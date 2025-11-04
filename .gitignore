@@ -14,3 +14,8 @@
 *.tmp
 *.log
 
+# Tests and Quizzes (to prevent cheating)
+# Note: test-prep-trivia-game.html is kept as it's a practice activity
+tenses-quiz.html
+Marlie Level 3_ Unit 2 Test .pdf
+
