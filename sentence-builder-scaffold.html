@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sentence Builder Scaffold Guide</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;      /* Pastel sky blue */
+    --tobe:#b3ebe7;         /* Pastel teal */
+    --helper:#a8e6cf;       /* Pastel mint */
+    --v1:#c1e99b;           /* Pastel lime green */
+    --ving:#b8d9a8;         /* Pastel sage green */
+    --v2:#9dd4a8;           /* Pastel mint-green */
+    --object:#ffd9b3;       /* Pastel peach */
+    --time:#ffb3ba;         /* Pastel coral pink */
+    --place:#c5a3ff;        /* Pastel periwinkle */
+    --preposition:#ffb3e6;  /* Pastel pink */
+    --det:#ffcc99;          /* Pastel apricot */
+    --connector:#d4b3ff;    /* Pastel purple */
+    --question:#e1a3ff;     /* Pastel lavender */
+    --border:#222;
+    --muted:#666;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.4in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 10px;
+    line-height: 1.3;
+    font-size: 13px;
+  }
+  
+  h1{
+    color: var(--ink);
+    border-bottom: 2px solid var(--subject);
+    padding-bottom: 5px;
+    margin-bottom: 12px;
+    font-size: 20px;
+  }
+  
+  h2{
+    color: var(--subject);
+    margin-top: 15px;
+    margin-bottom: 8px;
+    padding: 5px;
+    background: #f5f5f5;
+    border-left: 3px solid var(--subject);
+    font-size: 16px;
+  }
+  
+  h3{
+    color: var(--muted);
+    margin-top: 10px;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  
+  .level{
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+  }
+  
+  .level-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .level-number{
+    background: var(--subject);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  
+  .level-title{
+    font-size: 16px;
+    margin: 0;
+    color: var(--ink);
+  }
+  
+  .formula{
+    background: white;
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 10px;
+    margin: 8px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .formula-parts{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formula-part{
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 11px;
+    border: 2px solid;
+  }
+  
+  .formula-subject{ background: var(--subject); border-color: var(--subject); }
+  .formula-v1{ background: var(--v1); border-color: var(--v1); }
+  .formula-object{ background: var(--object); border-color: var(--object); }
+  .formula-time{ background: var(--time); border-color: var(--time); }
+  .formula-place{ background: var(--place); border-color: var(--place); }
+  .formula-tobe{ background: var(--tobe); border-color: var(--tobe); }
+  .formula-ving{ background: var(--ving); border-color: var(--ving); }
+  .formula-helper{ background: var(--helper); border-color: var(--helper); }
+  
+  .examples-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 8px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .examples-container{
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .example{
+    background: #f8f8f8;
+    border-left: 3px solid var(--subject);
+    padding: 8px;
+    border-radius: 4px;
+  }
+  
+  .example.negative{
+    border-left-color: #ff6b6b;
+  }
+  
+  .example-header{
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  
+  .example.negative .example-header{
+    color: #ff6b6b;
+  }
+  
+  .example-sentence{
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  
+  .example-breakdown{
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.3;
+  }
+  
+  .tip{
+    background: #fff9e6;
+    border-left: 3px solid #ffcc00;
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .tip-title{
+    font-weight: bold;
+    color: #b8860b;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  
+  .practice-box{
+    background: #e8f4f8;
+    border: 1px solid var(--subject);
+    border-radius: 6px;
+    padding: 10px;
+    margin: 8px 0;
+  }
+  
+  .practice-title{
+    font-weight: bold;
+    color: var(--subject);
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+  
+  .practice-instruction{
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  
+  .card-hint{
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin: 1px;
+  }
+  
+  .writing-lines{
+    margin-top: 12px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .writing-lines-title{
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .writing-line{
+    height: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  
+  .writing-line:last-child{
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  
+  .arrow{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 6px;
+  }
+  
+  @media print{
+    body{ 
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact;
+      font-size: 12px;
+    }
+    .level{
+      page-break-inside: avoid;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    h2 {
+      page-break-after: avoid;
+      margin-top: 10px;
+    }
+    h3 {
+      page-break-after: avoid;
+    }
+    .examples-container {
+      page-break-inside: avoid;
+    }
+    .writing-lines.page-break-before {
+      page-break-before: always;
+      page-break-after: avoid;
+    }
+    /* Keep Negative Statements level on same page as writing lines above it */
+    .level.negative-statements {
+      page-break-before: avoid;
+      margin-top: 0;
+    }
+  }
+  
+  p {
+    margin: 6px 0;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Sentence Builder Scaffolding Guide</h1>
+<p style="font-size: 12px; color: var(--muted); margin-bottom: 10px;">
+  This guide helps you build sentences step by step. Use your sentence builder cards to practice each level.
+</p>
+
+<!-- Visual Framework Guide -->
+<div style="background: #f0f0f0; border: 2px solid var(--border); border-radius: 8px; padding: 12px; margin: 12px 0; text-align: center;">
+  <div style="font-weight: bold; font-size: 11px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;">Sentence Building Framework</div>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;">
+    <div style="background: var(--subject); color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; border: 2px solid var(--border);">WHO</div>
+    <span style="color: var(--muted); font-size: 16px;">→</span>
+    <div style="background: var(--v1); color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; border: 2px solid var(--border);">VERB</div>
+    <span style="color: var(--muted); font-size: 16px;">→</span>
+    <div style="background: var(--object); color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; border: 2px solid var(--border);">WHAT</div>
+    <span style="color: var(--muted); font-size: 16px;">→</span>
+    <div style="background: var(--time); color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; border: 2px solid var(--border);">WHEN</div>
+    <span style="color: var(--muted); font-size: 16px;">→</span>
+    <div style="background: var(--place); color: var(--ink); padding: 8px 12px; border-radius: 6px; font-weight: bold; font-size: 13px; border: 2px solid var(--border);">WHERE</div>
+  </div>
+  <p style="font-size: 10px; color: var(--muted); margin-top: 8px; margin-bottom: 0;">
+    Ask yourself: <strong>WHO</strong> is doing it? <strong>VERB</strong> - what action? <strong>WHAT</strong> are they doing it to? <strong>WHEN</strong>? <strong>WHERE</strong>?
+  </p>
+</div>
+
+<!-- Card Breakdown by Category -->
+<div style="background: #fafafa; border: 2px solid var(--border); border-radius: 8px; padding: 15px; margin: 15px 0;">
+  <div style="font-weight: bold; font-size: 14px; color: var(--ink); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); padding-bottom: 6px;">Available Cards by Category</div>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 11px;">
+    
+    <!-- Pronouns -->
+    <div style="background: rgba(159, 211, 255, 0.2); border-left: 4px solid var(--subject); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Pronouns (6)</div>
+      <div style="color: var(--ink);">I, You, He, She, They, We</div>
+    </div>
+    
+    <!-- To Be -->
+    <div style="background: rgba(179, 235, 231, 0.15); border-left: 4px solid var(--tobe); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">To Be (10)</div>
+      <div style="color: var(--ink);">am, is, are, was, were, am not, isn't, aren't, wasn't, weren't</div>
+    </div>
+    
+    <!-- Helper Verbs -->
+    <div style="background: rgba(168, 230, 207, 0.15); border-left: 4px solid var(--helper); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Helper Verb (8)</div>
+      <div style="color: var(--ink);">do, does, did, will, don't, doesn't, didn't, won't</div>
+    </div>
+    
+    <!-- V1/V1-3rd -->
+    <div style="background: rgba(193, 233, 155, 0.15); border-left: 4px solid var(--v1); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">V1/V1-3rd (17)</div>
+      <div style="color: var(--ink);">eat/eats, work/works, watch/watches, go/goes, study/studies, play/plays, cook/cooks, read/reads, sleep/sleeps, clean/cleans, drive/drives, talk/talks, have/has, do/does, live/lives, need/needs, want/wants</div>
+    </div>
+    
+    <!-- V1-ing -->
+    <div style="background: rgba(184, 217, 168, 0.15); border-left: 4px solid var(--ving); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">V1-ing (17)</div>
+      <div style="color: var(--ink);">eating, working, watching, going, studying, playing, cooking, reading, sleeping, cleaning, driving, talking, having, doing, living, needing, wanting</div>
+    </div>
+    
+    <!-- V2 -->
+    <div style="background: rgba(157, 212, 168, 0.15); border-left: 4px solid var(--v2); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">V2 (17)</div>
+      <div style="color: var(--ink);">ate, worked, watched, went, studied, played, cooked, read, slept, cleaned, drove, talked, had, did, lived, needed, wanted</div>
+    </div>
+    
+    <!-- Objects -->
+    <div style="background: rgba(255, 217, 179, 0.15); border-left: 4px solid var(--object); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Object (8)</div>
+      <div style="color: var(--ink);">pizza, coffee, English, book, homework, TV, bus, music</div>
+    </div>
+    
+    <!-- Time -->
+    <div style="background: rgba(255, 179, 186, 0.15); border-left: 4px solid var(--time); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Time (7)</div>
+      <div style="color: var(--ink);">now, every day, usually, yesterday, last night, tomorrow, next weekend</div>
+    </div>
+    
+    <!-- Places -->
+    <div style="background: rgba(197, 163, 255, 0.15); border-left: 4px solid var(--place); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Place (6)</div>
+      <div style="color: var(--ink);">home, school, work, park, office, restaurant</div>
+    </div>
+    
+    <!-- Prepositions -->
+    <div style="background: rgba(255, 179, 230, 0.15); border-left: 4px solid var(--preposition); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Preposition (6)</div>
+      <div style="color: var(--ink);">at, in, on, to, from, with</div>
+    </div>
+    
+    <!-- Determiners -->
+    <div style="background: rgba(255, 204, 153, 0.15); border-left: 4px solid var(--det); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Determiner (5)</div>
+      <div style="color: var(--ink);">a, an, the, my, your</div>
+    </div>
+    
+    <!-- Connectors -->
+    <div style="background: rgba(212, 179, 255, 0.15); border-left: 4px solid var(--connector); padding: 8px; border-radius: 4px;">
+      <div style="font-weight: bold; color: var(--ink); margin-bottom: 4px; font-size: 12px;">Connector (7)</div>
+      <div style="color: var(--ink);">when, while, before, as, after, until, during</div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- LEVEL 1: Simple Present with Objects -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">1</div>
+    <h2 class="level-title">Adding Objects (What?)</h2>
+  </div>
+  
+  <p>Ask: <strong>WHO</strong> is doing it? <strong>WHAT</strong> are they doing? Add more information by including what the subject is doing something <em>to</em>.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1/V1-3rd</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">They pay bills.</div>
+      <div class="example-breakdown">Subject (They) + Verb (pay) + Object (bills) - No determiner needed (plural object)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">They don't pay bills.</div>
+      <div class="example-breakdown">Subject (They) + Helper Verb (don't) + Verb (pay) + Object (bills)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She prepares a report.</div>
+      <div class="example-breakdown">Subject (She) + Verb (prepares) + Determiner (a) + Object (report) - Determiner needed (singular object)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She doesn't prepare a report.</div>
+      <div class="example-breakdown">Subject (She) + Helper Verb (doesn't) + Verb (prepare) + Determiner (a) + Object (report)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 When to Use Determiners:</div>
+    <p><strong>Singular objects NEED a determiner:</strong> Use <span class="card-hint" style="background: var(--det);">Determiner</span> cards (a, an, the, my, your) before singular objects.</p>
+    <p style="margin-top: 8px;"><strong>Plural objects DON'T need a determiner:</strong> Plural objects like "pizza", "books", "cars" can stand alone without a determiner.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--v1);">V1/V1-3rd</span> + <span class="card-hint" style="background: var(--det);">Determiner</span> (for singular objects only) + <span class="card-hint" style="background: var(--object);">Object</span></div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 2: Simple Present with Time -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">2</div>
+    <h2 class="level-title">Adding Time Words</h2>
+  </div>
+  
+  <p>Ask: <strong>WHO</strong>? <strong>WHAT</strong>? <strong>WHEN</strong>? Tell <em>when</em> the action happens using time words.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1/V1-3rd</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">We check emails today.</div>
+      <div class="example-breakdown">Subject (We) + Verb (check) + Object (emails) + Time (today)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">We don't check emails today.</div>
+      <div class="example-breakdown">Subject (We) + Helper Verb (don't) + Verb (check) + Object (emails) + Time (today)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">He meets clients tonight.</div>
+      <div class="example-breakdown">Subject (He) + Verb (meets) + Object (clients) + Time (tonight)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">He doesn't meet clients tonight.</div>
+      <div class="example-breakdown">Subject (He) + Helper Verb (doesn't) + Verb (meet) + Object (clients) + Time (tonight)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Time words can go at the beginning or end of the sentence. Time + Subject + Verb + Object also works!</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Add <span class="card-hint" style="background: var(--time);">Time</span> cards to your sentences</div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 3: Simple Present with Place -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">3</div>
+    <h2 class="level-title">Adding Places (Where?)</h2>
+  </div>
+  
+  <p>Ask: <strong>WHO</strong>? <strong>WHAT</strong>? <strong>WHEN</strong>? <strong>WHERE</strong>? Add <em>where</em> the action happens using prepositions and place cards.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1/V1-3rd</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+      <span class="arrow">+</span>
+      <span class="formula-part" style="background: var(--preposition); border-color: var(--preposition);">Preposition</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-place">Place</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">They drive to the office.</div>
+      <div class="example-breakdown">Subject (They) + Verb (drive) + Preposition (to) + Determiner (the) + Place (office)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">They don't drive to the office.</div>
+      <div class="example-breakdown">Subject (They) + Helper Verb (don't) + Verb (drive) + Preposition (to) + Determiner (the) + Place (office)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She closes the shop today.</div>
+      <div class="example-breakdown">Subject (She) + Verb (closes) + Determiner (the) + Object (shop) + Time (today)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She doesn't close the shop today.</div>
+      <div class="example-breakdown">Subject (She) + Helper Verb (doesn't) + Verb (close) + Determiner (the) + Object (shop) + Time (today)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Common prepositions with places: <strong>at</strong> (at home, at school), <strong>in</strong> (in the park), <strong>on</strong> (on the bus)</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build sentences with <span class="card-hint" style="background: var(--preposition);">Preposition</span> + <span class="card-hint" style="background: var(--place);">Place</span></div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 4: Past Simple (V2) -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">4</div>
+    <h2 class="level-title">Past Simple (V2)</h2>
+  </div>
+  
+  <p>Use past simple to talk about completed actions in the past.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part" style="background: var(--v2); border-color: var(--v2);">V2</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I paid the bills yesterday.</div>
+      <div class="example-breakdown">Subject (I) + V2 (paid) + Determiner (the) + Object (bills) + Time (yesterday)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I didn't pay the bills yesterday.</div>
+      <div class="example-breakdown">Subject (I) + Helper Verb (didn't) + V1 (pay) + Determiner (the) + Object (bills) + Time (yesterday)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She prepared a report last week.</div>
+      <div class="example-breakdown">Subject (She) + V2 (prepared) + Determiner (a) + Object (report) + Time (last week)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She didn't prepare a report last week.</div>
+      <div class="example-breakdown">Subject (She) + Helper Verb (didn't) + V1 (prepare) + Determiner (a) + Object (report) + Time (last week)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>In negative past simple, use <strong>didn't</strong> + V1 (base form), not V2. The past tense is shown by "did", not the main verb.</p>
+    <p style="margin-top: 8px;">Past simple often uses time words like <strong>yesterday</strong>, <strong>last week</strong>, <strong>last night</strong>, or specific past dates.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--v2);">V2</span> + <span class="card-hint" style="background: var(--time);">Time</span></div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 5: Future Simple -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">5</div>
+    <h2 class="level-title">Future Simple</h2>
+  </div>
+  
+  <p>Use future simple to talk about actions that will happen in the future.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">will</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I will pay the bills tomorrow.</div>
+      <div class="example-breakdown">Subject (I) + will + V1 (pay) + Determiner (the) + Object (bills) + Time (tomorrow)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I won't pay the bills tomorrow.</div>
+      <div class="example-breakdown">Subject (I) + won't + V1 (pay) + Determiner (the) + Object (bills) + Time (tomorrow)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She will prepare a report next week.</div>
+      <div class="example-breakdown">Subject (She) + will + V1 (prepare) + Determiner (a) + Object (report) + Time (next week)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She won't prepare a report next week.</div>
+      <div class="example-breakdown">Subject (She) + won't + V1 (prepare) + Determiner (a) + Object (report) + Time (next week)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Future simple uses the base form of the verb (V1) after "will". Use "won't" or "won't" for negatives.</p>
+    <p style="margin-top: 8px;">Future simple often uses time words like <strong>tomorrow</strong>, <strong>next week</strong>, <strong>next weekend</strong>, or <strong>in the future</strong>.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--helper);">will</span> + <span class="card-hint" style="background: var(--v1);">V1</span> + <span class="card-hint" style="background: var(--time);">Time</span></div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 6: Present Continuous Introduction -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">6</div>
+    <h2 class="level-title">Present Continuous - Introduction</h2>
+  </div>
+  
+  <p>Use continuous tense to talk about actions happening <em>right now</em> or actions in progress.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I am preparing a report.</div>
+      <div class="example-breakdown">Subject (I) + To Be (am) + Verb-ing (preparing) + Determiner (a) + Object (report)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I'm not preparing a report.</div>
+      <div class="example-breakdown">Subject (I) + To Be (am not) + Verb-ing (preparing) + Determiner (a) + Object (report)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She is closing the shop.</div>
+      <div class="example-breakdown">Subject (She) + To Be (is) + Verb-ing (closing) + Determiner (the) + Object (shop)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She isn't closing the shop.</div>
+      <div class="example-breakdown">Subject (She) + To Be (isn't) + Verb-ing (closing) + Determiner (the) + Object (shop)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Match the To Be verb to your subject: <strong>I am</strong>, <strong>You/We/They are</strong>, <strong>He/She/It is</strong></p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--tobe);">To Be</span> + <span class="card-hint" style="background: var(--ving);">V1-ing</span></div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 7: Present Continuous with Objects and Details -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">7</div>
+    <h2 class="level-title">Present Continuous - Full Sentences</h2>
+  </div>
+  
+  <p>Add objects, places, and time to make complete continuous sentences.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+      <span class="arrow">+</span>
+      <span class="formula-part" style="background: var(--preposition); border-color: var(--preposition);">Preposition</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-place">Place</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I am preparing a report at the office today.</div>
+      <div class="example-breakdown">Subject (I) + To Be (am) + Verb-ing (preparing) + Determiner (a) + Object (report) + Preposition (at) + Determiner (the) + Place (office) + Time (today)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I'm not preparing a report at the office today.</div>
+      <div class="example-breakdown">Subject (I) + To Be (am not) + Verb-ing (preparing) + Determiner (a) + Object (report) + Preposition (at) + Determiner (the) + Place (office) + Time (today)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She is closing up the shop tonight.</div>
+      <div class="example-breakdown">Subject (She) + To Be (is) + Verb-ing (closing) + Preposition (up) + Determiner (the) + Object (shop) + Time (tonight)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She isn't closing up the shop tonight.</div>
+      <div class="example-breakdown">Subject (She) + To Be (isn't) + Verb-ing (closing) + Preposition (up) + Determiner (the) + Object (shop) + Time (tonight)</div>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Present continuous often uses time words like <strong>now</strong>, <strong>at the moment</strong>, or <strong>right now</strong> to show it's happening currently.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Create full present continuous sentences with all parts!</div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 8: Past Continuous -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">8</div>
+    <h2 class="level-title">Past Continuous</h2>
+  </div>
+  
+  <p>Use past continuous to talk about actions that were in progress at a specific time in the past.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be (was/were)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+      <span class="arrow" style="margin: 0 3px;">or</span>
+      <span class="formula-part" style="background: var(--connector); border-color: var(--connector);">Connector</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">second event</span>
+    </div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Important Rule:</div>
+    <p><strong>Affirmative past continuous sentences usually need a second event or time reference.</strong> The past continuous action is often interrupted by another action, or it happens at a specific time.</p>
+  </div>
+  
+  <h3>Examples with Connecting Words (Two Events):</h3>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I was cooking when he came home.</div>
+      <div class="example-breakdown">Subject (I) + To Be (was) + Verb-ing (cooking) + <strong>when</strong> + Subject (he) + Verb (came) + Object (home)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I wasn't cooking when he came home.</div>
+      <div class="example-breakdown">Subject (I) + To Be (wasn't) + Verb-ing (cooking) + <strong>when</strong> + Subject (he) + Verb (came) + Object (home)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She was preparing a report before the meeting started.</div>
+      <div class="example-breakdown">Subject (She) + To Be (was) + Verb-ing (preparing) + Determiner (a) + Object (report) + <strong>before</strong> + Determiner (the) + Object (meeting) + Verb (started)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She wasn't preparing a report before the meeting started.</div>
+      <div class="example-breakdown">Subject (She) + To Be (wasn't) + Verb-ing (preparing) + Determiner (a) + Object (report) + <strong>before</strong> + Determiner (the) + Object (meeting) + Verb (started)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">They were meeting clients while I was checking emails.</div>
+      <div class="example-breakdown">Subject (They) + To Be (were) + Verb-ing (meeting) + Object (clients) + <strong>while</strong> + Subject (I) + To Be (was) + Verb-ing (checking) + Object (emails)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">They weren't meeting clients while I was checking emails.</div>
+      <div class="example-breakdown">Subject (They) + To Be (weren't) + Verb-ing (meeting) + Object (clients) + <strong>while</strong> + Subject (I) + To Be (was) + Verb-ing (checking) + Object (emails)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">He was driving to the office as the rain began.</div>
+      <div class="example-breakdown">Subject (He) + To Be (was) + Verb-ing (driving) + Preposition (to) + Determiner (the) + Place (office) + <strong>as</strong> + Determiner (the) + Object (rain) + Verb (began)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">He wasn't driving to the office as the rain began.</div>
+      <div class="example-breakdown">Subject (He) + To Be (wasn't) + Verb-ing (driving) + Preposition (to) + Determiner (the) + Place (office) + <strong>as</strong> + Determiner (the) + Object (rain) + Verb (began)</div>
+    </div>
+  </div>
+  
+  <h3>Examples with Time Reference:</h3>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">They were meeting clients at 3 PM yesterday.</div>
+      <div class="example-breakdown">Subject (They) + To Be (were) + Verb-ing (meeting) + Object (clients) + Time (at 3 PM) + Time (yesterday)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">They weren't meeting clients at 3 PM yesterday.</div>
+      <div class="example-breakdown">Subject (They) + To Be (weren't) + Verb-ing (meeting) + Object (clients) + Time (at 3 PM) + Time (yesterday)</div>
+    </div>
+  </div>
+  
+  <div class="tip" style="background: #e8f4f8; border-left-color: var(--subject); margin-top: 10px;">
+    <div class="tip-title">💡 Connecting Words for Past Continuous:</div>
+    <p style="margin-top: 10px;">You can use these words to connect past continuous with another event:</p>
+    <ul style="margin: 10px 0; padding-left: 20px;">
+      <li><strong>when</strong> - shows interruption (I was cooking <strong>when</strong> he came home)</li>
+      <li><strong>while</strong> - shows two actions happening at the same time (I was working <strong>while</strong> she was calling)</li>
+      <li><strong>as</strong> - shows two actions happening at the same time (I was leaving <strong>as</strong> she arrived)</li>
+      <li><strong>before</strong> - shows the continuous action happened before another event (I was preparing <strong>before</strong> the meeting started)</li>
+      <li><strong>after</strong> - shows the continuous action happened after another event started (I was working <strong>after</strong> they left)</li>
+      <li><strong>until</strong> - shows the continuous action continued up to a point (I was waiting <strong>until</strong> he arrived)</li>
+      <li><strong>during</strong> - shows the continuous action happened at the same time as another event (I was working <strong>during</strong> the meeting)</li>
+    </ul>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Match the To Be verb to your subject: <strong>I/He/She/It was</strong>, <strong>You/We/They were</strong></p>
+    <p style="margin-top: 8px;">Remember: Past continuous often describes an action that was happening when something else occurred, or shows what was happening at a specific past time.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--tobe);">To Be (was/were)</span> + <span class="card-hint" style="background: var(--ving);">V1-ing</span> + <span class="card-hint" style="background: var(--time);">Time</span> or connecting word (<strong>when</strong>, <strong>while</strong>, <strong>before</strong>, <strong>after</strong>, <strong>as</strong>, <strong>until</strong>, <strong>during</strong>) + second event</div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 9: Future Continuous -->
+<div class="level">
+  <div class="level-header">
+    <div class="level-number">9</div>
+    <h2 class="level-title">Future Continuous</h2>
+  </div>
+  
+  <p>Use future continuous to talk about actions that will be in progress at a specific time in the future.</p>
+  
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">will</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">be</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">I will be preparing a report at 3 PM tomorrow.</div>
+      <div class="example-breakdown">Subject (I) + will + be + Verb-ing (preparing) + Determiner (a) + Object (report) + Time (at 3 PM) + Time (tomorrow)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">I won't be preparing a report at 3 PM tomorrow.</div>
+      <div class="example-breakdown">Subject (I) + won't + be + Verb-ing (preparing) + Determiner (a) + Object (report) + Time (at 3 PM) + Time (tomorrow)</div>
+    </div>
+  </div>
+  
+  <div class="examples-container">
+    <div class="example">
+      <div class="example-header">Positive</div>
+      <div class="example-sentence">She will be meeting clients next week.</div>
+      <div class="example-breakdown">Subject (She) + will + be + Verb-ing (meeting) + Object (clients) + Time (next week)</div>
+    </div>
+    <div class="example negative">
+      <div class="example-header">Negative</div>
+      <div class="example-sentence">She won't be meeting clients next week.</div>
+      <div class="example-breakdown">Subject (She) + won't + be + Verb-ing (meeting) + Object (clients) + Time (next week)</div>
+    </div>
+  </div>
+  
+  <div class="tip" style="background: #e8f4f8; border-left-color: var(--subject); margin-top: 10px;">
+    <div class="tip-title">💡 Present Continuous vs Future Continuous for Future Events:</div>
+    <p style="margin-top: 10px;"><strong>Present Continuous for Future:</strong> Use when the future event is <strong>planned, arranged, or scheduled</strong> (often with a specific time).</p>
+    <div class="example" style="margin: 10px 0; padding: 10px; background: white;">
+      <div class="example-sentence">I am meeting clients tomorrow at 2 PM.</div>
+      <div class="example-breakdown">This is a planned/scheduled meeting</div>
+    </div>
+    <p style="margin-top: 8px;"><strong>Future Continuous:</strong> Use to describe what will be <strong>happening at a specific time in the future</strong>, or to show an action in progress in the future.</p>
+    <div class="example" style="margin: 10px 0; padding: 10px; background: white;">
+      <div class="example-sentence">I will be meeting clients at 2 PM tomorrow.</div>
+      <div class="example-breakdown">This emphasizes the action will be in progress at that specific time</div>
+    </div>
+    <p style="margin-top: 8px;"><strong>Key difference:</strong> Present continuous focuses on the <strong>plan</strong>, future continuous focuses on the <strong>ongoing action</strong> at a future time.</p>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>Future continuous often uses future time words like <strong>tomorrow</strong>, <strong>next week</strong>, <strong>at 3 PM</strong>, or <strong>in the future</strong>.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build: <span class="card-hint" style="background: var(--subject);">Subject</span> + <span class="card-hint" style="background: var(--helper);">will</span> + <strong>be</strong> + <span class="card-hint" style="background: var(--ving);">V1-ing</span> + <span class="card-hint" style="background: var(--time);">Time</span></div>
+  </div>
+  
+  <div class="writing-lines page-break-before">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- LEVEL 10: Negative Statements -->
+<div class="level negative-statements">
+  <div class="level-header">
+    <div class="level-number">10</div>
+    <h2 class="level-title">Negative Statements</h2>
+  </div>
+  
+  <h3>Simple Present Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">Helper Verb (don't/doesn't)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I don't pay bills.</div>
+    <div class="example-breakdown">Subject (I) + Helper Verb (don't) + Verb (pay) + Object (bills)</div>
+  </div>
+  
+  <h3 style="margin-top: 12px;">Present Continuous Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be (am not/isn't/aren't)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I am not preparing a report.</div>
+    <div class="example-breakdown">Subject (I) + To Be (am not) + Verb-ing (preparing) + Determiner (a) + Object (report)</div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">She isn't closing the shop.</div>
+    <div class="example-breakdown">Subject (She) + To Be (isn't) + Verb-ing (closing) + Determiner (the) + Object (shop)</div>
+  </div>
+  
+  <h3 style="margin-top: 12px;">Past Continuous Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be (wasn't/weren't)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I wasn't cooking when he came home.</div>
+    <div class="example-breakdown">Subject (I) + To Be (wasn't) + Verb-ing (cooking) + <strong>when</strong> + Subject (he) + Verb (came) + Object (home)</div>
+  </div>
+  
+  <h3 style="margin-top: 12px;">Future Continuous Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">won't</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">be</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I won't be preparing a report tomorrow.</div>
+    <div class="example-breakdown">Subject (I) + won't + be + Verb-ing (preparing) + Determiner (a) + Object (report) + Time (tomorrow)</div>
+  </div>
+  
+  <h3 style="margin-top: 12px;">Past Simple Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">Helper Verb (didn't)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I didn't pay the bills yesterday.</div>
+    <div class="example-breakdown">Subject (I) + Helper Verb (didn't) + V1 (pay) + Determiner (the) + Object (bills) + Time (yesterday)</div>
+  </div>
+  
+  <h3 style="margin-top: 12px;">Future Simple Negative:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">won't</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+    </div>
+  </div>
+  
+  <div class="example">
+    <div class="example-sentence">I won't pay the bills tomorrow.</div>
+    <div class="example-breakdown">Subject (I) + won't + V1 (pay) + Determiner (the) + Object (bills) + Time (tomorrow)</div>
+  </div>
+  
+  <div class="tip">
+    <div class="tip-title">💡 Tip:</div>
+    <p>In negative sentences, use the base form of the verb (V1), not V1-3rd or V2, after <strong>don't</strong>, <strong>doesn't</strong>, <strong>didn't</strong>, or <strong>won't</strong>.</p>
+  </div>
+  
+  <div class="practice-box">
+    <div class="practice-title">Practice:</div>
+    <div class="practice-instruction">Build negative sentences using "not" cards</div>
+  </div>
+  
+  <div class="writing-lines">
+    <div class="writing-lines-title">Write Your Sentences:</div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+    <div class="writing-line"></div>
+  </div>
+</div>
+
+<!-- Summary Section -->
+<div class="level" style="background: #e8f4f8; border-color: var(--subject);">
+  <div class="level-header">
+    <h2 class="level-title" style="color: var(--subject); margin: 0;">Summary: Key Formulas</h2>
+  </div>
+  
+  <h3>Simple Present:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1/V1-3rd</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <h3 style="margin-top: 10px;">Present Continuous:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be (am/is/are)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-object">Object</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <h3 style="margin-top: 10px;">Past Continuous:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">To Be (was/were)</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+      <span class="arrow">or</span>
+      <span class="formula-part" style="background: var(--connector); border-color: var(--connector);">Connector</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">second event</span>
+    </div>
+  </div>
+  
+  <h3 style="margin-top: 10px;">Past Simple:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part" style="background: var(--v2); border-color: var(--v2);">V2</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <h3 style="margin-top: 10px;">Future Simple:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">will</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-v1">V1</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <h3 style="margin-top: 10px;">Future Continuous:</h3>
+  <div class="formula">
+    <div class="formula-parts">
+      <span class="formula-part formula-subject">Subject</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-helper">will</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-tobe">be</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-ving">V1-ing</span>
+      <span class="arrow">+</span>
+      <span class="formula-part formula-time">Time</span>
+    </div>
+  </div>
+  
+  <div class="tip" style="margin-top: 10px;">
+    <div class="tip-title">💡 Remember:</div>
+    <ul style="margin: 10px 0; padding-left: 20px;">
+      <li><strong>Simple Present</strong> = habits, routines, facts</li>
+      <li><strong>Present Continuous</strong> = actions happening now OR planned future events (scheduled/arranged)</li>
+      <li><strong>Past Simple</strong> = completed actions in the past</li>
+      <li><strong>Past Continuous</strong> = actions in progress in the past (usually needs a second event or time reference)</li>
+      <li><strong>Future Simple</strong> = actions that will happen in the future</li>
+      <li><strong>Future Continuous</strong> = actions that will be in progress at a specific future time (emphasizes ongoing action)</li>
+      <li>Use <strong>V1-3rd</strong> (adds -s/-es/-ies) with <strong>He/She/It</strong> in simple present</li>
+      <li>Match <strong>To Be</strong> verb to your subject: <strong>I am/was</strong>, <strong>You/We/They are/were</strong>, <strong>He/She/It is/was</strong></li>
+      <li><strong>For future events:</strong> Present Continuous = the plan/schedule, Future Continuous = the ongoing action at that time</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
+

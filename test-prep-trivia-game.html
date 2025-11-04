@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Level 3 Unit 2 Test Prep - Trivia Game</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Round Header Slide */
+  .round-header {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .round-number {
+    font-size: 72px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 20px;
+  }
+  
+  .round-title {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .round-subtitle {
+    font-size: 24px;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .round-icon {
+    font-size: 120px;
+    margin: 30px 0;
+  }
+  
+  /* All Questions Together Slide */
+  .questions-together {
+    background: white;
+    border-radius: 20px;
+    padding: 35px 45px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    min-height: 600px;
+  }
+  
+  .work-timer {
+    background: #fff3cd;
+    border: 3px solid #ffc107;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #856404;
+  }
+  
+  .timer-display {
+    font-size: 48px;
+    font-weight: bold;
+    color: #d32f2f;
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .timer-display.warning {
+    color: #f57c00;
+    animation: pulse 1s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  .timer-controls {
+    margin-top: 15px;
+  }
+  
+  .timer-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.3s;
+  }
+  
+  .timer-btn:hover {
+    background: #5568d3;
+    transform: scale(1.05);
+  }
+  
+  .timer-btn.stop {
+    background: #d32f2f;
+  }
+  
+  .timer-btn.stop:hover {
+    background: #b71c1c;
+  }
+  
+  .timer-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .question-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+  }
+  
+  .question-item-number {
+    font-size: 22px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 6px;
+  }
+  
+  .question-item-text {
+    font-size: 26px;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .question-item-options {
+    margin-left: 30px;
+    font-size: 22px;
+    line-height: 1.8;
+    color: #555;
+  }
+  
+  .question-item-options .option-letter {
+    font-weight: bold;
+    color: #667eea;
+    margin-right: 10px;
+  }
+  
+  /* Matching Exercise Format */
+  .matching-exercise {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .matching-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .matching-column-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 10px;
+    background: #f0f4ff;
+    border-radius: 8px;
+  }
+  
+  .matching-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 20px;
+    line-height: 1.4;
+  }
+  
+  .matching-item-number {
+    font-weight: bold;
+    color: #667eea;
+    margin-right: 8px;
+  }
+  
+  /* Answer Slide */
+  .answer-slide {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 60px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #28a745;
+  }
+  
+  .answer-number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #28a745;
+    background: #d4edda;
+    padding: 10px 25px;
+    border-radius: 50px;
+  }
+  
+  .question-repeat {
+    font-size: 28px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+  }
+  
+  .answer-section {
+    background: #d4edda;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid #28a745;
+  }
+  
+  .answer-label {
+    font-size: 20px;
+    color: #155724;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .answer-text {
+    font-size: 36px;
+    color: #155724;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .explanation {
+    font-size: 20px;
+    color: #155724;
+    margin-top: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    line-height: 1.6;
+  }
+  
+  .explanation strong {
+    color: #856404;
+  }
+  
+  .example {
+    font-size: 18px;
+    color: #555;
+    margin-top: 15px;
+    font-style: italic;
+    padding-left: 20px;
+    border-left: 3px solid #ccc;
+    line-height: 1.6;
+  }
+  
+  /* Instructions Slide */
+  .instructions-slide {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 30px;
+  }
+  
+  .instructions-title {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+  
+  .instructions-list {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 24px;
+    line-height: 1.8;
+    color: #333;
+  }
+  
+  .instructions-list li {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  /* Final Slide */
+  .final-slide {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 80px 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    color: white;
+  }
+  
+  .final-title {
+    font-size: 56px;
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
+  
+  .final-message {
+    font-size: 32px;
+    margin-top: 40px;
+    line-height: 1.6;
+  }
+  
+  /* Page Break for Printing */
+  @media print {
+    .questions-together,
+    .answer-slide,
+    .round-header,
+    .instructions-slide,
+    .final-slide {
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- Instructions Slide -->
+    <div class="instructions-slide">
+      <h1 class="instructions-title">🎯 Level 3 Unit 2 Test Prep <br /> Trivia Game</h1>
+      <ul class="instructions-list">
+        <li><strong>5 Rounds</strong> - Work with your group!</li>
+        <li><strong>5 minutes per round</strong> - Discuss and answer together</li>
+        <li><strong>Write your answers on a white board</strong> - Then we'll review together</li>
+        <li><strong>Progressive Difficulty</strong> - Questions get harder as you go</li>
+      </ul>
+      <p style="font-size: 28px; margin-top: 50px; color: #667eea; font-weight: bold;">
+        Work together, learn together! 🚀
+      </p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ROUND 1: VOCABULARY -->
+    <!-- ============================================ -->
+    
+    <div class="round-header">
+      <div class="round-number">1</div>
+      <div class="round-title">Vocabulary</div>
+      <div class="round-subtitle">Know your words!</div>
+      <div class="round-icon">📚</div>
+    </div>
+
+    <!-- Round 1 - All Questions Together -->
+    <div class="questions-together">
+      <div class="work-timer">
+        ⏱️ Work Time: 5 minutes - Discuss with your group!<br>
+        <div class="timer-display" data-timer="300">5:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn start-btn">Start Timer</button>
+          <button class="timer-btn stop-btn stop" disabled>Stop Timer</button>
+        </div>
+      </div>
+      
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-item-number">Question 1</div>
+          <div class="question-item-text">Describe some <strong>qualifications</strong> you need to become a doctor.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 2</div>
+          <div class="question-item-text">Give an example of a <strong>distraction</strong> when you are trying to study.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 3</div>
+          <div class="question-item-text">Name something that is <strong>beneficial</strong> for healthy friendships.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 4</div>
+          <div class="question-item-text">What does it mean to <strong>go over</strong> your notes?</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 5</div>
+          <div class="question-item-text">Give an example of a good <strong>study habit</strong>.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 6</div>
+          <div class="question-item-text">Compare a <strong>reserved</strong> person to an <strong>outgoing</strong> person. How are they different?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 1 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 1</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Describe some <strong>qualifications</strong> you need to become a doctor.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Example Answers:</div>
+        <div class="answer-text">To become a doctor, you need:</div>
+        <div class="explanation">
+          • A medical degree from university<br>
+          • Years of training and experience<br>
+          • A license to practice medicine<br>
+          • Skills in science and helping people
+        </div>
+        <div class="example">
+          ✅ <strong>Qualifications</strong> = the skills, education, or experience needed for a specific job<br>
+          ✅ "You need good <strong>qualifications</strong> to be a teacher: a teaching degree and experience with children."
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 2 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 2</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Give an example of a <strong>distraction</strong> when you are trying to study.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Example Answers:</div>
+        <div class="answer-text">A <strong>distraction</strong> is something that takes your attention away.</div>
+        <div class="explanation">
+          • A loud TV or music<br>
+          • Your phone ringing or notifications<br>
+          • People talking nearby<br>
+          • Social media or games
+        </div>
+        <div class="example">
+          ✅ "A loud TV can be a <strong>distraction</strong> when you are trying to study."<br>
+          ✅ "I need to turn off my phone - it's a <strong>distraction</strong>."
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 3 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 3</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Name something that is <strong>beneficial</strong> for healthy friendships.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Example Answers:</div>
+        <div class="answer-text"><strong>Beneficial</strong> = good or helpful</div>
+        <div class="explanation">
+          • Being honest and trustworthy<br>
+          • Listening to your friends<br>
+          • Spending time together<br>
+          • Supporting each other<br>
+          • Respecting each other's opinions<br>
+          • Communicating openly
+        </div>
+        <div class="example">
+          ✅ "Being honest is <strong>beneficial</strong> for healthy friendships."<br>
+          ✅ "Good communication is <strong>beneficial</strong> for relationships." (opposite of "harmful")
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 4 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 4</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> What does it mean to <strong>go over</strong> your notes?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">To <strong>go over</strong> means to review or study something again</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> "Go over" is a phrasal verb meaning to read through your notes 
+          carefully to remember them or understand them better.
+        </div>
+        <div class="example">
+          ✅ "I need to <strong>go over</strong> my notes before the test."<br>
+          ✅ "Let's <strong>go over</strong> the vocabulary words together."<br>
+          ✅ "The teacher will <strong>go over</strong> the answers with us."
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 5 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 5</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Give an example of a good <strong>study habit</strong>.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Example Answers:</div>
+        <div class="answer-text"><strong>Study habits</strong> = a regular routine that you use to help you learn</div>
+        <div class="explanation">
+          • Studying at the same time every day<br>
+          • Taking notes while reading<br>
+          • Reviewing material before going to bed<br>
+          • Creating flashcards for vocabulary<br>
+          • Finding a quiet place to study<br>
+          • Taking breaks every 30 minutes
+        </div>
+        <div class="example">
+          ✅ "A good <strong>study habit</strong> is to review your notes every day after class."<br>
+          ✅ "My best <strong>study habit</strong> is studying in the morning when my mind is fresh."
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 1 - Answer 6 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 1 - Answer 6</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Compare a <strong>reserved</strong> person to an <strong>outgoing</strong> person. How are they different?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text"><strong>Reserved</strong> vs <strong>Outgoing</strong> - They are opposites!</div>
+        <div class="explanation">
+          <strong>Reserved person:</strong> Quiet, shy, doesn't talk much, keeps feelings private, 
+          prefers small groups or being alone<br><br>
+          <strong>Outgoing person:</strong> Friendly, social, talks to everyone, makes friends easily, 
+          enjoys being around people, shows feelings openly
+        </div>
+        <div class="example">
+          ✅ "My sister is <strong>reserved</strong> - she's quiet and prefers reading alone."<br>
+          ✅ "My brother is <strong>outgoing</strong> - he talks to everyone and makes friends easily."<br>
+          ✅ "She is <strong>reserved</strong> and doesn't show her feelings easily, but he is very <strong>outgoing</strong>."
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ROUND 2: CONNECTORS -->
+    <!-- ============================================ -->
+    
+    <div class="round-header">
+      <div class="round-number">2</div>
+      <div class="round-title">Connectors</div>
+      <div class="round-subtitle">Linking words and time relationships</div>
+      <div class="round-icon">🔗</div>
+    </div>
+
+    <!-- Round 2 - All Questions Together -->
+    <div class="questions-together">
+      <div class="work-timer">
+        ⏱️ Work Time: 5 minutes - Discuss with your group!<br>
+        <div class="timer-display" data-timer="300">5:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn start-btn">Start Timer</button>
+          <button class="timer-btn stop-btn stop" disabled>Stop Timer</button>
+        </div>
+      </div>
+      
+      <div style="margin-top: 30px;">
+        <div style="font-size: 28px; font-weight: bold; color: #333; margin-bottom: 20px; text-align: center;">
+          Match the sentence beginnings to the correct endings
+        </div>
+        
+        <div class="matching-exercise">
+           <div class="matching-column">
+             <div class="matching-column-title">Beginnings</div>
+             <div class="matching-item"><span class="matching-item-number">1.</span> I'm very tired,</div>
+             <div class="matching-item"><span class="matching-item-number">2.</span> She studies English every day</div>
+             <div class="matching-item"><span class="matching-item-number">3.</span> I want to get better at math</div>
+             <div class="matching-item"><span class="matching-item-number">4.</span> <strong>While</strong> he was cooking dinner,</div>
+             <div class="matching-item"><span class="matching-item-number">5.</span> I like pizza,</div>
+             <div class="matching-item"><span class="matching-item-number">6.</span> They didn't go to the party</div>
+             <div class="matching-item"><span class="matching-item-number">7.</span> I'm going to exercise more</div>
+             <div class="matching-item"><span class="matching-item-number">8.</span> She was reading a book</div>
+           </div>
+           
+           <div class="matching-column">
+             <div class="matching-column-title">Endings</div>
+             <div class="matching-item"><strong>because</strong> she wants to improve her speaking.</div>
+             <div class="matching-item"><strong>because</strong> I didn't sleep well last night.</div>
+             <div class="matching-item"><strong>so</strong> I'm going to study harder.</div>
+             <div class="matching-item">she was setting the table.</div>
+             <div class="matching-item"><strong>but</strong> I don't eat it every day.</div>
+             <div class="matching-item"><strong>because</strong> they had too much homework.</div>
+             <div class="matching-item"><strong>so</strong> I can be healthier.</div>
+             <div class="matching-item"><strong>while</strong> her brother was playing video games.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 1 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 1</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> I'm very tired, _____ I didn't sleep well last night.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I'm very tired, <strong>because</strong> I didn't sleep well last night.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>Because</strong> shows a reason - why you're tired. 
+          You're tired BECAUSE you didn't sleep well.
+        </div>
+        <div class="example">
+          ✅ "I'm tired <strong>because</strong> I didn't sleep" (reason)<br>
+          ✅ Pattern: Result + because + Reason
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 2 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 2</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> She studies English every day _____ she wants to improve her speaking.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">She studies English every day <strong>because</strong> she wants to improve her speaking.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>Because</strong> shows the reason - why she studies. 
+          She studies BECAUSE she wants to improve.
+        </div>
+        <div class="example">
+          ✅ "She studies <strong>because</strong> she wants to improve" (reason)<br>
+          ✅ "because" = shows WHY something happens
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 3 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 3</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> I want to get better at math _____ I'm going to study harder.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I want to get better at math <strong>so</strong> I'm going to study harder.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>So</strong> shows a result - what happens because you want to get better. 
+          You want to improve SO you study harder.
+        </div>
+        <div class="example">
+          ✅ "I want to improve <strong>so</strong> I study harder" (result)<br>
+          ✅ Pattern: Reason + so + Result
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 4 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 4</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> <strong>While</strong> he was cooking dinner, _____
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text"><strong>While</strong> he was cooking dinner, she was setting the table.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>While</strong> shows two actions happening at the same time. 
+          Both actions were happening simultaneously.
+        </div>
+        <div class="example">
+          ✅ "<strong>While</strong> he was cooking, she was setting the table" (same time)<br>
+          ✅ "<strong>While</strong>" can come first or in the middle of a sentence
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 5 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 5</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> I like pizza, _____ I don't eat it every day.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I like pizza, <strong>but</strong> I don't eat it every day.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>But</strong> shows contrast - two opposite ideas. 
+          You like pizza BUT you don't eat it every day (contrast).
+        </div>
+        <div class="example">
+          ✅ "I like pizza <strong>but</strong> I don't eat it every day" (contrast)<br>
+          ✅ "<strong>but</strong>" = shows opposite or different ideas
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 6 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 6</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> They didn't go to the party _____ they had too much homework.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">They didn't go to the party <strong>because</strong> they had too much homework.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>Because</strong> shows the reason - why they didn't go. 
+          They didn't go BECAUSE they had homework.
+        </div>
+        <div class="example">
+          ✅ "They didn't go <strong>because</strong> they had homework" (reason)<br>
+          ✅ "<strong>because</strong>" answers the question "why?"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 7 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 7</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> I'm going to exercise more _____ I can be healthier.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I'm going to exercise more <strong>so</strong> I can be healthier.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>So</strong> shows the result - what happens because you exercise. 
+          You exercise SO you can be healthier.
+        </div>
+        <div class="example">
+          ✅ "I exercise <strong>so</strong> I can be healthier" (result/purpose)<br>
+          ✅ "<strong>so</strong>" = shows what happens because of something
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 2 - Answer 8 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 2 - Answer 8</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Match:</strong> She was reading a book _____ her brother was playing video games.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">She was reading a book <strong>while</strong> her brother was playing video games.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> <strong>While</strong> shows two actions happening at the same time. 
+          Both actions were happening simultaneously.
+        </div>
+        <div class="example">
+          ✅ "She was reading <strong>while</strong> he was playing" (same time)<br>
+          ✅ "<strong>while</strong>" = shows two actions happening together
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ROUND 3: COMPARATIVES -->
+    <!-- ============================================ -->
+    
+    <div class="round-header">
+      <div class="round-number">3</div>
+      <div class="round-title">Comparatives</div>
+      <div class="round-subtitle">Comparing things and people</div>
+      <div class="round-icon">⚖️</div>
+    </div>
+
+    <!-- Round 3 - All Questions Together -->
+    <div class="questions-together">
+      <div class="work-timer">
+        ⏱️ Work Time: 5 minutes - Discuss with your group!<br>
+        <div class="timer-display" data-timer="300">5:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn start-btn">Start Timer</button>
+          <button class="timer-btn stop-btn stop" disabled>Stop Timer</button>
+        </div>
+      </div>
+      
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-item-number">Question 1</div>
+          <div class="question-item-text">What is the comparative form of "big"?</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 2</div>
+          <div class="question-item-text">What is the comparative form of "beautiful"?</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 3</div>
+          <div class="question-item-text">Complete the sentence: "Coffee is _____ than tea."</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 4</div>
+          <div class="question-item-text">What is the irregular comparative form of "good"?</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 5</div>
+          <div class="question-item-text">What is the comparative form of "happy"?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 3 - Answer 1 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 3 - Answer 1</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> What is the comparative form of "big"?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">bigger</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> For short adjectives (1 syllable), add "-er". 
+          Double the final consonant if it ends in a consonant-vowel-consonant pattern.
+        </div>
+        <div class="example">
+          ✅ "big" → "bigger" | "hot" → "hotter" | "fast" → "faster"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 3 - Answer 2 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 3 - Answer 2</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> What is the comparative form of "beautiful"?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">more beautiful</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> For long adjectives (2+ syllables), use "more" + adjective.
+        </div>
+        <div class="example">
+          ✅ "beautiful" → "more beautiful"<br>
+          ✅ "interesting" → "more interesting"<br>
+          ✅ "difficult" → "more difficult"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 3 - Answer 3 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 3 - Answer 3</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Complete the sentence: "Coffee is _____ than tea."
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Example Answers:</div>
+        <div class="answer-text">stronger / more popular / better / more expensive</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> Many answers are possible! Just remember: 
+          short adjectives (1 syllable) use "-er", long adjectives (2+ syllables) use "more".
+        </div>
+        <div class="example">
+          ✅ "Coffee is <strong>stronger</strong> than tea" (strong = 1 syllable → stronger)<br>
+          ✅ "Coffee is <strong>more popular</strong> than tea" (popular = 3 syllables → more popular)<br>
+          ✅ "Coffee is <strong>better</strong> than tea" (good → better, irregular)
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 3 - Answer 4 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 3 - Answer 4</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> What is the irregular comparative form of "good"?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">better</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> "Good" is irregular. It doesn't follow the normal "-er" or "more" pattern.
+        </div>
+        <div class="example">
+          ✅ "good" → "better" | "bad" → "worse" | "far" → "farther/further"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 3 - Answer 5 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 3 - Answer 5</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> What is the comparative form of "happy"?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">happier</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> For adjectives ending in "-y", change "y" to "i" and add "-er".
+        </div>
+        <div class="example">
+          ✅ "happy" → "happier" | "easy" → "easier" | "busy" → "busier"
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ROUND 4: TENSES -->
+    <!-- ============================================ -->
+    
+    <div class="round-header">
+      <div class="round-number">4</div>
+      <div class="round-title">Tenses</div>
+      <div class="round-subtitle">Past, present, and future</div>
+      <div class="round-icon">⏰</div>
+    </div>
+
+    <!-- Round 4 - All Questions Together -->
+    <div class="questions-together">
+      <div class="work-timer">
+        ⏱️ Work Time: 5 minutes - Discuss with your group!<br>
+        <div class="timer-display" data-timer="300">5:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn start-btn">Start Timer</button>
+          <button class="timer-btn stop-btn stop" disabled>Stop Timer</button>
+        </div>
+      </div>
+      
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-item-number">Question 1 - Fill in the blank</div>
+          <div class="question-item-text">I _____ (study) English every day.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 2 - Correct the sentence</div>
+          <div class="question-item-text">"She doesn't eats pizza."</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 3 - Fill in the blank</div>
+          <div class="question-item-text">I _____ (not go) to school yesterday because I was sick.</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 4 - Word scramble</div>
+          <div class="question-item-text">Unscramble: "I / studying / am / now / English"</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 5 - Correct the sentence</div>
+          <div class="question-item-text">"I was cook when she arrived."</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 6 - Fill in the blank</div>
+          <div class="question-item-text">I _____ (meet) my friend tomorrow at 3pm.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 1 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 1</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Fill in the blank: I _____ (study) English every day.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">study</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> "Every day" shows present simple tense. With "I", use the base form V1 (study).
+        </div>
+        <div class="example">
+          ✅ "I <strong>study</strong> English every day" (present simple - habit/routine)<br>
+          ✅ "I <strong>study</strong>" | "You <strong>study</strong>" | "We <strong>study</strong>" | "They <strong>study</strong>"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 2 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 2</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Correct the sentence: "She doesn't eats pizza."
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">She doesn't eat pizza.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> After "doesn't" (or "don't/didn't"), you ALWAYS use the base form V1, never V1-3rd or V2.
+        </div>
+        <div class="example">
+          ✅ "She <strong>doesn't eat</strong> pizza" (base form after doesn't)<br>
+          ❌ Wrong: "She doesn't eats" | "She doesn't ate"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 3 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 3</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Fill in the blank: I _____ (not go) to school yesterday because I was sick.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">didn't go</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> "Yesterday" shows past tense. Negative past uses "didn't" + base form V1 (go).
+        </div>
+        <div class="example">
+          ✅ "I <strong>didn't go</strong> to school yesterday"<br>
+          ❌ Wrong: "I didn't went" (never use V2 after didn't!)
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 4 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 4</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Word scramble: "I / studying / am / now / English"
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I am studying English now.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> Present continuous structure: Subject + am/is/are + V1-ing + object + time.
+        </div>
+        <div class="example">
+          ✅ "I <strong>am studying</strong> English now" (present continuous - happening now)<br>
+          ✅ Pattern: I am + V1-ing | She is + V1-ing | They are + V1-ing
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 5 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 5</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Correct the sentence: "I was cook when she arrived."
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">I was cooking when she arrived.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> Past continuous needs V1-ing form (cooking), not V1 base form (cook).
+        </div>
+        <div class="example">
+          ✅ "I <strong>was cooking</strong> when she arrived" (past continuous + when + past simple)<br>
+          ❌ Wrong: "I was cook" (need -ing form for continuous)
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 4 - Answer 6 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 4 - Answer 6</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Fill in the blank: I _____ (meet) my friend tomorrow at 3pm.
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">will meet</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> "Tomorrow" shows future tense. Use "will" + base form V1 (meet).
+        </div>
+        <div class="example">
+          ✅ "I <strong>will meet</strong> my friend tomorrow" (future simple)<br>
+          ✅ After "will" always use base form: "I will meet" | "She will meet" | "They will meet"
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ROUND 5: GRAMMAR RULES -->
+    <!-- ============================================ -->
+    
+    <div class="round-header">
+      <div class="round-number">5</div>
+      <div class="round-title">Grammar Rules</div>
+      <div class="round-subtitle">The tricky stuff!</div>
+      <div class="round-icon">🎓</div>
+    </div>
+
+    <!-- Round 5 - All Questions Together -->
+    <div class="questions-together">
+      <div class="work-timer">
+        ⏱️ Work Time: 5 minutes - Discuss with your group!<br>
+        <div class="timer-display" data-timer="300">5:00</div>
+        <div class="timer-controls">
+          <button class="timer-btn start-btn">Start Timer</button>
+          <button class="timer-btn stop-btn stop" disabled>Stop Timer</button>
+        </div>
+      </div>
+      
+      <div class="questions-list">
+        <div class="question-item">
+          <div class="question-item-number">Question 1</div>
+          <div class="question-item-text">When do you use present continuous vs future continuous for future events?</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 2</div>
+          <div class="question-item-text">Fill in the blank: "I was cooking when she _____ (arrive)."</div>
+        </div>
+
+        <div class="question-item">
+          <div class="question-item-number">Question 3</div>
+          <div class="question-item-text">When do we need to add a determiner before an object?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 5 - Answer 1 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 5 - Answer 1</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> When do you use present continuous vs future continuous for future events?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">Use present continuous for planned/arranged future events. Use future continuous for actions that will be in progress.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> Both can talk about the future, but:
+          • <strong>Present continuous</strong> = planned/arranged events (I'm meeting her tomorrow)
+          • <strong>Future continuous</strong> = actions in progress at a future time (I'll be studying at 3pm)
+        </div>
+        <div class="example">
+          ✅ "I <strong>am meeting</strong> my friend tomorrow" (present continuous - planned)<br>
+          ✅ "I <strong>will be studying</strong> at 3pm tomorrow" (future continuous - in progress)
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 5 - Answer 2 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 5 - Answer 2</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> Fill in the blank: "I was cooking when she _____ (arrive)."
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">arrived</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> After past continuous + "when", use past simple (V2) for the interrupting action.
+        </div>
+        <div class="example">
+          ✅ "I was cooking when she <strong>arrived</strong>" (past continuous + when + past simple)<br>
+          ✅ Pattern: was/were + V1-ing + when + V2<br>
+          ✅ "I was studying when the phone <strong>rang</strong>"
+        </div>
+      </div>
+    </div>
+
+    <!-- Round 5 - Answer 3 -->
+    <div class="answer-slide">
+      <div class="answer-header">
+        <div class="answer-number">Round 5 - Answer 3</div>
+      </div>
+      <div class="question-repeat">
+        <strong>Question:</strong> When do we need to add a determiner before an object?
+      </div>
+      <div class="answer-section">
+        <div class="answer-label">Answer:</div>
+        <div class="answer-text">We need determiners for <strong>singular</strong> objects. Plural or uncountable (numberless) objects don't need determiners.</div>
+        <div class="explanation">
+          <strong>Explanation:</strong> This is a critical rule! Singular = one specific thing. Plural/uncountable = more than one or not countable.
+        </div>
+        <div class="example">
+          ✅ "I read <strong>a</strong> book" (singular - needs determiner: a/an/the/my/your)<br>
+          ✅ "I eat pizza" (plural/uncountable - no determiner)<br>
+          ✅ "I drink coffee" (uncountable - no determiner)<br>
+          ❌ "I read book" (singular missing determiner)
+        </div>
+      </div>
+    </div>
+
+    <!-- Final Slide -->
+    <div class="final-slide">
+      <h1 class="final-title">🎉 Great Job! 🎉</h1>
+      <p class="final-message">
+        You've completed all 5 rounds!<br><br>
+        Review the answers you missed and practice those topics.<br><br>
+        <strong>You're ready for your test!</strong> 📝✨
+      </p>
+    </div>
+
+  </div>
+
+<script>
+// Timer functionality for each round
+document.addEventListener('DOMContentLoaded', function() {
+  const timers = document.querySelectorAll('.timer-display');
+  
+  timers.forEach((timer) => {
+    const initialSeconds = parseInt(timer.getAttribute('data-timer')) || 300; // 5 minutes = 300 seconds
+    let seconds = initialSeconds;
+    let intervalId = null;
+    
+    const timerContainer = timer.closest('.work-timer');
+    const startBtn = timerContainer.querySelector('.start-btn');
+    const stopBtn = timerContainer.querySelector('.stop-btn');
+    
+    function updateDisplay() {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      const display = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+      timer.textContent = display;
+      
+      // Add warning class when under 1 minute
+      if (seconds <= 60 && seconds > 0) {
+        timer.classList.add('warning');
+      } else {
+        timer.classList.remove('warning');
+      }
+      
+      // Stop timer when it reaches 0
+      if (seconds <= 0) {
+        clearInterval(intervalId);
+        intervalId = null;
+        timer.textContent = '0:00';
+        timer.style.color = '#d32f2f';
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    }
+    
+    startBtn.addEventListener('click', function() {
+      if (intervalId) return; // Already running
+      
+      // If timer is at 0, reset it
+      if (seconds <= 0) {
+        seconds = initialSeconds;
+        timer.style.color = '';
+      }
+      
+      intervalId = setInterval(() => {
+        seconds--;
+        updateDisplay();
+      }, 1000);
+      
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+      updateDisplay();
+    });
+    
+    stopBtn.addEventListener('click', function() {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    });
+    
+    // Initialize display
+    updateDisplay();
+  });
+});
+</script>
+</body>
+</html>

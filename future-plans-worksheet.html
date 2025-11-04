@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Planning Future Events - Worksheet</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;      /* Pastel sky blue */
+    --v1:#c1e99b;           /* Pastel lime green */
+    --ving:#b8d9a8;         /* Pastel sage green */
+    --time:#ffb3ba;         /* Pastel coral pink */
+    --place:#c5a3ff;        /* Pastel periwinkle */
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.3in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 8px;
+    line-height: 1.2;
+    font-size: 14px;
+  }
+  
+  h1{
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  h2{
+    color: var(--accent);
+    margin-top: 8px;
+    margin-bottom: 4px;
+    padding: 3px 5px;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+  }
+  
+  h3{
+    color: var(--muted);
+    margin-top: 6px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .reminder-box{
+    background: #fff9e6;
+    border: 1px solid #ffd700;
+    border-radius: 3px;
+    padding: 6px;
+    margin: 6px 0;
+  }
+  
+  .info-box{
+    background: #f0f7ff;
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 6px;
+    margin: 6px 0;
+  }
+  
+  .example-box{
+    background: #f9f9f9;
+    border-left: 2px solid var(--time);
+    padding: 4px 6px;
+    margin: 4px 0;
+    border-radius: 2px;
+    font-size: 13px;
+  }
+  
+  .example-sentence{
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    font-size: 13px;
+  }
+  
+  .example-note{
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  
+  .practice-section{
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    padding: 6px;
+    margin: 6px 0;
+  }
+  
+  .practice-item{
+    margin: 4px 0;
+    padding: 4px;
+    background: white;
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+    font-size: 13px;
+  }
+  
+  .practice-item label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  
+  .answer-line{
+    border-bottom: 1px dotted #999;
+    min-height: 18px;
+    margin: 2px 0;
+    padding: 1px;
+  }
+  
+  .hint{
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 3px;
+    padding-left: 4px;
+  }
+  
+  .formula-box{
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 4px;
+    margin: 4px 0;
+    text-align: center;
+    font-size: 13px;
+  }
+  
+  .formula-part{
+    display: inline-block;
+    padding: 3px 6px;
+    margin: 1px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  
+  .arrow{
+    margin: 0 3px;
+    color: var(--muted);
+  }
+  
+  .tip-box{
+    background: #e8f4f8;
+    border-left: 2px solid var(--ving);
+    padding: 4px;
+    margin: 4px 0;
+    border-radius: 2px;
+    font-size: 13px;
+  }
+  
+  .tip-title{
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: var(--ink);
+    font-size: 13px;
+  }
+  
+  ul {
+    margin: 2px 0;
+    padding-left: 18px;
+  }
+  
+  li {
+    margin: 2px 0;
+    font-size: 13px;
+  }
+  
+  p {
+    margin: 2px 0;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  
+  .blank-line {
+    border-bottom: 1px solid #000;
+    display: inline-block;
+    min-width: 100px;
+    margin: 0 3px;
+  }
+  
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 4px 0;
+  }
+  
+  .compact-examples {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+  
+  @media print {
+    .practice-item {
+      page-break-inside: avoid;
+    }
+    .reminder-box, .info-box {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Planning Future Events</h1>
+
+<!-- Sentence Order Reminder -->
+<div class="reminder-box">
+  <h2>Reminder: Sentence Order</h2>
+  
+  <div class="formula-box">
+    <div style="margin-bottom: 4px;">
+      <span class="formula-part" style="background: var(--subject);">WHO</span>
+      <span class="arrow">→</span>
+      <span class="formula-part" style="background: var(--v1);">VERB</span>
+      <span class="arrow">→</span>
+      <span class="formula-part" style="background: #ffd9b3;">WHAT</span>
+      <span class="arrow">→</span>
+      <span class="formula-part" style="background: var(--time);">WHEN</span>
+      <span class="arrow">→</span>
+      <span class="formula-part" style="background: var(--place);">WHERE</span>
+    </div>
+  </div>
+  
+  <h3>When and Where: Order Flexibility</h3>
+  <p><strong>Both orders are correct!</strong> Use the framework order (WHEN → WHERE) as a starting point.</p>
+  <div class="two-column">
+    <div class="example-box compact-examples">
+      <strong>WHEN then WHERE:</strong><br>
+      "We are meeting Susan tomorrow in the cafe."<br>
+      "I eat pizza every day at home."
+    </div>
+    <div class="example-box compact-examples">
+      <strong>WHERE then WHEN:</strong><br>
+      "We are meeting Susan in the cafe tomorrow."<br>
+      "I eat pizza at home every day."
+    </div>
+  </div>
+</div>
+
+<!-- Present Continuous vs Future Continuous -->
+<div class="info-box">
+  <h2>Present Continuous vs Future Continuous for Future Plans</h2>
+  
+  <div class="two-column">
+    <div>
+      <h3>Present Continuous (am/is/are + verb-ing):</h3>
+      <ul style="margin: 4px 0;">
+        <li><strong>Planned/scheduled</strong> events</li>
+        <li>Focus: the <strong>plan</strong></li>
+      </ul>
+      <div class="example-box compact-examples">
+        "I am meeting Susan tomorrow at 2 PM." (planned)<br>
+        "We are flying to Paris next week." (arranged)
+      </div>
+    </div>
+    <div>
+      <h3>Future Continuous (will be + verb-ing):</h3>
+      <ul style="margin: 4px 0;">
+        <li>What will be <strong>happening</strong> at a future time</li>
+        <li>Focus: the <strong>ongoing action</strong></li>
+      </ul>
+      <div class="example-box compact-examples">
+        "I will be meeting clients at 2 PM." (in progress)<br>
+        "At 3 PM, she will be starting." (action happening)
+      </div>
+    </div>
+  </div>
+  <div class="tip-box" style="margin-top: 4px;">
+    <strong>Quick Rule:</strong> Present Continuous = "I have a plan" | Future Continuous = "At this time, this will be happening"
+  </div>
+</div>
+
+<!-- Practice Section -->
+<div class="practice-section">
+  <h2>Practice Exercises</h2>
+  
+  <h3>Complete the Sentences</h3>
+  <p>Fill in the blanks with the correct form (Present Continuous or Future Continuous):</p>
+  
+  <div class="practice-item" style="background: #f0f9ff; border-left-color: #4a90e2;">
+    <label><strong>Example:</strong> I am meeting (meet) my boss tomorrow at 9 AM for a scheduled meeting.</label>
+    <div style="font-size: 11px; color: var(--muted); margin-top: 2px;"><em>✓ Present Continuous - scheduled/planned</em></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>1. I _________________________ (go) to the dentist next Tuesday at 2 PM.</label>
+    <div class="answer-line"></div>
+    <div class="hint">Hint: This is a scheduled appointment.</div>
+  </div>
+  
+  <div class="practice-item">
+    <label>2. At 2 PM tomorrow, I _________________________ (have) a conference call.</label>
+    <div class="answer-line"></div>
+    <div class="hint">Hint: This describes what will be happening at that specific time.</div>
+  </div>
+  
+  <div class="practice-item">
+    <label>3. We _________________________ (travel) to New York next week.</label>
+    <div class="answer-line"></div>
+    <div class="hint">Hint: The tickets are already booked (arranged/planned).</div>
+  </div>
+  
+  <div class="practice-item">
+    <label>4. This time next year, she _________________________ (study) at university.</label>
+    <div class="answer-line"></div>
+    <div class="hint">Hint: This describes what will be happening at that future time.</div>
+  </div>
+  
+  <div class="practice-item">
+    <label>5. They _________________________ (move) to a new apartment on the first of next month.</label>
+    <div class="answer-line"></div>
+    <div class="hint">Hint: This is an arranged/planned move.</div>
+  </div>
+  
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple vs Continuous Tenses - Presentation Slides</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;
+    --v1:#c1e99b;
+    --ving:#b8d9a8;
+    --time:#ffb3ba;
+    --place:#c5a3ff;
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --strikethrough:#e53935;
+  }
+  
+  .reveal {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 42px;
+  }
+  
+  .reveal .slides section {
+    text-align: left;
+    padding: 20px 40px;
+    box-sizing: border-box;
+  }
+  
+  .reveal h1, .reveal h2, .reveal h3 {
+    color: var(--accent);
+  }
+  
+  .reveal h1 {
+    font-size: 2.2em;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+  }
+  
+  .reveal h2 {
+    font-size: 1.8em;
+    border-left: 5px solid var(--accent);
+    padding-left: 0.5em;
+    background: #f0f7ff;
+    padding: 0.3em 0.5em;
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+  }
+  
+  .reveal h3 {
+    font-size: 1.4em;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+  }
+  
+  .reveal p {
+    margin: 0.5em 0;
+    line-height: 1.5;
+  }
+  
+  .reveal ul {
+    margin: 0.5em 0;
+  }
+  
+  .time-word {
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #856404;
+  }
+  
+  .tense-box {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px;
+    font-size: 0.9em;
+  }
+  
+  .tense-box h4 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 1.1em;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+  
+  .usage-list {
+    text-align: left;
+    font-size: 0.9em;
+    margin: 6px 0;
+    padding-left: 25px;
+  }
+  
+  .usage-list li {
+    margin: 4px 0;
+  }
+  
+  .example-box {
+    background: #f9f9f9;
+    border-left: 4px solid var(--time);
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 0.95em;
+  }
+  
+  .practice-box {
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1em;
+  }
+  
+  .answer-box {
+    background: #e8f5e9;
+    border-left: 4px solid var(--green-header);
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 1em;
+  }
+  
+  .answer-box strong {
+    color: var(--green-header);
+    font-size: 1.1em;
+  }
+  
+  .explanation {
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border-radius: 5px;
+    font-size: 0.85em;
+    text-align: left;
+  }
+  
+  .two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  
+  .highlight {
+    background: #ffeb3b;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+  
+  .formula-part {
+    display: inline-block;
+    padding: 6px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid var(--border);
+    font-size: 0.85em;
+  }
+  
+  .word-card {
+    background: #e3f2fd;
+    border: 2px solid #90caf9;
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin: 3px;
+    display: inline-block;
+    font-size: 0.85em;
+  }
+  
+  .special-note {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 0.95em;
+  }
+  
+  .special-note ul {
+    margin: 6px 0;
+    padding-left: 30px;
+  }
+  
+  .special-note li {
+    margin: 5px 0;
+    line-height: 1.5;
+  }
+  
+  .correct {
+    color: var(--green-header);
+    font-weight: bold;
+  }
+  
+  .incorrect {
+    color: var(--strikethrough);
+    text-decoration: line-through;
+  }
+  
+  /* Ensure slides don't overflow */
+  .reveal .slides section {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  /* Adjust title slide to be centered */
+  .reveal .slides section[data-background] h1,
+  .reveal .slides section:first-child h1 {
+    text-align: center;
+  }
+  
+  .reveal .slides section:first-child {
+    text-align: center;
+  }
+  
+  /* Ensure content boxes fit */
+  .practice-box p,
+  .answer-box p,
+  .example-box p {
+    margin: 0.3em 0;
+    word-wrap: break-word;
+  }
+  
+  /* Reduce spacing for hints */
+  .practice-box p + p {
+    margin-top: 0.5em;
+  }
+  
+  /* Timeline Styles */
+  .timeline-container {
+    margin: 20px 0;
+    padding: 15px;
+  }
+  
+  .timeline {
+    position: relative;
+    margin: 30px 0;
+    padding: 20px 0;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin: 30px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    width: 45%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .timeline-item.left {
+    left: 0;
+    border-left: 5px solid var(--green-header);
+  }
+  
+  .timeline-item.right {
+    left: 55%;
+    border-left: 5px solid #ff9800;
+  }
+  
+  .timeline-item h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+    color: var(--accent);
+  }
+  
+  .timeline-dot {
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border: 4px solid white;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  
+  .timeline-arrow {
+    position: absolute;
+    left: 50%;
+    font-size: 1.5em;
+    color: var(--accent);
+    transform: translateX(-50%);
+    z-index: 5;
+  }
+  
+  .tense-visual {
+    margin: 8px 0;
+    padding: 8px;
+    background: #f5f5f5;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+  
+  .simple-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: var(--green-header);
+    border-radius: 50%;
+    margin: 0 3px;
+  }
+  
+  .continuous-line {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: #ff9800;
+    margin: 0 3px;
+    vertical-align: middle;
+  }
+  
+  .now-marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff1744;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    z-index: 15;
+  }
+  
+  /* Timeline Grid Styles */
+  .tense-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 18px;
+    margin: 20px 0;
+  }
+  
+  .tense-cell {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .tense-cell h4 {
+    margin: 0 0 12px 0;
+    font-size: 1.05em;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  
+  .tense-cell p {
+    font-size: 0.9em;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+  }
+  
+  .tense-cell strong {
+    color: var(--green-header);
+    font-weight: bold;
+  }
+  
+  .timeline-graphic {
+    position: relative;
+    width: 100%;
+    height: 70px;
+    margin: 15px 0 25px 0;
+    padding: 5px 0;
+  }
+  
+  .timeline-arrow {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: #222;
+    transform: translateY(-50%);
+  }
+  
+  .timeline-arrow::after {
+    content: '→';
+    position: absolute;
+    right: -12px;
+    top: -10px;
+    color: #222;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .timeline-past-label {
+    position: absolute;
+    left: 5%;
+    bottom: -18px;
+    font-size: 0.8em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  
+  .timeline-present-label {
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: #ff1744;
+    font-weight: bold;
+  }
+  
+  .timeline-future-label {
+    position: absolute;
+    right: 5%;
+    bottom: -18px;
+    font-size: 0.8em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  
+  .present-marker {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    bottom: 10%;
+    width: 2px;
+    background: #ff1744;
+    transform: translateX(-50%);
+  }
+  
+  .simple-x {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #2196F3;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  
+  .continuous-arc {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  
+  .arc-solid {
+    border-color: transparent transparent #f44336 transparent;
+    border-width: 0 20px 30px 20px;
+  }
+  
+  .arc-dashed {
+    border-color: transparent transparent #f44336 transparent;
+    border-width: 0 20px 30px 20px;
+    border-style: dashed;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- TITLE SLIDE -->
+<section>
+  <h1>Simple vs Continuous Tenses</h1>
+  <h2>Complete Practice Worksheet</h2>
+  <p style="font-size: 1.2em; margin-top: 2em;">Review & Answer Key</p>
+  <p style="font-size: 1.2em;">Tuesday, November 4, 2025</p>
+</section>
+
+<!-- QUICK REFERENCE -->
+<section>
+  <section>
+    <h2>Quick Reference: Time Words</h2>
+    <div class="two-column">
+      <div class="tense-box">
+        <h4>→ Simple Tenses</h4>
+        <p>
+          <span class="time-word">usually</span>, 
+          <span class="time-word">always</span>, 
+          <span class="time-word">often</span>, 
+          <span class="time-word">sometimes</span>, 
+          <span class="time-word">never</span>, 
+          <span class="time-word">yesterday</span>, 
+          <span class="time-word">last week</span>, 
+          <span class="time-word">ago</span>
+        </p>
+      </div>
+      <div class="tense-box">
+        <h4>→ Continuous Tenses</h4>
+        <p>
+          <span class="time-word">now</span>, 
+          <span class="time-word">at the moment</span>, 
+          <span class="time-word">today</span>, 
+          <span class="time-word">this week</span>, 
+          <span class="time-word">while</span>, 
+          <span class="time-word">when</span>, 
+          <span class="time-word">at 3 PM</span>, 
+          <span class="time-word">this time next week</span>
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Visual Timeline: Simple vs Continuous Tenses</h2>
+    <div class="tense-grid">
+      <!-- Past Simple -->
+      <div class="tense-cell">
+        <h4>Past Simple</h4>
+        <p>I <strong>studied</strong> English last year.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <div class="simple-x" style="left: 25%;">✕</div>
+        </div>
+      </div>
+      
+      <!-- Present Simple -->
+      <div class="tense-cell">
+        <h4>Present Simple</h4>
+        <p>I <strong>study</strong> English everyday.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <div class="simple-x" style="left: 20%;">✕</div>
+          <div class="simple-x" style="left: 35%;">✕</div>
+          <div class="simple-x" style="left: 50%;">✕</div>
+          <div class="simple-x" style="left: 65%;">✕</div>
+          <div class="simple-x" style="left: 80%;">✕</div>
+        </div>
+      </div>
+      
+      <!-- Future Simple -->
+      <div class="tense-cell">
+        <h4>Future Simple</h4>
+        <p>I <strong>will study</strong> English at Bunker Hill in the fall.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <div class="simple-x" style="left: 75%;">✕</div>
+          <div class="simple-x" style="left: 85%;">✕</div>
+        </div>
+      </div>
+      
+      <!-- Past Continuous -->
+      <div class="tense-cell">
+        <h4>Past Continuous</h4>
+        <p>I <strong>was studying</strong> English when my mom called me.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <svg width="100%" height="70" viewBox="0 0 100 70" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0;">
+            <path d="M 15 35 Q 30 20, 45 35" stroke="#f44336" stroke-width="2.5" fill="none" stroke-dasharray="5,4" stroke-linecap="round"/>
+            <path d="M 20 35 Q 32 22, 45 35" stroke="#2196F3" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+            <circle cx="45" cy="35" r="4.5" fill="#2196F3" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Present Continuous -->
+      <div class="tense-cell">
+        <h4>Present Continuous</h4>
+        <p>I <strong>am studying</strong> English right now.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <svg width="100%" height="70" viewBox="0 0 100 70" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0;">
+            <path d="M 38 35 Q 44 16, 50 14 Q 56 16, 62 35" stroke="#f44336" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M 38 35 Q 44 18, 50 16" stroke="#f44336" stroke-width="2.5" fill="none" stroke-dasharray="4,3" stroke-linecap="round" opacity="0.5"/>
+            <path d="M 50 16 Q 56 18, 62 35" stroke="#f44336" stroke-width="2.5" fill="none" stroke-dasharray="4,3" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Future Continuous -->
+      <div class="tense-cell">
+        <h4>Future Continuous</h4>
+        <p>I <strong>will be studying</strong> English for the next 2 years.</p>
+        <div class="timeline-graphic">
+          <div class="timeline-arrow"></div>
+          <div class="timeline-past-label">Past</div>
+          <div class="timeline-present-label">Present</div>
+          <div class="timeline-future-label">Future</div>
+          <div class="present-marker"></div>
+          <svg width="100%" height="70" viewBox="0 0 100 70" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0;">
+            <path d="M 50 35 Q 55 26, 60 35 Q 65 26, 70 35 Q 75 26, 80 35 Q 85 26, 90 35" stroke="#f44336" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+    
+    <div class="special-note" style="margin-top: 25px; font-size: 0.95em; text-align: center;">
+      <strong>💡 Visual Guide:</strong><br>
+      <span style="color: #2196F3; font-weight: bold; font-size: 1.1em;">✕</span> = Simple tenses (specific points in time)<br>
+      <span style="color: #f44336; font-weight: bold;">━</span> = Continuous tenses (ongoing actions over time) | <span style="color: #f44336;">Solid</span> = happening now | <span style="color: #f44336; opacity: 0.7;">Dashed</span> = continuing
+    </div>
+  </section>
+</section>
+
+<!-- PART 1: PRESENT TENSES -->
+<section>
+  <section>
+    <h2>Part 1: Present Simple vs Present Continuous</h2>
+    <div class="two-column">
+      <div class="tense-box">
+        <h4>Present Simple</h4>
+        <ul class="usage-list">
+          <li>Habits & routines</li>
+          <li>Permanent situations</li>
+          <li>General truths</li>
+          <li>With: always, usually, often, sometimes, never</li>
+        </ul>
+      </div>
+      <div class="tense-box">
+        <h4>Present Continuous</h4>
+        <ul class="usage-list">
+          <li>Actions happening now</li>
+          <li>Temporary situations</li>
+          <li>Future plans (arranged)</li>
+          <li>With: now, at the moment, today, this week</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Practice Exercise 1</h2>
+    <div class="practice-box">
+      <p><strong>1.</strong> I _________________ (<span class="time-word">usually</span> / eat) lunch at 12 PM, but <span class="time-word">today</span> I _________________ (eat) at 1 PM.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Answer & Explanation 1</h2>
+    <div class="answer-box">
+      <p><strong>1.</strong> I <span class="highlight">usually eat</span> lunch at 12 PM, but <span class="time-word">today</span> I <span class="highlight">am eating</span> at 1 PM.</p>
+      <div class="explanation">
+        ✓ <span class="time-word">"usually"</span> = Present Simple (habit) | <span class="time-word">"today"</span> = Present Continuous (temporary action)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Practice Exercise 2</h2>
+    <div class="practice-box">
+      <p><strong>2.</strong> He _________________ (<span class="time-word">often</span> / go) to the gym, but <span class="time-word">today</span> he _________________ (stay) home.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Answer & Explanation 2</h2>
+    <div class="answer-box">
+      <p><strong>2.</strong> He <span class="highlight">often goes</span> to the gym, but <span class="time-word">today</span> he <span class="highlight">is staying</span> home.</p>
+      <div class="explanation">
+        ✓ <span class="time-word">"often"</span> = Present Simple (habit) | <span class="time-word">"today"</span> = Present Continuous (temporary situation)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Practice Exercise 3</h2>
+    <div class="practice-box">
+      <p><strong>3.</strong> She _________________ (<span class="time-word">always</span> / do) her homework <span class="time-word">in the evening</span>, but <span class="time-word">now</span> she _________________ (study) for a test.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Answer & Explanation 3</h2>
+    <div class="answer-box">
+      <p><strong>3.</strong> She <span class="highlight">always does</span> her homework <span class="time-word">in the evening</span>, but <span class="time-word">now</span> she <span class="highlight">is studying</span> for a test.</p>
+      <div class="explanation">
+        ✓ <span class="time-word">"always"</span> = Present Simple (habit) | <span class="time-word">"now"</span> = Present Continuous (action happening now)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Practice Exercise 4</h2>
+    <div class="practice-box">
+      <p><strong>4.</strong> We _________________ (<span class="time-word">normally</span> / cook) dinner together, but <span class="time-word">this evening</span> we _________________ (order) pizza.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 1: Answer & Explanation 4</h2>
+    <div class="answer-box">
+      <p><strong>4.</strong> We <span class="highlight">normally cook</span> dinner together, but <span class="time-word">this evening</span> we <span class="highlight">are ordering</span> pizza.</p>
+      <div class="explanation">
+        ✓ <span class="time-word">"normally"</span> = Present Simple (habit) | <span class="time-word">"this evening"</span> = Present Continuous (temporary/planned action)
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 2: PAST TENSES -->
+<section>
+  <section>
+    <h2>Part 2: Past Simple vs Past Continuous</h2>
+    <div class="two-column">
+      <div class="tense-box">
+        <h4>Past Simple</h4>
+        <ul class="usage-list">
+          <li>Completed actions in the past</li>
+          <li>Specific time in the past</li>
+          <li>Interrupts a longer action</li>
+          <li>With: yesterday, last week, ago, at 3 PM</li>
+        </ul>
+      </div>
+      <div class="tense-box">
+        <h4>Past Continuous</h4>
+        <ul class="usage-list">
+          <li>Ongoing action in the past</li>
+          <li>Background action (when interrupted)</li>
+          <li>Action in progress at a past time</li>
+          <li>Often used with Past Simple</li>
+        </ul>
+      </div>
+    </div>
+    <div class="special-note">
+      <strong>⚠️ Important:</strong> Past Continuous shows the <strong>longer/ongoing action</strong>, and Past Simple shows the <strong>shorter action that interrupted it</strong>.
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Practice Exercise 5</h2>
+    <div class="practice-box">
+      <p><strong>5.</strong> <span class="time-word">While</span> I _________________ (cook) dinner, my sister _________________ (call) me.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Answer & Explanation 5</h2>
+    <div class="answer-box">
+      <p><strong>5.</strong> <span class="time-word">While</span> I <span class="highlight">was cooking</span> dinner, my sister <span class="highlight">called</span> me.</p>
+      <div class="explanation">
+        ✓ "was cooking" = Past Continuous (ongoing action) | "called" = Past Simple (interruption)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Practice Exercise 6</h2>
+    <div class="practice-box">
+      <p><strong>6.</strong> They _________________ (play) tennis <span class="time-word">when</span> it _________________ (start) to rain.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Answer & Explanation 6</h2>
+    <div class="answer-box">
+      <p><strong>6.</strong> They <span class="highlight">were playing</span> tennis <span class="time-word">when</span> it <span class="highlight">started</span> to rain.</p>
+      <div class="explanation">
+        ✓ "were playing" = Past Continuous (ongoing action) | "started" = Past Simple (interruption)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Practice Exercise 7</h2>
+    <div class="practice-box">
+      <p><strong>7.</strong> <span class="time-word">At 6 PM yesterday</span>, she _________________ (drive) to work <span class="time-word">when</span> she _________________ (see) an accident.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2: Answer & Explanation 7</h2>
+    <div class="answer-box">
+      <p><strong>7.</strong> <span class="time-word">At 6 PM yesterday</span>, she <span class="highlight">was driving</span> to work <span class="time-word">when</span> she <span class="highlight">saw</span> an accident.</p>
+      <div class="explanation">
+        ✓ "was driving" = Past Continuous (ongoing action at specific time) | "saw" = Past Simple (interruption)
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 2B: WHAT WERE YOU DOING WHEN...? -->
+<section>
+  <section>
+    <h2>Part 2B: What Were You Doing When...?</h2>
+    <div class="special-note">
+      <strong>📝 Instructions:</strong> Use <strong>Past Continuous</strong> for what you were doing and <strong>Past Simple</strong> for the interruption.
+    </div>
+    <div class="example-box">
+      <p><strong>Example:</strong> "What were you doing when the power went out yesterday?"</p>
+      <p><strong>Answer:</strong> "I was cooking dinner when the power went out. I had to finish cooking by candlelight!"</p>
+      <div class="explanation">✓ "was cooking" = Past Continuous (ongoing) | "went out" = Past Simple (interruption)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Practice Question 8</h2>
+    <div class="practice-box">
+      <p><strong>8.</strong> What were you doing when your phone rang <span class="time-word">this morning</span>?</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Sample Answer 8</h2>
+    <div class="answer-box">
+      <p><strong>8.</strong> I <span class="highlight">was eating breakfast</span> when my phone <span class="highlight">rang</span> this morning.</p>
+      <div class="explanation">✓ Past Continuous (ongoing) + Past Simple (interruption)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Practice Question 9</h2>
+    <div class="practice-box">
+      <p><strong>9.</strong> What were you doing when it started raining <span class="time-word">last week</span>?</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Sample Answer 9</h2>
+    <div class="answer-box">
+      <p><strong>9.</strong> I <span class="highlight">was walking home</span> when it <span class="highlight">started</span> raining last week.</p>
+      <div class="explanation">✓ Past Continuous (ongoing) + Past Simple (interruption)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Practice Question 10</h2>
+    <div class="practice-box">
+      <p><strong>10.</strong> What were you doing when your teacher called your name in class?</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 2B: Sample Answer 10</h2>
+    <div class="answer-box">
+      <p><strong>10.</strong> I <span class="highlight">was reading my book</span> when my teacher <span class="highlight">called</span> my name.</p>
+      <div class="explanation">✓ Past Continuous (ongoing) + Past Simple (interruption)</div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 3: FUTURE TENSES -->
+<section>
+  <section>
+    <h2>Part 3: Future Simple vs Future Continuous</h2>
+    <div class="two-column">
+      <div class="tense-box">
+        <h4>Will (Future Simple)</h4>
+        <ul class="usage-list">
+          <li>Spontaneous decisions</li>
+          <li>Predictions</li>
+          <li>Promises/offers</li>
+          <li>General future actions</li>
+        </ul>
+      </div>
+      <div class="tense-box">
+        <h4>Future Continuous</h4>
+        <ul class="usage-list">
+          <li>Action in progress at future time</li>
+          <li>At a specific future moment</li>
+          <li>With: at 3 PM tomorrow, this time next week</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 3: Practice Exercise 14</h2>
+    <div class="practice-box">
+      <p><strong>14.</strong> <span class="time-word">At 3 PM tomorrow</span>, we _________________ (have) a meeting. It _________________ (be) very important.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 3: Answer & Explanation 14</h2>
+    <div class="answer-box">
+      <p><strong>14.</strong> <span class="time-word">At 3 PM tomorrow</span>, we <span class="highlight">will be having</span> a meeting. It <span class="highlight">will be</span> very important.</p>
+      <div class="explanation">
+        ✓ "will be having" = Future Continuous (action in progress at specific time) | "will be" = Future Simple (fact/state)
+      </div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 3: Practice Exercise 15</h2>
+    <div class="practice-box">
+      <p><strong>15.</strong> <span class="time-word">This time next week</span>, she _________________ (study) at university. She _________________ (start) classes <span class="time-word">next Monday</span>.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 3: Answer & Explanation 15</h2>
+    <div class="answer-box">
+      <p><strong>15.</strong> <span class="time-word">This time next week</span>, she <span class="highlight">will be studying</span> at university. She <span class="highlight">will start</span> classes <span class="time-word">next Monday</span>.</p>
+      <div class="explanation">
+        ✓ "will be studying" = Future Continuous (action in progress at future time) | "will start" = Future Simple (specific future action)
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 4: PLANNING FUTURE EVENTS -->
+<section>
+  <section>
+    <h2>Part 4: Planning Future Events</h2>
+    <div class="two-column">
+      <div class="tense-box">
+        <h4>Present Continuous</h4>
+        <p><strong>Planned/scheduled</strong> events</p>
+        <p>Focus: the <strong>plan</strong></p>
+        <div class="example-box" style="font-size: 0.9em;">
+          "I am meeting Susan tomorrow at 2 PM." (planned)
+        </div>
+      </div>
+      <div class="tense-box">
+        <h4>Future Continuous</h4>
+        <p>What will be <strong>happening</strong> at a future time</p>
+        <p>Focus: the <strong>ongoing action</strong></p>
+        <div class="example-box" style="font-size: 0.9em;">
+          "I will be meeting clients at 2 PM." (in progress)
+        </div>
+      </div>
+    </div>
+    <div class="special-note">
+      <strong>Quick Rule:</strong> Present Continuous = "I have a plan" | Future Continuous = "At this time, this will be happening"
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Practice Exercise 16</h2>
+    <div class="practice-box">
+      <p><strong>16.</strong> I _________________________ (go) to the dentist next Tuesday at 2 PM.</p>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: This is a scheduled appointment.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Answer & Explanation 16</h2>
+    <div class="answer-box">
+      <p><strong>16.</strong> I <span class="highlight">am going</span> to the dentist next Tuesday at 2 PM.</p>
+      <div class="explanation">✓ Present Continuous - scheduled/planned appointment</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Practice Exercise 17</h2>
+    <div class="practice-box">
+      <p><strong>17.</strong> At 2 PM tomorrow, I _________________________ (have) a conference call.</p>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: This describes what will be happening at that specific time.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Answer & Explanation 17</h2>
+    <div class="answer-box">
+      <p><strong>17.</strong> At 2 PM tomorrow, I <span class="highlight">will be having</span> a conference call.</p>
+      <div class="explanation">✓ Future Continuous - describes what will be happening at that specific time</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Practice Exercise 18</h2>
+    <div class="practice-box">
+      <p><strong>18.</strong> We _________________________ (travel) to New York next week.</p>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: The tickets are already booked (arranged/planned).</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Answer & Explanation 18</h2>
+    <div class="answer-box">
+      <p><strong>18.</strong> We <span class="highlight">are traveling</span> to New York next week.</p>
+      <div class="explanation">✓ Present Continuous - arranged/planned trip (tickets booked)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Practice Exercise 19</h2>
+    <div class="practice-box">
+      <p><strong>19.</strong> This time next year, she _________________________ (study) at university.</p>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: This describes what will be happening at that future time.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Answer & Explanation 19</h2>
+    <div class="answer-box">
+      <p><strong>19.</strong> This time next year, she <span class="highlight">will be studying</span> at university.</p>
+      <div class="explanation">✓ Future Continuous - describes action in progress at future time</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Practice Exercise 20</h2>
+    <div class="practice-box">
+      <p><strong>20.</strong> They _________________________ (move) to a new apartment on the first of next month.</p>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: This is an arranged/planned move.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Part 4: Answer & Explanation 20</h2>
+    <div class="answer-box">
+      <p><strong>20.</strong> They <span class="highlight">are moving</span> to a new apartment on the first of next month.</p>
+      <div class="explanation">✓ Present Continuous - arranged/planned move</div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 5: WORD SCRAMBLE -->
+<section>
+  <section>
+    <h2>Part 5: Word Scramble</h2>
+    <div class="special-note">
+      <strong>Instructions:</strong> Put the words in the correct order. Choose the correct tense:
+      <ul style="text-align: left; margin-top: 10px;">
+        <li><strong>Present Continuous</strong> (am/is/are + verb-ing) → planned/arranged events</li>
+        <li><strong>Past Continuous</strong> (was/were + verb-ing) → actions in progress in the past</li>
+        <li><strong>Future Continuous</strong> (will be + verb-ing) → actions in progress at future time</li>
+      </ul>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Exercise 21</h2>
+    <div class="practice-box">
+      <p><strong>21.</strong> Put these words in order:</p>
+      <div style="margin: 15px 0;">
+        <span class="word-card">year</span>
+        <span class="word-card">going</span>
+        <span class="word-card">she</span>
+        <span class="word-card">to</span>
+        <span class="word-card">france</span>
+        <span class="word-card">is</span>
+        <span class="word-card">next</span>
+      </div>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: This is a planned trip.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Answer 21</h2>
+    <div class="answer-box">
+      <p><strong>21.</strong> <span class="highlight">She is going to France next year.</span></p>
+      <div class="explanation">✓ Present Continuous - planned/scheduled trip</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Exercise 29</h2>
+    <div class="practice-box">
+      <p><strong>29.</strong> Put these words in order:</p>
+      <div style="margin: 15px 0;">
+        <span class="word-card">started</span>
+        <span class="word-card">I</span>
+        <span class="word-card">walking</span>
+        <span class="word-card">when</span>
+        <span class="word-card">it</span>
+        <span class="word-card">to</span>
+        <span class="word-card">home</span>
+        <span class="word-card">was</span>
+        <span class="word-card">rain</span>
+      </div>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: Background action + interruption.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Answer 29</h2>
+    <div class="answer-box">
+      <p><strong>29.</strong> I <span class="highlight">was walking</span> home <span class="time-word">when</span> it <span class="highlight">started</span> to rain.</p>
+      <div class="explanation">✓ Past Continuous (ongoing) + Past Simple (interruption)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Exercise 33</h2>
+    <div class="practice-box">
+      <p><strong>33.</strong> Put these words in order:</p>
+      <div style="margin: 15px 0;">
+        <span class="word-card">meeting</span>
+        <span class="word-card">I</span>
+        <span class="word-card">tomorrow</span>
+        <span class="word-card">will</span>
+        <span class="word-card">at</span>
+        <span class="word-card">,</span>
+        <span class="word-card">be</span>
+        <span class="word-card">pm</span>
+        <span class="word-card">having</span>
+        <span class="word-card">3</span>
+        <span class="word-card">a</span>
+      </div>
+      <p style="font-size: 0.85em; color: var(--muted);">Hint: Describes what will be happening at that specific time.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Word Scramble: Answer 33</h2>
+    <div class="answer-box">
+      <p><strong>33.</strong> <span class="time-word">At 3 PM tomorrow</span>, I <span class="highlight">will be having</span> a meeting.</p>
+      <div class="explanation">✓ Future Continuous - action in progress at specific future time</div>
+    </div>
+  </section>
+</section>
+
+<!-- PART 6: CROSS-OUT ACTIVITY -->
+<section>
+  <section>
+    <h2>Part 6: Cross Out the Incorrect Words</h2>
+    <div class="example-box">
+      <p><strong>Example:</strong> Lottie <span class="time-word">usually</span> <span class="correct">shops</span> / <span class="incorrect">is shopping</span> on her own, but <span class="time-word">today</span> <span class="correct">she's shopping</span> / <span class="incorrect">she shops</span> with her sister.</p>
+      <div class="explanation">✓ "usually" = Present Simple (habit) | "today" = Present Continuous (temporary)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Exercise 39</h2>
+    <div class="practice-box">
+      <p><strong>39.</strong> I <span class="time-word">normally</span> <span class="word-choice">am walking</span> / <span class="word-choice">walk</span> the dog in the evening, but <span class="time-word">this evening</span> <span class="word-choice">I'm relaxing</span> / <span class="word-choice">I relax</span> at home.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Answer 39</h2>
+    <div class="answer-box">
+      <p><strong>39.</strong> I <span class="time-word">normally</span> <span class="correct">walk</span> / <span class="incorrect">am walking</span> the dog in the evening, but <span class="time-word">this evening</span> <span class="correct">I'm relaxing</span> / <span class="incorrect">I relax</span> at home.</p>
+      <div class="explanation">✓ "normally" = Present Simple (habit) | "this evening" = Present Continuous (temporary)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Exercise 45</h2>
+    <div class="practice-box">
+      <p><strong>45.</strong> She <span class="word-choice">was cooking</span> / <span class="word-choice">cooked</span> dinner <span class="time-word">when</span> the phone <span class="word-choice">was ringing</span> / <span class="word-choice">rang</span>.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Answer 45</h2>
+    <div class="answer-box">
+      <p><strong>45.</strong> She <span class="correct">was cooking</span> / <span class="incorrect">cooked</span> dinner <span class="time-word">when</span> the phone <span class="correct">rang</span> / <span class="incorrect">was ringing</span>.</p>
+      <div class="explanation">✓ "was cooking" = Past Continuous (ongoing) | "rang" = Past Simple (interruption)</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Exercise 49</h2>
+    <div class="practice-box">
+      <p><strong>49.</strong> <span class="time-word">At 3 PM tomorrow</span>, I <span class="word-choice">will be having</span> / <span class="word-choice">will have</span> a meeting, so I <span class="word-choice">will call</span> / <span class="word-choice">will be calling</span> you later.</p>
+    </div>
+  </section>
+  
+  <section>
+    <h2>Cross-Out: Answer 49</h2>
+    <div class="answer-box">
+      <p><strong>49.</strong> <span class="time-word">At 3 PM tomorrow</span>, I <span class="correct">will be having</span> / <span class="incorrect">will have</span> a meeting, so I <span class="correct">will call</span> / <span class="incorrect">will be calling</span> you later.</p>
+      <div class="explanation">✓ "will be having" = Future Continuous (action in progress at specific time) | "will call" = Future Simple (promise/decision)</div>
+    </div>
+  </section>
+</section>
+
+<!-- REVIEW & SUMMARY -->
+<section>
+  <section>
+    <h2>Key Points to Remember</h2>
+    <div class="special-note" style="text-align: left;">
+      <ul style="font-size: 1.1em; line-height: 1.8;">
+        <li><strong>Simple tenses:</strong> Habits, routines, completed actions, general facts</li>
+        <li><strong>Continuous tenses:</strong> Actions in progress, temporary situations, ongoing actions</li>
+        <li><strong>Past Continuous + Past Simple:</strong> The longer action (continuous) is interrupted by the shorter action (simple)</li>
+        <li><strong>Time words are clues:</strong> <span class="time-word">"usually, often, always"</span> → Simple | <span class="time-word">"now, at the moment, while"</span> → Continuous</li>
+        <li><strong>Present Continuous vs Future Continuous:</strong> Present Continuous = "I have a plan" | Future Continuous = "At this time, this will be happening"</li>
+      </ul>
+    </div>
+  </section>
+  
+  <section>
+    <h1>Great Job!</h1>
+    <h2>You've completed the worksheet review</h2>
+    <p style="font-size: 1.5em; margin-top: 2em;">Keep practicing! 🎓</p>
+  </section>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    controls: true,
+    progress: true,
+    center: true,
+    transition: 'slide',
+    width: 1400,
+    height: 900,
+    margin: 0.05,
+    minScale: 0.2,
+    maxScale: 2.0
+  });
+</script>
+</body>
+</html>

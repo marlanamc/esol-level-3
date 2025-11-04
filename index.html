@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marlie's ESOL Class</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  header {
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
+    padding: 40px 20px;
+  }
+  
+  h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .subtitle {
+    font-size: 20px;
+    opacity: 0.9;
+  }
+  
+  .activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  
+  .activity-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  
+  .activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  
+  .activity-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  
+  .activity-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 10px;
+  }
+  
+  .activity-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  footer {
+    text-align: center;
+    color: white;
+    padding: 30px 20px;
+    opacity: 0.8;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 36px;
+    }
+    
+    .activities-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 English Grammar Activities</h1>
+      <p class="subtitle">Practice your grammar skills with interactive exercises</p>
+    </header>
+    
+    <div class="activities-grid">
+      <a href="test-prep-trivia-game.html" class="activity-card">
+        <span class="activity-icon">🎮</span>
+        <div class="activity-title">Test Prep Trivia Game</div>
+        <div class="activity-description">Review for your test with this fun trivia game covering Level 3 Unit 2 material.</div>
+      </a>
+      
+      <a href="complete-tense-worksheet-slides.html" class="activity-card">
+        <span class="activity-icon">📊</span>
+        <div class="activity-title">Complete Tense Worksheet (Slides)</div>
+        <div class="activity-description">Interactive slide-based worksheet for practicing complete tenses.</div>
+      </a>
+      
+      <a href="complete-tense-worksheet.html" class="activity-card">
+        <span class="activity-icon">📝</span>
+        <div class="activity-title">Complete Tense Worksheet</div>
+        <div class="activity-description">Practice completing sentences with the correct tense forms.</div>
+      </a>
+      
+      <a href="simple-vs-continuous-tenses.html" class="activity-card">
+        <span class="activity-icon">⚖️</span>
+        <div class="activity-title">Simple vs Continuous Tenses</div>
+        <div class="activity-description">Learn the difference between simple and continuous tenses with interactive exercises.</div>
+      </a>
+      
+      <a href="tenses-quiz.html" class="activity-card">
+        <span class="activity-icon">❓</span>
+        <div class="activity-title">Tenses Quiz</div>
+        <div class="activity-description">Test your knowledge of English tenses with this comprehensive quiz.</div>
+      </a>
+      
+      <a href="sentence-builder-scaffold.html" class="activity-card">
+        <span class="activity-icon">🏗️</span>
+        <div class="activity-title">Sentence Builder (Scaffold)</div>
+        <div class="activity-description">Build sentences step by step with helpful scaffolding support.</div>
+      </a>
+      
+      <a href="sentence-builder-helper-verbs.html" class="activity-card">
+        <span class="activity-icon">🔧</span>
+        <div class="activity-title">Sentence Builder (Helper Verbs)</div>
+        <div class="activity-description">Practice building sentences using helper verbs and auxiliary verbs.</div>
+      </a>
+      
+      <a href="future-plans-worksheet.html" class="activity-card">
+        <span class="activity-icon">🔮</span>
+        <div class="activity-title">Future Plans Worksheet</div>
+        <div class="activity-description">Practice talking about future plans and intentions.</div>
+      </a>
+      
+      <a href="word-scramble-future-tenses.html" class="activity-card">
+        <span class="activity-icon">🔀</span>
+        <div class="activity-title">Word Scramble - Future Tenses</div>
+        <div class="activity-description">Unscramble words to practice future tense vocabulary and forms.</div>
+      </a>
+      
+      <a href="speaking-activity-tenses.html" class="activity-card">
+        <span class="activity-icon">🎤</span>
+        <div class="activity-title">Speaking Activity - Tenses</div>
+        <div class="activity-description">Practice speaking and using different tenses in conversation.</div>
+      </a>
+    </div>
+    
+    <footer>
+      <p>Happy learning! 🌟</p>
+    </footer>
+  </div>
+</body>
+</html>
+

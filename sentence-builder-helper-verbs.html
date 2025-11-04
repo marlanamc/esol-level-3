@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sentence Builder Cards - Printable</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    /* More distinct pastel colors for better differentiation */
+    --subject:#9fd3ff;      /* Pastel sky blue */
+    --tobe:#b3ebe7;         /* Pastel teal */
+    --helper:#a8e6cf;       /* Pastel mint */
+    --v1:#c1e99b;           /* Pastel lime green */
+    --ving:#b8d9a8;         /* Pastel sage green */
+    --v2:#9dd4a8;           /* Pastel mint-green */
+    --object:#ffd9b3;       /* Pastel peach */
+    --time:#ffb3ba;         /* Pastel coral pink */
+    --place:#c5a3ff;        /* Pastel periwinkle */
+    --preposition:#ffb3e6;  /* Pastel pink */
+    --det:#ffcc99;          /* Pastel apricot */
+    --connector:#d4b3ff;    /* Pastel purple */
+    --border:#222;
+    --muted:#666;
+    
+    /* Card dimensions - uniform size for all cards */
+    --card-width: 2.2in;
+    --card-height: 1.4in;
+    --card-gap: 0.15in;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.5in;
+  }
+  
+  @media print{
+    body{ 
+      margin: 0; 
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact;
+      background: white;
+    }
+    .no-print{
+      display: none;
+    }
+    .page-break{
+      page-break-before: always;
+    }
+  }
+  
+  .page-break{
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 3px dashed #ccc;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .no-print{
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 8px;
+  }
+  
+  .no-print h1{
+    margin: 0 0 10px 0;
+    font-size: 24px;
+  }
+  
+  .no-print p{
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .cards-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, var(--card-width));
+    gap: var(--card-gap);
+    justify-content: center;
+    padding: 20px 0;
+  }
+  
+  .card{
+    width: var(--card-width);
+    height: var(--card-height);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .card-text{
+    font-weight: 700;
+    font-size: 18pt;
+    text-align: center;
+    line-height: 1.2;
+    text-align: center;
+  }
+  
+  .card-contraction{
+    font-weight: 400;
+    font-size: 11pt;
+    color: #666;
+    text-align: center;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  
+  .card-category{
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    font-size: 7pt;
+    font-weight: 600;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .card-back{
+    width: var(--card-width);
+    height: var(--card-height);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white !important; /* White background to save color ink */
+  }
+  
+  .card-back-text{
+    font-weight: 800;
+    font-size: 16pt;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Color the category text on backs - more vibrant versions for better visibility on white */
+  .card-back.subject .card-back-text{ color: #4fa3e8; } /* More vibrant sky blue */
+  .card-back.tobe .card-back-text{ color: #5dd5ca; } /* More vibrant teal */
+  .card-back.helper .card-back-text{ color: #6dd4a8; } /* More vibrant mint */
+  .card-back.v1 .card-back-text{ color: #8fcf5a; } /* More vibrant lime green */
+  .card-back.ving .card-back-text{ color: #7bc077; } /* More vibrant sage green */
+  .card-back.v2 .card-back-text{ color: #6bbd7a; } /* More vibrant mint-green */
+  .card-back.object .card-back-text{ color: #ffb366; } /* More vibrant peach */
+  .card-back.time .card-back-text{ color: #ff8a94; } /* More vibrant coral pink */
+  .card-back.place .card-back-text{ color: #a882ff; } /* More vibrant periwinkle */
+  .card-back.preposition .card-back-text{ color: #ff85d4; } /* More vibrant pink */
+  .card-back.det .card-back-text{ color: #ffaa66; } /* More vibrant apricot */
+  .card-back.connector .card-back-text{ color: #b87fff; } /* More vibrant purple */
+  
+  /* Color backgrounds for each category */
+  .subject{ background: var(--subject); }
+  .tobe{ background: var(--tobe); }
+  .helper{ background: var(--helper); }
+  .v1{ background: var(--v1); }
+  .ving{ background: var(--ving); }
+  .v2{ background: var(--v2); }
+  .object{ background: var(--object); }
+  .time{ background: var(--time); }
+  .place{ background: var(--place); }
+  .preposition{ background: var(--preposition); }
+  .det{ background: var(--det); }
+  .connector{ background: var(--connector); }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <h1>Sentence Builder Cards</h1>
+  <p>Print this page to create uniform-sized cards for sentence building activities.</p>
+  <p>All cards are <strong>2.2" × 1.4"</strong> and can be cut out along the borders.</p>
+  <p><strong>Printing Instructions:</strong> Cards are arranged in groups of 18 fronts followed by 18 backs. Print each page with fronts on one side and backs on the reverse.</p>
+</div>
+
+<!-- GROUP 1: 18 Fronts (6 Pronouns + 8 Helpers + 4 To Be) -->
+<div class="cards-container">
+
+  <!-- Pronouns (Who?) -->
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">I</div>
+  </div>
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">You</div>
+  </div>
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">He</div>
+  </div>
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">She</div>
+  </div>
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">They</div>
+  </div>
+  <div class="card subject">
+    <div class="card-category">Pronouns</div>
+    <div class="card-text">We</div>
+  </div>
+
+  <!-- Helper Verbs -->
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">do</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">does</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">did</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">will</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">do not</div>
+    <div class="card-contraction">(don't)</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">does not</div>
+    <div class="card-contraction">(doesn't)</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">did not</div>
+    <div class="card-contraction">(didn't)</div>
+  </div>
+  <div class="card helper">
+    <div class="card-category">Helper Verb</div>
+    <div class="card-text">will not</div>
+    <div class="card-contraction">(won't)</div>
+  </div>
+
+  <!-- To Be (first 4) -->
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">am</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">is</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">are</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">was</div>
+  </div>
+
+</div>
+
+<!-- GROUP 1: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+  <div class="card-back subject">
+    <div class="card-back-text">Pronouns</div>
+  </div>
+
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+  <div class="card-back helper">
+    <div class="card-back-text">Helper Verb</div>
+  </div>
+
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+
+</div>
+
+<!-- GROUP 2: 18 Fronts (6 To Be + 12 V1) -->
+<div class="page-break cards-container">
+
+  <!-- To Be (remaining 6) -->
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">were</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">am not</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">isn't</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">aren't</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">wasn't</div>
+  </div>
+  <div class="card tobe">
+    <div class="card-category">To Be</div>
+    <div class="card-text">weren't</div>
+  </div>
+
+  <!-- Base Verbs (Present Simple) - first 12 -->
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">eat / eats</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">work / works</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">watch / watches</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">go / goes</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">study / studies</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">play / plays</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">cook / cooks</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">read / reads</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">sleep / sleeps</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">clean / cleans</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">drive / drives</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">talk / talks</div>
+  </div>
+
+</div>
+
+<!-- GROUP 2: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+  <div class="card-back tobe">
+    <div class="card-back-text">To Be</div>
+  </div>
+
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+
+</div>
+
+<!-- GROUP 3: 18 Fronts (5 V1 + 13 V1-ing) -->
+<div class="page-break cards-container">
+
+  <!-- Base Verbs (remaining 5) -->
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">have / has</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">do / does</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">live / lives</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">need / needs</div>
+  </div>
+  <div class="card v1">
+    <div class="card-category">V1/V1-3rd</div>
+    <div class="card-text">want / wants</div>
+  </div>
+
+  <!-- Verb-ing Forms (first 13) -->
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">eating</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">working</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">watching</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">going</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">studying</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">playing</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">cooking</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">reading</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">sleeping</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">cleaning</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">driving</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">talking</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">having</div>
+  </div>
+
+</div>
+
+<!-- GROUP 3: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+  <div class="card-back v1">
+    <div class="card-back-text">V1/V1-3rd</div>
+  </div>
+
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+
+</div>
+
+<!-- GROUP 4: 18 Fronts (4 V1-ing + 14 V2) -->
+<div class="page-break cards-container">
+
+  <!-- Verb-ing Forms (remaining 4) -->
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">doing</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">living</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">needing</div>
+  </div>
+  <div class="card ving">
+    <div class="card-category">V1-ing</div>
+    <div class="card-text">wanting</div>
+  </div>
+
+  <!-- V2 Verbs (first 14) -->
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">ate</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">worked</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">watched</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">went</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">studied</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">played</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">cooked</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">read</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">slept</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">cleaned</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">drove</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">talked</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">had</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">did</div>
+  </div>
+
+</div>
+
+<!-- GROUP 4: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+  <div class="card-back ving">
+    <div class="card-back-text">V1-ing</div>
+  </div>
+
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+
+</div>
+
+<!-- GROUP 5: 18 Fronts (3 V2 + 8 Objects + 7 Time) -->
+<div class="page-break cards-container">
+
+  <!-- V2 Verbs (remaining 3) -->
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">lived</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">needed</div>
+  </div>
+  <div class="card v2">
+    <div class="card-category">V2</div>
+    <div class="card-text">wanted</div>
+  </div>
+
+  <!-- Objects (What?) -->
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">pizza</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">coffee</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">English</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">book</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">homework</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">TV</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">bus</div>
+  </div>
+  <div class="card object">
+    <div class="card-category">Object</div>
+    <div class="card-text">music</div>
+  </div>
+
+  <!-- Time Words -->
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">now</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">every day</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">usually</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">yesterday</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">last night</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">tomorrow</div>
+  </div>
+  <div class="card time">
+    <div class="card-category">Time</div>
+    <div class="card-text">next weekend</div>
+  </div>
+
+</div>
+
+<!-- GROUP 5: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+  <div class="card-back v2">
+    <div class="card-back-text">V2</div>
+  </div>
+
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+  <div class="card-back object">
+    <div class="card-back-text">Object</div>
+  </div>
+
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+  <div class="card-back time">
+    <div class="card-back-text">Time</div>
+  </div>
+
+</div>
+
+<!-- GROUP 6: 18 Fronts (4 Places + 6 Prepositions + 4 Determiners + 4 Connectors = 18) -->
+<div class="page-break cards-container">
+
+  <!-- Places -->
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">home</div>
+  </div>
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">school</div>
+  </div>
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">work</div>
+  </div>
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">park</div>
+  </div>
+
+  <!-- Prepositions -->
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">at</div>
+  </div>
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">in</div>
+  </div>
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">on</div>
+  </div>
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">to</div>
+  </div>
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">from</div>
+  </div>
+  <div class="card preposition">
+    <div class="card-category">Preposition</div>
+    <div class="card-text">with</div>
+  </div>
+
+  <!-- Determiners (4 of 5) -->
+  <div class="card det">
+    <div class="card-category">Determiner</div>
+    <div class="card-text">a</div>
+  </div>
+  <div class="card det">
+    <div class="card-category">Determiner</div>
+    <div class="card-text">an</div>
+  </div>
+  <div class="card det">
+    <div class="card-category">Determiner</div>
+    <div class="card-text">the</div>
+  </div>
+  <div class="card det">
+    <div class="card-category">Determiner</div>
+    <div class="card-text">my</div>
+  </div>
+
+  <!-- Connectors (4 of 7) -->
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">when</div>
+  </div>
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">while</div>
+  </div>
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">before</div>
+  </div>
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">as</div>
+  </div>
+
+</div>
+
+<!-- GROUP 6: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+  <div class="card-back preposition">
+    <div class="card-back-text">Preposition</div>
+  </div>
+
+  <div class="card-back det">
+    <div class="card-back-text">Determiner</div>
+  </div>
+  <div class="card-back det">
+    <div class="card-back-text">Determiner</div>
+  </div>
+  <div class="card-back det">
+    <div class="card-back-text">Determiner</div>
+  </div>
+  <div class="card-back det">
+    <div class="card-back-text">Determiner</div>
+  </div>
+
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+
+</div>
+
+<!-- GROUP 7: 18 Fronts (1 Determiner + 3 Connectors + 2 Places = 6, need 12 more) -->
+<div class="page-break cards-container">
+
+  <!-- Determiner (remaining 1) -->
+  <div class="card det">
+    <div class="card-category">Determiner</div>
+    <div class="card-text">your</div>
+  </div>
+
+  <!-- Connectors (remaining 3) -->
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">after</div>
+  </div>
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">until</div>
+  </div>
+  <div class="card connector">
+    <div class="card-category">Connector</div>
+    <div class="card-text">during</div>
+  </div>
+
+  <!-- Places (additional 2) -->
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">office</div>
+  </div>
+  <div class="card place">
+    <div class="card-category">Place</div>
+    <div class="card-text">restaurant</div>
+  </div>
+
+  <!-- Empty slots for future cards (12 slots) -->
+  <!-- These can be filled with additional cards later if needed -->
+
+</div>
+
+<!-- GROUP 7: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back det">
+    <div class="card-back-text">Determiner</div>
+  </div>
+
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+  <div class="card-back connector">
+    <div class="card-back-text">Connector</div>
+  </div>
+
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+  <div class="card-back place">
+    <div class="card-back-text">Place</div>
+  </div>
+
+  <!-- Empty slots for future card backs (12 slots) -->
+
+</div>
+
+</body>
+</html>
