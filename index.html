@@ -44,9 +44,12 @@
   
   .activities-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     margin-bottom: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .activity-card {
@@ -98,6 +101,7 @@
     
     .activities-grid {
       grid-template-columns: 1fr;
+      max-width: 100%;
     }
   }
 </style>
@@ -105,7 +109,7 @@
 <body>
   <div class="container">
     <header>
-      <h1>📚 English Grammar Activities</h1>
+      <h1>Marlie's ESOL Class</h1>
       <p class="subtitle">Practice your grammar skills with interactive exercises</p>
     </header>
     
@@ -126,48 +130,6 @@
         <span class="activity-icon">📝</span>
         <div class="activity-title">Complete Tense Worksheet</div>
         <div class="activity-description">Practice completing sentences with the correct tense forms.</div>
-      </a>
-      
-      <a href="simple-vs-continuous-tenses.html" class="activity-card">
-        <span class="activity-icon">⚖️</span>
-        <div class="activity-title">Simple vs Continuous Tenses</div>
-        <div class="activity-description">Learn the difference between simple and continuous tenses with interactive exercises.</div>
-      </a>
-      
-      <a href="tenses-quiz.html" class="activity-card">
-        <span class="activity-icon">❓</span>
-        <div class="activity-title">Tenses Quiz</div>
-        <div class="activity-description">Test your knowledge of English tenses with this comprehensive quiz.</div>
-      </a>
-      
-      <a href="sentence-builder-scaffold.html" class="activity-card">
-        <span class="activity-icon">🏗️</span>
-        <div class="activity-title">Sentence Builder (Scaffold)</div>
-        <div class="activity-description">Build sentences step by step with helpful scaffolding support.</div>
-      </a>
-      
-      <a href="sentence-builder-helper-verbs.html" class="activity-card">
-        <span class="activity-icon">🔧</span>
-        <div class="activity-title">Sentence Builder (Helper Verbs)</div>
-        <div class="activity-description">Practice building sentences using helper verbs and auxiliary verbs.</div>
-      </a>
-      
-      <a href="future-plans-worksheet.html" class="activity-card">
-        <span class="activity-icon">🔮</span>
-        <div class="activity-title">Future Plans Worksheet</div>
-        <div class="activity-description">Practice talking about future plans and intentions.</div>
-      </a>
-      
-      <a href="word-scramble-future-tenses.html" class="activity-card">
-        <span class="activity-icon">🔀</span>
-        <div class="activity-title">Word Scramble - Future Tenses</div>
-        <div class="activity-description">Unscramble words to practice future tense vocabulary and forms.</div>
-      </a>
-      
-      <a href="speaking-activity-tenses.html" class="activity-card">
-        <span class="activity-icon">🎤</span>
-        <div class="activity-title">Speaking Activity - Tenses</div>
-        <div class="activity-description">Practice speaking and using different tenses in conversation.</div>
       </a>
     </div>
     
