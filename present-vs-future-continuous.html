@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Present Continuous vs Future Continuous - Simple Guide</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --muted:#666;
+    --yellow-bg:#fff9e6;
+    --blue-bg:#e3f2fd;
+    --green-bg:#e8f5e9;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.25in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 12px;
+    line-height: 1.4;
+    font-size: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  h1{
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    font-size: 22px;
+    text-align: center;
+  }
+  
+  h2{
+    color: var(--accent);
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+  
+  .reassurance-box{
+    background: var(--yellow-bg);
+    border: 2px solid #ffd700;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .reassurance-box strong{
+    color: #856404;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .reassurance-box p{
+    margin: 2px 0;
+    font-size: 13px;
+    color: #856404;
+  }
+  
+  /* Venn Diagram Styles */
+  .venn-container{
+    background: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .venn-diagram{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin: 8px 0;
+    align-items: stretch;
+  }
+  
+  .venn-circle{
+    background: rgba(74, 144, 226, 0.1);
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .venn-overlap{
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px dashed var(--green-header);
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .venn-circle h3{
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  
+  .venn-overlap h3{
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: var(--green-header);
+    font-weight: bold;
+  }
+  
+  .venn-circle ul{
+    margin: 4px 0;
+    padding-left: 16px;
+    font-size: 12px;
+    text-align: left;
+  }
+  
+  .venn-circle li{
+    margin: 2px 0;
+  }
+  
+  .formula{
+    background: #f5f5f5;
+    border-left: 3px solid var(--accent);
+    padding: 4px 6px;
+    margin: 4px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+  
+  .example-box{
+    background: var(--blue-bg);
+    border-left: 3px solid var(--accent);
+    padding: 6px;
+    margin: 6px 0;
+    border-radius: 3px;
+  }
+  
+  .example-box strong{
+    color: var(--accent);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 13px;
+  }
+  
+  .example-sentence{
+    margin: 3px 0;
+    font-size: 13px;
+  }
+  
+  .example-note{
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  
+  .comparison-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0;
+  }
+  
+  .comparison-card{
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px;
+  }
+  
+  .comparison-card h3{
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  
+  .overlap-examples{
+    background: var(--green-bg);
+    border: 2px solid var(--green-header);
+    border-radius: 6px;
+    padding: 8px;
+    margin: 10px 0;
+  }
+  
+  .overlap-examples h3{
+    color: var(--green-header);
+    margin-top: 0;
+    font-size: 14px;
+  }
+  
+  .speech-tip{
+    background: #fff3cd;
+    border-left: 3px solid #ffc107;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 3px;
+  }
+  
+  .speech-tip strong{
+    color: #856404;
+    display: block;
+    margin-bottom: 3px;
+    font-size: 13px;
+  }
+  
+  .boss-example{
+    background: #ffebee;
+    border: 2px solid #e91e63;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 12px 0;
+  }
+  
+  .boss-example h3{
+    color: #c2185b;
+    margin-top: 0;
+    font-size: 16px;
+  }
+  
+  .strong-weak{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 8px 0;
+    min-width: 0;
+  }
+  
+  .strong-statement{
+    background: #e8f5e9;
+    border-left: 3px solid var(--green-header);
+    padding: 8px;
+    border-radius: 3px;
+    min-width: 0;
+  }
+  
+  .weak-statement{
+    background: #fff3e0;
+    border-left: 3px solid #ff9800;
+    padding: 8px;
+    border-radius: 3px;
+    min-width: 0;
+  }
+  
+  .strong-statement strong{
+    color: var(--green-header);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 13px;
+  }
+  
+  .weak-statement strong{
+    color: #e65100;
+    display: block;
+    margin-bottom: 3px;
+    font-size: 13px;
+  }
+  
+  @media print {
+    .venn-container {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Present Continuous vs Future Continuous</h1>
+<p style="text-align: center; font-size: 14px; color: var(--muted); margin-bottom: 10px;">
+  When Do They Overlap?
+</p>
+
+<!-- Reassurance Box -->
+<div class="reassurance-box">
+  <strong>✨ Good News!</strong>
+  <p>Both tenses work for future plans. Don't overthink it! This is about clarity, not being "wrong."</p>
+</div>
+
+<!-- Venn Diagram -->
+<div class="venn-container">
+  <h2 style="text-align: center; margin-top: 0; font-size: 15px;">Where Do They Overlap?</h2>
+  
+  <div class="venn-diagram">
+    <div class="venn-circle">
+      <h3>Present Continuous</h3>
+      <div class="formula">am/is/are + verb-ing</div>
+      <ul>
+        <li><strong>Focus:</strong> "I have a plan"</li>
+        <li>Planned/scheduled events</li>
+        <li>Arranged activities</li>
+        <li>What you're doing later</li>
+      </ul>
+    </div>
+    
+    <div class="venn-overlap">
+      <h3>✅ Both Work!</h3>
+      <p style="font-size: 12px; margin: 4px 0;"><strong>For planned events, either works!</strong></p>
+      <p style="font-size: 11px; margin: 2px 0;">"I'm meeting..." ✅</p>
+      <p style="font-size: 11px; margin: 2px 0;">"I'll be meeting..." ✅</p>
+    </div>
+    
+    <div class="venn-circle">
+      <h3>Future Continuous</h3>
+      <div class="formula">will be + verb-ing</div>
+      <ul>
+        <li><strong>Focus:</strong> "At this time, this will be happening"</li>
+        <li>Action in progress at a future time</li>
+        <li>What's happening at a specific moment</li>
+        <li>More about the ongoing action</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Simple Comparison -->
+<div class="comparison-grid">
+  <div class="comparison-card">
+    <h3>Present Continuous</h3>
+    <p style="font-size: 12px; margin: 4px 0;"><strong>Think:</strong> "I have this scheduled"</p>
+    <div class="example-box" style="padding: 4px;">
+      <div class="example-sentence" style="font-size: 12px;">"I'm meeting Susan tomorrow."</div>
+      <div class="example-sentence" style="font-size: 12px;">"We're flying to Paris next week."</div>
+    </div>
+  </div>
+  
+  <div class="comparison-card">
+    <h3>Future Continuous</h3>
+    <p style="font-size: 12px; margin: 4px 0;"><strong>Think:</strong> "At this time, this will be happening"</p>
+    <div class="example-box" style="padding: 4px;">
+      <div class="example-sentence" style="font-size: 12px;">"At 2 PM, I'll be meeting clients."</div>
+      <div class="example-sentence" style="font-size: 12px;">"This time next week, she'll be studying."</div>
+    </div>
+  </div>
+</div>
+
+<!-- Where They Overlap -->
+<div class="overlap-examples">
+  <h3>🎯 Both Work!</h3>
+  <p style="font-size: 12px; margin: 4px 0;">For planned events, either tense works: "I'm going..." ✅ "I'll be going..." ✅</p>
+</div>
+
+<!-- Boss Example - When It Really Matters -->
+<div class="boss-example">
+  <h3>💼 When It REALLY Matters: Talking to Your Boss</h3>
+  <p style="font-size: 13px; margin: 4px 0;">When you need to show a <em>firm commitment</em>, Present Continuous is much stronger!</p>
+  
+  <div class="strong-weak">
+    <div class="strong-statement">
+      <strong>✅ STRONG</strong>
+      <div class="example-sentence" style="margin-top: 4px; font-size: 13px; font-weight: 500; white-space: nowrap;">
+        "Next Wednesday, I <strong style="background: rgba(76, 175, 80, 0.2); padding: 1px 2px;">am going</strong> to the dentist at 3 PM."
+      </div>
+      <div style="margin-top: 6px;">
+        <strong style="color: var(--green-header); font-size: 12px; display: block; margin-bottom: 2px;">Boss hears:</strong>
+        <div style="font-style: italic; color: var(--muted); font-size: 11px; padding-left: 4px; white-space: nowrap;">"Scheduled appointment. Cannot change. Need time off."</div>
+      </div>
+    </div>
+    
+    <div class="weak-statement">
+      <strong>⚠️ WEAKER</strong>
+      <div class="example-sentence" style="margin-top: 4px; font-size: 13px; font-weight: 500; white-space: nowrap;">
+        "Next Wednesday, I <strong style="background: rgba(255, 152, 0, 0.2); padding: 1px 2px;">will be going</strong> to the dentist at 3 PM."
+      </div>
+      <div style="margin-top: 6px;">
+        <strong style="color: #e65100; font-size: 12px; display: block; margin-bottom: 2px;">Boss might hear:</strong>
+        <div style="font-style: italic; color: var(--muted); font-size: 11px; padding-left: 4px; white-space: nowrap;">"Maybe flexible? Can reschedule?"</div>
+      </div>
+    </div>
+  </div>
+  
+  <p style="margin-top: 8px; font-size: 12px;"><strong>Why it matters:</strong> Present Continuous shows <em>definiteness</em>. "I am taking vacation" (firm) vs "I will be taking vacation" (sounds flexible).</p>
+</div>
+
+<!-- Quick Tips -->
+<div style="background: #f0f7ff; border: 2px solid var(--accent); border-radius: 6px; padding: 8px; margin: 10px 0; page-break-before: always;">
+  <h3 style="margin-top: 0; color: var(--accent); font-size: 14px;">Quick Tips:</h3>
+  <ul style="margin: 4px 0; padding-left: 18px; font-size: 12px;">
+    <li>Both tenses work in casual conversation - don't stress!</li>
+    <li><strong>Present Continuous</strong> = "I have this scheduled" → Use for <strong>firm commitments</strong> (boss, appointments)</li>
+    <li><strong>Future Continuous</strong> = "At this time, this will be happening"</li>
+    <li>When unsure, <strong>Present Continuous is safer</strong> - shows commitment!</li>
+  </ul>
+</div>
+
+<!-- Practice Exercises -->
+<div style="margin-top: 16px;">
+  <h2 style="font-size: 15px;">Try It Out: Which Would You Use?</h2>
+  <p style="color: var(--muted); font-size: 12px; margin: 4px 0;">Remember: Both might be correct! It's about what feels natural.</p>
+  
+  <div class="example-box" style="margin: 6px 0; padding: 6px;">
+    <strong style="font-size: 12px;">1. "I _________________ (go) to the doctor next Tuesday at 2 PM."</strong>
+    <div style="margin-top: 4px;">
+      <div class="example-sentence" style="font-size: 12px;">• "I'm going..." ✅ (emphasizes scheduled appointment)</div>
+      <div class="example-sentence" style="font-size: 12px;">• "I'll be going..." ✅ (emphasizes what's happening at that time)</div>
+    </div>
+  </div>
+  
+  <div class="example-box" style="margin: 6px 0; padding: 6px;">
+    <strong style="font-size: 12px;">2. "At 2 PM tomorrow, I _________________ (have) a conference call."</strong>
+    <div style="margin-top: 4px;">
+      <div class="example-sentence" style="font-size: 12px;">• "I'm having..." ✅ (perfectly fine!)</div>
+      <div class="example-sentence" style="font-size: 12px;">• "I'll be having..." ✅ (emphasizes ongoing action at that moment)</div>
+    </div>
+  </div>
+  
+  <div class="example-box" style="margin: 6px 0; padding: 6px;">
+    <strong style="font-size: 12px;">3. "This time next year, she _________________ (study) at university."</strong>
+    <div style="margin-top: 4px;">
+      <div class="example-sentence" style="font-size: 12px;">• "She's studying..." ✅ (works if it's already planned)</div>
+      <div class="example-sentence" style="font-size: 12px;">• "She'll be studying..." ✅ (emphasizes what's happening at that future time)</div>
+    </div>
+  </div>
+</div>
+
+<div class="reassurance-box" style="margin-top: 12px;">
+  <strong>🌟 Remember</strong>
+  <p style="font-size: 13px;">Both work in casual talk, BUT use <strong>Present Continuous</strong> when you need to show strength (like talking to your boss)! 😊</p>
+</div>
+
+</body>
+</html>
+

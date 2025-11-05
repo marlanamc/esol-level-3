@@ -329,6 +329,88 @@
     font-size: 10px;
   }
   
+  /* Venn Diagram Styles */
+  .venn-container{
+    background: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 6px;
+    padding: 8px;
+    margin: 8px 0;
+  }
+  
+  .venn-diagram{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 8px 0;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  
+  .venn-circle{
+    flex: 1;
+    min-width: 140px;
+    background: rgba(74, 144, 226, 0.1);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 6px;
+    text-align: center;
+  }
+  
+  .venn-overlap{
+    flex: 1;
+    min-width: 140px;
+    background: rgba(76, 175, 80, 0.15);
+    border: 2px dashed var(--green-header);
+    border-radius: 8px;
+    padding: 6px;
+    text-align: center;
+    font-size: 9px;
+  }
+  
+  .venn-circle h4{
+    margin: 0 0 4px 0;
+    font-size: 11px;
+    color: var(--accent);
+  }
+  
+  .venn-overlap h4{
+    margin: 0 0 4px 0;
+    font-size: 11px;
+    color: var(--green-header);
+  }
+  
+  .venn-circle ul{
+    margin: 0;
+    padding-left: 16px;
+    font-size: 9px;
+    text-align: left;
+  }
+  
+  .venn-note{
+    background: #fff9e6;
+    border: 1px solid #ffd700;
+    border-radius: 4px;
+    padding: 6px;
+    margin: 6px 0;
+    font-size: 10px;
+    text-align: center;
+  }
+  
+  .reassurance-box{
+    background: #f0f7ff;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 6px;
+    margin: 6px 0;
+    text-align: center;
+  }
+  
+  .reassurance-box strong{
+    color: var(--accent);
+    font-size: 11px;
+  }
+  
   /* Word Scramble Styles */
   .word-scramble-section{
     background: #fafafa;

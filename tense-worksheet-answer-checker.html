@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Answer Checker - Word Scrambles & Cross-Out Exercises</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;
+    --v1:#c1e99b;
+    --ving:#b8d9a8;
+    --time:#ffb3ba;
+    --place:#c5a3ff;
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --strikethrough:#e53935;
+    --card-bg:#e3f2fd;
+    --card-border:#90caf9;
+    --correct:#4caf50;
+    --incorrect:#e53935;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  h1{
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  h2{
+    color: var(--accent);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+  }
+  
+  .section-header{
+    background: #e8f5e9;
+    border-left: 4px solid var(--green-header);
+    padding: 8px 12px;
+    margin: 20px 0 15px 0;
+    font-weight: bold;
+    color: #2e7d32;
+  }
+  
+  .check-button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .check-button:hover {
+    background: #357abd;
+  }
+  
+  .check-button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Word Scramble Styles */
+  .scramble-exercise {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fafafa;
+    border-left: 3px solid var(--accent);
+    border-radius: 5px;
+  }
+  
+  .exercise-number {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  
+  .word-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+    align-items: center;
+  }
+  
+  .word-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-block;
+  }
+  
+  .answer-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  
+  .answer-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  
+  .answer-feedback {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+  
+  .answer-feedback.correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid var(--correct);
+    display: block;
+  }
+  
+  .answer-feedback.incorrect {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid var(--incorrect);
+    display: block;
+  }
+  
+  .answer-feedback.show-correct {
+    background: #e3f2fd;
+    color: #1565c0;
+    border-left: 4px solid var(--accent);
+    display: block;
+  }
+  
+  .correct-answer {
+    font-weight: bold;
+    color: var(--correct);
+  }
+  
+  /* Cross-Out Styles */
+  .cross-out-section {
+    background: #f5f5f5;
+    border: 2px solid var(--green-header);
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+  }
+  
+  .cross-out-title {
+    background: var(--green-header);
+    color: white;
+    padding: 10px 15px;
+    margin: -15px -15px 15px -15px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+  }
+  
+  .cross-out-item {
+    margin: 15px 0;
+    padding: 12px;
+    background: white;
+    border-left: 3px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .cross-out-item.example {
+    background: #e8f5e9;
+    border-left-color: var(--green-header);
+  }
+  
+  .cross-out-sentence {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 8px 0;
+  }
+  
+  .word-choice {
+    display: inline;
+    padding: 2px 6px;
+    margin: 0 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  
+  .word-choice:hover {
+    background: #fff3cd;
+    border-color: #ffc107;
+  }
+  
+  .word-choice.crossed-out {
+    text-decoration: line-through;
+    text-decoration-color: var(--strikethrough);
+    text-decoration-thickness: 2px;
+    color: var(--muted);
+    background: #ffebee;
+    border-color: var(--strikethrough);
+  }
+  
+  .word-choice.correct-choice {
+    background: #e8f5e9;
+    border-color: var(--correct);
+    font-weight: bold;
+    color: var(--green-header);
+  }
+  
+  .word-choice.incorrect-choice {
+    background: #ffebee;
+    border-color: var(--incorrect);
+    color: var(--strikethrough);
+  }
+  
+  .cross-out-feedback {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+  
+  .cross-out-feedback.correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid var(--correct);
+    display: block;
+  }
+  
+  .cross-out-feedback.incorrect {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid var(--incorrect);
+    display: block;
+  }
+  
+  .time-word {
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #856404;
+    font-size: 14px;
+  }
+  
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 5px;
+  }
+  
+  .score-display {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f0f7ff;
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .reset-button {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+  }
+  
+  .reset-button:hover {
+    background: #555;
+  }
+</style>
+</head>
+<body>
+
+<h1>Answer Checker: Word Scrambles & Cross-Out Exercises</h1>
+
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  Score: <span id="score">0</span> / <span id="total">0</span>
+</div>
+
+<div style="text-align: center; margin: 20px 0;">
+  <button class="check-button" onclick="checkAllAnswers()">Check All Answers</button>
+  <button class="reset-button" onclick="resetAll()">Reset</button>
+  <button class="reset-button" onclick="showAllAnswers()">Show All Answers</button>
+</div>
+
+<!-- ============================================ -->
+<!-- PART 5: WORD SCRAMBLE EXERCISES -->
+<!-- ============================================ -->
+
+<h2>Part 5: Word Scramble - Put the Words in Order</h2>
+
+<div class="section-header">📝 Present Continuous (Exercises 21-28)</div>
+
+<div class="scramble-exercise" data-exercise="21">
+  <div class="exercise-number">21.</div>
+  <div class="word-cards">
+    <span class="word-card">year</span>
+    <span class="word-card">going</span>
+    <span class="word-card">she</span>
+    <span class="word-card">to</span>
+    <span class="word-card">france</span>
+    <span class="word-card">is</span>
+    <span class="word-card">next</span>
+  </div>
+  <input type="text" class="answer-input" id="answer21" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback21"></div>
+  <div class="hint">Hint: This is a planned trip.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="22">
+  <div class="exercise-number">22.</div>
+  <div class="word-cards">
+    <span class="word-card">tonight</span>
+    <span class="word-card">a</span>
+    <span class="word-card">they</span>
+    <span class="word-card">concert</span>
+    <span class="word-card">in</span>
+    <span class="word-card">are</span>
+    <span class="word-card">singing</span>
+  </div>
+  <input type="text" class="answer-input" id="answer22" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback22"></div>
+  <div class="hint">Hint: This is a scheduled/arranged event.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="23">
+  <div class="exercise-number">23.</div>
+  <div class="word-cards">
+    <span class="word-card">catching</span>
+    <span class="word-card">I</span>
+    <span class="word-card">2:20pm</span>
+    <span class="word-card">train</span>
+    <span class="word-card">a</span>
+    <span class="word-card">at</span>
+    <span class="word-card">am</span>
+  </div>
+  <input type="text" class="answer-input" id="answer23" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback23"></div>
+  <div class="hint">Hint: This is a scheduled/planned event.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="24">
+  <div class="exercise-number">24.</div>
+  <div class="word-cards">
+    <span class="word-card">evening</span>
+    <span class="word-card">are</span>
+    <span class="word-card">this</span>
+    <span class="word-card">tennis</span>
+    <span class="word-card">playing</span>
+    <span class="word-card">us</span>
+    <span class="word-card">they</span>
+    <span class="word-card">with</span>
+  </div>
+  <input type="text" class="answer-input" id="answer24" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback24"></div>
+  <div class="hint">Hint: This is an arranged activity.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="25">
+  <div class="exercise-number">25.</div>
+  <div class="word-cards">
+    <span class="word-card">together</span>
+    <span class="word-card">going</span>
+    <span class="word-card">a</span>
+    <span class="word-card">for</span>
+    <span class="word-card">run</span>
+    <span class="word-card">they</span>
+    <span class="word-card">are</span>
+    <span class="word-card">tomorrow</span>
+  </div>
+  <input type="text" class="answer-input" id="answer25" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback25"></div>
+  <div class="hint">Hint: This is a planned activity.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="26">
+  <div class="exercise-number">26.</div>
+  <div class="word-cards">
+    <span class="word-card">job</span>
+    <span class="word-card">starting</span>
+    <span class="word-card">monday</span>
+    <span class="word-card">his</span>
+    <span class="word-card">he</span>
+    <span class="word-card">new</span>
+    <span class="word-card">is</span>
+    <span class="word-card">on</span>
+  </div>
+  <input type="text" class="answer-input" id="answer26" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback26"></div>
+  <div class="hint">Hint: This is a scheduled start date.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="27">
+  <div class="exercise-number">27.</div>
+  <div class="word-cards">
+    <span class="word-card">book</span>
+    <span class="word-card">london</span>
+    <span class="word-card">we</span>
+    <span class="word-card">month</span>
+    <span class="word-card">visiting</span>
+    <span class="word-card">hotels</span>
+    <span class="word-card">so</span>
+    <span class="word-card">next</span>
+    <span class="word-card">,</span>
+    <span class="word-card">to</span>
+    <span class="word-card">are</span>
+    <span class="word-card">we</span>
+    <span class="word-card">need</span>
+  </div>
+  <input type="text" class="answer-input" id="answer27" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback27"></div>
+  <div class="hint">Hint: This is a planned trip with a consequence.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="28">
+  <div class="exercise-number">28.</div>
+  <div class="word-cards">
+    <span class="word-card">excited</span>
+    <span class="word-card">she</span>
+    <span class="word-card">moving</span>
+    <span class="word-card">week</span>
+    <span class="word-card">is</span>
+    <span class="word-card">tokyo</span>
+    <span class="word-card">,</span>
+    <span class="word-card">and</span>
+    <span class="word-card">very</span>
+    <span class="word-card">next</span>
+    <span class="word-card">to</span>
+    <span class="word-card">she</span>
+    <span class="word-card">is</span>
+  </div>
+  <input type="text" class="answer-input" id="answer28" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback28"></div>
+  <div class="hint">Hint: This is a planned move with additional information.</div>
+</div>
+
+<div class="section-header">📝 Past Continuous (Exercises 29-32)</div>
+
+<div class="scramble-exercise" data-exercise="29">
+  <div class="exercise-number">29.</div>
+  <div class="word-cards">
+    <span class="word-card">started</span>
+    <span class="word-card">I</span>
+    <span class="word-card">walking</span>
+    <span class="word-card">when</span>
+    <span class="word-card">it</span>
+    <span class="word-card">to</span>
+    <span class="word-card">home</span>
+    <span class="word-card">was</span>
+    <span class="word-card">rain</span>
+  </div>
+  <input type="text" class="answer-input" id="answer29" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback29"></div>
+  <div class="hint">Hint: Background action (Past Continuous) + interruption (Past Simple).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="30">
+  <div class="exercise-number">30.</div>
+  <div class="word-cards">
+    <span class="word-card">studying</span>
+    <span class="word-card">arrived</span>
+    <span class="word-card">they</span>
+    <span class="word-card">the</span>
+    <span class="word-card">while</span>
+    <span class="word-card">teacher</span>
+    <span class="word-card">were</span>
+    <span class="word-card">,</span>
+  </div>
+  <input type="text" class="answer-input" id="answer30" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback30"></div>
+  <div class="hint">Hint: Past Continuous for background; Past Simple for the event.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="31">
+  <div class="exercise-number">31.</div>
+  <div class="word-cards">
+    <span class="word-card">work</span>
+    <span class="word-card">yesterday</span>
+    <span class="word-card">she</span>
+    <span class="word-card">driving</span>
+    <span class="word-card">6</span>
+    <span class="word-card">,</span>
+    <span class="word-card">pm</span>
+    <span class="word-card">at</span>
+    <span class="word-card">was</span>
+    <span class="word-card">to</span>
+  </div>
+  <input type="text" class="answer-input" id="answer31" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback31"></div>
+  <div class="hint">Hint: Ongoing action at a specific time in the past.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="32">
+  <div class="exercise-number">32.</div>
+  <div class="word-cards">
+    <span class="word-card">rang</span>
+    <span class="word-card">reading</span>
+    <span class="word-card">I</span>
+    <span class="word-card">phone</span>
+    <span class="word-card">while</span>
+    <span class="word-card">was</span>
+    <span class="word-card">my</span>
+    <span class="word-card">,</span>
+  </div>
+  <input type="text" class="answer-input" id="answer32" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback32"></div>
+  <div class="hint">Hint: Past Continuous for background action interrupted by Past Simple.</div>
+</div>
+
+<div class="section-header">📝 Future Continuous (Exercises 33-38)</div>
+
+<div class="scramble-exercise" data-exercise="33">
+  <div class="exercise-number">33.</div>
+  <div class="word-cards">
+    <span class="word-card">meeting</span>
+    <span class="word-card">I</span>
+    <span class="word-card">tomorrow</span>
+    <span class="word-card">will</span>
+    <span class="word-card">at</span>
+    <span class="word-card">,</span>
+    <span class="word-card">be</span>
+    <span class="word-card">pm</span>
+    <span class="word-card">having</span>
+    <span class="word-card">3</span>
+    <span class="word-card">a</span>
+  </div>
+  <input type="text" class="answer-input" id="answer33" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback33"></div>
+  <div class="hint">Hint: Describes what will be happening at that specific time.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="34">
+  <div class="exercise-number">34.</div>
+  <div class="word-cards">
+    <span class="word-card">university</span>
+    <span class="word-card">week</span>
+    <span class="word-card">she</span>
+    <span class="word-card">this</span>
+    <span class="word-card">studying</span>
+    <span class="word-card">,</span>
+    <span class="word-card">will</span>
+    <span class="word-card">time</span>
+    <span class="word-card">at</span>
+    <span class="word-card">be</span>
+    <span class="word-card">next</span>
+  </div>
+  <input type="text" class="answer-input" id="answer34" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback34"></div>
+  <div class="hint">Hint: Describes an action in progress at a future time.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="35">
+  <div class="exercise-number">35.</div>
+  <div class="word-cards">
+    <span class="word-card">flying</span>
+    <span class="word-card">paris</span>
+    <span class="word-card">will</span>
+    <span class="word-card">tonight</span>
+    <span class="word-card">at</span>
+    <span class="word-card">be</span>
+    <span class="word-card">,</span>
+    <span class="word-card">midnight</span>
+    <span class="word-card">to</span>
+    <span class="word-card">we</span>
+  </div>
+  <input type="text" class="answer-input" id="answer35" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback35"></div>
+  <div class="hint">Hint: Describes what will be happening at that specific moment.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="36">
+  <div class="exercise-number">36.</div>
+  <div class="word-cards">
+    <span class="word-card">this</span>
+    <span class="word-card">I</span>
+    <span class="word-card">month</span>
+    <span class="word-card">working</span>
+    <span class="word-card">at</span>
+    <span class="word-card">next</span>
+    <span class="word-card">be</span>
+    <span class="word-card">time</span>
+    <span class="word-card">will</span>
+    <span class="word-card">on</span>
+    <span class="word-card">this</span>
+    <span class="word-card">project</span>
+  </div>
+  <input type="text" class="answer-input" id="answer36" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback36"></div>
+  <div class="hint">Hint: Describes an ongoing action at a future time.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="37">
+  <div class="exercise-number">37.</div>
+  <div class="word-cards">
+    <span class="word-card">tomorrow</span>
+    <span class="word-card">their</span>
+    <span class="word-card">be</span>
+    <span class="word-card">at</span>
+    <span class="word-card">exam</span>
+    <span class="word-card">,</span>
+    <span class="word-card">will</span>
+    <span class="word-card">9</span>
+    <span class="word-card">they</span>
+    <span class="word-card">taking</span>
+    <span class="word-card">am</span>
+    <span class="word-card">final</span>
+  </div>
+  <input type="text" class="answer-input" id="answer37" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback37"></div>
+  <div class="hint">Hint: Describes what will be happening at that specific time.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="38">
+  <div class="exercise-number">38.</div>
+  <div class="word-cards">
+    <span class="word-card">celebrating</span>
+    <span class="word-card">this</span>
+    <span class="word-card">will</span>
+    <span class="word-card">year</span>
+    <span class="word-card">time</span>
+    <span class="word-card">,</span>
+    <span class="word-card">next</span>
+    <span class="word-card">our</span>
+    <span class="word-card">be</span>
+    <span class="word-card">we</span>
+    <span class="word-card">anniversary</span>
+  </div>
+  <input type="text" class="answer-input" id="answer38" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback38"></div>
+  <div class="hint">Hint: Describes an ongoing action at a future time.</div>
+</div>
+
+<!-- ============================================ -->
+<!-- PART 6: CROSS-OUT ACTIVITY -->
+<!-- ============================================ -->
+
+<h2>Part 6: Cross Out the Incorrect Words</h2>
+
+<div class="cross-out-section">
+  <div class="cross-out-title">CROSS OUT THE INCORRECT WORDS IN EACH SENTENCE</div>
+  
+  <!-- Example -->
+  <div class="cross-out-item example">
+    <div class="cross-out-sentence">
+      <strong>Example:</strong> Lottie <span class="time-word">usually</span> <span class="word-choice correct-choice">shops</span> / <span class="word-choice crossed-out">is shopping</span> on her own, but <span class="time-word">today</span> <span class="word-choice correct-choice">she's shopping</span> / <span class="word-choice crossed-out">she shops</span> with her sister.
+    </div>
+  </div>
+  
+  <!-- Present Tense Section -->
+  <div class="section-header">📝 Present Simple vs Present Continuous (Exercises 39-44)</div>
+  
+  <div class="cross-out-item" data-exercise="39">
+    <div class="cross-out-sentence">
+      <strong>39.</strong> I <span class="time-word">normally</span> <span class="word-choice" data-id="39-1" data-correct="false">am walking</span> / <span class="word-choice" data-id="39-2" data-correct="true">walk</span> the dog in the evening, but <span class="time-word">this evening</span> <span class="word-choice" data-id="39-3" data-correct="true">I'm relaxing</span> / <span class="word-choice" data-id="39-4" data-correct="false">I relax</span> at home.
+    </div>
+    <div class="cross-out-feedback" id="feedback39"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="40">
+    <div class="cross-out-sentence">
+      <strong>40.</strong> <span class="word-choice" data-id="40-1" data-correct="true">We're doing</span> / <span class="word-choice" data-id="40-2" data-correct="false">We do</span> the laundry together <span class="time-word">today</span>, but I <span class="time-word">usually</span> <span class="word-choice" data-id="40-3" data-correct="false">am doing</span> / <span class="word-choice" data-id="40-4" data-correct="true">do</span> it myself.
+    </div>
+    <div class="cross-out-feedback" id="feedback40"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="41">
+    <div class="cross-out-sentence">
+      <strong>41.</strong> Frank <span class="time-word">sometimes</span> <span class="word-choice" data-id="41-1" data-correct="true">goes</span> / <span class="word-choice" data-id="41-2" data-correct="false">is going</span> to the gym after work, but <span class="time-word">today</span> <span class="word-choice" data-id="41-3" data-correct="true">he's working</span> / <span class="word-choice" data-id="41-4" data-correct="false">he works</span> late.
+    </div>
+    <div class="cross-out-feedback" id="feedback41"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="42">
+    <div class="cross-out-sentence">
+      <strong>42.</strong> Ben <span class="word-choice" data-id="42-1" data-correct="false">does</span> / <span class="word-choice" data-id="42-2" data-correct="true">is doing</span> the ironing <span class="time-word">today</span>, but his dad <span class="time-word">usually</span> <span class="word-choice" data-id="42-3" data-correct="true">does</span> / <span class="word-choice" data-id="42-4" data-correct="false">is doing</span> it.
+    </div>
+    <div class="cross-out-feedback" id="feedback42"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="43">
+    <div class="cross-out-sentence">
+      <strong>43.</strong> <span class="word-choice" data-id="43-1" data-correct="true">He's listening</span> / <span class="word-choice" data-id="43-2" data-correct="false">He listens</span> to music <span class="time-word">now</span>, but he <span class="time-word">often</span> <span class="word-choice" data-id="43-3" data-correct="false">is watching</span> / <span class="word-choice" data-id="43-4" data-correct="true">watches</span> TV in the evening.
+    </div>
+    <div class="cross-out-feedback" id="feedback43"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="44">
+    <div class="cross-out-sentence">
+      <strong>44.</strong> I <span class="word-choice" data-id="44-1" data-correct="false">mow</span> / <span class="word-choice" data-id="44-2" data-correct="true">I'm mowing</span> the lawn <span class="time-word">today</span>, but I <span class="time-word">normally</span> <span class="word-choice" data-id="44-3" data-correct="false">am mowing</span> / <span class="word-choice" data-id="44-4" data-correct="true">mow</span> it on Saturdays.
+    </div>
+    <div class="cross-out-feedback" id="feedback44"></div>
+  </div>
+  
+  <!-- Past Tense Section -->
+  <div class="section-header">📝 Past Simple vs Past Continuous (Exercises 45-48)</div>
+  
+  <div class="cross-out-item" data-exercise="45">
+    <div class="cross-out-sentence">
+      <strong>45.</strong> She <span class="word-choice" data-id="45-1" data-correct="true">was cooking</span> / <span class="word-choice" data-id="45-2" data-correct="false">cooked</span> dinner <span class="time-word">when</span> the phone <span class="word-choice" data-id="45-3" data-correct="false">was ringing</span> / <span class="word-choice" data-id="45-4" data-correct="true">rang</span>.
+    </div>
+    <div class="cross-out-feedback" id="feedback45"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="46">
+    <div class="cross-out-sentence">
+      <strong>46.</strong> <span class="time-word">While</span> I <span class="word-choice" data-id="46-1" data-correct="true">was studying</span> / <span class="word-choice" data-id="46-2" data-correct="false">studied</span>, my friend <span class="word-choice" data-id="46-3" data-correct="false">was calling</span> / <span class="word-choice" data-id="46-4" data-correct="true">called</span> me.
+    </div>
+    <div class="cross-out-feedback" id="feedback46"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="47">
+    <div class="cross-out-sentence">
+      <strong>47.</strong> They <span class="word-choice" data-id="47-1" data-correct="true">were playing</span> / <span class="word-choice" data-id="47-2" data-correct="false">played</span> soccer <span class="time-word">when</span> it <span class="word-choice" data-id="47-3" data-correct="false">was starting</span> / <span class="word-choice" data-id="47-4" data-correct="true">started</span> to rain.
+    </div>
+    <div class="cross-out-feedback" id="feedback47"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="48">
+    <div class="cross-out-sentence">
+      <strong>48.</strong> I <span class="word-choice" data-id="48-1" data-correct="true">was walking</span> / <span class="word-choice" data-id="48-2" data-correct="false">walked</span> home <span class="time-word">yesterday</span> <span class="time-word">when</span> I <span class="word-choice" data-id="48-3" data-correct="false">was meeting</span> / <span class="word-choice" data-id="48-4" data-correct="true">met</span> an old friend.
+    </div>
+    <div class="cross-out-feedback" id="feedback48"></div>
+  </div>
+  
+  <!-- Future Tense Section -->
+  <div class="section-header">📝 Future Simple vs Future Continuous (Exercises 49-50)</div>
+  
+  <div class="cross-out-item" data-exercise="49">
+    <div class="cross-out-sentence">
+      <strong>49.</strong> <span class="time-word">At 3 PM tomorrow</span>, I <span class="word-choice" data-id="49-1" data-correct="true">will be having</span> / <span class="word-choice" data-id="49-2" data-correct="false">will have</span> a meeting, so I <span class="word-choice" data-id="49-3" data-correct="true">will call</span> / <span class="word-choice" data-id="49-4" data-correct="false">will be calling</span> you later.
+    </div>
+    <div class="cross-out-feedback" id="feedback49"></div>
+  </div>
+  
+  <div class="cross-out-item" data-exercise="50">
+    <div class="cross-out-sentence">
+      <strong>50.</strong> She <span class="word-choice" data-id="50-1" data-correct="true">will be traveling</span> / <span class="word-choice" data-id="50-2" data-correct="false">will travel</span> to Paris <span class="time-word">next week</span>, and <span class="time-word">at this time next Friday</span>, she <span class="word-choice" data-id="50-3" data-correct="false">will visit</span> / <span class="word-choice" data-id="50-4" data-correct="true">will be visiting</span> the Eiffel Tower.
+    </div>
+    <div class="cross-out-feedback" id="feedback50"></div>
+  </div>
+</div>
+
+<script>
+// Correct answers for word scrambles
+const correctAnswers = {
+  21: "She is going to France next year.",
+  22: "They are singing in a concert tonight.",
+  23: "I am catching a train at 2:20pm.",
+  24: "They are playing tennis with us this evening.",
+  25: "They are going for a run together tomorrow.",
+  26: "He is starting his new job on Monday.",
+  27: "We are visiting London next month, so we need to book hotels.",
+  28: "She is moving to Tokyo next week, and she is very excited.",
+  29: "I was walking home when it started to rain.",
+  30: "While they were studying, the teacher arrived.",
+  31: "Yesterday at 6 PM, she was driving to work.",
+  32: "While I was reading, my phone rang.",
+  33: "At 3 PM tomorrow, I will be having a meeting.",
+  34: "This time next week, she will be studying at university.",
+  35: "At midnight tonight, we will be flying to Paris.",
+  36: "This time next month, I will be working on this project.",
+  37: "At 9 AM tomorrow, they will be taking their final exam.",
+  38: "This time next year, we will be celebrating our anniversary."
+};
+
+// Normalize function to compare answers (remove punctuation, extra spaces, case insensitive)
+function normalizeAnswer(answer) {
+  return answer.trim().toLowerCase().replace(/[.,;:!?]/g, '').replace(/\s+/g, ' ');
+}
+
+// Check word scramble answers
+function checkScrambleAnswer(exerciseNum, userAnswer) {
+  const correct = correctAnswers[exerciseNum];
+  if (!correct) return null;
+  
+  const normalizedUser = normalizeAnswer(userAnswer);
+  const normalizedCorrect = normalizeAnswer(correct);
+  
+  return normalizedUser === normalizedCorrect;
+}
+
+// Check all word scramble answers
+function checkAllScrambles() {
+  let correct = 0;
+  let total = 0;
+  
+  for (let i = 21; i <= 38; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+    
+    if (!input || !feedback) continue;
+    
+    total++;
+    const userAnswer = input.value.trim();
+    
+    if (userAnswer === '') {
+      feedback.className = 'answer-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+      continue;
+    }
+    
+    const isCorrect = checkScrambleAnswer(i, userAnswer);
+    
+    if (isCorrect) {
+      correct++;
+      feedback.className = 'answer-feedback correct';
+      feedback.innerHTML = '✓ <strong>Correct!</strong>';
+    } else {
+      feedback.className = 'answer-feedback incorrect';
+      feedback.innerHTML = `✗ Incorrect. Correct answer: <span class="correct-answer">${correctAnswers[i]}</span>`;
+    }
+  }
+  
+  return { correct, total };
+}
+
+// Check cross-out answers
+function checkCrossOutAnswer(exerciseNum) {
+  const exercise = document.querySelector(`[data-exercise="${exerciseNum}"]`);
+  if (!exercise) return null;
+  
+  const choices = exercise.querySelectorAll('.word-choice[data-id]');
+  let allCorrect = true;
+  let selectedIncorrect = [];
+  let missedCorrect = [];
+  
+  choices.forEach(choice => {
+    const isCorrect = choice.getAttribute('data-correct') === 'true';
+    const isCrossedOut = choice.classList.contains('crossed-out');
+    
+    if (isCorrect && isCrossedOut) {
+      allCorrect = false;
+      missedCorrect.push(choice.textContent.trim());
+    } else if (!isCorrect && !isCrossedOut) {
+      allCorrect = false;
+      selectedIncorrect.push(choice.textContent.trim());
+    }
+  });
+  
+  return { allCorrect, selectedIncorrect, missedCorrect };
+}
+
+// Check all cross-out answers
+function checkAllCrossOuts() {
+  let correct = 0;
+  let total = 0;
+  
+  for (let i = 39; i <= 50; i++) {
+    const feedback = document.getElementById(`feedback${i}`);
+    if (!feedback) continue;
+    
+    total++;
+    const result = checkCrossOutAnswer(i);
+    
+    if (result === null) continue;
+    
+    if (result.allCorrect) {
+      correct++;
+      feedback.className = 'cross-out-feedback correct';
+      feedback.innerHTML = '✓ <strong>Correct!</strong>';
+    } else {
+      feedback.className = 'cross-out-feedback incorrect';
+      let message = '✗ Incorrect. ';
+      if (result.selectedIncorrect.length > 0) {
+        message += `You should cross out: ${result.selectedIncorrect.join(', ')}. `;
+      }
+      if (result.missedCorrect.length > 0) {
+        message += `Don't cross out: ${result.missedCorrect.join(', ')}.`;
+      }
+      feedback.innerHTML = message;
+    }
+  }
+  
+  return { correct, total };
+}
+
+// Main check function
+function checkAllAnswers() {
+  const scrambleResults = checkAllScrambles();
+  const crossOutResults = checkAllCrossOuts();
+  
+  const totalCorrect = scrambleResults.correct + crossOutResults.correct;
+  const totalQuestions = scrambleResults.total + crossOutResults.total;
+  
+  // Show score
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  document.getElementById('score').textContent = totalCorrect;
+  document.getElementById('total').textContent = totalQuestions;
+  scoreDisplay.style.display = 'block';
+  
+  // Scroll to top to see score
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reset all answers
+function resetAll() {
+  // Reset scrambles
+  for (let i = 21; i <= 38; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+    if (input) input.value = '';
+    if (feedback) {
+      feedback.className = 'answer-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+    }
+  }
+  
+  // Reset cross-outs
+  for (let i = 39; i <= 50; i++) {
+    const feedback = document.getElementById(`feedback${i}`);
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    if (feedback) {
+      feedback.className = 'cross-out-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+    }
+    choices.forEach(choice => {
+      choice.classList.remove('crossed-out', 'correct-choice', 'incorrect-choice');
+    });
+  }
+  
+  // Hide score
+  document.getElementById('scoreDisplay').style.display = 'none';
+}
+
+// Show all correct answers
+function showAllAnswers() {
+  // Show scramble answers
+  for (let i = 21; i <= 38; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+    if (input && correctAnswers[i]) {
+      input.value = correctAnswers[i];
+    }
+    if (feedback && correctAnswers[i]) {
+      feedback.className = 'answer-feedback show-correct';
+      feedback.innerHTML = `Correct answer: <span class="correct-answer">${correctAnswers[i]}</span>`;
+    }
+  }
+  
+  // Show cross-out answers
+  for (let i = 39; i <= 50; i++) {
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    choices.forEach(choice => {
+      const isCorrect = choice.getAttribute('data-correct') === 'true';
+      if (!isCorrect) {
+        choice.classList.add('crossed-out');
+      } else {
+        choice.classList.add('correct-choice');
+      }
+    });
+    
+    const feedback = document.getElementById(`feedback${i}`);
+    if (feedback) {
+      feedback.className = 'cross-out-feedback correct';
+      feedback.innerHTML = '✓ Correct answers shown above.';
+    }
+  }
+  
+  // Show score
+  checkAllAnswers();
+}
+
+// Set up click handlers for cross-out exercises
+document.addEventListener('DOMContentLoaded', function() {
+  for (let i = 39; i <= 50; i++) {
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    choices.forEach(choice => {
+      choice.addEventListener('click', function() {
+        // Don't allow clicking on example
+        if (this.closest('.example')) return;
+        
+        // Toggle crossed-out class
+        this.classList.toggle('crossed-out');
+        
+        // Clear feedback when user makes changes
+        const exercise = this.closest('[data-exercise]');
+        if (exercise) {
+          const exerciseNum = exercise.getAttribute('data-exercise');
+          const feedback = document.getElementById(`feedback${exerciseNum}`);
+          if (feedback) {
+            feedback.className = 'cross-out-feedback';
+            feedback.textContent = '';
+            feedback.style.display = 'none';
+          }
+        }
+      });
+    });
+  }
+  
+  // Allow Enter key to check answers in input fields
+  for (let i = 21; i <= 38; i++) {
+    const input = document.getElementById(`answer${i}`);
+    if (input) {
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkAllAnswers();
+        }
+      });
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+
