@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Builder to Reader | Bridge Writing & Reading</title>
+    <style>
+        :root {
+            --subject: #9fd3ff;
+            --tobe: #b3ebe7;
+            --helper: #a8e6cf;
+            --v1: #c1e99b;
+            --ving: #b8d9a8;
+            --v2: #9dd4a8;
+            --object: #ffd9b3;
+            --time: #ffb3ba;
+            --place: #c5a3ff;
+            --preposition: #ffb3e6;
+            --det: #ffcc99;
+            --connector: #d4b3ff;
+            --question: #e1a3ff;
+            --ink: #111;
+            --bg: #fff;
+            --border: #222;
+            --muted: #666;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --primary: #3498db;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            margin: 0;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #5dade2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .mode-btn {
+            background: var(--muted);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mode-btn:hover {
+            background: #5a6268;
+        }
+
+        .mode-btn.active {
+            background: var(--primary);
+        }
+
+        .sentence-display {
+            background: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sentence-text {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.4;
+        }
+
+        .sentence-text.hidden {
+            color: transparent;
+            text-shadow: 0 0 8px rgba(0,0,0,0.3);
+            user-select: none;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #fafbfc;
+            border-radius: 8px;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 6px;
+            padding: 8px 12px;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card.selected {
+            border-color: var(--success);
+            background: #d4edda;
+        }
+
+        .card.correct {
+            border-color: var(--success);
+            background: #d4edda;
+        }
+
+        .card.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .card-subject { border-left: 4px solid var(--subject); }
+        .card-tobe { border-left: 4px solid var(--tobe); }
+        .card-helper { border-left: 4px solid var(--helper); }
+        .card-v1 { border-left: 4px solid var(--v1); }
+        .card-ving { border-left: 4px solid var(--ving); }
+        .card-v2 { border-left: 4px solid var(--v2); }
+        .card-object { border-left: 4px solid var(--object); }
+        .card-time { border-left: 4px solid var(--time); }
+        .card-place { border-left: 4px solid var(--place); }
+        .card-preposition { border-left: 4px solid var(--preposition); }
+        .card-det { border-left: 4px solid var(--det); }
+        .card-connector { border-left: 4px solid var(--connector); }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--muted);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #5a6268;
+        }
+
+        .btn.primary {
+            background: var(--primary);
+        }
+
+        .btn.primary:hover {
+            background: #2980b9;
+        }
+
+        .btn.success {
+            background: var(--success);
+        }
+
+        .btn.success:hover {
+            background: #229954;
+        }
+
+        .btn.warning {
+            background: var(--warning);
+        }
+
+        .btn.warning:hover {
+            background: #e67e22;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .progress {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+            text-align: center;
+        }
+
+        .stat {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .help-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .help-section h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .help-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .help-btn {
+            background: var(--warning);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .help-btn:hover {
+            background: #e67e22;
+        }
+
+        @media (max-width: 768px) {
+            .mode-selector {
+                flex-direction: column;
+            }
+
+            .mode-btn {
+                width: 100%;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔄 Build → Read Bridge</h1>
+        <p>Practice the same sentences you build - now focus on reading them!</p>
+        <div class="level-badge">NRS Level 3-4</div>
+    </div>
+
+    <div class="instructions">
+        <h3>🎯 How to Use This Bridge Activity:</h3>
+        <ul>
+            <li><strong>Build Mode:</strong> Use your sentence builder skills to create sentences (just like in class!)</li>
+            <li><strong>Read Mode:</strong> Practice reading the sentences you built, with support as needed</li>
+            <li><strong>Mixed Mode:</strong> Switch between building and reading to build confidence</li>
+        </ul>
+        <p><strong>💡 Goal:</strong> Transfer your writing skills to reading skills using familiar sentence patterns.</p>
+    </div>
+
+    <div class="game-container">
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="build">🛠️ Build Mode</button>
+            <button class="mode-btn" data-mode="read">📖 Read Mode</button>
+            <button class="mode-btn" data-mode="mixed">🔄 Mixed Mode</button>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="sentencesRead">0</div>
+                <div class="stat-label">Read</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="sentencesBuilt">0</div>
+                <div class="stat-label">Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="streakCount">0</div>
+                <div class="stat-label">Streak</div>
+            </div>
+        </div>
+
+        <div class="sentence-display">
+            <div class="sentence-text" id="sentenceText">Choose a mode above to get started!</div>
+        </div>
+
+        <div class="card-grid" id="cardGrid" style="display: none;">
+            <!-- Cards will be populated by JavaScript -->
+        </div>
+
+        <div class="help-section" id="helpSection" style="display: none;">
+            <h4>🤝 Need Help Reading?</h4>
+            <div class="help-buttons">
+                <button class="help-btn" id="showWordsBtn">Show Words</button>
+                <button class="help-btn" id="readAloudBtn">Read Aloud</button>
+                <button class="help-btn" id="slowReadBtn">Read Slowly</button>
+                <button class="help-btn" id="highlightBtn">Highlight Words</button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" id="newSentenceBtn">New Sentence</button>
+            <button class="btn success" id="checkBtn">Check Answer</button>
+            <button class="btn warning" id="hintBtn">Hint</button>
+            <button class="btn" id="clearBtn">Clear</button>
+        </div>
+
+        <div id="feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Sentence patterns for NRS Level 3-4
+        const sentencePatterns = [
+            {
+                structure: ['subject', 'v1', 'object'],
+                example: ['I', 'eat', 'pizza'],
+                difficulty: 'easy'
+            },
+            {
+                structure: ['subject', 'v1', 'object', 'time'],
+                example: ['She', 'reads', 'books', 'every day'],
+                difficulty: 'easy'
+            },
+            {
+                structure: ['subject', 'v1', 'object', 'preposition', 'place'],
+                example: ['He', 'works', 'at', 'the office'],
+                difficulty: 'medium'
+            },
+            {
+                structure: ['subject', 'tobe', 'ving', 'object'],
+                example: ['They', 'are', 'watching', 'TV'],
+                difficulty: 'medium'
+            },
+            {
+                structure: ['subject', 'v2', 'object', 'time'],
+                example: ['I', 'cleaned', 'the room', 'yesterday'],
+                difficulty: 'medium'
+            },
+            {
+                structure: ['subject', 'helper', 'v1', 'object'],
+                example: ['She', 'does not', 'like', 'coffee'],
+                difficulty: 'hard'
+            }
+        ];
+
+        // Available cards by category
+        const cardCategories = {
+            subject: ['I', 'You', 'He', 'She', 'It', 'We', 'They'],
+            tobe: ['am', 'is', 'are', 'was', 'were'],
+            helper: ['do', 'does', 'did', 'will', 'don\'t', 'doesn\'t', 'didn\'t', 'won\'t'],
+            v1: ['eat', 'work', 'watch', 'go', 'study', 'play', 'cook', 'read', 'sleep', 'clean', 'drive'],
+            ving: ['eating', 'working', 'watching', 'going', 'studying', 'playing', 'cooking', 'reading', 'sleeping', 'cleaning', 'driving'],
+            v2: ['ate', 'worked', 'watched', 'went', 'studied', 'played', 'cooked', 'read', 'slept', 'cleaned', 'drove'],
+            object: ['pizza', 'coffee', 'English', 'book', 'homework', 'TV', 'bus', 'music'],
+            time: ['now', 'today', 'yesterday', 'every day', 'last night', 'tomorrow', 'next week'],
+            place: ['home', 'school', 'work', 'park', 'office', 'restaurant'],
+            preposition: ['at', 'in', 'on', 'to', 'from', 'with'],
+            det: ['a', 'an', 'the', 'my', 'your'],
+            connector: ['when', 'while', 'before', 'after', 'as', 'until']
+        };
+
+        let currentMode = 'build';
+        let currentSentence = null;
+        let selectedCards = [];
+        let sentencesRead = 0;
+        let sentencesBuilt = 0;
+        let streakCount = 0;
+
+        // DOM elements
+        const modeBtns = document.querySelectorAll('.mode-btn');
+        const sentenceTextEl = document.getElementById('sentenceText');
+        const cardGridEl = document.getElementById('cardGrid');
+        const helpSectionEl = document.getElementById('helpSection');
+        const newSentenceBtn = document.getElementById('newSentenceBtn');
+        const checkBtn = document.getElementById('checkBtn');
+        const hintBtn = document.getElementById('hintBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const feedbackEl = document.getElementById('feedback');
+        const progressBar = document.getElementById('progressBar');
+        const sentencesReadEl = document.getElementById('sentencesRead');
+        const sentencesBuiltEl = document.getElementById('sentencesBuilt');
+        const streakCountEl = document.getElementById('streakCount');
+        const showWordsBtn = document.getElementById('showWordsBtn');
+        const readAloudBtn = document.getElementById('readAloudBtn');
+        const slowReadBtn = document.getElementById('slowReadBtn');
+        const highlightBtn = document.getElementById('highlightBtn');
+
+        // Initialize
+        function initGame() {
+            setupEventListeners();
+            setMode('build');
+            updateUI();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', () => setMode(btn.dataset.mode));
+            });
+
+            newSentenceBtn.addEventListener('click', newSentence);
+            checkBtn.addEventListener('click', checkAnswer);
+            hintBtn.addEventListener('click', showHint);
+            clearBtn.addEventListener('click', clearSelection);
+
+            showWordsBtn.addEventListener('click', showWords);
+            readAloudBtn.addEventListener('click', readAloud);
+            slowReadBtn.addEventListener('click', slowRead);
+            highlightBtn.addEventListener('click', highlightWords);
+        }
+
+        // Set mode
+        function setMode(mode) {
+            currentMode = mode;
+
+            // Update button styles
+            modeBtns.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.mode === mode);
+            });
+
+            // Reset game state
+            selectedCards = [];
+            hideFeedback();
+
+            if (mode === 'build') {
+                showBuildMode();
+            } else if (mode === 'read') {
+                showReadMode();
+            } else if (mode === 'mixed') {
+                showMixedMode();
+            }
+
+            updateUI();
+        }
+
+        // Show build mode
+        function showBuildMode() {
+            cardGridEl.style.display = 'grid';
+            helpSectionEl.style.display = 'none';
+            sentenceTextEl.classList.remove('hidden');
+            newSentence();
+        }
+
+        // Show read mode
+        function showReadMode() {
+            cardGridEl.style.display = 'none';
+            helpSectionEl.style.display = 'block';
+            sentenceTextEl.classList.add('hidden');
+            newSentence();
+        }
+
+        // Show mixed mode
+        function showMixedMode() {
+            cardGridEl.style.display = 'grid';
+            helpSectionEl.style.display = 'block';
+            sentenceTextEl.classList.add('hidden');
+            newSentence();
+        }
+
+        // Generate new sentence
+        function newSentence() {
+            // Select random pattern
+            currentSentence = sentencePatterns[Math.floor(Math.random() * sentencePatterns.length)];
+
+            // Create cards for this sentence
+            createCardsForSentence();
+
+            // Display sentence (hidden in read/mixed mode)
+            displaySentence();
+
+            selectedCards = [];
+            updateCardSelection();
+            hideFeedback();
+        }
+
+        // Create cards for current sentence
+        function createCardsForSentence() {
+            cardGridEl.innerHTML = '';
+
+            // Create cards for each position in the sentence
+            currentSentence.structure.forEach((category, index) => {
+                const cards = getRandomCardsForCategory(category, 3); // Show 3 options per category
+
+                cards.forEach(cardText => {
+                    const card = document.createElement('div');
+                    card.className = `card card-${category}`;
+                    card.textContent = cardText;
+                    card.dataset.category = category;
+                    card.dataset.index = index;
+                    card.addEventListener('click', () => selectCard(card));
+                    cardGridEl.appendChild(card);
+                });
+            });
+        }
+
+        // Get random cards for a category
+        function getRandomCardsForCategory(category, count) {
+            const categoryCards = cardCategories[category] || [];
+            const shuffled = [...categoryCards].sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, count);
+        }
+
+        // Display sentence
+        function displaySentence() {
+            if (currentMode === 'build') {
+                sentenceTextEl.textContent = 'Build the sentence using the cards below!';
+                sentenceTextEl.classList.remove('hidden');
+            } else {
+                // Show blanks or hidden text
+                const blankSentence = currentSentence.example.map(word => '___').join(' ');
+                sentenceTextEl.textContent = blankSentence;
+                sentenceTextEl.classList.add('hidden');
+            }
+        }
+
+        // Select card
+        function selectCard(cardElement) {
+            const category = cardElement.dataset.category;
+            const index = parseInt(cardElement.dataset.index);
+            const cardText = cardElement.textContent;
+
+            // Clear previous selection for this position
+            document.querySelectorAll(`.card[data-index="${index}"]`).forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Select this card
+            cardElement.classList.add('selected');
+            selectedCards[index] = cardText;
+
+            // Update sentence display
+            updateSentenceDisplay();
+        }
+
+        // Update sentence display
+        function updateSentenceDisplay() {
+            if (currentMode === 'build') {
+                const displayText = selectedCards.filter(card => card).join(' ') || 'Build the sentence using the cards below!';
+                sentenceTextEl.textContent = displayText;
+            }
+        }
+
+        // Update card selection visual
+        function updateCardSelection() {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('selected', 'correct', 'incorrect');
+            });
+        }
+
+        // Check answer
+        function checkAnswer() {
+            if (!currentSentence) return;
+
+            const expectedSentence = currentSentence.example;
+            const userSentence = selectedCards.filter(card => card);
+
+            if (userSentence.length !== expectedSentence.length) {
+                showFeedback('Keep building! You need more cards for this sentence.', 'error');
+                return;
+            }
+
+            const isCorrect = userSentence.every((word, index) => word === expectedSentence[index]);
+
+            if (isCorrect) {
+                sentencesBuilt++;
+                streakCount++;
+
+                if (currentMode !== 'build') {
+                    sentencesRead++;
+                }
+
+                showFeedback('🎉 Perfect! You built the sentence correctly!', 'success');
+                revealSentence();
+
+                setTimeout(() => {
+                    newSentence();
+                }, 3000);
+            } else {
+                streakCount = 0;
+                showFeedback('Almost! Check your card choices and try again.', 'error');
+
+                // Mark incorrect cards
+                selectedCards.forEach((word, index) => {
+                    if (word !== expectedSentence[index]) {
+                        const card = document.querySelector(`.card.selected[data-index="${index}"]`);
+                        if (card) card.classList.add('incorrect');
+                    }
+                });
+            }
+
+            updateUI();
+        }
+
+        // Show hint
+        function showHint() {
+            if (!currentSentence) return;
+
+            const missingCards = currentSentence.structure.length - selectedCards.filter(card => card).length;
+
+            if (missingCards > 0) {
+                showFeedback(`Hint: You need ${missingCards} more card${missingCards > 1 ? 's' : ''} to complete this sentence.`, 'info');
+            } else {
+                const nextCategory = currentSentence.structure[selectedCards.length];
+                showFeedback(`Hint: Next, choose a ${nextCategory} card.`, 'info');
+            }
+        }
+
+        // Clear selection
+        function clearSelection() {
+            selectedCards = [];
+            updateCardSelection();
+            updateSentenceDisplay();
+            hideFeedback();
+        }
+
+        // Reveal sentence
+        function revealSentence() {
+            sentenceTextEl.classList.remove('hidden');
+            sentenceTextEl.textContent = currentSentence.example.join(' ');
+        }
+
+        // Help functions
+        function showWords() {
+            revealSentence();
+            showFeedback('Here\'s the full sentence. Try reading it out loud!', 'info');
+        }
+
+        function readAloud() {
+            const sentence = currentSentence.example.join(' ');
+            const utterance = new SpeechSynthesisUtterance(sentence);
+            utterance.rate = 0.9;
+            utterance.pitch = 1.1;
+
+            speechSynthesis.speak(utterance);
+            showFeedback('🔊 Listen carefully, then try reading along!', 'info');
+        }
+
+        function slowRead() {
+            const words = currentSentence.example;
+            let wordIndex = 0;
+
+            const speakNextWord = () => {
+                if (wordIndex < words.length) {
+                    const utterance = new SpeechSynthesisUtterance(words[wordIndex]);
+                    utterance.rate = 0.6;
+                    utterance.onend = () => {
+                        wordIndex++;
+                        setTimeout(speakNextWord, 500);
+                    };
+                    speechSynthesis.speak(utterance);
+                }
+            };
+
+            speakNextWord();
+            showFeedback('🐌 Listen to each word slowly. Repeat after me!', 'info');
+        }
+
+        function highlightWords() {
+            revealSentence();
+            const words = sentenceTextEl.textContent.split(' ');
+            let highlightIndex = 0;
+
+            const highlightNext = () => {
+                if (highlightIndex < words.length) {
+                    const highlighted = words.map((word, index) => {
+                        if (index === highlightIndex) {
+                            return `<mark>${word}</mark>`;
+                        }
+                        return word;
+                    }).join(' ');
+
+                    sentenceTextEl.innerHTML = highlighted;
+
+                    setTimeout(() => {
+                        highlightIndex++;
+                        highlightNext();
+                    }, 1000);
+                } else {
+                    // Reset to normal text
+                    sentenceTextEl.textContent = words.join(' ');
+                }
+            };
+
+            highlightNext();
+            showFeedback('👀 Watch each word light up. Read along!', 'info');
+        }
+
+        // Show feedback
+        function showFeedback(message, type) {
+            feedbackEl.textContent = message;
+            feedbackEl.className = `feedback ${type}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        // Hide feedback
+        function hideFeedback() {
+            feedbackEl.style.display = 'none';
+        }
+
+        // Update UI
+        function updateUI() {
+            sentencesReadEl.textContent = sentencesRead;
+            sentencesBuiltEl.textContent = sentencesBuilt;
+            streakCountEl.textContent = streakCount;
+
+            const totalActivities = sentencesRead + sentencesBuilt;
+            const progress = totalActivities > 0 ? (totalActivities / 20) * 100 : 0;
+            progressBar.style.width = `${Math.min(progress, 100)}%`;
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', initGame);
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                newSentence();
+            } else if (e.key === 'Escape') {
+                clearSelection();
+            }
+        });
+    </script>
+</body>
+</html>

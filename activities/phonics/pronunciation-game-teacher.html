@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronunciation Game - Teacher Dashboard</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), #ff6b6b);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .session-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .session-code {
+            font-size: 4em;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 10px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff5f5;
+            border: 3px dashed var(--primary);
+            border-radius: 8px;
+        }
+
+        .session-url {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #2980b9;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: white;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: var(--muted);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 25px;
+        }
+
+        .results-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .word-results {
+            margin-bottom: 30px;
+        }
+
+        .word-header {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .word-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .word-stat {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid #e1e8ed;
+        }
+
+        .word-stat-label {
+            font-size: 0.9em;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .word-stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .review-words-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .review-word-tag {
+            background: #fff5f5;
+            color: var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid var(--primary);
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+            font-size: 1.2em;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid var(--warning);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .qr-code {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            border-radius: 8px;
+        }
+
+        .students-list {
+            background: white;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .students-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .student-status {
+            font-size: 0.9em;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .status-joined {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .student-words-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e1e8ed;
+        }
+
+        .student-words-title {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .student-review-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .student-review-word {
+            background: #fff5f5;
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            border: 1px solid var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎤 Pronunciation Game - Teacher Dashboard</h1>
+        <p>Create a session and see anonymous student results in real-time</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 How to Use:</h3>
+        <ol>
+            <li>Click "Start New Session" to create a game code</li>
+            <li>Share the code with students (they'll use it to join on their phones)</li>
+            <li>Students take the quiz anonymously on their devices</li>
+            <li>Watch results appear in real-time below</li>
+            <li>Use the data to plan your next lesson!</li>
+        </ol>
+        
+        <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; border: 2px solid var(--primary);">
+            <h4 style="margin-top: 0; color: var(--primary);">🎯 What This Game Tests:</h4>
+            <p style="margin: 8px 0; font-weight: 600;">Major pronunciation challenges for Spanish speakers:</p>
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li><strong>B/V Sounds</strong> - Both sound like /b/ in Spanish, different in English</li>
+                <li><strong>TH Sounds</strong> - Doesn't exist in Spanish (think, this, that)</li>
+                <li><strong>R Sounds</strong> - English R (not rolled like Spanish RR)</li>
+                <li><strong>W Sounds</strong> - No equivalent in Spanish (water, work)</li>
+                <li><strong>SH/CH Sounds</strong> - Similar but different from Spanish</li>
+                <li><strong>H Sounds</strong> - Silent in Spanish, breathy in English</li>
+                <li><strong>S/Z Sounds</strong> - Z has voice, S doesn't</li>
+                <li><strong>Vowel Sounds</strong> - Minimal pairs (ship/sheep, bit/beat)</li>
+            </ul>
+            <p style="margin: 8px 0 0 0; font-size: 0.9em; color: var(--muted);"><strong>Total:</strong> ~60 words covering all major Spanish speaker challenges</p>
+        </div>
+    </div>
+
+    <div class="session-section" id="sessionSection">
+        <h2 style="margin-top: 0;">Start a New Game Session</h2>
+        <button class="btn btn-primary" onclick="startNewSession()">🎮 Start New Session</button>
+    </div>
+
+    <div class="session-section" id="activeSessionSection" style="display: none;">
+        <h2 style="margin-top: 0;">Active Session</h2>
+        <div class="session-code" id="sessionCode">----</div>
+        <p>Share this code with your students!</p>
+        
+        <div class="session-url">
+            Students go to: <strong>pronunciation-game-student.html</strong> and enter code: <span id="sessionCodeText"></span>
+        </div>
+
+        <div class="qr-code">
+            <div class="qr-placeholder">
+                QR Code<br>(Scan to join)
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number" id="totalStudents">0</div>
+                <div class="stat-label">Students Joined</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="completedStudents">0</div>
+                <div class="stat-label">Completed Quiz</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="avgConfidence">0%</div>
+                <div class="stat-label">Avg Confidence</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="avgMatch">0%</div>
+                <div class="stat-label">Avg Match Rate</div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="refreshResults()">🔄 Refresh Results</button>
+        <button class="btn btn-success" onclick="exportResults()">📊 Export Results</button>
+        <button class="btn btn-primary" onclick="endSession()">⏹️ End Session</button>
+
+        <div class="students-list" id="studentsList" style="display: none;">
+            <div class="students-title">👥 Students in Session</div>
+            <div id="studentsContainer"></div>
+        </div>
+    </div>
+
+    <div class="results-section" id="resultsSection" style="display: none;">
+        <div class="results-title">📊 Class Results by Word</div>
+        <div id="wordResultsContainer"></div>
+    </div>
+
+    <script>
+        let currentSessionCode = null;
+        let refreshInterval = null;
+
+        // Generate random session code
+        function generateSessionCode() {
+            return Math.random().toString(36).substring(2, 6).toUpperCase();
+        }
+
+        // Start new session
+        function startNewSession() {
+            currentSessionCode = generateSessionCode();
+            
+            // Store session in localStorage
+            const sessionData = {
+                code: currentSessionCode,
+                startTime: new Date().toISOString(),
+                students: []
+            };
+            localStorage.setItem('pronunciation_session_' + currentSessionCode, JSON.stringify(sessionData));
+            localStorage.setItem('active_pronunciation_session', currentSessionCode);
+
+            // Show active session
+            document.getElementById('sessionSection').style.display = 'none';
+            document.getElementById('activeSessionSection').style.display = 'block';
+            document.getElementById('sessionCode').textContent = currentSessionCode;
+            document.getElementById('sessionCodeText').textContent = currentSessionCode;
+
+            // Start auto-refresh
+            refreshInterval = setInterval(refreshResults, 2000); // Refresh every 2 seconds
+            refreshResults();
+        }
+
+        // Refresh results
+        function refreshResults() {
+            if (!currentSessionCode) {
+                currentSessionCode = localStorage.getItem('active_pronunciation_session');
+                if (!currentSessionCode) return;
+            }
+
+            // Get all student responses
+            const allResponses = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('pronunciation_response_' + currentSessionCode + '_')) {
+                    try {
+                        const response = JSON.parse(localStorage.getItem(key));
+                        allResponses.push(response);
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                }
+            }
+
+            if (allResponses.length === 0) {
+                document.getElementById('resultsSection').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('resultsSection').style.display = 'block';
+
+            // Get session data to get student names
+            const sessionKey = 'pronunciation_session_' + currentSessionCode;
+            const sessionData = localStorage.getItem(sessionKey);
+            let sessionStudents = [];
+            if (sessionData) {
+                try {
+                    const session = JSON.parse(sessionData);
+                    sessionStudents = session.students || [];
+                } catch (e) {
+                    console.error('Error parsing session:', e);
+                }
+            }
+
+            // Create student map with names
+            const studentMap = {};
+            sessionStudents.forEach(s => {
+                studentMap[s.id] = s.name;
+            });
+
+            // Calculate stats
+            const uniqueStudents = new Set(allResponses.map(r => r.studentId)).size;
+            const completedStudents = new Set(allResponses.filter(r => r.completed).map(r => r.studentId)).size;
+            
+            let totalConfident = 0;
+            let totalConfidentCount = 0;
+            let totalMatches = 0;
+            let totalMatchCount = 0;
+
+            allResponses.forEach(response => {
+                if (response.confident !== undefined) {
+                    totalConfident += response.confident ? 1 : 0;
+                    totalConfidentCount++;
+                }
+                if (response.matched !== undefined) {
+                    totalMatches += response.matched ? 1 : 0;
+                    totalMatchCount++;
+                }
+            });
+
+            const avgConfidence = totalConfidentCount > 0 ? Math.round((totalConfident / totalConfidentCount) * 100) : 0;
+            const avgMatch = totalMatchCount > 0 ? Math.round((totalMatches / totalMatchCount) * 100) : 0;
+
+            document.getElementById('totalStudents').textContent = uniqueStudents;
+            document.getElementById('completedStudents').textContent = completedStudents;
+            document.getElementById('avgConfidence').textContent = avgConfidence + '%';
+            document.getElementById('avgMatch').textContent = avgMatch + '%';
+
+            // Group by word
+            const wordGroups = {};
+            allResponses.forEach(response => {
+                response.words.forEach(wordData => {
+                    if (!wordGroups[wordData.word]) {
+                        wordGroups[wordData.word] = {
+                            word: wordData.word,
+                            confident: 0,
+                            notConfident: 0,
+                            goodMatch: 0,
+                            needsReview: 0,
+                            total: 0
+                        };
+                    }
+                    wordGroups[wordData.word].total++;
+                    if (wordData.confident) wordGroups[wordData.word].confident++;
+                    else wordGroups[wordData.word].notConfident++;
+                    if (wordData.matched === true) wordGroups[wordData.word].goodMatch++;
+                    if (wordData.matched === false) wordGroups[wordData.word].needsReview++;
+                });
+            });
+
+            // Display word results
+            const container = document.getElementById('wordResultsContainer');
+            container.innerHTML = '';
+
+            Object.values(wordGroups).forEach(wordData => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-results';
+
+                const confidentPct = Math.round((wordData.confident / wordData.total) * 100);
+                const matchPct = Math.round((wordData.goodMatch / wordData.total) * 100);
+                const reviewPct = Math.round((wordData.needsReview / wordData.total) * 100);
+
+                wordDiv.innerHTML = `
+                    <div class="word-header">
+                        <span>${wordData.word}</span>
+                        <span style="font-size: 0.8em; color: var(--muted);">${wordData.total} responses</span>
+                    </div>
+                    <div class="word-stats">
+                        <div class="word-stat">
+                            <div class="word-stat-label">Confident</div>
+                            <div class="word-stat-value" style="color: var(--success);">${confidentPct}%</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat-label">Not Confident</div>
+                            <div class="word-stat-value" style="color: var(--warning);">${100 - confidentPct}%</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat-label">Good Match</div>
+                            <div class="word-stat-value" style="color: var(--success);">${matchPct}%</div>
+                        </div>
+                        <div class="word-stat">
+                            <div class="word-stat-label">Needs Review</div>
+                            <div class="word-stat-value" style="color: var(--primary);">${reviewPct}%</div>
+                        </div>
+                    </div>
+                    ${wordData.needsReview > 0 ? `
+                        <div style="margin-top: 10px;">
+                            <strong style="color: var(--primary);">⚠️ ${wordData.needsReview} students need to review this word</strong>
+                        </div>
+                    ` : ''}
+                `;
+
+                container.appendChild(wordDiv);
+            });
+        }
+
+        // Export results
+        function exportResults() {
+            if (!currentSessionCode) return;
+
+            const allResponses = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('pronunciation_response_' + currentSessionCode + '_')) {
+                    try {
+                        const response = JSON.parse(localStorage.getItem(key));
+                        allResponses.push(response);
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                }
+            }
+
+            // Create CSV
+            let csv = 'Word,Confident,Not Confident,Good Match,Needs Review\n';
+            
+            const wordGroups = {};
+            allResponses.forEach(response => {
+                response.words.forEach(wordData => {
+                    if (!wordGroups[wordData.word]) {
+                        wordGroups[wordData.word] = {
+                            confident: 0,
+                            notConfident: 0,
+                            goodMatch: 0,
+                            needsReview: 0
+                        };
+                    }
+                    if (wordData.confident) wordGroups[wordData.word].confident++;
+                    else wordGroups[wordData.word].notConfident++;
+                    if (wordData.matched === true) wordGroups[wordData.word].goodMatch++;
+                    if (wordData.matched === false) wordGroups[wordData.word].needsReview++;
+                });
+            });
+
+            Object.entries(wordGroups).forEach(([word, data]) => {
+                csv += `${word},${data.confident},${data.notConfident},${data.goodMatch},${data.needsReview}\n`;
+            });
+
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `pronunciation_results_${currentSessionCode}_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        // End session
+        function endSession() {
+            if (confirm('End this session? Results will be saved but no new students can join.')) {
+                if (refreshInterval) {
+                    clearInterval(refreshInterval);
+                }
+                localStorage.removeItem('active_pronunciation_session');
+                document.getElementById('activeSessionSection').style.display = 'none';
+                document.getElementById('sessionSection').style.display = 'block';
+                document.getElementById('resultsSection').style.display = 'none';
+                currentSessionCode = null;
+            }
+        }
+
+        // Check for existing session on load
+        window.addEventListener('load', () => {
+            const activeSession = localStorage.getItem('active_pronunciation_session');
+            if (activeSession) {
+                currentSessionCode = activeSession;
+                document.getElementById('sessionSection').style.display = 'none';
+                document.getElementById('activeSessionSection').style.display = 'block';
+                document.getElementById('sessionCode').textContent = currentSessionCode;
+                document.getElementById('sessionCodeText').textContent = currentSessionCode;
+                refreshInterval = setInterval(refreshResults, 2000);
+                refreshResults();
+            }
+        });
+    </script>
+</body>
+</html>

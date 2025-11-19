@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronunciation Self-Check Quiz | Spanish Speakers</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), #ff6b6b);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 2px solid var(--warning);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .word-display {
+            text-align: center;
+            margin: 30px 0;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .current-word {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .word-pronunciation {
+            font-size: 1.3em;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .confidence-section {
+            background: #f0f8ff;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .confidence-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .confidence-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-yes {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+
+        .btn-yes.selected {
+            background: #1e8449;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-no {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-no:hover {
+            background: #e67e22;
+            transform: scale(1.05);
+        }
+
+        .btn-no.selected {
+            background: #d35400;
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
+        }
+
+        .audio-section {
+            background: #e8f8f5;
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .audio-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-audio:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .btn-audio:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .match-section {
+            background: #fff9e6;
+            border: 2px solid var(--warning);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .match-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .match-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-match {
+            background: var(--success);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-match:hover {
+            background: #229954;
+        }
+
+        .btn-match.selected {
+            background: #1e8449;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-review {
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-review:hover {
+            background: #c0392b;
+        }
+
+        .btn-review.selected {
+            background: #a93226;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e1e8ed;
+        }
+
+        .btn-nav {
+            background: var(--muted);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            background: #5a6268;
+        }
+
+        .btn-nav:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e1e8ed;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            display: none;
+        }
+
+        .results-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            background: #f8f9fa;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .result-label {
+            font-size: 1.1em;
+            color: var(--muted);
+        }
+
+        .review-list {
+            background: #fff5f5;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .review-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .review-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .review-word {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--primary);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .feedback-message {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+            display: none;
+        }
+
+        .feedback-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .timer-display {
+            font-size: 0.9em;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        @media print {
+            .btn, .audio-controls, .navigation {
+                display: none;
+            }
+
+            .quiz-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎤 Pronunciation Self-Check Quiz</h1>
+        <p>Test your pronunciation confidence and accuracy</p>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 How to Use This Quiz:</h3>
+        <ol>
+            <li><strong>See the word</strong> - Look at the word shown</li>
+            <li><strong>Think about pronunciation</strong> - Say it in your head. How confident are you?</li>
+            <li><strong>Mark your confidence</strong> - Click "Yes, I'm confident" or "No, I'm not sure"</li>
+            <li><strong>Listen to correct pronunciation</strong> - Click "Play Audio" to hear how it should sound</li>
+            <li><strong>Check if you matched</strong> - Did your pronunciation match? Click "Good Match" or "Need to Review"</li>
+            <li><strong>Continue</strong> - Move to the next word and repeat</li>
+        </ol>
+        <p><strong>💡 Goal:</strong> Identify which words you need to practice more. Words marked "Need to Review" will be saved for you!</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div class="progress-text" id="progressText">Word 1 of 20</div>
+
+        <div class="word-display">
+            <div class="current-word" id="currentWord">library</div>
+            <div class="word-pronunciation" id="wordPronunciation" style="display: none;">(lī' brer ē)</div>
+        </div>
+
+        <!-- Confidence Section -->
+        <div class="confidence-section" id="confidenceSection">
+            <div class="confidence-question">Are you confident you know how to pronounce this word?</div>
+            <div class="confidence-buttons">
+                <button class="btn btn-yes" onclick="markConfidence(true)">✅ Yes, I'm confident</button>
+                <button class="btn btn-no" onclick="markConfidence(false)">❌ No, I'm not sure</button>
+            </div>
+            <div class="timer-display" id="timerDisplay">Take your time to think...</div>
+        </div>
+
+        <!-- Audio Section -->
+        <div class="audio-section" id="audioSection" style="display: none;">
+            <div class="audio-question">Now listen to the correct pronunciation:</div>
+            <div class="audio-controls">
+                <button class="btn-audio" id="playAudioBtn" onclick="playAudio()">🔊 Play Audio</button>
+                <button class="btn-audio" onclick="playAudioSlow()">🐌 Play Slowly</button>
+            </div>
+        </div>
+
+        <!-- Match Section -->
+        <div class="match-section" id="matchSection" style="display: none;">
+            <div class="match-question">Did your pronunciation match the audio?</div>
+            <div class="match-buttons">
+                <button class="btn-match" onclick="markMatch(true)">✅ Good Match</button>
+                <button class="btn-review" onclick="markMatch(false)">📚 Need to Review</button>
+            </div>
+        </div>
+
+        <div class="feedback-message" id="feedbackMessage"></div>
+
+        <div class="navigation">
+            <button class="btn-nav" id="prevBtn" onclick="previousWord()" disabled>← Previous</button>
+            <button class="btn-nav" id="nextBtn" onclick="nextWord()" disabled>Next →</button>
+        </div>
+    </div>
+
+    <div class="results-section" id="resultsSection">
+        <div class="results-title">📊 Your Results</div>
+        <div class="results-grid">
+            <div class="result-box">
+                <div class="result-number" id="totalWords">0</div>
+                <div class="result-label">Words Completed</div>
+            </div>
+            <div class="result-box">
+                <div class="result-number" id="confidentWords">0</div>
+                <div class="result-label">Confident Pronunciations</div>
+            </div>
+            <div class="result-box">
+                <div class="result-number" id="goodMatches">0</div>
+                <div class="result-label">Good Matches</div>
+            </div>
+            <div class="result-box">
+                <div class="result-number" id="reviewWords">0</div>
+                <div class="result-label">Words to Review</div>
+            </div>
+        </div>
+
+        <div class="review-list" id="reviewList" style="display: none;">
+            <div class="review-title">📚 Words You Marked for Review:</div>
+            <div class="review-words" id="reviewWordsList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Word list - Common words Spanish speakers mispronounce
+        const words = [
+            { word: 'library', pronunciation: 'lī\' brer ē', audio: 'library' },
+            { word: 'very', pronunciation: 'vĕr\' ē', audio: 'very' },
+            { word: 'business', pronunciation: 'biz\' ness', audio: 'business' },
+            { word: 'vegetable', pronunciation: 'vĕj\' ta ble', audio: 'vegetable' },
+            { word: 'beautiful', pronunciation: 'bū\' ti ful', audio: 'beautiful' },
+            { word: 'available', pronunciation: 'a vail\' a ble', audio: 'available' },
+            { word: 'believe', pronunciation: 'bē lieve\'', audio: 'believe' },
+            { word: 'visit', pronunciation: 'viz\' it', audio: 'visit' },
+            { word: 'village', pronunciation: 'vil\' lage', audio: 'village' },
+            { word: 'become', pronunciation: 'bē come\'', audio: 'become' },
+            { word: 'before', pronunciation: 'bē fore\'', audio: 'before' },
+            { word: 'between', pronunciation: 'bē tween\'', audio: 'between' },
+            { word: 'value', pronunciation: 'val\' ue', audio: 'value' },
+            { word: 'behavior', pronunciation: 'bē hav\' ior', audio: 'behavior' },
+            { word: 'various', pronunciation: 'var\' i ous', audio: 'various' },
+            { word: 'vase', pronunciation: 'vāse', audio: 'vase' },
+            { word: 'veteran', pronunciation: 'vĕt\' er an', audio: 'veteran' },
+            { word: 'beverage', pronunciation: 'bĕv\' er age', audio: 'beverage' },
+            { word: 'obvious', pronunciation: 'ob\' vi ous', audio: 'obvious' },
+            { word: 'develop', pronunciation: 'de vĕl\' op', audio: 'develop' }
+        ];
+
+        let currentIndex = 0;
+        let results = {
+            confident: [],
+            notConfident: [],
+            goodMatches: [],
+            needsReview: []
+        };
+
+        // Initialize quiz
+        function initQuiz() {
+            displayWord();
+            updateProgress();
+        }
+
+        // Display current word
+        function displayWord() {
+            const currentWordData = words[currentIndex];
+            document.getElementById('currentWord').textContent = currentWordData.word;
+            document.getElementById('wordPronunciation').textContent = `(${currentWordData.pronunciation})`;
+            document.getElementById('wordPronunciation').style.display = 'none';
+
+            // Reset sections
+            document.getElementById('confidenceSection').style.display = 'block';
+            document.getElementById('audioSection').style.display = 'none';
+            document.getElementById('matchSection').style.display = 'none';
+            document.getElementById('feedbackMessage').style.display = 'none';
+
+            // Reset buttons
+            document.querySelectorAll('.btn-yes, .btn-no, .btn-match, .btn-review').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Update navigation
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = true;
+
+            // Start timer
+            startTimer();
+        }
+
+        // Timer for thinking time
+        function startTimer() {
+            let seconds = 0;
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            const timer = setInterval(() => {
+                seconds++;
+                if (seconds <= 3) {
+                    timerDisplay.textContent = `Take your time to think... (${seconds}s)`;
+                } else {
+                    timerDisplay.textContent = 'Ready? Mark your confidence above.';
+                    clearInterval(timer);
+                }
+            }, 1000);
+        }
+
+        // Mark confidence
+        function markConfidence(isConfident) {
+            // Remove selection from both buttons
+            document.querySelectorAll('.btn-yes, .btn-no').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Mark selected button
+            if (isConfident) {
+                document.querySelector('.btn-yes').classList.add('selected');
+                results.confident.push(words[currentIndex].word);
+            } else {
+                document.querySelector('.btn-no').classList.add('selected');
+                results.notConfident.push(words[currentIndex].word);
+            }
+
+            // Show audio section
+            document.getElementById('audioSection').style.display = 'block';
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        // Play audio
+        function playAudio() {
+            const word = words[currentIndex].word;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.rate = 0.9;
+            utterance.pitch = 1.0;
+
+            // Try to find a good voice
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+            if (englishVoice) {
+                utterance.voice = englishVoice;
+            }
+
+            speechSynthesis.speak(utterance);
+
+            // Show pronunciation guide
+            document.getElementById('wordPronunciation').style.display = 'block';
+
+            // Show match section
+            document.getElementById('matchSection').style.display = 'block';
+        }
+
+        // Play audio slowly
+        function playAudioSlow() {
+            const word = words[currentIndex].word;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.rate = 0.6;
+            utterance.pitch = 1.0;
+
+            const voices = speechSynthesis.getVoices();
+            const englishVoice = voices.find(voice => voice.lang.startsWith('en'));
+            if (englishVoice) {
+                utterance.voice = englishVoice;
+            }
+
+            speechSynthesis.speak(utterance);
+            document.getElementById('wordPronunciation').style.display = 'block';
+        }
+
+        // Mark match
+        function markMatch(isMatch) {
+            // Remove selection from both buttons
+            document.querySelectorAll('.btn-match, .btn-review').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            const word = words[currentIndex].word;
+
+            if (isMatch) {
+                document.querySelector('.btn-match').classList.add('selected');
+                results.goodMatches.push(word);
+                showFeedback('Great! Your pronunciation matches! ✅', 'success');
+            } else {
+                document.querySelector('.btn-review').classList.add('selected');
+                results.needsReview.push(word);
+                showFeedback('Good to know! We\'ll review this word. 📚', 'info');
+            }
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        // Show feedback
+        function showFeedback(message, type) {
+            const feedback = document.getElementById('feedbackMessage');
+            feedback.textContent = message;
+            feedback.className = `feedback-message feedback-${type}`;
+            feedback.style.display = 'block';
+
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 3000);
+        }
+
+        // Next word
+        function nextWord() {
+            if (currentIndex < words.length - 1) {
+                currentIndex++;
+                displayWord();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        // Previous word
+        function previousWord() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayWord();
+                updateProgress();
+            }
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentIndex + 1) / words.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Word ${currentIndex + 1} of ${words.length}`;
+        }
+
+        // Show results
+        function showResults() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+
+            document.getElementById('totalWords').textContent = words.length;
+            document.getElementById('confidentWords').textContent = results.confident.length;
+            document.getElementById('goodMatches').textContent = results.goodMatches.length;
+            document.getElementById('reviewWords').textContent = results.needsReview.length;
+
+            // Show review list
+            if (results.needsReview.length > 0) {
+                document.getElementById('reviewList').style.display = 'block';
+                const reviewList = document.getElementById('reviewWordsList');
+                reviewList.innerHTML = '';
+                results.needsReview.forEach(word => {
+                    const wordEl = document.createElement('div');
+                    wordEl.className = 'review-word';
+                    wordEl.textContent = word;
+                    reviewList.appendChild(wordEl);
+                });
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            // Load voices
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = initQuiz;
+            } else {
+                initQuiz();
+            }
+        });
+    </script>
+</body>
+</html>

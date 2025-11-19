@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Family Builder | NRS Level 3-4 Phonics</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #ff6b6b);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .word-families {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .family-card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .family-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.1);
+        }
+
+        .family-card.active {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+
+        .family-header {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .word-rack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .word-piece {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .word-piece:hover {
+            background: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .word-piece.selected {
+            background: var(--success);
+        }
+
+        .word-display {
+            min-height: 60px;
+            border: 2px dashed #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background: #fafbfc;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .word-display.empty {
+            color: var(--muted);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: var(--muted);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #5a6268;
+        }
+
+        .btn.primary {
+            background: var(--primary);
+        }
+
+        .btn.primary:hover {
+            background: #c0392b;
+        }
+
+        .btn.success {
+            background: var(--success);
+        }
+
+        .btn.success:hover {
+            background: #229954;
+        }
+
+        .btn.warning {
+            background: var(--warning);
+        }
+
+        .btn.warning:hover {
+            background: #e67e22;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .progress {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+            text-align: center;
+        }
+
+        .stat {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .word-list {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .word-list h4 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .word-item {
+            background: white;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #e1e8ed;
+        }
+
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .celebration h2 {
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .celebration p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .word-families {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Word Family Builder</h1>
+        <p>Build words by adding endings to word families</p>
+        <div class="level-badge">NRS Level 3-4</div>
+    </div>
+
+    <div class="instructions">
+        <h3>🎯 How to Play:</h3>
+        <ul>
+            <li><strong>Step 1:</strong> Click on a word family (like "play")</li>
+            <li><strong>Step 2:</strong> Choose word pieces from the rack below</li>
+            <li><strong>Step 3:</strong> Click "Build Word" to see your creation</li>
+            <li><strong>Step 4:</strong> Practice reading the word out loud!</li>
+        </ul>
+        <p><strong>💡 Tip:</strong> Start with short words and build confidence. Remember: "at" + "play" = "play"!</p>
+    </div>
+
+    <div class="game-container">
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="wordsBuilt">0</div>
+                <div class="stat-label">Words Built</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="streakCount">0</div>
+                <div class="stat-label">Streak</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="familiesCompleted">0</div>
+                <div class="stat-label">Families Done</div>
+            </div>
+        </div>
+
+        <div class="word-families" id="wordFamilies">
+            <!-- Word families will be populated by JavaScript -->
+        </div>
+
+        <div class="word-rack" id="wordRack">
+            <!-- Word pieces will be populated by JavaScript -->
+        </div>
+
+        <div class="word-display empty" id="wordDisplay">
+            Click a word family and pieces to build a word!
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" id="buildBtn">Build Word</button>
+            <button class="btn success" id="readBtn">Read Aloud</button>
+            <button class="btn warning" id="clearBtn">Clear</button>
+            <button class="btn" id="nextFamilyBtn">Next Family</button>
+        </div>
+
+        <div id="feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <h2>🎉 Amazing!</h2>
+        <p>You've mastered this word family!</p>
+        <button class="btn success" onclick="closeCelebration()">Continue</button>
+    </div>
+
+    <script>
+        // Word families for NRS Level 3-4 (appropriate vocabulary)
+        const wordFamiliesData = [
+            {
+                family: 'play',
+                base: 'play',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['plays', 'played', 'playing', 'player'],
+                sentences: [
+                    'She plays soccer.',
+                    'They played yesterday.',
+                    'I am playing now.',
+                    'He is a good player.'
+                ]
+            },
+            {
+                family: 'work',
+                base: 'work',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['works', 'worked', 'working', 'worker'],
+                sentences: [
+                    'He works every day.',
+                    'She worked last week.',
+                    'They are working now.',
+                    'My father is a worker.'
+                ]
+            },
+            {
+                family: 'help',
+                base: 'help',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['helps', 'helped', 'helping', 'helper'],
+                sentences: [
+                    'She helps at school.',
+                    'I helped my friend.',
+                    'We are helping today.',
+                    'He is a good helper.'
+                ]
+            },
+            {
+                family: 'talk',
+                base: 'talk',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['talks', 'talked', 'talking', 'talker'],
+                sentences: [
+                    'He talks to friends.',
+                    'They talked yesterday.',
+                    'I am talking now.',
+                    'She is a fast talker.'
+                ]
+            },
+            {
+                family: 'clean',
+                base: 'clean',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['cleans', 'cleaned', 'cleaning', 'cleaner'],
+                sentences: [
+                    'She cleans the room.',
+                    'I cleaned my desk.',
+                    'They are cleaning now.',
+                    'He works as a cleaner.'
+                ]
+            },
+            {
+                family: 'cook',
+                base: 'cook',
+                endings: ['s', 'ed', 'ing', 'er'],
+                fullWords: ['cooks', 'cooked', 'cooking', 'cooker'],
+                sentences: [
+                    'He cooks dinner.',
+                    'She cooked rice.',
+                    'We are cooking now.',
+                    'My mother is a cook.'
+                ]
+            }
+        ];
+
+        let currentFamily = null;
+        let selectedPieces = [];
+        let wordsBuilt = 0;
+        let streakCount = 0;
+        let completedFamilies = new Set();
+
+        // DOM elements
+        const wordFamiliesEl = document.getElementById('wordFamilies');
+        const wordRackEl = document.getElementById('wordRack');
+        const wordDisplayEl = document.getElementById('wordDisplay');
+        const buildBtn = document.getElementById('buildBtn');
+        const readBtn = document.getElementById('readBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const nextFamilyBtn = document.getElementById('nextFamilyBtn');
+        const feedbackEl = document.getElementById('feedback');
+        const celebrationEl = document.getElementById('celebration');
+        const progressBar = document.getElementById('progressBar');
+        const wordsBuiltEl = document.getElementById('wordsBuilt');
+        const streakCountEl = document.getElementById('streakCount');
+        const familiesCompletedEl = document.getElementById('familiesCompleted');
+
+        // Initialize game
+        function initGame() {
+            createWordFamilies();
+            selectRandomFamily();
+            updateUI();
+        }
+
+        // Create word family cards
+        function createWordFamilies() {
+            wordFamiliesEl.innerHTML = '';
+            wordFamiliesData.forEach(family => {
+                const card = document.createElement('div');
+                card.className = 'family-card';
+                card.innerHTML = `
+                    <div class="family-header">${family.base}</div>
+                    <div class="word-list">
+                        <h4>Example Words:</h4>
+                        <div class="word-grid">
+                            ${family.fullWords.map(word => `<div class="word-item">${word}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+                card.addEventListener('click', () => selectFamily(family));
+                wordFamiliesEl.appendChild(card);
+            });
+        }
+
+        // Select word family
+        function selectFamily(family) {
+            // Update visual selection
+            document.querySelectorAll('.family-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            currentFamily = family;
+            selectedPieces = [];
+
+            // Create word pieces for this family
+            createWordPieces(family);
+
+            // Clear display
+            wordDisplayEl.textContent = 'Click word pieces to build!';
+            wordDisplayEl.classList.add('empty');
+
+            hideFeedback();
+        }
+
+        // Create word pieces
+        function createWordPieces(family) {
+            wordRackEl.innerHTML = '';
+
+            // Add base word
+            const basePiece = document.createElement('div');
+            basePiece.className = 'word-piece';
+            basePiece.textContent = family.base;
+            basePiece.addEventListener('click', () => togglePiece(basePiece, family.base));
+            wordRackEl.appendChild(basePiece);
+
+            // Add endings
+            family.endings.forEach(ending => {
+                const piece = document.createElement('div');
+                piece.className = 'word-piece';
+                piece.textContent = ending;
+                piece.addEventListener('click', () => togglePiece(piece, ending));
+                wordRackEl.appendChild(piece);
+            });
+        }
+
+        // Toggle word piece selection
+        function togglePiece(pieceElement, pieceText) {
+            pieceElement.classList.toggle('selected');
+
+            if (pieceElement.classList.contains('selected')) {
+                selectedPieces.push(pieceText);
+            } else {
+                selectedPieces = selectedPieces.filter(piece => piece !== pieceText);
+            }
+        }
+
+        // Build word
+        function buildWord() {
+            if (!currentFamily || selectedPieces.length === 0) {
+                showFeedback('Please select a word family and some pieces first!', 'error');
+                return;
+            }
+
+            // Build the word
+            const builtWord = selectedPieces.join('');
+            wordDisplayEl.textContent = builtWord;
+            wordDisplayEl.classList.remove('empty');
+
+            // Check if it's a valid word
+            const isValidWord = currentFamily.fullWords.includes(builtWord);
+
+            if (isValidWord) {
+                wordsBuilt++;
+                streakCount++;
+
+                // Find the sentence for this word
+                const wordIndex = currentFamily.fullWords.indexOf(builtWord);
+                const sentence = currentFamily.sentences[wordIndex];
+
+                showFeedback(`🎉 Great! "${builtWord}" - "${sentence}"`, 'success');
+
+                // Check if family is complete
+                checkFamilyCompletion();
+            } else {
+                streakCount = 0;
+                showFeedback(`❌ "${builtWord}" is not in this word family. Try different pieces!`, 'error');
+            }
+
+            updateUI();
+        }
+
+        // Read word aloud
+        function readWordAloud() {
+            if (wordDisplayEl.classList.contains('empty') || wordDisplayEl.textContent === 'Click word pieces to build!') {
+                showFeedback('Build a word first, then click "Read Aloud"!', 'error');
+                return;
+            }
+
+            const word = wordDisplayEl.textContent;
+            const utterance = new SpeechSynthesisUtterance(word);
+            utterance.rate = 0.8;
+            utterance.pitch = 1.1;
+
+            speechSynthesis.speak(utterance);
+
+            showFeedback(`🔊 Listening to: "${word}"`, 'info');
+        }
+
+        // Clear selection
+        function clearSelection() {
+            selectedPieces = [];
+            document.querySelectorAll('.word-piece').forEach(piece => {
+                piece.classList.remove('selected');
+            });
+            wordDisplayEl.textContent = 'Click word pieces to build!';
+            wordDisplayEl.classList.add('empty');
+            hideFeedback();
+        }
+
+        // Next family
+        function nextFamily() {
+            selectRandomFamily();
+            clearSelection();
+        }
+
+        // Check if family is complete
+        function checkFamilyCompletion() {
+            if (!currentFamily) return;
+
+            // Check if all words in family have been built
+            const allWordsBuilt = currentFamily.fullWords.every(word => {
+                // This is a simplified check - in a real implementation,
+                // you'd track which words each student has built
+                return true; // For demo purposes
+            });
+
+            if (allWordsBuilt && !completedFamilies.has(currentFamily.family)) {
+                completedFamilies.add(currentFamily.family);
+                showCelebration();
+            }
+        }
+
+        // Select random family
+        function selectRandomFamily() {
+            const availableFamilies = wordFamiliesData.filter(family =>
+                !completedFamilies.has(family.family)
+            );
+
+            if (availableFamilies.length === 0) {
+                // All families completed - reset
+                completedFamilies.clear();
+                currentFamily = wordFamiliesData[Math.floor(Math.random() * wordFamiliesData.length)];
+            } else {
+                currentFamily = availableFamilies[Math.floor(Math.random() * availableFamilies.length)];
+            }
+
+            // Update visual selection
+            document.querySelectorAll('.family-card').forEach((card, index) => {
+                if (wordFamiliesData[index].family === currentFamily.family) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            selectedPieces = [];
+            createWordPieces(currentFamily);
+        }
+
+        // Show celebration
+        function showCelebration() {
+            celebrationEl.style.display = 'block';
+        }
+
+        // Close celebration
+        function closeCelebration() {
+            celebrationEl.style.display = 'none';
+            nextFamily();
+        }
+
+        // Show feedback
+        function showFeedback(message, type) {
+            feedbackEl.textContent = message;
+            feedbackEl.className = `feedback ${type}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        // Hide feedback
+        function hideFeedback() {
+            feedbackEl.style.display = 'none';
+        }
+
+        // Update UI
+        function updateUI() {
+            wordsBuiltEl.textContent = wordsBuilt;
+            streakCountEl.textContent = streakCount;
+            familiesCompletedEl.textContent = completedFamilies.size;
+
+            const progress = (completedFamilies.size / wordFamiliesData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Event listeners
+        buildBtn.addEventListener('click', buildWord);
+        readBtn.addEventListener('click', readWordAloud);
+        clearBtn.addEventListener('click', clearSelection);
+        nextFamilyBtn.addEventListener('click', nextFamily);
+
+        // Initialize game when page loads
+        window.addEventListener('load', initGame);
+
+        // Add keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                buildWord();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                readWordAloud();
+            } else if (e.key === 'Escape') {
+                clearSelection();
+            }
+        });
+    </script>
+</body>
+</html>

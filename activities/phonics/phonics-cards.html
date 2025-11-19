@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonics Sound Cards | NRS Level 3-4</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #ff6b6b);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .phonics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .phonics-card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .phonics-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .phonics-card.active {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+
+        .sound-symbol {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .phoneme-ipa {
+            font-size: 1.2em;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .letter-examples {
+            font-size: 0.9em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .word-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .word-example {
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+            border: 1px solid #e1e8ed;
+        }
+
+        .sound-description {
+            font-size: 0.9em;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .practice-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .practice-section h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.1em;
+        }
+
+        .practice-words {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .practice-word {
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            border: 2px solid #e1e8ed;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .practice-word:hover {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+
+        .practice-word.correct {
+            background: #d4edda;
+            border-color: var(--success);
+        }
+
+        .practice-word.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--muted);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #5a6268;
+        }
+
+        .btn.primary {
+            background: var(--primary);
+        }
+
+        .btn.primary:hover {
+            background: #c0392b;
+        }
+
+        .btn.success {
+            background: var(--success);
+        }
+
+        .btn.success:hover {
+            background: #229954;
+        }
+
+        .btn.warning {
+            background: var(--warning);
+        }
+
+        .btn.warning:hover {
+            background: #e67e22;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .sound-guide {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .sound-guide h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .sound-guide p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .phonics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .practice-words {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔤 Phonics Sound Cards</h1>
+        <p>Master phonics sounds with visual guides and examples</p>
+        <div class="level-badge">NRS Level 3-4</div>
+    </div>
+
+    <div class="instructions">
+        <h3>🎯 How to Use:</h3>
+        <ul>
+            <li><strong>Step 1:</strong> Click on a phonics sound card to learn about that sound</li>
+            <li><strong>Step 2:</strong> Read the sound description and look at word examples</li>
+            <li><strong>Step 3:</strong> Practice with the words below - which ones start with this sound?</li>
+            <li><strong>Step 4:</strong> Try saying the sound and words out loud</li>
+        </ul>
+        <p><strong>💡 Pro Tip:</strong> Say the sound clearly, then add a vowel to make a word. Example: /k/ + "at" = "cat"</p>
+    </div>
+
+    <div class="game-container">
+        <div class="phonics-grid" id="phonicsGrid">
+            <!-- Phonics cards will be populated by JavaScript -->
+        </div>
+
+        <div class="practice-section" id="practiceSection" style="display: none;">
+            <h3>✨ Practice Time!</h3>
+            <p>Click on words that start with the <span id="currentSoundDisplay" style="color: var(--primary); font-weight: bold;"></span> sound:</p>
+
+            <div class="practice-words" id="practiceWords">
+                <!-- Practice words will be populated by JavaScript -->
+            </div>
+
+            <div class="controls">
+                <button class="btn primary" id="checkPracticeBtn">Check Answers</button>
+                <button class="btn warning" id="showAnswersBtn">Show Correct Answers</button>
+                <button class="btn" id="newPracticeBtn">New Practice Set</button>
+            </div>
+
+            <div id="practiceFeedback" class="feedback" style="display: none;"></div>
+        </div>
+
+        <div class="sound-guide" id="soundGuide" style="display: none;">
+            <h4>🔊 How to Make This Sound:</h4>
+            <div id="soundInstructions"></div>
+        </div>
+    </div>
+
+    <script>
+        // Phonics sounds for Spanish Speakers (NRS Level 3-4)
+        // Focus on sounds that are difficult for Spanish speakers
+        const phonicsSounds = [
+            {
+                letter: 'B/V',
+                symbol: 'Bb/Vv',
+                ipa: '/b/ /v/',
+                description: 'B = "bay" sound, V = "vey" sound',
+                spanishChallenge: 'Spanish speakers pronounce both as /b/. V makes a different sound.',
+                mouthPosition: 'B: Both lips touch and release. V: Top teeth touch bottom lip with voice.',
+                examples: ['ball/bay', 'very/vey'],
+                practiceWords: ['ball', 'book', 'very', 'vest', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'TH',
+                symbol: 'Th',
+                ipa: '/ð/ /θ/',
+                description: 'Voiced "thuh" (this) and voiceless "thuh" (think)',
+                spanishChallenge: 'This sound does not exist in Spanish. Practice with tongue between teeth.',
+                mouthPosition: 'Tongue tip between top and bottom front teeth. Voiced = with voice, voiceless = without voice.',
+                examples: ['this/ðis', 'think/θink'],
+                practiceWords: ['this', 'that', 'think', 'thank', 'mother', 'father', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'R',
+                symbol: 'Rr',
+                ipa: '/r/',
+                description: 'English R sound (not rolled like Spanish RR)',
+                spanishChallenge: 'English R is made at the back of mouth. Spanish RR is rolled with tongue.',
+                mouthPosition: 'Tongue curls back toward roof of mouth but does not touch. Air flows around tongue.',
+                examples: ['red', 'run', 'car', 'bird'],
+                practiceWords: ['red', 'run', 'car', 'bird', 'rose', 'rice', 'ring', 'rabbit', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'W',
+                symbol: 'Ww',
+                ipa: '/w/',
+                description: 'Double-u sound (like Spanish "u")',
+                spanishChallenge: 'Similar to Spanish "u" but with rounded lips. Practice saying "oo" with rounded lips.',
+                mouthPosition: 'Lips rounded tightly, tongue moves up like for "oo" but with air flow.',
+                examples: ['water', 'wind', 'window', 'wolf'],
+                practiceWords: ['water', 'wind', 'window', 'wolf', 'wagon', 'well', 'whale', 'wing', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'SH',
+                symbol: 'Sh',
+                ipa: '/ʃ/',
+                description: 'Shhh sound (like Spanish "ch" but softer)',
+                spanishChallenge: 'Similar to Spanish "ch" but tongue is flatter. Air hisses between tongue and roof of mouth.',
+                mouthPosition: 'Tongue curves up toward roof of mouth but does not touch. Air hisses through small gap.',
+                examples: ['ship', 'fish', 'wash', 'push'],
+                practiceWords: ['ship', 'fish', 'wash', 'push', 'shop', 'shoe', 'shine', 'shadow', 'sun', 'cat', 'dog', 'ball']
+            },
+            {
+                letter: 'CH',
+                symbol: 'Ch',
+                ipa: '/tʃ/',
+                description: 'Chuh sound (like Spanish "ch")',
+                spanishChallenge: 'Very similar to Spanish "ch"! You already know this sound.',
+                mouthPosition: 'Tongue touches roof of mouth, then releases with "ch" sound.',
+                examples: ['chair', 'cheese', 'church', 'beach'],
+                practiceWords: ['chair', 'cheese', 'church', 'beach', 'chicken', 'cherry', 'school', 'much', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'J',
+                symbol: 'Jj',
+                ipa: '/dʒ/',
+                description: 'Juh sound (like Spanish "y" in "yo")',
+                spanishChallenge: 'Similar to Spanish "y" in "yo". Add a "d" sound before it.',
+                mouthPosition: 'Tongue behind front teeth, like "d" + "zh" together.',
+                examples: ['jump', 'juice', 'jam', 'job'],
+                practiceWords: ['jump', 'juice', 'jam', 'job', 'jet', 'jelly', 'jar', 'judge', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'H',
+                symbol: 'Hh',
+                ipa: '/h/',
+                description: 'Breathy "hhh" sound',
+                spanishChallenge: 'Spanish "h" is silent. English "h" is breathy - like fogging a mirror.',
+                mouthPosition: 'Open mouth, breathe out like fogging a mirror.',
+                examples: ['house', 'hand', 'hat', 'hot'],
+                practiceWords: ['house', 'hand', 'hat', 'hot', 'hen', 'hill', 'home', 'hug', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'S',
+                symbol: 'Ss',
+                ipa: '/s/',
+                description: 'Hissing "sss" sound',
+                spanishChallenge: 'Similar to Spanish "s" but English "s" is sharper.',
+                mouthPosition: 'Tongue near ridge behind front teeth, air hisses through small gap.',
+                examples: ['sun', 'sit', 'soap', 'sock'],
+                practiceWords: ['sun', 'sit', 'soap', 'sock', 'sea', 'sing', 'six', 'snake', 'ball', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'Z',
+                symbol: 'Zz',
+                ipa: '/z/',
+                description: 'Buzzing "zzz" sound',
+                spanishChallenge: 'Similar to Spanish "s" but with voice. Tongue position same as /s/ but add voice.',
+                mouthPosition: 'Tongue near ridge behind front teeth, voice through small gap.',
+                examples: ['zoo', 'zebra', 'zip', 'zero'],
+                practiceWords: ['zoo', 'zebra', 'zip', 'zero', 'zigzag', 'zone', 'zoom', 'zucchini', 'sun', 'cat', 'dog', 'fish']
+            },
+            {
+                letter: 'C',
+                symbol: 'Cc',
+                ipa: '/k/',
+                description: 'Hard "kuh" sound (before a, o, u)',
+                mouthPosition: 'Back of tongue touches roof of mouth, release with air',
+                examples: ['cat', 'car', 'cake', 'cup'],
+                practiceWords: ['cat', 'car', 'cake', 'cup', 'can', 'cow', 'cut', 'cab', 'dog', 'pig', 'sun', 'hat']
+            },
+            {
+                letter: 'D',
+                symbol: 'Dd',
+                ipa: '/d/',
+                description: 'Short "duh" sound',
+                mouthPosition: 'Tongue touches ridge behind front teeth, release with voice',
+                examples: ['dog', 'day', 'door', 'duck'],
+                practiceWords: ['dog', 'day', 'door', 'duck', 'dad', 'desk', 'dish', 'drum', 'cat', 'pig', 'sun', 'hat']
+            },
+            {
+                letter: 'F',
+                symbol: 'Ff',
+                ipa: '/f/',
+                description: 'Long "fff" sound',
+                mouthPosition: 'Bottom lip touches top front teeth, blow air through',
+                examples: ['fish', 'fun', 'farm', 'face'],
+                practiceWords: ['fish', 'fun', 'farm', 'face', 'fan', 'fox', 'frog', 'flag', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'G',
+                symbol: 'Gg',
+                ipa: '/g/',
+                description: 'Hard "guh" sound (before a, o, u)',
+                mouthPosition: 'Back of tongue touches soft palate, release with voice',
+                examples: ['goat', 'game', 'girl', 'gum'],
+                practiceWords: ['goat', 'game', 'girl', 'gum', 'gate', 'gift', 'gold', 'goose', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'H',
+                symbol: 'Hh',
+                ipa: '/h/',
+                description: 'Breathy "hhh" sound',
+                mouthPosition: 'Open mouth, breathe out like fogging a mirror',
+                examples: ['house', 'hand', 'hat', 'hot'],
+                practiceWords: ['house', 'hand', 'hat', 'hot', 'hen', 'hill', 'home', 'hug', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'J',
+                symbol: 'Jj',
+                ipa: '/j/',
+                description: 'Soft "juh" sound',
+                mouthPosition: 'Tongue behind front teeth, like "d" + "zh" together',
+                examples: ['jump', 'juice', 'jam', 'job'],
+                practiceWords: ['jump', 'juice', 'jam', 'job', 'jet', 'jelly', 'jar', 'judge', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'K',
+                symbol: 'Kk',
+                ipa: '/k/',
+                description: 'Hard "kuh" sound',
+                mouthPosition: 'Back of tongue touches roof of mouth, release with air',
+                examples: ['kite', 'king', 'cake', 'book'],
+                practiceWords: ['kite', 'king', 'cake', 'book', 'key', 'kiss', 'kite', 'kitten', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'L',
+                symbol: 'Ll',
+                ipa: '/l/',
+                description: 'Liquid "lll" sound',
+                mouthPosition: 'Tongue touches ridge behind front teeth, air flows around sides',
+                examples: ['lion', 'love', 'lake', 'lamp'],
+                practiceWords: ['lion', 'love', 'lake', 'lamp', 'leg', 'light', 'lock', 'lady', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'M',
+                symbol: 'Mm',
+                ipa: '/m/',
+                description: 'Buzzing "mmm" sound',
+                mouthPosition: 'Lips closed, hum with nose',
+                examples: ['mouse', 'milk', 'moon', 'man'],
+                practiceWords: ['mouse', 'milk', 'moon', 'man', 'map', 'mop', 'monkey', 'music', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'N',
+                symbol: 'Nn',
+                ipa: '/n/',
+                description: 'Nasal "nnn" sound',
+                mouthPosition: 'Tongue touches ridge behind front teeth, air through nose',
+                examples: ['nose', 'net', 'new', 'nut'],
+                practiceWords: ['nose', 'net', 'new', 'nut', 'nest', 'neck', 'nine', 'nose', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'P',
+                symbol: 'Pp',
+                ipa: '/p/',
+                description: 'Popping "puh" sound',
+                mouthPosition: 'Lips come together tightly, then release with puff of air',
+                examples: ['pig', 'pen', 'pan', 'pot'],
+                practiceWords: ['pig', 'pen', 'pan', 'pot', 'pet', 'pie', 'park', 'pony', 'cat', 'dog', 'sun', 'hat']
+            },
+            {
+                letter: 'R',
+                symbol: 'Rr',
+                ipa: '/r/',
+                description: 'Growling "rrr" sound',
+                mouthPosition: 'Tongue curls back, vibrate against roof of mouth',
+                examples: ['run', 'red', 'rain', 'rock'],
+                practiceWords: ['run', 'red', 'rain', 'rock', 'rose', 'rice', 'ring', 'rabbit', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'S',
+                symbol: 'Ss',
+                ipa: '/s/',
+                description: 'Hissing "sss" sound',
+                mouthPosition: 'Tongue near ridge behind front teeth, air hisses through small gap',
+                examples: ['sun', 'sit', 'soap', 'sock'],
+                practiceWords: ['sun', 'sit', 'soap', 'sock', 'sea', 'sing', 'six', 'snake', 'cat', 'dog', 'pig', 'hat']
+            },
+            {
+                letter: 'T',
+                symbol: 'Tt',
+                ipa: '/t/',
+                description: 'Quick "tuh" sound',
+                mouthPosition: 'Tongue touches ridge behind front teeth, quick release',
+                examples: ['top', 'ten', 'tree', 'taxi'],
+                practiceWords: ['top', 'ten', 'tree', 'taxi', 'tall', 'time', 'toy', 'turtle', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'V',
+                symbol: 'Vv',
+                ipa: '/v/',
+                description: 'Buzzing "vvv" sound',
+                mouthPosition: 'Bottom lip touches top front teeth, voice through lips',
+                examples: ['van', 'voice', 'vine', 'vest'],
+                practiceWords: ['van', 'voice', 'vine', 'vest', 'vet', 'very', 'vote', 'violin', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'W',
+                symbol: 'Ww',
+                ipa: '/w/',
+                ipa: '/w/',
+                description: 'Rounded "wuh" sound',
+                mouthPosition: 'Lips rounded, tongue moves up like for "oo" but with air',
+                examples: ['water', 'wind', 'window', 'wolf'],
+                practiceWords: ['water', 'wind', 'window', 'wolf', 'wagon', 'well', 'whale', 'wing', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'Y',
+                symbol: 'Yy',
+                ipa: '/y/',
+                description: 'Palatal "yuh" sound',
+                mouthPosition: 'Middle of tongue touches roof of mouth, like "ee" but with air',
+                examples: ['yes', 'yellow', 'yarn', 'yogurt'],
+                practiceWords: ['yes', 'yellow', 'yarn', 'yogurt', 'yak', 'yard', 'yo-yo', 'yummy', 'cat', 'dog', 'pig', 'sun']
+            },
+            {
+                letter: 'Z',
+                symbol: 'Zz',
+                ipa: '/z/',
+                description: 'Buzzing "zzz" sound',
+                mouthPosition: 'Tongue near ridge behind front teeth, voice through small gap',
+                examples: ['zoo', 'zebra', 'zip', 'zero'],
+                practiceWords: ['zoo', 'zebra', 'zip', 'zero', 'zigzag', 'zone', 'zoom', 'zucchini', 'cat', 'dog', 'pig', 'sun']
+            }
+        ];
+
+        let currentSound = null;
+        let practiceWords = [];
+        let selectedWords = new Set();
+
+        // DOM elements
+        const phonicsGridEl = document.getElementById('phonicsGrid');
+        const practiceSectionEl = document.getElementById('practiceSection');
+        const currentSoundDisplayEl = document.getElementById('currentSoundDisplay');
+        const practiceWordsEl = document.getElementById('practiceWords');
+        const checkPracticeBtn = document.getElementById('checkPracticeBtn');
+        const showAnswersBtn = document.getElementById('showAnswersBtn');
+        const newPracticeBtn = document.getElementById('newPracticeBtn');
+        const practiceFeedbackEl = document.getElementById('practiceFeedback');
+        const soundGuideEl = document.getElementById('soundGuide');
+        const soundInstructionsEl = document.getElementById('soundInstructions');
+
+        // Initialize game
+        function initGame() {
+            createPhonicsCards();
+            setupEventListeners();
+        }
+
+        // Create phonics cards
+        function createPhonicsCards() {
+            phonicsGridEl.innerHTML = '';
+
+            phonicsSounds.forEach(sound => {
+                const card = document.createElement('div');
+                card.className = 'phonics-card';
+                card.innerHTML = `
+                    <div class="sound-symbol">${sound.symbol}</div>
+                    <div class="phoneme-ipa">${sound.ipa}</div>
+                    <div class="letter-examples">${sound.description}</div>
+                    <div class="word-examples">
+                        ${sound.examples.map(word => `<div class="word-example">${word}</div>`).join('')}
+                    </div>
+                    <div class="sound-description">${sound.mouthPosition}</div>
+                `;
+                card.addEventListener('click', () => selectSound(sound));
+                phonicsGridEl.appendChild(card);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            checkPracticeBtn.addEventListener('click', checkPractice);
+            showAnswersBtn.addEventListener('click', showAnswers);
+            newPracticeBtn.addEventListener('click', newPractice);
+        }
+
+        // Select a sound
+        function selectSound(sound) {
+            // Update visual selection
+            document.querySelectorAll('.phonics-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            currentSound = sound;
+            currentSoundDisplayEl.textContent = sound.ipa + ' (' + sound.description + ')';
+
+            // Show practice section
+            practiceSectionEl.style.display = 'block';
+
+            // Show sound guide
+            soundGuideEl.style.display = 'block';
+            soundInstructionsEl.innerHTML = `
+                <p><strong>How to make the ${sound.ipa} sound:</strong> ${sound.mouthPosition}</p>
+                <p><strong>Practice:</strong> Say the sound clearly, then try these words: ${sound.examples.slice(0, 3).join(', ')}</p>
+                <p><strong>Remember:</strong> This sound is made at the ${sound.description.includes('back') ? 'back' : sound.description.includes('front') ? 'front' : 'middle'} of your mouth.</p>
+            `;
+
+            // Create practice words
+            createPracticeWords(sound);
+
+            // Scroll to practice section
+            practiceSectionEl.scrollIntoView({ behavior: 'smooth' });
+
+            hideFeedback();
+        }
+
+        // Create practice words
+        function createPracticeWords(sound) {
+            practiceWordsEl.innerHTML = '';
+            practiceWords = [...sound.practiceWords].sort(() => Math.random() - 0.5);
+            selectedWords.clear();
+
+            practiceWords.forEach(word => {
+                const wordEl = document.createElement('div');
+                wordEl.className = 'practice-word';
+                wordEl.textContent = word;
+                wordEl.addEventListener('click', () => toggleWordSelection(wordEl, word));
+                practiceWordsEl.appendChild(wordEl);
+            });
+        }
+
+        // Toggle word selection
+        function toggleWordSelection(wordEl, word) {
+            wordEl.classList.toggle('selected');
+
+            if (wordEl.classList.contains('selected')) {
+                selectedWords.add(word);
+            } else {
+                selectedWords.delete(word);
+            }
+        }
+
+        // Check practice answers
+        function checkPractice() {
+            if (!currentSound) return;
+
+            const correctWords = currentSound.practiceWords.slice(0, 4); // First 4 are correct
+            const selectedArray = Array.from(selectedWords);
+            const correctSelected = selectedArray.filter(word => correctWords.includes(word));
+            const incorrectSelected = selectedArray.filter(word => !correctWords.includes(word));
+
+            // Mark correct/incorrect
+            document.querySelectorAll('.practice-word').forEach(wordEl => {
+                const word = wordEl.textContent;
+                wordEl.classList.remove('correct', 'incorrect');
+
+                if (selectedWords.has(word)) {
+                    if (correctWords.includes(word)) {
+                        wordEl.classList.add('correct');
+                    } else {
+                        wordEl.classList.add('incorrect');
+                    }
+                } else if (correctWords.includes(word)) {
+                    wordEl.classList.add('correct'); // Show correct answers that weren't selected
+                }
+            });
+
+            const score = correctSelected.length;
+            const maxScore = correctWords.length;
+
+            if (score === maxScore && incorrectSelected.length === 0) {
+                showFeedback(`🎉 Perfect! You found all ${maxScore} words that start with ${currentSound.ipa}!`, 'success');
+            } else if (score > 0) {
+                showFeedback(`👍 Good job! You found ${score} out of ${maxScore} words. The correct words are highlighted in green.`, 'info');
+            } else {
+                showFeedback(`🤔 Try again! Look for words that start with the ${currentSound.ipa} sound.`, 'error');
+            }
+        }
+
+        // Show answers
+        function showAnswers() {
+            if (!currentSound) return;
+
+            const correctWords = currentSound.practiceWords.slice(0, 4);
+
+            document.querySelectorAll('.practice-word').forEach(wordEl => {
+                const word = wordEl.textContent;
+                wordEl.classList.remove('selected', 'correct', 'incorrect');
+
+                if (correctWords.includes(word)) {
+                    wordEl.classList.add('correct');
+                }
+            });
+
+            showFeedback(`💡 Here are the words that start with ${currentSound.ipa}: ${correctWords.join(', ')}`, 'info');
+        }
+
+        // New practice set
+        function newPractice() {
+            if (currentSound) {
+                createPracticeWords(currentSound);
+                selectedWords.clear();
+                hideFeedback();
+            }
+        }
+
+        // Show feedback
+        function showFeedback(message, type) {
+            practiceFeedbackEl.textContent = message;
+            practiceFeedbackEl.className = `feedback ${type}`;
+            practiceFeedbackEl.style.display = 'block';
+        }
+
+        // Hide feedback
+        function hideFeedback() {
+            practiceFeedbackEl.style.display = 'none';
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', initGame);
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                checkPractice();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                showAnswers();
+            }
+        });
+    </script>
+</body>
+</html>

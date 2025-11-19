@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laubach Week 1: B vs V Sounds | NRS Level 3</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            color: var(--dark);
+            background: white;
+            margin: 0;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .lesson-header {
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .lesson-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 8px 0;
+        }
+
+        .lesson-subtitle {
+            font-size: 1.3em;
+            color: var(--dark);
+            margin: 0 0 10px 0;
+        }
+
+        .sound-rule {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--secondary);
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f0f8ff;
+            border: 2px solid var(--secondary);
+        }
+
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+        }
+
+        .pronunciation-chart {
+            display: grid;
+            grid-template-columns: 120px 1fr 1fr 1fr;
+            gap: 8px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        .chart-header {
+            font-weight: 700;
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .chart-cell {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #e1e8ed;
+            background: white;
+        }
+
+        .chart-image {
+            font-size: 2em;
+            padding: 15px;
+        }
+
+        .word-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .pronunciation {
+            font-size: 0.95em;
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        .sound-highlight {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: var(--warning);
+        }
+
+        .vocabulary-section {
+            background: #f8f9fa;
+            border: 2px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .vocab-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .vocab-word {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 3px;
+        }
+
+        .vocab-pronunciation {
+            font-size: 0.9em;
+            color: var(--secondary);
+            font-style: italic;
+        }
+
+        .reading-text {
+            background: white;
+            border: 2px solid var(--dark);
+            padding: 25px;
+            margin: 20px 0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        .story-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .story-paragraph {
+            margin-bottom: 15px;
+            text-indent: 1em;
+        }
+
+        .comprehension-section {
+            background: #f0f8ff;
+            border: 2px solid var(--secondary);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .question-number {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .answer-line {
+            border: none;
+            border-bottom: 2px solid #333;
+            width: 100%;
+            padding: 5px;
+            font-size: 1em;
+            margin-top: 8px;
+            min-width: 200px;
+        }
+
+        .practice-section {
+            background: #fff9e6;
+            border: 2px solid var(--warning);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .practice-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 12px;
+        }
+
+        .practice-instruction {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .practice-word {
+            background: white;
+            padding: 10px;
+            border: 2px solid #ddd;
+            text-align: center;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .practice-word:hover {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+
+        .practice-word.selected {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .stress-practice {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+
+        .stress-example {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stress-word {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+
+        .stress-input {
+            border: none;
+            border-bottom: 1px solid #333;
+            width: 30px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .spanish-note {
+            background: #ffeaa7;
+            border: 2px solid var(--warning);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .spanish-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .spanish-note-text {
+            color: #856404;
+            line-height: 1.5;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 15px;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .reading-text {
+                page-break-inside: avoid;
+            }
+        }
+
+        @page {
+            size: Letter;
+            margin: 0.75in;
+        }
+    </style>
+</head>
+<body>
+    <div class="lesson-header">
+        <h1 class="lesson-title">Week 1: B vs V Sounds</h1>
+        <h2 class="lesson-subtitle">Learning the Difference Between /b/ and /v/</h2>
+    </div>
+
+    <div class="sound-rule">
+        b = /b/ (lips together) &nbsp;&nbsp;&nbsp; v = /v/ (teeth on lip)
+    </div>
+
+    <!-- Spanish Speaker Note -->
+    <div class="spanish-note">
+        <div class="spanish-note-title">🇪🇸 For Spanish Speakers:</div>
+        <div class="spanish-note-text">
+            In Spanish, B and V both sound like /b/. In English, they are different! 
+            <strong>B = /b/</strong> (both lips come together) 
+            <strong>V = /v/</strong> (top teeth touch bottom lip with voice). 
+            Practice saying "ball" (/b/) and "very" (/v/) - feel the difference!
+        </div>
+    </div>
+
+    <!-- Pronunciation Chart -->
+    <div class="section">
+        <h2 class="section-title">Pronunciation Practice Chart</h2>
+        <p style="text-align: center; margin-bottom: 15px; font-weight: 600;">Practice these words. Notice the difference between B and V sounds.</p>
+
+        <div class="pronunciation-chart">
+            <div class="chart-header">Picture</div>
+            <div class="chart-header">Word</div>
+            <div class="chart-header">Pronunciation</div>
+            <div class="chart-header">Word</div>
+
+            <div class="chart-cell chart-image">👨👩</div>
+            <div class="chart-cell word-text">ball</div>
+            <div class="chart-cell pronunciation">b<span class="sound-highlight">aw</span>l</div>
+            <div class="chart-cell word-text">ball</div>
+
+            <div class="chart-cell chart-image">📚</div>
+            <div class="chart-cell word-text">book</div>
+            <div class="chart-cell pronunciation">b<span class="sound-highlight">oo</span>k</div>
+            <div class="chart-cell word-text">book</div>
+
+            <div class="chart-cell chart-image">👶</div>
+            <div class="chart-cell word-text">baby</div>
+            <div class="chart-cell pronunciation">b<span class="sound-highlight">ā</span>' b<span class="sound-highlight">ē</span></div>
+            <div class="chart-cell word-text">baby</div>
+
+            <div class="chart-cell chart-image">🚌</div>
+            <div class="chart-cell word-text">bus</div>
+            <div class="chart-cell pronunciation">b<span class="sound-highlight">u</span>s</div>
+            <div class="chart-cell word-text">bus</div>
+
+            <div class="chart-cell chart-image">✅</div>
+            <div class="chart-cell word-text">very</div>
+            <div class="chart-cell pronunciation">v<span class="sound-highlight">ĕr</span>' <span class="sound-highlight">ē</span></div>
+            <div class="chart-cell word-text">very</div>
+
+            <div class="chart-cell chart-image">👔</div>
+            <div class="chart-cell word-text">vest</div>
+            <div class="chart-cell pronunciation">v<span class="sound-highlight">ĕ</span>st</div>
+            <div class="chart-cell word-text">vest</div>
+
+            <div class="chart-cell chart-image">🚐</div>
+            <div class="chart-cell word-text">van</div>
+            <div class="chart-cell pronunciation">v<span class="sound-highlight">ă</span>n</div>
+            <div class="chart-cell word-text">van</div>
+
+            <div class="chart-cell chart-image">🗳️</div>
+            <div class="chart-cell word-text">vote</div>
+            <div class="chart-cell pronunciation">v<span class="sound-highlight">ō</span>t</div>
+            <div class="chart-cell word-text">vote</div>
+        </div>
+    </div>
+
+    <!-- Vocabulary Before Reading -->
+    <div class="section">
+        <div class="vocabulary-section">
+            <h2 class="vocab-title">Vocabulary: Words You Will Read</h2>
+            <p style="text-align: center; margin-bottom: 15px;">Practice these words before reading the story. Pay attention to B and V sounds.</p>
+
+            <div class="vocab-grid">
+                <div class="vocab-item">
+                    <div class="vocab-word">business</div>
+                    <div class="vocab-pronunciation">(biz' ness)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">beautiful</div>
+                    <div class="vocab-pronunciation">(bū' ti ful)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">believe</div>
+                    <div class="vocab-pronunciation">(bē lieve')</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">visit</div>
+                    <div class="vocab-pronunciation">(viz' it)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">village</div>
+                    <div class="vocab-pronunciation">(vil' lage)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">various</div>
+                    <div class="vocab-pronunciation">(var' i ous)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">become</div>
+                    <div class="vocab-pronunciation">(bē come')</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">before</div>
+                    <div class="vocab-pronunciation">(bē fore')</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">between</div>
+                    <div class="vocab-pronunciation">(bē tween')</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">value</div>
+                    <div class="vocab-pronunciation">(val' ue)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">available</div>
+                    <div class="vocab-pronunciation">(a vail' a ble)</div>
+                </div>
+                <div class="vocab-item">
+                    <div class="vocab-word">behavior</div>
+                    <div class="vocab-pronunciation">(bē hav' ior)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reading -->
+    <div class="section">
+        <h2 class="section-title">Reading: "Building a Better Business"</h2>
+
+        <div class="reading-text">
+            <div class="story-title">Building a Better Business</div>
+
+            <div class="story-paragraph">
+                Maria and Victor are business partners. They believe that a good business must provide value to its customers. Before they started their business, they visited many successful businesses in their village. They wanted to learn what makes a business become successful.
+            </div>
+
+            <div class="story-paragraph">
+                Maria and Victor noticed that the best businesses have beautiful stores. The stores are clean and well-organized. The workers are friendly and helpful. These businesses serve their customers very well. The customers believe they are getting good value for their money.
+            </div>
+
+            <div class="story-paragraph">
+                Maria and Victor decided to open a small store between the village market and the bus station. They wanted their business to be available to many people. They worked very hard to make their store beautiful. They painted the walls, organized the shelves, and made sure everything was clean.
+            </div>
+
+            <div class="story-paragraph">
+                When they opened their business, they had various products available. They sold books, bags, and beautiful vases. They also sold various vegetables from local farms. Their prices were fair, and their service was excellent. The people in the village began to visit their store very often.
+            </div>
+
+            <div class="story-paragraph">
+                The business became successful because Maria and Victor believed in good behavior. They treated every customer with respect. They listened to what customers wanted and tried to provide it. They valued their customers' opinions and made changes based on their feedback.
+            </div>
+
+            <div class="story-paragraph">
+                Today, Maria and Victor's business is very successful. They have become well-known in their village. Other business owners visit them to learn from their success. Maria and Victor believe that the value of good service and beautiful products will always bring customers back. Their business continues to grow because they never forget what made them successful in the beginning.
+            </div>
+        </div>
+    </div>
+
+    <!-- Comprehension Questions -->
+    <div class="section">
+        <div class="comprehension-section">
+            <h2 class="section-title">Comprehension Questions</h2>
+
+            <div class="question">
+                <div class="question-number">1. Who are the business partners in the story?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">2. What did Maria and Victor do before they started their business?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">3. Where did they decide to open their store?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">4. What products did they sell in their store?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">5. Why did their business become successful? Give two reasons.</div>
+                <input type="text" class="answer-line" style="min-width: 400px;">
+            </div>
+
+            <div class="question">
+                <div class="question-number">6. What do other business owners do now?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">7. According to Maria and Victor, what will always bring customers back?</div>
+                <input type="text" class="answer-line">
+            </div>
+
+            <div class="question">
+                <div class="question-number">8. In your own words, what is the main lesson of this story?</div>
+                <textarea class="answer-line" rows="3" style="min-width: 100%; border: 2px solid #333;"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pronunciation Practice -->
+    <div class="section">
+        <div class="practice-section">
+            <h2 class="practice-title">Pronunciation Practice</h2>
+
+            <div class="practice-instruction">
+                <strong>Activity 1:</strong> Say the words. Circle the words with the sound /b/ as in "ball".
+            </div>
+
+            <div class="word-grid">
+                <div class="practice-word" data-sound="b">ball</div>
+                <div class="practice-word" data-sound="v">very</div>
+                <div class="practice-word" data-sound="b">book</div>
+                <div class="practice-word" data-sound="v">vest</div>
+                <div class="practice-word" data-sound="b">baby</div>
+                <div class="practice-word" data-sound="v">van</div>
+                <div class="practice-word" data-sound="b">bus</div>
+                <div class="practice-word" data-sound="v">vote</div>
+                <div class="practice-word" data-sound="b">business</div>
+                <div class="practice-word" data-sound="v">visit</div>
+                <div class="practice-word" data-sound="b">become</div>
+                <div class="practice-word" data-sound="v">village</div>
+                <div class="practice-word" data-sound="b">beautiful</div>
+                <div class="practice-word" data-sound="v">value</div>
+                <div class="practice-word" data-sound="b">before</div>
+                <div class="practice-word" data-sound="v">various</div>
+            </div>
+
+            <div class="practice-instruction" style="margin-top: 20px;">
+                <strong>Activity 2:</strong> Say each word. Put the stress mark (') after the syllable that is stressed.
+            </div>
+
+            <div class="stress-practice">
+                <div class="stress-example">
+                    <strong>Example:</strong> business = bus' iness
+                </div>
+                <div class="stress-example">
+                    <strong>Example:</strong> beautiful = beau' ti ful
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <div class="stress-word">
+                        1. believe = be <input type="text" class="stress-input" maxlength="1"> lieve
+                    </div>
+                    <div class="stress-word">
+                        2. visit = vis <input type="text" class="stress-input" maxlength="1"> it
+                    </div>
+                    <div class="stress-word">
+                        3. village = vil <input type="text" class="stress-input" maxlength="1"> lage
+                    </div>
+                    <div class="stress-word">
+                        4. become = be <input type="text" class="stress-input" maxlength="1"> come
+                    </div>
+                    <div class="stress-word">
+                        5. before = be <input type="text" class="stress-input" maxlength="1"> fore
+                    </div>
+                    <div class="stress-word">
+                        6. between = be <input type="text" class="stress-input" maxlength="1"> tween
+                    </div>
+                    <div class="stress-word">
+                        7. value = val <input type="text" class="stress-input" maxlength="1"> ue
+                    </div>
+                    <div class="stress-word">
+                        8. available = a <input type="text" class="stress-input" maxlength="1"> vail a ble
+                    </div>
+                </div>
+            </div>
+
+            <div class="practice-instruction" style="margin-top: 20px;">
+                <strong>Activity 3:</strong> Practice saying these word pairs. Notice the difference between B and V sounds.
+            </div>
+
+            <div class="stress-practice">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;">
+                    <div>
+                        <strong>B words (/b/):</strong>
+                        <div style="margin-top: 8px;">
+                            ball - book - baby - bus<br>
+                            business - become - before<br>
+                            beautiful - between - believe
+                        </div>
+                    </div>
+                    <div>
+                        <strong>V words (/v/):</strong>
+                        <div style="margin-top: 8px;">
+                            very - vest - van - vote<br>
+                            visit - village - value<br>
+                            various - available - behavior
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Word selection for Activity 1
+        document.querySelectorAll('.practice-word[data-sound]').forEach(word => {
+            word.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html>

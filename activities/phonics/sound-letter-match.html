@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound-Letter Match Game | ESOL Phonics</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), #5ba0f2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .game-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .sound-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .sound-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .sound-btn:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        .sound-btn:active {
+            transform: translateY(0);
+        }
+
+        .sound-btn.playing {
+            background: var(--success);
+            animation: pulse 0.6s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .letter-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .letter-card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .letter-card:hover {
+            border-color: var(--primary);
+            background: #f8f9ff;
+        }
+
+        .letter-card.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .letter-card.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .letter-card.incorrect {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: var(--muted);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #5a6268;
+        }
+
+        .btn.primary {
+            background: var(--primary);
+        }
+
+        .btn.primary:hover {
+            background: #3a7bc8;
+        }
+
+        .btn.success {
+            background: var(--success);
+        }
+
+        .btn.success:hover {
+            background: #229954;
+        }
+
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feedback.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .feedback.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .progress {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+            text-align: center;
+        }
+
+        .stat {
+            background: white;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            margin-top: 0;
+            color: #856404;
+        }
+
+        .instructions ul {
+            margin: 10px 0 0 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+
+        .voice-selector {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .voice-selector label {
+            color: #fff;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .voice-selector select {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            min-width: 200px;
+        }
+
+        .voice-selector .btn {
+            background: rgba(255,255,255,0.9);
+            color: var(--primary);
+            border: 1px solid rgba(255,255,255,0.5);
+            font-weight: 600;
+        }
+
+        .voice-selector .btn:hover {
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .sound-buttons {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+
+            .letter-cards {
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+            }
+
+            .voice-selector {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .voice-selector select {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔤 Sound-Letter Match</h1>
+        <p>Click the sound button, then find the letter that makes that sound!</p>
+    </div>
+
+        <div class="instructions">
+        <h3>📚 How to Play:</h3>
+        <ul>
+            <li><strong>Step 1:</strong> Click a sound button to hear the phonics sound</li>
+            <li><strong>Step 2:</strong> Look at the letter cards below</li>
+            <li><strong>Step 3:</strong> Click the letter that makes that sound</li>
+            <li><strong>Step 4:</strong> Get feedback and try again!</li>
+        </ul>
+        <p><strong>💡 Tip:</strong> Take your time and listen carefully. This builds the connection between sounds and letters!</p>
+        <div class="voice-selector">
+            <label for="voiceSelect"><strong>🎤 Voice:</strong></label>
+            <select id="voiceSelect">
+                <option value="auto">Auto (Best Available)</option>
+            </select>
+            <button id="testVoiceBtn" class="btn" style="margin-left: 10px; padding: 8px 16px;">Test Voice</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="correctCount">0</div>
+                <div class="stat-label">Correct</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="attemptsCount">0</div>
+                <div class="stat-label">Attempts</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="streakCount">0</div>
+                <div class="stat-label">Streak</div>
+            </div>
+        </div>
+
+        <div class="sound-buttons" id="soundButtons">
+            <!-- Sounds will be populated by JavaScript -->
+        </div>
+
+        <div class="letter-cards" id="letterCards">
+            <!-- Letters will be populated by JavaScript -->
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" id="checkBtn">Check Answer</button>
+            <button class="btn" id="nextBtn">Next Sound</button>
+            <button class="btn success" id="resetBtn">Reset Game</button>
+        </div>
+
+        <div id="feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <script>
+        // Game configuration
+        const soundLetters = [
+            { sound: 'ah', letter: 'A', audio: 'ah' },
+            { sound: 'buh', letter: 'B', audio: 'buh' },
+            { sound: 'kuh', letter: 'C', audio: 'kuh' },
+            { sound: 'duh', letter: 'D', audio: 'duh' },
+            { sound: 'eh', letter: 'E', audio: 'eh' },
+            { sound: 'fuh', letter: 'F', audio: 'fuh' },
+            { sound: 'guh', letter: 'G', audio: 'guh' },
+            { sound: 'huh', letter: 'H', audio: 'huh' },
+            { sound: 'ih', letter: 'I', audio: 'ih' },
+            { sound: 'juh', letter: 'J', audio: 'juh' },
+            { sound: 'kuh', letter: 'K', audio: 'kuh' },
+            { sound: 'luh', letter: 'L', audio: 'luh' },
+            { sound: 'muh', letter: 'M', audio: 'muh' },
+            { sound: 'nuh', letter: 'N', audio: 'nuh' },
+            { sound: 'oh', letter: 'O', audio: 'oh' },
+            { sound: 'puh', letter: 'P', audio: 'puh' },
+            { sound: 'kwuh', letter: 'Q', audio: 'kwuh' },
+            { sound: 'ruh', letter: 'R', audio: 'ruh' },
+            { sound: 'suh', letter: 'S', audio: 'suh' },
+            { sound: 'tuh', letter: 'T', audio: 'tuh' },
+            { sound: 'uh', letter: 'U', audio: 'uh' },
+            { sound: 'vuh', letter: 'V', audio: 'vuh' },
+            { sound: 'wuh', letter: 'W', audio: 'wuh' },
+            { sound: 'ks', letter: 'X', audio: 'ks' },
+            { sound: 'yuh', letter: 'Y', audio: 'yuh' },
+            { sound: 'zuh', letter: 'Z', audio: 'zuh' }
+        ];
+
+        let currentSound = null;
+        let selectedLetter = null;
+        let correctCount = 0;
+        let attemptsCount = 0;
+        let streakCount = 0;
+        let availableSounds = [...soundLetters];
+        let selectedVoice = null;
+        let voicesLoaded = false;
+
+        // DOM elements
+        const soundButtonsEl = document.getElementById('soundButtons');
+        const letterCardsEl = document.getElementById('letterCards');
+        const checkBtn = document.getElementById('checkBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const feedbackEl = document.getElementById('feedback');
+        const progressBar = document.getElementById('progressBar');
+        const correctCountEl = document.getElementById('correctCount');
+        const attemptsCountEl = document.getElementById('attemptsCount');
+        const streakCountEl = document.getElementById('streakCount');
+        const voiceSelect = document.getElementById('voiceSelect');
+        const testVoiceBtn = document.getElementById('testVoiceBtn');
+
+        // Initialize game
+        function initGame() {
+            // Load voices when available
+            loadVoices();
+
+            // Set up voice event listeners
+            speechSynthesis.onvoiceschanged = loadVoices;
+            voiceSelect.addEventListener('change', handleVoiceChange);
+            testVoiceBtn.addEventListener('click', testVoice);
+
+            createSoundButtons();
+            createLetterCards();
+            selectRandomSound();
+            updateUI();
+        }
+
+        // Load available voices
+        function loadVoices() {
+            const voices = speechSynthesis.getVoices();
+
+            if (voices.length > 0 && !voicesLoaded) {
+                voicesLoaded = true;
+
+                // Clear existing options except "Auto"
+                while (voiceSelect.children.length > 1) {
+                    voiceSelect.removeChild(voiceSelect.lastChild);
+                }
+
+                // Add English voices
+                const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
+                englishVoices.forEach(voice => {
+                    const option = document.createElement('option');
+                    option.value = voice.name;
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    voiceSelect.appendChild(option);
+                });
+
+                // Select best default voice
+                selectBestVoice();
+            }
+        }
+
+        // Select the best available voice
+        function selectBestVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = voices.filter(voice =>
+                voice.name.includes('Samantha') ||
+                voice.name.includes('Daniel') ||
+                voice.name.includes('Karen') ||
+                voice.name.includes('Zira') ||
+                voice.name.includes('David') ||
+                voice.name.includes('Google')
+            );
+
+            if (preferredVoices.length > 0) {
+                selectedVoice = preferredVoices[0];
+                voiceSelect.value = preferredVoices[0].name;
+            } else {
+                const englishVoices = voices.filter(voice => voice.lang.startsWith('en'));
+                if (englishVoices.length > 0) {
+                    selectedVoice = englishVoices[0];
+                    voiceSelect.value = englishVoices[0].name;
+                }
+            }
+        }
+
+        // Handle voice selection change
+        function handleVoiceChange() {
+            const voices = speechSynthesis.getVoices();
+            const selectedVoiceName = voiceSelect.value;
+
+            if (selectedVoiceName === 'auto') {
+                selectBestVoice();
+            } else {
+                selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
+            }
+        }
+
+        // Test the selected voice
+        function testVoice() {
+            const testText = "ah buh kuh duh eh fuh guh huh";
+            const utterance = new SpeechSynthesisUtterance(testText);
+
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+
+            utterance.rate = 0.6;
+            utterance.pitch = 1.0;
+            utterance.volume = 0.9;
+
+            speechSynthesis.speak(utterance);
+        }
+
+        // Create sound buttons
+        function createSoundButtons() {
+            soundButtonsEl.innerHTML = '';
+            availableSounds.forEach(soundData => {
+                const button = document.createElement('button');
+                button.className = 'sound-btn';
+                button.innerHTML = `
+                    <span class="sound-text">${soundData.sound}</span>
+                    <span class="speaker">🔊</span>
+                `;
+                button.addEventListener('click', () => playSound(soundData));
+                soundButtonsEl.appendChild(button);
+            });
+        }
+
+        // Create letter cards
+        function createLetterCards() {
+            letterCardsEl.innerHTML = '';
+            const shuffledLetters = [...soundLetters].sort(() => Math.random() - 0.5);
+
+            shuffledLetters.forEach(soundData => {
+                const card = document.createElement('div');
+                card.className = 'letter-card';
+                card.textContent = soundData.letter;
+                card.addEventListener('click', () => selectLetter(card, soundData));
+                letterCardsEl.appendChild(card);
+            });
+        }
+
+        // Play sound (using speech synthesis)
+        function playSound(soundData) {
+            // Remove playing class from all buttons
+            document.querySelectorAll('.sound-btn').forEach(btn => {
+                btn.classList.remove('playing');
+            });
+
+            // Add playing class to clicked button
+            event.target.classList.add('playing');
+
+            // Use speech synthesis for phonics sounds with selected voice
+            const utterance = new SpeechSynthesisUtterance(soundData.audio);
+
+            // Use the selected voice
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+
+            // Optimized settings for clarity
+            utterance.rate = 0.6; // Slower for clarity
+            utterance.pitch = 1.0; // Natural pitch
+            utterance.volume = 0.9; // Slightly louder
+
+            speechSynthesis.speak(utterance);
+
+            // Set current sound
+            currentSound = soundData;
+
+            // Remove playing class after sound finishes
+            setTimeout(() => {
+                document.querySelectorAll('.sound-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                });
+            }, 1500); // Longer delay for slower speech
+
+            // Clear previous selection and feedback
+            clearSelection();
+            hideFeedback();
+        }
+
+        // Select letter
+        function selectLetter(cardElement, letterData) {
+            // Clear previous selection
+            clearSelection();
+
+            // Select new letter
+            cardElement.classList.add('selected');
+            selectedLetter = letterData;
+        }
+
+        // Clear selection
+        function clearSelection() {
+            document.querySelectorAll('.letter-card').forEach(card => {
+                card.classList.remove('selected', 'correct', 'incorrect');
+            });
+            selectedLetter = null;
+        }
+
+        // Check answer
+        function checkAnswer() {
+            if (!currentSound || !selectedLetter) {
+                showFeedback('Please select a sound and a letter first!', 'error');
+                return;
+            }
+
+            attemptsCount++;
+
+            if (selectedLetter.letter === currentSound.letter) {
+                // Correct answer
+                correctCount++;
+                streakCount++;
+                showFeedback('🎉 Excellent! You matched the sound correctly!', 'success');
+
+                // Mark as correct
+                document.querySelector('.letter-card.selected').classList.remove('selected');
+                document.querySelector('.letter-card.selected')?.classList.add('correct');
+
+                // Remove this sound from available sounds
+                availableSounds = availableSounds.filter(sound => sound.letter !== currentSound.letter);
+
+                // Check if game is complete
+                if (availableSounds.length === 0) {
+                    setTimeout(() => {
+                        showFeedback('🏆 Congratulations! You completed all sound-letter matches!', 'success');
+                        resetGame();
+                    }, 2000);
+                } else {
+                    setTimeout(() => {
+                        selectRandomSound();
+                        clearSelection();
+                        hideFeedback();
+                    }, 2000);
+                }
+            } else {
+                // Incorrect answer
+                streakCount = 0;
+                showFeedback(`❌ Not quite! "${currentSound.sound}" is the sound for "${currentSound.letter}". Try again!`, 'error');
+
+                // Mark as incorrect briefly
+                document.querySelector('.letter-card.selected').classList.add('incorrect');
+                setTimeout(() => {
+                    document.querySelector('.letter-card.incorrect').classList.remove('incorrect');
+                }, 1000);
+            }
+
+            updateUI();
+        }
+
+        // Next sound
+        function nextSound() {
+            selectRandomSound();
+            clearSelection();
+            hideFeedback();
+        }
+
+        // Reset game
+        function resetGame() {
+            availableSounds = [...soundLetters];
+            correctCount = 0;
+            attemptsCount = 0;
+            streakCount = 0;
+            currentSound = null;
+            selectedLetter = null;
+            createSoundButtons();
+            createLetterCards();
+            selectRandomSound();
+            updateUI();
+            hideFeedback();
+        }
+
+        // Select random sound
+        function selectRandomSound() {
+            if (availableSounds.length > 0) {
+                currentSound = availableSounds[Math.floor(Math.random() * availableSounds.length)];
+            }
+        }
+
+        // Show feedback
+        function showFeedback(message, type) {
+            feedbackEl.textContent = message;
+            feedbackEl.className = `feedback ${type}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        // Hide feedback
+        function hideFeedback() {
+            feedbackEl.style.display = 'none';
+        }
+
+        // Update UI
+        function updateUI() {
+            correctCountEl.textContent = correctCount;
+            attemptsCountEl.textContent = attemptsCount;
+            streakCountEl.textContent = streakCount;
+
+            const progress = availableSounds.length > 0 ?
+                ((soundLetters.length - availableSounds.length) / soundLetters.length) * 100 : 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Event listeners
+        checkBtn.addEventListener('click', checkAnswer);
+        nextBtn.addEventListener('click', nextSound);
+        resetBtn.addEventListener('click', resetGame);
+
+        // Initialize game when page loads
+        window.addEventListener('load', initGame);
+
+        // Add keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                nextSound();
+            }
+        });
+    </script>
+</body>
+</html>

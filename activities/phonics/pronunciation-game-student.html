@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronunciation Game - Student</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --muted: #6c757d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            color: var(--dark);
+            background: var(--light);
+            margin: 0;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--secondary), #5dade2);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .join-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .name-input {
+            font-size: 1.2em;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            margin: 15px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .code-input {
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: 8px;
+            padding: 15px;
+            border: 3px solid var(--secondary);
+            border-radius: 8px;
+            margin: 20px 0;
+            text-transform: uppercase;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .input-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .btn-primary:disabled {
+            background: var(--muted);
+            cursor: not-allowed;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e1e8ed;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+
+        .word-display {
+            text-align: center;
+            margin: 25px 0;
+            min-height: 100px;
+        }
+
+        .current-word {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .word-pronunciation {
+            font-size: 1.1em;
+            color: var(--muted);
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .confidence-section, .audio-section, .match-section {
+            background: #f8f9fa;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .audio-section {
+            background: #e8f4f8;
+            border-color: var(--secondary);
+        }
+
+        .section-question {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .btn-yes {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            background: #229954;
+        }
+
+        .btn-yes.selected {
+            background: #1e8449;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-no {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-no:hover {
+            background: #e67e22;
+        }
+
+        .btn-no.selected {
+            background: #d35400;
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3);
+        }
+
+
+        .btn-match {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-match:hover {
+            background: #229954;
+        }
+
+        .btn-match.selected {
+            background: #1e8449;
+            box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-review {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-review:hover {
+            background: #c0392b;
+        }
+
+        .btn-review.selected {
+            background: #a93226;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+        }
+
+        .completion-message {
+            background: var(--success);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            display: none;
+        }
+
+        .completion-message h2 {
+            margin: 0 0 15px 0;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎤 Pronunciation Game</h1>
+        <p>Join your teacher's game session</p>
+    </div>
+
+    <!-- Join Section -->
+    <div class="join-section" id="joinSection">
+        <h2>Join Pronunciation Game</h2>
+        <p>Enter your name and the game code from your teacher</p>
+        
+        <div style="margin: 20px 0;">
+            <label class="input-label" for="studentNameInput">Your Name:</label>
+            <input type="text" class="name-input" id="studentNameInput" placeholder="Enter your first name" autocomplete="name" required>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <label class="input-label" for="sessionCodeInput">Game Code:</label>
+            <input type="text" class="code-input" id="sessionCodeInput" maxlength="4" placeholder="----" autocomplete="off" required>
+        </div>
+        
+        <button class="btn btn-primary" onclick="joinSession()">Join Game</button>
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <!-- Quiz Container -->
+    <div class="quiz-container" id="quizContainer">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <div class="progress-text" id="progressText">Word 1 of 20</div>
+
+        <div class="word-display">
+            <div class="current-word" id="currentWord">library</div>
+            <div class="word-pronunciation" id="wordPronunciation" style="display: none;">(lī' brer ē)</div>
+        </div>
+
+        <!-- Confidence Section -->
+        <div class="confidence-section" id="confidenceSection">
+            <div class="section-question">Are you confident you know how to pronounce this word?</div>
+            <div class="btn-group">
+                <button class="btn-small btn-yes" onclick="markConfidence(true)">✅ Yes</button>
+                <button class="btn-small btn-no" onclick="markConfidence(false)">❌ No</button>
+            </div>
+        </div>
+
+        <!-- Teacher Says Word Section -->
+        <div class="audio-section" id="teacherSection" style="display: none;">
+            <div class="section-question">👩‍🏫 Listen as your teacher says the word</div>
+            <div style="background: white; padding: 15px; border-radius: 6px; margin-top: 15px; border: 2px dashed var(--secondary);">
+                <div style="font-size: 1.1em; color: var(--muted);">Wait for your teacher to pronounce: <strong style="color: var(--primary);" id="wordToHear"></strong></div>
+            </div>
+        </div>
+
+        <!-- Match Section -->
+        <div class="match-section" id="matchSection" style="display: none;">
+            <div class="section-question">Did your pronunciation match what your teacher said?</div>
+            <div class="btn-group">
+                <button class="btn-small btn-match" onclick="markMatch(true)">✅ Match</button>
+                <button class="btn-small btn-review" onclick="markMatch(false)">📚 Review</button>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="nextBtn" onclick="nextWord()" style="display: none; margin-top: 20px;">Next Word →</button>
+    </div>
+
+    <!-- Completion Message -->
+    <div class="completion-message" id="completionMessage">
+        <h2>🎉 Quiz Complete!</h2>
+        <p>Your responses have been submitted anonymously to your teacher.</p>
+        <p>Thank you for participating!</p>
+    </div>
+
+    <script>
+        // Word list - Major Spanish Speaker Challenges
+        // Organized by sound difficulty: B/V, TH, R, W, SH/CH, H, S/Z, Vowels
+        const words = [
+            // B/V Sounds (Week 1 focus)
+            { word: 'library', pronunciation: 'lī\' brer ē', category: 'B/V' },
+            { word: 'very', pronunciation: 'vĕr\' ē', category: 'B/V' },
+            { word: 'business', pronunciation: 'biz\' ness', category: 'B/V' },
+            { word: 'vegetable', pronunciation: 'vĕj\' ta ble', category: 'B/V' },
+            { word: 'beautiful', pronunciation: 'bū\' ti ful', category: 'B/V' },
+            { word: 'available', pronunciation: 'a vail\' a ble', category: 'B/V' },
+            { word: 'visit', pronunciation: 'viz\' it', category: 'B/V' },
+            { word: 'value', pronunciation: 'val\' ue', category: 'B/V' },
+            
+            // TH Sounds (doesn't exist in Spanish)
+            { word: 'think', pronunciation: 'θink', category: 'TH' },
+            { word: 'this', pronunciation: 'ðis', category: 'TH' },
+            { word: 'that', pronunciation: 'ðat', category: 'TH' },
+            { word: 'thank', pronunciation: 'θank', category: 'TH' },
+            { word: 'mother', pronunciation: 'muth\' er', category: 'TH' },
+            { word: 'father', pronunciation: 'fath\' er', category: 'TH' },
+            { word: 'three', pronunciation: 'θrē', category: 'TH' },
+            { word: 'bath', pronunciation: 'bath', category: 'TH' },
+            
+            // R Sounds (not rolled like Spanish)
+            { word: 'red', pronunciation: 'rĕd', category: 'R' },
+            { word: 'car', pronunciation: 'kär', category: 'R' },
+            { word: 'work', pronunciation: 'wurk', category: 'R' },
+            { word: 'park', pronunciation: 'pärk', category: 'R' },
+            { word: 'bird', pronunciation: 'burd', category: 'R' },
+            { word: 'world', pronunciation: 'wurld', category: 'R' },
+            { word: 'first', pronunciation: 'furst', category: 'R' },
+            { word: 'word', pronunciation: 'wurd', category: 'R' },
+            
+            // W Sounds (no equivalent in Spanish)
+            { word: 'water', pronunciation: 'waw\' ter', category: 'W' },
+            { word: 'work', pronunciation: 'wurk', category: 'W' },
+            { word: 'window', pronunciation: 'win\' dō', category: 'W' },
+            { word: 'want', pronunciation: 'wänt', category: 'W' },
+            { word: 'week', pronunciation: 'wēk', category: 'W' },
+            { word: 'where', pronunciation: 'hwär', category: 'W' },
+            { word: 'when', pronunciation: 'hwĕn', category: 'W' },
+            { word: 'what', pronunciation: 'hwät', category: 'W' },
+            
+            // SH/CH Sounds
+            { word: 'ship', pronunciation: 'ship', category: 'SH' },
+            { word: 'shop', pronunciation: 'shäp', category: 'SH' },
+            { word: 'fish', pronunciation: 'fish', category: 'SH' },
+            { word: 'chair', pronunciation: 'chär', category: 'CH' },
+            { word: 'cheese', pronunciation: 'chēz', category: 'CH' },
+            { word: 'church', pronunciation: 'church', category: 'CH' },
+            
+            // H Sounds (silent in Spanish)
+            { word: 'house', pronunciation: 'hous', category: 'H' },
+            { word: 'help', pronunciation: 'hĕlp', category: 'H' },
+            { word: 'hot', pronunciation: 'hät', category: 'H' },
+            { word: 'home', pronunciation: 'hōm', category: 'H' },
+            { word: 'happy', pronunciation: 'hap\' pē', category: 'H' },
+            { word: 'hospital', pronunciation: 'häs\' pi tal', category: 'H' },
+            
+            // S/Z Sounds (Z has voice, S doesn't)
+            { word: 'zoo', pronunciation: 'zū', category: 'S/Z' },
+            { word: 'zero', pronunciation: 'zēr\' ō', category: 'S/Z' },
+            { word: 'rose', pronunciation: 'rōz', category: 'S/Z' },
+            { word: 'music', pronunciation: 'mū\' zik', category: 'S/Z' },
+            { word: 'bus', pronunciation: 'bus', category: 'S/Z' },
+            { word: 'class', pronunciation: 'klas', category: 'S/Z' },
+            
+            // Vowel Challenges
+            { word: 'ship', pronunciation: 'ship', category: 'Vowels' },
+            { word: 'sheep', pronunciation: 'shēp', category: 'Vowels' },
+            { word: 'bit', pronunciation: 'bit', category: 'Vowels' },
+            { word: 'beat', pronunciation: 'bēt', category: 'Vowels' },
+            { word: 'bet', pronunciation: 'bĕt', category: 'Vowels' },
+            { word: 'bat', pronunciation: 'bat', category: 'Vowels' }
+        ];
+
+        let sessionCode = null;
+        let studentId = null;
+        let studentName = null;
+        let currentIndex = 0;
+        let responses = [];
+
+        // Generate anonymous student ID
+        function generateStudentId() {
+            return 'student_' + Math.random().toString(36).substring(2, 11);
+        }
+
+        // Join session
+        function joinSession() {
+            const name = document.getElementById('studentNameInput').value.trim();
+            const code = document.getElementById('sessionCodeInput').value.toUpperCase().trim();
+            
+            if (!name || name.length < 2) {
+                showError('Please enter your name');
+                return;
+            }
+            
+            if (code.length !== 4) {
+                showError('Please enter a 4-letter code');
+                return;
+            }
+
+            // Check if session exists
+            const sessionKey = 'pronunciation_session_' + code;
+            const sessionData = localStorage.getItem(sessionKey);
+            
+            if (!sessionData) {
+                showError('Session not found. Please check the code.');
+                return;
+            }
+
+            sessionCode = code;
+            studentName = name;
+            studentId = generateStudentId();
+            
+            // Update session to include student
+            try {
+                const session = JSON.parse(sessionData);
+                if (!session.students) {
+                    session.students = [];
+                }
+                if (!session.students.find(s => s.id === studentId)) {
+                    session.students.push({
+                        id: studentId,
+                        name: studentName,
+                        joinedAt: new Date().toISOString()
+                    });
+                    localStorage.setItem(sessionKey, JSON.stringify(session));
+                }
+            } catch (e) {
+                console.error('Error updating session:', e);
+            }
+            
+            // Hide join section, show quiz
+            document.getElementById('joinSection').style.display = 'none';
+            document.getElementById('quizContainer').style.display = 'block';
+            
+            // Start quiz
+            displayWord();
+        }
+
+        // Show error
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Display word
+        function displayWord() {
+            const currentWordData = words[currentIndex];
+            document.getElementById('currentWord').textContent = currentWordData.word;
+            document.getElementById('wordPronunciation').textContent = `(${currentWordData.pronunciation})`;
+            document.getElementById('wordPronunciation').style.display = 'none';
+            document.getElementById('wordToHear').textContent = currentWordData.word;
+
+            // Reset sections
+            document.getElementById('confidenceSection').style.display = 'block';
+            document.getElementById('teacherSection').style.display = 'none';
+            document.getElementById('matchSection').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+
+            // Reset buttons
+            document.querySelectorAll('.btn-yes, .btn-no, .btn-match, .btn-review').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            updateProgress();
+        }
+
+        // Mark confidence
+        function markConfidence(isConfident) {
+            document.querySelectorAll('.btn-yes, .btn-no').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            if (isConfident) {
+                document.querySelector('.btn-yes').classList.add('selected');
+            } else {
+                document.querySelector('.btn-no').classList.add('selected');
+            }
+
+            // Store response
+            if (!responses[currentIndex]) {
+                responses[currentIndex] = {
+                    word: words[currentIndex].word,
+                    confident: isConfident
+                };
+            } else {
+                responses[currentIndex].confident = isConfident;
+            }
+
+            // Show teacher section - wait for teacher to say the word
+            document.getElementById('teacherSection').style.display = 'block';
+            document.getElementById('matchSection').style.display = 'block';
+        }
+
+        // Mark match
+        function markMatch(isMatch) {
+            document.querySelectorAll('.btn-match, .btn-review').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            if (isMatch) {
+                document.querySelector('.btn-match').classList.add('selected');
+            } else {
+                document.querySelector('.btn-review').classList.add('selected');
+            }
+
+            // Store response
+            if (!responses[currentIndex]) {
+                responses[currentIndex] = {
+                    word: words[currentIndex].word
+                };
+            }
+            responses[currentIndex].matched = isMatch;
+
+            // Show next button
+            document.getElementById('nextBtn').style.display = 'block';
+        }
+
+        // Next word
+        function nextWord() {
+            if (currentIndex < words.length - 1) {
+                currentIndex++;
+                displayWord();
+            } else {
+                submitResults();
+            }
+        }
+
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentIndex + 1) / words.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Word ${currentIndex + 1} of ${words.length}`;
+        }
+
+        // Submit results
+        function submitResults() {
+            const responseData = {
+                studentId: studentId,
+                studentName: studentName,
+                sessionCode: sessionCode,
+                timestamp: new Date().toISOString(),
+                words: responses,
+                completed: true
+            };
+
+            // Store response
+            const responseKey = 'pronunciation_response_' + sessionCode + '_' + studentId;
+            localStorage.setItem(responseKey, JSON.stringify(responseData));
+
+            // Hide quiz, show completion
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('completionMessage').style.display = 'block';
+        }
+
+        // Auto-uppercase code input
+        document.getElementById('sessionCodeInput').addEventListener('input', function(e) {
+            e.target.value = e.target.value.toUpperCase();
+        });
+
+        // Enter key to join
+        document.getElementById('sessionCodeInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                joinSession();
+            }
+        });
+
+        // Enter key on name input
+        document.getElementById('studentNameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('sessionCodeInput').focus();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printable Phonics Cards for Spanish Speakers</title>
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --muted: #6c757d;
+            --dark: #2c3e50;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .print-guide {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        .print-guide h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .print-guide ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .print-guide li {
+            margin-bottom: 4px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            page-break-inside: avoid;
+        }
+
+        .card-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            page-break-inside: avoid;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            padding: 8px;
+            background: #f9f9f9;
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 200px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 12px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 11px;
+            position: relative;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #fff5f5, white);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, #f0f8ff, white);
+            border-color: var(--secondary);
+        }
+
+        .card-label {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            font-size: 8px;
+            font-weight: bold;
+            color: var(--muted);
+            background: rgba(255,255,255,0.8);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .sound-symbol {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .phoneme-ipa {
+            font-size: 14px;
+            color: var(--secondary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 6px;
+        }
+
+        .description {
+            font-size: 10px;
+            color: var(--dark);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .spanish-challenge {
+            font-size: 9px;
+            color: var(--warning);
+            font-style: italic;
+            margin-bottom: 6px;
+            background: rgba(243, 156, 18, 0.1);
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+        .examples {
+            font-size: 9px;
+            color: var(--muted);
+            margin-top: auto;
+        }
+
+        .back-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back-header {
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .word-list {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .word-item {
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--dark);
+            background: rgba(52, 152, 219, 0.1);
+            padding: 4px 6px;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .instructions {
+            font-size: 8px;
+            color: var(--muted);
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .print-guide {
+                display: none;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .card-pair {
+                margin-bottom: 12px;
+                padding: 6px;
+                border: 1px solid #ccc;
+            }
+
+            .card-front, .card-back {
+                height: 180px;
+                padding: 8px;
+                font-size: 10px;
+            }
+
+            .sound-symbol {
+                font-size: 20px;
+            }
+
+            .phoneme-ipa {
+                font-size: 12px;
+            }
+
+            .description, .spanish-challenge {
+                font-size: 8px;
+            }
+
+            .word-item {
+                font-size: 9px;
+                padding: 3px 4px;
+            }
+
+            .back-header {
+                font-size: 11px;
+            }
+
+            .instructions {
+                font-size: 7px;
+            }
+        }
+
+        @page {
+            size: Letter;
+            margin: 0.5in;
+        }
+    </style>
+</head>
+<body>
+    <div class="print-guide">
+        <h3>🖨️ Printing Instructions:</h3>
+        <ul>
+            <li><strong>Print double-sided</strong> - Front and back of each card</li>
+            <li><strong>Cut along the lines</strong> - Each card pair becomes 2 cards</li>
+            <li><strong>Laminate</strong> for durability (optional)</li>
+            <li><strong>Fold or glue</strong> front to back to make double-sided cards</li>
+            <li><strong>Print on cardstock</strong> for sturdier cards</li>
+        </ul>
+        <p><strong>💡 Tip:</strong> Use "Fit to page" or "Actual size" in print settings. Each card measures approximately 2.5" × 3.5".</p>
+    </div>
+
+    <div class="cards-grid">
+        <!-- B/V Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">B/V</div>
+                <div class="phoneme-ipa">/b/ /v/</div>
+                <div class="description">B = "bay" sound, V = "vey" sound</div>
+                <div class="spanish-challenge">Spanish speakers pronounce both as /b/. V makes a different sound.</div>
+                <div class="examples">Examples: ball/vey, very/vey</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">ball</div>
+                        <div class="word-item">book</div>
+                        <div class="word-item">very</div>
+                        <div class="word-item">vest</div>
+                        <div class="word-item">bag</div>
+                        <div class="word-item">bed</div>
+                        <div class="word-item">big</div>
+                        <div class="word-item">box</div>
+                        <div class="word-item">vet</div>
+                        <div class="word-item">vote</div>
+                    </div>
+                    <div class="instructions">Practice: B with lips together, V with teeth on lip</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TH Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">TH</div>
+                <div class="phoneme-ipa">/ð/ /θ/</div>
+                <div class="description">Voiced "thuh" (this) and voiceless "thuh" (think)</div>
+                <div class="spanish-challenge">This sound does not exist in Spanish. Practice with tongue between teeth.</div>
+                <div class="examples">Examples: this/ðis, think/θink</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">this</div>
+                        <div class="word-item">that</div>
+                        <div class="word-item">think</div>
+                        <div class="word-item">thank</div>
+                        <div class="word-item">mother</div>
+                        <div class="word-item">father</div>
+                        <div class="word-item">bath</div>
+                        <div class="word-item">path</div>
+                        <div class="word-item">three</div>
+                        <div class="word-item">thumb</div>
+                    </div>
+                    <div class="instructions">Tongue between teeth: voiced (with voice) vs voiceless (no voice)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- R Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">R</div>
+                <div class="phoneme-ipa">/r/</div>
+                <div class="description">English R sound (not rolled like Spanish RR)</div>
+                <div class="spanish-challenge">English R is made at the back of mouth. Spanish RR is rolled with tongue.</div>
+                <div class="examples">Examples: red, run, car, bird</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">red</div>
+                        <div class="word-item">run</div>
+                        <div class="word-item">car</div>
+                        <div class="word-item">bird</div>
+                        <div class="word-item">rose</div>
+                        <div class="word-item">rice</div>
+                        <div class="word-item">ring</div>
+                        <div class="word-item">rabbit</div>
+                        <div class="word-item">fork</div>
+                        <div class="word-item">park</div>
+                    </div>
+                    <div class="instructions">Tongue back toward roof of mouth (don't roll like Spanish)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- W Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">W</div>
+                <div class="phoneme-ipa">/w/</div>
+                <div class="description">Double-u sound (like Spanish "u")</div>
+                <div class="spanish-challenge">Similar to Spanish "u" but with rounded lips. Practice saying "oo" with rounded lips.</div>
+                <div class="examples">Examples: water, wind, window, wolf</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">water</div>
+                        <div class="word-item">wind</div>
+                        <div class="word-item">window</div>
+                        <div class="word-item">wolf</div>
+                        <div class="word-item">wagon</div>
+                        <div class="word-item">well</div>
+                        <div class="word-item">whale</div>
+                        <div class="word-item">wing</div>
+                        <div class="word-item">swim</div>
+                        <div class="word-item">twin</div>
+                    </div>
+                    <div class="instructions">Lips rounded tightly, like saying "oo" but with air flow</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SH Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">SH</div>
+                <div class="phoneme-ipa">/ʃ/</div>
+                <div class="description">Shhh sound (like Spanish "ch" but softer)</div>
+                <div class="spanish-challenge">Similar to Spanish "ch" but tongue is flatter. Air hisses between tongue and roof of mouth.</div>
+                <div class="examples">Examples: ship, fish, wash, push</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">ship</div>
+                        <div class="word-item">fish</div>
+                        <div class="word-item">wash</div>
+                        <div class="word-item">push</div>
+                        <div class="word-item">shop</div>
+                        <div class="word-item">shoe</div>
+                        <div class="word-item">shine</div>
+                        <div class="word-item">shadow</div>
+                        <div class="word-item">crash</div>
+                        <div class="word-item">wish</div>
+                    </div>
+                    <div class="instructions">Tongue curves up toward roof, air hisses through small gap</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CH Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">CH</div>
+                <div class="phoneme-ipa">/tʃ/</div>
+                <div class="description">Chuh sound (like Spanish "ch")</div>
+                <div class="spanish-challenge">Very similar to Spanish "ch"! You already know this sound.</div>
+                <div class="examples">Examples: chair, cheese, church, beach</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">chair</div>
+                        <div class="word-item">cheese</div>
+                        <div class="word-item">church</div>
+                        <div class="word-item">beach</div>
+                        <div class="word-item">chicken</div>
+                        <div class="word-item">cherry</div>
+                        <div class="word-item">school</div>
+                        <div class="word-item">much</div>
+                        <div class="word-item">catch</div>
+                        <div class="word-item">watch</div>
+                    </div>
+                    <div class="instructions">Tongue touches roof of mouth, then releases with "ch" sound</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- J Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">J</div>
+                <div class="phoneme-ipa">/dʒ/</div>
+                <div class="description">Juh sound (like Spanish "y" in "yo")</div>
+                <div class="spanish-challenge">Similar to Spanish "y" in "yo". Add a "d" sound before it.</div>
+                <div class="examples">Examples: jump, juice, jam, job</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">jump</div>
+                        <div class="word-item">juice</div>
+                        <div class="word-item">jam</div>
+                        <div class="word-item">job</div>
+                        <div class="word-item">jet</div>
+                        <div class="word-item">jelly</div>
+                        <div class="word-item">jar</div>
+                        <div class="word-item">judge</div>
+                        <div class="word-item">enjoy</div>
+                        <div class="word-item">magic</div>
+                    </div>
+                    <div class="instructions">Tongue behind front teeth, like "d" + "zh" together</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- H Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">H</div>
+                <div class="phoneme-ipa">/h/</div>
+                <div class="description">Breathy "hhh" sound</div>
+                <div class="spanish-challenge">Spanish "h" is silent. English "h" is breathy - like fogging a mirror.</div>
+                <div class="examples">Examples: house, hand, hat, hot</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">house</div>
+                        <div class="word-item">hand</div>
+                        <div class="word-item">hat</div>
+                        <div class="word-item">hot</div>
+                        <div class="word-item">hen</div>
+                        <div class="word-item">hill</div>
+                        <div class="word-item">home</div>
+                        <div class="word-item">hug</div>
+                        <div class="word-item">who</div>
+                        <div class="word-item">when</div>
+                    </div>
+                    <div class="instructions">Open mouth, breathe out like fogging a mirror</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">S</div>
+                <div class="phoneme-ipa">/s/</div>
+                <div class="description">Hissing "sss" sound</div>
+                <div class="spanish-challenge">Similar to Spanish "s" but English "s" is sharper.</div>
+                <div class="examples">Examples: sun, sit, soap, sock</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">sun</div>
+                        <div class="word-item">sit</div>
+                        <div class="word-item">soap</div>
+                        <div class="word-item">sock</div>
+                        <div class="word-item">sea</div>
+                        <div class="word-item">sing</div>
+                        <div class="word-item">six</div>
+                        <div class="word-item">snake</div>
+                        <div class="word-item">bus</div>
+                        <div class="word-item">class</div>
+                    </div>
+                    <div class="instructions">Tongue near ridge behind front teeth, air hisses through gap</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Z Card -->
+        <div class="card-pair">
+            <div class="card-front">
+                <div class="card-label">Front</div>
+                <div class="sound-symbol">Z</div>
+                <div class="phoneme-ipa">/z/</div>
+                <div class="description">Buzzing "zzz" sound</div>
+                <div class="spanish-challenge">Similar to Spanish "s" but with voice. Tongue position same as /s/ but add voice.</div>
+                <div class="examples">Examples: zoo, zebra, zip, zero</div>
+            </div>
+            <div class="card-back">
+                <div class="card-label">Back</div>
+                <div class="back-content">
+                    <div class="back-header">Practice Words:</div>
+                    <div class="word-list">
+                        <div class="word-item">zoo</div>
+                        <div class="word-item">zebra</div>
+                        <div class="word-item">zip</div>
+                        <div class="word-item">zero</div>
+                        <div class="word-item">zigzag</div>
+                        <div class="word-item">zone</div>
+                        <div class="word-item">zoom</div>
+                        <div class="word-item">zucchini</div>
+                        <div class="word-item">rose</div>
+                        <div class="word-item">music</div>
+                    </div>
+                    <div class="instructions">Tongue near ridge behind front teeth, voice through small gap</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

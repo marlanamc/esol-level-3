@@ -1,0 +1,42 @@
+[build]
+  # No build command needed - we're deploying static HTML files
+  publish = "."
+
+[build.environment]
+  # No environment variables needed for static site
+
+# Redirect rules for better navigation
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/phonics"
+  to = "/activities/phonics/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/teacher"
+  to = "/pronunciation-game-teacher.html"
+  status = 200
+
+[[redirects]]
+  from = "/student"
+  to = "/activities/phonics/pronunciation-game-student.html"
+  status = 200
+
+# Headers for better security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
