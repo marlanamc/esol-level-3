@@ -360,80 +360,35 @@
     </div>
 
     <script>
-        // Word list - Major Spanish Speaker Challenges
-        // Organized by sound difficulty: B/V, TH, R, W, SH/CH, H, S/Z, Vowels
+        // Word list - Major Spanish Speaker Challenges (15 words - manageable for one session)
+        // Focus on the most common and challenging sounds
         const words = [
-            // B/V Sounds (Week 1 focus)
+            // B/V Sounds (Week 1 focus - 5 words)
             { word: 'library', pronunciation: 'lī\' brer ē', category: 'B/V' },
             { word: 'very', pronunciation: 'vĕr\' ē', category: 'B/V' },
             { word: 'business', pronunciation: 'biz\' ness', category: 'B/V' },
-            { word: 'vegetable', pronunciation: 'vĕj\' ta ble', category: 'B/V' },
             { word: 'beautiful', pronunciation: 'bū\' ti ful', category: 'B/V' },
-            { word: 'available', pronunciation: 'a vail\' a ble', category: 'B/V' },
             { word: 'visit', pronunciation: 'viz\' it', category: 'B/V' },
-            { word: 'value', pronunciation: 'val\' ue', category: 'B/V' },
             
-            // TH Sounds (doesn't exist in Spanish)
+            // TH Sounds (hardest for Spanish speakers - 3 words)
             { word: 'think', pronunciation: 'θink', category: 'TH' },
             { word: 'this', pronunciation: 'ðis', category: 'TH' },
-            { word: 'that', pronunciation: 'ðat', category: 'TH' },
             { word: 'thank', pronunciation: 'θank', category: 'TH' },
-            { word: 'mother', pronunciation: 'muth\' er', category: 'TH' },
-            { word: 'father', pronunciation: 'fath\' er', category: 'TH' },
-            { word: 'three', pronunciation: 'θrē', category: 'TH' },
-            { word: 'bath', pronunciation: 'bath', category: 'TH' },
             
-            // R Sounds (not rolled like Spanish)
-            { word: 'red', pronunciation: 'rĕd', category: 'R' },
+            // R Sounds (not rolled like Spanish - 2 words)
             { word: 'car', pronunciation: 'kär', category: 'R' },
-            { word: 'work', pronunciation: 'wurk', category: 'R' },
-            { word: 'park', pronunciation: 'pärk', category: 'R' },
             { word: 'bird', pronunciation: 'burd', category: 'R' },
-            { word: 'world', pronunciation: 'wurld', category: 'R' },
-            { word: 'first', pronunciation: 'furst', category: 'R' },
-            { word: 'word', pronunciation: 'wurd', category: 'R' },
             
-            // W Sounds (no equivalent in Spanish)
+            // W Sounds (no equivalent in Spanish - 2 words)
             { word: 'water', pronunciation: 'waw\' ter', category: 'W' },
-            { word: 'work', pronunciation: 'wurk', category: 'W' },
-            { word: 'window', pronunciation: 'win\' dō', category: 'W' },
             { word: 'want', pronunciation: 'wänt', category: 'W' },
-            { word: 'week', pronunciation: 'wēk', category: 'W' },
-            { word: 'where', pronunciation: 'hwär', category: 'W' },
-            { word: 'when', pronunciation: 'hwĕn', category: 'W' },
-            { word: 'what', pronunciation: 'hwät', category: 'W' },
             
-            // SH/CH Sounds
-            { word: 'ship', pronunciation: 'ship', category: 'SH' },
-            { word: 'shop', pronunciation: 'shäp', category: 'SH' },
-            { word: 'fish', pronunciation: 'fish', category: 'SH' },
-            { word: 'chair', pronunciation: 'chär', category: 'CH' },
-            { word: 'cheese', pronunciation: 'chēz', category: 'CH' },
-            { word: 'church', pronunciation: 'church', category: 'CH' },
-            
-            // H Sounds (silent in Spanish)
+            // H Sounds (silent in Spanish - 2 words)
             { word: 'house', pronunciation: 'hous', category: 'H' },
             { word: 'help', pronunciation: 'hĕlp', category: 'H' },
-            { word: 'hot', pronunciation: 'hät', category: 'H' },
-            { word: 'home', pronunciation: 'hōm', category: 'H' },
-            { word: 'happy', pronunciation: 'hap\' pē', category: 'H' },
-            { word: 'hospital', pronunciation: 'häs\' pi tal', category: 'H' },
             
-            // S/Z Sounds (Z has voice, S doesn't)
-            { word: 'zoo', pronunciation: 'zū', category: 'S/Z' },
-            { word: 'zero', pronunciation: 'zēr\' ō', category: 'S/Z' },
-            { word: 'rose', pronunciation: 'rōz', category: 'S/Z' },
-            { word: 'music', pronunciation: 'mū\' zik', category: 'S/Z' },
-            { word: 'bus', pronunciation: 'bus', category: 'S/Z' },
-            { word: 'class', pronunciation: 'klas', category: 'S/Z' },
-            
-            // Vowel Challenges
-            { word: 'ship', pronunciation: 'ship', category: 'Vowels' },
-            { word: 'sheep', pronunciation: 'shēp', category: 'Vowels' },
-            { word: 'bit', pronunciation: 'bit', category: 'Vowels' },
-            { word: 'beat', pronunciation: 'bēt', category: 'Vowels' },
-            { word: 'bet', pronunciation: 'bĕt', category: 'Vowels' },
-            { word: 'bat', pronunciation: 'bat', category: 'Vowels' }
+            // SH/CH Sounds (1 word)
+            { word: 'ship', pronunciation: 'ship', category: 'SH' }
         ];
 
         let sessionCode = null;
