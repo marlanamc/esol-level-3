@@ -20,6 +20,8 @@
     --preposition:#ffb3e6;  /* Pastel pink */
     --det:#ffcc99;          /* Pastel apricot */
     --connector:#d4b3ff;    /* Pastel purple */
+    --relative:#ffe6a3;     /* Pastel yellow-orange for relative pronouns */
+    --noun:#b3d9ff;         /* Pastel light blue for nouns */
     --border:#222;
     --muted:#666;
     
@@ -46,6 +48,12 @@
     }
     .page-break{
       page-break-before: always;
+    }
+    /* Reverse order of backs for double-sided printing */
+    .cards-container:has(.card-back) {
+      display: flex;
+      flex-direction: row-reverse;
+      flex-wrap: wrap;
     }
   }
   
@@ -174,6 +182,8 @@
   .card-back.preposition .card-back-text{ color: #ff85d4; } /* More vibrant pink */
   .card-back.det .card-back-text{ color: #ffaa66; } /* More vibrant apricot */
   .card-back.connector .card-back-text{ color: #b87fff; } /* More vibrant purple */
+  .card-back.relative .card-back-text{ color: #ffb84d; } /* More vibrant yellow-orange */
+  .card-back.noun .card-back-text{ color: #66b3ff; } /* More vibrant light blue */
   
   /* Color backgrounds for each category */
   .subject{ background: var(--subject); }
@@ -188,6 +198,8 @@
   .preposition{ background: var(--preposition); }
   .det{ background: var(--det); }
   .connector{ background: var(--connector); }
+  .relative{ background: var(--relative); }
+  .noun{ background: var(--noun); }
 </style>
 </head>
 <body>
@@ -197,6 +209,7 @@
   <p>Print this page to create uniform-sized cards for sentence building activities.</p>
   <p>All cards are <strong>2.2" × 1.4"</strong> and can be cut out along the borders.</p>
   <p><strong>Printing Instructions:</strong> Cards are arranged in groups of 18 fronts followed by 18 backs. Print each page with fronts on one side and backs on the reverse.</p>
+  <p><strong>Double-Sided Printing:</strong> When printing double-sided, make sure to select "Flip on short edge" in your printer settings. The backs are automatically reversed to align correctly.</p>
 </div>
 
 <!-- GROUP 1: 18 Fronts (6 Pronouns + 8 Helpers + 4 To Be) -->
@@ -1100,7 +1113,41 @@
     <div class="card-text">restaurant</div>
   </div>
 
-  <!-- Empty slots for future cards (12 slots) -->
+  <!-- Relative Pronouns -->
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">who</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">whom</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">whose</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">that</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">which</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">when</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">where</div>
+  </div>
+  <div class="card relative">
+    <div class="card-category">Relative Pronoun</div>
+    <div class="card-text">why</div>
+  </div>
+
+  <!-- Empty slots for future cards (4 slots) -->
   <!-- These can be filled with additional cards later if needed -->
 
 </div>
@@ -1129,7 +1176,173 @@
     <div class="card-back-text">Place</div>
   </div>
 
-  <!-- Empty slots for future card backs (12 slots) -->
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+  <div class="card-back relative">
+    <div class="card-back-text">Relative Pronoun</div>
+  </div>
+
+  <!-- Empty slots for future card backs (4 slots) -->
+
+</div>
+
+<!-- GROUP 8: 18 Fronts (Nouns with determiners) -->
+<div class="page-break cards-container">
+
+  <!-- Nouns (people) -->
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the woman</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the man</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the teacher</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the student</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">a child</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">a friend</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the doctor</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the neighbor</div>
+  </div>
+
+  <!-- Nouns (things) -->
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the book</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the car</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the house</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the store</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the library</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the restaurant</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the computer</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the movie</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the reason</div>
+  </div>
+  <div class="card noun">
+    <div class="card-category">Noun</div>
+    <div class="card-text">the day</div>
+  </div>
+
+</div>
+
+<!-- GROUP 8: 18 Backs -->
+<div class="page-break cards-container">
+
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
+  <div class="card-back noun">
+    <div class="card-back-text">Noun</div>
+  </div>
 
 </div>
 

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Simple vs Continuous Tenses</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;
+    --v1:#c1e99b;
+    --ving:#b8d9a8;
+    --time:#ffb3ba;
+    --place:#c5a3ff;
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --strikethrough:#e53935;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.4in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 10px;
+    line-height: 1.4;
+    font-size: 12px;
+  }
+  
+  h1{
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  h2{
+    color: var(--accent);
+    margin-top: 12px;
+    margin-bottom: 6px;
+    padding: 4px 6px;
+    background: #f0f7ff;
+    border-left: 3px solid var(--accent);
+    font-size: 14px;
+  }
+  
+  h3{
+    color: var(--muted);
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .tense-section{
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 10px 0;
+  }
+  
+  .tense-comparison{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 8px 0;
+  }
+  
+  .tense-box{
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 6px;
+  }
+  
+  .tense-box h4{
+    margin: 0 0 4px 0;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  
+  .usage-list{
+    font-size: 11px;
+    margin: 4px 0;
+    padding-left: 18px;
+  }
+  
+  .usage-list li{
+    margin: 3px 0;
+  }
+  
+  .example-box{
+    background: #f9f9f9;
+    border-left: 3px solid var(--time);
+    padding: 6px 8px;
+    margin: 6px 0;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  
+  .example-sentence{
+    margin: 4px 0;
+  }
+  
+  .example-note{
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  
+  /* Cross-Out Activity Styles */
+  .cross-out-section{
+    background: #f5f5f5;
+    border: 2px solid var(--green-header);
+    border-radius: 4px;
+    padding: 12px;
+    margin: 15px 0;
+  }
+  
+  .cross-out-title{
+    background: var(--green-header);
+    color: white;
+    padding: 6px 10px;
+    margin: -12px -12px 10px -12px;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 2px 2px 0 0;
+  }
+  
+  .cross-out-item{
+    margin: 12px 0;
+    padding: 8px;
+    background: white;
+    border-left: 3px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .cross-out-item.example{
+    background: #e8f5e9;
+    border-left-color: var(--green-header);
+  }
+  
+  .cross-out-sentence{
+    font-size: 12px;
+    line-height: 1.6;
+    margin: 6px 0;
+  }
+  
+  .word-choice{
+    display: inline;
+    position: relative;
+    font-weight: bold;
+  }
+  
+  .word-choice.crossed-out{
+    text-decoration: line-through;
+    text-decoration-color: var(--strikethrough);
+    text-decoration-thickness: 2px;
+    color: var(--muted);
+  }
+  
+  .word-choice.correct{
+    font-weight: bold;
+    color: var(--green-header);
+  }
+  
+  .practice-item{
+    margin: 8px 0;
+    padding: 6px;
+    background: white;
+    border-left: 2px solid var(--accent);
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  
+  .practice-item label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+  
+  .answer-line{
+    border-bottom: 1px dotted #999;
+    min-height: 18px;
+    margin: 4px 0;
+    padding: 2px;
+  }
+  
+  .special-note{
+    background: #fff3cd;
+    border-left: 3px solid #ffc107;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  
+  .special-note strong{
+    color: #856404;
+  }
+  
+  .quick-reference{
+    background: #e3f2fd;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 12px 0;
+  }
+  
+  .quick-reference h3{
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--accent);
+    font-size: 13px;
+  }
+  
+  .reference-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    font-size: 11px;
+  }
+  
+  .reference-column{
+    background: white;
+    padding: 6px;
+    border-radius: 3px;
+  }
+  
+  .reference-column strong{
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .time-word{
+    background: #fff3cd;
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-weight: bold;
+    color: #856404;
+  }
+  
+  .section-header{
+    background: #e8f5e9;
+    border-left: 4px solid var(--green-header);
+    padding: 6px 10px;
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+    font-size: 12px;
+    color: #2e7d32;
+  }
+  
+  @media print {
+    .tense-section, .cross-out-section {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Simple vs Continuous Tenses</h1>
+
+<!-- Quick Reference Table -->
+<div class="quick-reference">
+  <h3>🔍 Quick Reference: Time Words</h3>
+  <div class="reference-grid">
+    <div class="reference-column">
+      <strong>→ Simple Tenses</strong>
+      <span class="time-word">usually</span>, <span class="time-word">always</span>, <span class="time-word">often</span>, <span class="time-word">sometimes</span>, <span class="time-word">never</span>, <span class="time-word">yesterday</span>, <span class="time-word">last week</span>, <span class="time-word">ago</span>
+    </div>
+    <div class="reference-column">
+      <strong>→ Continuous Tenses</strong>
+      <span class="time-word">now</span>, <span class="time-word">at the moment</span>, <span class="time-word">today</span>, <span class="time-word">this week</span>, <span class="time-word">while</span>, <span class="time-word">when</span>, <span class="time-word">at 3 PM</span>, <span class="time-word">this time next week</span>
+    </div>
+  </div>
+</div>
+
+<!-- Present Tenses -->
+<div class="tense-section">
+  <h2>Present Simple vs Present Continuous</h2>
+  
+  <div class="tense-comparison">
+    <div class="tense-box">
+      <h4>Present Simple</h4>
+      <ul class="usage-list">
+        <li>Habits & routines</li>
+        <li>Permanent situations</li>
+        <li>General truths</li>
+        <li>With: always, usually, often, sometimes, never</li>
+      </ul>
+    </div>
+    <div class="tense-box">
+      <h4>Present Continuous</h4>
+      <ul class="usage-list">
+        <li>Actions happening now</li>
+        <li>Temporary situations</li>
+        <li>Future plans (arranged)</li>
+        <li>With: now, at the moment, today, this week</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="example-box">
+    <div class="example-sentence"><strong>Simple:</strong> "I <span class="time-word">usually</span> walk to work." <span class="example-note">(habit)</span></div>
+    <div class="example-sentence"><strong>Continuous:</strong> "I'm walking to work <span class="time-word">today</span>." <span class="example-note">(temporary action now/planned)</span></div>
+  </div>
+  
+  <!-- Practice Exercises -->
+  <h3>Practice: Complete the Sentences</h3>
+  <div class="practice-item">
+    <label>1. I _________________ (<span class="time-word">usually</span> / eat) lunch at 12 PM, but <span class="time-word">today</span> I _________________ (eat) at 1 PM.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>2. He _________________ (<span class="time-word">often</span> / go) to the gym, but <span class="time-word">today</span> he _________________ (stay) home.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>3. She _________________ (<span class="time-word">always</span> / do) her homework <span class="time-word">in the evening</span>, but <span class="time-word">now</span> she _________________ (study) for a test.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>4. We _________________ (<span class="time-word">normally</span> / cook) dinner together, but <span class="time-word">this evening</span> we _________________ (order) pizza.</label>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Past Tenses -->
+<div class="tense-section">
+  <h2>Past Simple vs Past Continuous</h2>
+  
+  <div class="tense-comparison">
+    <div class="tense-box">
+      <h4>Past Simple</h4>
+      <ul class="usage-list">
+        <li>Completed actions in the past</li>
+        <li>Specific time in the past</li>
+        <li>Interrupts a longer action</li>
+        <li>With: yesterday, last week, ago, at 3 PM</li>
+      </ul>
+    </div>
+    <div class="tense-box">
+      <h4>Past Continuous</h4>
+      <ul class="usage-list">
+        <li>Ongoing action in the past</li>
+        <li>Background action (when interrupted)</li>
+        <li>Action in progress at a past time</li>
+        <li>Often used with Past Simple</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="special-note">
+    <strong>⚠️ Important:</strong> Past Continuous often appears with Past Simple in the same sentence. The Past Continuous shows the <strong>longer/ongoing action</strong>, and Past Simple shows the <strong>shorter action that interrupted it</strong>.
+  </div>
+  
+  <div class="example-box">
+    <div class="example-sentence"><strong>Simple:</strong> "I cooked dinner <span class="time-word">yesterday</span>." <span class="example-note">(completed action)</span></div>
+    <div class="example-sentence"><strong>Continuous:</strong> "I was cooking <span class="time-word">when</span> he arrived." <span class="example-note">(ongoing action interrupted)</span></div>
+    <div class="example-sentence"><strong>Both:</strong> "I was cooking <span class="time-word">when</span> he arrived." <span class="example-note">(was cooking = ongoing, arrived = interruption)</span></div>
+  </div>
+  
+  <!-- Practice Exercises -->
+  <h3>Practice: Complete the Sentences</h3>
+  <div class="practice-item">
+    <label>5. <span class="time-word">While</span> I _________________ (cook) dinner, my sister _________________ (call) me.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>6. They _________________ (play) tennis <span class="time-word">when</span> it _________________ (start) to rain.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>7. <span class="time-word">At 6 PM yesterday</span>, she _________________ (drive) to work <span class="time-word">when</span> she _________________ (see) an accident.</label>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Future Tenses -->
+<div class="tense-section">
+  <h2>Future Simple vs Future Continuous</h2>
+  
+  <div class="tense-comparison">
+    <div class="tense-box">
+      <h4>Will (Future Simple)</h4>
+      <ul class="usage-list">
+        <li>Spontaneous decisions</li>
+        <li>Predictions</li>
+        <li>Promises/offers</li>
+        <li>General future actions</li>
+      </ul>
+    </div>
+    <div class="tense-box">
+      <h4>Future Continuous</h4>
+      <ul class="usage-list">
+        <li>Action in progress at future time</li>
+        <li>At a specific future moment</li>
+        <li>With: at 3 PM tomorrow, this time next week</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="example-box">
+    <div class="example-sentence"><strong>Simple:</strong> "I will call you <span class="time-word">tomorrow</span>." <span class="example-note">(decision/promise)</span></div>
+    <div class="example-sentence"><strong>Continuous:</strong> "<span class="time-word">At 3 PM</span>, I will be calling you." <span class="example-note">(action in progress at that time)</span></div>
+  </div>
+  
+  <!-- Practice Exercises -->
+  <h3>Practice: Complete the Sentences</h3>
+  <div class="practice-item">
+    <label>8. <span class="time-word">At 3 PM tomorrow</span>, we _________________ (have) a meeting. It _________________ (be) very important.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>9. <span class="time-word">This time next week</span>, she _________________ (study) at university. She _________________ (start) classes <span class="time-word">next Monday</span>.</label>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Cross-Out Activity -->
+<div class="cross-out-section">
+  <div class="cross-out-title">CROSS OUT THE INCORRECT WORDS IN EACH SENTENCE</div>
+  
+  <!-- Example -->
+  <div class="cross-out-item example">
+    <div class="cross-out-sentence">
+      <strong>Example:</strong> Lottie <span class="time-word">usually</span> <span class="word-choice correct">shops</span> / <span class="word-choice crossed-out">is shopping</span> on her own, but <span class="time-word">today</span> <span class="word-choice correct">she's shopping</span> / <span class="word-choice crossed-out">she shops</span> with her sister.
+    </div>
+    <div class="example-note" style="margin-top: 4px;">✓ <span class="time-word">"usually"</span> = Present Simple (habit) | <span class="time-word">"today"</span> = Present Continuous (temporary action)</div>
+  </div>
+  
+  <!-- Present Tense Section -->
+  <div class="section-header">📝 Present Simple vs Present Continuous (Exercises 1-6)</div>
+  
+  <!-- Exercise 1 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>1.</strong> I <span class="time-word">normally</span> <span class="word-choice">am walking</span> / <span class="word-choice">walk</span> the dog in the evening, but <span class="time-word">this evening</span> <span class="word-choice">I'm relaxing</span> / <span class="word-choice">I relax</span> at home.
+    </div>
+  </div>
+  
+  <!-- Exercise 2 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>2.</strong> <span class="word-choice">We're doing</span> / <span class="word-choice">We do</span> the laundry together <span class="time-word">today</span>, but I <span class="time-word">usually</span> <span class="word-choice">am doing</span> / <span class="word-choice">do</span> it myself.
+    </div>
+  </div>
+  
+  <!-- Exercise 3 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>3.</strong> Frank <span class="time-word">sometimes</span> <span class="word-choice">goes</span> / <span class="word-choice">is going</span> to the gym after work, but <span class="time-word">today</span> <span class="word-choice">he's working</span> / <span class="word-choice">he works</span> late.
+    </div>
+  </div>
+  
+  <!-- Exercise 4 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>4.</strong> Ben <span class="word-choice">does</span> / <span class="word-choice">is doing</span> the ironing <span class="time-word">today</span>, but his dad <span class="time-word">usually</span> <span class="word-choice">does</span> / <span class="word-choice">is doing</span> it.
+    </div>
+  </div>
+  
+  <!-- Exercise 5 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>5.</strong> <span class="word-choice">He's listening</span> / <span class="word-choice">He listens</span> to music <span class="time-word">now</span>, but he <span class="time-word">often</span> <span class="word-choice">is watching</span> / <span class="word-choice">watches</span> TV in the evening.
+    </div>
+  </div>
+  
+  <!-- Exercise 6 -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>6.</strong> I <span class="word-choice">mow</span> / <span class="word-choice">I'm mowing</span> the lawn <span class="time-word">today</span>, but I <span class="time-word">normally</span> <span class="word-choice">am mowing</span> / <span class="word-choice">mow</span> it on Saturdays.
+    </div>
+  </div>
+  
+  <!-- Past Tense Section -->
+  <div class="section-header">📝 Past Simple vs Past Continuous (Exercises 7-10)</div>
+  
+  <!-- Past Continuous Exercises -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>7.</strong> She <span class="word-choice">was cooking</span> / <span class="word-choice">cooked</span> dinner <span class="time-word">when</span> the phone <span class="word-choice">was ringing</span> / <span class="word-choice">rang</span>.
+    </div>
+  </div>
+  
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>8.</strong> <span class="time-word">While</span> I <span class="word-choice">was studying</span> / <span class="word-choice">studied</span>, my friend <span class="word-choice">was calling</span> / <span class="word-choice">called</span> me.
+    </div>
+  </div>
+  
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>9.</strong> They <span class="word-choice">were playing</span> / <span class="word-choice">played</span> soccer <span class="time-word">when</span> it <span class="word-choice">was starting</span> / <span class="word-choice">started</span> to rain.
+    </div>
+  </div>
+  
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>10.</strong> I <span class="word-choice">was walking</span> / <span class="word-choice">walked</span> home <span class="time-word">yesterday</span> <span class="time-word">when</span> I <span class="word-choice">was meeting</span> / <span class="word-choice">met</span> an old friend.
+    </div>
+  </div>
+  
+  <!-- Future Tense Section -->
+  <div class="section-header">📝 Future Simple vs Future Continuous (Exercises 11-12)</div>
+  
+  <!-- Future Exercises -->
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>11.</strong> <span class="time-word">At 3 PM tomorrow</span>, I <span class="word-choice">will be having</span> / <span class="word-choice">will have</span> a meeting, so I <span class="word-choice">will call</span> / <span class="word-choice">will be calling</span> you later.
+    </div>
+  </div>
+  
+  <div class="cross-out-item">
+    <div class="cross-out-sentence">
+      <strong>12.</strong> She <span class="word-choice">will be traveling</span> / <span class="word-choice">will travel</span> to Paris <span class="time-word">next week</span>, and <span class="time-word">at this time next Friday</span>, she <span class="word-choice">will visit</span> / <span class="word-choice">will be visiting</span> the Eiffel Tower.
+    </div>
+  </div>
+</div>
+
+<!-- Additional Practice -->
+<div class="tense-section">
+  <h2>More Practice: Mixed Tenses</h2>
+  
+  <div class="practice-item">
+    <label>10. I _________________ (<span class="time-word">always</span> / wake) up at 7 AM, but <span class="time-word">tomorrow</span> I _________________ (sleep) in because it's a holiday.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>11. <span class="time-word">While</span> they _________________ (watch) TV, the power _________________ (go) out.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>12. She _________________ (<span class="time-word">sometimes</span> / take) the bus, but <span class="time-word">this week</span> she _________________ (drive) her car.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>13. <span class="time-word">At 5 PM yesterday</span>, I _________________ (work) <span class="time-word">when</span> my boss _________________ (tell) me about the promotion.</label>
+    <div class="answer-line"></div>
+  </div>
+  
+  <div class="practice-item">
+    <label>14. <span class="time-word">This time next month</span>, we _________________ (live) in a new apartment. We _________________ (move) <span class="time-word">next week</span>.</label>
+    <div class="answer-line"></div>
+  </div>
+</div>
+
+<!-- Notes Section -->
+<div class="special-note">
+  <strong>💡 Remember:</strong>
+  <ul style="margin: 6px 0; padding-left: 20px;">
+    <li><strong>Simple tenses:</strong> Habits, routines, completed actions, general facts</li>
+    <li><strong>Continuous tenses:</strong> Actions in progress, temporary situations, ongoing actions</li>
+    <li><strong>Past Continuous + Past Simple:</strong> The longer action (continuous) is interrupted by the shorter action (simple)</li>
+    <li><strong>Time words are clues:</strong> <span class="time-word">"usually, often, always"</span> → Simple | <span class="time-word">"now, at the moment, while"</span> → Continuous</li>
+  </ul>
+</div>
+
+</body>
+</html>

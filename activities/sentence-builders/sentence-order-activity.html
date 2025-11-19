@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentence Order Activity - Who Verb What Where When</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --answer-green:#4caf50;
+    --answer-bg:#e8f5e9;
+    --who:#9fd4ff;
+    --verb:#b9f0a8;
+    --what:#ffd9a1;
+    --when:#ffb6c8;
+    --where:#cfb6ff;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    margin: 0;
+    padding: 0 0 100px 0;
+    line-height: 1.4;
+    min-height: 100vh;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .slide-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    min-height: 600px;
+  }
+  
+  .slide.intro-slide {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+  }
+  
+  .slide {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+    page-break-after: always;
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 144, 226, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  
+  .slide.active {
+    display: block;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .navigation {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 22px 40px;
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border: 2px solid rgba(74, 144, 226, 0.1);
+  }
+  
+  .nav-button {
+    background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #357abd 0%, #2a5f8f 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+  }
+  
+  .nav-button:disabled {
+    background: linear-gradient(135deg, #cccccc 0%, #aaaaaa 100%);
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: none;
+  }
+  
+  .slide-counter {
+    background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 32px;
+    border-radius: 25px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    min-width: 140px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  .slide-header {
+    background: linear-gradient(135deg, var(--accent), #357abd);
+    color: white;
+    padding: 15px 25px;
+    margin: -30px -30px 20px -30px;
+    border-radius: 16px 16px 0 0;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  h1 {
+    color: var(--accent);
+    font-size: 36px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  h2 {
+    color: var(--accent);
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .sentence-list {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .sentence-item {
+    background: white;
+    border: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin: 0;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .sentence-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  
+  .sentence-number {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 36px;
+    font-weight: bold;
+    margin-right: 15px;
+    vertical-align: middle;
+  }
+  
+  .instruction-box {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f0ff 100%);
+    border: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .instruction-box strong {
+    color: var(--accent);
+    font-size: 20px;
+  }
+  
+  .answer-slide {
+    text-align: center;
+  }
+  
+  .sentence-parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+    align-items: center;
+  }
+  
+  .part {
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: slideIn 0.5s ease forwards;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .part.who {
+    background: var(--who);
+    color: #2f8edc;
+  }
+  
+  .part.verb {
+    background: var(--verb);
+    color: #4da851;
+  }
+  
+  .part.what {
+    background: var(--what);
+    color: #e79b33;
+  }
+  
+  .part.where {
+    background: var(--where);
+    color: #8b6fe8;
+  }
+  
+  .part.when {
+    background: var(--when);
+    color: #e36a86;
+  }
+  
+  .part.comma {
+    background: #e3e3e3;
+    color: #555;
+    font-size: 32px;
+    padding: 10px 15px;
+  }
+  
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .part:nth-child(1) { animation-delay: 0.1s; }
+  .part:nth-child(2) { animation-delay: 0.3s; }
+  .part:nth-child(3) { animation-delay: 0.5s; }
+  .part:nth-child(4) { animation-delay: 0.7s; }
+  .part:nth-child(5) { animation-delay: 0.9s; }
+  .part:nth-child(6) { animation-delay: 1.1s; }
+  .part:nth-child(7) { animation-delay: 1.3s; }
+  
+  .complete-sentence {
+    background: linear-gradient(135deg, var(--answer-bg) 0%, #d4edda 100%);
+    border: 3px solid var(--answer-green);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 30px auto;
+    max-width: 800px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #155724;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease 1.5s forwards;
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .tense-label {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .formula-box {
+    background: white;
+    border: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto 30px;
+    max-width: 700px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .formula-label {
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .formula-parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .formula-part {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .formula-part.who {
+    background: var(--who);
+    color: #2f8edc;
+  }
+  
+  .formula-part.verb {
+    background: var(--verb);
+    color: #4da851;
+  }
+  
+  .formula-part.what {
+    background: var(--what);
+    color: #e79b33;
+  }
+  
+  .formula-part.where {
+    background: var(--where);
+    color: #8b6fe8;
+  }
+  
+  .formula-part.when {
+    background: var(--when);
+    color: #e36a86;
+  }
+  
+  .formula-plus {
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 4px;
+  }
+  
+  .formula-comma {
+    color: var(--muted);
+    font-size: 24px;
+    padding: 0 4px;
+  }
+  
+  @media (max-width: 900px) {
+    .sentence-list {
+      grid-template-columns: 1fr;
+    }
+    
+    .slide.intro-slide {
+      max-width: 100%;
+    }
+  }
+  
+  @media print {
+    .navigation {
+      display: none;
+    }
+    .slide {
+      display: block !important;
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="slide-container">
+
+<!-- Slide 1: Instructions and Sentences -->
+<div class="slide active intro-slide">
+  <div class="slide-header">
+    <span>Sentence Order Activity</span>
+    <span>Slide 1</span>
+  </div>
+  <h1>Put the Sentences in Order</h1>
+  
+  <div class="instruction-box">
+    <strong>Instructions:</strong> Order each sentence using: <strong>WHO → VERB → WHAT → WHERE → WHEN</strong><br>
+    <em>Remember: WHERE and WHEN can go at the beginning with a comma!</em><br>
+    <em>Not all sentences have all components.</em>
+  </div>
+  
+  <ul class="sentence-list">
+    <li class="sentence-item">
+      <span class="sentence-number">1</span>
+      She eats pizza at home every day.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">2</span>
+      Yesterday, I studied English.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">3</span>
+      They are playing soccer in the park now.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">4</span>
+      At 3pm, he was reading a book in the library.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">5</span>
+      Tomorrow, we will visit the museum.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">6</span>
+      She will be cooking dinner tonight.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">7</span>
+      She doesn't live here.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">8</span>
+      In the park, they aren't playing.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">9</span>
+      Yesterday, I didn't study.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">10</span>
+      At 3pm, he wasn't reading in the library.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">11</span>
+      Tomorrow, we won't visit.
+    </li>
+    <li class="sentence-item">
+      <span class="sentence-number">12</span>
+      She has eaten pizza at home every day.
+    </li>
+  </ul>
+</div>
+
+<!-- Slide 2: Sentence 1 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 1 - Answer</span>
+    <span>Slide 2</span>
+  </div>
+  <h2>Sentence 1: Simple Present</h2>
+  <div class="tense-label">Simple Present Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part when">WHEN</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part who">She</span>
+    <span class="part verb">eats</span>
+    <span class="part what">pizza</span>
+    <span class="part where">at home</span>
+    <span class="part when">every day</span>
+  </div>
+  
+  <div class="complete-sentence">
+    She eats pizza at home every day.
+  </div>
+</div>
+
+<!-- Slide 3: Sentence 2 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 2 - Answer</span>
+    <span>Slide 3</span>
+  </div>
+  <h2>Sentence 2: Simple Past</h2>
+  <div class="tense-label">Simple Past Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">Yesterday</span>
+    <span class="part comma">,</span>
+    <span class="part who">I</span>
+    <span class="part verb">studied</span>
+    <span class="part what">English</span>
+  </div>
+  
+  <div class="complete-sentence">
+    Yesterday, I studied English.
+  </div>
+</div>
+
+<!-- Slide 4: Sentence 3 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 3 - Answer</span>
+    <span>Slide 4</span>
+  </div>
+  <h2>Sentence 3: Present Continuous</h2>
+  <div class="tense-label">Present Continuous Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part when">WHEN</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part who">They</span>
+    <span class="part verb">are playing</span>
+    <span class="part what">soccer</span>
+    <span class="part where">in the park</span>
+    <span class="part when">now</span>
+  </div>
+  
+  <div class="complete-sentence">
+    They are playing soccer in the park now.
+  </div>
+</div>
+
+<!-- Slide 5: Sentence 4 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 4 - Answer</span>
+    <span>Slide 5</span>
+  </div>
+  <h2>Sentence 4: Past Continuous</h2>
+  <div class="tense-label">Past Continuous Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">At 3pm</span>
+    <span class="part comma">,</span>
+    <span class="part who">he</span>
+    <span class="part verb">was reading</span>
+    <span class="part what">a book</span>
+    <span class="part where">in the library</span>
+  </div>
+  
+  <div class="complete-sentence">
+    At 3pm, he was reading a book in the library.
+  </div>
+</div>
+
+<!-- Slide 6: Sentence 5 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 5 - Answer</span>
+    <span>Slide 6</span>
+  </div>
+  <h2>Sentence 5: Future Simple</h2>
+  <div class="tense-label">Future Simple Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">Tomorrow</span>
+    <span class="part comma">,</span>
+    <span class="part who">we</span>
+    <span class="part verb">will visit</span>
+    <span class="part what">the museum</span>
+  </div>
+  
+  <div class="complete-sentence">
+    Tomorrow, we will visit the museum.
+  </div>
+</div>
+
+<!-- Slide 7: Sentence 6 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 6 - Answer</span>
+    <span>Slide 7</span>
+  </div>
+  <h2>Sentence 6: Future Continuous</h2>
+  <div class="tense-label">Future Continuous Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part when">WHEN</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part who">She</span>
+    <span class="part verb">will be cooking</span>
+    <span class="part what">dinner</span>
+    <span class="part when">tonight</span>
+  </div>
+  
+  <div class="complete-sentence">
+    She will be cooking dinner tonight.
+  </div>
+</div>
+
+<!-- Slide 8: Sentence 7 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 7 - Answer</span>
+    <span>Slide 8</span>
+  </div>
+  <h2>Sentence 7: Simple Present Negative</h2>
+  <div class="tense-label">Simple Present Tense (Negative)</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part who">She</span>
+    <span class="part verb">doesn't live</span>
+    <span class="part where">here</span>
+  </div>
+  
+  <div class="complete-sentence">
+    She doesn't live here.
+  </div>
+</div>
+
+<!-- Slide 9: Sentence 8 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 8 - Answer</span>
+    <span>Slide 9</span>
+  </div>
+  <h2>Sentence 8: Present Continuous Negative</h2>
+  <div class="tense-label">Present Continuous Tense (Negative)</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part where">WHERE</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part where">In the park</span>
+    <span class="part comma">,</span>
+    <span class="part who">they</span>
+    <span class="part verb">aren't playing</span>
+  </div>
+  
+  <div class="complete-sentence">
+    In the park, they aren't playing.
+  </div>
+</div>
+
+<!-- Slide 10: Sentence 9 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 9 - Answer</span>
+    <span>Slide 10</span>
+  </div>
+  <h2>Sentence 9: Simple Past Negative</h2>
+  <div class="tense-label">Simple Past Tense (Negative)</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">Yesterday</span>
+    <span class="part comma">,</span>
+    <span class="part who">I</span>
+    <span class="part verb">didn't study</span>
+  </div>
+  
+  <div class="complete-sentence">
+    Yesterday, I didn't study.
+  </div>
+</div>
+
+<!-- Slide 11: Sentence 10 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 10 - Answer</span>
+    <span>Slide 11</span>
+  </div>
+  <h2>Sentence 10: Past Continuous Negative</h2>
+  <div class="tense-label">Past Continuous Tense (Negative)</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">At 3pm</span>
+    <span class="part comma">,</span>
+    <span class="part who">he</span>
+    <span class="part verb">wasn't reading</span>
+    <span class="part where">in the library</span>
+  </div>
+  
+  <div class="complete-sentence">
+    At 3pm, he wasn't reading in the library.
+  </div>
+</div>
+
+<!-- Slide 12: Sentence 11 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 11 - Answer</span>
+    <span>Slide 12</span>
+  </div>
+  <h2>Sentence 11: Future Simple Negative</h2>
+  <div class="tense-label">Future Simple Tense (Negative)</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part when">WHEN</span>
+      <span class="formula-comma">,</span>
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part when">Tomorrow</span>
+    <span class="part comma">,</span>
+    <span class="part who">we</span>
+    <span class="part verb">won't visit</span>
+  </div>
+  
+  <div class="complete-sentence">
+    Tomorrow, we won't visit.
+  </div>
+</div>
+
+<!-- Slide 13: Sentence 12 Answer -->
+<div class="slide answer-slide">
+  <div class="slide-header">
+    <span>Sentence 12 - Answer</span>
+    <span>Slide 13</span>
+  </div>
+  <h2>Sentence 12: Present Perfect</h2>
+  <div class="tense-label">Present Perfect Tense</div>
+  
+  <div class="formula-box">
+    <div class="formula-label">Formula:</div>
+    <div class="formula-parts">
+      <span class="formula-part who">WHO</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part verb">VERB</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part what">WHAT</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part where">WHERE</span>
+      <span class="formula-plus">+</span>
+      <span class="formula-part when">WHEN</span>
+    </div>
+  </div>
+  
+  <div class="sentence-parts">
+    <span class="part who">She</span>
+    <span class="part verb">has eaten</span>
+    <span class="part what">pizza</span>
+    <span class="part where">at home</span>
+    <span class="part when">every day</span>
+  </div>
+  
+  <div class="complete-sentence">
+    She has eaten pizza at home every day.
+  </div>
+</div>
+
+</div>
+
+<div class="navigation">
+  <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+  <div class="slide-counter">
+    <span id="currentSlide">1</span> / <span id="totalSlides">13</span>
+  </div>
+  <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  
+  document.getElementById('totalSlides').textContent = totalSlides;
+  
+  function showSlide(n) {
+    if (n >= totalSlides) {
+      currentSlideIndex = 0;
+    } else if (n < 0) {
+      currentSlideIndex = totalSlides - 1;
+    } else {
+      currentSlideIndex = n;
+    }
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[currentSlideIndex].classList.add('active');
+    
+    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+    
+    // Update button states
+    document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+    document.getElementById('nextBtn').disabled = currentSlideIndex === totalSlides - 1;
+  }
+  
+  function changeSlide(direction) {
+    showSlide(currentSlideIndex + direction);
+  }
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      changeSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+      changeSlide(1);
+    }
+  });
+  
+  // Initialize
+  showSlide(0);
+</script>
+
+</body>
+</html>
+

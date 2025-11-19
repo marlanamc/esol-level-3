@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relative Pronouns Worksheet</title>
+<style>
+  :root {
+    --who: #667eea;
+    --whom: #764ba2;
+    --whose: #f093fb;
+    --that: #4facfe;
+    --which: #00897b;
+    --when: #31b85e;
+    --where: #fa709a;
+    --why: #b19f38;
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --ink: #111;
+    --bg: #fff;
+    --border: #ddd;
+    --muted: #666;
+    --accent: #667eea;
+    --success: #4caf50;
+    --success-bg: #e8f5e9;
+    --error: #e53935;
+    --error-bg: #ffebee;
+  }
+
+  @page {
+    size: Letter;
+    margin: 0.4in 0.5in 0.6in 0.5in;
+  }
+  
+  @page {
+    @bottom-center {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 10px;
+      color: #666;
+    }
+  }
+  
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.4;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  }
+
+  @media print {
+    body {
+      background: white;
+      padding: 0;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+    .container {
+      box-shadow: none;
+      padding: 0;
+      max-width: 100%;
+    }
+    .print-hide {
+      display: none !important;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 5px;
+      padding-bottom: 8px;
+    }
+    h2 {
+      font-size: 16px;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      padding-left: 10px;
+    }
+    .subtitle {
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+    .container {
+      padding: 20px;
+    }
+  }
+
+  h1 {
+    color: var(--bg-gradient-start);
+    font-size: 28px;
+    margin: 0 0 8px 0;
+    text-align: center;
+    border-bottom: 2px solid var(--bg-gradient-end);
+    padding-bottom: 10px;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    color: var(--accent);
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--bg-gradient-start);
+    padding-left: 12px;
+  }
+
+  h3 {
+    color: var(--muted);
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+  }
+
+  /* Color coding for relative pronouns */
+  .pronoun-who { color: var(--who); font-weight: bold; }
+  .pronoun-whom { color: var(--whom); font-weight: bold; }
+  .pronoun-whose { color: var(--whose); font-weight: bold; }
+  .pronoun-that { color: var(--that); font-weight: bold; }
+  .pronoun-which { color: var(--which); font-weight: bold; }
+  .pronoun-when { color: var(--when); font-weight: bold; }
+  .pronoun-where { color: var(--where); font-weight: bold; }
+  .pronoun-why { color: var(--why); font-weight: bold; }
+
+  /* Guide section */
+  .guide-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 6px;
+    padding: 8px;
+    margin: 10px 0;
+    page-break-inside: avoid;
+  }
+
+  .guide-section p {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+  }
+
+  .pronouns-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  @media print {
+    .pronouns-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .pronouns-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .pronouns-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .pronoun-card {
+    background: white;
+    border-radius: 3px;
+    padding: 4px 6px;
+    margin: 0;
+    border-left: 2px solid;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  .pronoun-card.who { border-left-color: var(--who); }
+  .pronoun-card.whom { border-left-color: var(--whom); }
+  .pronoun-card.whose { border-left-color: var(--whose); }
+  .pronoun-card.that { border-left-color: var(--that); }
+  .pronoun-card.which { border-left-color: var(--which); }
+  .pronoun-card.when { border-left-color: var(--when); }
+  .pronoun-card.where { border-left-color: var(--where); }
+  .pronoun-card.why { border-left-color: var(--why); }
+
+  .pronoun-card h4 {
+    margin: 0 0 2px 0;
+    font-size: 13px;
+  }
+
+  .pronoun-card .usage {
+    font-size: 9px;
+    color: var(--muted);
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+
+  .pronoun-card .example {
+    background: #f8f9fa;
+    padding: 3px 4px;
+    border-radius: 2px;
+    font-style: italic;
+    margin-top: 2px;
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+  /* Exercise sections */
+  .exercise {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 15px 0;
+    border: 1px solid var(--border);
+    page-break-inside: avoid;
+  }
+
+  .exercise-title {
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .exercise-title::before {
+    content: "📝";
+    font-size: 18px;
+  }
+
+  .exercise > p {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+
+  .question {
+    margin: 8px 0;
+    padding: 8px 10px;
+    background: white;
+    border-radius: 4px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .question-number {
+    font-weight: bold;
+    color: var(--accent);
+    margin-right: 6px;
+    font-size: 13px;
+  }
+
+  /* Input fields */
+  input[type="text"] {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 13px;
+    font-family: inherit;
+    width: 100%;
+    max-width: 150px;
+    margin: 3px 0;
+    transition: border-color 0.3s;
+  }
+
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+
+  /* Multiple choice */
+  .choices {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 6px 0;
+  }
+
+  .choice {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 12px;
+  }
+
+  .choice:hover {
+    border-color: var(--accent);
+    background: #f0f7ff;
+  }
+
+  .choice input[type="radio"] {
+    cursor: pointer;
+  }
+
+  .choice label {
+    cursor: pointer;
+    flex: 1;
+  }
+
+  /* Buttons */
+  .btn {
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 10px 5px;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-check {
+    background: var(--success);
+  }
+
+  .btn-reset {
+    background: var(--muted);
+  }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 6px;
+    padding: 6px 8px;
+    border-radius: 3px;
+    display: none;
+    font-size: 11px;
+  }
+
+  .feedback.correct {
+    background: var(--success-bg);
+    color: #2e7d32;
+    border-left: 3px solid var(--success);
+    display: block;
+  }
+
+  .feedback.incorrect {
+    background: var(--error-bg);
+    color: #c62828;
+    border-left: 3px solid var(--error);
+    display: block;
+  }
+
+  .feedback-icon {
+    margin-right: 4px;
+  }
+
+  /* Results summary */
+  .results {
+    background: linear-gradient(135deg, var(--success-bg), #c8e6c9);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    display: none;
+  }
+
+  .results.show {
+    display: block;
+  }
+
+  .score {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--success);
+    margin: 10px 0;
+  }
+
+  /* Visual icons */
+  .icon {
+    font-size: 24px;
+    margin-right: 8px;
+  }
+
+  /* Sentence combining */
+  .sentence-combine {
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 6px 0;
+  }
+
+  .sentence-combine .sentence {
+    margin: 4px 0;
+    padding: 5px 6px;
+    background: #f8f9fa;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  .arrow {
+    text-align: center;
+    font-size: 16px;
+    color: var(--accent);
+    margin: 4px 0;
+  }
+
+  /* Passage highlight styles (for vocabulary activity) */
+  .passage-card{
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin: 8px 0 12px 0;
+  }
+  .passage-title{
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .hl{ background: #fff59d; border-radius: 2px; padding: 0 2px; }
+  .defs{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px 12px;
+  }
+  .defs .label{ font-size: 13px; color: var(--ink); }
+
+  /* Printable styles */
+  @media print {
+    .btn, .print-hide, .results {
+      display: none !important;
+    }
+    .exercise {
+      page-break-inside: avoid;
+      margin: 10px 0;
+      padding: 10px;
+    }
+    .guide-section {
+      page-break-inside: avoid;
+      margin: 10px 0;
+      padding: 10px;
+    }
+    input[type="text"] {
+      border-bottom: 1px solid var(--ink);
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      background: transparent;
+      padding: 2px 4px;
+      font-size: 11px;
+    }
+    .pronoun-card {
+      padding: 6px 8px;
+    }
+    .pronoun-card h4 {
+      font-size: 13px;
+    }
+    .pronoun-card .usage {
+      font-size: 10px;
+    }
+    .pronoun-card .example {
+      font-size: 10px;
+      padding: 4px 5px;
+    }
+    .question {
+      padding: 6px 8px;
+      margin: 6px 0;
+    }
+    .choice {
+      padding: 3px 6px;
+      font-size: 11px;
+    }
+    .sentence-combine {
+      padding: 6px;
+    }
+    .sentence-combine .sentence {
+      font-size: 11px;
+      padding: 4px 5px;
+    }
+    .arrow {
+      font-size: 14px;
+      margin: 3px 0;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Relative Pronouns</h1>
+
+    <!-- Guide Section -->
+    <div class="guide-section">
+      <h2 style="font-size: 16px; margin-bottom: 6px;">Understanding Relative Pronouns</h2>
+      <p style="margin-bottom: 6px;">Relative pronouns connect clauses and refer to nouns mentioned earlier. They help us combine sentences and add more information.</p>
+
+      <div class="pronouns-grid">
+        <div class="pronoun-card who">
+          <h4 class="pronoun-who">WHO</h4>
+          <div class="usage">Used for people (subject)</div>
+          <div class="example">The teacher <span class="pronoun-who">who</span> teaches English is very kind.</div>
+        </div>
+
+        <div class="pronoun-card whom">
+          <h4 class="pronoun-whom">WHOM</h4>
+          <div class="usage">Used for people (object - formal)</div>
+          <div class="example">The student <span class="pronoun-whom">whom</span> I met yesterday is from Brazil.</div>
+        </div>
+
+        <div class="pronoun-card whose">
+          <h4 class="pronoun-whose">WHOSE</h4>
+          <div class="usage">Shows possession (for people or things)</div>
+          <div class="example">The woman <span class="pronoun-whose">whose</span> car was stolen called the police.</div>
+        </div>
+
+        <div class="pronoun-card that">
+          <h4 class="pronoun-that">THAT</h4>
+          <div class="usage">Used for people or things (informal, common)</div>
+          <div class="example">The book <span class="pronoun-that">that</span> I'm reading is interesting.</div>
+        </div>
+
+        <div class="pronoun-card which">
+          <h4 class="pronoun-which">WHICH</h4>
+          <div class="usage">Used for things (more formal than "that")</div>
+          <div class="example">The computer <span class="pronoun-which">which</span> I bought last week is very fast.</div>
+        </div>
+
+        <div class="pronoun-card when">
+          <h4 class="pronoun-when">WHEN</h4>
+          <div class="usage">Refers to time</div>
+          <div class="example">Summer is the season <span class="pronoun-when">when</span> many people take vacations.</div>
+        </div>
+
+        <div class="pronoun-card where">
+          <h4 class="pronoun-where">WHERE</h4>
+          <div class="usage">Refers to place</div>
+          <div class="example">This is the library <span class="pronoun-where">where</span> I study every day.</div>
+        </div>
+
+        <div class="pronoun-card why">
+          <h4 class="pronoun-why">WHY</h4>
+          <div class="usage">Refers to reason (usually with "the reason")</div>
+          <div class="example">I don't know the reason <span class="pronoun-why">why</span> she left early.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important Notes Section -->
+    <div class="guide-section" style="background: #fff3cd; border: 2px solid #ffc107;">
+      <h2 style="color: #856404; border-left-color: #ffc107; font-size: 16px; margin-bottom: 6px;">⚠️ Important Notes for ESOL Learners</h2>
+      
+      <div style="background: white; padding: 6px 8px; border-radius: 4px; margin: 4px 0; border-left: 3px solid #dc3545;">
+        <h3 style="color: #dc3545; margin: 0 0 3px 0; font-size: 13px;">❌ "WHAT" is NOT a relative pronoun</h3>
+        <p style="margin: 2px 0; font-size: 11px;"><strong>WRONG:</strong> The book <span style="color: #dc3545; text-decoration: line-through;">what</span> I read</p>
+        <p style="margin: 2px 0; font-size: 11px;"><strong>CORRECT:</strong> The book <strong>that</strong> I read (or "The book I read")</p>
+      </div>
+
+      <div style="background: white; padding: 6px 8px; border-radius: 4px; margin: 4px 0; border-left: 3px solid #28a745;">
+        <h3 style="color: #28a745; margin: 0 0 3px 0; font-size: 13px;">✓ When to Omit Relative Pronouns</h3>
+        <p style="margin: 2px 0; font-size: 11px;">You can <strong>omit</strong> when they are the <strong>object</strong>: "The book (that) I read" ✓</p>
+        <p style="margin: 2px 0; font-size: 11px;">You <strong>CANNOT</strong> omit when they are the <strong>subject</strong>: "The man who called" ✗</p>
+      </div>
+
+      <div style="background: white; padding: 6px 8px; border-radius: 4px; margin: 4px 0; border-left: 3px solid #007bff;">
+        <h3 style="color: #007bff; margin: 0 0 3px 0; font-size: 13px;">📝 Subject vs. Object</h3>
+        <p style="margin: 2px 0; font-size: 11px;"><strong>Subject:</strong> "The teacher <strong>who</strong> teaches" (does the action)</p>
+        <p style="margin: 2px 0; font-size: 11px;"><strong>Object:</strong> "The teacher <strong>who/whom</strong> I respect" (receives action)</p>
+      </div>
+
+      <div style="background: white; padding: 6px 8px; border-radius: 4px; margin: 4px 0; border-left: 3px solid #6f42c1;">
+        <h3 style="color: #6f42c1; margin: 0 0 3px 0; font-size: 13px;">💡 Prepositions</h3>
+        <p style="margin: 2px 0; font-size: 11px;"><strong>Formal:</strong> "to whom I spoke" | <strong>Informal:</strong> "who I spoke to" ✓</p>
+      </div>
+    </div>
+
+    <!-- Exercise 1: Fill in the Blank -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 1: Fill in the Blank</h2>
+      <p>Choose the correct relative pronoun to complete each sentence.</p>
+
+      <div class="question">
+        <span class="question-number">1.</span> The man <input type="text" class="answer" data-answer="who"> lives next door is a doctor.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">2.</span> This is the restaurant <input type="text" class="answer" data-answer="where"> we had dinner last week.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">3.</span> The car <input type="text" class="answer" data-answer="that"> was parked outside belongs to my neighbor.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">4.</span> Friday is the day <input type="text" class="answer" data-answer="when"> we usually go shopping.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">5.</span> The student <input type="text" class="answer" data-answer="whose"> notebook was lost found it in the library.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">6.</span> I can't remember the reason <input type="text" class="answer" data-answer="why"> she didn't come to the party.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">7.</span> The book <input type="text" class="answer" data-answer="which"> you recommended was excellent.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">8.</span> The person <input type="text" class="answer" data-answer="whom"> I spoke to was very helpful.
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 2: Multiple Choice -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 2: Multiple Choice</h2>
+      <p>Select the best relative pronoun for each sentence.</p>
+
+      <div class="question">
+        <span class="question-number">1.</span> The house _____ roof was damaged needs repairs.
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="q2-1" value="who" id="q2-1-a">
+            <label for="q2-1-a">who</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-1" value="whose" id="q2-1-b" data-correct="true">
+            <label for="q2-1-b">whose</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-1" value="which" id="q2-1-c">
+            <label for="q2-1-c">which</label>
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">2.</span> Do you remember the time _____ we first met?
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="q2-2" value="where" id="q2-2-a">
+            <label for="q2-2-a">where</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-2" value="when" id="q2-2-b" data-correct="true">
+            <label for="q2-2-b">when</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-2" value="why" id="q2-2-c">
+            <label for="q2-2-c">why</label>
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">3.</span> The teacher _____ I respect the most is retiring this year.
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="q2-3" value="who" id="q2-3-a" data-correct="true">
+            <label for="q2-3-a">who</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-3" value="which" id="q2-3-b">
+            <label for="q2-3-b">which</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-3" value="where" id="q2-3-c">
+            <label for="q2-3-c">where</label>
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">4.</span> This is the reason _____ I decided to study English.
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="q2-4" value="when" id="q2-4-a">
+            <label for="q2-4-a">when</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-4" value="where" id="q2-4-b">
+            <label for="q2-4-b">where</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-4" value="why" id="q2-4-c" data-correct="true">
+            <label for="q2-4-c">why</label>
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">5.</span> The computer _____ I use for work is very old.
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="q2-5" value="who" id="q2-5-a">
+            <label for="q2-5-a">who</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-5" value="that" id="q2-5-b" data-correct="true">
+            <label for="q2-5-b">that</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="q2-5" value="where" id="q2-5-c">
+            <label for="q2-5-c">where</label>
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 3: Sentence Combining -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 3: Combine the Sentences</h2>
+      <p>Combine each pair of sentences using a relative pronoun.</p>
+
+      <div class="question">
+        <span class="question-number">1.</span>
+        <div class="sentence-combine">
+          <div class="sentence">The woman is my neighbor. She lives upstairs.</div>
+          <div class="arrow">↓</div>
+          <div class="sentence">
+            <input type="text" class="answer" data-answer="The woman who lives upstairs is my neighbor"  style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">2.</span>
+        <div class="sentence-combine">
+          <div class="sentence">This is the store. I bought my phone there.</div>
+          <div class="arrow">↓</div>
+          <div class="sentence">
+            <input type="text" class="answer" data-answer="This is the store where I bought my phone"  style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">3.</span>
+        <div class="sentence-combine">
+          <div class="sentence">The movie was interesting. We watched it last night.</div>
+          <div class="arrow">↓</div>
+          <div class="sentence">
+            <input type="text" class="answer" data-answer="The movie that we watched last night was interesting"  style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">4.</span>
+        <div class="sentence-combine">
+          <div class="sentence">The student's bag was stolen. The student is very upset.</div>
+          <div class="arrow">↓</div>
+          <div class="sentence">
+            <input type="text" class="answer" data-answer="The student whose bag was stolen is very upset"  style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">5.</span>
+        <div class="sentence-combine">
+          <div class="sentence">Spring is my favorite season. Flowers bloom in spring.</div>
+          <div class="arrow">↓</div>
+          <div class="sentence">
+            <input type="text" class="answer" data-answer="Spring is my favorite season when flowers bloom"  style="width: 100%; max-width: 100%;">
+          </div>
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 4: Choose the Correct Form -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 4: Who, Whom, or Whose?</h2>
+      <p>Choose between WHO, WHOM, and WHOSE. Remember: WHO = subject, WHOM = object, WHOSE = possession.</p>
+
+      <div class="question">
+        <span class="question-number">1.</span> The person <input type="text" class="answer" data-answer="who"> called you is waiting outside.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">2.</span> The artist <input type="text" class="answer" data-answer="whose"> paintings are famous lives in Paris.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">3.</span> The doctor <input type="text" class="answer" data-answer="whom"> I visited yesterday was very kind.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">4.</span> My neighbor, <input type="text" class="answer" data-answer="whose"> son is a teacher, is moving away.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">5.</span> The students <input type="text" class="answer" data-answer="who"> passed the test were very happy.
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 5: Fix Common Errors -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 5: Fix Common Errors</h2>
+      <p>Correct the mistakes in these sentences. Replace the incorrect word with the right relative pronoun.</p>
+
+      <div class="question">
+        <span class="question-number">1.</span> The movie <span style="color: #dc3545; text-decoration: line-through;">what</span> we watched was boring.
+        <br>Correct: The movie <input type="text" class="answer" data-answer="that"> we watched was boring.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">2.</span> The house <span style="color: #dc3545; text-decoration: line-through;">what</span> I live in is small.
+        <br>Correct: The house <input type="text" class="answer" data-answer="that"> I live in is small.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">3.</span> The student <span style="color: #dc3545; text-decoration: line-through;">who</span> book was lost is upset.
+        <br>Correct: The student <input type="text" class="answer" data-answer="whose"> book was lost is upset.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">4.</span> This is the time <span style="color: #dc3545; text-decoration: line-through;">where</span> I usually eat lunch.
+        <br>Correct: This is the time <input type="text" class="answer" data-answer="when"> I usually eat lunch.
+        <div class="feedback"></div>
+      </div>
+
+      <div class="question">
+        <span class="question-number">5.</span> The place <span style="color: #dc3545; text-decoration: line-through;">when</span> I work is downtown.
+        <br>Correct: The place <input type="text" class="answer" data-answer="where"> I work is downtown.
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 6: Complete the Paragraph -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 6: Complete the Paragraph</h2>
+      <p>Fill in the blanks with the correct relative pronouns to complete the story.</p>
+
+      <div class="question">
+        <p>
+          I have a friend <input type="text" class="answer" data-answer="who" style="max-width: 100px;"> works at a library <input type="text" class="answer" data-answer="where" style="max-width: 100px;"> I often study. 
+          She showed me a book <input type="text" class="answer" data-answer="that" style="max-width: 100px;"> I really enjoyed reading. 
+          The author, <input type="text" class="answer" data-answer="whose" style="max-width: 100px;"> name I can't remember, writes about places 
+          <input type="text" class="answer" data-answer="where" style="max-width: 100px;"> she has traveled. 
+          There was a chapter about the time <input type="text" class="answer" data-answer="when" style="max-width: 100px;"> she lived in Japan, 
+          <input type="text" class="answer" data-answer="which" style="max-width: 100px;"> was my favorite part of the book.
+        </p>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Exercise 7: Job Ad Vocabulary -->
+    <div class="exercise">
+      <h2 class="exercise-title">Exercise 7: Job Ad Vocabulary</h2>
+      <p>Read the passage. Write the highlighted phrases next to their definitions.</p>
+
+      <div class="passage-card">
+        <div class="passage-title">VACANCIES — Preschool Teacher: Full-time Parklands Preschool</div>
+        <div class="passage-text" style="font-size:13px; color:#333;">
+          We are looking for a teacher who is caring, <span class="hl">good-humored</span>, and <span class="hl">reliable</span> to work in our busy preschool. The successful candidate will be <span class="hl">conscientious</span> and <span class="hl">self-confident</span>, and must have two years of experience. We are a happy team at Parklands Preschool and we’re looking for someone who is <span class="hl">fun-loving</span> as well as <span class="hl">reliable</span> and <span class="hl">calm</span>.
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="defs">
+          <div class="label"><strong>Example</strong> — cheerful and positive</div>
+          <div style="font-size:13px; color: var(--accent); font-weight:600;">good-humored</div>
+
+          <div class="label"><span class="question-number">1.</span> someone who wants to do their job well</div>
+          <input type="text" class="answer" data-answer="conscientious">
+
+          <div class="label"><span class="question-number">2.</span> someone you can trust</div>
+          <input type="text" class="answer" data-answer="reliable">
+
+          <div class="label"><span class="question-number">3.</span> not excited or nervous</div>
+          <input type="text" class="answer" data-answer="calm">
+
+          <div class="label"><span class="question-number">4.</span> someone who likes having fun</div>
+          <input type="text" class="answer" data-answer="fun-loving">
+
+          <div class="label"><span class="question-number">5.</span> someone who believes in him/herself</div>
+          <input type="text" class="answer" data-answer="self-confident">
+        </div>
+        <div class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div style="text-align: center; margin: 30px 0;" class="print-hide">
+      <button class="btn btn-check" onclick="checkAllAnswers()">✓ Check All Answers</button>
+      <button class="btn btn-reset" onclick="resetAnswers()">↻ Reset</button>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results">
+      <h2>🎉 Great Job!</h2>
+      <div class="score" id="score">0/0</div>
+      <p id="results-message"></p>
+    </div>
+  </div>
+
+  <script>
+    function normalizeAnswer(answer) {
+      return answer.trim().toLowerCase().replace(/[.,!?;:]/g, '');
+    }
+
+    function checkAnswer(input, correctAnswer) {
+      const userAnswer = normalizeAnswer(input.value);
+      const correct = normalizeAnswer(correctAnswer);
+      const feedback = input.closest('.question').querySelector('.feedback');
+      
+      // For sentence combining, be more flexible
+      if (input.style.width === '100%' || input.style.maxWidth === '100%') {
+        const userWords = userAnswer.split(/\s+/);
+        const correctWords = correct.split(/\s+/);
+        const hasCorrectPronoun = correctWords.some(word => 
+          ['who', 'whom', 'whose', 'that', 'which', 'when', 'where', 'why'].includes(word.toLowerCase()) &&
+          userWords.includes(word.toLowerCase())
+        );
+        const isClose = userAnswer.includes(correct.split(' ').find(w => 
+          ['who', 'whom', 'whose', 'that', 'which', 'when', 'where', 'why'].includes(w.toLowerCase())
+        ));
+        
+        if (hasCorrectPronoun && userWords.length >= correctWords.length * 0.7) {
+          feedback.className = 'feedback correct';
+          feedback.innerHTML = '<span class="feedback-icon">✓</span> Correct! Well done!';
+          return true;
+        } else if (isClose) {
+          feedback.className = 'feedback incorrect';
+          feedback.innerHTML = '<span class="feedback-icon">✗</span> Close! Check your sentence structure. The correct answer is: "' + correctAnswer + '"';
+          return false;
+        } else {
+          feedback.className = 'feedback incorrect';
+          feedback.innerHTML = '<span class="feedback-icon">✗</span> Not quite. The correct answer is: "' + correctAnswer + '"';
+          return false;
+        }
+      } else {
+        // For simple fill-in-the-blank (accept hyphen/no-hyphen and with/without spaces)
+        const userCanon = userAnswer.replace(/[-\s]/g, '');
+        const correctCanon = correct.replace(/[-\s]/g, '');
+        if (userAnswer === correct || userCanon === correctCanon) {
+          feedback.className = 'feedback correct';
+          feedback.innerHTML = '<span class="feedback-icon">✓</span> Correct!';
+          return true;
+        } else {
+          feedback.className = 'feedback incorrect';
+          feedback.innerHTML = '<span class="feedback-icon">✗</span> Incorrect. The correct answer is: "' + correctAnswer + '"';
+          return false;
+        }
+      }
+    }
+
+    function checkRadioAnswer(radioGroup, correctValue) {
+      const selected = document.querySelector(`input[name="${radioGroup}"]:checked`);
+      const question = document.querySelector(`input[name="${radioGroup}"]`).closest('.question');
+      const feedback = question.querySelector('.feedback');
+      
+      if (!selected) {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = '<span class="feedback-icon">!</span> Please select an answer.';
+        return false;
+      }
+      
+      if (selected.value === correctValue) {
+        feedback.className = 'feedback correct';
+        feedback.innerHTML = '<span class="feedback-icon">✓</span> Correct!';
+        return true;
+      } else {
+        feedback.className = 'feedback incorrect';
+        feedback.innerHTML = '<span class="feedback-icon">✗</span> Incorrect. The correct answer is: "' + correctValue + '"';
+        return false;
+      }
+    }
+
+    function checkAllAnswers() {
+      let correct = 0;
+      let total = 0;
+
+      // Check text inputs
+      const textInputs = document.querySelectorAll('input[type="text"].answer');
+      textInputs.forEach(input => {
+        if (input.value.trim()) {
+          total++;
+          if (checkAnswer(input, input.dataset.answer)) {
+            correct++;
+          }
+        }
+      });
+
+      // Check radio buttons
+      const radioGroups = ['q2-1', 'q2-2', 'q2-3', 'q2-4', 'q2-5'];
+      radioGroups.forEach(group => {
+        const correctRadio = document.querySelector(`input[name="${group}"][data-correct="true"]`);
+        if (correctRadio) {
+          total++;
+          if (checkRadioAnswer(group, correctRadio.value)) {
+            correct++;
+          }
+        }
+      });
+
+      // Show results
+      if (total > 0) {
+        const resultsDiv = document.getElementById('results');
+        const scoreDiv = document.getElementById('score');
+        const messageDiv = document.getElementById('results-message');
+        
+        scoreDiv.textContent = `${correct}/${total}`;
+        const percentage = Math.round((correct / total) * 100);
+        
+        if (percentage === 100) {
+          messageDiv.textContent = 'Perfect! You understand relative pronouns very well! 🌟';
+        } else if (percentage >= 80) {
+          messageDiv.textContent = 'Excellent work! You have a good understanding of relative pronouns! 👍';
+        } else if (percentage >= 60) {
+          messageDiv.textContent = 'Good job! Keep practicing to improve your skills! 💪';
+        } else {
+          messageDiv.textContent = 'Keep practicing! Review the guide section and try again! 📚';
+        }
+        
+        resultsDiv.classList.add('show');
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert('Please answer at least one question before checking!');
+      }
+    }
+
+    function resetAnswers() {
+      // Clear all inputs
+      document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+      document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+      
+      // Clear all feedback
+      document.querySelectorAll('.feedback').forEach(feedback => {
+        feedback.className = 'feedback';
+        feedback.innerHTML = '';
+      });
+      
+      // Hide results
+      document.getElementById('results').classList.remove('show');
+    }
+
+    // Allow Enter key to check answers on text inputs
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkAnswer(this, this.dataset.answer);
+        }
+      });
+    });
+
+    // Auto-check radio buttons when changed
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const correctRadio = this.closest('.question').querySelector('input[data-correct="true"]');
+        if (correctRadio) {
+          checkRadioAnswer(this.name, correctRadio.value);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

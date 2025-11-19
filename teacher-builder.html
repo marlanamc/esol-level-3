@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teacher Activity Builder - Create Amazing Activities!</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  header {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    padding: 30px 20px;
+  }
+  
+  h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    opacity: 0.95;
+    margin-top: 10px;
+  }
+  
+  .builder-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+  }
+  
+  .step {
+    margin-bottom: 30px;
+  }
+  
+  .step-title {
+    font-size: 24px;
+    color: #667eea;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .step-number {
+    background: #667eea;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .label-hint {
+    font-weight: normal;
+    font-size: 14px;
+    color: #666;
+    margin-left: 5px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #667eea;
+  }
+  
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .activity-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .activity-type-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    background: #f9f9f9;
+  }
+  
+  .activity-type-card:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+    transform: translateY(-2px);
+  }
+  
+  .activity-type-card.selected {
+    border-color: #667eea;
+    background: #e8f0ff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  }
+  
+  .activity-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .activity-type-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .activity-type-desc {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .checkbox-item:hover {
+    border-color: #667eea;
+    background: #f0f4ff;
+  }
+  
+  .checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .checkbox-item.selected {
+    border-color: #667eea;
+    background: #e8f0ff;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  
+  button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .btn-primary {
+    background: #667eea;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+  }
+  
+  .btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+    border: 2px solid #e0e0e0;
+  }
+  
+  .btn-secondary:hover {
+    background: #e8e8e8;
+    border-color: #ccc;
+  }
+  
+  .output-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e0e0e0;
+  }
+  
+  .output-box {
+    background: #f9f9f9;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+    position: relative;
+  }
+  
+  .output-label {
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .prompt-text {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+  }
+  
+  .copy-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .copy-btn:hover {
+    background: #5568d3;
+  }
+  
+  .copy-success {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    background: #4caf50;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .tips-box {
+    background: #fff9e6;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .tips-box strong {
+    color: #856404;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .tips-box ul {
+    margin-left: 20px;
+    color: #856404;
+  }
+  
+  .tips-box li {
+    margin: 5px 0;
+  }
+  
+  .example-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  
+  .example-link:hover {
+    text-decoration: underline;
+  }
+  
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 32px;
+    }
+    
+    .builder-card {
+      padding: 25px;
+    }
+    
+    .activity-types {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>📚 Teacher Activity Builder</h1>
+      <p class="subtitle">Create amazing educational activities in minutes - no coding required!</p>
+    </header>
+    
+    <div class="builder-card">
+      <form id="activityForm">
+        <!-- Step 1: Activity Type -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">1</span>
+            <span>Choose Activity Type</span>
+          </div>
+          <div class="form-group">
+            <label>What kind of activity do you want to create? <span class="label-hint">(Select one)</span></label>
+            <div class="activity-types" id="activityTypes">
+              <div class="activity-type-card" data-type="worksheet">
+                <div class="activity-icon">📝</div>
+                <div class="activity-type-name">Worksheet</div>
+                <div class="activity-type-desc">Practice exercises, fill-in-the-blank, matching</div>
+              </div>
+              <div class="activity-type-card" data-type="quiz">
+                <div class="activity-icon">✅</div>
+                <div class="activity-type-name">Quiz</div>
+                <div class="activity-type-desc">Multiple choice, true/false, answer checker</div>
+              </div>
+              <div class="activity-type-card" data-type="game">
+                <div class="activity-icon">🎮</div>
+                <div class="activity-type-name">Game</div>
+                <div class="activity-type-desc">Trivia, word scramble, interactive games</div>
+              </div>
+              <div class="activity-type-card" data-type="guide">
+                <div class="activity-icon">📚</div>
+                <div class="activity-type-name">Study Guide</div>
+                <div class="activity-type-desc">Reference materials, explanations, examples</div>
+              </div>
+              <div class="activity-type-card" data-type="slides">
+                <div class="activity-icon">📊</div>
+                <div class="activity-type-name">Slides</div>
+                <div class="activity-type-desc">Presentation slides, answer keys, review decks</div>
+              </div>
+              <div class="activity-type-card" data-type="interactive">
+                <div class="activity-icon">🖱️</div>
+                <div class="activity-type-name">Interactive</div>
+                <div class="activity-type-desc">Clickable exercises, drag-and-drop, builders</div>
+              </div>
+            </div>
+            <input type="hidden" id="activityType" name="activityType" required>
+          </div>
+        </div>
+        
+        <!-- Step 2: Subject & Topic -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">2</span>
+            <span>Subject & Topic</span>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject or Class <span class="label-hint">(e.g., ESOL, Math, Science)</span></label>
+            <input type="text" id="subject" name="subject" placeholder="ESOL" required>
+          </div>
+          <div class="form-group">
+            <label for="topic">Topic or Theme <span class="label-hint">(e.g., Present Perfect Tense, Fractions, Photosynthesis)</span></label>
+            <input type="text" id="topic" name="topic" placeholder="Present Perfect Tense" required>
+          </div>
+          <div class="form-group">
+            <label for="level">Level/Grade <span class="label-hint">(e.g., Level 3, Grade 5, Beginner)</span></label>
+            <input type="text" id="level" name="level" placeholder="Level 3">
+          </div>
+        </div>
+        
+        <!-- Step 3: Learning Objectives -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">3</span>
+            <span>Learning Goals</span>
+          </div>
+          <div class="form-group">
+            <label for="objectives">What should students learn or practice? <span class="label-hint">(Be specific - this helps create better activities)</span></label>
+            <textarea id="objectives" name="objectives" placeholder="Example: Students will practice identifying when to use Present Simple vs Present Continuous tenses. They will learn to recognize time words like 'usually', 'now', 'today' and match them to the correct tense." required></textarea>
+          </div>
+        </div>
+        
+        <!-- Step 4: Activity Details -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">4</span>
+            <span>Activity Details</span>
+          </div>
+          <div class="form-group">
+            <label for="title">Activity Title</label>
+            <input type="text" id="title" name="title" placeholder="e.g., Present Perfect Practice Worksheet" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Activity Description <span class="label-hint">(What will students do?)</span></label>
+            <textarea id="description" name="description" placeholder="Example: Students will complete sentences by choosing the correct tense. They will also do a word scramble exercise and cross out incorrect words in sentences." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="numQuestions">Number of Questions/Exercises <span class="label-hint">(if applicable)</span></label>
+            <input type="number" id="numQuestions" name="numQuestions" placeholder="20" min="1">
+          </div>
+        </div>
+        
+        <!-- Step 5: Features -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">5</span>
+            <span>Special Features</span>
+          </div>
+          <div class="form-group">
+            <label>Select any features you'd like to include:</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item" data-feature="examples">
+                <input type="checkbox" id="feature-examples" name="features" value="examples">
+                <label for="feature-examples" style="margin:0; cursor:pointer;">Example sentences</label>
+              </div>
+              <div class="checkbox-item" data-feature="hints">
+                <input type="checkbox" id="feature-hints" name="features" value="hints">
+                <label for="feature-hints" style="margin:0; cursor:pointer;">Hints/clues</label>
+              </div>
+              <div class="checkbox-item" data-feature="answers">
+                <input type="checkbox" id="feature-answers" name="features" value="answers">
+                <label for="feature-answers" style="margin:0; cursor:pointer;">Answer key</label>
+              </div>
+              <div class="checkbox-item" data-feature="color-coding">
+                <input type="checkbox" id="feature-color" name="features" value="color-coding">
+                <label for="feature-color" style="margin:0; cursor:pointer;">Color coding</label>
+              </div>
+              <div class="checkbox-item" data-feature="visuals">
+                <input type="checkbox" id="feature-visuals" name="features" value="visuals">
+                <label for="feature-visuals" style="margin:0; cursor:pointer;">Visual aids</label>
+              </div>
+              <div class="checkbox-item" data-feature="interactive">
+                <input type="checkbox" id="feature-interactive" name="features" value="interactive">
+                <label for="feature-interactive" style="margin:0; cursor:pointer;">Interactive elements</label>
+              </div>
+              <div class="checkbox-item" data-feature="printable">
+                <input type="checkbox" id="feature-printable" name="features" value="printable">
+                <label for="feature-printable" style="margin:0; cursor:pointer;">Print-friendly</label>
+              </div>
+              <div class="checkbox-item" data-feature="timer">
+                <input type="checkbox" id="feature-timer" name="features" value="timer">
+                <label for="feature-timer" style="margin:0; cursor:pointer;">Timer</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 6: Additional Info -->
+        <div class="step">
+          <div class="step-title">
+            <span class="step-number">6</span>
+            <span>Additional Information</span>
+          </div>
+          <div class="form-group">
+            <label for="additionalInfo">Any other details, examples, or specific requirements? <span class="label-hint">(Optional but helpful!)</span></label>
+            <textarea id="additionalInfo" name="additionalInfo" placeholder="Example: Include a quick reference table at the top. Use vocabulary from Unit 2. Make it suitable for ESOL learners at B1 level."></textarea>
+          </div>
+        </div>
+        
+        <!-- Buttons -->
+        <div class="button-group">
+          <button type="submit" class="btn-primary">✨ Generate My Prompt</button>
+          <button type="button" class="btn-secondary" onclick="resetForm()">🔄 Reset Form</button>
+        </div>
+      </form>
+      
+      <!-- Output Section -->
+      <div class="output-section" id="outputSection" style="display: none;">
+        <div class="step-title">
+          <span class="step-number">✓</span>
+          <span>Your Custom Prompt</span>
+        </div>
+        <div class="output-box">
+          <span class="output-label">Copy this prompt and paste it into an AI assistant (like ChatGPT, Claude, or Cursor):</span>
+          <button class="copy-btn" onclick="copyPrompt()">📋 Copy Prompt</button>
+          <div class="prompt-text" id="promptOutput"></div>
+        </div>
+        
+        <div class="tips-box">
+          <strong>💡 How to use this prompt:</strong>
+          <ul>
+            <li>Copy the prompt above (click the Copy button)</li>
+            <li>Open your favorite AI assistant (ChatGPT, Claude, Cursor, etc.)</li>
+            <li>Paste the prompt and send it</li>
+            <li>The AI will generate a complete HTML file for your activity</li>
+            <li>Save the HTML file and open it in a web browser to use with your students!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="builder-card">
+      <h2 style="color: #667eea; margin-bottom: 15px;">📖 Quick Guide</h2>
+      <div class="tips-box">
+        <strong>Tips for best results:</strong>
+        <ul>
+          <li><strong>Be specific:</strong> The more details you provide, the better the activity will be</li>
+          <li><strong>Think about your students:</strong> Consider their level and what they need to practice</li>
+          <li><strong>Examples help:</strong> If you can, include example questions or content you want</li>
+          <li><strong>Review the output:</strong> After generating, you can ask the AI to modify colors, add more questions, or change the style</li>
+          <li><strong>Check out examples:</strong> Look at <a href="index.html" class="example-link">existing activities</a> for inspiration!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Activity type selection
+    document.querySelectorAll('.activity-type-card').forEach(card => {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.activity-type-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('activityType').value = this.dataset.type;
+      });
+    });
+    
+    // Checkbox styling
+    document.querySelectorAll('.checkbox-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        if (e.target.type !== 'checkbox') {
+          const checkbox = this.querySelector('input[type="checkbox"]');
+          checkbox.checked = !checkbox.checked;
+        }
+        updateCheckboxStyle(this);
+      });
+      
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener('change', function() {
+        updateCheckboxStyle(item);
+      });
+    });
+    
+    function updateCheckboxStyle(item) {
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (checkbox.checked) {
+        item.classList.add('selected');
+      } else {
+        item.classList.remove('selected');
+      }
+    }
+    
+    // Form submission
+    document.getElementById('activityForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      generatePrompt();
+    });
+    
+    function generatePrompt() {
+      const formData = new FormData(document.getElementById('activityForm'));
+      const data = Object.fromEntries(formData);
+      
+      // Get selected features
+      const features = Array.from(document.querySelectorAll('input[name="features"]:checked')).map(cb => cb.value);
+      
+      // Validate activity type is selected
+      if (!data.activityType) {
+        alert('Please select an activity type!');
+        return;
+      }
+      
+      // Build the prompt
+      let prompt = `Create a beautiful, interactive HTML educational activity for my students. Here are the details:\n\n`;
+      
+      prompt += `ACTIVITY TYPE: ${data.activityType.charAt(0).toUpperCase() + data.activityType.slice(1)}\n`;
+      prompt += `SUBJECT: ${data.subject}\n`;
+      prompt += `TOPIC: ${data.topic}\n`;
+      if (data.level) prompt += `LEVEL/GRADE: ${data.level}\n`;
+      prompt += `\nTITLE: ${data.title}\n`;
+      prompt += `\nLEARNING OBJECTIVES:\n${data.objectives}\n`;
+      prompt += `\nACTIVITY DESCRIPTION:\n${data.description}\n`;
+      if (data.numQuestions) prompt += `\nNUMBER OF QUESTIONS/EXERCISES: ${data.numQuestions}\n`;
+      
+      if (features.length > 0) {
+        prompt += `\nSPECIAL FEATURES TO INCLUDE:\n`;
+        features.forEach(feature => {
+          prompt += `- ${feature.charAt(0).toUpperCase() + feature.slice(1).replace('-', ' ')}\n`;
+        });
+      }
+      
+      if (data.additionalInfo) {
+        prompt += `\nADDITIONAL REQUIREMENTS/INFORMATION:\n${data.additionalInfo}\n`;
+      }
+      
+      prompt += `\n---\n\n`;
+      prompt += `Please create a complete, standalone HTML file that:\n`;
+      prompt += `1. Is beautifully styled with modern CSS (use a gradient background similar to #667eea to #764ba2)\n`;
+      prompt += `2. Is fully self-contained (all CSS and JavaScript in the HTML file)\n`;
+      prompt += `3. Is mobile-responsive and works well on tablets\n`;
+      prompt += `4. Uses clear, readable fonts and good spacing\n`;
+      prompt += `5. Includes all the features requested above\n`;
+      prompt += `6. Is engaging and visually appealing for students\n`;
+      if (features.includes('printable')) {
+        prompt += `7. Is optimized for printing (use @page CSS rules)\n`;
+      }
+      prompt += `\nMake sure the HTML is complete and ready to use - I should be able to save it as a .html file and open it directly in a browser.`;
+      
+      // Display the prompt
+      document.getElementById('promptOutput').textContent = prompt;
+      document.getElementById('outputSection').style.display = 'block';
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function copyPrompt() {
+      const promptText = document.getElementById('promptOutput').textContent;
+      navigator.clipboard.writeText(promptText).then(() => {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copy-success');
+        btn.classList.remove('copy-btn');
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove('copy-success');
+          btn.classList.add('copy-btn');
+        }, 2000);
+      });
+    }
+    
+    function resetForm() {
+      document.getElementById('activityForm').reset();
+      document.querySelectorAll('.activity-type-card').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.checkbox-item').forEach(c => c.classList.remove('selected'));
+      document.getElementById('outputSection').style.display = 'none';
+      document.getElementById('activityType').value = '';
+    }
+  </script>
+</body>
+</html>
+
