@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentence Order Worksheet - Answer Key</title>
+  <style>
+    :root {
+      --ink: #111;
+      --bg: #fff;
+      --border: #222;
+      --muted: #666;
+      --accent: #4a90e2;
+      --green-header: #4caf50;
+      --answer-green: #4caf50;
+      --answer-bg: #e8f5e9;
+      --who: #9fd4ff;
+      --verb: #b9f0a8;
+      --what: #ffd9a1;
+      --when: #ffb6c8;
+      --where: #cfb6ff;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      margin: 0;
+      padding: 20px 20px 100px 20px;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+      padding: 20px;
+    }
+    
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+    
+    .grammar-guide {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .step-section {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .step-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(74, 144, 226, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    .step-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid var(--accent);
+      position: relative;
+    }
+    
+    .step-title {
+      color: var(--accent);
+      font-size: 24px;
+      margin: 0;
+      font-weight: bold;
+    }
+    
+    .answer-section {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(6, 182, 212, 0.08) 100%);
+      border: 2px solid rgba(76, 175, 80, 0.3);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 12px;
+    }
+    
+    .answer-item {
+      margin: 15px 0;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      border-left: 4px solid var(--answer-green);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .answer-item .question {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    
+    .answer-item .answer {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--answer-green);
+      margin-top: 8px;
+    }
+    
+    .answer-item .answer-text {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    
+    .sentence-part {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      margin: 0 2px;
+      border: 1px solid;
+    }
+    
+    .sentence-part.who {
+      background-color: rgba(159, 212, 255, 0.3);
+      border-color: rgba(47, 142, 220, 0.6);
+      color: #1e5a8a;
+    }
+    
+    .sentence-part.verb {
+      background-color: rgba(185, 240, 168, 0.3);
+      border-color: rgba(77, 168, 81, 0.6);
+      color: #0d5d3f;
+    }
+    
+    .sentence-part.what {
+      background-color: rgba(255, 217, 161, 0.3);
+      border-color: rgba(231, 155, 51, 0.6);
+      color: #8b4a00;
+    }
+    
+    .sentence-part.where {
+      background-color: rgba(207, 182, 255, 0.3);
+      border-color: rgba(139, 111, 232, 0.6);
+      color: #4a1e8a;
+    }
+    
+    .sentence-part.when {
+      background-color: rgba(255, 182, 200, 0.3);
+      border-color: rgba(227, 106, 134, 0.6);
+      color: #8a1e2e;
+    }
+    
+    .answer-header {
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%);
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 2px solid rgba(76, 175, 80, 0.4);
+      text-align: center;
+    }
+    
+    .answer-header h3 {
+      color: var(--answer-green);
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .print-button {
+      background: linear-gradient(135deg, var(--accent) 0%, #357abd 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 20px 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    }
+    
+    .print-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+    }
+    
+    .back-link {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 20px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    @media print {
+      @page {
+        margin: 0.5in;
+      }
+      
+      * {
+        box-sizing: border-box;
+      }
+      
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 10pt;
+        line-height: 1.3;
+      }
+      
+      .print-button,
+      .back-link,
+      header {
+        display: none !important;
+      }
+      
+      h1 {
+        font-size: 16pt !important;
+        margin-bottom: 6px !important;
+        page-break-after: avoid;
+        font-weight: bold;
+        color: black !important;
+      }
+      
+      .step-section {
+        border: 1px solid #ddd !important;
+        margin: 8px 0;
+        padding: 15px;
+        background: white !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+      }
+      
+      .step-header {
+        border-bottom: 1.5px solid #000 !important;
+        margin-bottom: 6px;
+        padding-bottom: 3px;
+        page-break-after: avoid;
+      }
+      
+      .step-title {
+        font-size: 13pt !important;
+        color: black !important;
+        margin: 0;
+        font-weight: bold;
+      }
+      
+      .answer-section {
+        border: 1px solid #000 !important;
+        background: white !important;
+        padding: 8px;
+        margin: 8px 0;
+      }
+      
+      .answer-item {
+        border-left: 3px solid #000 !important;
+        border: 1px solid #ddd !important;
+        background: white !important;
+        padding: 6px;
+        margin: 4px 0;
+      }
+      
+      .answer-item .question {
+        font-size: 9pt;
+        margin-bottom: 2px;
+      }
+      
+      .answer-item .answer {
+        font-size: 10pt;
+        font-weight: bold;
+      }
+      
+      .answer-item .answer-text {
+        font-size: 10pt;
+        font-weight: normal;
+      }
+      
+      .answer-header {
+        border: 1px solid #000 !important;
+        background: #e5e5e5 !important;
+        padding: 6px;
+        margin: 8px 0;
+      }
+      
+      .answer-header h3 {
+        font-size: 12pt !important;
+        color: black !important;
+      }
+      
+      .sentence-part {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        font-size: 8pt;
+        padding: 2px 4px;
+      }
+      
+      .sentence-part.who {
+        background-color: rgba(159, 212, 255, 0.3) !important;
+        border: 1px solid rgba(47, 142, 220, 0.6) !important;
+        color: #1e5a8a !important;
+      }
+      
+      .sentence-part.verb {
+        background-color: rgba(185, 240, 168, 0.3) !important;
+        border: 1px solid rgba(77, 168, 81, 0.6) !important;
+        color: #0d5d3f !important;
+      }
+      
+      .sentence-part.what {
+        background-color: rgba(255, 217, 161, 0.3) !important;
+        border: 1px solid rgba(231, 155, 51, 0.6) !important;
+        color: #8b4a00 !important;
+      }
+      
+      .sentence-part.where {
+        background-color: rgba(207, 182, 255, 0.3) !important;
+        border: 1px solid rgba(139, 111, 232, 0.6) !important;
+        color: #4a1e8a !important;
+      }
+      
+      .sentence-part.when {
+        background-color: rgba(255, 182, 200, 0.3) !important;
+        border: 1px solid rgba(227, 106, 134, 0.6) !important;
+        color: #8a1e2e !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="back-link">← Back to Home</a>
+      <h1>Sentence Order Worksheet - Answer Key</h1>
+      <p class="subtitle">Complete answer key for sentence ordering exercises</p>
+      <button class="print-button" onclick="window.print()">
+        🖨️ Print Answer Key
+      </button>
+    </header>
+
+        <div class="grammar-guide">
+          
+          <!-- EXERCISE 1 ANSWERS -->
+          <div class="step-section">
+            <div class="step-header">
+              <h2 class="step-title">Exercise 1: Put the words in the correct order</h2>
+            </div>
+
+            <div class="answer-header">
+              <h3>✓ Answer Key</h3>
+            </div>
+
+            <div class="answer-section">
+              <div class="answer-item">
+                <div class="question">1. bought / I / a car / last week</div>
+                <div class="answer">✓ <span class="answer-text">I bought a car last week.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">2. studies / Maria / at the library / every day</div>
+                <div class="answer">✓ <span class="answer-text">Maria studies at the library every day.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">3. met / They / their friends / at the park / yesterday</div>
+                <div class="answer">✓ <span class="answer-text">They met their friends at the park yesterday.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">4. will buy / We / groceries / at the supermarket / tomorrow</div>
+                <div class="answer">✓ <span class="answer-text">We will buy groceries at the supermarket tomorrow.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">5. is reading / She / a magazine / in the living room / right now</div>
+                <div class="answer">✓ <span class="answer-text">She is reading a magazine in the living room right now.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">6. went / Yesterday / I / to the beach / with my family</div>
+                <div class="answer">✓ <span class="answer-text">Yesterday, I went to the beach with my family.</span></div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                  <em>Alternative: I went to the beach with my family yesterday.</em>
+                </div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">7. cooked / My mother / dinner / in the kitchen / last night</div>
+                <div class="answer">✓ <span class="answer-text">My mother cooked dinner in the kitchen last night.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">8. will meet / Tomorrow / we / at the café / for coffee</div>
+                <div class="answer">✓ <span class="answer-text">Tomorrow, we will meet at the café for coffee.</span></div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                  <em>Alternative: We will meet at the café for coffee tomorrow.</em>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXERCISE 2 ANSWERS -->
+          <div class="step-section">
+            <div class="step-header">
+              <h2 class="step-title">Exercise 2: Advanced Tenses - Put the words in the correct order</h2>
+            </div>
+
+            <div class="answer-header">
+              <h3>✓ Answer Key</h3>
+            </div>
+
+            <div class="answer-section">
+              <div class="answer-item">
+                <div class="question">1. was cooking / My sister / dinner / in the kitchen / when I arrived</div>
+                <div class="answer">✓ <span class="answer-text">My sister was cooking dinner in the kitchen when I arrived.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">2. will travel / Next summer / we / to Japan / with our family</div>
+                <div class="answer">✓ <span class="answer-text">Next summer, we will travel to Japan with our family.</span></div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                  <em>Alternative: We will travel to Japan with our family next summer.</em>
+                </div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">3. Were / you / studying / at the library / when I called?</div>
+                <div class="answer">✓ <span class="answer-text">Were you studying at the library when I called?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">4. will be working / At 3pm tomorrow / I / on my presentation / in the office</div>
+                <div class="answer">✓ <span class="answer-text">At 3pm tomorrow, I will be working on my presentation in the office.</span></div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                  <em>Alternative: I will be working on my presentation in the office at 3pm tomorrow.</em>
+                </div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">5. bought / Last week / she / a new laptop / from the electronics store</div>
+                <div class="answer">✓ <span class="answer-text">Last week, she bought a new laptop from the electronics store.</span></div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-top: var(--spacing-xs);">
+                  <em>Alternative: She bought a new laptop from the electronics store last week.</em>
+                </div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">6. What / will / you / be doing / at the beach / this time tomorrow?</div>
+                <div class="answer">✓ <span class="answer-text">What will you be doing at the beach this time tomorrow?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">7. was reading / I / a book / in the library / when the fire alarm went off</div>
+                <div class="answer">✓ <span class="answer-text">I was reading a book in the library when the fire alarm went off.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">8. Where / will / he / send / the report / tomorrow morning?</div>
+                <div class="answer">✓ <span class="answer-text">Where will he send the report tomorrow morning?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">9. were playing / They / soccer / at the park / all afternoon yesterday</div>
+                <div class="answer">✓ <span class="answer-text">They were playing soccer at the park all afternoon yesterday.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">10. When / were / they / playing / soccer / at the park?</div>
+                <div class="answer">✓ <span class="answer-text">When were they playing soccer at the park?</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EXERCISE 3 ANSWERS -->
+          <div class="step-section">
+            <div class="step-header">
+              <h2 class="step-title">Exercise 3: Correct the Incorrect Sentences</h2>
+            </div>
+
+            <div class="answer-header">
+              <h3>✓ Answer Key</h3>
+            </div>
+
+            <div class="answer-section">
+              <div class="answer-item">
+                <div class="question">❌ Did groceries you buy at the supermarket yesterday?</div>
+                <div class="answer">✓ <span class="answer-text">Did you buy groceries at the supermarket yesterday?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ I always you help with your homework at the library.</div>
+                <div class="answer">✓ <span class="answer-text">I always help you with your homework at the library.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ Where you did meet your best friend for the first time?</div>
+                <div class="answer">✓ <span class="answer-text">Where did you meet your best friend for the first time?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ We usually the museum visit in the city center on weekends.</div>
+                <div class="answer">✓ <span class="answer-text">We usually visit the museum in the city center on weekends.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ Was studying she always for the exam at the library?</div>
+                <div class="answer">✓ <span class="answer-text">Was she always studying for the exam at the library?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ I never this project finished at the office on time.</div>
+                <div class="answer">✓ <span class="answer-text">I never finished this project at the office on time.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ What you will be doing usually at the beach?</div>
+                <div class="answer">✓ <span class="answer-text">What will you usually be doing at the beach?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ They often to concerts go at the stadium on weekends.</div>
+                <div class="answer">✓ <span class="answer-text">They often go to concerts at the stadium on weekends.</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ When you were usually working at home?</div>
+                <div class="answer">✓ <span class="answer-text">When were you usually working at home?</span></div>
+              </div>
+              
+              <div class="answer-item">
+                <div class="question">❌ My friend sometimes me helps with my car at the garage.</div>
+                <div class="answer">✓ <span class="answer-text">My friend sometimes helps me with my car at the garage.</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer style="text-align: center; color: white; padding: 30px 20px; opacity: 0.8;">
+      <p>Happy learning! 🌟</p>
+    </footer>
+  </div>
+</body>
+</html>
+

@@ -26,6 +26,11 @@
   to = "/activities/phonics/pronunciation-game-student.html"
   status = 200
 
+[[redirects]]
+  from = "/sentence-answers"
+  to = "/sentencebuilder_answers.html"
+  status = 200
+
 # Headers for better security and performance
 [[headers]]
   for = "/*"
