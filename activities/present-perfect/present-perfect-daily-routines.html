@@ -1003,26 +1003,30 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 2px;
-      height: 100%;
-      transform-origin: center;
+      width: 0;
+      height: 0;
+      transform-origin: center center;
     }
 
     .hour-marker::before {
       content: '';
       position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: -130px;
+      left: -1.5px;
       width: 3px;
       height: 20px;
       background: linear-gradient(180deg, #6366f1, #8b5cf6);
       border-radius: 2px;
     }
 
-    .hour-marker:nth-child(3n+1)::before {
+    /* Major hour markers (12, 3, 6, 9 o'clock positions) */
+    .hour-marker:nth-child(1)::before,
+    .hour-marker:nth-child(4)::before,
+    .hour-marker:nth-child(7)::before,
+    .hour-marker:nth-child(10)::before {
       height: 30px;
       width: 4px;
+      left: -2px;
       background: linear-gradient(180deg, #6366f1, #4f46e5);
     }
 
