@@ -810,11 +810,11 @@
 
     /* Constrain slide content width - optimized for visibility */
     .slide-content {
-      max-width: 1400px !important;
-      width: 95% !important;
+      max-width: 1600px !important;
+      width: 96% !important;
       margin: 0 auto !important;
       box-sizing: border-box;
-      padding: var(--spacing-xl) var(--spacing-lg) !important;
+      padding: var(--spacing-xl) var(--spacing-2xl) !important;
       line-height: 1.5;
       max-height: calc(100vh - 120px);
       overflow-y: auto;
@@ -823,7 +823,10 @@
     .slide {
       overflow-x: hidden;
       overflow-y: hidden;
-      padding: var(--spacing-md) !important;
+      padding: var(--spacing-lg) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Ensure all content fits within container */
@@ -915,10 +918,11 @@
 
     .objectives-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: var(--spacing-xl);
       margin-top: var(--spacing-2xl);
       max-width: 100%;
+      padding: 0 var(--spacing-md);
     }
 
     .objective-card {
@@ -1013,10 +1017,11 @@
     /* Usage Grid */
     .usage-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-lg);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-xl);
       margin: var(--spacing-2xl) 0;
       max-width: 100%;
+      padding: 0 var(--spacing-md);
     }
 
     .usage-item {
@@ -1254,9 +1259,10 @@
     .example-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-md);
+      gap: var(--spacing-lg);
       margin-bottom: var(--spacing-lg);
       max-width: 100%;
+      padding: 0 var(--spacing-sm);
     }
 
     .example-card {
@@ -1350,21 +1356,22 @@
       display: flex;
       align-items: stretch;
       justify-content: center;
-      gap: var(--spacing-lg);
-      margin: var(--spacing-lg) 0;
+      gap: var(--spacing-xl);
+      margin: var(--spacing-xl) 0;
       flex-wrap: nowrap;
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
+      padding: 0 var(--spacing-lg);
     }
 
     .compare-item {
       flex: 1;
-      min-width: 280px;
-      max-width: 450px;
+      min-width: 300px;
+      max-width: 500px;
       background: rgba(255, 255, 255, 0.98);
       border-radius: var(--radius-lg);
-      padding: var(--spacing-lg);
+      padding: var(--spacing-xl);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       text-align: left;
       transition: all var(--transition-fast);
@@ -1629,11 +1636,11 @@
     /* Additional responsive constraints for narrower screens */
     @media (max-width: 1800px) {
       .slide-content {
-        max-width: 1220px !important;
-        width: 94% !important;
+        max-width: 1500px !important;
+        width: 95% !important;
       }
       .comparison-visual {
-        max-width: 1200px;
+        max-width: 1400px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -1641,15 +1648,15 @@
 
     @media (max-width: 1600px) {
       .slide-content {
-        max-width: 1120px !important;
-        width: 93% !important;
+        max-width: 1400px !important;
+        width: 94% !important;
       }
     }
 
     @media (max-width: 1400px) {
       .slide-content {
-        max-width: 1040px !important;
-        width: 92% !important;
+        max-width: 1300px !important;
+        width: 93% !important;
       }
       
       .slide-heading {
@@ -1659,7 +1666,7 @@
 
     @media (max-width: 1200px) {
       .slide-content {
-        max-width: 940px !important;
+        max-width: 1100px !important;
         width: 92% !important;
       }
       
