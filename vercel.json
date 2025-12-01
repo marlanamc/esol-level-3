@@ -1,0 +1,60 @@
+{
+  "version": 2,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/phonics",
+      "destination": "/activities/phonics/index.html"
+    },
+    {
+      "source": "/teacher",
+      "destination": "/pronunciation-game-teacher.html"
+    },
+    {
+      "source": "/student",
+      "destination": "/activities/phonics/pronunciation-game-student.html"
+    },
+    {
+      "source": "/sentence-answers",
+      "destination": "/sentencebuilder_answers.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.html)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ]
+}
+

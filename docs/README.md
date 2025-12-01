@@ -17,7 +17,7 @@ Interactive grammar activities and worksheets for ESOL Level 3 students.
 
 ## Deployment
 
-This site is deployed on Netlify. Updates are automatically deployed when changes are pushed to the main branch.
+This site is deployed on Vercel. Updates are automatically deployed when changes are pushed to the main branch.
 
 ## For Students
 
