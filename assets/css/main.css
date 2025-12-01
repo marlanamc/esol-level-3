@@ -16,6 +16,7 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+  --radius-full: 9999px;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -24,6 +25,10 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
+  --transition-fast: 0.2s ease;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-primary-dark: #4f46e5;
 }
 
 * {

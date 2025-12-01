@@ -134,8 +134,19 @@
     const exitBtn = document.getElementById('exit-presentation');
     if (exitBtn) {
       exitBtn.addEventListener('click', function() {
-        if (confirm('Exit presentation?')) {
-          window.location.href = '../index.html';
+        // Try to go back, or go to index.html
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          // Determine correct path based on current location
+          const currentPath = window.location.pathname;
+          if (currentPath.includes('/activities/present-perfect/')) {
+            window.location.href = '../../index.html';
+          } else if (currentPath.includes('/activities/')) {
+            window.location.href = '../index.html';
+          } else {
+            window.location.href = 'index.html';
+          }
         }
       });
     }
