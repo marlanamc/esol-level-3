@@ -42,15 +42,17 @@
       <div class="slide-content">
         <div class="title-visual">
           <div class="time-expression-icons">
+            <div class="icon-circle for"><i data-lucide="clock"></i><span>For</span></div>
+            <div class="icon-circle since"><i data-lucide="calendar"></i><span>Since</span></div>
             <div class="icon-circle already"><i data-lucide="check-circle"></i><span>Already</span></div>
-            <div class="icon-circle yet"><i data-lucide="clock"></i><span>Yet</span></div>
+            <div class="icon-circle yet"><i data-lucide="clock-4"></i><span>Yet</span></div>
             <div class="icon-circle just"><i data-lucide="zap"></i><span>Just</span></div>
             <div class="icon-circle ever"><i data-lucide="help-circle"></i><span>Ever</span></div>
             <div class="icon-circle never"><i data-lucide="x-circle"></i><span>Never</span></div>
           </div>
         </div>
         <h1 class="slide-title-main">Present Perfect Time Expressions</h1>
-        <p class="slide-subtitle">Master the 5 Essential Time Words</p>
+        <p class="slide-subtitle">Master the 7 Essential Time Words</p>
         <div class="slide-meta">
           <span class="slide-level">Intermediate</span>
           <span class="slide-topic">Grammar</span>
@@ -850,7 +852,7 @@
     .time-expression-icons {
       display: flex;
       justify-content: center;
-      gap: var(--spacing-xl);
+      gap: var(--spacing-lg);
       margin-bottom: var(--spacing-2xl);
       flex-wrap: wrap;
       max-width: 100%;
@@ -867,6 +869,16 @@
       height: 160px;
       transition: all var(--transition-fast);
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-circle.for {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
+      color: white;
+    }
+
+    .icon-circle.since {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      color: white;
     }
 
     .icon-circle.already {
