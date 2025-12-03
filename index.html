@@ -4,193 +4,486 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Marlie's ESOL Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --paper-cream: #faf8f3;
+    --ink-dark: #2d2a26;
+    --pencil-gray: #6b6b6b;
+    --highlight-yellow: #fff4a3;
+    --highlight-pink: #ffd4e5;
+    --highlight-blue: #cfe7ff;
+    --highlight-green: #d4f4dd;
+    --tab-red: #e74c3c;
+    --tab-orange: #ff9f43;
+    --tab-teal: #00b894;
+    --tab-purple: #a29bfe;
+    --margin-red: #e17f7f;
+    --shadow: rgba(0, 0, 0, 0.08);
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
-    padding: 20px;
+    font-family: 'Karla', sans-serif;
+    background: #e8e4dc;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 31px,
+        rgba(139, 107, 82, 0.05) 31px,
+        rgba(139, 107, 82, 0.05) 32px
+      );
+    color: var(--ink-dark);
+    padding: 0;
     min-height: 100vh;
+    position: relative;
   }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
   }
-  
+
+  .notebook-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .notebook-page {
+    background: var(--paper-cream);
+    border-radius: 3px;
+    box-shadow:
+      0 1px 3px var(--shadow),
+      0 10px 40px rgba(0, 0, 0, 0.05),
+      inset 0 0 0 1px rgba(0, 0, 0, 0.02);
+    padding: 60px 50px 60px 90px;
+    position: relative;
+    animation: pageSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes pageSlide {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Notebook margin line */
+  .notebook-page::before {
+    content: '';
+    position: absolute;
+    left: 70px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--margin-red);
+    opacity: 0.3;
+  }
+
+  /* Notebook holes */
+  .notebook-page::after {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 80px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e8e4dc;
+    box-shadow:
+      0 0 0 2px rgba(0, 0, 0, 0.03),
+      0 100px 0 0 #e8e4dc,
+      0 100px 0 2px rgba(0, 0, 0, 0.03),
+      0 200px 0 0 #e8e4dc,
+      0 200px 0 2px rgba(0, 0, 0, 0.03),
+      0 300px 0 0 #e8e4dc,
+      0 300px 0 2px rgba(0, 0, 0, 0.03);
+  }
+
   header {
-    text-align: center;
-    color: white;
     margin-bottom: 50px;
-    padding: 40px 20px;
+    border-bottom: 3px solid var(--ink-dark);
+    padding-bottom: 25px;
+    position: relative;
+    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
   }
-  
+
+  @keyframes fadeSlide {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-family: 'Caveat', cursive;
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--ink-dark);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
   }
-  
+
   .subtitle {
-    font-size: 20px;
-    opacity: 0.9;
+    font-size: 18px;
+    color: var(--pencil-gray);
+    font-weight: 400;
+    letter-spacing: 0.3px;
   }
-  
+
+  .category-section {
+    margin-bottom: 50px;
+    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+
+  .category-section:nth-child(2) { animation-delay: 0.3s; }
+  .category-section:nth-child(3) { animation-delay: 0.4s; }
+  .category-section:nth-child(4) { animation-delay: 0.5s; }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .category-tab {
+    background: var(--tab-orange);
+    color: white;
+    padding: 8px 20px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 2px;
+  }
+
+  .category-section:nth-child(2) .category-tab { background: var(--tab-teal); }
+  .category-section:nth-child(3) .category-tab { background: var(--tab-purple); }
+  .category-section:nth-child(4) .category-tab { background: var(--tab-red); }
+
+  .category-title {
+    font-family: 'Caveat', cursive;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--ink-dark);
+    line-height: 1;
+  }
+
   .activities-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-bottom: 40px;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
   }
-  
+
   .activity-card {
     background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--ink-dark);
+    padding: 24px;
     text-decoration: none;
     color: inherit;
     display: block;
+    position: relative;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
   }
-  
+
+  .activity-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: var(--highlight-yellow);
+    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .activity-card:hover::before {
+    height: 100%;
+  }
+
   .activity-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
   }
-  
+
+  .activity-card:nth-child(4n+2)::before { background: var(--highlight-pink); }
+  .activity-card:nth-child(4n+3)::before { background: var(--highlight-blue); }
+  .activity-card:nth-child(4n+4)::before { background: var(--highlight-green); }
+
+  .activity-content {
+    position: relative;
+    z-index: 1;
+  }
+
   .activity-icon {
-    font-size: 48px;
-    margin-bottom: 15px;
+    font-size: 40px;
     display: block;
+    margin-bottom: 12px;
+    line-height: 1;
+    filter: grayscale(0.2);
   }
-  
+
   .activity-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #667eea;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 8px;
+    line-height: 1.3;
   }
-  
+
   .activity-description {
     font-size: 14px;
-    color: #666;
+    color: var(--pencil-gray);
     line-height: 1.5;
   }
-  
+
   footer {
     text-align: center;
-    color: white;
-    padding: 30px 20px;
-    opacity: 0.8;
+    padding: 40px 20px;
+    margin-top: 40px;
+    border-top: 2px dashed var(--pencil-gray);
+    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
   }
-  
+
+  .footer-note {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    color: var(--pencil-gray);
+    font-weight: 600;
+  }
+
   @media (max-width: 768px) {
-    h1 {
-      font-size: 36px;
+    .notebook-page {
+      padding: 40px 30px 40px 60px;
     }
-    
+
+    .notebook-page::before {
+      left: 50px;
+    }
+
+    .notebook-page::after {
+      left: 20px;
+      top: 60px;
+    }
+
+    h1 {
+      font-size: 48px;
+    }
+
+    .category-title {
+      font-size: 28px;
+    }
+
     .activities-grid {
       grid-template-columns: 1fr;
-      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .notebook-page {
+      padding: 30px 20px 30px 50px;
+    }
+
+    .notebook-page::before {
+      left: 40px;
+    }
+
+    .notebook-page::after {
+      left: 15px;
+      width: 10px;
+      height: 10px;
+    }
+
+    h1 {
+      font-size: 40px;
     }
   }
 </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Marlie's ESOL Class</h1>
-      <p class="subtitle">Practice your grammar skills with interactive exercises</p>
-    </header>
-    
-    <div class="activities-grid">
-      <a href="activities/present-perfect/present-perfect-guide.html" class="activity-card">
-        <span class="activity-icon">📚</span>
-        <div class="activity-title">Present Perfect Tense Guide</div>
-        <div class="activity-description">Complete guide with 14 activities covering Present Perfect tense, including Past Simple comparisons.</div>
-      </a>
-      
-      <a href="activities/present-perfect/present-perfect-guide-slides.html" class="activity-card">
-        <span class="activity-icon">📊</span>
-        <div class="activity-title">Present Perfect Guide - Slides & Answers</div>
-        <div class="activity-description">Slide deck with complete answer key for all activities in the Present Perfect guide.</div>
-      </a>
-      
-      <a href="activities/present-perfect/present-perfect-guide-slides-no-answers.html" class="activity-card">
-        <span class="activity-icon">👥</span>
-        <div class="activity-title">Present Perfect Guide - Slides (No Answers)</div>
-        <div class="activity-description">Slide deck without answers - perfect for classroom review and practice sessions.</div>
-      </a>
-      
-      <a href="activities/present-perfect/present-perfect-daily-routines.html" class="activity-card">
-        <span class="activity-icon">⏰</span>
-        <div class="activity-title">Present Perfect Daily Routines</div>
-        <div class="activity-description">Interactive slide activity using daily routines to practice present perfect with already, yet, and just.</div>
-      </a>
-      
-      <a href="activities/present-perfect/present-perfect-time-expressions-slides.html" class="activity-card">
-        <span class="activity-icon">📅</span>
-        <div class="activity-title">Present Perfect Time Expressions</div>
-        <div class="activity-description">Complete slide presentation covering Already, Yet, Just, Ever, and Never with examples, comparisons, and practice exercises.</div>
-      </a>
-      
-      <a href="activities/games/test-prep-trivia-game.html" class="activity-card">
-        <span class="activity-icon">🎮</span>
-        <div class="activity-title">Test Prep Trivia Game</div>
-        <div class="activity-description">Review for your test with this fun trivia game covering Level 3 Unit 2 material.</div>
-      </a>
-      
-      <a href="activities/tenses/complete-tense-worksheet-slides.html" class="activity-card">
-        <span class="activity-icon">📊</span>
-        <div class="activity-title">Complete Tense Worksheet (Slides)</div>
-        <div class="activity-description">Interactive slide-based worksheet for practicing complete tenses.</div>
-      </a>
-      
-      <a href="activities/tenses/complete-tense-worksheet.html" class="activity-card">
-        <span class="activity-icon">📝</span>
-        <div class="activity-title">Complete Tense Worksheet</div>
-        <div class="activity-description">Practice completing sentences with the correct tense forms.</div>
-      </a>
-      
-      <a href="activities/tenses/tense-worksheet-answer-checker.html" class="activity-card">
-        <span class="activity-icon">✅</span>
-        <div class="activity-title">Answer Checker</div>
-        <div class="activity-description">Check your answers for word scrambles and cross-out exercises from the complete tense worksheet.</div>
-      </a>
-      
-      <a href="activities/sentence-builders/sentence-order-activity.html" class="activity-card">
-        <span class="activity-icon">🔤</span>
-        <div class="activity-title">Sentence Order Activity</div>
-        <div class="activity-description">Practice ordering sentences using WHO, VERB, WHAT, WHERE, WHEN. 12 progressively harder sentences with answer slides.</div>
-      </a>
-      
-      <a href="sentencebuilder_answers.html" class="activity-card">
-        <span class="activity-icon">✅</span>
-        <div class="activity-title">Sentence Order Worksheet - Answer Key</div>
-        <div class="activity-description">Complete answer key for sentence ordering exercises with all three exercises and correct answers.</div>
-      </a>
-      
-      <a href="activities/phonics/index.html" class="activity-card">
-        <span class="activity-icon">🔤</span>
-        <div class="activity-title">Phonics & Reading Hub</div>
-        <div class="activity-description">Pronunciation games, Laubach-style reading lessons, and phonics activities for Spanish speakers. Includes classroom game with codes!</div>
-      </a>
+  <div class="notebook-container">
+    <div class="notebook-page">
+      <header>
+        <h1>Marlie's ESOL Class</h1>
+        <p class="subtitle">Interactive English grammar activities and exercises for learners</p>
+      </header>
+
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-tab">Present Perfect</div>
+          <div class="category-title">Present Perfect Tense</div>
+        </div>
+
+        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Complete Guide Set</h3>
+        <div class="activities-grid">
+          <a href="activities/present-perfect/present-perfect-guide.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">📚</span>
+              <div class="activity-title">Complete Present Perfect Guide</div>
+              <div class="activity-description">Comprehensive workbook with 14 activities. Learn when to use Present Perfect vs. Past Simple, with clear examples and practice exercises.</div>
+            </div>
+          </a>
+
+          <a href="activities/present-perfect/present-perfect-guide-slides.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">📊</span>
+              <div class="activity-title">Teacher's Presentation with Answers</div>
+              <div class="activity-description">Slide version of the guide above with answer keys. Perfect for teachers to review and present solutions in class.</div>
+            </div>
+          </a>
+
+          <a href="activities/present-perfect/present-perfect-guide-slides-no-answers.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">👥</span>
+              <div class="activity-title">Student Practice Presentation</div>
+              <div class="activity-description">Same presentation without answers. Use this for classroom practice, group work, or homework review sessions.</div>
+            </div>
+          </a>
+        </div>
+
+        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 30px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Focused Practice Activities</h3>
+        <div class="activities-grid">
+          <a href="activities/present-perfect/present-perfect-daily-routines.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">⏰</span>
+              <div class="activity-title">Daily Routines: Already, Yet, Just</div>
+              <div class="activity-description">Practice using "already," "yet," and "just" with everyday activities. Interactive slides walk through a typical day with present perfect questions.</div>
+            </div>
+          </a>
+
+          <a href="activities/present-perfect/present-perfect-time-expressions-slides.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">📅</span>
+              <div class="activity-title">Time Expressions Reference</div>
+              <div class="activity-description">Master time words: Already, Yet, Just, Ever, and Never. Includes definitions, examples, usage comparisons, and practice activities.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-tab">Tenses</div>
+          <div class="category-title">Complete Tense Practice</div>
+        </div>
+
+        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Tense Practice Set</h3>
+        <div class="activities-grid">
+          <a href="activities/tenses/complete-tense-worksheet.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">📝</span>
+              <div class="activity-title">Tense Practice Worksheet</div>
+              <div class="activity-description">Fill-in-the-blank exercises to practice choosing and using the correct verb tense. Work at your own pace.</div>
+            </div>
+          </a>
+
+          <a href="activities/tenses/complete-tense-worksheet-slides.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">📊</span>
+              <div class="activity-title">Tense Practice Slides</div>
+              <div class="activity-description">Slide version of the worksheet above. Great for classroom display and group exercises.</div>
+            </div>
+          </a>
+
+          <a href="activities/tenses/tense-worksheet-answer-checker.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">✅</span>
+              <div class="activity-title">Interactive Answer Checker</div>
+              <div class="activity-description">Check your work instantly. Type in your answers for word scrambles and cross-out exercises to see if you got them right.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-tab">Sentences</div>
+          <div class="category-title">Sentence Building</div>
+        </div>
+
+        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Sentence Order Practice</h3>
+        <div class="activities-grid">
+          <a href="activities/sentence-builders/sentence-order-activity.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">🔤</span>
+              <div class="activity-title">Sentence Structure Builder</div>
+              <div class="activity-description">Learn proper English word order: WHO + VERB + WHAT + WHERE + WHEN. Start with simple sentences and progress to more complex patterns through 12 exercises.</div>
+            </div>
+          </a>
+
+          <a href="sentencebuilder_answers.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">✅</span>
+              <div class="activity-title">Sentence Builder Answer Key</div>
+              <div class="activity-description">Answer key for the activity above. Review the correct answers for all sentence ordering exercises and learn from any mistakes.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="category-section">
+        <div class="category-header">
+          <div class="category-tab">More</div>
+          <div class="category-title">Games & Phonics</div>
+        </div>
+        <div class="activities-grid">
+          <a href="activities/games/test-prep-trivia-game.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">🎮</span>
+              <div class="activity-title">Level 3 Unit 2 Trivia Game</div>
+              <div class="activity-description">Fun review game to prepare for your test. Answer questions about Level 3 Unit 2 material in an interactive quiz format.</div>
+            </div>
+          </a>
+
+          <a href="activities/phonics/index.html" class="activity-card">
+            <div class="activity-content">
+              <span class="activity-icon">🔤</span>
+              <div class="activity-title">Phonics & Reading Center</div>
+              <div class="activity-description">Improve pronunciation and reading skills with games and lessons. Includes Laubach method activities designed for Spanish-speaking learners.</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <footer>
+        <p class="footer-note">Happy learning!</p>
+      </footer>
     </div>
-    
-    <footer>
-      <p>Happy learning! 🌟</p>
-    </footer>
   </div>
 </body>
 </html>
-

@@ -2,547 +2,767 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Present Perfect Tense Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Comprehensive Present Perfect Tense guide with 14 activities for ESOL learners" />
+<title>Present Perfect Tense Guide - Marlie's ESOL Class</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#111;
-    --bg:#fff;
-    --border:#222;
-    --muted:#666;
-    --accent:#4a90e2;
-    --green-header:#4caf50;
-    --gray-header:#d0d0d0;
-    --card-bg:#e3f2fd;
-    --card-border:#90caf9;
+    --paper-cream: #faf8f3;
+    --ink-dark: #2d2a26;
+    --pencil-gray: #6b6b6b;
+    --margin-red: #e17f7f;
+
+    /* Grammar color coding */
+    --subject-blue: #9fd3ff;
+    --have-green: #c1e99b;
+    --v3-pink: #ffb3ba;
+    --time-yellow: #fff3cd;
+    --place-purple: #c5a3ff;
+
+    /* Highlight colors */
+    --highlight-yellow: #fff4a3;
+    --highlight-pink: #ffd4e5;
+    --highlight-blue: #cfe7ff;
+    --highlight-green: #d4f4dd;
+
+    /* Functional colors */
+    --accent-orange: #ff9f43;
+    --success-green: #4caf50;
+    --warning-yellow: #ffc107;
+    --info-blue: #4a90e2;
   }
-  
-  @page{ 
-    size: Letter; 
-    margin: 0.4in;
+
+  @page{
+    size: Letter;
+    margin: 0.5in;
   }
-  
+
+  * {
+    box-sizing: border-box;
+  }
+
   body{
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
-    color: var(--ink);
-    background: var(--bg);
+    font-family: 'Karla', sans-serif;
+    color: var(--ink-dark);
+    background: #e8e4dc;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 23px,
+        rgba(139, 107, 82, 0.08) 23px,
+        rgba(139, 107, 82, 0.08) 24px
+      );
     margin: 0;
-    padding: 4px;
-    line-height: 1.25;
-    font-size: 10px;
+    padding: 20px;
+    line-height: 1.7;
+    font-size: 16px;
   }
-  
+
+  .worksheet-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: var(--paper-cream);
+    padding: 40px 45px 40px 65px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Notebook margin line */
+  .worksheet-container::before {
+    content: '';
+    position: absolute;
+    left: 55px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--margin-red);
+    opacity: 0.4;
+  }
+
   h1{
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 3px;
-    margin-bottom: 6px;
-    font-size: 18px;
+    font-family: 'Caveat', cursive;
+    color: var(--ink-dark);
+    border-bottom: 3px solid var(--ink-dark);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-size: 42px;
     text-align: center;
+    font-weight: 700;
   }
-  
+
   h2{
-    color: var(--accent);
-    margin-top: 8px;
-    margin-bottom: 4px;
-    padding: 3px 6px;
-    background: #f0f7ff;
-    border-left: 3px solid var(--accent);
-    font-size: 14px;
-  }
-  
-  h3{
-    color: var(--accent);
-    margin-top: 6px;
-    margin-bottom: 3px;
-    font-size: 12px;
+    font-family: 'Caveat', cursive;
+    color: var(--accent-orange);
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-size: 32px;
     font-weight: 600;
+    border-bottom: 2px solid var(--accent-orange);
+    padding-bottom: 4px;
   }
-  
+
+  h3{
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
   .info-box{
-    background: #f0f7ff;
-    border: 2px solid var(--accent);
+    background: var(--highlight-blue);
+    border-left: 4px solid var(--info-blue);
     border-radius: 4px;
-    padding: 5px;
-    margin: 6px 0;
+    padding: 12px;
+    margin: 15px 0;
   }
-  
+
+  .info-box h3 {
+    margin-top: 0;
+    color: var(--info-blue);
+  }
+
   .formula-box{
-    background: #fff;
-    border: 2px solid var(--border);
-    border-radius: 4px;
-    padding: 8px;
-    margin: 8px 0;
+    background: white;
+    border: 3px solid var(--ink-dark);
+    border-radius: 6px;
+    padding: 15px;
+    margin: 15px 0;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
   }
-  
+
   .formula-part{
     display: inline-block;
-    padding: 4px 8px;
-    margin: 2px;
-    border-radius: 3px;
+    padding: 8px 14px;
+    margin: 4px;
+    border-radius: 4px;
     font-weight: bold;
-    border: 1px solid var(--border);
-    font-size: 12px;
+    border: 2px solid var(--ink-dark);
+    font-size: 13px;
   }
-  
+
   .subject-part{
-    background: #9fd3ff;
+    background: var(--subject-blue);
   }
-  
+
   .have-part{
-    background: #c1e99b;
+    background: var(--have-green);
   }
-  
+
   .v3-part{
-    background: #ffb3ba;
+    background: var(--v3-pink);
   }
-  
+
   .arrow{
-    margin: 0 4px;
-    color: var(--muted);
-    font-size: 14px;
+    margin: 0 6px;
+    color: var(--pencil-gray);
+    font-size: 16px;
+    font-weight: bold;
   }
-  
+
   .usage-list{
-    background: #f9f9f9;
-    border-left: 3px solid var(--accent);
-    padding: 5px 15px;
-    margin: 5px 0;
-    font-size: 10px;
+    background: rgba(255,255,255,0.5);
+    border-left: 3px solid var(--info-blue);
+    padding: 12px 15px 12px 30px;
+    margin: 10px 0;
+    font-size: 15px;
   }
-  
+
   .usage-list li{
-    margin: 2px 0;
+    margin: 8px 0;
   }
-  
+
   .example-box{
-    background: #f5f5f5;
-    border-left: 3px solid var(--green-header);
-    padding: 4px 8px;
-    margin: 4px 0;
+    background: rgba(255,255,255,0.6);
+    border-left: 4px solid var(--success-green);
+    padding: 12px;
+    margin: 10px 0;
     border-radius: 3px;
-    font-size: 10px;
+    font-size: 15px;
   }
-  
+
   .example-sentence{
-    margin: 4px 0;
+    margin: 6px 0;
     font-style: italic;
   }
-  
+
   .example-note{
     font-size: 10px;
-    color: var(--muted);
+    color: var(--pencil-gray);
     font-style: italic;
-    margin-top: 4px;
+    margin-top: 6px;
   }
-  
+
   .time-word{
-    background: #fff3cd;
-    padding: 2px 4px;
-    border-radius: 2px;
-    font-weight: bold;
-    color: #856404;
-    font-size: 11px;
-  }
-  
-  .activity-section{
-    background: #fafafa;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    padding: 6px;
-    margin: 6px 0;
-    page-break-inside: avoid;
-  }
-  
-  .activity-title{
-    background: var(--green-header);
-    color: white;
-    padding: 3px 6px;
-    margin: -6px -6px 4px -6px;
-    font-weight: bold;
-    font-size: 12px;
-    border-radius: 3px 3px 0 0;
-  }
-  
-  .practice-item{
-    margin: 3px 0;
-    padding: 3px;
-    background: white;
-    border-left: 2px solid var(--accent);
+    background: var(--time-yellow);
+    padding: 6px 12px;
     border-radius: 3px;
-    font-size: 10px;
+    font-weight: 700;
+    color: #856404;
+    font-size: 15px;
+    display: inline-block;
+    border: 1px solid #f0e1a1;
   }
-  
+
+  .activity-section{
+    background: white;
+    border: 2px solid var(--ink-dark);
+    border-radius: 4px;
+    padding: 0;
+    margin: 20px 0;
+    page-break-inside: avoid;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+  }
+
+  .activity-title{
+    background: var(--success-green);
+    color: white;
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 2px 2px 0 0;
+    margin: 0;
+  }
+
+  .activity-section > p,
+  .activity-section > div:not(.activity-title) {
+    padding: 0 15px;
+  }
+
+  .activity-section > div:first-of-type:not(.activity-title) {
+    padding-top: 15px;
+  }
+
+  .activity-section > div:last-child,
+  .activity-section > p:last-child {
+    padding-bottom: 15px;
+  }
+
+  .practice-item{
+    margin: 12px 15px;
+    padding: 14px;
+    background: var(--paper-cream);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: 2px;
+    font-size: 15px;
+  }
+
   .practice-item label{
     display: block;
     font-weight: 600;
-    margin-bottom: 2px;
-    font-size: 10px;
+    margin-bottom: 6px;
+    font-size: 15px;
   }
-  
+
   .answer-line{
-    border-bottom: 2px dotted #999;
-    min-height: 16px;
-    margin: 2px 0;
-    padding: 1px;
-  }
-  
-  .multiple-choice{
-    margin: 4px 0;
-    padding: 4px;
-    background: white;
-    border-left: 2px solid var(--accent);
-    border-radius: 3px;
-  }
-  
-  .choice-option{
-    margin: 2px 0;
+    border-bottom: 2px dotted var(--pencil-gray);
+    min-height: 24px;
+    margin: 5px 0;
     padding: 2px;
+  }
+
+  .multiple-choice{
+    margin: 12px 15px;
+    padding: 14px;
+    background: var(--paper-cream);
+    border-left: 3px solid var(--info-blue);
+    border-radius: 2px;
+  }
+
+  .choice-option{
+    margin: 10px 0;
+    padding: 6px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    font-size: 10px;
+    gap: 10px;
+    font-size: 15px;
   }
-  
+
   .choice-circle{
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--border);
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--ink-dark);
     border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
   }
-  
+
   .fill-blank{
-    margin: 8px 0;
-    padding: 6px;
-    background: white;
-    border-left: 2px solid var(--accent);
-    border-radius: 3px;
-    font-size: 11px;
-    line-height: 1.6;
+    margin: 10px 15px;
+    padding: 12px;
+    background: var(--paper-cream);
+    border-left: 3px solid var(--accent-orange);
+    border-radius: 2px;
+    font-size: 12px;
+    line-height: 1.8;
   }
-  
+
   .blank-space{
-    border-bottom: 2px solid var(--border);
-    min-width: 80px;
+    border-bottom: 2px solid var(--ink-dark);
+    min-width: 100px;
     display: inline-block;
-    margin: 0 2px;
-    padding: 0 4px;
+    margin: 0 4px;
+    padding: 0 6px;
+    min-height: 20px;
   }
-  
+
   .matching-section{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin: 10px 0;
+    margin: 15px;
   }
-  
+
   .matching-column{
-    background: white;
-    border: 1px solid #ddd;
+    background: var(--paper-cream);
+    border: 2px solid var(--ink-dark);
     border-radius: 3px;
-    padding: 8px;
+    padding: 12px;
   }
-  
+
   .matching-item{
-    margin: 6px 0;
-    padding: 4px;
-    border-bottom: 1px dotted #ccc;
+    margin: 8px 0;
+    padding: 6px;
+    border-bottom: 1px dotted var(--pencil-gray);
   }
-  
+
   .special-note{
-    background: #fff9e6;
-    border-left: 3px solid #ffc107;
-    padding: 5px;
-    margin: 6px 0;
+    background: var(--highlight-yellow);
+    border-left: 4px solid var(--warning-yellow);
+    padding: 10px;
+    margin: 12px 15px;
     border-radius: 3px;
-    font-size: 10px;
+    font-size: 11px;
   }
-  
+
   .special-note strong{
     color: #856404;
   }
-  
+
   .correct-answer{
-    background: #e8f5e9;
-    border-left: 3px solid var(--green-header);
-    padding: 6px;
-    margin: 4px 0;
-    font-size: 10px;
+    background: var(--highlight-green);
+    border-left: 4px solid var(--success-green);
+    padding: 10px;
+    margin: 10px 15px;
+    font-size: 11px;
     color: #2e7d32;
+    border-radius: 2px;
   }
-  
+
   .reading-text{
-    background: #f9f9f9;
-    border: 1px solid #ddd;
+    background: var(--paper-cream);
+    border: 2px solid var(--ink-dark);
     border-radius: 4px;
-    padding: 8px;
-    margin: 8px 0;
-    font-size: 10px;
-    line-height: 1.5;
+    padding: 15px;
+    margin: 15px;
+    font-size: 11px;
+    line-height: 1.6;
   }
-  
+
   .email-header{
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 4px;
-    margin-bottom: 6px;
+    border-bottom: 2px solid var(--pencil-gray);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
   }
-  
+
   .email-field{
-    margin: 2px 0;
-    font-size: 10px;
+    margin: 4px 0;
+    font-size: 11px;
   }
-  
+
   .email-body{
-    margin-top: 6px;
-    padding-top: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
   }
-  
+
   .email-body p{
-    margin: 3px 0;
-  }
-  
-  .true-false-section{
     margin: 8px 0;
   }
-  
+
+  .true-false-section{
+    margin: 15px;
+  }
+
   .true-false-item{
-    margin: 5px 0;
-    padding: 4px;
-    background: white;
-    border-left: 2px solid var(--accent);
-    border-radius: 3px;
+    margin: 10px 0;
+    padding: 10px;
+    background: var(--paper-cream);
+    border-left: 3px solid var(--info-blue);
+    border-radius: 2px;
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 12px;
   }
-  
+
   .true-false-item label{
     flex: 1;
-    font-size: 10px;
+    font-size: 11px;
   }
-  
+
   .true-false-options{
     display: flex;
-    gap: 8px;
+    gap: 10px;
     align-items: center;
   }
-  
+
   .true-false-option{
     display: flex;
     align-items: center;
-    gap: 3px;
-    font-size: 9px;
+    gap: 4px;
+    font-size: 10px;
   }
-  
+
   .tf-circle{
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--border);
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--ink-dark);
     border-radius: 50%;
     display: inline-block;
   }
-  
+
   .word-scramble-section{
-    margin: 8px 0;
+    margin: 15px;
   }
-  
+
   .scramble-exercise{
-    margin: 6px 0;
-    padding: 4px;
+    margin: 12px 0;
+    padding: 10px;
     border-bottom: 1px solid #ddd;
+    background: var(--paper-cream);
+    border-radius: 3px;
   }
-  
+
   .scramble-label{
-    font-weight: bold;
-    font-size: 10px;
-    margin-bottom: 4px;
-    color: var(--accent);
+    font-weight: 700;
+    font-size: 11px;
+    margin-bottom: 8px;
+    color: var(--accent-orange);
   }
-  
+
   .word-cards{
     display: flex;
     flex-wrap: wrap;
-    gap: 4px;
-    margin: 4px 0;
+    gap: 6px;
+    margin: 8px 0;
     align-items: center;
   }
-  
+
   .word-card{
-    background: #e3f2fd;
-    border: 2px solid #90caf9;
+    background: var(--highlight-blue);
+    border: 2px solid var(--info-blue);
     border-radius: 4px;
-    padding: 3px 6px;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--ink);
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-dark);
     display: inline-block;
   }
-  
+
   .scramble-answer{
-    margin-top: 4px;
-    padding: 2px;
+    margin-top: 8px;
+    padding: 4px;
   }
-  
+
   .scramble-hint{
-    font-size: 9px;
-    color: var(--muted);
-    font-style: italic;
-    margin-top: 2px;
-  }
-  
-  .word-box{
-    background: #fff9e6;
-    border: 2px solid #ffc107;
-    border-radius: 4px;
-    padding: 8px;
-    margin: 8px 0;
-  }
-  
-  .word-box-title{
-    font-weight: bold;
     font-size: 10px;
-    color: #856404;
-    margin-bottom: 6px;
+    color: var(--pencil-gray);
+    font-style: italic;
+    margin-top: 4px;
   }
-  
+
+  .word-box{
+    background: var(--time-yellow);
+    border: 2px solid var(--warning-yellow);
+    border-radius: 4px;
+    padding: 12px;
+    margin: 15px;
+  }
+
+  .word-box-title{
+    font-weight: 700;
+    font-size: 12px;
+    color: #856404;
+    margin-bottom: 10px;
+  }
+
   .word-bank{
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    font-size: 10px;
+    gap: 8px;
+    font-size: 11px;
   }
-  
+
   .word-bank-item{
     background: white;
-    border: 1px solid #ddd;
+    border: 2px solid #856404;
     border-radius: 3px;
-    padding: 3px 6px;
-    font-weight: 500;
+    padding: 4px 10px;
+    font-weight: 600;
   }
-  
+
   .sentence-builder{
-    background: #f9f9f9;
-    border: 2px solid var(--accent);
+    background: var(--paper-cream);
+    border: 3px solid var(--ink-dark);
     border-radius: 6px;
-    padding: 15px;
-    margin: 15px 0;
+    padding: 20px;
+    margin: 20px 0;
   }
-  
+
   .builder-title{
-    font-size: 13px;
-    font-weight: bold;
-    color: var(--accent);
-    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
   }
-  
+
   .builder-example{
-    background: #e8e8e8;
-    border-radius: 8px;
-    padding: 10px;
-    margin: 10px 0;
+    background: white;
+    border: 2px solid var(--ink-dark);
+    border-radius: 6px;
+    padding: 12px;
+    margin: 15px 0;
     text-align: center;
-    font-size: 12px;
+    font-size: 13px;
     font-style: italic;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
   }
-  
+
   .builder-chart{
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 8px;
-    margin: 15px 0;
+    gap: 10px;
+    margin: 20px 0;
     flex-wrap: wrap;
   }
-  
+
   .builder-column{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     flex: 1;
-    min-width: 120px;
+    min-width: 130px;
   }
-  
+
   .builder-box{
-    background: #c1e99b;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    padding: 8px;
+    background: var(--have-green);
+    border: 2px solid var(--ink-dark);
+    border-radius: 6px;
+    padding: 10px;
     text-align: center;
-    font-size: 11px;
+    font-size: 12px;
     width: 100%;
-    min-height: 50px;
+    min-height: 55px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 4px;
+    gap: 6px;
+    font-weight: 600;
   }
-  
+
   .builder-box.subject{
-    background: #9fd3ff;
+    background: var(--subject-blue);
   }
-  
+
   .builder-box.verb{
-    background: #ffb3ba;
+    background: var(--v3-pink);
   }
-  
+
   .builder-box.preposition{
-    background: #c5a3ff;
+    background: var(--place-purple);
   }
-  
+
   .builder-box.time{
-    background: #fff3cd;
+    background: var(--time-yellow);
   }
-  
+
   .builder-option{
-    padding: 4px;
-    margin: 2px 0;
+    padding: 6px;
+    margin: 3px 0;
     background: white;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    border-radius: 3px;
+    border: 1px solid var(--pencil-gray);
   }
-  
+
   .arrow-connector{
-    color: var(--muted);
-    font-size: 18px;
-    margin-top: 20px;
+    color: var(--pencil-gray);
+    font-size: 20px;
+    margin-top: 25px;
     flex-shrink: 0;
+    font-weight: 700;
   }
-  
+
   .speaker-icon{
-    font-size: 16px;
+    font-size: 18px;
   }
-  
+
+  /* Print & Share Toolbar */
+  .toolbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 2px solid var(--ink-dark);
+  }
+
+  .toolbar-btn {
+    background: var(--accent-orange);
+    color: white;
+    border: 2px solid var(--ink-dark);
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .toolbar-btn:hover {
+    background: var(--ink-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .toolbar-btn:focus {
+    outline: 3px solid var(--info-blue);
+    outline-offset: 2px;
+  }
+
+  .toolbar-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Accessibility skip link */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--ink-dark);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: 700;
+    z-index: 100;
+  }
+
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .activity-section,
+    .info-box,
+    .practice-item {
+      border-width: 3px;
+    }
+
+    .activity-title {
+      border-bottom: 3px solid white;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+
+  /* Force light mode for better printing and readability */
+  /* Dark mode disabled - worksheets should always be light for printing */
+
   @media print {
-    @page {
-      margin-bottom: 0.7in;
+    body {
+      background: white;
+      padding: 0;
     }
-    
-    @page {
-      @bottom-right {
-        content: "Page " counter(page);
-        font-size: 9px;
-        color: var(--muted);
-      }
+
+    .worksheet-container {
+      box-shadow: none;
+      padding: 0.5in 0.5in 0.5in 0.7in;
     }
-    
+
+    .toolbar {
+      display: none;
+    }
+
+    @page {
+      margin: 0.5in;
+    }
+
     .activity-section {
       page-break-inside: avoid;
+    }
+
+    h2 {
+      page-break-after: avoid;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .toolbar {
+      top: 10px;
+      right: 10px;
+      padding: 8px;
+      gap: 6px;
+    }
+
+    .toolbar-btn {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+
+    .worksheet-container {
+      padding: 30px 20px 30px 50px;
     }
   }
 </style>
 </head>
 <body>
+
+<!-- Skip to content link for accessibility -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Print & Share Toolbar -->
+<div class="toolbar" role="toolbar" aria-label="Page actions">
+  <button class="toolbar-btn" onclick="window.print()" aria-label="Print worksheet">
+    <span aria-hidden="true">🖨️</span> Print
+  </button>
+  <button class="toolbar-btn" onclick="shareWorksheet()" aria-label="Share worksheet">
+    <span aria-hidden="true">📤</span> Share
+  </button>
+  <a href="../../index.html" class="toolbar-btn" aria-label="Return to home page">
+    <span aria-hidden="true">🏠</span> Home
+  </a>
+</div>
+
+<div class="worksheet-container" id="main-content">
 
 <h1>Present Perfect Tense Guide</h1>
 
@@ -562,7 +782,7 @@
 <div class="info-box">
   <h3>Formula</h3>
   <div class="formula-box">
-    <div style="margin-bottom: 6px;">
+    <div style="margin-bottom: 8px;">
       <span class="formula-part subject-part">Subject</span>
       <span class="arrow">+</span>
       <span class="formula-part have-part">have/has</span>
@@ -570,7 +790,7 @@
       <span class="formula-part v3-part">Past Participle (V3)</span>
     </div>
   </div>
-  
+
   <div class="special-note">
     <strong>Remember:</strong> Use <strong>have</strong> with I, You, We, They. Use <strong>has</strong> with He, She, It.
   </div>
@@ -579,11 +799,11 @@
 <!-- When to Use Present Perfect -->
 <div class="info-box">
   <h3>When to Use Present Perfect</h3>
-  
-  <div style="font-size: 10px; margin-top: 4px;">
-    <strong>1. Unspecified Time:</strong> "I <strong>have visited</strong> Paris." (when doesn't matter) |
-    <strong>2. Recent Actions:</strong> "She <strong>has just finished</strong> her homework." |
-    <strong>3. Life Experiences:</strong> "I <strong>have never seen</strong> a whale." |
+
+  <div style="font-size: 11px; margin-top: 8px; line-height: 1.6;">
+    <strong>1. Unspecified Time:</strong> "I <strong>have visited</strong> Paris." (when doesn't matter)<br>
+    <strong>2. Recent Actions:</strong> "She <strong>has just finished</strong> her homework."<br>
+    <strong>3. Life Experiences:</strong> "I <strong>have never seen</strong> a whale."<br>
     <strong>4. Continuing Actions:</strong> "We <strong>have lived</strong> here for 5 years."
   </div>
 </div>
@@ -592,7 +812,7 @@
 <div class="info-box">
   <h3>Common Time Words with Present Perfect</h3>
   <p>These words often appear with Present Perfect:</p>
-  <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0;">
+  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0;">
     <span class="time-word">already</span>
     <span class="time-word">yet</span>
     <span class="time-word">just</span>
@@ -605,8 +825,8 @@
     <span class="time-word">for</span>
     <span class="time-word">since</span>
   </div>
-  
-  <div class="special-note" style="margin-top: 10px;">
+
+  <div class="special-note" style="margin-top: 12px;">
     <strong>Important:</strong> We DON'T use Present Perfect with specific past times like "yesterday", "last week", "in 2020". Use Past Simple for those!
   </div>
 </div>
@@ -614,36 +834,36 @@
 <!-- Activity 1: Fill in Have/Has -->
 <div class="activity-section">
   <div class="activity-title">Activity 1: Fill in Have or Has</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Remember: Use <strong>have</strong> with I, You, We, They. Use <strong>has</strong> with He, She, It.</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Remember: Use <strong>have</strong> with I, You, We, They. Use <strong>has</strong> with He, She, It.</p>
+
   <div class="practice-item">
     <label>1. I <span class="blank-space"></span> finished my homework.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>2. She <span class="blank-space"></span> visited London three times.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>3. We <span class="blank-space"></span> never been to Japan.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>4. He <span class="blank-space"></span> already eaten lunch.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>5. They <span class="blank-space"></span> just arrived.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>6. It <span class="blank-space"></span> stopped raining.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>7. You <span class="blank-space"></span> changed a lot since last year.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>8. My sister <span class="blank-space"></span> bought a new car.</label>
   </div>
@@ -652,8 +872,8 @@
 <!-- Activity 2: Affirmative Fill in the Blank -->
 <div class="activity-section">
   <div class="activity-title">Activity 2: Fill in the Blank - Affirmative Sentences</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Complete each sentence with the correct form. Use the words from the word box.</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Complete each sentence with the correct form. Use the words from the word box.</p>
+
   <div class="word-box">
     <div class="word-box-title">Word Box:</div>
     <div class="word-bank">
@@ -671,35 +891,35 @@
       <span class="word-bank-item">bought</span>
     </div>
   </div>
-  
+
   <div class="practice-item">
     <label>1. I <span class="blank-space"></span> <span class="blank-space"></span> my homework already.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>2. She <span class="blank-space"></span> <span class="blank-space"></span> Paris three times.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>3. We <span class="blank-space"></span> never <span class="blank-space"></span> to Japan.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>4. He <span class="blank-space"></span> already <span class="blank-space"></span> lunch.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>5. They <span class="blank-space"></span> just <span class="blank-space"></span> to the store.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>6. It <span class="blank-space"></span> <span class="blank-space"></span> raining.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>7. You <span class="blank-space"></span> <span class="blank-space"></span> a lot of work today.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>8. My sister <span class="blank-space"></span> <span class="blank-space"></span> English for 3 years.</label>
   </div>
@@ -707,52 +927,52 @@
 
 <!-- Activity 3: Negative Forms -->
 <div class="activity-section">
-  <div class="activity-title">Activity 2: Write the Negative Form</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Change these sentences to negative:</p>
-  
+  <div class="activity-title">Activity 3: Write the Negative Form</div>
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Change these sentences to negative:</p>
+
   <div class="practice-item">
-    <label>1. I have seen that movie. → <span class="blank-space"></span></label>
+    <label>1. I have seen that movie. → <span class="blank-space" style="min-width: 250px;"></span></label>
   </div>
   <div class="practice-item">
-    <label>2. She has finished her homework. → <span class="blank-space"></span></label>
+    <label>2. She has finished her homework. → <span class="blank-space" style="min-width: 250px;"></span></label>
   </div>
   <div class="practice-item">
-    <label>3. They have arrived yet. → <span class="blank-space"></span></label>
+    <label>3. They have arrived yet. → <span class="blank-space" style="min-width: 250px;"></span></label>
   </div>
   <div class="practice-item">
-    <label>4. He has eaten lunch. → <span class="blank-space"></span></label>
+    <label>4. He has eaten lunch. → <span class="blank-space" style="min-width: 250px;"></span></label>
   </div>
   <div class="practice-item">
-    <label>5. We have visited Paris. → <span class="blank-space"></span></label>
+    <label>5. We have visited Paris. → <span class="blank-space" style="min-width: 250px;"></span></label>
   </div>
 </div>
 
 <!-- Activity 4: Question Forms -->
 <div class="activity-section">
   <div class="activity-title">Activity 4: Write Questions</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Write questions using Present Perfect:</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Write questions using Present Perfect:</p>
+
   <div class="practice-item">
-    <label>1. (you / ever / visit) <span class="blank-space"></span> New York?</label>
+    <label>1. (you / ever / visit) <span class="blank-space" style="min-width: 250px;"></span> New York?</label>
   </div>
   <div class="practice-item">
-    <label>2. (she / finish) <span class="blank-space"></span> her book yet?</label>
+    <label>2. (she / finish) <span class="blank-space" style="min-width: 250px;"></span> her book yet?</label>
   </div>
   <div class="practice-item">
-    <label>3. (they / ever / see) <span class="blank-space"></span> a shark?</label>
+    <label>3. (they / ever / see) <span class="blank-space" style="min-width: 250px;"></span> a shark?</label>
   </div>
   <div class="practice-item">
-    <label>4. (he / already / leave) <span class="blank-space"></span>?</label>
+    <label>4. (he / already / leave) <span class="blank-space" style="min-width: 250px;"></span>?</label>
   </div>
   <div class="practice-item">
-    <label>5. (we / study) <span class="blank-space"></span> for the test?</label>
+    <label>5. (we / study) <span class="blank-space" style="min-width: 250px;"></span> for the test?</label>
   </div>
 </div>
 
 <!-- Activity 5: Multiple Choice -->
 <div class="activity-section">
   <div class="activity-title">Activity 5: Choose the Correct Answer</div>
-  
+
   <div class="multiple-choice">
     <label><strong>1. I _____ to Tokyo twice.</strong></label>
     <div class="choice-option">
@@ -768,7 +988,7 @@
       <span>was</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>2. She _____ her keys yet.</strong></label>
     <div class="choice-option">
@@ -784,7 +1004,7 @@
       <span>doesn't find</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>3. _____ you ever _____ sushi?</strong></label>
     <div class="choice-option">
@@ -800,7 +1020,7 @@
       <span>Have / eat</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>4. We _____ here for five years.</strong></label>
     <div class="choice-option">
@@ -821,133 +1041,133 @@
 <!-- Activity 6: Complete Sentences -->
 <div class="activity-section">
   <div class="activity-title">Activity 6: Complete the Sentences</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Complete each sentence with Present Perfect:</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Complete each sentence with Present Perfect:</p>
+
   <div class="practice-item">
-    <label>1. I <span class="blank-space"></span> (never / try) bungee jumping.</label>
+    <label>1. I <span class="blank-space" style="min-width: 200px;"></span> (never / try) bungee jumping.</label>
   </div>
-  
+
   <div class="practice-item">
-    <label>2. She <span class="blank-space"></span> (already / read) that book.</label>
+    <label>2. She <span class="blank-space" style="min-width: 200px;"></span> (already / read) that book.</label>
   </div>
-  
+
   <div class="practice-item">
-    <label>3. We <span class="blank-space"></span> (live) in this city since 2020.</label>
+    <label>3. We <span class="blank-space" style="min-width: 200px;"></span> (live) in this city since 2020.</label>
   </div>
-  
+
   <div class="practice-item">
-    <label>4. They <span class="blank-space"></span> (just / arrive) at the hotel.</label>
+    <label>4. They <span class="blank-space" style="min-width: 200px;"></span> (just / arrive) at the hotel.</label>
   </div>
-  
+
   <div class="practice-item">
-    <label>5. He <span class="blank-space"></span> (work) here for ten years.</label>
+    <label>5. He <span class="blank-space" style="min-width: 200px;"></span> (work) here for ten years.</label>
   </div>
 </div>
 
+<h2>Present Perfect vs Past Simple</h2>
+
 <!-- Present Perfect vs Past Simple -->
-<div class="info-box" style="background: #fff3e0; border: 3px solid #ff9800; padding: 5px;">
-  <h2 style="color: #e65100; margin-top: 0; margin-bottom: 4px;">📚 Present Perfect vs Past Simple: Key Differences</h2>
-  <p style="font-size: 10px; margin-bottom: 5px;"><strong>Main Rule:</strong> Past Simple = specific time in past | Present Perfect = connection to now (no specific time)</p>
-  
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 5px 0;">
-    <div style="background: #ffebee; border-left: 3px solid #f44336; padding: 4px; border-radius: 3px;">
-      <div style="font-weight: bold; font-size: 9px; color: #c62828; margin-bottom: 2px;">Past Simple:</div>
-      <div style="font-size: 8px; line-height: 1.3;">yesterday, last week, in 2020, ago, when...</div>
+<div class="info-box" style="background: #fff3e0; border-left: 4px solid #ff9800;">
+  <h3 style="color: #e65100; margin-top: 0;">Key Differences</h3>
+  <p style="margin-bottom: 10px;"><strong>Main Rule:</strong> Past Simple = specific time in past | Present Perfect = connection to now (no specific time)</p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0;">
+    <div style="background: #ffebee; border-left: 3px solid #f44336; padding: 10px; border-radius: 3px;">
+      <div style="font-weight: bold; font-size: 11px; color: #c62828; margin-bottom: 5px;">Past Simple:</div>
+      <div style="font-size: 10px; line-height: 1.4;">yesterday, last week, in 2020, ago, when...</div>
     </div>
-    <div style="background: #e8f5e9; border-left: 3px solid #4caf50; padding: 4px; border-radius: 3px;">
-      <div style="font-weight: bold; font-size: 9px; color: #2e7d32; margin-bottom: 2px;">Present Perfect:</div>
-      <div style="font-size: 8px; line-height: 1.3;">already, yet, just, ever, never, for, since</div>
+    <div style="background: #e8f5e9; border-left: 3px solid #4caf50; padding: 10px; border-radius: 3px;">
+      <div style="font-weight: bold; font-size: 11px; color: #2e7d32; margin-bottom: 5px;">Present Perfect:</div>
+      <div style="font-size: 10px; line-height: 1.4;">already, yet, just, ever, never, for, since</div>
     </div>
   </div>
-  
-  <div style="margin: 5px 0;">
-    <div class="example-box" style="margin: 3px 0; padding: 3px 6px;">
-      <div class="example-sentence" style="font-size: 9px;">
-        <span style="color: #c62828;">Past:</span> "I <strong>went</strong> to Paris <strong>last year</strong>." | 
+
+  <div style="margin: 10px 0;">
+    <div class="example-box" style="margin: 6px 0; padding: 8px;">
+      <div class="example-sentence" style="font-size: 11px;">
+        <span style="color: #c62828;">Past:</span> "I <strong>went</strong> to Paris <strong>last year</strong>."<br>
         <span style="color: #2e7d32;">Perfect:</span> "I <strong>have been</strong> to Paris." (no specific time)
       </div>
     </div>
-    <div class="example-box" style="margin: 3px 0; padding: 3px 6px;">
-      <div class="example-sentence" style="font-size: 9px;">
-        <span style="color: #c62828;">Past:</span> "She <strong>finished</strong> work <strong>an hour ago</strong>." | 
+    <div class="example-box" style="margin: 6px 0; padding: 8px;">
+      <div class="example-sentence" style="font-size: 11px;">
+        <span style="color: #c62828;">Past:</span> "She <strong>finished</strong> work <strong>an hour ago</strong>."<br>
         <span style="color: #2e7d32;">Perfect:</span> "She <strong>has just finished</strong> work."
       </div>
     </div>
   </div>
-  
-  <div class="special-note" style="background: #fff9c4; border-left: 3px solid #fbc02d; margin-top: 5px; padding: 4px;">
-    <strong style="font-size: 9px;">💡 Quick Guide:</strong>
-    <div style="font-size: 8px; margin-top: 2px;">Specific time? → Past Simple | No time/experience/recent? → Present Perfect</div>
+
+  <div class="special-note" style="background: #fff9c4; border-left: 3px solid #fbc02d; margin-top: 10px;">
+    <strong>💡 Quick Guide:</strong> Specific time? → Past Simple | No time/experience/recent? → Present Perfect
   </div>
-  
-  <div class="special-note" style="background: #ffebee; border-left: 3px solid #f44336; margin-top: 5px; padding: 4px;">
-    <strong style="font-size: 9px;">❌ Common Mistakes:</strong>
-    <div style="font-size: 8px; margin-top: 2px;">WRONG: "I have seen him yesterday." → RIGHT: "I saw him yesterday."</div>
+
+  <div class="special-note" style="background: #ffebee; border-left: 3px solid #f44336; margin-top: 10px;">
+    <strong>❌ Common Mistakes:</strong> WRONG: "I have seen him yesterday." → RIGHT: "I saw him yesterday."
   </div>
 </div>
 
 <!-- Activity 7: Past Simple vs Present Perfect -->
 <div class="activity-section">
   <div class="activity-title">Activity 7: Past Simple or Present Perfect? (Choose the Correct Tense)</div>
-  <p style="font-size: 10px; margin-bottom: 4px;"><strong>Look for time expressions to help you decide!</strong></p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;"><strong>Look for time expressions to help you decide!</strong></p>
+
   <div class="practice-item">
-    <label>1. I <span class="blank-space"></span> (go) to Paris last year.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "last year" = specific time</div>
+    <label>1. I <span class="blank-space" style="min-width: 150px;"></span> (go) to Paris last year.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "last year" = specific time</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>2. I <span class="blank-space"></span> (go) to Paris twice in my life.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "in my life" = experience</div>
+    <label>2. I <span class="blank-space" style="min-width: 150px;"></span> (go) to Paris twice in my life.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "in my life" = experience</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>3. She <span class="blank-space"></span> (finish) her work an hour ago.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "ago" = specific time</div>
+    <label>3. She <span class="blank-space" style="min-width: 150px;"></span> (finish) her work an hour ago.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "ago" = specific time</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>4. She <span class="blank-space"></span> (finish) her work already.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "already" = Present Perfect</div>
+    <label>4. She <span class="blank-space" style="min-width: 150px;"></span> (finish) her work already.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "already" = Present Perfect</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>5. We <span class="blank-space"></span> (live) here for five years.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "for" = continuing to now</div>
+    <label>5. We <span class="blank-space" style="min-width: 150px;"></span> (live) here for five years.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "for" = continuing to now</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>6. They <span class="blank-space"></span> (visit) London in 2019.</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "in 2019" = specific year</div>
+    <label>6. They <span class="blank-space" style="min-width: 150px;"></span> (visit) London in 2019.</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "in 2019" = specific year</div>
   </div>
-  
+
   <div class="practice-item">
-    <label>7. Have you ever <span class="blank-space"></span> (try) sushi?</label>
-    <div style="font-size: 8px; color: var(--muted); margin-top: 1px;">Hint: "ever" = Present Perfect</div>
+    <label>7. Have you ever <span class="blank-space" style="min-width: 150px;"></span> (try) sushi?</label>
+    <div style="font-size: 10px; color: var(--pencil-gray); margin-top: 4px;">Hint: "ever" = Present Perfect</div>
   </div>
 </div>
 
 <!-- Activity 8: For vs Since -->
 <div class="activity-section">
   <div class="activity-title">Activity 8: Fill in "For" or "Since"</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Use <strong>for</strong> with periods of time. Use <strong>since</strong> with a specific point in time.</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Use <strong>for</strong> with periods of time. Use <strong>since</strong> with a specific point in time.</p>
+
   <div class="practice-item">
     <label>1. I have lived here <span class="blank-space"></span> three years.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>2. She has worked here <span class="blank-space"></span> 2020.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>3. We have known each other <span class="blank-space"></span> a long time.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>4. He has been sick <span class="blank-space"></span> Monday.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>5. They have been married <span class="blank-space"></span> ten years.</label>
   </div>
@@ -956,8 +1176,8 @@
 <!-- Activity 8B: Multiple Choice - Present Perfect vs Past Simple -->
 <div class="activity-section">
   <div class="activity-title">Activity 8B: Multiple Choice - Present Perfect or Past Simple?</div>
-  <p style="font-size: 10px; margin-bottom: 4px;">Choose the correct form. Pay attention to time expressions!</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Choose the correct form. Pay attention to time expressions!</p>
+
   <div class="multiple-choice">
     <label><strong>1. I _____ to Japan three times.</strong></label>
     <div class="choice-option">
@@ -973,7 +1193,7 @@
       <span>was</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>2. She _____ her keys yesterday.</strong></label>
     <div class="choice-option">
@@ -989,7 +1209,7 @@
       <span>loses</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>3. _____ you ever _____ a whale?</strong></label>
     <div class="choice-option">
@@ -1005,7 +1225,7 @@
       <span>Do / see</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>4. We _____ here since 2020.</strong></label>
     <div class="choice-option">
@@ -1021,7 +1241,7 @@
       <span>were living</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>5. He _____ his homework two hours ago.</strong></label>
     <div class="choice-option">
@@ -1037,7 +1257,7 @@
       <span>finishes</span>
     </div>
   </div>
-  
+
   <div class="multiple-choice">
     <label><strong>6. I _____ that movie already.</strong></label>
     <div class="choice-option">
@@ -1058,33 +1278,33 @@
 <!-- Activity 8C: Correct the Mistakes - Present Perfect vs Past Simple -->
 <div class="activity-section">
   <div class="activity-title">Activity 8C: Correct the Mistakes - Present Perfect vs Past Simple</div>
-  <p style="font-size: 10px; margin-bottom: 4px;">Each sentence has a mistake with the tense. Find and correct it:</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Each sentence has a mistake with the tense. Find and correct it:</p>
+
   <div class="practice-item">
     <label>1. I have seen him yesterday.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>2. She finished her work already.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>3. They went to Italy three times.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>4. I have lost my keys two hours ago.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>5. Did you ever try sushi?</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>6. We lived here since 2018.</label>
     <div class="answer-line"></div>
@@ -1094,10 +1314,10 @@
 <!-- Activity 8D: Complete the Dialog - Present Perfect vs Past Simple -->
 <div class="activity-section">
   <div class="activity-title">Activity 8D: Complete the Dialog - Choose the Correct Tense</div>
-  <p style="font-size: 10px; margin-bottom: 4px;">Fill in the blanks with Past Simple or Present Perfect:</p>
-  
-  <div class="reading-text" style="background: #f5f5f5; padding: 5px;">
-    <div style="font-size: 9px; line-height: 1.4;">
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Fill in the blanks with Past Simple or Present Perfect:</p>
+
+  <div class="reading-text">
+    <div style="line-height: 1.8;">
       <p><strong>Sarah:</strong> Hi Tom! <strong>1.</strong> (you / be) to the new restaurant yet?</p>
       <p><strong>Tom:</strong> Yes, I <strong>2.</strong> (go) there last Friday. What <strong>3.</strong> (you / order)?</p>
       <p><strong>Tom:</strong> I <strong>4.</strong> (try) their pasta. I <strong>5.</strong> (never / taste) anything so delicious!</p>
@@ -1105,13 +1325,13 @@
       <p><strong>Tom:</strong> Yes, I <strong>7.</strong> (go) there in 2019. But I <strong>8.</strong> (not have) pasta like this before!</p>
     </div>
   </div>
-  
-  <div style="margin-top: 5px; font-size: 10px;">
-    <div class="practice-item" style="margin: 2px 0;">
-      <label>1. <span class="blank-space"></span> 2. <span class="blank-space"></span> 3. <span class="blank-space"></span> 4. <span class="blank-space"></span></label>
+
+  <div style="margin: 15px;">
+    <div class="practice-item">
+      <label>1. <span class="blank-space" style="min-width: 80px;"></span> 2. <span class="blank-space" style="min-width: 80px;"></span> 3. <span class="blank-space" style="min-width: 80px;"></span> 4. <span class="blank-space" style="min-width: 80px;"></span></label>
     </div>
-    <div class="practice-item" style="margin: 2px 0;">
-      <label>5. <span class="blank-space"></span> 6. <span class="blank-space"></span> 7. <span class="blank-space"></span> 8. <span class="blank-space"></span></label>
+    <div class="practice-item">
+      <label>5. <span class="blank-space" style="min-width: 80px;"></span> 6. <span class="blank-space" style="min-width: 80px;"></span> 7. <span class="blank-space" style="min-width: 80px;"></span> 8. <span class="blank-space" style="min-width: 80px;"></span></label>
     </div>
   </div>
 </div>
@@ -1119,18 +1339,18 @@
 <!-- Activity 9: Write Your Own Sentences -->
 <div class="activity-section">
   <div class="activity-title">Activity 9: Write Your Own Sentences</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Write 3 sentences about yourself using Present Perfect:</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Write 3 sentences about yourself using Present Perfect:</p>
+
   <div class="practice-item">
     <label>1. Something you have done recently:</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>2. A place you have visited:</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>3. Something you have never done:</label>
     <div class="answer-line"></div>
@@ -1140,28 +1360,28 @@
 <!-- Activity 10: Correct the Mistakes -->
 <div class="activity-section">
   <div class="activity-title">Activity 10: Correct the Mistakes</div>
-  <p style="font-size: 10px; margin-bottom: 6px;">Each sentence has one mistake. Find and correct it:</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Each sentence has one mistake. Find and correct it:</p>
+
   <div class="practice-item">
     <label>1. I have went to the store yesterday.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>2. She has never see a whale.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>3. We have live here since five years.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>4. They has finished their homework.</label>
     <div class="answer-line"></div>
   </div>
-  
+
   <div class="practice-item">
     <label>5. I have eat breakfast already.</label>
     <div class="answer-line"></div>
@@ -1171,10 +1391,10 @@
 <!-- Activity 11: Word Scramble -->
 <div class="activity-section">
   <div class="activity-title">Activity 11: Word Scramble - Put the Words in Order</div>
-  <p style="font-size: 10px; margin-bottom: 4px;">Put the words in the correct order to make Present Perfect sentences.</p>
-  
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Put the words in the correct order to make Present Perfect sentences.</p>
+
   <div class="word-scramble-section">
-    <div class="scramble-exercise" style="margin: 4px 0;">
+    <div class="scramble-exercise">
       <div class="scramble-label">1. Affirmative:</div>
       <div class="word-cards">
         <span class="word-card">have</span>
@@ -1188,8 +1408,8 @@
         <div class="answer-line"></div>
       </div>
     </div>
-    
-    <div class="scramble-exercise" style="margin: 4px 0;">
+
+    <div class="scramble-exercise">
       <div class="scramble-label">2. Affirmative:</div>
       <div class="word-cards">
         <span class="word-card">has</span>
@@ -1203,8 +1423,8 @@
         <div class="answer-line"></div>
       </div>
     </div>
-    
-    <div class="scramble-exercise" style="margin: 4px 0;">
+
+    <div class="scramble-exercise">
       <div class="scramble-label">3. Negative:</div>
       <div class="word-cards">
         <span class="word-card">yet</span>
@@ -1216,8 +1436,8 @@
         <div class="answer-line"></div>
       </div>
     </div>
-    
-    <div class="scramble-exercise" style="margin: 4px 0;">
+
+    <div class="scramble-exercise">
       <div class="scramble-label">4. Negative:</div>
       <div class="word-cards">
         <span class="word-card">never</span>
@@ -1231,8 +1451,8 @@
         <div class="answer-line"></div>
       </div>
     </div>
-    
-    <div class="scramble-exercise" style="margin: 4px 0;">
+
+    <div class="scramble-exercise">
       <div class="scramble-label">5. Question:</div>
       <div class="word-cards">
         <span class="word-card">you</span>
@@ -1247,8 +1467,8 @@
         <div class="answer-line"></div>
       </div>
     </div>
-    
-    <div class="scramble-exercise" style="margin: 4px 0;">
+
+    <div class="scramble-exercise">
       <div class="scramble-label">6. Question:</div>
       <div class="word-cards">
         <span class="word-card">finished</span>
@@ -1269,27 +1489,27 @@
 <!-- Activity 12: Matching and Time Words -->
 <div class="activity-section">
   <div class="activity-title">Activity 12: Matching and Time Words</div>
-  
-  <p style="font-size: 10px; margin-bottom: 4px; font-weight: bold;">Part A: Match the questions with the correct answers:</p>
-  <div class="matching-section" style="gap: 8px;">
-    <div class="matching-column" style="padding: 5px;">
-      <div style="font-weight: bold; margin-bottom: 4px; color: var(--accent); font-size: 9px;">Questions</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">1. Have you ever been to Italy?</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">2. Has she finished her work?</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">3. How long have you lived here?</div>
+
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px; font-weight: bold;">Part A: Match the questions with the correct answers:</p>
+  <div class="matching-section">
+    <div class="matching-column">
+      <div style="font-weight: bold; margin-bottom: 8px; color: var(--accent-orange); font-size: 11px;">Questions</div>
+      <div class="matching-item">1. Have you ever been to Italy?</div>
+      <div class="matching-item">2. Has she finished her work?</div>
+      <div class="matching-item">3. How long have you lived here?</div>
     </div>
-    <div class="matching-column" style="padding: 5px;">
-      <div style="font-weight: bold; margin-bottom: 4px; color: var(--accent); font-size: 9px;">Answers</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">A. Yes, she has just finished.</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">B. I have lived here for five years.</div>
-      <div class="matching-item" style="font-size: 9px; margin: 3px 0;">C. Yes, I went there last summer.</div>
+    <div class="matching-column">
+      <div style="font-weight: bold; margin-bottom: 8px; color: var(--accent-orange); font-size: 11px;">Answers</div>
+      <div class="matching-item">A. Yes, she has just finished.</div>
+      <div class="matching-item">B. I have lived here for five years.</div>
+      <div class="matching-item">C. Yes, I went there last summer.</div>
     </div>
   </div>
-  <div style="margin-top: 4px; font-size: 9px;">
-    <strong>Match:</strong> 1 = <span class="blank-space" style="width: 20px;"></span>, 2 = <span class="blank-space" style="width: 20px;"></span>, 3 = <span class="blank-space" style="width: 20px;"></span>
+  <div style="margin: 15px; font-size: 11px;">
+    <strong>Match:</strong> 1 = <span class="blank-space" style="width: 30px; min-width: 30px;"></span>, 2 = <span class="blank-space" style="width: 30px; min-width: 30px;"></span>, 3 = <span class="blank-space" style="width: 30px; min-width: 30px;"></span>
   </div>
-  
-  <p style="font-size: 10px; margin: 6px 0 4px 0; font-weight: bold;">Part B: Add the correct time word:</p>
+
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px; font-weight: bold;">Part B: Add the correct time word:</p>
   <div class="practice-item">
     <label>4. I have <span class="blank-space"></span> finished my homework. (just/already/yet)</label>
   </div>
@@ -1301,108 +1521,108 @@
   </div>
 </div>
 
-<!-- Activity 12: Reading Comprehension -->
+<!-- Activity 13: Reading Comprehension -->
 <div class="activity-section">
   <div class="activity-title">Activity 13: Reading Comprehension</div>
-  <p style="font-size: 10px; margin-bottom: 5px;"><strong>Read the email and answer. Circle True, False, or Not Given.</strong></p>
-  
-  <div class="reading-text" style="padding: 5px;">
-    <div class="email-header" style="padding-bottom: 3px; margin-bottom: 4px;">
-      <div class="email-field" style="font-size: 9px;"><strong>To:</strong> Noah | <strong>Subject:</strong> Fun times</div>
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;"><strong>Read the email and answer. Circle True, False, or Not Given.</strong></p>
+
+  <div class="reading-text">
+    <div class="email-header">
+      <div class="email-field"><strong>To:</strong> Noah | <strong>Subject:</strong> Fun times</div>
     </div>
-    <div class="email-body" style="margin-top: 4px; padding-top: 4px;">
-      <p style="font-size: 9px; margin: 2px 0;">Hi Noah, Sorry I haven't written until now. We've been so busy. We arrived in Cape Town three days ago and it's really beautiful. We've done a lot already.</p>
-      <p style="font-size: 9px; margin: 2px 0;">I've just been hang gliding along the coast. We've both been snorkeling. Trudi has already been scuba diving in Egypt, but I haven't.</p>
-      <p style="font-size: 9px; margin: 2px 0;">We haven't been on safari yet, but we're going on Friday. See you soon! Alec and Trudi</p>
+    <div class="email-body">
+      <p>Hi Noah, Sorry I haven't written until now. We've been so busy. We arrived in Cape Town three days ago and it's really beautiful. We've done a lot already.</p>
+      <p>I've just been hang gliding along the coast. We've both been snorkeling. Trudi has already been scuba diving in Egypt, but I haven't.</p>
+      <p>We haven't been on safari yet, but we're going on Friday. See you soon! Alec and Trudi</p>
     </div>
   </div>
-  
+
   <div class="true-false-section">
-    <div class="true-false-item" style="margin: 3px 0; padding: 3px;">
-      <label style="font-size: 9px;"><strong>1.</strong> Alec and Trudi have just arrived in Cape Town.</label>
-      <div class="true-false-options" style="gap: 6px;">
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+    <div class="true-false-item">
+      <label><strong>1.</strong> Alec and Trudi have just arrived in Cape Town.</label>
+      <div class="true-false-options">
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>True</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>False</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>Not Given</span>
         </div>
       </div>
     </div>
-    
-    <div class="true-false-item" style="margin: 3px 0; padding: 3px;">
-      <label style="font-size: 9px;"><strong>2.</strong> They still haven't done much.</label>
-      <div class="true-false-options" style="gap: 6px;">
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+
+    <div class="true-false-item">
+      <label><strong>2.</strong> They still haven't done much.</label>
+      <div class="true-false-options">
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>True</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>False</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>Not Given</span>
         </div>
       </div>
     </div>
-    
-    <div class="true-false-item" style="margin: 3px 0; padding: 3px;">
-      <label style="font-size: 9px;"><strong>3.</strong> Alec has just been hang gliding.</label>
-      <div class="true-false-options" style="gap: 6px;">
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+
+    <div class="true-false-item">
+      <label><strong>3.</strong> Alec has just been hang gliding.</label>
+      <div class="true-false-options">
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>True</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>False</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>Not Given</span>
         </div>
       </div>
     </div>
-    
-    <div class="true-false-item" style="margin: 3px 0; padding: 3px;">
-      <label style="font-size: 9px;"><strong>4.</strong> Trudi has already been scuba diving.</label>
-      <div class="true-false-options" style="gap: 6px;">
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+
+    <div class="true-false-item">
+      <label><strong>4.</strong> Trudi has already been scuba diving.</label>
+      <div class="true-false-options">
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>True</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>False</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>Not Given</span>
         </div>
       </div>
     </div>
-    
-    <div class="true-false-item" style="margin: 3px 0; padding: 3px;">
-      <label style="font-size: 9px;"><strong>5.</strong> They haven't been on safari yet.</label>
-      <div class="true-false-options" style="gap: 6px;">
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+
+    <div class="true-false-item">
+      <label><strong>5.</strong> They haven't been on safari yet.</label>
+      <div class="true-false-options">
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>True</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>False</span>
         </div>
-        <div class="true-false-option" style="font-size: 8px;">
-          <span class="tf-circle" style="width: 12px; height: 12px;"></span>
+        <div class="true-false-option">
+          <span class="tf-circle"></span>
           <span>Not Given</span>
         </div>
       </div>
@@ -1413,47 +1633,47 @@
 <!-- Activity 14: Fill in the Gaps Using Words in the Panel -->
 <div class="activity-section">
   <div class="activity-title">Activity 14: Fill in the Gaps Using the Words in the Panel</div>
-  <p style="font-size: 10px; margin-bottom: 4px;">Fill in each blank with the correct word from the panel below. Each word can be used more than once.</p>
-  
-  <div class="example-box" style="margin-bottom: 4px; padding: 3px 6px;">
-    <div class="example-sentence" style="font-size: 9px;"><strong>Example:</strong> I haven't been to Los Angeles <span style="background: #fff3cd; padding: 1px 3px; border-radius: 2px; font-weight: bold;">yet</span>.</div>
+  <p style="font-size: 11px; margin: 15px; margin-bottom: 10px;">Fill in each blank with the correct word from the panel below. Each word can be used more than once.</p>
+
+  <div class="example-box" style="margin: 15px; padding: 8px;">
+    <div class="example-sentence"><strong>Example:</strong> I haven't been to Los Angeles <span style="background: #fff3cd; padding: 2px 6px; border-radius: 2px; font-weight: bold;">yet</span>.</div>
   </div>
-  
+
   <div class="practice-item">
     <label>1. We have <span class="blank-space"></span> come back from the beach.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>2. They haven't tried hang gliding <span class="blank-space"></span>.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>3. I <span class="blank-space"></span> haven't been on safari.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>4. Alexia has <span class="blank-space"></span> been snorkeling before.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>5. I haven't tried windsurfing <span class="blank-space"></span>.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>6. We have <span class="blank-space"></span> arrived at the hotel 10 minutes ago.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>7. He's <span class="blank-space"></span> been skydiving before.</label>
   </div>
-  
+
   <div class="practice-item">
     <label>8. Tom has <span class="blank-space"></span> called us a minute ago.</label>
   </div>
-  
-  <div class="word-box" style="margin-top: 6px; padding: 5px;">
-    <div class="word-box-title" style="font-size: 9px; margin-bottom: 4px;">Words in the Panel:</div>
-    <div class="word-bank" style="gap: 4px; font-size: 9px;">
+
+  <div class="word-box">
+    <div class="word-box-title">Words in the Panel:</div>
+    <div class="word-bank">
       <span class="word-bank-item">yet</span>
       <span class="word-bank-item">already</span>
       <span class="word-bank-item">yet</span>
@@ -1467,7 +1687,65 @@
   </div>
 </div>
 
+</div>
+
+<script>
+// Share functionality
+function shareWorksheet() {
+  const pageTitle = document.title;
+  const pageUrl = window.location.href;
+
+  // Check if Web Share API is supported
+  if (navigator.share) {
+    navigator.share({
+      title: pageTitle,
+      text: 'Check out this Present Perfect Tense Guide worksheet!',
+      url: pageUrl
+    }).catch((error) => {
+      // User cancelled or error occurred
+      if (error.name !== 'AbortError') {
+        fallbackShare();
+      }
+    });
+  } else {
+    fallbackShare();
+  }
+}
+
+// Fallback share method - copy link to clipboard
+function fallbackShare() {
+  const pageUrl = window.location.href;
+
+  // Create temporary input element
+  const tempInput = document.createElement('input');
+  tempInput.value = pageUrl;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+
+  try {
+    document.execCommand('copy');
+    alert('Link copied to clipboard! Share it with your students.');
+  } catch (err) {
+    alert('Link: ' + pageUrl + '\n\nCopy this link to share the worksheet.');
+  }
+
+  document.body.removeChild(tempInput);
+}
+
+// Keyboard navigation improvements
+document.addEventListener('DOMContentLoaded', function() {
+  // Add focus visible class for better keyboard navigation visibility
+  document.body.addEventListener('keydown', function(e) {
+    if (e.key === 'Tab') {
+      document.body.classList.add('keyboard-nav');
+    }
+  });
+
+  document.body.addEventListener('mousedown', function() {
+    document.body.classList.remove('keyboard-nav');
+  });
+});
+</script>
 
 </body>
 </html>
-
