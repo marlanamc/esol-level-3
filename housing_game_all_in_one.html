@@ -34,6 +34,13 @@
             overflow: hidden;
         }
         
+        @media (max-width: 768px) {
+            .slide-container {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+        }
+        
         .hidden {
             display: none !important;
         }
@@ -94,6 +101,14 @@
             position: relative;
             width: 100%;
             height: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .game-page {
+                min-height: 100vh;
+                justify-content: flex-start;
+                padding-top: 0;
+            }
         }
         
         .question-counter {
@@ -372,6 +387,200 @@
         
         .line-1 { width: 100%; height: 2px; top: 100px; }
         .line-2 { width: 100%; height: 2px; bottom: 100px; }
+        
+        /* MOBILE RESPONSIVE STYLES */
+        @media (max-width: 768px) {
+            .home-title {
+                font-size: 42px;
+                padding: 0 20px;
+            }
+            
+            .home-subtitle {
+                font-size: 18px;
+                padding: 0 20px;
+            }
+            
+            .start-game-btn {
+                font-size: 20px;
+                padding: 16px 40px;
+            }
+            
+            .question-counter {
+                top: 20px;
+                left: 20px;
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            
+            .timer-container {
+                top: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .timer-display {
+                font-size: 32px;
+                padding: 8px 16px;
+                min-width: 100px;
+            }
+            
+            .timer-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .content-area {
+                gap: 30px;
+                padding: 100px 20px 120px 20px;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .flip-card {
+                width: 90%;
+                max-width: 400px;
+                height: 160px;
+            }
+            
+            .flip-card h2 {
+                font-size: 32px;
+            }
+            
+            .flip-card-front::after {
+                font-size: 12px;
+                bottom: 15px;
+            }
+            
+            .adjectives-container {
+                flex-direction: column;
+                gap: 20px;
+                width: 100%;
+                align-items: center;
+            }
+            
+            .adjective-flip-card {
+                width: 90%;
+                max-width: 300px;
+                height: 120px;
+            }
+            
+            .adjective-flip-card p {
+                font-size: 18px;
+                padding: 15px;
+            }
+            
+            .instruction-text {
+                font-size: 14px;
+                padding: 0 20px;
+                margin-top: 20px;
+            }
+            
+            .nav-container {
+                bottom: 20px;
+                flex-wrap: wrap;
+                gap: 12px;
+                width: 90%;
+                max-width: 500px;
+            }
+            
+            .nav-btn {
+                font-size: 14px;
+                padding: 12px 20px;
+                flex: 1;
+                min-width: 100px;
+            }
+            
+            .game-page {
+                padding: 0;
+                overflow-y: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .home-title {
+                font-size: 32px;
+            }
+            
+            .home-subtitle {
+                font-size: 16px;
+            }
+            
+            .start-game-btn {
+                font-size: 18px;
+                padding: 14px 32px;
+            }
+            
+            .question-counter {
+                font-size: 12px;
+                padding: 6px 12px;
+                top: 10px;
+                left: 10px;
+                right: auto;
+                max-width: calc(50% - 15px);
+            }
+            
+            .timer-container {
+                top: 10px;
+                right: 10px;
+                left: auto;
+                max-width: calc(50% - 15px);
+            }
+            
+            .timer-display {
+                font-size: 28px;
+                padding: 6px 12px;
+                min-width: 90px;
+            }
+            
+            .timer-controls {
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .timer-btn {
+                font-size: 11px;
+                padding: 5px 10px;
+            }
+            
+            .content-area {
+                padding: 90px 15px 140px 15px;
+                gap: 25px;
+            }
+            
+            .flip-card {
+                width: 95%;
+                height: 140px;
+            }
+            
+            .flip-card h2 {
+                font-size: 28px;
+            }
+            
+            .adjective-flip-card {
+                width: 95%;
+                height: 110px;
+            }
+            
+            .adjective-flip-card p {
+                font-size: 16px;
+                padding: 12px;
+            }
+            
+            .instruction-text {
+                font-size: 13px;
+                padding: 0 15px;
+            }
+            
+            .nav-container {
+                bottom: 15px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                font-size: 13px;
+                padding: 10px 16px;
+            }
+        }
     </style>
 </head>
 <body>
