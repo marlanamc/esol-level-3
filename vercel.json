@@ -22,6 +22,10 @@
     {
       "source": "/sentence-answers",
       "destination": "/sentencebuilder_answers.html"
+    },
+    {
+      "source": "/housing-game",
+      "destination": "/housing_game_all_in_one.html"
     }
   ],
   "headers": [
@@ -57,4 +61,9 @@
     }
   ]
 }
+
+
+
+
+
 

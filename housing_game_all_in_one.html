@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Superlatives Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            background: #F4F4F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* HOME PAGE STYLES */
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .home-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: #E04E39;
+            text-align: center;
+        }
+        
+        .home-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+        }
+        
+        .start-game-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #2D6A4F 0%, #1f4a35 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .start-game-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* GAME PAGE STYLES */
+        .game-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .question-counter {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            background: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+        
+        .timer-container {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .timer-display {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A1A1A;
+            background: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .timer-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .start-btn { background: #2D6A4F; color: white; }
+        .reset-btn { background: #333333; color: white; }
+        .timer-btn:hover { opacity: 0.8; }
+        
+        .nav-container {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 20;
+        }
+        
+        .nav-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #2D6A4F;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: #1f4a35;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .nav-btn.back {
+            background: #333333;
+        }
+        
+        .nav-btn.back:hover:not(:disabled) {
+            background: #1a1a1a;
+        }
+        
+        .nav-btn.home {
+            background: #E04E39;
+        }
+        
+        .nav-btn.home:hover {
+            background: #c73d2a;
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+            z-index: 10;
+        }
+        
+        /* FLIP CARD STYLES */
+        .flip-card {
+            background-color: transparent;
+            width: 500px;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
+            color: #F4F4F0;
+        }
+        
+        .flip-card-back {
+            background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
+            color: #F4F4F0;
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+        }
+        
+        .flip-card-front::after {
+            content: "Click to reveal";
+            position: absolute;
+            bottom: 20px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+        }
+        
+        /* ADJECTIVE CARDS */
+        .adjectives-container {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+        
+        .adjective-flip-card {
+            background-color: transparent;
+            width: 200px;
+            height: 150px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .adjective-flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .adjective-flip-card.flipped .adjective-flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .adjective-flip-card-front, .adjective-flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .adjective-flip-card-front {
+            background: #2D6A4F;
+            color: #F4F4F0;
+        }
+        
+        .adjective-flip-card-back {
+            background: #2D6A4F;
+            color: #F4F4F0;
+            transform: rotateY(180deg);
+        }
+        
+        .adjective-flip-card p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 20px;
+        }
+        
+        .adjective-flip-card-front::after {
+            content: "Click";
+            position: absolute;
+            bottom: 10px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.8;
+        }
+        
+        .instruction-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+            margin-top: 30px;
+            font-style: italic;
+            letter-spacing: 0.3px;
+            line-height: 1.5;
+        }
+        
+        .decorative-line {
+            position: absolute;
+            background: #E04E39;
+            opacity: 0.1;
+        }
+        
+        .line-1 { width: 100%; height: 2px; top: 100px; }
+        .line-2 { width: 100%; height: 2px; bottom: 100px; }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slideContainer">
+        <div class="decorative-line line-1"></div>
+        <div class="decorative-line line-2"></div>
+        
+        <!-- HOME PAGE -->
+        <div id="homePage" class="home-page">
+            <h1 class="home-title">🏠 Housing Superlatives Game</h1>
+            <p class="home-subtitle">Learn English by discussing housing topics!</p>
+            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+        </div>
+        
+        <!-- GAME PAGE -->
+        <div id="gamePage" class="game-page hidden">
+            <div class="question-counter" id="questionCounter">Question 1 of 10</div>
+            
+            <div class="timer-container">
+                <div class="timer-display" id="timer">01:30</div>
+                <div class="timer-controls">
+                    <button class="timer-btn start-btn" onclick="toggleTimer()" id="timerBtn">Start</button>
+                    <button class="timer-btn reset-btn" onclick="resetTimer()">Reset</button>
+                </div>
+            </div>
+            
+            <div class="content-area" id="contentArea">
+                <!-- CATEGORY CARD -->
+                <div class="flip-card" onclick="toggleFlip(this)">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h2>?</h2>
+                        </div>
+                        <div class="flip-card-back">
+                            <h2 id="categoryTitle">CATEGORY</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ADJECTIVE CARDS -->
+                <div class="adjectives-container">
+                    <div class="adjective-flip-card" onclick="toggleFlip(this)">
+                        <div class="adjective-flip-card-inner">
+                            <div class="adjective-flip-card-front">
+                                <p>?</p>
+                            </div>
+                            <div class="adjective-flip-card-back">
+                                <p id="adj1">Adjective 1</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adjective-flip-card" onclick="toggleFlip(this)">
+                        <div class="adjective-flip-card-inner">
+                            <div class="adjective-flip-card-front">
+                                <p>?</p>
+                            </div>
+                            <div class="adjective-flip-card-back">
+                                <p id="adj2">Adjective 2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adjective-flip-card" onclick="toggleFlip(this)">
+                        <div class="adjective-flip-card-inner">
+                            <div class="adjective-flip-card-front">
+                                <p>?</p>
+                            </div>
+                            <div class="adjective-flip-card-back">
+                                <p id="adj3">Adjective 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instruction-text">Click the cards to flip and reveal • Write your answers on your whiteboard (1, 2, 3)</div>
+            </div>
+            
+            <!-- NAVIGATION BUTTONS -->
+            <div class="nav-container">
+                <button class="nav-btn back" onclick="previousCategory()" id="backBtn">← Back</button>
+                <button class="nav-btn home" onclick="goHome()">🏠 Home</button>
+                <button class="nav-btn" onclick="nextCategory()" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game data
+        const categories = [
+            {
+                title: "Boston Neighborhoods",
+                adj1: "Nicest",
+                adj2: "Sketchiest",
+                adj3: "Best place to go shopping"
+            },
+            {
+                title: "Things in an Apartment",
+                adj1: "Most essential",
+                adj2: "Most expensive",
+                adj3: "Most likely to break"
+            },
+            {
+                title: "Types of Homes",
+                adj1: "Most affordable",
+                adj2: "Most luxurious",
+                adj3: "Best for families"
+            },
+            {
+                title: "Kitchen Appliances",
+                adj1: "Most used",
+                adj2: "Most annoying to clean",
+                adj3: "Most likely to break down"
+            },
+            {
+                title: "Home Safety",
+                adj1: "Most important safety feature",
+                adj2: "Most common hazard",
+                adj3: "Best way to prevent accidents"
+            },
+            {
+                title: "House Hunting",
+                adj1: "Most important feature",
+                adj2: "Most frustrating part",
+                adj3: "Best deal to find"
+            },
+            {
+                title: "Furniture",
+                adj1: "Most comfortable",
+                adj2: "Most expensive",
+                adj3: "Hardest to move"
+            },
+            {
+                title: "Neighborhood Features",
+                adj1: "Most convenient",
+                adj2: "Most noisy",
+                adj3: "Best for safety"
+            },
+            {
+                title: "Home Repairs",
+                adj1: "Most expensive",
+                adj2: "Most annoying",
+                adj3: "Most important to fix"
+            },
+            {
+                title: "Dream Home",
+                adj1: "Most important room",
+                adj2: "Most desired feature",
+                adj3: "Best location"
+            }
+        ];
+        
+        let currentCategoryIndex = 0;
+        let timeLeft = 90;
+        let timerId = null;
+        
+        // Start game from home page
+        function startGame() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('gamePage').classList.remove('hidden');
+            loadCategory(0);
+        }
+        
+        // Load category
+        function loadCategory(index) {
+            if (index < 0) index = categories.length - 1;
+            if (index >= categories.length) index = 0;
+            
+            currentCategoryIndex = index;
+            const category = categories[index];
+            
+            // Reset flip cards FIRST before changing content
+            document.querySelectorAll('.flip-card, .adjective-flip-card').forEach(card => {
+                card.classList.remove('flipped');
+            });
+            
+            // Then update the content
+            document.getElementById('categoryTitle').textContent = category.title;
+            document.getElementById('adj1').textContent = category.adj1;
+            document.getElementById('adj2').textContent = category.adj2;
+            document.getElementById('adj3').textContent = category.adj3;
+            document.getElementById('questionCounter').textContent = `Question ${index + 1} of ${categories.length}`;
+            
+            // Reset timer
+            resetTimer();
+        }
+        
+        function toggleFlip(element) {
+            if (element.classList.contains('flip-card')) {
+                element.classList.toggle('flipped');
+            } else if (element.classList.contains('adjective-flip-card')) {
+                element.classList.toggle('flipped');
+            }
+        }
+        
+        function nextCategory() {
+            loadCategory(currentCategoryIndex + 1);
+        }
+        
+        function previousCategory() {
+            loadCategory(currentCategoryIndex - 1);
+        }
+        
+        function goHome() {
+            document.getElementById('gamePage').classList.add('hidden');
+            document.getElementById('homePage').classList.remove('hidden');
+            clearInterval(timerId);
+            timerId = null;
+        }
+        
+        // TIMER FUNCTIONALITY
+        const display = document.getElementById('timer');
+        const btn = document.getElementById('timerBtn');
+        
+        function updateDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            if (timeLeft <= 10) display.style.color = '#E04E39';
+            else display.style.color = '#1A1A1A';
+        }
+        
+        function toggleTimer() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                btn.textContent = 'Start';
+            } else {
+                btn.textContent = 'Pause';
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        btn.textContent = 'Start';
+                        alert('Time is up!');
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 90;
+            btn.textContent = 'Start';
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
