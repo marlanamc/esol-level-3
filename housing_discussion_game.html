@@ -210,66 +210,26 @@
             max-width: 1200px;
         }
         
-        /* CATEGORY FLIP CARD */
-        .category-flip-card {
-            background-color: transparent;
+        /* CATEGORY CARD (always visible, no flip) */
+        .category-card {
             width: 420px;
-            height: 120px;
-            perspective: 1000px;
-            cursor: pointer;
+            height: 100px;
             margin: 0 auto;
-        }
-        
-        .category-flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .category-flip-card.flipped .category-flip-card-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .category-flip-card-front, .category-flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 8px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-        
-        .category-flip-card-front {
             background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
             color: #F4F4F0;
         }
         
-        .category-flip-card-back {
-            background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
-            color: #F4F4F0;
-            transform: rotateY(180deg);
-        }
-        
-        .category-flip-card h2 {
+        .category-card h2 {
             font-family: 'Montserrat', sans-serif;
             font-size: 28px;
             font-weight: 700;
             padding: 0 20px;
-        }
-        
-        .category-flip-card-front::after {
-            content: "Click to reveal category";
-            position: absolute;
-            bottom: 12px;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            opacity: 0.85;
+            text-align: center;
         }
         
         /* TOPIC CARDS GRID */
@@ -370,6 +330,63 @@
             margin-bottom: 0;
         }
         
+        /* Expanded topic card when flipped — bigger, easier to read */
+        body:has(.topic-flip-card.flipped)::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 99;
+        }
+        
+        .topic-flip-card.flipped {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            max-width: 680px;
+            height: 75vh;
+            max-height: 520px;
+            z-index: 100;
+            margin: 0;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            min-height: 100%;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-front,
+        .topic-flip-card.flipped .topic-flip-card-back {
+            min-height: 100%;
+            padding: 28px;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-back {
+            padding-bottom: 52px;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            font-size: 19px;
+            line-height: 1.6;
+            padding-left: 24px;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-back li {
+            margin-bottom: 14px;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-back::after {
+            content: "Click to close";
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.9;
+        }
+        
         .instruction-text {
             font-family: 'Inter', sans-serif;
             font-size: 15px;
@@ -417,13 +434,12 @@
                 padding: 100px 16px 24px;
             }
             
-            .category-flip-card {
+            .category-card {
                 width: 90%;
                 max-width: 360px;
-                height: 100px;
+                height: 88px;
             }
-            .category-flip-card h2 { font-size: 22px; }
-            .category-flip-card-front::after { font-size: 11px; bottom: 10px; }
+            .category-card h2 { font-size: 22px; }
             
             .topic-cards-grid {
                 gap: 14px;
@@ -449,8 +465,8 @@
             .timer-container { top: 10px; right: 10px; }
             .timer-display { font-size: 28px; padding: 6px 12px; min-width: 90px; }
             .content-area { padding: 90px 12px 20px; gap: 20px; }
-            .category-flip-card { height: 90px; }
-            .category-flip-card h2 { font-size: 18px; }
+            .category-card { height: 80px; }
+            .category-card h2 { font-size: 18px; }
             .topic-cards-grid { grid-template-columns: 1fr; gap: 12px; }
             .topic-flip-card { min-height: 150px; }
             .topic-flip-card-inner, .topic-flip-card-front, .topic-flip-card-back { min-height: 150px; }
@@ -486,16 +502,9 @@
             </div>
             
             <div class="content-area" id="contentArea">
-                <!-- CATEGORY CARD -->
-                <div class="category-flip-card" onclick="toggleFlip(this)">
-                    <div class="category-flip-card-inner">
-                        <div class="category-flip-card-front">
-                            <h2>?</h2>
-                        </div>
-                        <div class="category-flip-card-back">
-                            <h2 id="categoryTitle">CATEGORY</h2>
-                        </div>
-                    </div>
+                <!-- CATEGORY CARD (always visible) -->
+                <div class="category-card">
+                    <h2 id="categoryTitle">CATEGORY</h2>
                 </div>
                 
                 <!-- 6 TOPIC CARDS -->
@@ -503,7 +512,7 @@
                     <!-- filled by JS -->
                 </div>
                 
-                <div class="instruction-text">Click the category card to reveal the category • Click each topic card to flip and see discussion questions</div>
+                <div class="instruction-text">Click each topic card to flip and see discussion questions • Click the card again to close</div>
             </div>
             
             <div class="nav-container">
@@ -578,7 +587,7 @@
             currentCategoryIndex = index;
             const cat = categories[index];
             
-            document.querySelectorAll('.category-flip-card, .topic-flip-card').forEach(c => c.classList.remove('flipped'));
+            document.querySelectorAll('.topic-flip-card').forEach(c => c.classList.remove('flipped'));
             
             document.getElementById('categoryTitle').textContent = cat.title;
             document.getElementById('questionCounter').textContent = `Category ${index + 1} of ${categories.length}`;
@@ -612,7 +621,7 @@
         }
         
         function toggleFlip(el) {
-            if (el.classList.contains('category-flip-card') || el.classList.contains('topic-flip-card')) {
+            if (el.classList.contains('topic-flip-card')) {
                 el.classList.toggle('flipped');
             }
         }
