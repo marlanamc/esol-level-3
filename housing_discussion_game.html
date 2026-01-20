@@ -330,13 +330,14 @@
             margin-bottom: 0;
         }
         
-        /* Expanded topic card when flipped — bigger, easier to read */
-        body:has(.topic-flip-card.flipped)::before {
-            content: '';
+        /* Backdrop for expanded card — click to close */
+        .topic-card-backdrop {
+            display: none;
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.4);
             z-index: 99;
+            cursor: pointer;
         }
         
         .topic-flip-card.flipped {
@@ -350,6 +351,7 @@
             max-height: 520px;
             z-index: 100;
             margin: 0;
+            cursor: pointer;
         }
         
         .topic-flip-card.flipped .topic-flip-card-inner {
@@ -363,7 +365,7 @@
         }
         
         .topic-flip-card.flipped .topic-flip-card-back {
-            padding-bottom: 52px;
+            padding-bottom: 72px;
             background: #FFFFFF;
             color: #1a1a1a;
             border-left: 6px solid #2D6A4F;
@@ -386,16 +388,24 @@
             color: #2D6A4F;
         }
         
-        .topic-flip-card.flipped .topic-flip-card-back::after {
-            content: "Click to close";
+        .topic-card-close-btn {
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 15px;
+            font-size: 16px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            color: #2D6A4F;
+            color: #FFFFFF;
+            background: #2D6A4F;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 28px;
+            cursor: pointer;
+        }
+        
+        .topic-card-close-btn:hover {
+            background: #1f4a35;
         }
         
         .instruction-text {
@@ -516,6 +526,8 @@
                 </div>
             </div>
             
+            <div id="topicCardBackdrop" class="topic-card-backdrop"></div>
+            
             <div class="content-area" id="contentArea">
                 <!-- CATEGORY CARD (always visible) -->
                 <div class="category-card">
@@ -527,7 +539,7 @@
                     <!-- filled by JS -->
                 </div>
                 
-                <div class="instruction-text">Click each topic card to flip and see discussion questions • Click the card again to close</div>
+                <div class="instruction-text">Click each topic card to flip and see discussion questions • Click Close or the dark area to close</div>
             </div>
             
             <div class="nav-container">
@@ -603,6 +615,8 @@
             const cat = categories[index];
             
             document.querySelectorAll('.topic-flip-card').forEach(c => c.classList.remove('flipped'));
+            var bd = document.getElementById('topicCardBackdrop');
+            if (bd) bd.style.display = 'none';
             
             document.getElementById('categoryTitle').textContent = cat.title;
             document.getElementById('questionCounter').textContent = `Category ${index + 1} of ${categories.length}`;
@@ -621,6 +635,7 @@
                     '  </div>' +
                     '  <div class="topic-flip-card-back">' +
                     '    <ul>' + t.questions.map(q => '<li>' + escapeHtml(q) + '</li>').join('') + '</ul>' +
+                    '    <button type="button" class="topic-card-close-btn" onclick="event.stopPropagation(); this.closest(\'.topic-flip-card\').classList.remove(\'flipped\'); document.getElementById(\'topicCardBackdrop\').style.display=\'none\';">Close</button>' +
                     '  </div>' +
                     '</div>';
                 grid.appendChild(card);
@@ -636,8 +651,19 @@
         }
         
         function toggleFlip(el) {
-            if (el.classList.contains('topic-flip-card')) {
-                el.classList.toggle('flipped');
+            if (!el || !el.classList.contains('topic-flip-card')) return;
+            var backdrop = document.getElementById('topicCardBackdrop');
+            el.classList.toggle('flipped');
+            if (el.classList.contains('flipped')) {
+                if (backdrop) {
+                    backdrop.style.display = 'block';
+                    backdrop.onclick = function() {
+                        el.classList.remove('flipped');
+                        backdrop.style.display = 'none';
+                    };
+                }
+            } else {
+                if (backdrop) backdrop.style.display = 'none';
             }
         }
         
