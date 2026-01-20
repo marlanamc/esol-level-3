@@ -364,16 +364,26 @@
         
         .topic-flip-card.flipped .topic-flip-card-back {
             padding-bottom: 52px;
+            background: #FFFFFF;
+            color: #1a1a1a;
+            border-left: 6px solid #2D6A4F;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
         
         .topic-flip-card.flipped .topic-flip-card-back ul {
-            font-size: 19px;
-            line-height: 1.6;
-            padding-left: 24px;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.7;
+            padding-left: 28px;
+            color: #1a1a1a;
         }
         
         .topic-flip-card.flipped .topic-flip-card-back li {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-back li::marker {
+            color: #2D6A4F;
         }
         
         .topic-flip-card.flipped .topic-flip-card-back::after {
@@ -382,9 +392,10 @@
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 14px;
+            font-size: 15px;
             font-family: 'Inter', sans-serif;
-            opacity: 0.9;
+            font-weight: 600;
+            color: #2D6A4F;
         }
         
         .instruction-text {
@@ -451,6 +462,8 @@
             .topic-flip-card .topic-name { font-size: 16px; }
             .topic-flip-card-back ul { font-size: 12px; }
             .topic-flip-card-back li { margin-bottom: 6px; }
+            .topic-flip-card.flipped .topic-flip-card-back ul { font-size: 20px; }
+            .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 14px; }
             
             .instruction-text { font-size: 14px; padding: 0 16px; }
             .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
@@ -472,6 +485,8 @@
             .topic-flip-card-inner, .topic-flip-card-front, .topic-flip-card-back { min-height: 150px; }
             .topic-flip-card .topic-name { font-size: 15px; }
             .topic-flip-card-back ul { font-size: 11px; }
+            .topic-flip-card.flipped .topic-flip-card-back ul { font-size: 18px; }
+            .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 12px; }
             .instruction-text { font-size: 13px; }
             .nav-container { padding: 12px; }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
