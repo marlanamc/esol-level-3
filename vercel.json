@@ -26,6 +26,10 @@
     {
       "source": "/housing-game",
       "destination": "/housing_game_all_in_one.html"
+    },
+    {
+      "source": "/housing-discussion-game",
+      "destination": "/housing_discussion_game.html"
     }
   ],
   "headers": [

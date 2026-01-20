@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Discussion Game — Open-Ended</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .slide-container {
+            width: 100vw;
+            min-height: 100vh;
+            background: #F4F4F0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* HOME PAGE STYLES */
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        .home-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: #E04E39;
+            text-align: center;
+        }
+        
+        .home-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+        }
+        
+        .start-game-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #2D6A4F 0%, #1f4a35 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .start-game-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* GAME PAGE STYLES */
+        .game-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+        
+        .question-counter {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            background: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+        
+        .timer-container {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
+        }
+        
+        .timer-display {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A1A1A;
+            background: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .timer-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .start-btn { background: #2D6A4F; color: white; }
+        .reset-btn { background: #333333; color: white; }
+        .timer-btn:hover { opacity: 0.8; }
+        
+        .nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            z-index: 20;
+            background: linear-gradient(to top, #F4F4F0 80%, transparent);
+        }
+        
+        .nav-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #2D6A4F;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: #1f4a35;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn.back { background: #333333; }
+        .nav-btn.back:hover:not(:disabled) { background: #1a1a1a; }
+        .nav-btn.home { background: #E04E39; }
+        .nav-btn.home:hover { background: #c73d2a; }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            z-index: 10;
+            padding: 120px 24px 24px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        /* CATEGORY FLIP CARD */
+        .category-flip-card {
+            background-color: transparent;
+            width: 420px;
+            height: 120px;
+            perspective: 1000px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+        
+        .category-flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .category-flip-card.flipped .category-flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .category-flip-card-front, .category-flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-flip-card-front {
+            background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
+            color: #F4F4F0;
+        }
+        
+        .category-flip-card-back {
+            background: linear-gradient(135deg, #E04E39 0%, #d63e2a 100%);
+            color: #F4F4F0;
+            transform: rotateY(180deg);
+        }
+        
+        .category-flip-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 0 20px;
+        }
+        
+        .category-flip-card-front::after {
+            content: "Click to reveal category";
+            position: absolute;
+            bottom: 12px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.85;
+        }
+        
+        /* TOPIC CARDS GRID */
+        .topic-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .topic-flip-card {
+            background-color: transparent;
+            width: 100%;
+            min-height: 180px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .topic-flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .topic-flip-card-front, .topic-flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+        
+        .topic-flip-card-front {
+            background: #2D6A4F;
+            color: #F4F4F0;
+        }
+        
+        .topic-flip-card-back {
+            background: #2D6A4F;
+            color: #F4F4F0;
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            overflow-y: auto;
+        }
+        
+        .topic-flip-card .topic-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            padding: 0 8px;
+        }
+        
+        .topic-flip-card-front::after {
+            content: "Click to see questions";
+            position: absolute;
+            bottom: 10px;
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.85;
+        }
+        
+        .topic-flip-card-back ul {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            list-style: disc;
+            padding-left: 18px;
+            margin: 0;
+        }
+        
+        .topic-flip-card-back li {
+            margin-bottom: 8px;
+        }
+        
+        .topic-flip-card-back li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .instruction-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+            font-style: italic;
+            letter-spacing: 0.3px;
+            line-height: 1.5;
+        }
+        
+        .decorative-line {
+            position: absolute;
+            background: #E04E39;
+            opacity: 0.1;
+        }
+        
+        .line-1 { width: 100%; height: 2px; top: 100px; }
+        .line-2 { width: 100%; height: 2px; bottom: 100px; }
+        
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .topic-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-container { overflow-y: auto; }
+            
+            .home-title { font-size: 42px; padding: 0 20px; }
+            .home-subtitle { font-size: 18px; padding: 0 20px; }
+            .start-game-btn { font-size: 20px; padding: 16px 40px; }
+            
+            .question-counter {
+                top: 20px; left: 20px;
+                font-size: 14px; padding: 8px 16px;
+            }
+            .timer-container { top: 20px; right: 20px; gap: 8px; }
+            .timer-display { font-size: 32px; padding: 8px 16px; min-width: 100px; }
+            .timer-btn { font-size: 12px; padding: 6px 12px; }
+            
+            .content-area {
+                gap: 24px;
+                padding: 100px 16px 24px;
+            }
+            
+            .category-flip-card {
+                width: 90%;
+                max-width: 360px;
+                height: 100px;
+            }
+            .category-flip-card h2 { font-size: 22px; }
+            .category-flip-card-front::after { font-size: 11px; bottom: 10px; }
+            
+            .topic-cards-grid {
+                gap: 14px;
+                max-width: 100%;
+            }
+            .topic-flip-card { min-height: 160px; }
+            .topic-flip-card-inner { min-height: 160px; }
+            .topic-flip-card-front, .topic-flip-card-back { min-height: 160px; }
+            .topic-flip-card .topic-name { font-size: 16px; }
+            .topic-flip-card-back ul { font-size: 12px; }
+            .topic-flip-card-back li { margin-bottom: 6px; }
+            
+            .instruction-text { font-size: 14px; padding: 0 16px; }
+            .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
+            .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
+        }
+        
+        @media (max-width: 480px) {
+            .home-title { font-size: 32px; }
+            .home-subtitle { font-size: 16px; }
+            .start-game-btn { font-size: 18px; padding: 14px 32px; }
+            .question-counter { font-size: 12px; padding: 6px 12px; top: 10px; left: 10px; }
+            .timer-container { top: 10px; right: 10px; }
+            .timer-display { font-size: 28px; padding: 6px 12px; min-width: 90px; }
+            .content-area { padding: 90px 12px 20px; gap: 20px; }
+            .category-flip-card { height: 90px; }
+            .category-flip-card h2 { font-size: 18px; }
+            .topic-cards-grid { grid-template-columns: 1fr; gap: 12px; }
+            .topic-flip-card { min-height: 150px; }
+            .topic-flip-card-inner, .topic-flip-card-front, .topic-flip-card-back { min-height: 150px; }
+            .topic-flip-card .topic-name { font-size: 15px; }
+            .topic-flip-card-back ul { font-size: 11px; }
+            .instruction-text { font-size: 13px; }
+            .nav-container { padding: 12px; }
+            .nav-btn { font-size: 13px; padding: 10px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slideContainer">
+        <div class="decorative-line line-1"></div>
+        <div class="decorative-line line-2"></div>
+        
+        <!-- HOME PAGE -->
+        <div id="homePage" class="home-page">
+            <h1 class="home-title">🏠 Housing Discussion Game</h1>
+            <p class="home-subtitle">Open-ended questions to practice talking about home, landlords, and safety</p>
+            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+        </div>
+        
+        <!-- GAME PAGE -->
+        <div id="gamePage" class="game-page hidden">
+            <div class="question-counter" id="questionCounter">Category 1 of 4</div>
+            <div class="timer-container">
+                <div class="timer-display" id="timer">01:30</div>
+                <div class="timer-controls">
+                    <button class="timer-btn start-btn" onclick="toggleTimer()" id="timerBtn">Start</button>
+                    <button class="timer-btn reset-btn" onclick="resetTimer()">Reset</button>
+                </div>
+            </div>
+            
+            <div class="content-area" id="contentArea">
+                <!-- CATEGORY CARD -->
+                <div class="category-flip-card" onclick="toggleFlip(this)">
+                    <div class="category-flip-card-inner">
+                        <div class="category-flip-card-front">
+                            <h2>?</h2>
+                        </div>
+                        <div class="category-flip-card-back">
+                            <h2 id="categoryTitle">CATEGORY</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 6 TOPIC CARDS -->
+                <div class="topic-cards-grid" id="topicCardsGrid">
+                    <!-- filled by JS -->
+                </div>
+                
+                <div class="instruction-text">Click the category card to reveal the category • Click each topic card to flip and see discussion questions</div>
+            </div>
+            
+            <div class="nav-container">
+                <button class="nav-btn back" onclick="previousCategory()" id="backBtn">← Back</button>
+                <button class="nav-btn home" onclick="goHome()">🏠 Home</button>
+                <button class="nav-btn" onclick="nextCategory()" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const categories = [
+            {
+                title: "Daily Life at Home",
+                topics: [
+                    { name: "Favorite Room", questions: ["What is your favorite room in your home?", "Why do you like this room?", "Describe at least three things in the room."] },
+                    { name: "Weeknight at Home", questions: ["Describe a typical weeknight at home.", "What time do you get home?", "What do you usually do in the evening?"] },
+                    { name: "Room Description", questions: ["Describe one room in your home.", "Use there is and there are.", "Name at least five objects in the room."] },
+                    { name: "Household Chores", questions: ["What chores do you do at home?", "How often do you do each chore?", "Which chore do you like the most? Which do you like the least?"] },
+                    { name: "First Home in Boston or the U.S.", questions: ["Describe the first place you lived in Boston or in the U.S.", "Was it small or big? Quiet or noisy? Cheap or expensive?", "What is one thing you liked and one thing you did not like?"] },
+                    { name: "Dream Apartment or House", questions: ["Describe your dream apartment or house.", "Where is it?", "How many rooms does it have?", "What is around it?", "Use at least three sentences with \"I would like to have…\""] }
+                ]
+            },
+            {
+                title: "Landlords & Communication",
+                topics: [
+                    { name: "Heat Problem", questions: ["Your apartment has no heat and it is very cold.", "Describe the problem clearly.", "What information should you give to your landlord?", "What questions should you ask?"] },
+                    { name: "Noisy Neighbors", questions: ["Your neighbors are very noisy late at night.", "Describe the situation.", "What would you say to the building manager?", "What solution would you ask for?"] },
+                    { name: "Text Message to Landlord", questions: ["Think of a small problem in your apartment (for example, a broken light or leaking faucet).", "What text message would you send to your landlord?", "Include a greeting, the problem, and a thank you."] },
+                    { name: "Rent Increase", questions: ["You receive a notice about a rent increase.", "What questions would you ask your landlord?", "How would you ask for more information or a smaller increase?"] },
+                    { name: "New Lease", questions: ["You want to renew your lease.", "What questions would you ask about rent, lease length, or discounts?", "What is important to you in a new lease?"] },
+                    { name: "Leaving a Voicemail", questions: ["What information should you include in a voicemail to your landlord?", "What problem would you explain?", "Why is speaking clearly important?"] }
+                ]
+            },
+            {
+                title: "Housing Problems & Solutions",
+                topics: [
+                    { name: "Leaking Ceiling", questions: ["Your ceiling leaks when it rains.", "Describe the problem in detail.", "What should you do first, second, and third?"] },
+                    { name: "Pests in the Apartment", questions: ["You see mice or bugs in your kitchen.", "What can you do yourself?", "What should the landlord do?", "Use at least three sentences with \"should.\""] },
+                    { name: "Broken Elevator", questions: ["You live on a high floor and the elevator is broken.", "How does this affect your daily life?", "What solutions would you ask for?"] },
+                    { name: "Cleaning Disagreement", questions: ["Two people in an apartment disagree about how often to clean.", "What are both opinions?", "What is a fair compromise?", "How can people talk about this calmly?"] },
+                    { name: "Late Rent", questions: ["You need to pay rent a few days late.", "How would you explain the situation politely?", "What information should you include?"] },
+                    { name: "Laundry Problems", questions: ["The laundry machines in your building often cause problems.", "What problems can happen in shared laundry spaces?", "What rules or solutions could help?"] }
+                ]
+            },
+            {
+                title: "Safety & Emergencies at Home",
+                topics: [
+                    { name: "Smell of Gas", questions: ["You smell gas in your kitchen.", "What should you do?", "What should you not do?", "Why are these steps important?"] },
+                    { name: "Fire Alarm", questions: ["The fire alarm goes off in your building.", "What should you do step by step?", "Where is the exit in your building?"] },
+                    { name: "Water from Upstairs", questions: ["Water is coming through your ceiling from the apartment above.", "How would you feel?", "What actions should you take?", "Who should you contact?"] },
+                    { name: "Stranger at the Door", questions: ["Someone you do not know knocks on your door late at night.", "What would you do?", "What safety rules are important in this situation?"] },
+                    { name: "No Heat in Winter", questions: ["It is winter and your apartment has no heat.", "What temporary solutions can you use inside your home?", "What help would you request from your landlord?"] },
+                    { name: "Calling 911 from Home", questions: ["Choose one emergency at home (fire, injury, smoke, or gas).", "What information do you need to give when calling 911?", "Why is it important to stay calm and clear?"] }
+                ]
+            }
+        ];
+        
+        let currentCategoryIndex = 0;
+        let timeLeft = 90;
+        let timerId = null;
+        
+        function startGame() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('gamePage').classList.remove('hidden');
+            loadCategory(0);
+        }
+        
+        function loadCategory(index) {
+            if (index < 0) index = categories.length - 1;
+            if (index >= categories.length) index = 0;
+            currentCategoryIndex = index;
+            const cat = categories[index];
+            
+            document.querySelectorAll('.category-flip-card, .topic-flip-card').forEach(c => c.classList.remove('flipped'));
+            
+            document.getElementById('categoryTitle').textContent = cat.title;
+            document.getElementById('questionCounter').textContent = `Category ${index + 1} of ${categories.length}`;
+            
+            const grid = document.getElementById('topicCardsGrid');
+            grid.innerHTML = '';
+            
+            cat.topics.forEach((t, i) => {
+                const card = document.createElement('div');
+                card.className = 'topic-flip-card';
+                card.onclick = function() { toggleFlip(this); };
+                card.innerHTML = 
+                    '<div class="topic-flip-card-inner">' +
+                    '  <div class="topic-flip-card-front">' +
+                    '    <span class="topic-name">' + escapeHtml(t.name) + '</span>' +
+                    '  </div>' +
+                    '  <div class="topic-flip-card-back">' +
+                    '    <ul>' + t.questions.map(q => '<li>' + escapeHtml(q) + '</li>').join('') + '</ul>' +
+                    '  </div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+            
+            resetTimer();
+        }
+        
+        function escapeHtml(s) {
+            const d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+        
+        function toggleFlip(el) {
+            if (el.classList.contains('category-flip-card') || el.classList.contains('topic-flip-card')) {
+                el.classList.toggle('flipped');
+            }
+        }
+        
+        function nextCategory() { loadCategory(currentCategoryIndex + 1); }
+        function previousCategory() { loadCategory(currentCategoryIndex - 1); }
+        
+        function goHome() {
+            document.getElementById('gamePage').classList.add('hidden');
+            document.getElementById('homePage').classList.remove('hidden');
+            clearInterval(timerId);
+            timerId = null;
+        }
+        
+        const display = document.getElementById('timer');
+        const btn = document.getElementById('timerBtn');
+        
+        function updateDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            display.textContent = (m + '').padStart(2, '0') + ':' + (s + '').padStart(2, '0');
+            display.style.color = timeLeft <= 10 ? '#E04E39' : '#1A1A1A';
+        }
+        
+        function toggleTimer() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                btn.textContent = 'Start';
+            } else {
+                btn.textContent = 'Pause';
+                timerId = setInterval(function() {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        btn.textContent = 'Start';
+                        alert('Time is up!');
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 90;
+            btn.textContent = 'Start';
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
