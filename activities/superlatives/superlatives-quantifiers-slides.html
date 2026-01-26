@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superlatives & Quantifiers - ESOL Grammar Slides</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #d97757;
+      --secondary: #7ba884;
+      --accent: #f4d35e;
+      --background: #fef9f3;
+      --text: #2b3a4a;
+      --light-gray: #f5f5f5;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .slide {
+      min-height: 100vh;
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+      position: relative;
+    }
+
+    .slide-number {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 2rem;
+      font-size: 0.875rem;
+      color: #999;
+    }
+
+    /* Title Slide */
+    .title-slide {
+      background: linear-gradient(135deg, var(--primary) 0%, #c86a4d 100%);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .title-slide h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .title-slide .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+    }
+
+    .title-slide .tagline {
+      font-size: 1.1rem;
+      font-style: italic;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+
+    /* Section Headers */
+    .section-slide {
+      background: linear-gradient(135deg, var(--secondary) 0%, #6a9973 100%);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .section-slide h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-slide .icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Content Slides */
+    .content-slide h2 {
+      font-size: 2.25rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .content-slide h3 {
+      font-size: 1.5rem;
+      color: var(--secondary);
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .content-slide p {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-slide ul, .content-slide ol {
+      font-size: 1.25rem;
+      margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .content-slide li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Example Box */
+    .example-box {
+      background: white;
+      border-left: 5px solid var(--secondary);
+      padding: 1.25rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .example-box.wrong {
+      border-left-color: #e74c3c;
+      background: #fdf2f2;
+    }
+
+    .example-box .label {
+      font-weight: bold;
+      color: var(--secondary);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .example-box.wrong .label {
+      color: #e74c3c;
+    }
+
+    .example-box .sentence {
+      font-size: 1.35rem;
+    }
+
+    .highlight {
+      background: linear-gradient(to bottom, transparent 50%, var(--accent) 50%);
+      padding: 0 4px;
+      font-weight: 600;
+    }
+
+    .highlight-green {
+      background: linear-gradient(to bottom, transparent 50%, #b8e6c1 50%);
+      padding: 0 4px;
+      font-weight: 600;
+    }
+
+    .highlight-red {
+      text-decoration: line-through;
+      color: #e74c3c;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .column {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .column.green {
+      border-top: 4px solid var(--secondary);
+    }
+
+    .column.orange {
+      border-top: 4px solid var(--primary);
+    }
+
+    .column h4 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: inherit;
+    }
+
+    .column.green h4 { color: var(--secondary); }
+    .column.orange h4 { color: var(--primary); }
+
+    .column ul {
+      margin-left: 1.25rem;
+      font-size: 1.1rem;
+    }
+
+    /* Table Styles */
+    .grammar-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .grammar-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .grammar-table td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .grammar-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .grammar-table tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    /* Tip Box */
+    .tip-box {
+      background: linear-gradient(135deg, var(--accent) 0%, #f0c93e 100%);
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .tip-box .tip-label {
+      font-weight: bold;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tip-box p {
+      font-size: 1.15rem;
+      margin: 0;
+    }
+
+    /* Formula Box */
+    .formula-box {
+      background: var(--text);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .formula-box span {
+      margin: 0 0.25rem;
+    }
+
+    .formula-box .keyword {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* Quiz Slide */
+    .quiz-slide {
+      background: #f8f9fa;
+    }
+
+    .quiz-slide h2 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .quiz-question {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .quiz-question .q-number {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 2rem;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+
+    .quiz-question .q-text {
+      font-size: 1.25rem;
+      display: inline;
+    }
+
+    .quiz-options {
+      margin-top: 1rem;
+      margin-left: 3rem;
+    }
+
+    .quiz-options label {
+      display: block;
+      padding: 0.5rem 0;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* Cheat Sheet */
+    .cheat-sheet {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .cheat-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .cheat-card .word {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .cheat-card .use {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .cheat-card .example {
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    /* Interactive Exercise Styles */
+    .exercise-slide {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .exercise-slide h2 {
+      color: var(--secondary);
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .exercise-item {
+      background: white;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .exercise-item .ex-number {
+      background: var(--secondary);
+      color: white;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .exercise-item .ex-content {
+      flex: 1;
+    }
+
+    .exercise-item .ex-question {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-item .ex-blank {
+      display: inline-block;
+      border-bottom: 2px solid var(--primary);
+      min-width: 100px;
+      margin: 0 4px;
+      text-align: center;
+    }
+
+    .exercise-item .ex-answer {
+      background: linear-gradient(135deg, var(--accent) 0%, #f0c93e 100%);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: none;
+      margin-top: 0.5rem;
+    }
+
+    .exercise-item .ex-answer.visible {
+      display: inline-block;
+    }
+
+    .exercise-item .ex-hint {
+      font-size: 0.9rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    .show-answer-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .show-answer-btn:hover {
+      background: #c86a4d;
+      transform: scale(1.05);
+    }
+
+    .show-answer-btn.revealed {
+      background: var(--secondary);
+    }
+
+    .show-all-btn {
+      background: var(--text);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .show-all-btn:hover {
+      background: #1a2530;
+      transform: scale(1.02);
+    }
+
+    .exercise-instructions {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    /* Navigation */
+    .nav-controls {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .nav-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .nav-btn:hover {
+      background: #c86a4d;
+      transform: scale(1.05);
+    }
+
+    .nav-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .nav-btn.secondary {
+      background: var(--secondary);
+    }
+
+    .nav-btn.secondary:hover {
+      background: #6a9973;
+    }
+
+    .slide-counter {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      color: var(--text);
+      min-width: 80px;
+      justify-content: center;
+    }
+
+    /* Hide slides by default, show active */
+    .slide {
+      display: none;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    /* Print Styles */
+    @media print {
+      .nav-controls {
+        display: none !important;
+      }
+
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh;
+      }
+
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Controls -->
+  <div class="nav-controls">
+    <button class="nav-btn secondary" id="prevBtn" onclick="prevSlide()">
+      <span>&#8592;</span> Back
+    </button>
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">20</span>
+    </div>
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+      Next <span>&#8594;</span>
+    </button>
+  </div>
+
+  <!-- Slide 1: Title -->
+  <div class="slide title-slide active">
+    <h1>Superlatives & Quantifiers</h1>
+    <p class="subtitle">Comparing and Describing Amounts</p>
+    <p class="tagline">"This is the cheapest apartment I found." "I have less time but more responsibilities."</p>
+    <span class="slide-number">1</span>
+  </div>
+
+  <!-- Slide 2: Why This Matters -->
+  <div class="slide content-slide">
+    <h2>Why This Matters</h2>
+    <p>Whether you're apartment hunting, job searching, or just describing your day, you need to compare and quantify.</p>
+
+    <h3>This lesson helps you:</h3>
+    <ul>
+      <li><strong>Find the best deal</strong> - Compare apartments, jobs, prices</li>
+      <li><strong>Make informed decisions</strong> - "Which option has the most advantages?"</li>
+      <li><strong>Describe situations accurately</strong> - "I have too much work and too little time"</li>
+      <li><strong>Negotiate effectively</strong> - At work, at stores, with landlords</li>
+    </ul>
+
+    <div class="tip-box">
+      <div class="tip-label">When You'll Use This</div>
+      <p>Comparing homes, discussing jobs, shopping for groceries, talking about restaurants</p>
+    </div>
+    <span class="slide-number">2</span>
+  </div>
+
+  <!-- Slide 3: Section - Superlatives -->
+  <div class="slide section-slide">
+    <div class="icon">🏆</div>
+    <h2>Part 1: Superlatives</h2>
+    <p>The Most, The Best, The -est</p>
+    <span class="slide-number">3</span>
+  </div>
+
+  <!-- Slide 4: What Are Superlatives? -->
+  <div class="slide content-slide">
+    <h2>What Are Superlatives?</h2>
+    <p>Superlatives identify the <strong>extreme</strong> in a group - the highest, lowest, best, or worst.</p>
+    <p>Use them when comparing <strong>three or more</strong> things.</p>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>Superlative (3+ things)</h4>
+        <div class="example-box">
+          <div class="sentence">This is <span class="highlight">the cheapest</span> apartment in the neighborhood.</div>
+        </div>
+        <p style="font-size: 0.95rem; color: #666;">Comparing this apartment to ALL others</p>
+      </div>
+      <div class="column orange">
+        <h4>Comparative (2 things)</h4>
+        <div class="example-box">
+          <div class="sentence">This apartment is <span class="highlight">cheaper</span> than that one.</div>
+        </div>
+        <p style="font-size: 0.95rem; color: #666;">Comparing only 2 apartments</p>
+      </div>
+    </div>
+    <span class="slide-number">4</span>
+  </div>
+
+  <!-- Slide 5: How to Form Superlatives -->
+  <div class="slide content-slide">
+    <h2>How to Form Superlatives</h2>
+
+    <table class="grammar-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Pattern</th>
+          <th>Examples</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Short adjectives (1 syllable)</td>
+          <td>the + adjective + <strong>-est</strong></td>
+          <td>cheap → <span class="highlight">the cheapest</span>, old → the oldest</td>
+        </tr>
+        <tr>
+          <td>Adjectives ending in -y</td>
+          <td>the + adjective (y→iest)</td>
+          <td>busy → <span class="highlight">the busiest</span>, happy → the happiest</td>
+        </tr>
+        <tr>
+          <td>Long adjectives (2+ syllables)</td>
+          <td>the <strong>most/least</strong> + adjective</td>
+          <td>expensive → <span class="highlight">the most expensive</span></td>
+        </tr>
+        <tr>
+          <td>Irregular adjectives</td>
+          <td>(special forms)</td>
+          <td>good → <span class="highlight">the best</span>, bad → the worst</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <div class="tip-label">Common Mistake</div>
+      <p>Never say "the most cheap" - use "the cheapest" for short adjectives!</p>
+    </div>
+    <span class="slide-number">5</span>
+  </div>
+
+  <!-- Slide 6: Superlative Examples -->
+  <div class="slide content-slide">
+    <h2>Superlatives in Real Life</h2>
+
+    <h3>Finding the Best Deal</h3>
+    <div class="example-box">
+      <div class="sentence">This job offers <span class="highlight">the most</span> vacation days.</div>
+    </div>
+
+    <h3>Describing Your Schedule</h3>
+    <div class="example-box">
+      <div class="sentence">Monday is <span class="highlight">the busiest</span> day at work.</div>
+    </div>
+
+    <h3>Job Comparisons</h3>
+    <div class="example-box">
+      <div class="sentence">She's <span class="highlight">the most experienced</span> person on the team.</div>
+    </div>
+    <span class="slide-number">6</span>
+  </div>
+
+  <!-- Slide 7: Exercise - Superlatives -->
+  <div class="slide exercise-slide">
+    <h2>Exercise: Form the Superlative</h2>
+    <p class="exercise-instructions">Complete each sentence with the correct superlative form. Click "Show" to reveal the answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">1</span>
+      <div class="ex-content">
+        <div class="ex-question">This is <span class="ex-blank"></span> (cheap) apartment I can afford.</div>
+        <div class="ex-answer" id="ans-sup-1">the cheapest</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-sup-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">2</span>
+      <div class="ex-content">
+        <div class="ex-question">Monday is <span class="ex-blank"></span> (busy) day of the week.</div>
+        <div class="ex-answer" id="ans-sup-2">the busiest</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-sup-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">3</span>
+      <div class="ex-content">
+        <div class="ex-question">She's <span class="ex-blank"></span> (experienced) worker on our team.</div>
+        <div class="ex-answer" id="ans-sup-3">the most experienced</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-sup-3', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">4</span>
+      <div class="ex-content">
+        <div class="ex-question">That was <span class="ex-blank"></span> (good) interview I've ever had!</div>
+        <div class="ex-answer" id="ans-sup-4">the best</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-sup-4', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">5</span>
+      <div class="ex-content">
+        <div class="ex-question">This is <span class="ex-blank"></span> (expensive) restaurant in the city.</div>
+        <div class="ex-answer" id="ans-sup-5">the most expensive</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-sup-5', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-sup')">Show All Answers</button>
+    <span class="slide-number">7</span>
+  </div>
+
+  <!-- Slide 8: Section - Quantifiers -->
+  <div class="slide section-slide">
+    <div class="icon">🔢</div>
+    <h2>Part 2: Quantifiers</h2>
+    <p>How Much? How Many?</p>
+    <span class="slide-number">7</span>
+  </div>
+
+  <!-- Slide 8: Countable vs Uncountable -->
+  <div class="slide content-slide">
+    <h2>Countable vs Uncountable Nouns</h2>
+    <p>Before using quantifiers, you need to know if a noun is countable or uncountable.</p>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>🔢 Countable Nouns</h4>
+        <p style="font-size: 0.95rem; margin-bottom: 1rem;">You can count them: 1, 2, 3...</p>
+        <ul>
+          <li><strong>jobs</strong> - 1 job, 2 jobs, 3 jobs</li>
+          <li><strong>hours</strong> - 1 hour, 2 hours</li>
+          <li><strong>bedrooms</strong> - 1 bedroom, 2 bedrooms</li>
+          <li><strong>apartments</strong> - 1 apartment, 2 apartments</li>
+        </ul>
+      </div>
+      <div class="column orange">
+        <h4>💧 Uncountable Nouns</h4>
+        <p style="font-size: 0.95rem; margin-bottom: 1rem;">You can't count them directly</p>
+        <ul>
+          <li><strong>money</strong> - NOT "1 money, 2 moneys"</li>
+          <li><strong>time</strong> - NOT "1 time, 2 times"</li>
+          <li><strong>experience</strong> - NOT "1 experience"</li>
+          <li><strong>traffic</strong> - NOT "1 traffic"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">Quick Test</div>
+      <p>Can you put a number in front of it? If yes, it's countable!</p>
+    </div>
+    <span class="slide-number">8</span>
+  </div>
+
+  <!-- Slide 9: Many vs Much -->
+  <div class="slide content-slide">
+    <h2>Many vs Much</h2>
+    <p>This is one of the <strong>most common mistakes</strong> in English!</p>
+
+    <div class="formula-box">
+      <span class="keyword">MANY</span> = Countable &nbsp;&nbsp;|&nbsp;&nbsp; <span class="keyword">MUCH</span> = Uncountable
+    </div>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>✅ MANY + Countable</h4>
+        <div class="example-box">
+          <div class="sentence">How <span class="highlight-green">many hours</span> do you work?</div>
+        </div>
+        <div class="example-box">
+          <div class="sentence">She has <span class="highlight-green">many responsibilities</span>.</div>
+        </div>
+      </div>
+      <div class="column orange">
+        <h4>✅ MUCH + Uncountable</h4>
+        <div class="example-box">
+          <div class="sentence">I don't have <span class="highlight">much time</span>.</div>
+        </div>
+        <div class="example-box">
+          <div class="sentence">This job requires <span class="highlight">much experience</span>.</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">9</span>
+  </div>
+
+  <!-- Slide 10: Common Mistakes with Many/Much -->
+  <div class="slide content-slide">
+    <h2>Common Mistakes with Many/Much</h2>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">How <span class="highlight-red">much hours</span> do you work?</div>
+    </div>
+    <div class="example-box">
+      <div class="label">Correct</div>
+      <div class="sentence">How <span class="highlight-green">many hours</span> do you work?</div>
+    </div>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">I don't have <span class="highlight-red">many time</span>.</div>
+    </div>
+    <div class="example-box">
+      <div class="label">Correct</div>
+      <div class="sentence">I don't have <span class="highlight-green">much time</span>.</div>
+    </div>
+    <span class="slide-number">11</span>
+  </div>
+
+  <!-- Slide 12: Exercise - Many vs Much -->
+  <div class="slide exercise-slide">
+    <h2>Exercise: Many or Much?</h2>
+    <p class="exercise-instructions">Choose the correct word for each sentence. Click "Show" to reveal the answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">1</span>
+      <div class="ex-content">
+        <div class="ex-question">How <span class="ex-blank"></span> vacation days do you get?</div>
+        <div class="ex-hint">(vacation days = countable)</div>
+        <div class="ex-answer" id="ans-mm-1">many</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-mm-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">2</span>
+      <div class="ex-content">
+        <div class="ex-question">I don't have <span class="ex-blank"></span> experience with computers.</div>
+        <div class="ex-hint">(experience = uncountable)</div>
+        <div class="ex-answer" id="ans-mm-2">much</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-mm-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">3</span>
+      <div class="ex-content">
+        <div class="ex-question">There aren't <span class="ex-blank"></span> affordable apartments available.</div>
+        <div class="ex-hint">(apartments = countable)</div>
+        <div class="ex-answer" id="ans-mm-3">many</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-mm-3', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">4</span>
+      <div class="ex-content">
+        <div class="ex-question">This job requires too <span class="ex-blank"></span> travel.</div>
+        <div class="ex-hint">(travel = uncountable)</div>
+        <div class="ex-answer" id="ans-mm-4">much</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-mm-4', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-mm')">Show All Answers</button>
+    <span class="slide-number">12</span>
+  </div>
+
+  <!-- Slide 13: Few vs Little -->
+  <div class="slide content-slide">
+    <h2>Few vs Little</h2>
+    <p>Both mean "not enough" - but which noun are you describing?</p>
+
+    <div class="formula-box">
+      <span class="keyword">FEW</span> = Countable (small number) &nbsp;|&nbsp; <span class="keyword">LITTLE</span> = Uncountable (small amount)
+    </div>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>FEW + Countable</h4>
+        <ul>
+          <li>few <strong>options</strong></li>
+          <li>few <strong>openings</strong></li>
+          <li>few <strong>applicants</strong></li>
+        </ul>
+        <div class="example-box">
+          <div class="sentence">There are very <span class="highlight-green">few apartments</span> available.</div>
+        </div>
+      </div>
+      <div class="column orange">
+        <h4>LITTLE + Uncountable</h4>
+        <ul>
+          <li>little <strong>money</strong></li>
+          <li>little <strong>space</strong></li>
+          <li>little <strong>hope</strong></li>
+        </ul>
+        <div class="example-box">
+          <div class="sentence">I have very <span class="highlight">little patience</span>.</div>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">11</span>
+  </div>
+
+  <!-- Slide 12: A Few vs Few -->
+  <div class="slide content-slide">
+    <h2>A Few vs Few / A Little vs Little</h2>
+    <p>The word "a" changes the meaning!</p>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>A FEW / A LITTLE (Positive)</h4>
+        <p style="font-size: 1rem; color: #666; margin-bottom: 0.5rem;">= some, enough for something</p>
+        <div class="example-box">
+          <div class="sentence">I have <span class="highlight-green">a few friends</span> here.</div>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">= I do have some friends! (positive)</p>
+        </div>
+        <div class="example-box">
+          <div class="sentence">I have <span class="highlight-green">a little time</span>.</div>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">= I have some time (enough)</p>
+        </div>
+      </div>
+      <div class="column orange">
+        <h4>FEW / LITTLE (Negative)</h4>
+        <p style="font-size: 1rem; color: #666; margin-bottom: 0.5rem;">= almost none, not enough</p>
+        <div class="example-box">
+          <div class="sentence">I have <span class="highlight">few friends</span> here.</div>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">= I'm lonely (negative)</p>
+        </div>
+        <div class="example-box">
+          <div class="sentence">I have <span class="highlight">little time</span>.</div>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">= I'm rushed (not enough)</p>
+        </div>
+      </div>
+    </div>
+    <span class="slide-number">12</span>
+  </div>
+
+  <!-- Slide 13: Fewer vs Less -->
+  <div class="slide content-slide">
+    <h2>Fewer vs Less: The Grocery Store Rule</h2>
+    <p>You've seen "10 items or less" at the supermarket? It's <strong>wrong!</strong></p>
+    <p>It should be "10 items or fewer" because items are countable.</p>
+
+    <div class="formula-box">
+      <span class="keyword">FEWER</span> = Countable (comparing numbers) &nbsp;|&nbsp; <span class="keyword">LESS</span> = Uncountable (comparing amounts)
+    </div>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>FEWER + Countable</h4>
+        <ul>
+          <li>fewer <strong>hours</strong></li>
+          <li>fewer <strong>employees</strong></li>
+          <li>fewer <strong>benefits</strong></li>
+        </ul>
+      </div>
+      <div class="column orange">
+        <h4>LESS + Uncountable</h4>
+        <ul>
+          <li>less <strong>time</strong></li>
+          <li>less <strong>stress</strong></li>
+          <li>less <strong>money</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="sentence">My new job has <span class="highlight-green">fewer hours</span> but <span class="highlight">less stress</span>.</div>
+    </div>
+    <span class="slide-number">16</span>
+  </div>
+
+  <!-- Slide 17: Exercise - Few/Little & Fewer/Less -->
+  <div class="slide exercise-slide">
+    <h2>Exercise: Few, Little, Fewer, or Less?</h2>
+    <p class="exercise-instructions">Fill in the blank with the correct word. Click "Show" to reveal the answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">1</span>
+      <div class="ex-content">
+        <div class="ex-question">There are very <span class="ex-blank"></span> good apartments in my budget.</div>
+        <div class="ex-hint">(apartments = countable, meaning "almost none")</div>
+        <div class="ex-answer" id="ans-fl-1">few</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-fl-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">2</span>
+      <div class="ex-content">
+        <div class="ex-question">I have very <span class="ex-blank"></span> patience for rude customers.</div>
+        <div class="ex-hint">(patience = uncountable)</div>
+        <div class="ex-answer" id="ans-fl-2">little</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-fl-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">3</span>
+      <div class="ex-content">
+        <div class="ex-question">This job offers <span class="ex-blank"></span> vacation days than my last one.</div>
+        <div class="ex-hint">(comparing, vacation days = countable)</div>
+        <div class="ex-answer" id="ans-fl-3">fewer</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-fl-3', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">4</span>
+      <div class="ex-content">
+        <div class="ex-question">Working night shift means <span class="ex-blank"></span> traffic on my commute.</div>
+        <div class="ex-hint">(comparing, traffic = uncountable)</div>
+        <div class="ex-answer" id="ans-fl-4">less</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-fl-4', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-fl')">Show All Answers</button>
+    <span class="slide-number">17</span>
+  </div>
+
+  <!-- Slide 18: Most vs Least -->
+  <div class="slide content-slide">
+    <h2>Most vs Least: The Extremes</h2>
+    <p>Good news! <strong>Most</strong> and <strong>Least</strong> work with BOTH countable and uncountable nouns!</p>
+
+    <div class="two-column">
+      <div class="column green">
+        <h4>MOST = Maximum/Highest</h4>
+        <ul>
+          <li>This job has <strong>the most</strong> benefits.</li>
+          <li>Monday has <strong>the most</strong> traffic.</li>
+          <li>She does <strong>the most</strong> work.</li>
+        </ul>
+      </div>
+      <div class="column orange">
+        <h4>LEAST = Minimum/Lowest</h4>
+        <ul>
+          <li>This option costs <strong>the least</strong> money.</li>
+          <li>Wednesday has <strong>the least</strong> traffic.</li>
+          <li>That job requires <strong>the least</strong> experience.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Works with both:</h3>
+    <ul>
+      <li>the most <strong>hours</strong> (countable) / the most <strong>time</strong> (uncountable)</li>
+      <li>the least <strong>problems</strong> (countable) / the least <strong>stress</strong> (uncountable)</li>
+    </ul>
+    <span class="slide-number">19</span>
+  </div>
+
+  <!-- Slide 20: Exercise - Real-Life Comparisons -->
+  <div class="slide exercise-slide">
+    <h2>Exercise: Real-Life Comparisons</h2>
+    <p class="exercise-instructions">Complete these sentences about comparing options. Click "Show" to reveal the answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">1</span>
+      <div class="ex-content">
+        <div class="ex-question">Apartment A has 2 bedrooms, B has 3, C has 1. Apartment C has <span class="ex-blank"></span> bedrooms.</div>
+        <div class="ex-hint">(bedrooms = countable, finding the minimum)</div>
+        <div class="ex-answer" id="ans-rl-1">the fewest</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-rl-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">2</span>
+      <div class="ex-content">
+        <div class="ex-question">Job A pays $15/hr, Job B pays $18/hr, Job C pays $20/hr. Job C pays <span class="ex-blank"></span> money.</div>
+        <div class="ex-hint">(money = uncountable, finding the maximum)</div>
+        <div class="ex-answer" id="ans-rl-2">the most</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-rl-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">3</span>
+      <div class="ex-content">
+        <div class="ex-question">Downtown has heavy traffic, Midtown has moderate traffic, Riverside has almost none. Riverside has <span class="ex-blank"></span> traffic.</div>
+        <div class="ex-hint">(traffic = uncountable, finding the minimum)</div>
+        <div class="ex-answer" id="ans-rl-3">the least</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-rl-3', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">4</span>
+      <div class="ex-content">
+        <div class="ex-question">Company A offers 5 vacation days, B offers 10, C offers 15. Company C offers <span class="ex-blank"></span> vacation days.</div>
+        <div class="ex-hint">(vacation days = countable, finding the maximum)</div>
+        <div class="ex-answer" id="ans-rl-4">the most</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-rl-4', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-rl')">Show All Answers</button>
+    <span class="slide-number">20</span>
+  </div>
+
+  <!-- Slide 21: Cheat Sheet -->
+  <div class="slide content-slide">
+    <h2>Quick Reference Cheat Sheet</h2>
+
+    <table class="grammar-table">
+      <thead>
+        <tr>
+          <th>Quantifier</th>
+          <th>Use With</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>many</strong></td>
+          <td>Countable</td>
+          <td>many jobs, many hours</td>
+        </tr>
+        <tr>
+          <td><strong>much</strong></td>
+          <td>Uncountable</td>
+          <td>much time, much stress</td>
+        </tr>
+        <tr>
+          <td><strong>few</strong></td>
+          <td>Countable (not enough)</td>
+          <td>few options, few applicants</td>
+        </tr>
+        <tr>
+          <td><strong>little</strong></td>
+          <td>Uncountable (not enough)</td>
+          <td>little money, little hope</td>
+        </tr>
+        <tr>
+          <td><strong>fewer</strong></td>
+          <td>Countable (comparison)</td>
+          <td>fewer hours, fewer problems</td>
+        </tr>
+        <tr>
+          <td><strong>less</strong></td>
+          <td>Uncountable (comparison)</td>
+          <td>less time, less stress</td>
+        </tr>
+        <tr>
+          <td><strong>most/least</strong></td>
+          <td>Both!</td>
+          <td>the most hours, the most time</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="slide-number">15</span>
+  </div>
+
+  <!-- Slide 16: Common Mistakes Summary -->
+  <div class="slide content-slide">
+    <h2>Common Mistakes to Avoid</h2>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">"much hours" → <strong>many hours</strong> (hours are countable)</div>
+    </div>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">"less employees" → <strong>fewer employees</strong> (employees are countable)</div>
+    </div>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">"the most cheap" → <strong>the cheapest</strong> (short adjective = -est)</div>
+    </div>
+
+    <div class="example-box wrong">
+      <div class="label">Wrong</div>
+      <div class="sentence">"more better" → <strong>better</strong> (better already means "more good")</div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">The Ultimate Test</div>
+      <p>Can I say "one ___"? If yes → countable (use many/few/fewer). If no → uncountable (use much/little/less).</p>
+    </div>
+    <span class="slide-number">16</span>
+  </div>
+
+  <!-- Slide 17: Practice Time -->
+  <div class="slide section-slide">
+    <div class="icon">✏️</div>
+    <h2>Practice Time!</h2>
+    <p>Let's test your knowledge</p>
+    <span class="slide-number">17</span>
+  </div>
+
+  <!-- Quiz Slide 1 -->
+  <div class="slide exercise-slide">
+    <h2>Mini Quiz - Part 1</h2>
+    <p class="exercise-instructions">Test your knowledge! Click "Show" to reveal the correct answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">1</span>
+      <div class="ex-content">
+        <div class="ex-question">How _____ experience do you have?</div>
+        <div class="ex-hint">a) many &nbsp;&nbsp; b) much</div>
+        <div class="ex-answer" id="ans-quiz-1">b) much (experience is uncountable)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">2</span>
+      <div class="ex-content">
+        <div class="ex-question">This job has _____ vacation days than my last one.</div>
+        <div class="ex-hint">a) fewer &nbsp;&nbsp; b) less</div>
+        <div class="ex-answer" id="ans-quiz-2">a) fewer (vacation days are countable)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">3</span>
+      <div class="ex-content">
+        <div class="ex-question">This is _____ apartment in the building.</div>
+        <div class="ex-hint">a) the most cheap &nbsp;&nbsp; b) the cheapest</div>
+        <div class="ex-answer" id="ans-quiz-3">b) the cheapest (short adjective = -est)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz-3', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-quiz')">Show All Answers</button>
+    <span class="slide-number">24</span>
+  </div>
+
+  <!-- Quiz Slide 2 -->
+  <div class="slide exercise-slide">
+    <h2>Mini Quiz - Part 2</h2>
+    <p class="exercise-instructions">Keep going! Click "Show" to reveal the correct answer.</p>
+
+    <div class="exercise-item">
+      <span class="ex-number">4</span>
+      <div class="ex-content">
+        <div class="ex-question">I have very _____ patience for rude customers.</div>
+        <div class="ex-hint">a) few &nbsp;&nbsp; b) little</div>
+        <div class="ex-answer" id="ans-quiz2-1">b) little (patience is uncountable)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz2-1', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">5</span>
+      <div class="ex-content">
+        <div class="ex-question">Of all three neighborhoods, this one has _____ crime.</div>
+        <div class="ex-hint">a) the fewest &nbsp;&nbsp; b) the least</div>
+        <div class="ex-answer" id="ans-quiz2-2">b) the least (crime is uncountable)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz2-2', this)">Show</button>
+    </div>
+
+    <div class="exercise-item">
+      <span class="ex-number">6</span>
+      <div class="ex-content">
+        <div class="ex-question">I have _____ friends here, so I'm happy. (positive meaning)</div>
+        <div class="ex-hint">a) few &nbsp;&nbsp; b) a few</div>
+        <div class="ex-answer" id="ans-quiz2-3">b) a few ("a few" = positive, "few" = negative)</div>
+      </div>
+      <button class="show-answer-btn" onclick="toggleAnswer('ans-quiz2-3', this)">Show</button>
+    </div>
+
+    <button class="show-all-btn" onclick="showAllAnswers('ans-quiz2')">Show All Answers</button>
+    <span class="slide-number">25</span>
+  </div>
+
+  <!-- Slide 20: Summary -->
+  <div class="slide title-slide" style="background: linear-gradient(135deg, var(--secondary) 0%, #5a8a63 100%);">
+    <h1>Key Takeaways</h1>
+    <p class="subtitle" style="text-align: left; max-width: 700px;">
+      ✓ Superlatives compare 3+ things: the cheapest, the best, the most expensive<br><br>
+      ✓ MANY/FEW/FEWER → countable nouns (hours, jobs, apartments)<br><br>
+      ✓ MUCH/LITTLE/LESS → uncountable nouns (time, money, experience)<br><br>
+      ✓ MOST/LEAST → work with both!
+    </p>
+    <p class="tagline">Practice makes perfect!</p>
+    <span class="slide-number">20</span>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+
+    // Update total slides counter
+    document.getElementById('totalSlides').textContent = totalSlides;
+
+    // Update all slide numbers dynamically
+    slides.forEach((slide, index) => {
+      const slideNum = slide.querySelector('.slide-number');
+      if (slideNum) {
+        slideNum.textContent = index + 1;
+      }
+    });
+
+    function showSlide(index) {
+      // Hide all slides
+      slides.forEach(slide => slide.classList.remove('active'));
+
+      // Show current slide
+      slides[index].classList.add('active');
+
+      // Update counter
+      document.getElementById('currentSlide').textContent = index + 1;
+
+      // Update button states
+      document.getElementById('prevBtn').disabled = index === 0;
+      document.getElementById('nextBtn').disabled = index === totalSlides - 1;
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        showSlide(currentSlide);
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        showSlide(currentSlide);
+      }
+    }
+
+    // Exercise answer toggle functions
+    function toggleAnswer(answerId, button) {
+      const answer = document.getElementById(answerId);
+      if (answer.classList.contains('visible')) {
+        answer.classList.remove('visible');
+        button.textContent = 'Show';
+        button.classList.remove('revealed');
+      } else {
+        answer.classList.add('visible');
+        button.textContent = 'Hide';
+        button.classList.add('revealed');
+      }
+    }
+
+    function showAllAnswers(prefix) {
+      const answers = document.querySelectorAll(`[id^="${prefix}"]`);
+      const buttons = answers[0]?.closest('.slide')?.querySelectorAll('.show-answer-btn');
+
+      answers.forEach((answer, index) => {
+        answer.classList.add('visible');
+        if (buttons && buttons[index]) {
+          buttons[index].textContent = 'Hide';
+          buttons[index].classList.add('revealed');
+        }
+      });
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        currentSlide = 0;
+        showSlide(currentSlide);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        currentSlide = totalSlides - 1;
+        showSlide(currentSlide);
+      }
+    });
+
+    // Initialize
+    showSlide(0);
+  </script>
+</body>
+</html>
