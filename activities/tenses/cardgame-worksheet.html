@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verb Tense Sentence Game – Student Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Black and white, printer friendly */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #000;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            line-height: 1.4;
+            background: #fff;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #000;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .header .sub {
+            font-size: 13px;
+            color: #333;
+            margin-top: 4px;
+        }
+
+        .name-date {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 20px;
+        }
+
+        .name-date span {
+            display: inline-block;
+            min-width: 120px;
+            border-bottom: 1px solid #000;
+        }
+
+        .page-group {
+            margin-bottom: 0;
+        }
+
+        .round {
+            margin-bottom: 14px;
+            padding: 8px 12px;
+            background: #fff;
+            border-radius: 0;
+            border: 1px solid #000;
+        }
+
+        .round-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 6px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 4px 12px;
+            margin-bottom: 4px;
+        }
+
+        .row:last-of-type { margin-bottom: 0; }
+
+        .label {
+            font-weight: 600;
+            min-width: 88px;
+            font-size: 11px;
+        }
+
+        .circles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px 10px;
+            align-items: center;
+        }
+
+        .circle-opt {
+            display: inline;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        .circle-opt .o {
+            font-size: 12px;
+            margin-right: 2px;
+        }
+
+        .write-in {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 1px solid #000;
+            height: 16px;
+            vertical-align: bottom;
+        }
+
+        .verb-row .write-in { min-width: 80px; }
+
+        .sentence-lines {
+            margin-top: 6px;
+            padding-top: 4px;
+            border-top: 1px solid #333;
+        }
+
+        .sentence-lines .label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+        }
+
+        .line {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .line-num {
+            font-weight: 700;
+            min-width: 18px;
+            font-size: 11px;
+        }
+
+        .line input,
+        .line .blank {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid #000;
+            background: transparent;
+            font-family: inherit;
+            font-size: 12px;
+            padding: 2px 4px;
+            min-height: 18px;
+        }
+
+        .fix-section {
+            margin-top: 6px;
+            padding-top: 4px;
+            border-top: 1px solid #333;
+        }
+
+        .fix-section .label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .fix-section .fix-row {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .fix-section .fix-row span.small {
+            font-size: 11px;
+            min-width: 56px;
+        }
+
+        .fix-section .fix-row input {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid #000;
+            background: transparent;
+            font-family: inherit;
+            font-size: 12px;
+            padding: 2px 4px;
+            min-height: 18px;
+        }
+
+        /* Print: 3 rounds per page */
+        @media print {
+            body {
+                padding: 0.4in;
+                font-size: 10px;
+                color: #000 !important;
+                background: #fff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .header {
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+                border-bottom-color: #000 !important;
+            }
+            .header h1 { font-size: 18px; }
+            .header .sub { font-size: 11px; }
+            .name-date { margin-bottom: 8px; }
+            .name-date span { border-bottom-color: #000 !important; }
+            .page-group {
+                page-break-after: always;
+            }
+            .page-group:last-of-type {
+                page-break-after: auto;
+            }
+            .round {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 10px;
+                padding: 6px 10px;
+                background: #fff !important;
+                border-color: #000 !important;
+                box-shadow: none;
+            }
+            .round-title { font-size: 11px; margin-bottom: 4px; }
+            .label { font-size: 10px; min-width: 80px; }
+            .row { margin-bottom: 2px; gap: 2px 8px; }
+            .circle-opt { font-size: 10px; }
+            .circle-opt .o { font-size: 11px; }
+            .write-in { min-width: 80px; height: 14px; }
+            .sentence-lines { margin-top: 4px; padding-top: 2px; }
+            .sentence-lines .label { font-size: 10px; margin-bottom: 2px; }
+            .line { margin-bottom: 2px; }
+            .line input { font-size: 10px; min-height: 14px; }
+            .fix-section { margin-top: 4px; padding-top: 2px; }
+            .fix-section .label { font-size: 10px; margin-bottom: 2px; }
+            .fix-section .fix-row { margin-bottom: 2px; }
+            .fix-section .fix-row input { font-size: 10px; min-height: 14px; }
+            input, .write-in {
+                border-bottom-color: #000 !important;
+                background: transparent !important;
+            }
+            .sentence-lines, .fix-section { border-top-color: #333 !important; }
+        }
+
+        @media (max-width: 600px) {
+            .row { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .label { min-width: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Verb Tense Sentence Game</h1>
+        <p class="sub">Student Worksheet – Follow along with the cards and write your sentences.</p>
+    </div>
+
+    <div class="name-date">
+        Name: <span></span>
+    </div>
+
+    <!-- Page 1: Rounds 1–3 -->
+    <div class="page-group">
+    <!-- Round 1 -->
+    <div class="round">
+        <div class="round-title">Round 1 – Circle your categories and write the verb</div>
+
+        <div class="row">
+            <span class="label">Meaning:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> habit / fact</span>
+                <span class="circle-opt"><span class="o">○</span> finished</span>
+                <span class="circle-opt"><span class="o">○</span> now / near future</span>
+                <span class="circle-opt"><span class="o">○</span> background</span>
+                <span class="circle-opt"><span class="o">○</span> future</span>
+                <span class="circle-opt"><span class="o">○</span> in progress (future)</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Subject:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> I</span>
+                <span class="circle-opt"><span class="o">○</span> you</span>
+                <span class="circle-opt"><span class="o">○</span> he</span>
+                <span class="circle-opt"><span class="o">○</span> she</span>
+                <span class="circle-opt"><span class="o">○</span> we</span>
+                <span class="circle-opt"><span class="o">○</span> they</span>
+            </div>
+        </div>
+
+        <div class="row verb-row">
+            <span class="label">V1:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Sentence type:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> affirmative</span>
+                <span class="circle-opt"><span class="o">○</span> negative</span>
+                <span class="circle-opt"><span class="o">○</span> question</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Time word:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="sentence-lines">
+            <span class="label">Write one really good sentence using your cards:</span>
+            <div class="line"><span class="line-num">1.</span><input type="text"></div>
+            <div class="line"><span class="line-num">2.</span><input type="text"></div>
+        </div>
+
+        <div class="fix-section">
+            <span class="label">Fix this sentence – rewrite</span>
+            <div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div>
+        </div>
+    </div>
+
+    <!-- Round 2 -->
+    <div class="round">
+        <div class="round-title">Round 2 – Circle your categories and write the verb</div>
+
+        <div class="row">
+            <span class="label">Meaning:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> habit / fact</span>
+                <span class="circle-opt"><span class="o">○</span> finished</span>
+                <span class="circle-opt"><span class="o">○</span> now / near future</span>
+                <span class="circle-opt"><span class="o">○</span> background</span>
+                <span class="circle-opt"><span class="o">○</span> future</span>
+                <span class="circle-opt"><span class="o">○</span> in progress (future)</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Subject:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> I</span>
+                <span class="circle-opt"><span class="o">○</span> you</span>
+                <span class="circle-opt"><span class="o">○</span> he</span>
+                <span class="circle-opt"><span class="o">○</span> she</span>
+                <span class="circle-opt"><span class="o">○</span> we</span>
+                <span class="circle-opt"><span class="o">○</span> they</span>
+            </div>
+        </div>
+
+        <div class="row verb-row">
+            <span class="label">V1:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Sentence type:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> affirmative</span>
+                <span class="circle-opt"><span class="o">○</span> negative</span>
+                <span class="circle-opt"><span class="o">○</span> question</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Time word:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="sentence-lines">
+            <span class="label">Write one really good sentence using your cards:</span>
+            <div class="line"><span class="line-num">1.</span><input type="text"></div>
+            <div class="line"><span class="line-num">2.</span><input type="text"></div>
+        </div>
+
+        <div class="fix-section">
+            <span class="label">Fix this sentence – rewrite</span>
+            <div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div>
+        </div>
+    </div>
+
+    <!-- Round 3 -->
+    <div class="round">
+        <div class="round-title">Round 3 – Circle your categories and write the verb</div>
+
+        <div class="row">
+            <span class="label">Meaning:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> habit / fact</span>
+                <span class="circle-opt"><span class="o">○</span> finished</span>
+                <span class="circle-opt"><span class="o">○</span> now / near future</span>
+                <span class="circle-opt"><span class="o">○</span> background</span>
+                <span class="circle-opt"><span class="o">○</span> future</span>
+                <span class="circle-opt"><span class="o">○</span> in progress (future)</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Subject:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> I</span>
+                <span class="circle-opt"><span class="o">○</span> you</span>
+                <span class="circle-opt"><span class="o">○</span> he</span>
+                <span class="circle-opt"><span class="o">○</span> she</span>
+                <span class="circle-opt"><span class="o">○</span> we</span>
+                <span class="circle-opt"><span class="o">○</span> they</span>
+            </div>
+        </div>
+
+        <div class="row verb-row">
+            <span class="label">V1:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="row">
+            <span class="label">Sentence type:</span>
+            <div class="circles">
+                <span class="circle-opt"><span class="o">○</span> affirmative</span>
+                <span class="circle-opt"><span class="o">○</span> negative</span>
+                <span class="circle-opt"><span class="o">○</span> question</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <span class="label">Time word:</span>
+            <span class="write-in"></span>
+        </div>
+
+        <div class="sentence-lines">
+            <span class="label">Write one really good sentence using your cards:</span>
+            <div class="line"><span class="line-num">1.</span><input type="text"></div>
+            <div class="line"><span class="line-num">2.</span><input type="text"></div>
+        </div>
+
+        <div class="fix-section">
+            <span class="label">Fix this sentence – rewrite</span>
+            <div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div>
+        </div>
+    </div>
+
+    </div><!-- end page-group -->
+
+    <!-- Page 2: Rounds 4–6 -->
+    <div class="page-group">
+    <!-- Round 4 -->
+    <div class="round">
+        <div class="round-title">Round 4 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 5 -->
+    <div class="round">
+        <div class="round-title">Round 5 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 6 -->
+    <div class="round">
+        <div class="round-title">Round 6 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    </div><!-- end page-group -->
+
+    <!-- Page 3: Rounds 7–9 -->
+    <div class="page-group">
+    <!-- Round 7 -->
+    <div class="round">
+        <div class="round-title">Round 7 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 8 -->
+    <div class="round">
+        <div class="round-title">Round 8 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 9 -->
+    <div class="round">
+        <div class="round-title">Round 9 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    </div><!-- end page-group -->
+
+    <!-- Page 4: Rounds 10–12 -->
+    <div class="page-group">
+    <!-- Round 10 -->
+    <div class="round">
+        <div class="round-title">Round 10 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 11 -->
+    <div class="round">
+        <div class="round-title">Round 11 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 12 -->
+    <div class="round">
+        <div class="round-title">Round 12 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    </div><!-- end page-group -->
+
+    <!-- Page 5: Rounds 13–15 -->
+    <div class="page-group">
+    <!-- Round 13 -->
+    <div class="round">
+        <div class="round-title">Round 13 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 14 -->
+    <div class="round">
+        <div class="round-title">Round 14 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 15 -->
+    <div class="round">
+        <div class="round-title">Round 15 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    </div><!-- end page-group -->
+
+    <!-- Page 6: Rounds 16–18 -->
+    <div class="page-group">
+    <!-- Round 16 -->
+    <div class="round">
+        <div class="round-title">Round 16 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 17 -->
+    <div class="round">
+        <div class="round-title">Round 17 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+    <!-- Round 18 -->
+    <div class="round">
+        <div class="round-title">Round 18 – Circle your categories and write the verb</div>
+        <div class="row"><span class="label">Meaning:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> habit / fact</span><span class="circle-opt"><span class="o">○</span> finished</span><span class="circle-opt"><span class="o">○</span> now / near future</span><span class="circle-opt"><span class="o">○</span> background</span><span class="circle-opt"><span class="o">○</span> future</span><span class="circle-opt"><span class="o">○</span> in progress (future)</span></div></div>
+        <div class="row"><span class="label">Subject:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> I</span><span class="circle-opt"><span class="o">○</span> you</span><span class="circle-opt"><span class="o">○</span> he</span><span class="circle-opt"><span class="o">○</span> she</span><span class="circle-opt"><span class="o">○</span> we</span><span class="circle-opt"><span class="o">○</span> they</span></div></div>
+        <div class="row verb-row"><span class="label">V1:</span><span class="write-in"></span></div>
+        <div class="row"><span class="label">Sentence type:</span><div class="circles"><span class="circle-opt"><span class="o">○</span> affirmative</span><span class="circle-opt"><span class="o">○</span> negative</span><span class="circle-opt"><span class="o">○</span> question</span></div></div>
+        <div class="row"><span class="label">Time word:</span><span class="write-in"></span></div>
+        <div class="sentence-lines"><span class="label">Write one really good sentence using your cards:</span><div class="line"><span class="line-num">1.</span><input type="text"></div><div class="line"><span class="line-num">2.</span><input type="text"></div></div>
+        <div class="fix-section"><span class="label">Fix this sentence – rewrite</span><div class="fix-row"><span class="small">Rewrite:</span><input type="text"></div></div>
+    </div>
+
+    </div><!-- end page-group -->
+
+</body>
+</html>
