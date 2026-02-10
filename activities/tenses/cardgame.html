@@ -6,26 +6,32 @@
     <title>Verb Tense Sentence Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Verb Bootcamp palette — match worksheet/slides for meaning cards */
+        /* Meaning card colors — match reference key (Present/Past/Future Simple & Cont.) */
         :root {
-            --habit: #059669;
-            --habit-bg: #ecfdf5;
-            --habit-border: #10b981;
-            --finished: #e11d48;
-            --finished-bg: #fff1f2;
-            --finished-border: #f43f5e;
-            --now: #d97706;
-            --now-bg: #fffbeb;
-            --now-border: #f59e0b;
-            --background: #7c3aed;
-            --background-bg: #f5f3ff;
-            --background-border: #8b5cf6;
-            --future: #0284c7;
-            --future-bg: #f0f9ff;
-            --future-border: #0ea5e9;
-            --future-cont: #4f46e5;
-            --future-cont-bg: #eef2ff;
-            --future-cont-border: #6366f1;
+            /* Present Simple — green */
+            --habit: #4CAF50;
+            --habit-bg: #E8F5E9;
+            --habit-border: #4CAF50;
+            /* Past Simple — red */
+            --finished: #F44336;
+            --finished-bg: #FFEBEE;
+            --finished-border: #F44336;
+            /* Present Continuous — amber/orange */
+            --now: #FFC107;
+            --now-bg: #FFF8E1;
+            --now-border: #FFC107;
+            /* Past Continuous — purple */
+            --background: #9C27B0;
+            --background-bg: #F3E5F5;
+            --background-border: #9C27B0;
+            /* Future Simple — blue */
+            --future: #2196F3;
+            --future-bg: #E3F2FD;
+            --future-border: #2196F3;
+            /* Future Continuous — indigo */
+            --future-cont: #3F51B5;
+            --future-cont-bg: #E8EAF6;
+            --future-cont-border: #3F51B5;
         }
 
         * {
@@ -356,17 +362,17 @@
             border-radius: 14px 14px 0 0;
             background: var(--habit-border);
         }
-        .card-meaning.meaning-habit .card-back { background: var(--habit-bg); color: #047857; }
+        .card-meaning.meaning-habit .card-back { background: var(--habit-bg); color: #2E7D32; }
         .card-meaning.meaning-habit .card-back::before { background: var(--habit-border); }
-        .card-meaning.meaning-finished .card-back { background: var(--finished-bg); color: #be123c; }
+        .card-meaning.meaning-finished .card-back { background: var(--finished-bg); color: #C62828; }
         .card-meaning.meaning-finished .card-back::before { background: var(--finished-border); }
-        .card-meaning.meaning-now .card-back { background: var(--now-bg); color: #b45309; }
+        .card-meaning.meaning-now .card-back { background: var(--now-bg); color: #F57F17; }
         .card-meaning.meaning-now .card-back::before { background: var(--now-border); }
-        .card-meaning.meaning-background .card-back { background: var(--background-bg); color: #6d28d9; }
+        .card-meaning.meaning-background .card-back { background: var(--background-bg); color: #7B1FA2; }
         .card-meaning.meaning-background .card-back::before { background: var(--background-border); }
-        .card-meaning.meaning-future .card-back { background: var(--future-bg); color: #0369a1; }
+        .card-meaning.meaning-future .card-back { background: var(--future-bg); color: #1565C0; }
         .card-meaning.meaning-future .card-back::before { background: var(--future-border); }
-        .card-meaning.meaning-future-cont .card-back { background: var(--future-cont-bg); color: #4338ca; }
+        .card-meaning.meaning-future-cont .card-back { background: var(--future-cont-bg); color: #303F9F; }
         .card-meaning.meaning-future-cont .card-back::before { background: var(--future-cont-border); }
         
         .card-subject .card-back { background: #CA8A04; } /* Amber/Gold */
