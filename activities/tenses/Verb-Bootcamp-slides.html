@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verb Bootcamp — Follow-Along Slides</title>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/slides.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Design System from Verb-Bootcamp.html */
+        :root {
+            --habit: #059669; --habit-bg: #ecfdf5; --habit-border: #10b981;
+            --finished: #e11d48; --finished-bg: #fff1f2; --finished-border: #f43f5e;
+            --now: #d97706; --now-bg: #fffbeb; --now-border: #f59e0b;
+            --background: #7c3aed; --background-bg: #f5f3ff; --background-border: #8b5cf6;
+            --future: #0284c7; --future-bg: #f0f9ff; --future-border: #0ea5e9;
+            --future-cont: #4f46e5; --future-cont-bg: #eef2ff; --future-cont-border: #6366f1;
+            --v1: #0369a1; --v2: #be123c; --v3: #6d28d9; --ving: #d97706;
+            --bg-body: #f8fafc; --bg-card: #ffffff;
+            --text-main: #1e293b; --text-secondary: #475569; --border-color: #cbd5e1;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        /* Match worksheet page background */
+        .slide-presentation.slide-presentation { background: var(--bg-body); }
+
+        /* Slide Specific Layout */
+        .slide-controls { 
+            position: fixed; bottom: 30px; right: 30px; top: auto;
+            border-radius: 16px; background: #0f172a; color: #fff;
+            padding: 12px 20px; box-shadow: var(--shadow-lg); z-index: 1001;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .slide-counter { color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.1rem; }
+        .slide-control-btn { background: transparent; border: none; color: #fff; padding: 8px; cursor: pointer; transition: transform 0.2s; }
+        .slide-control-btn:hover { transform: scale(1.1); color: #cbd5e1; }
+
+        .slide-content { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+        
+        /* Headers - Styled like Worksheet */
+        .slide h1 { font-family: 'Montserrat', sans-serif; font-size: 3.5rem; font-weight: 800; color: #0f172a; line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.01em; }
+        .slide h2 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 20px; }
+        .slide h2::after { content: ''; flex: 1; height: 3px; background: var(--border-color); opacity: 0.2; border-radius: 2px; }
+
+        /* Meaning Cards - Wide Layout from Worksheet */
+        .meaning-card-slide {
+            background: #fff; padding: 2.5rem 3rem; border-radius: 24px; box-shadow: var(--shadow-lg);
+            position: relative; overflow: hidden; border: 1px solid #f1f5f9; width: 100%;
+        }
+        .meaning-card-slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; }
+        .slide.meaning-habit-card .meaning-card-slide::before { background: var(--habit-border); }
+        .slide.meaning-finished-card .meaning-card-slide::before { background: var(--finished-border); }
+        .slide.meaning-future-card .meaning-card-slide::before { background: var(--future-border); }
+        .slide.meaning-now-card .meaning-card-slide::before { background: var(--now-border); }
+        .slide.meaning-background-card .meaning-card-slide::before { background: var(--background-border); }
+        .slide.meaning-future-cont-card .meaning-card-slide::before { background: var(--future-cont-border); }
+
+        .card-header-wide { display: grid; grid-template-columns: 1.2fr 1fr 1.2fr; align-items: start; gap: 2rem; margin-bottom: 2rem; }
+        .card-title-box { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .slide.active .card-title-box { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+        .slide.active .diagram-box { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+        .slide.active .time-box-worksheet { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+        .diagram-box { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .time-box-worksheet { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .card-title-box h3 { font-family: 'Montserrat', sans-serif; font-size: 2.8rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.1; }
+        .tense-pill { font-size: 0.9rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; background: #f1f5f9; padding: 6px 12px; border-radius: 8px; display: inline-block; margin-top: 12px; }
+
+        /* Diagram container - worksheet style nested card */
+        .diagram-box {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #f1f5f9;
+            padding: 12px;
+            min-width: 240px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        /* Diagrams with Animations - match worksheet */
+        .tense-diagram { width: 100%; height: 80px; overflow: visible; display: block; margin: 0 auto; }
+        .diagram-line { stroke: #94a3b8; stroke-width: 2; stroke-linecap: round; }
+        .diagram-present-line { stroke: #475569; stroke-width: 2; }
+        .diagram-arc { fill: none; stroke-width: 3; stroke-linecap: round; }
+        .diagram-x { stroke-width: 2.5; stroke-linecap: round; }
+        .diagram-label { font-size: 8px; fill: #94a3b8; font-weight: 600; text-transform: uppercase; font-family: sans-serif; }
+        
+        .draw-line { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1s ease-out; }
+        .slide.active .draw-line { stroke-dashoffset: 0; }
+        
+        .pop-dot { transform: scale(0); transform-origin: center; transform-box: fill-box; transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .slide.active .pop-dot { transform: scale(1); }
+        
+        .pop-delay-1 { transition-delay: 0.15s; }
+        .pop-delay-2 { transition-delay: 0.35s; }
+        .pop-delay-3 { transition-delay: 0.5s; }
+        .pop-delay-4 { transition-delay: 0.65s; }
+        .pop-delay-5 { transition-delay: 0.8s; }
+
+        /* Wavy-line animation for continuous arcs (worksheet) */
+        .wavy-line { stroke-dasharray: 100; animation: dash 3s linear infinite; }
+        .slide.active .wavy-line { animation: dash 3s linear infinite; }
+        @keyframes dash {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+        .slide:not(.active) .wavy-line { stroke-dasharray: 100; stroke-dashoffset: 100; opacity: 0; transition: opacity 0.3s; }
+        .slide.active .wavy-line { opacity: 1; transition: opacity 0.3s 0.5s; }
+
+        /* Pulse dot for Now / Present Continuous (worksheet) */
+        .pulse-dot { animation: none; }
+        .slide.active .pulse-dot { animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse-ring {
+            0% { r: 3; opacity: 1; }
+            50% { r: 6; opacity: 0.5; }
+            100% { r: 3; opacity: 1; }
+        }
+
+        /* Time Words Box - worksheet style (nested card, TIME WORDS label) */
+        .time-box-worksheet {
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: right;
+            flex: 0 1 280px;
+            min-width: 200px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+        .time-label { display: block; font-size: 11px; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .time-content { font-size: 1rem; color: var(--text-secondary); font-weight: 500; line-height: 1.5; }
+
+        /* Staggered entry for examples when slide becomes active */
+        .examples-grid li { opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease; }
+        .slide.active .examples-grid li:nth-child(1) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+        .slide.active .examples-grid li:nth-child(2) { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+        .slide.active .examples-grid li:nth-child(3) { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+        .slide.active .examples-grid li:nth-child(4) { transition-delay: 0.8s; opacity: 1; transform: translateY(0); }
+        .slide.active .examples-grid li:nth-child(5) { transition-delay: 0.9s; opacity: 1; transform: translateY(0); }
+        .slide.active .examples-grid li:nth-child(6) { transition-delay: 1s; opacity: 1; transform: translateY(0); }
+
+        /* Examples Grid */
+        .examples-grid { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px 40px; 
+            border-top: 1px solid #f1f5f9; padding-top: 2rem;
+            list-style: none; padding-left: 0;
+        }
+        .examples-grid li { font-size: 1.3rem; color: var(--text-secondary); display: flex; align-items: start; gap: 12px; line-height: 1.4; position: relative; padding-left: 20px; }
+        .examples-grid li::before { content: '•'; position: absolute; left: 0; color: #cbd5e1; font-weight: bold; font-size: 1.2em; line-height: 1; }
+        .examples-grid b { color: var(--text-main); font-weight: 700; background: linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,0.03)); border-radius: 2px; }
+
+        /* Tables */
+        .slide table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); background: #fff; font-size: 1.2rem; }
+        .slide th { background: #f8fafc; padding: 20px; color: var(--text-secondary); text-transform: uppercase; font-size: 0.9rem; font-weight: 800; letter-spacing: 0.05em; border-bottom: 2px solid #f1f5f9; }
+        .slide td { padding: 20px; border-bottom: 1px solid #f1f5f9; color: var(--text-main); font-weight: 500; }
+        .slide tr:last-child td { border-bottom: none; }
+        .slide tr.meaning-habit td { background: var(--habit-bg); }
+        .slide tr.meaning-finished td { background: var(--finished-bg); }
+        .slide tr.meaning-now td { background: var(--now-bg); }
+        .slide tr.meaning-background td { background: var(--background-bg); }
+        .slide tr.meaning-future td { background: var(--future-bg); }
+        .slide tr.meaning-future-cont td { background: var(--future-cont-bg); }
+        .slide tr[class^="meaning-"] td:first-child { position: relative; padding-left: 24px; font-weight: 600; }
+        .slide tr[class^="meaning-"] td:first-child::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; }
+        .slide tr.meaning-habit td:first-child::before { background: var(--habit-border); }
+        .slide tr.meaning-finished td:first-child::before { background: var(--finished-border); }
+        .slide tr.meaning-now td:first-child::before { background: var(--now-border); }
+        .slide tr.meaning-background td:first-child::before { background: var(--background-border); }
+        .slide tr.meaning-future td:first-child::before { background: var(--future-border); }
+        .slide tr.meaning-future-cont td:first-child::before { background: var(--future-cont-border); }
+
+        /* Answers - Pill Style from Screenshot */
+        .answer { 
+            visibility: hidden; opacity: 0; transform: translateY(5px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #2563eb; font-weight: 700; background: #eff6ff; padding: 4px 12px; border-radius: 10px;
+            display: inline-block;
+        }
+        .answer.revealed { visibility: visible; opacity: 1; transform: translateY(0); }
+        
+        .show-answer-btn {
+            margin-top: 3rem; padding: 16px 32px; background: #0f172a; color: #fff; border: none; border-radius: 14px;
+            cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 12px; font-size: 1.1rem;
+            transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .show-answer-btn:hover { background: #1e293b; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+
+        .time-words { font-size: 1rem; color: var(--text-secondary); background: #f8fafc; padding: 1.5rem; border-radius: 16px; border: 1px solid #e2e8f0; line-height: 1.6; font-weight: 500; }
+        .time-words strong { display: block; margin-bottom: 6px; color: #1e293b; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        
+        .examples { list-style: none; display: flex; flex-direction: column; gap: 15px; margin-top: 2rem; }
+        .examples li { font-size: 1.5rem; color: var(--text-secondary); display: flex; align-items: center; gap: 12px; }
+        .examples li::before { content: '•'; color: var(--border-color); font-weight: 900; }
+
+        .goal-p { font-size: 1.4rem; color: var(--text-secondary); background: #fff; padding: 2.5rem; border-radius: 20px; border-left: 8px solid var(--v1); box-shadow: var(--shadow); }
+        .ready-box { background: #1e293b; color: #f1f5f9; padding: 2rem 2.5rem; border-radius: 16px; font-size: 1.25rem; box-shadow: var(--shadow-lg); border: 1px solid #334155; }
+        .ready-box strong { color: #38bdf8; }
+        .vs-mini-quiz { background: #f8fafc; padding: 2.5rem; border-radius: 24px; margin-top: 2rem; border: 2px dashed var(--border-color); }
+        .vs-mini-quiz p { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 500; }
+
+        /* Section 8: Quick Check T/F */
+        .quick-check-tf { margin: 1.5rem 0; }
+        .quick-check-tf .tf-item { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid #e2e8f0; font-size: 1.2rem; }
+        .quick-check-tf .tf-item:last-child { border-bottom: none; }
+        .quick-check-tf .tf-sentence { flex: 1; color: var(--text-main); }
+        .quick-check-tf .tf-choices { flex-shrink: 0; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.2em; }
+        .quick-check-tf .tf-item .answer { margin-left: 0.5rem; }
+        .quick-check-tf .tf-item .answer.revealed { color: #059669; font-weight: 700; }
+        .quick-check-tf .tf-item .answer.revealed.ans-f { color: #dc2626; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="slide-presentation">
+  <a href="#slides-container" class="skip-link">Skip to slides</a>
+  <div class="slide-controls" role="toolbar" aria-label="Slide navigation">
+    <button class="slide-control-btn" id="prev-slide" aria-label="Previous slide" title="Previous (←)"><i data-lucide="chevron-left" class="icon"></i></button>
+    <div class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">28</span></div>
+    <button class="slide-control-btn" id="next-slide" aria-label="Next slide" title="Next (→)"><i data-lucide="chevron-right" class="icon"></i></button>
+    <button class="slide-control-btn" id="exit-presentation" aria-label="Exit presentation" title="Exit (Esc)"><i data-lucide="x" class="icon"></i></button>
+  </div>
+  <div class="slide-progress"><div class="slide-progress-bar" id="progress-bar"></div></div>
+  <div class="slides-container" id="slides-container">
+
+    <!-- Slide 1: Title -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1>Simple & Continuous Verb Review</h1>
+        <p class="goal-p"><strong>Goal:</strong> Know the six patterns by heart so you can form sentences quickly when you see the cards.</p>
+        <div class="ready-box" style="margin-top: 2rem;">
+            Mastering the balance between <strong>Actions</strong> and <strong>Background</strong>.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2: Section Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:4rem; margin-top:10vh;">Verb Charts</h1>
+      </div>
+    </section>
+
+    <!-- Slide 3: Verb forms (walk, eat) -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Verb forms:</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>V1 (base)</th>
+              <th>V1-3rd</th>
+              <th>V1-ing</th>
+              <th>V2 (past)</th>
+              <th>V3 (past participle)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>verb</td>
+              <td><span class="answer">verb-s</span></td>
+              <td><span class="answer">verb-ing</span></td>
+              <td><span class="answer">past simple verb</span></td>
+              <td><span class="answer">past participle</span></td>
+            </tr>
+            <tr>
+              <td><strong>walk</strong></td>
+              <td><span class="answer">walks</span></td>
+              <td><span class="answer">walking</span></td>
+              <td><span class="answer">walked</span></td>
+              <td><span class="answer">walked</span></td>
+            </tr>
+            <tr>
+              <td><strong>eat</strong></td>
+              <td><span class="answer">eats</span></td>
+              <td><span class="answer">eating</span></td>
+              <td><span class="answer">ate</span></td>
+              <td><span class="answer">eaten</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 4: Formula Chart -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Formula chart — tense × patterns</h2>
+        <table style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Tense</th>
+              <th>Affirmative</th>
+              <th>Negative</th>
+              <th>Question</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td>subject + V1(-s)</td><td>subject + do(es) not + V1</td><td>Do(es) + subj + V1?</td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td>subject + V2</td><td>subject + did not + V1</td><td>Did + subj + V1?</td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td>subject + will + V1</td><td>subject + will not + V1</td><td>Will + subj + V1?</td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td>subj + am/is/are + V1-ing</td><td>subj + am/is/are not + V1-ing</td><td>Am/Is/Are + subj + V1-ing?</td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td>subj + was/were + V1-ing</td><td>subj + was/were not + V1-ing</td><td>Was/Were + subj + V1-ing?</td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td>subj + will be + V1-ing</td><td>subj + will not be + V1-ing</td><td>Will + subj + be + V1-ing?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Slide 5: Example filled in (help, he) -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Example: verb: help | subject: he</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Tense</th>
+              <th>Affirmative</th>
+              <th>Negative</th>
+              <th>Question</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">He helps.</span></td><td><span class="answer">He doesn't help.</span></td><td><span class="answer">Does he help?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">He helped.</span></td><td><span class="answer">He didn't help.</span></td><td><span class="answer">Did he help?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">He will help.</span></td><td><span class="answer">He won't help.</span></td><td><span class="answer">Will he help?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">He is helping.</span></td><td><span class="answer">He isn't helping.</span></td><td><span class="answer">Is he helping?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">He was helping.</span></td><td><span class="answer">He wasn't helping.</span></td><td><span class="answer">Was he helping?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">He will be helping.</span></td><td><span class="answer">He won't be helping.</span></td><td><span class="answer">Will he be helping?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 6: Meaning Cards Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:4rem; margin-top:10vh;">1. The Six Meanings</h1>
+        <p style="text-align:center; font-size:1.5rem;">Each meaning has one pattern.</p>
+      </div>
+    </section>
+
+    <!-- Slide 7: Habit -->
+    <section class="slide meaning-habit-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>Habit /<br>Fact</h3>
+                        <span class="tense-pill">Present Simple</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-habit" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-habit)" marker-end="url(#arrow-habit)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <g stroke="var(--habit)" class="diagram-x pop-dot pop-delay-2">
+                                <path d="M40,40 l10,10 m0,-10 l-10,10" /><path d="M70,35 l10,10 m0,-10 l-10,10" />
+                                <path d="M100,40 l10,10 m0,-10 l-10,10" /><path d="M130,35 l10,10 m0,-10 l-10,10" />
+                                <path d="M160,40 l10,10 m0,-10 l-10,10" /><path d="M190,35 l10,10 m0,-10 l-10,10" />
+                                <path d="M220,40 l10,10 m0,-10 l-10,10" /><path d="M250,35 l10,10 m0,-10 l-10,10" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">always, usually, often, sometimes, never, every day/week/month</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>walk</b> to work.</li>
+                    <li>She <b>drinks</b> coffee every morning.</li>
+                    <li>They <b>don't eat</b> meat.</li>
+                    <li>He <b>doesn't play</b> soccer.</li>
+                    <li><b>Do</b> you <b>speak</b> Spanish?</li>
+                    <li><b>Does</b> she <b>live</b> here?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Finished -->
+    <section class="slide meaning-finished-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>Finished<br>Action</h3>
+                        <span class="tense-pill">Past Simple</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-finished" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-finished)" marker-end="url(#arrow-finished)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <g stroke="var(--finished)" class="diagram-x pop-dot pop-delay-2">
+                                <path d="M80,35 l10,10 m0,-10 l-10,10" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">yesterday, last week/month/year, ago, in 2020, when I was young</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>walked</b> to the store yesterday.</li>
+                    <li>She <b>ate</b> breakfast at 8:00.</li>
+                    <li>They <b>didn't watch</b> the movie.</li>
+                    <li>He <b>didn't call</b> his mom.</li>
+                    <li><b>Did</b> you <b>finish</b> the project?</li>
+                    <li><b>Did</b> she <b>see</b> the email?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: Plans -->
+    <section class="slide meaning-future-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>Plans /<br>Promises</h3>
+                        <span class="tense-pill">Future Simple</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-future" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-future)" marker-end="url(#arrow-future)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <g stroke="var(--future)" class="diagram-x pop-dot pop-delay-2">
+                                <path d="M180,35 l10,10 m0,-10 l-10,10" />
+                                <path d="M210,40 l10,10 m0,-10 l-10,10" />
+                                <path d="M240,35 l10,10 m0,-10 l-10,10" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">tomorrow, next week/month/year, soon, later, in the future</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>will help</b> you tomorrow.</li>
+                    <li>She <b>will call</b> you later.</li>
+                    <li>They <b>won't arrive</b> on time.</li>
+                    <li>He <b>won't forget</b>.</li>
+                    <li><b>Will</b> you <b>come</b> to the party?</li>
+                    <li><b>Will</b> she <b>finish</b> the report?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 10: Now -->
+    <section class="slide meaning-now-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>Now /<br>Near Future</h3>
+                        <span class="tense-pill">Present Continuous</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-now" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-now)" marker-end="url(#arrow-now)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <path d="M100,50 A50,50 0 0 1 200,50" class="diagram-arc wavy-line pop-dot pop-delay-2" stroke="var(--now)" />
+                            <circle class="pulse-dot pop-dot pop-delay-3" cx="150" cy="20" r="4" fill="var(--now)" />
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">now, right now, at the moment, currently, today, this week</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>am studying</b> right now.</li>
+                    <li>She <b>is cooking</b> dinner.</li>
+                    <li>They <b>aren't watching</b> TV.</li>
+                    <li>He <b>isn't working</b> today.</li>
+                    <li><b>Are</b> you <b>listening</b>?</li>
+                    <li><b>Is</b> she <b>coming</b> tomorrow?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 11: Background (Interrupted Background Action) -->
+    <section class="slide meaning-background-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>Interrupted<br>Background</h3>
+                        <span class="tense-pill">Past Continuous</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-background" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-background)" marker-end="url(#arrow-background)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <path d="M40,50 A50,50 0 0 1 140,50" class="diagram-arc wavy-line pop-dot pop-delay-2" stroke="var(--background)" />
+                            <g stroke="#333" class="diagram-x pop-dot pop-delay-3" transform="translate(90, 15)">
+                                <path d="M0,0 l8,8 m0,-8 l-8,8" />
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">when, while, at that moment, at 6:00 yesterday, all day/night</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>was sleeping</b> when you called.</li>
+                    <li>She <b>was reading</b> a book.</li>
+                    <li>They <b>weren't paying</b> attention.</li>
+                    <li>He <b>wasn't driving</b> fast.</li>
+                    <li><b>Were</b> you <b>waiting</b> long?</li>
+                    <li><b>Was</b> she <b>working</b> at 9:00?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 12: Future Cont -->
+    <section class="slide meaning-future-cont-card">
+        <div class="slide-content">
+            <div class="meaning-card-slide">
+                <div class="card-header-wide">
+                    <div class="card-title-box">
+                        <h3>In Progress<br>Later</h3>
+                        <span class="tense-pill">Future Continuous</span>
+                    </div>
+                    <div class="diagram-box">
+                        <svg class="tense-diagram" viewBox="0 0 300 80">
+                            <defs>
+                                <marker id="arrow-future-cont" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                                </marker>
+                            </defs>
+                            <line x1="30" y1="50" x2="270" y2="50" class="diagram-line draw-line" marker-start="url(#arrow-future-cont)" marker-end="url(#arrow-future-cont)" />
+                            <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line pop-dot pop-delay-1" />
+                            <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                            <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                            <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                            <path d="M160,50 A50,50 0 0 1 260,50" class="diagram-arc wavy-line pop-dot pop-delay-2" stroke="var(--future-cont)" />
+                        </svg>
+                    </div>
+                    <div class="time-box-worksheet">
+                        <span class="time-label">TIME WORDS:</span>
+                        <div class="time-content">at 3:00 tomorrow, this time next week, when you arrive, all day tomorrow</div>
+                    </div>
+                </div>
+                <ul class="examples-grid">
+                    <li>I <b>will be working</b> at 3:00 PM.</li>
+                    <li>She <b>will be sleeping</b> when you arrive.</li>
+                    <li>They <b>won't be traveling</b> tomorrow.</li>
+                    <li>He <b>won't be studying</b> then.</li>
+                    <li><b>Will</b> you <b>be waiting</b> for me?</li>
+                    <li><b>Will</b> she <b>be using</b> the car?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 13: Matching Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:4rem; margin-top:10vh;">2. Matching Challenge</h1>
+      </div>
+    </section>
+
+    <!-- Slide 14: Matching Grid -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Meanings × Tense Names</h2>
+        <div style="display: grid; grid-template-columns: 1.5fr 0.5fr 2fr; gap: 15px; margin-top: 1rem; align-items: start;">
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 8px;">
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li>1. habit / fact</li>
+                    <li>2. completed action</li>
+                    <li>3. plans / promises</li>
+                    <li>4. now / near future</li>
+                    <li>5. interrupted background</li>
+                    <li>6. in progress later</li>
+                </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center; line-height: 2.2; padding: 15px 0;">
+                <span class="answer">E</span>
+                <span class="answer">C</span>
+                <span class="answer">B</span>
+                <span class="answer">A</span>
+                <span class="answer">F</span>
+                <span class="answer">D</span>
+            </div>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 8px;">
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li>A. Present Continuous</li>
+                    <li>B. Future Simple</li>
+                    <li>C. Past Simple</li>
+                    <li>D. Future Continuous</li>
+                    <li>E. Present Simple</li>
+                    <li>F. Past Continuous</li>
+                </ul>
+            </div>
+        </div>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 15: VS Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:4rem; margin-top:10vh;">3. Simple vs. Continuous</h1>
+        <p style="text-align:center; font-size:1.5rem;">What's the difference?</p>
+      </div>
+    </section>
+
+    <!-- Slide 16: VS Present -->
+    <section class="slide">
+      <div class="slide-content">
+        <div class="vs-section">
+          <div class="vs-title">Present: Habit / Fact vs. Now</div>
+          <div class="vs-grid">
+            <div class="vs-box">
+                <h4>Simple (Habit)</h4>
+                <p>Regular actions.<br><em>"I drink coffee every morning."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <g fill="var(--habit)">
+                        <circle cx="50" cy="40" r="3.5" class="pop-dot pop-delay-1" />
+                        <circle cx="100" cy="40" r="3.5" class="pop-dot pop-delay-2" />
+                        <circle cx="150" cy="40" r="3.5" class="pop-dot pop-delay-3" />
+                        <circle cx="200" cy="40" r="3.5" class="pop-dot pop-delay-4" />
+                    </g>
+                </svg>
+            </div>
+            <div class="vs-box">
+                <h4>Continuous (Now)</h4>
+                <p>Right now.<br><em>"I am drinking coffee right now."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <path d="M130,40 A20,20 0 0 1 170,40" class="diagram-arc pop-dot" stroke="var(--now)" />
+                </svg>
+            </div>
+          </div>
+          <div class="vs-mini-quiz">
+              <p>1. I <span class="answer">am talking</span> on the phone right now.</p>
+              <p>2. I <span class="answer">talk</span> to my mom every Sunday.</p>
+          </div>
+          <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 17: VS Past -->
+    <section class="slide">
+      <div class="slide-content">
+        <div class="vs-section">
+          <div class="vs-title">Past: Finished vs. Background</div>
+          <div class="vs-grid">
+            <div class="vs-box">
+                <h4>Simple (Finished)</h4>
+                <p>Specific time.<br><em>"I cooked dinner at 6:00."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <g stroke="var(--finished)" stroke-width="4" stroke-linecap="round">
+                        <path d="M75,32 l16,16 m0,-16 l-16,16" class="pop-dot" />
+                    </g>
+                </svg>
+            </div>
+            <div class="vs-box">
+                <h4>Continuous (Background)</h4>
+                <p>Already in progress.<br><em>"I was cooking dinner when you called."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <path d="M50,40 A40,40 0 0 1 130,40" class="diagram-arc pop-dot" stroke="var(--background)" />
+                </svg>
+            </div>
+          </div>
+          <div class="vs-mini-quiz">
+              <p>1. I <span class="answer">slept</span> for 8 hours last night.</p>
+              <p>2. I <span class="answer">was sleeping</span> when the alarm rang.</p>
+          </div>
+          <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 18: VS Future -->
+    <section class="slide">
+      <div class="slide-content">
+        <div class="vs-section">
+          <div class="vs-title">Future: Fact vs. In Progress</div>
+          <div class="vs-grid">
+            <div class="vs-box">
+                <h4>Simple (Fact / Plan)</h4>
+                <p>General future.<br><em>"I will work tomorrow."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <circle cx="210" cy="40" r="5" fill="var(--future)" class="pop-dot" />
+                </svg>
+            </div>
+            <div class="vs-box">
+                <h4>Continuous (Progress)</h4>
+                <p>Active at that time.<br><em>"I will be working at 10:00."</em></p>
+                <svg class="tense-diagram" viewBox="0 0 300 60">
+                    <line x1="20" y1="40" x2="280" y2="40" class="diagram-line draw-line" />
+                    <path d="M180,40 A40,40 0 0 1 260,40" class="diagram-arc pop-dot" stroke="var(--future-cont)" />
+                </svg>
+            </div>
+          </div>
+          <div class="vs-mini-quiz">
+              <p>1. I <span class="answer">will watch</span> the movie later.</p>
+              <p>2. At 10 PM tonight, I <span class="answer">will be watching</span> a movie.</p>
+          </div>
+          <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 19: Neg/Q Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:3.5rem; margin-top:10vh;">4. Negative & Question</h1>
+        <p style="text-align:center; font-size:1.5rem;">Same Helper, Different Order</p>
+      </div>
+    </section>
+
+    <!-- Slide 20: Neg/Q Table -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Helping Verbs (Auxiliaries)</h2>
+        <table style="font-size: 0.9rem;">
+          <thead>
+            <tr><th>Tense</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">don't / doesn't + V1</span></td><td><span class="answer">Do / Does ...?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">didn't + V1</span></td><td><span class="answer">Did ...?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">won't + V1</span></td><td><span class="answer">Will ...?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">am/is/are not + V1-ing</span></td><td><span class="answer">Am/Is/Are ...?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">was/were not + V1-ing</span></td><td><span class="answer">Was/Were ...?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">will not be + V1-ing</span></td><td><span class="answer">Will ... be ...?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 21: Be Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:3.5rem; margin-top:10vh;">5. Must-Know: "To Be"</h1>
+      </div>
+    </section>
+
+    <!-- Slide 22: Be Table -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Conjugating "Be"</h2>
+        <table>
+          <thead>
+            <tr><th>Subject</th><th>Present (be)</th><th>Past (be)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>I</td><td><span class="answer">am</span></td><td><span class="answer">was</span></td></tr>
+            <tr><td>you / we / they</td><td><span class="answer">are</span></td><td><span class="answer">were</span></td></tr>
+            <tr><td>he / she / it</td><td><span class="answer">is</span></td><td><span class="answer">was</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 23: Practice Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:3.5rem; margin-top:10vh;">6. Fill in the verb tables</h1>
+        <p style="text-align:center; font-size:1.5rem;">Let's do the first one together.</p>
+      </div>
+    </section>
+
+    <!-- Slide 24: Practice 1 -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>1. Verb: <strong>make</strong> | Subject: <strong>she</strong></h2>
+        <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Forms:</strong> make / <span class="answer">makes</span> / <span class="answer">making</span> / <span class="answer">made</span> / <span class="answer">made</span></p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Tense</th><th>Affirmative</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">She makes.</span></td><td><span class="answer">She doesn't make.</span></td><td><span class="answer">Does she make?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">She made.</span></td><td><span class="answer">She didn't make.</span></td><td><span class="answer">Did she make?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">She will make.</span></td><td><span class="answer">She won't make.</span></td><td><span class="answer">Will she make?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">She is making.</span></td><td><span class="answer">She isn't making.</span></td><td><span class="answer">Is she making?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">She was making.</span></td><td><span class="answer">She wasn't making.</span></td><td><span class="answer">Was she making?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">She will be making.</span></td><td><span class="answer">She won't be making.</span></td><td><span class="answer">Will she be making?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 25: Practice 2 -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>2. Verb: <strong>take</strong> | Subject: <strong>they</strong></h2>
+        <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Forms:</strong> take / <span class="answer">takes</span> / <span class="answer">taking</span> / <span class="answer">took</span> / <span class="answer">taken</span></p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Tense</th><th>Affirmative</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">They take.</span></td><td><span class="answer">They don't take.</span></td><td><span class="answer">Do they take?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">They took.</span></td><td><span class="answer">They didn't take.</span></td><td><span class="answer">Did they take?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">They will take.</span></td><td><span class="answer">They won't take.</span></td><td><span class="answer">Will they take?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">They are taking.</span></td><td><span class="answer">They aren't taking.</span></td><td><span class="answer">Are they taking?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">They were taking.</span></td><td><span class="answer">They weren't taking.</span></td><td><span class="answer">Were they taking?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">They will be taking.</span></td><td><span class="answer">They won't be taking.</span></td><td><span class="answer">Will they be taking?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 26: Practice 3 -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>3. Verb: <strong>look</strong> | Subject: <strong>he</strong></h2>
+        <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Forms:</strong> look / <span class="answer">looks</span> / <span class="answer">looking</span> / <span class="answer">looked</span> / <span class="answer">looked</span></p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Tense</th><th>Affirmative</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">He looks.</span></td><td><span class="answer">He doesn't look.</span></td><td><span class="answer">Does he look?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">He looked.</span></td><td><span class="answer">He didn't look.</span></td><td><span class="answer">Did he look?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">He will look.</span></td><td><span class="answer">He won't look.</span></td><td><span class="answer">Will he look?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">He is looking.</span></td><td><span class="answer">He isn't looking.</span></td><td><span class="answer">Is he looking?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">He was looking.</span></td><td><span class="answer">He wasn't looking.</span></td><td><span class="answer">Was he looking?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">He will be looking.</span></td><td><span class="answer">He won't be looking.</span></td><td><span class="answer">Will he be looking?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 27: Practice 4 -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>4. Verb: <strong>buy</strong> | Subject: <strong>I</strong></h2>
+        <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Forms:</strong> buy / <span class="answer">buys</span> / <span class="answer">buying</span> / <span class="answer">bought</span> / <span class="answer">bought</span></p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Tense</th><th>Affirmative</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">I buy.</span></td><td><span class="answer">I don't buy.</span></td><td><span class="answer">Do I buy?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">I bought.</span></td><td><span class="answer">I didn't buy.</span></td><td><span class="answer">Did I buy?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">I will buy.</span></td><td><span class="answer">I won't buy.</span></td><td><span class="answer">Will I buy?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">I am buying.</span></td><td><span class="answer">I'm not buying.</span></td><td><span class="answer">Am I buying?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">I was buying.</span></td><td><span class="answer">I wasn't buying.</span></td><td><span class="answer">Was I buying?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">I will be buying.</span></td><td><span class="answer">I won't be buying.</span></td><td><span class="answer">Will I be buying?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 28: Practice 5 -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>5. Verb: <strong>travel</strong> | Subject: <strong>we</strong></h2>
+        <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Forms:</strong> travel / <span class="answer">travels</span> / <span class="answer">travelling</span> / <span class="answer">travelled</span> / <span class="answer">travelled</span></p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Tense</th><th>Affirmative</th><th>Negative</th><th>Question</th></tr>
+          </thead>
+          <tbody>
+            <tr class="meaning-habit"><td>Present Simple</td><td><span class="answer">We travel.</span></td><td><span class="answer">We don't travel.</span></td><td><span class="answer">Do we travel?</span></td></tr>
+            <tr class="meaning-finished"><td>Past Simple</td><td><span class="answer">We travelled.</span></td><td><span class="answer">We didn't travel.</span></td><td><span class="answer">Did we travel?</span></td></tr>
+            <tr class="meaning-future"><td>Future Simple</td><td><span class="answer">We will travel.</span></td><td><span class="answer">We won't travel.</span></td><td><span class="answer">Will we travel?</span></td></tr>
+            <tr class="meaning-now"><td>Present Cont.</td><td><span class="answer">We are travelling.</span></td><td><span class="answer">We aren't travelling.</span></td><td><span class="answer">Are we travelling?</span></td></tr>
+            <tr class="meaning-background"><td>Past Cont.</td><td><span class="answer">We were travelling.</span></td><td><span class="answer">We weren't travelling.</span></td><td><span class="answer">Were we travelling?</span></td></tr>
+            <tr class="meaning-future-cont"><td>Future Cont.</td><td><span class="answer">We will be travelling.</span></td><td><span class="answer">We won't be travelling.</span></td><td><span class="answer">Will we be travelling?</span></td></tr>
+          </tbody>
+        </table>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 29: Pattern Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:3.5rem; margin-top:10vh;">7. Correct Patterns</h1>
+        <p style="text-align:center; font-size:1.5rem;">The Secret to Winning the Game</p>
+      </div>
+    </section>
+
+    <!-- Slide 30: Formula -->
+    <section class="slide">
+      <div class="slide-content">
+        <div class="meaning-card-slide" style="text-align: center; border-top: 8px solid #3b82f6;">
+            <h2 style="justify-content: center; border:none; font-size: 2.5rem; margin-bottom: 3rem;">The Pattern Formula</h2>
+            <div style="font-weight: 800; font-size: 2.5rem; display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap; font-family: 'Montserrat', sans-serif;">
+                <span style="color: #0369a1; background: #e0f2fe; padding: 10px 20px; border-radius: 12px;">WHO</span> 
+                <span style="color: #475569;">+</span>
+                <span style="color: #059669; background: #ecfdf5; padding: 10px 20px; border-radius: 12px;">VERB</span> 
+                <span style="color: #475569;">+</span>
+                <span style="color: #d97706; background: #fffbeb; padding: 10px 20px; border-radius: 12px;">WHAT</span> 
+                <span style="color: #475569;">+</span>
+                <span style="color: #7c3aed; background: #f5f3ff; padding: 10px 20px; border-radius: 12px;">WHERE</span> 
+                <span style="color: #475569;">+</span>
+                <span style="color: #e11d48; background: #fff1f2; padding: 10px 20px; border-radius: 12px;">WHEN</span>
+            </div>
+            <p style="margin-top:3rem; font-size:1.6rem; color: var(--text-secondary); font-weight: 500;">This is the "Golden Path" for every sentence!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 31: Option Slide -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Can we move the info?</h2>
+        <p>Mostly, NO. You must keep <strong>WHO + VERB</strong> together.</p>
+        <div style="background:#f8fafc; padding:2rem; border-radius:12px;">
+            <p><strong>Standard:</strong> They played soccer in the park last weekend.</p>
+            <p><strong>Option:</strong> <span style="color:#b91c1c; font-weight:700;">Last weekend</span>, they played soccer in the park.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 32: Section 8 Header -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:3.5rem; margin-top:10vh;">8. Quick Check: Correct Word Order?</h1>
+        <p style="text-align:center; font-size:1.4rem;">Is the sentence in correct order? Circle <strong>T</strong> or <strong>F</strong>.</p>
+      </div>
+    </section>
+
+    <!-- Slide 33: Section 8 - All 6 T/F questions -->
+    <section class="slide">
+      <div class="slide-content">
+        <h2>Quick Check: Correct Word Order?</h2>
+        <div class="quick-check-tf">
+            <div class="tf-item">
+                <span class="tf-sentence">1. My brother studies English at the library every Tuesday.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer">T</span>
+            </div>
+            <div class="tf-item">
+                <span class="tf-sentence">2. Last summer, they visited their grandparents in Florida.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer">T</span>
+            </div>
+            <div class="tf-item">
+                <span class="tf-sentence">3. Pizza will order I tomorrow for dinner.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer ans-f">F</span>
+            </div>
+            <div class="tf-item">
+                <span class="tf-sentence">4. Runs she every morning in the park.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer ans-f">F</span>
+            </div>
+            <div class="tf-item">
+                <span class="tf-sentence">5. On weekends, we usually cook dinner together.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer">T</span>
+            </div>
+            <div class="tf-item">
+                <span class="tf-sentence">6. The email sent he yesterday to his boss.</span>
+                <span class="tf-choices">T &nbsp;&nbsp; F</span>
+                <span class="answer ans-f">F</span>
+            </div>
+        </div>
+        <button class="show-answer-btn"><i data-lucide="eye"></i><span class="btn-label">Show Answer</span></button>
+      </div>
+    </section>
+
+    <!-- Slide 34: Ready -->
+    <section class="slide">
+      <div class="slide-content">
+        <h1 style="border:none; text-align:center; font-size:5rem; margin-top:15vh;">Ready to Play?</h1>
+        <div class="ready-box" style="text-align:center;">
+            Grab your cards and let's go!
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <script src="../../assets/js/slides.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof lucide !== 'undefined') { lucide.createIcons(); }
+
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.show-answer-btn')) {
+          const btn = e.target.closest('.show-answer-btn');
+          const slide = btn.closest('.slide');
+          const hiddenAnswers = slide.querySelectorAll('.answer:not(.revealed)');
+          
+          if (hiddenAnswers.length > 0) {
+            // Find the "next line" to reveal - prioritize rows, then list items, then paragraphs
+            const firstHidden = hiddenAnswers[0];
+            const container = firstHidden.closest('tr, li, .vs-mini-quiz p, .vs-mini-quiz div, .tf-item') || firstHidden;
+            
+            // Reveal all answers in this container (this line)
+            const lineAnswers = container.querySelectorAll('.answer');
+            lineAnswers.forEach(ans => ans.classList.add('revealed'));
+            
+            // If that was the last hidden one, update button to Reset state
+            if (slide.querySelectorAll('.answer:not(.revealed)').length === 0) {
+              btn.querySelector('.btn-label').textContent = 'Hide All';
+              btn.querySelector('i').setAttribute('data-lucide', 'eye-off');
+            } else {
+              btn.querySelector('.btn-label').textContent = 'Next Answer';
+            }
+          } else {
+            // Reset functionality: Hide everything back
+            slide.querySelectorAll('.answer').forEach(ans => ans.classList.remove('revealed'));
+            btn.querySelector('.btn-label').textContent = 'Show Answer';
+            btn.querySelector('i').setAttribute('data-lucide', 'eye');
+          }
+          if (typeof lucide !== 'undefined') { lucide.createIcons(); }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
