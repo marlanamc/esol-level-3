@@ -6,6 +6,28 @@
     <title>Verb Tense Sentence Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Verb Bootcamp palette — match worksheet/slides for meaning cards */
+        :root {
+            --habit: #059669;
+            --habit-bg: #ecfdf5;
+            --habit-border: #10b981;
+            --finished: #e11d48;
+            --finished-bg: #fff1f2;
+            --finished-border: #f43f5e;
+            --now: #d97706;
+            --now-bg: #fffbeb;
+            --now-border: #f59e0b;
+            --background: #7c3aed;
+            --background-bg: #f5f3ff;
+            --background-border: #8b5cf6;
+            --future: #0284c7;
+            --future-bg: #f0f9ff;
+            --future-border: #0ea5e9;
+            --future-cont: #4f46e5;
+            --future-cont-bg: #eef2ff;
+            --future-cont-border: #6366f1;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -225,47 +247,42 @@
         .line-1 { width: 100%; height: 2px; top: 100px; }
         .line-2 { width: 100%; height: 2px; bottom: 100px; }
 
-        /* CARD GRID – top row: 2 cards (Meaning | Sentence type); bottom row: 3 cards (Subject | V1 | Time word) */
+        /* CARD GRID – top row: 2 cards (Meaning | Sentence type); bottom row: 2 cards (Subject | V1) */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-template-rows: auto auto;
-            gap: 24px;
+            gap: 40px 56px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 720px;
             align-items: start;
             justify-items: center;
         }
 
         .card-wrapper {
             width: 100%;
-            max-width: 260px;
+            max-width: 280px;
             cursor: pointer;
             perspective: 1000px;
         }
 
         .card-wrapper.card-meaning {
-            grid-column: 1 / 4;
+            grid-column: 1;
             grid-row: 1;
         }
 
         .card-wrapper.card-sentence-type {
-            grid-column: 4 / 7;
+            grid-column: 2;
             grid-row: 1;
         }
 
         .card-wrapper.card-subject {
-            grid-column: 1 / 3;
+            grid-column: 1;
             grid-row: 2;
         }
 
         .card-wrapper.card-verb {
-            grid-column: 3 / 5;
-            grid-row: 2;
-        }
-
-        .card-wrapper.card-time {
-            grid-column: 5 / 7;
+            grid-column: 2;
             grid-row: 2;
         }
 
@@ -324,18 +341,36 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* Card type colors — match Verb Bootcamp for visual recognition */
-        .card-meaning .card-back { background: #2E7D32; }
-        .card-meaning.meaning-habit .card-back { background: #2E7D32; }
-        .card-meaning.meaning-finished .card-back { background: #C62828; }
-        .card-meaning.meaning-now .card-back { background: #1B5E20; }
-        .card-meaning.meaning-background .card-back { background: #8E1B1B; }
-        .card-meaning.meaning-future .card-back { background: #1565C0; }
-        .card-meaning.meaning-future-cont .card-back { background: #0D47A1; }
+        /* Meaning card: same style as Verb Bootcamp — light bg + top accent bar, dark text */
+        .card-meaning .card-back {
+            position: relative;
+            background: var(--habit-bg);
+            color: var(--habit);
+            text-shadow: none;
+        }
+        .card-meaning .card-back::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 8px;
+            border-radius: 14px 14px 0 0;
+            background: var(--habit-border);
+        }
+        .card-meaning.meaning-habit .card-back { background: var(--habit-bg); color: #047857; }
+        .card-meaning.meaning-habit .card-back::before { background: var(--habit-border); }
+        .card-meaning.meaning-finished .card-back { background: var(--finished-bg); color: #be123c; }
+        .card-meaning.meaning-finished .card-back::before { background: var(--finished-border); }
+        .card-meaning.meaning-now .card-back { background: var(--now-bg); color: #b45309; }
+        .card-meaning.meaning-now .card-back::before { background: var(--now-border); }
+        .card-meaning.meaning-background .card-back { background: var(--background-bg); color: #6d28d9; }
+        .card-meaning.meaning-background .card-back::before { background: var(--background-border); }
+        .card-meaning.meaning-future .card-back { background: var(--future-bg); color: #0369a1; }
+        .card-meaning.meaning-future .card-back::before { background: var(--future-border); }
+        .card-meaning.meaning-future-cont .card-back { background: var(--future-cont-bg); color: #4338ca; }
+        .card-meaning.meaning-future-cont .card-back::before { background: var(--future-cont-border); }
         
         .card-subject .card-back { background: #CA8A04; } /* Amber/Gold */
         .card-verb .card-back { background: #0D9488; }    /* Teal */
-        .card-time .card-back { background: #64748B; }    /* Slate Gray */
         .card-sentence-type .card-back { background: #7C3AED; } /* Purple */
 
         .card-wrapper.card-meaning .card,
@@ -386,6 +421,49 @@
             text-align: left;
             letter-spacing: 0.3px;
             line-height: 1.6;
+            margin: 0;
+        }
+
+        .example-sentence-box {
+            width: 100%;
+            max-width: 720px;
+            margin-top: 64px;
+            padding: 32px 40px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 2px solid #2D6A4F;
+        }
+
+        .example-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #2D6A4F;
+            margin-bottom: 12px;
+        }
+
+        .example-sentence {
+            font-family: 'Inter', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: #1a1a1a;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .example-sentence strong {
+            font-weight: 700;
+            color: #C62828;
+        }
+
+        .example-note {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #555;
+            line-height: 1.5;
             margin: 0;
         }
 
@@ -585,11 +663,6 @@
         }
 
         /* MOBILE */
-        @media (max-width: 1100px) {
-            .cards-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
 
         @media (max-width: 768px) {
             .slide-container { overflow-y: auto; }
@@ -612,7 +685,7 @@
             }
 
             .cards-grid {
-                grid-template-columns: repeat(6, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 max-width: 100%;
             }
 
@@ -656,8 +729,7 @@
             .card-wrapper.card-meaning,
             .card-wrapper.card-sentence-type,
             .card-wrapper.card-subject,
-            .card-wrapper.card-verb,
-            .card-wrapper.card-time {
+            .card-wrapper.card-verb {
                 grid-column: 1;
                 grid-row: auto;
             }
@@ -681,9 +753,71 @@
     <div id="homePage" class="home-page">
         <h1 class="home-title">Verb Tense Sentence Game</h1>
         <p class="home-subtitle">
-            Work in groups. Use the cards to build one really good sentence together. Then fix the mistake in the “error” sentence.
+            Work in groups. Use the cards to build a sentence together. Then fix the mistake in the "error" sentence.
         </p>
-        <button class="start-game-btn" onclick="startGame()">Start Game</button>
+        <button class="start-game-btn" onclick="showExample()">See Example</button>
+    </div>
+
+    <!-- EXAMPLE PAGE -->
+    <div id="examplePage" class="game-page hidden">
+        <div class="question-counter">Example</div>
+
+        <div class="content-area">
+            <div class="cards-view">
+                <div class="cards-view-inner">
+            <div class="cards-grid">
+                <div class="card-wrapper card-meaning meaning-finished flipped" data-card="meaning">
+                    <div class="card">
+                        <div class="card-front"></div>
+                        <div class="card-back">
+                            <div class="card-label">Meaning</div>
+                            <div class="card-value">finished action</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-wrapper card-sentence-type flipped" data-card="sentenceType">
+                    <div class="card">
+                        <div class="card-front"></div>
+                        <div class="card-back">
+                            <div class="card-label">Sentence type</div>
+                            <div class="card-value">affirmative</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-wrapper card-subject flipped" data-card="subject">
+                    <div class="card">
+                        <div class="card-front"></div>
+                        <div class="card-back">
+                            <div class="card-label">Subject</div>
+                            <div class="card-value">my grandmother</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-wrapper card-verb flipped" data-card="verb">
+                    <div class="card">
+                        <div class="card-front"></div>
+                        <div class="card-back">
+                            <div class="card-label">V1</div>
+                            <div class="card-value">walk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-sentence-box">
+                <p class="example-label">Example sentence:</p>
+                <p class="example-sentence">"<strong>My grandmother walked</strong> on the icy sidewalks after the snowstorm in East Boston."</p>
+                <p class="example-note">Notice: The sentence uses <strong>walked</strong> (past simple) because the meaning is "finished action." Add details to make your sentences interesting!</p>
+            </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-container">
+            <button class="nav-btn home" onclick="goHome()">← Back</button>
+            <button class="nav-btn" onclick="startGame()">Start Game →</button>
+        </div>
     </div>
 
     <!-- GAME PAGE -->
@@ -738,20 +872,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-wrapper card-time" data-card="time" onclick="toggleFlip(this)">
-                    <div class="card">
-                        <div class="card-front"></div>
-                        <div class="card-back">
-                            <div class="card-label">Time word</div>
-                            <div class="card-value" id="timeValue">every morning</div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="instruction-box">
                 <p class="instruction-text">
-                    Say the sentence together, then write it. Write one really good sentence using these cards.
+                    Use the cards to build a sentence. Say it together, then write it down.
                 </p>
             </div>
 
@@ -806,54 +931,44 @@
     // Data for the decks
     const meanings = [
         { label: "habit / fact", tense: "Present Simple", slug: "habit" },
-        { label: "finished", tense: "Past Simple", slug: "finished" },
-        { label: "future", tense: "Future Simple", slug: "future" },
+        { label: "finished action", tense: "Past Simple", slug: "finished" },
+        { label: "plans / promises", tense: "Future Simple", slug: "future" },
         { label: "now / near future", tense: "Present Continuous", slug: "now" },
-        { label: "background", tense: "Past Continuous", slug: "background" },
-        { label: "in progress (future)", tense: "Future Continuous", slug: "future-cont" }
+        { label: "Interrupted background action", tense: "Past Continuous", slug: "background" },
+        { label: "In progress later", tense: "Future Continuous", slug: "future-cont" }
     ];
 
-    const timeWords = [
-        "every day",
-        "every morning",
-        "on the weekend",
-        "usually",
-        "often",
-        "yesterday",
-        "last night",
-        "two days ago",
-        "right now",
-        "at the moment",
-        "these days",
-        "this week",
-        "tomorrow",
-        "next week",
-        "recently",
-        "many times"
-    ];
-
+    // Pronouns and nouns for variety; used in sensible pairs below
     const subjects = [
-        "I",
-        "you",
-        "he",
-        "she",
-        "we",
-        "they"
+        "I", "you", "he", "she", "we", "they",
+        "my grandmother", "my grandfather", "the children", "the students",
+        "Lisa", "Carlos", "Maria", "James", "the teacher", "my neighbor",
+        "my best friend", "my parents", "my brother", "my sister",
+        "the baby", "the dog", "the cat", "the team", "the kids"
     ];
 
     const verbs = [
-        "walk",
-        "work",
-        "study",
-        "eat",
-        "cook",
-        "watch",
-        "clean",
-        "call",
-        "travel",
-        "read",
-        "sleep",
-        "drive"
+        "walk", "work", "study", "eat", "cook", "watch", "clean", "call",
+        "travel", "read", "sleep", "drive", "play", "run", "sing", "write",
+        "dance", "swim", "go", "have"
+    ];
+
+    // Pairs that make natural sentences in every tense (habit, past, now, background, future, future-cont)
+    const sensiblePairs = [
+        { subject: "I", verb: "walk" }, { subject: "I", verb: "work" }, { subject: "I", verb: "study" }, { subject: "I", verb: "read" }, { subject: "I", verb: "cook" }, { subject: "I", verb: "drive" }, { subject: "I", verb: "run" }, { subject: "I", verb: "swim" }, { subject: "I", verb: "write" }, { subject: "I", verb: "go" },
+        { subject: "you", verb: "walk" }, { subject: "you", verb: "work" }, { subject: "you", verb: "study" }, { subject: "you", verb: "eat" }, { subject: "you", verb: "cook" }, { subject: "you", verb: "watch" }, { subject: "you", verb: "read" }, { subject: "you", verb: "drive" }, { subject: "you", verb: "play" }, { subject: "you", verb: "call" },
+        { subject: "he", verb: "walk" }, { subject: "he", verb: "work" }, { subject: "he", verb: "study" }, { subject: "he", verb: "eat" }, { subject: "he", verb: "cook" }, { subject: "he", verb: "watch" }, { subject: "he", verb: "read" }, { subject: "he", verb: "sleep" }, { subject: "he", verb: "drive" }, { subject: "he", verb: "run" }, { subject: "he", verb: "go" },
+        { subject: "she", verb: "walk" }, { subject: "she", verb: "work" }, { subject: "she", verb: "study" }, { subject: "she", verb: "eat" }, { subject: "she", verb: "cook" }, { subject: "she", verb: "read" }, { subject: "she", verb: "sleep" }, { subject: "she", verb: "drive" }, { subject: "she", verb: "dance" }, { subject: "she", verb: "write" }, { subject: "she", verb: "travel" },
+        { subject: "we", verb: "walk" }, { subject: "we", verb: "work" }, { subject: "we", verb: "study" }, { subject: "we", verb: "eat" }, { subject: "we", verb: "cook" }, { subject: "we", verb: "watch" }, { subject: "we", verb: "play" }, { subject: "we", verb: "read" }, { subject: "we", verb: "travel" }, { subject: "we", verb: "run" }, { subject: "we", verb: "go" },
+        { subject: "they", verb: "walk" }, { subject: "they", verb: "work" }, { subject: "they", verb: "study" }, { subject: "they", verb: "eat" }, { subject: "they", verb: "cook" }, { subject: "they", verb: "watch" }, { subject: "they", verb: "play" }, { subject: "they", verb: "read" }, { subject: "they", verb: "sleep" }, { subject: "they", verb: "travel" }, { subject: "they", verb: "run" },
+        { subject: "my grandmother", verb: "walk" }, { subject: "my grandmother", verb: "cook" }, { subject: "my grandmother", verb: "read" }, { subject: "my grandfather", verb: "walk" }, { subject: "my grandfather", verb: "read" }, { subject: "my grandfather", verb: "drive" },
+        { subject: "the children", verb: "play" }, { subject: "the children", verb: "run" }, { subject: "the children", verb: "eat" }, { subject: "the children", verb: "sleep" }, { subject: "the children", verb: "watch" }, { subject: "the kids", verb: "play" }, { subject: "the kids", verb: "run" }, { subject: "the kids", verb: "eat" },
+        { subject: "the students", verb: "study" }, { subject: "the students", verb: "read" }, { subject: "the students", verb: "work" }, { subject: "the students", verb: "eat" }, { subject: "the teacher", verb: "work" }, { subject: "the teacher", verb: "read" }, { subject: "the teacher", verb: "write" },
+        { subject: "Lisa", verb: "work" }, { subject: "Lisa", verb: "study" }, { subject: "Lisa", verb: "read" }, { subject: "Lisa", verb: "drive" }, { subject: "Carlos", verb: "work" }, { subject: "Carlos", verb: "cook" }, { subject: "Carlos", verb: "drive" }, { subject: "Maria", verb: "study" }, { subject: "Maria", verb: "dance" }, { subject: "James", verb: "write" }, { subject: "James", verb: "read" },
+        { subject: "my neighbor", verb: "walk" }, { subject: "my neighbor", verb: "work" }, { subject: "my neighbor", verb: "drive" }, { subject: "my best friend", verb: "call" }, { subject: "my best friend", verb: "travel" }, { subject: "my best friend", verb: "study" },
+        { subject: "my parents", verb: "work" }, { subject: "my parents", verb: "cook" }, { subject: "my parents", verb: "travel" }, { subject: "my parents", verb: "drive" }, { subject: "my brother", verb: "work" }, { subject: "my brother", verb: "drive" }, { subject: "my brother", verb: "play" }, { subject: "my sister", verb: "study" }, { subject: "my sister", verb: "read" }, { subject: "my sister", verb: "dance" },
+        { subject: "the baby", verb: "sleep" }, { subject: "the baby", verb: "eat" }, { subject: "the baby", verb: "cry" }, { subject: "the dog", verb: "run" }, { subject: "the dog", verb: "eat" }, { subject: "the dog", verb: "sleep" }, { subject: "the cat", verb: "sleep" }, { subject: "the cat", verb: "eat" }, { subject: "the cat", verb: "run" },
+        { subject: "the team", verb: "play" }, { subject: "the team", verb: "run" }, { subject: "the team", verb: "work" }
     ];
 
     const sentenceTypes = [
@@ -875,7 +990,16 @@
         travel: { v2: "traveled", v3: "traveled", ing: "traveling" },
         read: { v2: "read", v3: "read", ing: "reading" },
         sleep: { v2: "slept", v3: "slept", ing: "sleeping" },
-        drive: { v2: "drove", v3: "driven", ing: "driving" }
+        drive: { v2: "drove", v3: "driven", ing: "driving" },
+        play: { v2: "played", v3: "played", ing: "playing" },
+        run: { v2: "ran", v3: "run", ing: "running" },
+        sing: { v2: "sang", v3: "sung", ing: "singing" },
+        write: { v2: "wrote", v3: "written", ing: "writing" },
+        dance: { v2: "danced", v3: "danced", ing: "dancing" },
+        swim: { v2: "swam", v3: "swum", ing: "swimming" },
+        go: { v2: "went", v3: "gone", ing: "going" },
+        have: { v2: "had", v3: "had", ing: "having" },
+        cry: { v2: "cried", v3: "cried", ing: "crying" }
     };
 
     function thirdPersonSingular(v1) {
@@ -907,7 +1031,7 @@
     }
 
     // Build wrong/correct fix sentences from current round (same verb and tense)
-    function buildFixSentences(meaningLabel, subject, verb, timeWord) {
+    function buildFixSentences(meaningLabel, subject, verb) {
         var v1 = verb.toLowerCase();
         var subj = subject;
         var subjLower = subj.toLowerCase();
@@ -915,41 +1039,41 @@
         if (!forms) {
             forms = { v2: v1 + "ed", v3: v1 + "ed", ing: v1 + "ing" };
         }
-        var tw = timeWord || "every day";
         var wrong = "";
         var correct = "";
         var explanation = "";
 
         switch (meaningLabel) {
             case "habit":
-                wrong = capitalizeFirst(subj + " " + v1 + " " + tw + ".");
-                correct = capitalizeFirst(subj + " " + (subjLower === "he" || subjLower === "she" || subjLower === "it" ? thirdPersonSingular(v1) : v1) + " " + tw + ".");
+                wrong = capitalizeFirst(subj + " " + v1 + ".");
+                correct = capitalizeFirst(subj + " " + (subjLower === "he" || subjLower === "she" || subjLower === "it" ? thirdPersonSingular(v1) : v1) + ".");
                 explanation = "Subject is \u201c" + subj + "\u201d" + (subjLower === "he" || subjLower === "she" || subjLower === "it" ? " (third person singular). In present simple, add \u201c-s\u201d to the verb." : ". Check subject–verb agreement.");
                 break;
             case "finished":
-                wrong = capitalizeFirst(tw + " " + subj + " " + v1 + ".");
-                correct = capitalizeFirst(tw + " " + subj + " " + forms.v2 + ".");
-                explanation = "The time word asks for past simple. Use the past form of the verb: \u201c" + forms.v2 + "\u201d.";
+                wrong = capitalizeFirst(subj + " " + v1 + ".");
+                correct = capitalizeFirst(subj + " " + forms.v2 + ".");
+                explanation = "Past simple needs the past form of the verb: \u201c" + forms.v2 + "\u201d.";
                 break;
-            case "now / near future":
-                wrong = capitalizeFirst(subj + " " + v1 + " now.");
-                correct = capitalizeFirst(subj + " " + getBePresent(subj) + " " + forms.ing + " now.");
-                explanation = "For \u201cnow\u201d we use present continuous: am/is/are + verb-ing.";
+            case "now":
+                wrong = capitalizeFirst(subj + " " + v1 + ".");
+                correct = capitalizeFirst(subj + " " + getBePresent(subj) + " " + forms.ing + ".");
+                explanation = "Present continuous uses am/is/are + verb-ing.";
                 break;
             case "background":
+                var subjInClause = (subjLower === "i") ? "I" : capitalizeFirst(subjLower);
                 wrong = capitalizeFirst("When I arrived, " + subjLower + " " + v1 + ".");
-                correct = capitalizeFirst("When I arrived, " + subjLower + " " + getBePast(subj) + " " + forms.ing + ".");
+                correct = "When I arrived, " + subjInClause + " " + getBePast(subj) + " " + forms.ing + ".";
                 explanation = "Background action in the past uses past continuous: was/were + verb-ing.";
                 break;
             case "future":
-                wrong = capitalizeFirst("Tomorrow " + subj + " " + getBePresent(subj) + " " + v1 + ".");
-                correct = capitalizeFirst("Tomorrow " + subj + " will " + v1 + ".");
-                explanation = "Use \u201cwill\u201d + base verb for a simple future decision or plan.";
+                wrong = capitalizeFirst(subj + " " + getBePresent(subj) + " " + v1 + ".");
+                correct = capitalizeFirst(subj + " will " + v1 + ".");
+                explanation = "Future simple uses will + base verb.";
                 break;
-            case "in progress (future)":
-                wrong = capitalizeFirst(subj + " will " + v1 + " " + tw + ".");
-                correct = capitalizeFirst(subj + " will be " + forms.ing + " " + tw + ".");
-                explanation = "For an ongoing action at a specific time in the future, use future continuous: will be + verb-ing.";
+            case "future-cont":
+                wrong = capitalizeFirst(subj + " will " + v1 + ".");
+                correct = capitalizeFirst(subj + " will be " + forms.ing + ".");
+                explanation = "Future continuous uses will be + verb-ing.";
                 break;
             default:
                 wrong = subj + " " + v1 + ".";
@@ -967,8 +1091,14 @@
     const timerBtn = document.getElementById('timerBtn');
     const roundCounter = document.getElementById('roundCounter');
 
+    function showExample() {
+        document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('examplePage').classList.remove('hidden');
+    }
+
     function startGame() {
         document.getElementById('homePage').classList.add('hidden');
+        document.getElementById('examplePage').classList.add('hidden');
         document.getElementById('gamePage').classList.remove('hidden');
         round = 1;
         roundCounter.textContent = "Round " + round;
@@ -978,6 +1108,7 @@
 
     function goHome() {
         document.getElementById('gamePage').classList.add('hidden');
+        document.getElementById('examplePage').classList.add('hidden');
         document.getElementById('homePage').classList.remove('hidden');
         document.getElementById('gamePage').classList.remove('show-fix');
         clearInterval(timerId);
@@ -1053,13 +1184,12 @@
         resetAllCardFlips();
 
         const meaningObj = randomItem(meanings);
-        const timeWord = randomItem(timeWords);
-        const subject = randomItem(subjects);
-        const verb = randomItem(verbs);
+        const pair = randomItem(sensiblePairs);
+        const subject = pair.subject;
+        const verb = pair.verb;
         const sentenceType = randomItem(sentenceTypes);
 
         document.getElementById('meaningValue').textContent = meaningObj.label;
-        document.getElementById('timeValue').textContent = timeWord;
         document.getElementById('subjectValue').textContent = subject;
         document.getElementById('verbValue').textContent = verb;
         document.getElementById('sentenceTypeValue').textContent = sentenceType;
@@ -1067,7 +1197,7 @@
         setMeaningCardColor(meaningObj.slug);
         setSubjectCardGender(subject);
 
-        var fix = buildFixSentences(meaningObj.label, subject, verb, timeWord);
+        var fix = buildFixSentences(meaningObj.slug, subject, verb);
         document.getElementById('wrongSentence').textContent = fix.wrong;
         document.getElementById('correctSentence').textContent = fix.correct;
         document.getElementById('errorExplanation').textContent = fix.explanation;
