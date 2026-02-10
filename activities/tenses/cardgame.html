@@ -1166,7 +1166,8 @@
     }
 
     function setMeaningCardColor(slug) {
-        const meaningWrapper = document.querySelector('.card-wrapper[data-card="meaning"]');
+        // Update the game page meaning card only (example page has its own card)
+        const meaningWrapper = document.querySelector('#gamePage .card-wrapper[data-card="meaning"]');
         if (!meaningWrapper) return;
         meaningWrapper.classList.remove('meaning-habit', 'meaning-finished', 'meaning-now', 'meaning-background', 'meaning-future', 'meaning-future-continuous');
         meaningWrapper.classList.add('meaning-' + slug);
