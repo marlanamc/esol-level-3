@@ -136,7 +136,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  animation: slideIn 0.4s ease-out;
+  animation: slideIn 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .slide.active {
@@ -146,7 +146,7 @@
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(8px);
   }
   to {
     opacity: 1;
@@ -360,6 +360,9 @@
     font-size: 40px;
   }
 }
+
+
+
 
 
 

@@ -28,6 +28,20 @@
 
     // Show first slide
     showSlide(0);
+
+    // Safety: if something strips the active class, re-apply it to the first slide
+    ensureActiveSlide();
+    setTimeout(ensureActiveSlide, 800);
+    setTimeout(ensureActiveSlide, 2500);
+  }
+
+  // Make sure at least one slide stays active so content is visible
+  function ensureActiveSlide() {
+    if (!slides.length) return;
+    const hasActive = slides.some(slide => slide.classList.contains('active'));
+    if (!hasActive) {
+      showSlide(0);
+    }
   }
 
   // Show specific slide
@@ -255,4 +269,3 @@
   };
 
 })();
-
