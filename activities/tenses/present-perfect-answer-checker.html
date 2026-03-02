@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Answer Checker - Present Perfect & Present Perfect Continuous</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;
+    --v1:#c1e99b;
+    --ving:#b8d9a8;
+    --time:#ffb3ba;
+    --place:#c5a3ff;
+    --border:#222;
+    --muted:#666;
+    --accent:#4a90e2;
+    --green-header:#4caf50;
+    --strikethrough:#e53935;
+    --card-bg:#e3f2fd;
+    --card-border:#90caf9;
+    --correct:#4caf50;
+    --incorrect:#e53935;
+  }
+
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.5;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1{
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  h2{
+    color: var(--accent);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    background: #f0f7ff;
+    border-left: 4px solid var(--accent);
+  }
+
+  .section-header{
+    background: #e8f5e9;
+    border-left: 4px solid var(--green-header);
+    padding: 8px 12px;
+    margin: 20px 0 15px 0;
+    font-weight: bold;
+    color: #2e7d32;
+  }
+
+  .check-button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 0;
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .check-button:hover {
+    background: #357abd;
+  }
+
+  .check-button:active {
+    transform: scale(0.98);
+  }
+
+  /* Word Scramble Styles */
+  .scramble-exercise {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fafafa;
+    border-left: 3px solid var(--accent);
+    border-radius: 5px;
+  }
+
+  .exercise-number {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+
+  .word-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+    align-items: center;
+  }
+
+  .word-card {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    display: inline-block;
+  }
+
+  .answer-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .answer-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .answer-feedback {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+
+  .answer-feedback.correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid var(--correct);
+    display: block;
+  }
+
+  .answer-feedback.incorrect {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid var(--incorrect);
+    display: block;
+  }
+
+  .answer-feedback.show-correct {
+    background: #e3f2fd;
+    color: #1565c0;
+    border-left: 4px solid var(--accent);
+    display: block;
+  }
+
+  .correct-answer {
+    font-weight: bold;
+    color: var(--correct);
+  }
+
+  /* Cross-Out Styles */
+  .cross-out-section {
+    background: #f5f5f5;
+    border: 2px solid var(--green-header);
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+  }
+
+  .cross-out-title {
+    background: var(--green-header);
+    color: white;
+    padding: 10px 15px;
+    margin: -15px -15px 15px -15px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+  }
+
+  .cross-out-item {
+    margin: 15px 0;
+    padding: 12px;
+    background: white;
+    border-left: 3px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .cross-out-item.example {
+    background: #e8f5e9;
+    border-left-color: var(--green-header);
+  }
+
+  .cross-out-sentence {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 8px 0;
+  }
+
+  .word-choice {
+    display: inline;
+    padding: 2px 6px;
+    margin: 0 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+
+  .word-choice:hover {
+    background: #fff3cd;
+    border-color: #ffc107;
+  }
+
+  .word-choice.crossed-out {
+    text-decoration: line-through;
+    text-decoration-color: var(--strikethrough);
+    text-decoration-thickness: 2px;
+    color: var(--muted);
+    background: #ffebee;
+    border-color: var(--strikethrough);
+  }
+
+  .word-choice.correct-choice {
+    background: #e8f5e9;
+    border-color: var(--correct);
+    font-weight: bold;
+    color: var(--green-header);
+  }
+
+  .word-choice.incorrect-choice {
+    background: #ffebee;
+    border-color: var(--incorrect);
+    color: var(--strikethrough);
+  }
+
+  .cross-out-feedback {
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+
+  .cross-out-feedback.correct {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid var(--correct);
+    display: block;
+  }
+
+  .cross-out-feedback.incorrect {
+    background: #ffebee;
+    color: #c62828;
+    border-left: 4px solid var(--incorrect);
+    display: block;
+  }
+
+  .time-word {
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #856404;
+    font-size: 14px;
+  }
+
+  .hint {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 5px;
+  }
+
+  .score-display {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f0f7ff;
+    border: 2px solid var(--accent);
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .reset-button {
+    background: #666;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+  }
+
+  .reset-button:hover {
+    background: #555;
+  }
+</style>
+</head>
+<body>
+
+<h1>Answer Checker: Present Perfect & Present Perfect Continuous</h1>
+
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  Score: <span id="score">0</span> / <span id="total">0</span>
+</div>
+
+<div style="text-align: center; margin: 20px 0;">
+  <button class="check-button" onclick="checkAllAnswers()">Check All Answers</button>
+  <button class="reset-button" onclick="resetAll()">Reset</button>
+  <button class="reset-button" onclick="showAllAnswers()">Show All Answers</button>
+</div>
+
+<!-- ============================================ -->
+<!-- PART 1: WORD SCRAMBLE - PRESENT PERFECT -->
+<!-- ============================================ -->
+
+<h2>Part 1: Word Scramble - Put the Words in Order</h2>
+
+<div class="section-header">📝 Present Perfect (Exercises 1-8)</div>
+
+<div class="scramble-exercise" data-exercise="1">
+  <div class="exercise-number">1.</div>
+  <div class="word-cards">
+    <span class="word-card">has</span>
+    <span class="word-card">just</span>
+    <span class="word-card">she</span>
+    <span class="word-card">finished</span>
+    <span class="word-card">her</span>
+    <span class="word-card">homework</span>
+  </div>
+  <input type="text" class="answer-input" id="answer1" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback1"></div>
+  <div class="hint">Hint: Use "just" for something that happened a short time ago.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="2">
+  <div class="exercise-number">2.</div>
+  <div class="word-cards">
+    <span class="word-card">have</span>
+    <span class="word-card">already</span>
+    <span class="word-card">they</span>
+    <span class="word-card">eaten</span>
+    <span class="word-card">dinner</span>
+  </div>
+  <input type="text" class="answer-input" id="answer2" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback2"></div>
+  <div class="hint">Hint: Use "already" for something done before now.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="3">
+  <div class="exercise-number">3.</div>
+  <div class="word-cards">
+    <span class="word-card">have</span>
+    <span class="word-card">never</span>
+    <span class="word-card">I</span>
+    <span class="word-card">been</span>
+    <span class="word-card">to</span>
+    <span class="word-card">Japan</span>
+  </div>
+  <input type="text" class="answer-input" id="answer3" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback3"></div>
+  <div class="hint">Hint: "Never" = not at any time in your life.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="4">
+  <div class="exercise-number">4.</div>
+  <div class="word-cards">
+    <span class="word-card">lived</span>
+    <span class="word-card">he</span>
+    <span class="word-card">has</span>
+    <span class="word-card">here</span>
+    <span class="word-card">for</span>
+    <span class="word-card">ten</span>
+    <span class="word-card">years</span>
+  </div>
+  <input type="text" class="answer-input" id="answer4" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback4"></div>
+  <div class="hint">Hint: Use "for" with a period of time (duration).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="5">
+  <div class="exercise-number">5.</div>
+  <div class="word-cards">
+    <span class="word-card">known</span>
+    <span class="word-card">each</span>
+    <span class="word-card">we</span>
+    <span class="word-card">have</span>
+    <span class="word-card">other</span>
+    <span class="word-card">since</span>
+    <span class="word-card">2010</span>
+  </div>
+  <input type="text" class="answer-input" id="answer5" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback5"></div>
+  <div class="hint">Hint: Use "since" with a starting point in time.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="6">
+  <div class="exercise-number">6.</div>
+  <div class="word-cards">
+    <span class="word-card">have</span>
+    <span class="word-card">you</span>
+    <span class="word-card">ever</span>
+    <span class="word-card">tried</span>
+    <span class="word-card">sushi</span>
+  </div>
+  <input type="text" class="answer-input" id="answer6" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback6"></div>
+  <div class="hint">Hint: "Ever" = at any time in your life (used in questions).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="7">
+  <div class="exercise-number">7.</div>
+  <div class="word-cards">
+    <span class="word-card">project</span>
+    <span class="word-card">her</span>
+    <span class="word-card">yet</span>
+    <span class="word-card">hasn't</span>
+    <span class="word-card">she</span>
+    <span class="word-card">finished</span>
+  </div>
+  <input type="text" class="answer-input" id="answer7" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback7"></div>
+  <div class="hint">Hint: Use "yet" in negative sentences (something not done by now).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="8">
+  <div class="exercise-number">8.</div>
+  <div class="word-cards">
+    <span class="word-card">arrived</span>
+    <span class="word-card">they</span>
+    <span class="word-card">have</span>
+    <span class="word-card">just</span>
+    <span class="word-card">at</span>
+    <span class="word-card">the</span>
+    <span class="word-card">airport</span>
+  </div>
+  <input type="text" class="answer-input" id="answer8" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback8"></div>
+  <div class="hint">Hint: Recent action with visible result.</div>
+</div>
+
+<div class="section-header">📝 Present Perfect Continuous (Exercises 9-16)</div>
+
+<div class="scramble-exercise" data-exercise="9">
+  <div class="exercise-number">9.</div>
+  <div class="word-cards">
+    <span class="word-card">studying</span>
+    <span class="word-card">have</span>
+    <span class="word-card">I</span>
+    <span class="word-card">English</span>
+    <span class="word-card">been</span>
+    <span class="word-card">for</span>
+    <span class="word-card">three</span>
+    <span class="word-card">years</span>
+  </div>
+  <input type="text" class="answer-input" id="answer9" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback9"></div>
+  <div class="hint">Hint: Use continuous for actions with duration (for + period).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="10">
+  <div class="exercise-number">10.</div>
+  <div class="word-cards">
+    <span class="word-card">company</span>
+    <span class="word-card">been</span>
+    <span class="word-card">she</span>
+    <span class="word-card">has</span>
+    <span class="word-card">working</span>
+    <span class="word-card">at</span>
+    <span class="word-card">that</span>
+    <span class="word-card">since</span>
+    <span class="word-card">2020</span>
+  </div>
+  <input type="text" class="answer-input" id="answer10" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback10"></div>
+  <div class="hint">Hint: Ongoing action from a starting point (since).</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="11">
+  <div class="exercise-number">11.</div>
+  <div class="word-cards">
+    <span class="word-card">been</span>
+    <span class="word-card">waiting</span>
+    <span class="word-card">they</span>
+    <span class="word-card">have</span>
+    <span class="word-card">for</span>
+    <span class="word-card">the</span>
+    <span class="word-card">bus</span>
+    <span class="word-card">30</span>
+    <span class="word-card">minutes</span>
+  </div>
+  <input type="text" class="answer-input" id="answer11" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback11"></div>
+  <div class="hint">Hint: Duration of waiting.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="12">
+  <div class="exercise-number">12.</div>
+  <div class="word-cards">
+    <span class="word-card">living</span>
+    <span class="word-card">been</span>
+    <span class="word-card">he</span>
+    <span class="word-card">has</span>
+    <span class="word-card">in</span>
+    <span class="word-card">London</span>
+    <span class="word-card">since</span>
+    <span class="word-card">last</span>
+    <span class="word-card">year</span>
+  </div>
+  <input type="text" class="answer-input" id="answer12" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback12"></div>
+  <div class="hint">Hint: Ongoing situation with a starting point.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="13">
+  <div class="exercise-number">13.</div>
+  <div class="word-cards">
+    <span class="word-card">trying</span>
+    <span class="word-card">we</span>
+    <span class="word-card">been</span>
+    <span class="word-card">have</span>
+    <span class="word-card">to</span>
+    <span class="word-card">call</span>
+    <span class="word-card">you</span>
+    <span class="word-card">all</span>
+    <span class="word-card">day</span>
+  </div>
+  <input type="text" class="answer-input" id="answer13" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback13"></div>
+  <div class="hint">Hint: Repeated/ongoing effort with duration.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="14">
+  <div class="exercise-number">14.</div>
+  <div class="word-cards">
+    <span class="word-card">long</span>
+    <span class="word-card">have</span>
+    <span class="word-card">how</span>
+    <span class="word-card">you</span>
+    <span class="word-card">been</span>
+    <span class="word-card">learning</span>
+    <span class="word-card">to</span>
+    <span class="word-card">drive</span>
+  </div>
+  <input type="text" class="answer-input" id="answer14" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback14"></div>
+  <div class="hint">Hint: "How long" asks about duration.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="15">
+  <div class="exercise-number">15.</div>
+  <div class="word-cards">
+    <span class="word-card">she</span>
+    <span class="word-card">been</span>
+    <span class="word-card">cooking</span>
+    <span class="word-card">has</span>
+    <span class="word-card">all</span>
+    <span class="word-card">morning</span>
+  </div>
+  <input type="text" class="answer-input" id="answer15" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback15"></div>
+  <div class="hint">Hint: Action in progress for a period, possibly just finished.</div>
+</div>
+
+<div class="scramble-exercise" data-exercise="16">
+  <div class="exercise-number">16.</div>
+  <div class="word-cards">
+    <span class="word-card">tennis</span>
+    <span class="word-card">been</span>
+    <span class="word-card">playing</span>
+    <span class="word-card">they</span>
+    <span class="word-card">have</span>
+    <span class="word-card">since</span>
+    <span class="word-card">9</span>
+    <span class="word-card">am</span>
+  </div>
+  <input type="text" class="answer-input" id="answer16" placeholder="Type your answer here...">
+  <div class="answer-feedback" id="feedback16"></div>
+  <div class="hint">Hint: Ongoing action from a specific time.</div>
+</div>
+
+<!-- ============================================ -->
+<!-- PART 2: CROSS-OUT ACTIVITY -->
+<!-- ============================================ -->
+
+<h2>Part 2: Cross Out the Incorrect Words</h2>
+
+<div class="cross-out-section">
+  <div class="cross-out-title">CROSS OUT THE INCORRECT FORM IN EACH SENTENCE</div>
+
+  <!-- Example -->
+  <div class="cross-out-item example">
+    <div class="cross-out-sentence">
+      <strong>Example:</strong> Click the wrong form to cross it out. I <span class="word-choice correct-choice">have always wanted</span> / <span class="word-choice crossed-out">have always been wanting</span> to visit Paris. (We don't use continuous with "want.")
+    </div>
+  </div>
+
+  <div class="section-header">📝 Present Perfect vs Present Perfect Continuous (Exercises 17-26)</div>
+
+  <div class="cross-out-item" data-exercise="17">
+    <div class="cross-out-sentence">
+      <strong>17.</strong> I'm tired. I <span class="word-choice" data-id="17-1" data-correct="false">have run</span> / <span class="word-choice" data-id="17-2" data-correct="true">have been running</span>.
+    </div>
+    <div class="cross-out-feedback" id="feedback17"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="18">
+    <div class="cross-out-sentence">
+      <strong>18.</strong> How long <span class="word-choice" data-id="18-1" data-correct="true">have you known</span> / <span class="word-choice" data-id="18-2" data-correct="false">have you been knowing</span> her?
+    </div>
+    <div class="cross-out-feedback" id="feedback18"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="19">
+    <div class="cross-out-sentence">
+      <strong>19.</strong> He <span class="word-choice" data-id="19-1" data-correct="true">has written</span> / <span class="word-choice" data-id="19-2" data-correct="false">has been writing</span> three books.
+    </div>
+    <div class="cross-out-feedback" id="feedback19"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="20">
+    <div class="cross-out-sentence">
+      <strong>20.</strong> They <span class="word-choice" data-id="20-1" data-correct="true">have been waiting</span> / <span class="word-choice" data-id="20-2" data-correct="false">have waited</span> for an hour.
+    </div>
+    <div class="cross-out-feedback" id="feedback20"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="21">
+    <div class="cross-out-sentence">
+      <strong>21.</strong> She <span class="word-choice" data-id="21-1" data-correct="true">has finished</span> / <span class="word-choice" data-id="21-2" data-correct="false">has been finishing</span> her homework.
+    </div>
+    <div class="cross-out-feedback" id="feedback21"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="22">
+    <div class="cross-out-sentence">
+      <strong>22.</strong> We <span class="word-choice" data-id="22-1" data-correct="false">have discussed</span> / <span class="word-choice" data-id="22-2" data-correct="true">have been discussing</span> this for hours.
+    </div>
+    <div class="cross-out-feedback" id="feedback22"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="23">
+    <div class="cross-out-sentence">
+      <strong>23.</strong> He <span class="word-choice" data-id="23-1" data-correct="true">has lost</span> / <span class="word-choice" data-id="23-2" data-correct="false">has been losing</span> his keys.
+    </div>
+    <div class="cross-out-feedback" id="feedback23"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="24">
+    <div class="cross-out-sentence">
+      <strong>24.</strong> I <span class="word-choice" data-id="24-1" data-correct="true">have always wanted</span> / <span class="word-choice" data-id="24-2" data-correct="false">have always been wanting</span> to visit Paris.
+    </div>
+    <div class="cross-out-feedback" id="feedback24"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="25">
+    <div class="cross-out-sentence">
+      <strong>25.</strong> <span class="time-word">Look!</span> Someone <span class="word-choice" data-id="25-1" data-correct="true">has painted</span> / <span class="word-choice" data-id="25-2" data-correct="false">has been painting</span> the door. (Completed action with visible result.)
+    </div>
+    <div class="cross-out-feedback" id="feedback25"></div>
+  </div>
+
+  <div class="cross-out-item" data-exercise="26">
+    <div class="cross-out-sentence">
+      <strong>26.</strong> She's out of breath. She <span class="word-choice" data-id="26-1" data-correct="false">has run</span> / <span class="word-choice" data-id="26-2" data-correct="true">has been running</span>.
+    </div>
+    <div class="cross-out-feedback" id="feedback26"></div>
+  </div>
+</div>
+
+<script>
+// Correct answers for word scrambles
+const correctAnswers = {
+  1: "She has just finished her homework.",
+  2: "They have already eaten dinner.",
+  3: "I have never been to Japan.",
+  4: "He has lived here for ten years.",
+  5: "We have known each other since 2010.",
+  6: "Have you ever tried sushi?",
+  7: "She hasn't finished her project yet.",
+  8: "They have just arrived at the airport.",
+  9: "I have been studying English for three years.",
+  10: "She has been working at that company since 2020.",
+  11: "They have been waiting for the bus for 30 minutes.",
+  12: "He has been living in London since last year.",
+  13: "We have been trying to call you all day.",
+  14: "How long have you been learning to drive?",
+  15: "She has been cooking all morning.",
+  16: "They have been playing tennis since 9 am."
+};
+
+// Normalize function to compare answers (remove punctuation, extra spaces, case insensitive)
+function normalizeAnswer(answer) {
+  return answer.trim().toLowerCase().replace(/[.,;:!?]/g, '').replace(/\s+/g, ' ');
+}
+
+// Check word scramble answers
+function checkScrambleAnswer(exerciseNum, userAnswer) {
+  const correct = correctAnswers[exerciseNum];
+  if (!correct) return null;
+
+  const normalizedUser = normalizeAnswer(userAnswer);
+  const normalizedCorrect = normalizeAnswer(correct);
+
+  return normalizedUser === normalizedCorrect;
+}
+
+// Check all word scramble answers
+function checkAllScrambles() {
+  let correct = 0;
+  let total = 0;
+
+  for (let i = 1; i <= 16; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+
+    if (!input || !feedback) continue;
+
+    total++;
+    const userAnswer = input.value.trim();
+
+    if (userAnswer === '') {
+      feedback.className = 'answer-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+      continue;
+    }
+
+    const isCorrect = checkScrambleAnswer(i, userAnswer);
+
+    if (isCorrect) {
+      correct++;
+      feedback.className = 'answer-feedback correct';
+      feedback.innerHTML = '✓ <strong>Correct!</strong>';
+    } else {
+      feedback.className = 'answer-feedback incorrect';
+      feedback.innerHTML = `✗ Incorrect. Correct answer: <span class="correct-answer">${correctAnswers[i]}</span>`;
+    }
+  }
+
+  return { correct, total };
+}
+
+// Check cross-out answers
+function checkCrossOutAnswer(exerciseNum) {
+  const exercise = document.querySelector(`[data-exercise="${exerciseNum}"]`);
+  if (!exercise) return null;
+
+  const choices = exercise.querySelectorAll('.word-choice[data-id]');
+  let allCorrect = true;
+  let selectedIncorrect = [];
+  let missedCorrect = [];
+
+  choices.forEach(choice => {
+    const isCorrect = choice.getAttribute('data-correct') === 'true';
+    const isCrossedOut = choice.classList.contains('crossed-out');
+
+    if (isCorrect && isCrossedOut) {
+      allCorrect = false;
+      missedCorrect.push(choice.textContent.trim());
+    } else if (!isCorrect && !isCrossedOut) {
+      allCorrect = false;
+      selectedIncorrect.push(choice.textContent.trim());
+    }
+  });
+
+  return { allCorrect, selectedIncorrect, missedCorrect };
+}
+
+// Check all cross-out answers
+function checkAllCrossOuts() {
+  let correct = 0;
+  let total = 0;
+
+  for (let i = 17; i <= 26; i++) {
+    const feedback = document.getElementById(`feedback${i}`);
+    if (!feedback) continue;
+
+    total++;
+    const result = checkCrossOutAnswer(i);
+
+    if (result === null) continue;
+
+    if (result.allCorrect) {
+      correct++;
+      feedback.className = 'cross-out-feedback correct';
+      feedback.innerHTML = '✓ <strong>Correct!</strong>';
+    } else {
+      feedback.className = 'cross-out-feedback incorrect';
+      let message = '✗ Incorrect. ';
+      if (result.selectedIncorrect.length > 0) {
+        message += `You should cross out: ${result.selectedIncorrect.join(', ')}. `;
+      }
+      if (result.missedCorrect.length > 0) {
+        message += `Don't cross out: ${result.missedCorrect.join(', ')}.`;
+      }
+      feedback.innerHTML = message;
+    }
+  }
+
+  return { correct, total };
+}
+
+// Main check function
+function checkAllAnswers() {
+  const scrambleResults = checkAllScrambles();
+  const crossOutResults = checkAllCrossOuts();
+
+  const totalCorrect = scrambleResults.correct + crossOutResults.correct;
+  const totalQuestions = scrambleResults.total + crossOutResults.total;
+
+  // Show score
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  document.getElementById('score').textContent = totalCorrect;
+  document.getElementById('total').textContent = totalQuestions;
+  scoreDisplay.style.display = 'block';
+
+  // Scroll to top to see score
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Reset all answers
+function resetAll() {
+  // Reset scrambles
+  for (let i = 1; i <= 16; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+    if (input) input.value = '';
+    if (feedback) {
+      feedback.className = 'answer-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+    }
+  }
+
+  // Reset cross-outs
+  for (let i = 17; i <= 26; i++) {
+    const feedback = document.getElementById(`feedback${i}`);
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    if (feedback) {
+      feedback.className = 'cross-out-feedback';
+      feedback.textContent = '';
+      feedback.style.display = 'none';
+    }
+    choices.forEach(choice => {
+      choice.classList.remove('crossed-out', 'correct-choice', 'incorrect-choice');
+    });
+  }
+
+  // Hide score
+  document.getElementById('scoreDisplay').style.display = 'none';
+}
+
+// Show all correct answers
+function showAllAnswers() {
+  // Show scramble answers
+  for (let i = 1; i <= 16; i++) {
+    const input = document.getElementById(`answer${i}`);
+    const feedback = document.getElementById(`feedback${i}`);
+    if (input && correctAnswers[i]) {
+      input.value = correctAnswers[i];
+    }
+    if (feedback && correctAnswers[i]) {
+      feedback.className = 'answer-feedback show-correct';
+      feedback.innerHTML = `Correct answer: <span class="correct-answer">${correctAnswers[i]}</span>`;
+    }
+  }
+
+  // Show cross-out answers
+  for (let i = 17; i <= 26; i++) {
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    choices.forEach(choice => {
+      const isCorrect = choice.getAttribute('data-correct') === 'true';
+      if (!isCorrect) {
+        choice.classList.add('crossed-out');
+      } else {
+        choice.classList.add('correct-choice');
+      }
+    });
+
+    const feedback = document.getElementById(`feedback${i}`);
+    if (feedback) {
+      feedback.className = 'cross-out-feedback correct';
+      feedback.innerHTML = '✓ Correct answers shown above.';
+    }
+  }
+
+  // Show score
+  checkAllAnswers();
+}
+
+// Set up click handlers for cross-out exercises
+document.addEventListener('DOMContentLoaded', function() {
+  for (let i = 17; i <= 26; i++) {
+    const choices = document.querySelectorAll(`[data-exercise="${i}"] .word-choice[data-id]`);
+    choices.forEach(choice => {
+      choice.addEventListener('click', function() {
+        if (this.closest('.example')) return;
+
+        this.classList.toggle('crossed-out');
+
+        const exercise = this.closest('[data-exercise]');
+        if (exercise) {
+          const exerciseNum = exercise.getAttribute('data-exercise');
+          const feedback = document.getElementById(`feedback${exerciseNum}`);
+          if (feedback) {
+            feedback.className = 'cross-out-feedback';
+            feedback.textContent = '';
+            feedback.style.display = 'none';
+          }
+        }
+      });
+    });
+  }
+
+  // Allow Enter key to check answers
+  for (let i = 1; i <= 16; i++) {
+    const input = document.getElementById(`answer${i}`);
+    if (input) {
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkAllAnswers();
+        }
+      });
+    }
+  }
+});
+</script>
+
+</body>
+</html>
