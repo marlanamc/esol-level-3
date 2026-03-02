@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Present Perfect Family Full Guide Slides + -ed Endings</title>
+  <style>
+    :root {
+      --ink: #101829;
+      --muted: #3f4f67;
+      --card: #ffffff;
+      --line: #b9c7da;
+      --accent: #e86f1f;
+      --accent-2: #1f9d8f;
+      --bg1: #101827;
+      --bg2: #224363;
+      --bg3: #3e7a74;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Verdana, "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      background: radial-gradient(circle at 8% 12%, var(--bg3), var(--bg2) 40%, var(--bg1) 78%);
+      color: var(--ink);
+      transition: background 500ms ease;
+      line-height: 1.5;
+      font-size: 18px;
+    }
+    body.theme-1 { background: radial-gradient(circle at 10% 8%, #4f6d3a, #2e5362 45%, #1a2531 78%); }
+    body.theme-2 { background: radial-gradient(circle at 18% 14%, #825436, #3c5f78 42%, #1d2436 78%); }
+    body.theme-3 { background: radial-gradient(circle at 14% 8%, #265a78, #49526f 45%, #1b202f 78%); }
+    body.theme-4 { background: radial-gradient(circle at 15% 10%, #6f5a2e, #2a6170 45%, #1a1f30 78%); }
+    .deck {
+      width: min(1180px, 96vw);
+      margin: 1rem auto;
+      padding: 1rem;
+      border: 1px solid rgba(226,232,240,.34);
+      border-radius: 16px;
+      background: linear-gradient(165deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+    }
+    .deck::before {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -20%;
+      width: 440px;
+      height: 440px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.2), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .deck::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      bottom: -160px;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.12), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .slide {
+      display: none;
+      min-height: 72vh;
+      padding: 1.15rem 1.35rem;
+      border-radius: 14px;
+      background: linear-gradient(158deg, #fffefc, #f5faff 70%);
+      border: 1px solid #d7e4f3;
+      box-shadow: 0 20px 52px rgba(10,20,36,.28);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide.active {
+      display: block;
+      animation: slideIn 320ms ease;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -38px;
+      top: -38px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,157,143,.2), rgba(31,157,143,0));
+      pointer-events: none;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px) scale(.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .kicker {
+      display: inline-block;
+      margin-bottom: .6rem;
+      border-radius: 999px;
+      padding: .26rem .7rem;
+      background: linear-gradient(90deg, #fde68a, #fdba74);
+      color: #7c2d12;
+      font-size: .74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    h1, h2, h3 { font-family: "Segoe UI", Verdana, Tahoma, sans-serif; margin: .15rem 0 .6rem; letter-spacing: .01em; font-weight: 800; line-height: 1.25; }
+    h1 { font-size: clamp(2.1rem, 3.2vw, 2.95rem); }
+    h2 { font-size: clamp(1.65rem, 2.5vw, 2.2rem); }
+    h3 { font-size: clamp(1.2rem, 1.9vw, 1.45rem); }
+    .lead { font-size: clamp(1.2rem, 1.9vw, 1.45rem); color: #1e293b; font-weight: 600; }
+    .content-scroll {
+      max-height: 54vh;
+      overflow: auto;
+      border: 1px solid #cfe0ef;
+      border-radius: 12px;
+      padding: .85rem;
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    .content-scroll p, .content-scroll li, .exercise-card p, .exercise-item, .quiz-q {
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    }
+    .item-label { font-size: clamp(1.2rem, 1.6vw, 1.38rem); }
+    .opt { font-size: clamp(1.05rem, 1.35vw, 1.22rem); }
+    .exercise-card h4 { font-size: clamp(1.22rem, 1.7vw, 1.45rem); }
+    .quiz-q p { font-size: clamp(1.1rem, 1.5vw, 1.28rem); }
+    .quiz-q label { font-size: clamp(1.05rem, 1.35vw, 1.2rem); }
+    .visual-panel {
+      margin: .25rem 0 .65rem;
+      border: 2px solid #c7d9ef;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f0f9ff, #ecfeff);
+      padding: .6rem .7rem;
+    }
+    .visual-title {
+      margin: 0 0 .35rem;
+      font-size: .95rem;
+      font-weight: 800;
+      color: #0f4c81;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+    .diagram-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .55rem;
+      align-items: stretch;
+    }
+    .diagram-card {
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #fff;
+      padding: .45rem .55rem;
+      font-size: .94rem;
+    }
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .35rem;
+      margin-top: .2rem;
+      font-weight: 700;
+      color: #1e3a8a;
+    }
+    .flow span {
+      flex: 1;
+      text-align: center;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: .22rem .3rem;
+      font-size: .84rem;
+    }
+    .flow b { color: #0369a1; }
+    .content-scroll table { width: 100% !important; }
+    .exercise-card {
+      margin-top: .7rem;
+      border: 2px solid #fbd0aa;
+      border-radius: 12px;
+      padding: .65rem;
+      background: linear-gradient(145deg, #fff7ed, #fff4d6);
+    }
+    .exercise-card h4 { margin: .1rem 0 .45rem; font-size: 1.03rem; }
+    .exercise-item {
+      margin-top: .55rem;
+      border: 1px solid #f8d494;
+      background: #fffef5;
+      padding: .5rem;
+      border-radius: 8px;
+    }
+    .item-label { font-weight: 700; margin-bottom: .25rem; }
+    .item-number {
+      display: inline-block;
+      min-width: 1.8rem;
+      text-align: center;
+      margin-right: .35rem;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1e3a8a;
+      font-weight: 800;
+      padding: .08rem .38rem;
+      font-size: .95rem;
+    }
+    .opt { display: block; margin: .15rem 0; }
+    .opt-letter {
+      display: inline-block;
+      min-width: 2rem;
+      margin-right: .35rem;
+      color: #0c4a6e;
+      font-weight: 900;
+      font-size: 1rem;
+    }
+    .reveal {
+      margin-top: .45rem;
+      border: 0;
+      border-radius: 8px;
+      padding: .4rem .68rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(90deg, #e0f2fe, #bae6fd);
+      color: #0b4c6b;
+      font-size: 1rem;
+    }
+    .answer { display: none; margin-top: .38rem; color: #0f766e; font-weight: 700; }
+    .answer.show { display: block; }
+    .tipbox {
+      margin-top: .55rem;
+      border: 2px solid #93c5fd;
+      background: #eff6ff;
+      border-radius: 10px;
+      padding: .6rem;
+    }
+    .quiz-wrap {
+      max-height: 58vh;
+      overflow: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      background: #fff;
+      padding: .7rem;
+    }
+    .quiz-q {
+      margin-top: .55rem;
+      border: 1px solid #c5ddf8;
+      border-radius: 10px;
+      padding: .55rem;
+      background: linear-gradient(150deg, #eff6ff, #eefcf8);
+    }
+    .quiz-q label { display: block; margin: .2rem 0; }
+    .discussion-card {
+      border: 2px solid #a7f3d0;
+      border-radius: 12px;
+      background: linear-gradient(150deg, #f0fdf4, #ecfeff);
+      padding: .75rem .85rem;
+      margin-top: .7rem;
+    }
+    .discussion-card h3 {
+      margin: 0 0 .35rem;
+      font-size: 1.35rem;
+      color: #065f46;
+    }
+    .discussion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-top: .45rem;
+    }
+    .discussion-box {
+      border: 1px solid #99f6e4;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: .55rem;
+    }
+    .discussion-box p {
+      margin: .12rem 0;
+      font-size: 1.03rem;
+    }
+    .teacher-board {
+      margin-top: .6rem;
+      border: 2px solid #bfdbfe;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: .55rem;
+    }
+    .teacher-board label {
+      display: block;
+      font-weight: 800;
+      color: #1e3a8a;
+      margin-bottom: .35rem;
+    }
+    .teacher-input {
+      width: 100%;
+      min-height: 110px;
+      border: 1px solid #93c5fd;
+      border-radius: 8px;
+      padding: .55rem .6rem;
+      font-family: inherit;
+      font-size: 1.06rem;
+      line-height: 1.45;
+      resize: vertical;
+      background: #f8fbff;
+      color: #0f172a;
+    }
+    .teacher-input:focus {
+      outline: 2px solid #93c5fd;
+      outline-offset: 1px;
+    }
+    .quiz-result {
+      display: none;
+      margin-top: .65rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      background: #f8fafc;
+      padding: .65rem;
+    }
+    .toolbar {
+      margin-top: .72rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .7rem;
+      color: #eff6ff;
+      background: linear-gradient(90deg, rgba(14,34,52,.9), rgba(26,62,78,.85));
+      border: 1px solid rgba(186,230,253,.28);
+      border-radius: 12px;
+      padding: .55rem .7rem;
+      font-size: 1rem;
+    }
+    .btns { display: flex; gap: .45rem; }
+    button.nav {
+      border: 0;
+      border-radius: 999px;
+      padding: .58rem 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: #dbeafe;
+      color: #0f172a;
+      font-size: 1rem;
+    }
+    button.nav.primary {
+      background: linear-gradient(90deg, #e86f1f, #ff9c41);
+      color: #fff;
+    }
+    .progress {
+      margin-top: .5rem;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(226,232,240,.35);
+      overflow: hidden;
+      border: 1px solid rgba(226,232,240,.5);
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #f59e0b, #22c55e);
+      transition: width .25s ease;
+    }
+    .jump { margin-top: .45rem; display: flex; gap: .25rem; flex-wrap: wrap; }
+    .jump button {
+      border: 1px solid rgba(226,232,240,.5);
+      border-radius: 8px;
+      background: rgba(226,232,240,.2);
+      color: #e2e8f0;
+      padding: .28rem .52rem;
+      cursor: pointer;
+      font-size: .92rem;
+    }
+    .utility {
+      margin-top: .65rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: .6rem;
+    }
+    .util-card {
+      border: 1px solid rgba(191,219,254,.5);
+      border-radius: 12px;
+      background: linear-gradient(140deg, rgba(13,30,45,.86), rgba(24,61,74,.8));
+      color: #e2e8f0;
+      padding: .58rem;
+    }
+    .timer { font-size: 1.32rem; font-weight: 700; margin-bottom: .45rem; }
+    .util-row { display: flex; gap: .3rem; flex-wrap: wrap; align-items: center; }
+    .util-row button {
+      border: 0;
+      border-radius: 7px;
+      padding: .28rem .48rem;
+      background: #e2e8f0;
+      color: #0f172a;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: .98rem;
+    }
+    .chip {
+      display: inline-block;
+      min-width: 2.1rem;
+      text-align: center;
+      border-radius: 999px;
+      padding: .14rem .45rem;
+      background: #f8fafc;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    @media (max-width: 920px) {
+      .slide { min-height: 76vh; padding: .9rem; }
+      .utility { grid-template-columns: 1fr; }
+      .content-scroll, .quiz-wrap { max-height: none; }
+      .diagram-row { grid-template-columns: 1fr; }
+      .discussion-grid { grid-template-columns: 1fr; }
+      body { font-size: 19px; }
+      .content-scroll p, .content-scroll li, .exercise-card p, .exercise-item, .quiz-q { font-size: 1.18rem; }
+      .item-label { font-size: 1.28rem; }
+      .opt, .quiz-q label { font-size: 1.14rem; }
+      .toolbar, button.nav, .reveal, .util-row button { font-size: 1.05rem; }
+      .content-scroll { padding: 1rem; }
+    }
+    @media print {
+      body { background: #fff; }
+      .deck { border: 0; background: #fff; }
+      .slide { display: block; min-height: auto; box-shadow: none; page-break-after: always; }
+      .toolbar, .jump, .utility { display: none; }
+      .content-scroll, .quiz-wrap { overflow: visible; max-height: none; }
+    }
+
+    :fullscreen .toolbar,
+    :fullscreen .progress,
+    :fullscreen .jump,
+    :fullscreen .utility,
+    :-webkit-full-screen .toolbar,
+    :-webkit-full-screen .progress,
+    :-webkit-full-screen .jump,
+    :-webkit-full-screen .utility {
+      display: none !important;
+    }
+
+    :fullscreen .deck,
+    :-webkit-full-screen .deck {
+      width: 100vw;
+      max-width: none;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    :fullscreen .slide,
+    :-webkit-full-screen .slide {
+      min-height: 100vh;
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
+      padding: 1.4rem 1.8rem;
+    }
+
+    :fullscreen .content-scroll,
+    :fullscreen .quiz-wrap,
+    :-webkit-full-screen .content-scroll,
+    :-webkit-full-screen .quiz-wrap {
+      max-height: 78vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <section class="slide active" data-kind="intro">
+      <span class="kicker">Slide 1</span>
+      <h1>Present Perfect Family Full Guide</h1>
+      <p class="lead">This version includes all guide explanations, all section exercises, and all 15 mini-quiz questions, plus the -ed endings mini-lesson.</p>
+      <ul>
+        <li>Use chat first, then reveal answers.</li>
+        <li>Use the timer + team scoreboard at the bottom.</li>
+        <li>Use arrows/space or buttons to navigate.</li>
+      </ul>
+    </section>
+    <div id="generatedSlides"></div>
+
+    <section class="slide" data-kind="ed-lesson">
+      <span class="kicker"></span>
+      <h2>-ed Endings Mini Lesson</h2>
+      <div class="content-scroll">
+        <p>Regular past participles in result form often end in <strong>-ed</strong>, but pronunciation changes.</p>
+        <h3>/t/</h3>
+        <p>After voiceless sounds (p, k, f, s, sh, ch, x): <strong>walked, washed, watched, asked</strong></p>
+        <h3>/d/</h3>
+        <p>After voiced sounds (vowels, b, g, v, z, m, n, l, r): <strong>played, cleaned, lived, opened</strong></p>
+        <h3>/id/</h3>
+        <p>After /t/ or /d/ endings: <strong>wanted, needed, started, visited</strong></p>
+      </div>
+      <div class="exercise-card">
+        <h4>Quick Sound Sort</h4>
+        <div class="exercise-item">
+          <div class="item-label"><span class="item-number">1</span> cooked, cleaned, needed, worked, started, called</div>
+          <button class="reveal">Reveal Answers</button>
+          <div class="answer">cooked /t/, cleaned /d/, needed /id/, worked /t/, started /id/, called /d/</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-kind="open-mic">
+      <span class="kicker"></span>
+      <h2>Open Mic: Your Real-Life English</h2>
+      <div class="discussion-card">
+        <h3>1-minute share, then pass to a classmate</h3>
+        <div class="discussion-grid">
+          <div class="discussion-box">
+            <strong>Open Mic Prompts</strong>
+            <p><strong>1.</strong> What have you finished this week?</p>
+            <p><strong>2.</strong> What have you been working on lately?</p>
+            <p><strong>3.</strong> What have you not done yet?</p>
+            <p><strong>4.</strong> Use one sentence with <em>for</em> or <em>since</em>.</p>
+          </div>
+          <div class="discussion-box">
+            <strong>Sentence Starters</strong>
+            <p>• I have finished ___.</p>
+            <p>• I have been ___ing for/since ___.</p>
+            <p>• I have not ___ yet, but I plan to ___.</p>
+            <p>• Lately, I have been ___.</p>
+          </div>
+        </div>
+        <div class="teacher-board">
+          <label for="openMicBoard">Live class examples (type student sentences here):</label>
+          <textarea id="openMicBoard" class="teacher-input" placeholder="1) I have finished my laundry.&#10;2) I have been looking for a new apartment since May.&#10;3) I have not called my doctor yet."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-kind="quiz-full">
+      <span class="kicker"></span>
+      <h2>Full Mini Quiz (15 Questions)</h2>
+      <div class="quiz-wrap" id="quizWrap"></div>
+      <button class="nav primary" id="gradeQuiz" type="button">Check Quiz</button>
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="slide" data-kind="wrap">
+      <span class="kicker"></span>
+      <h2>Wrap-Up</h2>
+      <ul>
+        <li>Result form: <strong>have/has + past participle</strong></li>
+        <li>Duration form: <strong>have/has been + verb-ing</strong></li>
+        <li>Use the golden question: result or duration?</li>
+      </ul>
+    </section>
+
+    <div class="toolbar">
+      <div>
+        <strong id="counter">Slide 1</strong>
+        <div>Keyboard: Left/Right, Space, Home, End</div>
+      </div>
+      <div class="btns">
+        <button class="nav" id="fsToggle">Full Screen</button>
+        <button class="nav" id="prev">Previous</button>
+        <button class="nav primary" id="next">Next</button>
+      </div>
+    </div>
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="jump" id="jump"></div>
+
+    <div class="utility">
+      <div class="util-card">
+        <div class="timer" id="timer">02:00</div>
+        <div class="util-row">
+          <button type="button" data-t="30">30s</button>
+          <button type="button" data-t="60">1m</button>
+          <button type="button" data-t="120">2m</button>
+          <button type="button" data-t="180">3m</button>
+          <button type="button" id="startT">Start</button>
+          <button type="button" id="pauseT">Pause</button>
+          <button type="button" id="resetT">Reset</button>
+        </div>
+      </div>
+      <div class="util-card">
+        <p style="margin:.1rem 0 .45rem;"><strong>Team Score</strong></p>
+        <div class="util-row">
+          Orange <span class="chip" id="orange">0</span>
+          <button type="button" id="op">+1</button>
+          <button type="button" id="om">-1</button>
+        </div>
+        <div class="util-row" style="margin-top:.35rem;">
+          Blue <span class="chip" id="blue">0</span>
+          <button type="button" id="bp">+1</button>
+          <button type="button" id="bm">-1</button>
+          <button type="button" id="sr">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="guideData" type="application/json">{"sections":[{"id":"family-intro","title":"The Present Perfect Family: Connecting Past to Present","icon":"👨‍👩‍👧‍👦","explanation":"\n                <div style=\"background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(255, 165, 94, 0.12) 100%); padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1.5rem;\">\n                    <p style=\"font-size: 1.125rem; margin-bottom: 0;\">Think about telling someone about your day. \"I've finished my shift.\" \"I've been working all morning.\" Same situation—both are about work—but two different ways to talk about it. That's the Present Perfect family! One focuses on what's <strong>done</strong>, the other on what you've been <strong>doing</strong>.</p>\n                </div>\n\n                <h3>Why This Matters</h3>\n                <p>The Present Perfect connects past actions to the present moment. Whether you want to show a completed result or emphasize ongoing effort, these two forms give you the flexibility to express exactly what you mean.</p>\n            ","exercises":[{"id":"intro-check","title":"Quick Check: Result or Activity?","instructions":"Choose what each sentence emphasizes.","items":[{"type":"radio","label":"\"I have finished my homework.\"","options":[{"value":"result","label":"Result: The homework is done"},{"value":"duration","label":"Duration: How long I worked on it"}],"expectedAnswer":"result"},{"type":"radio","label":"\"I have been studying all afternoon.\"","options":[{"value":"result","label":"Result: The studying is complete"},{"value":"duration","label":"Duration: The time spent studying"}],"expectedAnswer":"duration"}]}]},{"id":"core-idea-lens","title":"Core Idea Lens: What Two Times Are Connected?","icon":"🧠","explanation":"\n                <div class=\"bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6\">\n                    <p class=\"font-medium text-base text-slate-800 mb-2\"><strong>Core idea:</strong> Perfect tenses connect <strong>two times</strong>. Here, the connection is <strong>past → now</strong>.</p>\n                    <p class=\"text-sm text-slate-700 mb-0\"><strong>Ask yourself:</strong> Do I want to emphasize the <strong>result now</strong>, or the <strong>activity/duration up to now</strong>?</p>\n                </div>\n\n                <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4 mb-5\">\n                    <div class=\"bg-white border border-orange-200 rounded-xl p-5\">\n                        <h3 class=\"text-orange-700 font-bold text-lg mb-1\">Result form (Present Perfect)</h3>\n                        <p class=\"text-sm text-slate-600 mb-3\">Use this when completion or count is most important.</p>\n                        <ul class=\"text-sm text-slate-700 m-0 pl-5 space-y-2\">\n                            <li><strong>Concept:</strong> Completion. \"I have finished.\"</li>\n                            <li><strong>Quantity:</strong> \"How many?\" — \"I've written 3 emails.\"</li>\n                            <li><strong>Evidence:</strong> Present result — \"The car is clean.\"</li>\n                            <li><strong>Time:</strong> Life experience — <em>ever, never, before</em></li>\n                            <li><strong>Markers:</strong> <em>just, already, yet</em></li>\n                        </ul>\n                    </div>\n\n                    <div class=\"bg-white border border-indigo-200 rounded-xl p-5\">\n                        <h3 class=\"text-indigo-700 font-bold text-lg mb-1\">Duration form (Present Perfect Continuous)</h3>\n                        <p class=\"text-sm text-slate-600 mb-3\">Use this when time in progress or activity is most important.</p>\n                        <ul class=\"text-sm text-slate-700 m-0 pl-5 space-y-2\">\n                            <li><strong>Concept:</strong> Ongoing activity. \"I have been working.\"</li>\n                            <li><strong>Duration:</strong> \"How long?\" — \"I've been writing all morning.\"</li>\n                            <li><strong>Evidence:</strong> Side effect — \"My hands are dirty.\"</li>\n                            <li><strong>Time:</strong> Recent period — <em>lately, recently</em></li>\n                            <li><strong>Markers:</strong> <em>all day, for hours, since morning</em></li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div class=\"bg-white border border-slate-200 rounded-lg px-4 py-3\">\n                    <p class=\"text-sm text-slate-700 m-0\"><strong>Contrast:</strong> \"I have worked a lot <em>this week</em>\" (unfinished) vs \"I worked a lot <em>last week</em>\" (finished).</p>\n                </div>\n            ","tipBox":{"title":"For & Since: Both Forms Use Them","content":"Result form: <em>\"I've lived here for 5 years\"</em> (focus on the state). Duration form: <em>\"I've been living here for 5 years\"</em> (focus on the ongoing activity). Same time span, different emphasis."},"exercises":[{"id":"ex-core-idea-present-family","title":"Core Idea Check","instructions":"Choose the best focus for each sentence.","items":[{"type":"radio","label":"\"Have you ever traveled alone?\"","options":[{"value":"story","label":"Story order in the past"},{"value":"experience","label":"Life experience up to now (no specific time)"},{"value":"deadline","label":"Future deadline completion"}],"expectedAnswer":"experience"},{"type":"radio","label":"\"I have worked a lot this week.\" Why Present Perfect?","options":[{"value":"finished","label":"It is a finished past time like last week"},{"value":"future","label":"It is about a future point"},{"value":"unfinished","label":"This week is unfinished time, connected to now"}],"expectedAnswer":"unfinished"},{"type":"radio","label":"\"You look tired.\" \"I've been working all day.\" What is emphasized?","options":[{"value":"single","label":"One completed single action only"},{"value":"visible","label":"Visible result now plus duration activity"},{"value":"sequence","label":"Past-before-past story order"}],"expectedAnswer":"visible"}]}]},{"id":"timeline-comparison","title":"Visual Comparison: Two Timelines","icon":"⏱️","stepNumber":1,"explanation":"\n                <h3>See the Difference</h3>\n                <p>Both forms connect past to present, but they show different things. Think of it like taking a photo vs. recording a video:</p>\n\n                <div style=\"background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <p style=\"margin: 0;\"><strong>Result = Photo:</strong> \"Here's the finished result!\" 📸</p>\n                    <p style=\"margin: 0.5rem 0 0 0;\"><strong>Duration = Video:</strong> \"Watch how long I've been doing this!\" 🎥</p>\n                </div>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;\">\n                    <!-- Result Timeline -->\n                    <div style=\"background: white; border: 2px solid #f97316; border-radius: 0.75rem; padding: 1.25rem;\">\n                        <h4 style=\"text-align: center; margin: 0 0 1rem 0; color: #c2410c;\">Result Focus</h4>\n                        <div style=\"position: relative; height: 60px; margin: 1rem 0;\">\n                            <!-- Timeline line -->\n                            <div style=\"position: absolute; top: 50%; left: 10%; right: 10%; height: 3px; background: #e5e7eb; transform: translateY(-50%);\"></div>\n                            <!-- Action point -->\n                            <div style=\"position: absolute; left: 25%; top: 50%; transform: translate(-50%, -50%);\">\n                                <div style=\"width: 16px; height: 16px; background: #f97316; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px #f97316;\"></div>\n                                <div style=\"position: absolute; top: 22px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.7rem; color: #f97316; font-weight: 600;\">Action</div>\n                            </div>\n                            <!-- Arrow to result -->\n                            <div style=\"position: absolute; top: 50%; left: 30%; right: 25%; height: 0; border-top: 2px dashed #f97316; transform: translateY(-50%);\"></div>\n                            <!-- Result at NOW -->\n                            <div style=\"position: absolute; right: 10%; top: 50%; transform: translate(0, -50%);\">\n                                <div style=\"background: #fff7ed; border: 2px solid #f97316; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; color: #c2410c;\">NOW: ✓</div>\n                            </div>\n                        </div>\n                        <p style=\"text-align: center; margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #4b5563;\">\"I <strong>have finished</strong>.\"</p>\n                        <p style=\"text-align: center; margin: 0; font-size: 0.8rem; color: #9ca3af;\">Focus: The result is here now.</p>\n                    </div>\n\n                    <!-- Duration Timeline -->\n                    <div style=\"background: white; border: 2px solid #6366f1; border-radius: 0.75rem; padding: 1.25rem;\">\n                        <h4 style=\"text-align: center; margin: 0 0 1rem 0; color: #4338ca;\">Duration Focus</h4>\n                        <div style=\"position: relative; height: 60px; margin: 1rem 0;\">\n                            <!-- Timeline line -->\n                            <div style=\"position: absolute; top: 50%; left: 10%; right: 10%; height: 3px; background: #e5e7eb; transform: translateY(-50%);\"></div>\n                            <!-- Duration bar -->\n                            <div style=\"position: absolute; top: 50%; left: 20%; right: 15%; height: 20px; background: linear-gradient(to right, rgba(99, 102, 241, 0.3), rgba(99, 102, 241, 0.8)); border-radius: 10px; transform: translateY(-50%); border: 2px solid #6366f1;\"></div>\n                            <!-- Start dot -->\n                            <div style=\"position: absolute; left: 20%; top: 50%; transform: translate(-50%, -50%);\">\n                                <div style=\"width: 10px; height: 10px; background: #6366f1; border-radius: 50%;\"></div>\n                                <div style=\"position: absolute; top: 22px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.7rem; color: #6366f1; font-weight: 600;\">Start</div>\n                            </div>\n                            <!-- NOW dot -->\n                            <div style=\"position: absolute; right: 10%; top: 50%; transform: translate(0, -50%);\">\n                                <div style=\"background: #eef2ff; border: 2px solid #6366f1; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600; color: #4338ca;\">NOW</div>\n                            </div>\n                        </div>\n                        <p style=\"text-align: center; margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #4b5563;\">\"I <strong>have been working</strong>.\"</p>\n                        <p style=\"text-align: center; margin: 0; font-size: 0.8rem; color: #9ca3af;\">Focus: The duration up to now.</p>\n                    </div>\n                </div>\n\n                <h3>Same Situation, Two Different Answers</h3>\n                <p>Think about this: You've been cooking dinner. Your friend asks about it. You could answer two different ways:</p>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f97316;\">\n                        <p style=\"margin: 0 0 0.5rem 0; font-weight: 600; color: #c2410c;\">Result Answer:</p>\n                        <p style=\"margin: 0; font-size: 1.1rem;\">\"I <strong>have cooked</strong> pasta.\"</p>\n                        <p style=\"margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #6b7280;\">→ The pasta is ready! (Result)</p>\n                    </div>\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #6366f1;\">\n                        <p style=\"margin: 0 0 0.5rem 0; font-weight: 600; color: #4338ca;\">Duration Answer:</p>\n                        <p style=\"margin: 0; font-size: 1.1rem;\">\"I <strong>have been cooking</strong> for an hour.\"</p>\n                        <p style=\"margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #6b7280;\">→ That explains why you're tired! (Activity)</p>\n                    </div>\n                </div>\n\n                <h3>More Examples Side by Side</h3>\n                <table style=\"width: 100%; border-collapse: collapse; margin: 1rem 0;\">\n                    <tr style=\"background: #f8fafc;\">\n                        <th style=\"padding: 0.75rem; text-align: left; border-bottom: 2px solid #e2e8f0;\">Situation</th>\n                        <th style=\"padding: 0.75rem; text-align: left; border-bottom: 2px solid #f97316; color: #c2410c;\">Result</th>\n                        <th style=\"padding: 0.75rem; text-align: left; border-bottom: 2px solid #6366f1; color: #4338ca;\">Duration</th>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">Cleaning the house</td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have cleaned</strong> the kitchen.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ The kitchen is clean now!</span></td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have been cleaning</strong> all morning.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ That's why I'm exhausted!</span></td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">Writing emails</td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have written</strong> 5 emails.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ 5 emails are done!</span></td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have been writing</strong> emails for 2 hours.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ I've spent 2 hours on this!</span></td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">Learning English</td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have learned</strong> 500 new words.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ Look at my vocabulary!</span></td>\n                        <td style=\"padding: 0.75rem; border-bottom: 1px solid #e2e8f0;\">\"I <strong>have been learning</strong> English for 2 years.\"<br><span style=\"font-size: 0.8rem; color: #6b7280;\">→ It's been a long journey!</span></td>\n                    </tr>\n                </table>\n\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; margin-top: 1.5rem;\">\n                    <p style=\"margin: 0; font-weight: 600;\">💡 Real-Life Tip:</p>\n                    <p style=\"margin: 0.5rem 0 0 0;\">Native speakers often use BOTH forms in the same conversation! For example: \"I <strong>have been working</strong> on this project for 3 weeks, and I <strong>have completed</strong> 80% of it.\"</p>\n                </div>\n            ","exercises":[{"id":"ex-timeline-concept","title":"Which Form Fits?","instructions":"Match each sentence to the correct focus.","items":[{"type":"radio","label":"\"I have written 5 emails.\" - What's the focus?","options":[{"value":"duration","label":"Duration: time spent emailing"},{"value":"result","label":"Result: 5 completed emails"}],"expectedAnswer":"result"},{"type":"radio","label":"\"I have been writing emails all morning.\" - What's the focus?","options":[{"value":"result","label":"Result: emails are done"},{"value":"duration","label":"Duration: the time spent"}],"expectedAnswer":"duration"},{"type":"radio","label":"\"She has lost her keys.\" - What's the focus?","options":[{"value":"result","label":"Result: keys are gone now"},{"value":"duration","label":"Duration: how long she's been looking"}],"expectedAnswer":"result"}]},{"id":"ex-situation-match","title":"Match the Situation","instructions":"Which form would you use in each situation?","items":[{"type":"radio","label":"Your hands are dirty. Someone asks why.","options":[{"value":"simple","label":"I have gardened. (Shows result)"},{"value":"continuous","label":"I have been gardening. (Shows activity)"}],"expectedAnswer":"continuous"},{"type":"radio","label":"You want to show your friend the 10 photos you took.","options":[{"value":"continuous","label":"I have been taking photos. (Shows activity)"},{"value":"simple","label":"I have taken 10 photos! (Shows count)"}],"expectedAnswer":"simple"},{"type":"radio","label":"You're sweating because you exercised.","options":[{"value":"simple","label":"I have exercised. (Just states completion)"},{"value":"continuous","label":"I have been exercising. (Explains your condition)"}],"expectedAnswer":"continuous"},{"type":"radio","label":"You finished all your homework and want to tell your parent.","options":[{"value":"simple","label":"I have finished my homework! (Result is ready)"},{"value":"continuous","label":"I have been finishing my homework. (Incorrect)"}],"expectedAnswer":"simple"}]}]},{"id":"focus-result","title":"Focus on Result","icon":"✅","stepNumber":2,"explanation":"\n                <h3>When \"Done\" Matters</h3>\n                <p>Use <strong>The Present Perfect (Result)</strong> (have + <strong>past participle</strong>) when the most important thing is that the action is <strong>FINISHED</strong> or when you can <strong>COUNT</strong> how many times it happened.</p>\n\n                <div style=\"background: white; border: 2px solid #f59e0b; border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0;\">\n                     <h4 style=\"text-align: center; margin-top: 0; color: #d97706;\">Timeline: The Completed Action</h4>\n                     <div style=\"display: flex; align-items: center; justify-content: space-between; position: relative; margin: 2rem 0; padding: 0 1rem;\">\n                        <div style=\"position: absolute; top: 50%; left: 10%; right: 10%; height: 4px; background: #e5e7eb; transform: translateY(-50%); z-index: 0;\"></div>\n\n                        <!-- Past point -->\n                        <div style=\"position: relative; z-index: 1; text-align: center;\">\n                            <div style=\"width: 20px; height: 20px; background: #f59e0b; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px #f59e0b; margin: 0 auto;\"></div>\n                            <div style=\"margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; color: #d97706;\">Action Done</div>\n                        </div>\n\n                         <!-- Arrow connecting -->\n                        <div style=\"position: absolute; top: 50%; left: 20%; right: 20%; height: 0; border-top: 2px dashed #f59e0b; transform: translateY(-50%); z-index: 0;\"></div>\n\n                        <!-- Present Result -->\n                        <div style=\"position: relative; z-index: 1; text-align: center;\">\n                            <div style=\"background: #fffbeb; border: 2px solid #f59e0b; color: #b45309; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: bold; font-size: 0.9rem;\">\n                                NOW: Result\n                            </div>\n                        </div>\n                     </div>\n                     <p style=\"text-align: center; margin: 0;\">\"I <strong>have eaten</strong> lunch.\" → <span style=\"color: #64748b;\">(Result: I am not hungry now.)</span></p>\n                     <p style=\"text-align: center; margin-top: 0.5rem;\">\"She <strong>has written</strong> 5 emails.\" → <span style=\"color: #64748b;\">(Result: 5 completed items.)</span></p>\n                </div>\n\n                <h3>Three Main Uses for the Result Form</h3>\n\n                <div style=\"display: grid; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #c2410c;\">1. Life Experience (ever/never)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">Talking about experiences in your life up to now:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I <strong>have visited</strong> Japan twice.\" <span style=\"color: #6b7280;\">(In my life)</span></li>\n                            <li>\"She <strong>has never eaten</strong> sushi.\" <span style=\"color: #6b7280;\">(Not once in her life)</span></li>\n                            <li>\"<strong>Have</strong> you <strong>ever seen</strong> a whale?\" <span style=\"color: #6b7280;\">(At any time in your life?)</span></li>\n                        </ul>\n                    </div>\n\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #c2410c;\">2. Recent Completion (just/already/yet)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">Something finished recently with a present result:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I <strong>have just finished</strong> my homework.\" <span style=\"color: #6b7280;\">(I can play now!)</span></li>\n                            <li>\"She <strong>has already left</strong>.\" <span style=\"color: #6b7280;\">(She's not here anymore.)</span></li>\n                            <li>\"<strong>Have</strong> you <strong>done</strong> your chores <strong>yet</strong>?\" <span style=\"color: #6b7280;\">(Is it complete?)</span></li>\n                        </ul>\n                    </div>\n\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #c2410c;\">3. Counting Results (numbers/how many)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">When you can count completed items:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I <strong>have written</strong> three reports today.\" <span style=\"color: #6b7280;\">(Count: 3)</span></li>\n                            <li>\"He <strong>has called</strong> five times!\" <span style=\"color: #6b7280;\">(Count: 5)</span></li>\n                            <li>\"<strong>How many</strong> countries <strong>have</strong> you <strong>visited</strong>?\" <span style=\"color: #6b7280;\">(Asking for a number)</span></li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div style=\"background: #ecfdf5; padding: 1rem; border-radius: 0.5rem; border: 2px solid #10b981; margin-top: 1rem;\">\n                    <h4 style=\"margin: 0 0 0.5rem 0; color: #059669;\">✓ Remember the Formula</h4>\n                    <p style=\"margin: 0; font-size: 1.1rem; font-family: monospace; text-align: center;\">\n                        <strong>have/has</strong> + <strong>past participle</strong> (eaten, written, gone, done)\n                    </p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #6b7280; text-align: center;\">\n                        I/You/We/They <strong>have</strong> + verb³ | He/She/It <strong>has</strong> + verb³\n                    </p>\n                </div>\n            ","exercises":[{"id":"ex-simple-focus","title":"Check: Is it a Result?","instructions":"Choose the sentence that focuses on a COMPLETED result.","items":[{"type":"radio","label":"Kitchen Situation","options":[{"value":"continuous","label":"I have been cleaning the kitchen. (I'm tired/still working)"},{"value":"simple","label":"I have cleaned the kitchen. (It is clean now!)"}],"expectedAnswer":"simple"},{"type":"radio","label":"Reading Books","options":[{"value":"simple","label":"I have read 3 books this month. (Count: 3)"},{"value":"continuous","label":"I have been reading all month. (Activity)"}],"expectedAnswer":"simple"},{"type":"radio","label":"The empty plate","options":[{"value":"continuous","label":"I have been eating my sandwich."},{"value":"simple","label":"I have eaten my sandwich."}],"expectedAnswer":"simple"}]}]},{"id":"focus-duration","title":"Focus on Duration","icon":"⏱️","stepNumber":3,"explanation":"\n                <h3>When \"Time\" Matters</h3>\n                <p>Use <strong>The Present Perfect (Duration)</strong> (have + <strong>been</strong> + <strong>-ing</strong>) when you want to show <strong>how long</strong> something has been happening...</p>\n\n                <div style=\"background: white; border: 2px solid #6366f1; border-radius: 0.75rem; padding: 1.5rem; margin: 1.5rem 0;\">\n                    <h4 style=\"text-align: center; margin-top: 0; color: #4338ca;\">Timeline: The Ongoing Duration</h4>\n                    <div style=\"position: relative; margin: 2rem auto; max-width: 500px; padding: 1rem 0;\">\n                        <!-- Duration bar -->\n                        <div style=\"position: relative; height: 40px; background: linear-gradient(to right, rgba(99, 102, 241, 0.3), rgba(99, 102, 241, 0.9)); border-radius: 25px; border: 2px solid #6366f1; display: flex; align-items: center; padding: 0 1.5rem;\">\n                            <!-- Start dot -->\n                            <div style=\"position: absolute; left: 0; top: 50%; width: 12px; height: 12px; background: #6366f1; border-radius: 50%; transform: translate(-6px, -50%); border: 2px solid white;\"></div>\n\n                            <!-- Middle text -->\n                            <span style=\"color: #312e81; font-weight: 600; font-size: 0.85rem; margin-left: 10px;\">...working...working...</span>\n\n                            <!-- NOW dot (pulsing) -->\n                            <div style=\"position: absolute; right: 0; top: 50%; width: 16px; height: 16px; background: #f0b45a; border-radius: 50%; transform: translate(8px, -50%); border: 3px solid white; box-shadow: 0 0 0 4px rgba(240, 180, 90, 0.3);\"></div>\n                        </div>\n                        <div style=\"display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.8rem; color: #64748b;\">\n                            <span>Started in Past</span>\n                            <span>NOW</span>\n                        </div>\n                    </div>\n                    <p style=\"text-align: center; margin: 0;\">\"I <strong>have been waiting</strong> for 20 minutes.\"</p>\n                    <p style=\"text-align: center; margin-top: 0.5rem; font-size: 0.9em; color: #666;\">(Focus is on the 20 minutes of waiting time)</p>\n                </div>\n\n                <h3>Three Main Uses for the Duration Form</h3>\n\n                <div style=\"display: grid; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #4338ca;\">1. Duration (for/since/how long)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">Emphasizing how long an activity has been happening:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I <strong>have been studying</strong> English <strong>for 3 years</strong>.\" <span style=\"color: #6b7280;\">(Duration emphasized)</span></li>\n                            <li>\"She <strong>has been working</strong> here <strong>since 2020</strong>.\" <span style=\"color: #6b7280;\">(Starting point)</span></li>\n                            <li>\"<strong>How long have</strong> you <strong>been waiting</strong>?\" <span style=\"color: #6b7280;\">(Asking about duration)</span></li>\n                        </ul>\n                    </div>\n\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #4338ca;\">2. Visible Evidence (I can see the effects!)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">When you can see or feel the effects of recent activity:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"You're sweating! <strong>Have</strong> you <strong>been running</strong>?\" <span style=\"color: #6b7280;\">(I see evidence)</span></li>\n                            <li>\"Your eyes are red. <strong>Have</strong> you <strong>been crying</strong>?\" <span style=\"color: #6b7280;\">(I notice something)</span></li>\n                            <li>\"The ground is wet. It <strong>has been raining</strong>.\" <span style=\"color: #6b7280;\">(Evidence of recent activity)</span></li>\n                        </ul>\n                    </div>\n\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #4338ca;\">3. Recent Activity (explains a situation)</h4>\n                        <p style=\"margin: 0; font-size: 0.95rem;\">Explaining why something is the way it is now:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I'm tired because I <strong>have been working</strong> all day.\" <span style=\"color: #6b7280;\">(Explains tiredness)</span></li>\n                            <li>\"Sorry I'm late. I <strong>have been looking</strong> for parking.\" <span style=\"color: #6b7280;\">(Explains delay)</span></li>\n                            <li>\"My hands are dirty. I <strong>have been gardening</strong>.\" <span style=\"color: #6b7280;\">(Explains dirty hands)</span></li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div style=\"background: #ecfdf5; padding: 1rem; border-radius: 0.5rem; border: 2px solid #10b981; margin-top: 1rem;\">\n                    <h4 style=\"margin: 0 0 0.5rem 0; color: #059669;\">✓ Remember the Formula</h4>\n                    <p style=\"margin: 0; font-size: 1.1rem; font-family: monospace; text-align: center;\">\n                        <strong>have/has</strong> + <strong>been</strong> + <strong>verb-ing</strong>\n                    </p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.85rem; color: #6b7280; text-align: center;\">\n                        I/You/We/They <strong>have been</strong> + -ing | He/She/It <strong>has been</strong> + -ing\n                    </p>\n                </div>\n\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; margin-top: 1rem;\">\n                    <p style=\"margin: 0; font-weight: 600;\">💡 Action May or May Not Be Finished!</p>\n                    <p style=\"margin: 0.5rem 0 0 0;\">With the duration form, the action might still be happening OR might have just stopped. The focus is on the activity itself, not whether it's complete.</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.9rem;\"><em>\"I have been reading this book...\"</em> → Maybe still reading, maybe just stopped to rest.</p>\n                </div>\n            ","exercises":[{"id":"ex-continuous-focus","title":"Check: Is it Duration?","instructions":"Choose the sentence that focuses on TIME or the ACTIVITY itself.","items":[{"type":"radio","label":"Waiting for the bus","options":[{"value":"simple","label":"I have waited. (Done)"},{"value":"continuous","label":"I have been waiting for an hour! (Stress on time)"}],"expectedAnswer":"continuous"},{"type":"radio","label":"Dirty Hands","options":[{"value":"simple","label":"I have repaired the car."},{"value":"continuous","label":"I have been repairing the car. (That's why hands are dirty)"}],"expectedAnswer":"continuous"},{"type":"radio","label":"Out of breath","options":[{"value":"continuous","label":"I have been running around all morning."},{"value":"simple","label":"I have run."}],"expectedAnswer":"continuous"}]}]},{"id":"family-negatives","title":"Negatives: 'Haven't' vs 'Haven't Been'","icon":"🚫","stepNumber":4,"explanation":"\n                <h3>How to say \"No\"</h3>\n                <p>The negative forms also have slightly different meanings. Understanding these will help you express exactly what you mean.</p>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;\">\n                    <!-- Result Negative -->\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #c2410c;\">Result Negative</h4>\n                        <div style=\"font-weight: bold; margin-bottom: 0.5rem;\">have NOT + Past Participle</div>\n                        <p style=\"font-style: italic; color: #4b5563;\">\"I <strong>haven't finished</strong> yet.\"</p>\n                        <ul style=\"font-size: 0.9rem; padding-left: 1.2rem; margin-bottom: 0;\">\n                            <li>It is incomplete.</li>\n                            <li>The count is zero.</li>\n                            <li>\"I haven't seen that movie.\"</li>\n                        </ul>\n                    </div>\n\n                    <!-- Duration Negative -->\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #4338ca;\">Duration Negative</h4>\n                        <div style=\"font-weight: bold; margin-bottom: 0.5rem;\">have NOT + BEEN + -ING</div>\n                        <p style=\"font-style: italic; color: #4b5563;\">\"I <strong>haven't been sleeping</strong> well.\"</p>\n                        <ul style=\"font-size: 0.9rem; padding-left: 1.2rem; margin-bottom: 0;\">\n                            <li>The activity has been absent lately.</li>\n                            <li>\"I haven't been practicing enough.\"</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <h3>Understanding the Difference in Negatives</h3>\n                <p>The negative forms carry different nuances. Look at these examples:</p>\n\n                <div style=\"background: #f8fafc; padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">Scenario: Your friend asks about your diet</p>\n                        <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;\">\n                            <div>\n                                <p style=\"margin: 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>haven't eaten</strong> today.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ Zero meals. I'm hungry!</p>\n                            </div>\n                            <div>\n                                <p style=\"margin: 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>haven't been eating</strong> well lately.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ My eating habits have been poor recently.</p>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">Scenario: Talking about exercise</p>\n                        <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;\">\n                            <div>\n                                <p style=\"margin: 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>haven't exercised</strong> this week.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ Zero exercise sessions this week.</p>\n                            </div>\n                            <div>\n                                <p style=\"margin: 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>haven't been exercising</strong> lately.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ Exercise hasn't been part of my routine recently.</p>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div>\n                        <p style=\"margin: 0; font-weight: 600;\">Scenario: Someone asks about your homework</p>\n                        <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;\">\n                            <div>\n                                <p style=\"margin: 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>haven't done</strong> it yet.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ It's not complete (but I will do it).</p>\n                            </div>\n                            <div>\n                                <p style=\"margin: 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>haven't been doing</strong> my homework.\"</p>\n                                <p style=\"margin: 0; font-size: 0.85rem; color: #6b7280;\">→ I've been neglecting it as a regular habit.</p>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; margin-top: 1rem;\">\n                    <p style=\"margin: 0; font-weight: 600;\">💡 Quick Guide:</p>\n                    <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem;\">\n                    <li><strong>Result negative</strong> = The action hasn't happened (zero times, incomplete)</li>\n                    <li><strong>Duration negative</strong> = The activity hasn't been part of your life/routine lately</li>\n                    </ul>\n                </div>\n            ","exercises":[{"id":"ex-negatives-mix","title":"Negative Practice","instructions":"Fill in the blank with the correct negative form.","items":[{"type":"text","label":"I ___ (not / finish) my homework yet. Can I go out later?","expectedAnswer":"haven't finished","placeholder":"haven't finished"},{"type":"text","label":"She looks tired. She ___ (not / sleep) well lately.","expectedAnswer":"hasn't been sleeping","placeholder":"hasn't been sleeping"},{"type":"text","label":"We ___ (not / decide) where to go on vacation yet.","expectedAnswer":"haven't decided","placeholder":"haven't decided"},{"type":"text","label":"You ___ (not / practice) the piano enough this week!","expectedAnswer":"haven't been practicing","placeholder":"haven't been practicing"}]}]},{"id":"family-questions","title":"Questions: 'How Much' vs 'How Long'","icon":"❓","stepNumber":5,"explanation":"\n                <h3>Asking the Right Question</h3>\n                <p>The question you ask depends on what answer you want. Choose the right form to get the information you need!</p>\n\n                <table style=\"width: 100%; text-align: left; border-collapse: collapse; margin: 1rem 0;\">\n                    <tr style=\"border-bottom: 2px solid #e5e7eb;\">\n                        <th style=\"padding: 0.5rem; color: #4b5563;\">If you want to know...</th>\n                        <th style=\"padding: 0.5rem; color: #4b5563;\">Use...</th>\n                        <th style=\"padding: 0.5rem; color: #4b5563;\">Question Word</th>\n                    </tr>\n                    <tr style=\"background-color: #fff7ed;\">\n                        <td style=\"padding: 0.75rem; font-weight: 500;\">If it is DONE</td>\n                        <td style=\"padding: 0.75rem;\">Result</td>\n                        <td style=\"padding: 0.75rem; color: #c2410c; font-weight: bold;\">Have you finished...?</td>\n                    </tr>\n                    <tr style=\"background-color: #eef2ff;\">\n                        <td style=\"padding: 0.75rem; font-weight: 500;\">The DURATION</td>\n                        <td style=\"padding: 0.75rem;\">Duration</td>\n                        <td style=\"padding: 0.75rem; color: #4338ca; font-weight: bold;\">How long...?</td>\n                    </tr>\n                    <tr style=\"background-color: #fff7ed;\">\n                        <td style=\"padding: 0.75rem; font-weight: 500;\">The QUANTITY</td>\n                        <td style=\"padding: 0.75rem;\">Result</td>\n                        <td style=\"padding: 0.75rem; color: #c2410c; font-weight: bold;\">How many...?</td>\n                    </tr>\n                </table>\n\n                <h3>Question Examples by Type</h3>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem;\">\n                        <h4 style=\"margin: 0 0 0.75rem 0; color: #c2410c;\">Result Questions (Done/Count)</h4>\n                        <ul style=\"margin: 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li><strong>Have</strong> you <strong>finished</strong> your homework?</li>\n                            <li><strong>Has</strong> she <strong>called</strong> you back yet?</li>\n                            <li><strong>Have</strong> you ever <strong>been</strong> to Paris?</li>\n                            <li><strong>How many</strong> books <strong>have</strong> you <strong>read</strong>?</li>\n                            <li><strong>What</strong> <strong>have</strong> you <strong>done</strong> today?</li>\n                        </ul>\n                    </div>\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem;\">\n                        <h4 style=\"margin: 0 0 0.75rem 0; color: #4338ca;\">Duration Questions (Time/Activity)</h4>\n                        <ul style=\"margin: 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li><strong>How long have</strong> you <strong>been waiting</strong>?</li>\n                            <li><strong>What have</strong> you <strong>been doing</strong> all day?</li>\n                            <li><strong>Have</strong> you <strong>been crying</strong>? (evidence)</li>\n                            <li><strong>Have</strong> you <strong>been working</strong> hard?</li>\n                            <li><strong>Where have</strong> you <strong>been living</strong>?</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <h3>Same Topic, Different Questions</h3>\n                <p>Notice how the form you choose changes what you're asking about:</p>\n\n                <div style=\"background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">Topic: Reading</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result:</strong> \"How many books <strong>have</strong> you <strong>read</strong>?\" → Wants a number</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration:</strong> \"What <strong>have</strong> you <strong>been reading</strong>?\" → Wants to know about the activity</p>\n                    </div>\n\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">Topic: Work</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result:</strong> \"<strong>Have</strong> you <strong>finished</strong> the report?\" → Is it done?</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration:</strong> \"How long <strong>have</strong> you <strong>been working</strong> on it?\" → How much time?</p>\n                    </div>\n\n                    <div>\n                        <p style=\"margin: 0; font-weight: 600;\">Topic: Exercise (noticing sweat)</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result:</strong> \"<strong>Have</strong> you <strong>exercised</strong> today?\" → Did it happen?</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration:</strong> \"<strong>Have</strong> you <strong>been exercising</strong>?\" → I see evidence of activity!</p>\n                    </div>\n                </div>\n\n                <div style=\"background: #ecfdf5; padding: 1rem; border-radius: 0.5rem; border: 2px solid #10b981; margin-top: 1rem;\">\n                    <h4 style=\"margin: 0 0 0.5rem 0; color: #059669;\">✓ Question Formation</h4>\n                    <p style=\"margin: 0; font-size: 0.9rem;\"><strong>Result:</strong> Have/Has + subject + past participle...?</p>\n                    <p style=\"margin: 0.25rem 0 0 0; font-size: 0.9rem;\"><strong>Duration:</strong> Have/Has + subject + been + verb-ing...?</p>\n                </div>\n            ","exercises":[{"id":"ex-questions-match","title":"Match the Question to the Logic","instructions":"Which question form is best?","items":[{"type":"radio","label":"You see your friend sweating in gym clothes.","options":[{"value":"simple","label":"Have you exercised? (Focus on result)"},{"value":"continuous","label":"Have you been exercising? (Focus on recent activity)"}],"expectedAnswer":"continuous"},{"type":"radio","label":"You want to know quantity.","options":[{"value":"simple","label":"How many pages have you written?"},{"value":"continuous","label":"How many pages have you been writing?"}],"expectedAnswer":"simple"},{"type":"radio","label":"You are waiting for someone.","options":[{"value":"simple","label":"How long have you waited?"},{"value":"continuous","label":"How long have you been waiting?"}],"expectedAnswer":"continuous"}]}]},{"id":"family-comparison","title":"Comparison: Result vs Duration","stepNumber":6,"icon":"⚖️","explanation":"\n                <h3>The Final Summary</h3>\n                <p>The hardest part is choosing. Ask yourself: <strong>\"Do I care about the result (count) or the time (activity)?\"</strong></p>\n\n                <h3>Side-by-Side: The Same Verb, Two Meanings</h3>\n                <p>See how using the result form vs the duration form changes the meaning with the same verb:</p>\n\n                <div style=\"background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">PAINT 🎨</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>have painted</strong> two rooms.\" → <em>Two rooms are done!</em></p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>have been painting</strong> all day.\" → <em>That's why I'm tired/messy!</em></p>\n                    </div>\n\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">WRITE ✍️</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result form:</strong> \"She <strong>has written</strong> 5 chapters.\" → <em>5 chapters are complete!</em></p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration form:</strong> \"She <strong>has been writing</strong> since morning.\" → <em>Many hours of work!</em></p>\n                    </div>\n\n                    <div style=\"margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-weight: 600;\">COOK 🍳</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>have cooked</strong> dinner.\" → <em>Dinner is ready!</em></p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>have been cooking</strong> for 2 hours.\" → <em>That's a lot of effort!</em></p>\n                    </div>\n\n                    <div>\n                        <p style=\"margin: 0; font-weight: 600;\">LEARN 📚</p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #c2410c;\"><strong>Result form:</strong> \"I <strong>have learned</strong> 50 new words.\" → <em>My vocabulary grew by 50!</em></p>\n                        <p style=\"margin: 0.25rem 0 0 0; color: #4338ca;\"><strong>Duration form:</strong> \"I <strong>have been learning</strong> Spanish for a year.\" → <em>One year of study!</em></p>\n                    </div>\n                </div>\n            ","comparison":{"title":"Result form vs duration form (Present Perfect)","leftLabel":"Result form (Result)","rightLabel":"Duration form (Activity)","rows":[{"label":"Core Meaning","left":"Completion (It is finished)","right":"Process (It might not be finished)"},{"label":"Key Question","left":"<strong>How many?</strong> (Quantity)","right":"<strong>How long?</strong> (Duration)"},{"label":"Evidence","left":"The finished product is ready.","right":"Side effects (sweat, dirt, tiredness)."},{"label":"Example","left":"I have written <strong>10 emails</strong>.","right":"I have been writing emails <strong>for 2 hours</strong>."}]},"tipBox":{"title":"💡 State Verbs Exception","content":"Remember: Verbs like 'know', 'like', 'believe', 'have (possession)' usually stay SIMPLE, even for duration! <br><br>Correct: 'I have known him for 10 years.'<br>Incorrect: 'I have been knowing him...'"}},{"id":"structure-review","title":"Structure Check: Building Sentences","icon":"🏗️","explanation":"\n                <h3>Master the Structures</h3>\n                <p>Let's make sure you can build these sentences perfectly. Both forms have the same basic pattern but with different endings.</p>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0; color: #c2410c; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.5rem;\">Result form</h4>\n                        <div style=\"margin-bottom: 0.5rem;\"><strong>+</strong> have + <span style=\"color: #c2410c;\">past participle</span></div>\n                        <div style=\"margin-bottom: 0.5rem;\"><strong>-</strong> haven't + <span style=\"color: #c2410c;\">past participle</span></div>\n                        <div><strong>?</strong> Have you + <span style=\"color: #c2410c;\">past participle</span>?</div>\n                    </div>\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0; color: #4338ca; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; margin-bottom: 0.5rem;\">Duration form</h4>\n                        <div style=\"margin-bottom: 0.5rem;\"><strong>+</strong> have <span style=\"color: #6366f1;\">been</span> + <span style=\"color: #6366f1;\">-ing</span></div>\n                        <div style=\"margin-bottom: 0.5rem;\"><strong>-</strong> haven't <span style=\"color: #6366f1;\">been</span> + <span style=\"color: #6366f1;\">-ing</span></div>\n                        <div><strong>?</strong> Have you <span style=\"color: #6366f1;\">been</span> + <span style=\"color: #6366f1;\">-ing</span>?</div>\n                    </div>\n                </div>\n\n                <h3>Full Example Sentences</h3>\n                <div style=\"background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <table style=\"width: 100%; border-collapse: collapse;\">\n                        <tr style=\"border-bottom: 2px solid #e2e8f0;\">\n                            <th style=\"padding: 0.5rem; text-align: left; width: 25%;\">Form</th>\n                            <th style=\"padding: 0.5rem; text-align: left; color: #c2410c;\">Result form</th>\n                            <th style=\"padding: 0.5rem; text-align: left; color: #4338ca;\">Duration form</th>\n                        </tr>\n                        <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                            <td style=\"padding: 0.5rem; font-weight: 600;\">Positive (+)</td>\n                            <td style=\"padding: 0.5rem;\">I <strong>have eaten</strong> lunch.</td>\n                            <td style=\"padding: 0.5rem;\">I <strong>have been eating</strong> lunch.</td>\n                        </tr>\n                        <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                            <td style=\"padding: 0.5rem; font-weight: 600;\">Negative (-)</td>\n                            <td style=\"padding: 0.5rem;\">She <strong>hasn't finished</strong> yet.</td>\n                            <td style=\"padding: 0.5rem;\">She <strong>hasn't been working</strong> hard.</td>\n                        </tr>\n                        <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                            <td style=\"padding: 0.5rem; font-weight: 600;\">Question (?)</td>\n                            <td style=\"padding: 0.5rem;\"><strong>Have</strong> you <strong>seen</strong> it?</td>\n                            <td style=\"padding: 0.5rem;\"><strong>Have</strong> you <strong>been waiting</strong> long?</td>\n                        </tr>\n                        <tr>\n                            <td style=\"padding: 0.5rem; font-weight: 600;\">He/She/It</td>\n                            <td style=\"padding: 0.5rem;\">He <strong>has gone</strong> home.</td>\n                            <td style=\"padding: 0.5rem;\">He <strong>has been studying</strong>.</td>\n                        </tr>\n                    </table>\n                </div>\n\n                <h3>Subject-Verb Agreement</h3>\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b;\">\n                    <p style=\"margin: 0; font-weight: 600;\">Remember: HAS is for He/She/It</p>\n                    <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                        <li>I/You/We/They <strong>have</strong> finished | <strong>have been</strong> working</li>\n                        <li>He/She/It <strong>has</strong> finished | <strong>has been</strong> working</li>\n                    </ul>\n                </div>\n            ","exercises":[{"id":"ex-structure-mix","title":"Build the Sentences","instructions":"Fill in the missing parts based on the clues.","items":[{"type":"text","label":"Result form: She ___ (write) three letters.","expectedAnswer":"has written","placeholder":"has written"},{"type":"text","label":"Duration form: They ___ (play) soccer for 2 hours.","expectedAnswer":"have been playing","placeholder":"have been playing"},{"type":"text","label":"Question: How long ___ you ___ (wait)?","expectedAnswer":"have you been waiting","placeholder":"have you been waiting"},{"type":"text","label":"Negative: I ___ (not / see) him today.","expectedAnswer":"haven't seen","placeholder":"haven't seen"}]}]},{"id":"time-expressions","title":"Time Expressions: For, Since & Signal Words","icon":"📅","stepNumber":7,"explanation":"\n                <h3>Key Time Words for Both Forms</h3>\n                <p>Both the result form and the duration form use <strong>for</strong> and <strong>since</strong>, but some words work better with one form. Learning these will help you sound more natural!</p>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;\">\n                    <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b;\">\n                        <h4 style=\"margin: 0 0 0.75rem 0; color: #b45309;\">FOR = Duration</h4>\n                        <p style=\"margin: 0; font-size: 0.9rem; color: #4b5563;\">How long? A period of time.</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>for 10 minutes</li>\n                            <li>for 2 hours</li>\n                            <li>for 3 weeks</li>\n                            <li>for 5 years</li>\n                        </ul>\n                    </div>\n                    <div style=\"background: #dbeafe; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #3b82f6;\">\n                        <h4 style=\"margin: 0 0 0.75rem 0; color: #1d4ed8;\">SINCE = Starting Point</h4>\n                        <p style=\"margin: 0; font-size: 0.9rem; color: #4b5563;\">From when? A specific time.</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>since Monday</li>\n                            <li>since 2019</li>\n                            <li>since I moved here</li>\n                            <li>since breakfast</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <h3>FOR vs SINCE: Easy Way to Remember</h3>\n                <div style=\"background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <p style=\"margin: 0;\"><strong>FOR</strong> answers \"How long?\" → <em>for 3 hours, for 2 weeks, for a year</em></p>\n                    <p style=\"margin: 0.5rem 0 0 0;\"><strong>SINCE</strong> answers \"From when?\" → <em>since Monday, since 2020, since I was a child</em></p>\n                    <div style=\"margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;\">\n                        <p style=\"margin: 0; font-size: 0.9rem;\"><strong>Example:</strong> \"I have lived here <strong>for</strong> 5 years.\" = \"I have lived here <strong>since</strong> 2020.\"</p>\n                        <p style=\"margin: 0.25rem 0 0 0; font-size: 0.85rem; color: #6b7280;\">Both sentences mean the same thing, just expressed differently!</p>\n                    </div>\n                </div>\n\n                <h4>Signal Words by Form</h4>\n                <table style=\"width: 100%; border-collapse: collapse; margin: 1rem 0;\">\n                    <tr style=\"background: #fff7ed;\">\n                        <th style=\"padding: 0.75rem; text-align: left; border-bottom: 2px solid #f97316; color: #c2410c;\">Result form (Result/Count)</th>\n                        <th style=\"padding: 0.75rem; text-align: left; border-bottom: 2px solid #6366f1; color: #4338ca;\">Duration form (Duration/Activity)</th>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 0.5rem; vertical-align: top;\">\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">already</span>\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">yet</span>\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">just</span>\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">ever</span>\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">never</span>\n                            <span style=\"background: #fff7ed; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">how many times</span>\n                        </td>\n                        <td style=\"padding: 0.5rem; vertical-align: top;\">\n                            <span style=\"background: #eef2ff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">all day/morning/week</span>\n                            <span style=\"background: #eef2ff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">lately</span>\n                            <span style=\"background: #eef2ff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">recently</span>\n                            <span style=\"background: #eef2ff; padding: 0.25rem 0.5rem; border-radius: 0.25rem; margin: 0.25rem; display: inline-block;\">how long</span>\n                        </td>\n                    </tr>\n                </table>\n\n                <h3>Signal Words in Action</h3>\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem;\">\n                        <p style=\"margin: 0; font-weight: 600; color: #c2410c;\">Result form signal words:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I have <strong>already</strong> eaten.\"</li>\n                            <li>\"Have you finished <strong>yet</strong>?\"</li>\n                            <li>\"She has <strong>just</strong> arrived.\"</li>\n                            <li>\"Have you <strong>ever</strong> been to Japan?\"</li>\n                            <li>\"I have <strong>never</strong> seen snow.\"</li>\n                        </ul>\n                    </div>\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem;\">\n                        <p style=\"margin: 0; font-weight: 600; color: #4338ca;\">Duration form signal words:</p>\n                        <ul style=\"margin: 0.5rem 0 0 0; padding-left: 1.2rem; font-size: 0.9rem;\">\n                            <li>\"I've been working <strong>all day</strong>.\"</li>\n                            <li>\"She's been feeling tired <strong>lately</strong>.\"</li>\n                            <li>\"What have you been doing <strong>recently</strong>?\"</li>\n                            <li>\"<strong>How long</strong> have you been waiting?\"</li>\n                        </ul>\n                    </div>\n                </div>\n\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; margin-top: 1rem;\">\n                    <p style=\"margin: 0; font-weight: 600;\">💡 Word Position Tip:</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.9rem;\"><strong>Already/just/never/ever</strong> go BETWEEN have and the verb: \"I have <strong>already</strong> finished.\"</p>\n                    <p style=\"margin: 0.25rem 0 0 0; font-size: 0.9rem;\"><strong>Yet</strong> goes at the END: \"Have you finished <strong>yet</strong>?\"</p>\n                </div>\n            ","exercises":[{"id":"ex-time-expressions","title":"For or Since?","instructions":"Choose the correct time expression.","items":[{"type":"select","label":"I have been working here ___ 2018.","options":["for","since"],"expectedAnswer":"since"},{"type":"select","label":"She has lived in Boston ___ five years.","options":["for","since"],"expectedAnswer":"for"},{"type":"select","label":"We have been waiting ___ the meeting started.","options":["for","since"],"expectedAnswer":"since"},{"type":"select","label":"They have been studying English ___ three months.","options":["for","since"],"expectedAnswer":"for"}]},{"id":"ex-signal-words","title":"Which Form Fits?","instructions":"Based on the signal word, choose result form or duration form.","items":[{"type":"radio","label":"I have ___ finished my homework. (already)","options":[{"value":"simple","label":"Result form: have already finished"},{"value":"continuous","label":"Duration form: have been already finishing"}],"expectedAnswer":"simple"},{"type":"radio","label":"She has been tired ___. (lately)","options":[{"value":"simple","label":"Result form: has felt tired lately"},{"value":"continuous","label":"Duration form: has been feeling tired lately"}],"expectedAnswer":"continuous"},{"type":"radio","label":"Have you ___ been to Japan? (ever)","options":[{"value":"simple","label":"Result form: Have you ever been"},{"value":"continuous","label":"Duration form: Have you ever been being"}],"expectedAnswer":"simple"}]}]},{"id":"common-mistakes","title":"Common Mistakes & When NOT to Use","icon":"⚠️","stepNumber":8,"explanation":"\n                <h3>Avoid These Errors!</h3>\n                <p>Here are the most common mistakes students make with the Present Perfect Family. Understanding these will help you avoid them!</p>\n\n                <div style=\"background: #fffafa; border: 1px solid #ef4444; border-left: 5px solid #ef4444; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.75rem 0; color: #991b1b;\">❌ Mistake 1: Using the duration form with state verbs</h4>\n                    <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">Wrong: <span style=\"font-weight: 400;\">I have been knowing him for years.</span></p>\n                        </div>\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #15803d; font-weight: 600;\">Correct: <span style=\"font-weight: 400;\">I have known him for years.</span></p>\n                        </div>\n                    </div>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #374151;\">State verbs (know, believe, like, love, want, need, have, own) don't use the duration form.</p>\n                </div>\n\n                <div style=\"background: #fffafa; border: 1px solid #ef4444; border-left: 5px solid #ef4444; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.75rem 0; color: #991b1b;\">❌ Mistake 2: Using the duration form for counted actions</h4>\n                    <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">Wrong: <span style=\"font-weight: 400;\">I have been reading 3 books this month.</span></p>\n                        </div>\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #15803d; font-weight: 600;\">Correct: <span style=\"font-weight: 400;\">I have read 3 books this month.</span></p>\n                        </div>\n                    </div>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #374151;\">When counting completed items, use the result form.</p>\n                </div>\n\n                <div style=\"background: #fffafa; border: 1px solid #ef4444; border-left: 5px solid #ef4444; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.75rem 0; color: #991b1b;\">❌ Mistake 3: Using the duration form with \"Finish\"</h4>\n                    <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">Wrong: <span style=\"font-weight: 400;\">I haven't been finishing my work yet.</span></p>\n                        </div>\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #15803d; font-weight: 600;\">Correct: <span style=\"font-weight: 400;\">I haven't finished my work yet.</span></p>\n                        </div>\n                    </div>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #374151;\">\"Finish\" describes completion - always use the result form.</p>\n                </div>\n\n                <div style=\"background: #fffafa; border: 1px solid #ef4444; border-left: 5px solid #ef4444; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.75rem 0; color: #991b1b;\">❌ Mistake 4: Using Present Perfect with Specific Past Time</h4>\n                    <div style=\"display: flex; gap: 1rem; flex-wrap: wrap;\">\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">Wrong: <span style=\"font-weight: 400;\">I have seen him yesterday.</span></p>\n                        </div>\n                        <div style=\"flex: 1; min-width: 200px;\">\n                            <p style=\"margin: 0; color: #15803d; font-weight: 600;\">Correct: <span style=\"font-weight: 400;\">I saw him yesterday.</span></p>\n                        </div>\n                    </div>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #374151;\">With specific past times (yesterday, last week, in 2020), use Past Simple, not Present Perfect.</p>\n                </div>\n\n                <div style=\"background: #f9fafb; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; border: 1px solid #e5e7eb;\">\n                    <div style=\"margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e5e7eb;\">\n                        <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">❌ <span style=\"font-weight: 400;\">\"I have been wanting a new phone for months.\"</span></p>\n                        <p style=\"margin: 0; color: #15803d; font-weight: 600;\">✓ <span style=\"font-weight: 400;\">\"I have wanted a new phone for months.\"</span> <span style=\"font-size: 0.85rem; color: #4b5563;\">(want = state verb)</span></p>\n                    </div>\n                    <div style=\"margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e5e7eb;\">\n                        <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">❌ <span style=\"font-weight: 400;\">\"She has been visiting Paris twice.\"</span></p>\n                        <p style=\"margin: 0; color: #15803d; font-weight: 600;\">✓ <span style=\"font-weight: 400;\">\"She has visited Paris twice.\"</span> <span style=\"font-size: 0.85rem; color: #4b5563;\">(twice = counting)</span></p>\n                    </div>\n                    <div style=\"margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid #e5e7eb;\">\n                        <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">❌ <span style=\"font-weight: 400;\">\"I have been losing my keys.\"</span></p>\n                        <p style=\"margin: 0; color: #15803d; font-weight: 600;\">✓ <span style=\"font-weight: 400;\">\"I have lost my keys.\"</span> <span style=\"font-size: 0.85rem; color: #4b5563;\">(lose = single event with result)</span></p>\n                    </div>\n                    <div>\n                        <p style=\"margin: 0; color: #b91c1c; font-weight: 600;\">❌ <span style=\"font-weight: 400;\">\"We have met at the party last Saturday.\"</span></p>\n                        <p style=\"margin: 0; color: #15803d; font-weight: 600;\">✓ <span style=\"font-weight: 400;\">\"We met at the party last Saturday.\"</span> <span style=\"font-size: 0.85rem; color: #4b5563;\">(specific past time)</span></p>\n                    </div>\n                </div>\n\n                <div style=\"background: #f0fdf4; border: 1px solid #10b981; border-left: 5px solid #10b981; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.75rem 0; color: #065f46;\">✓ Quick Decision Guide</h4>\n                    <ul style=\"margin: 0; padding-left: 1.2rem; color: #1f2937;\">\n                        <li><strong>Can you count it?</strong> → result form (3 emails, twice, never)</li>\n                        <li><strong>Is it a state verb?</strong> → result form (know, believe, own)</li>\n                        <li><strong>Is it about completion?</strong> → result form (finish, decide, arrive)</li>\n                        <li><strong>Is it about duration/how long?</strong> → duration form (all day, for hours)</li>\n                        <li><strong>Do you see evidence of activity?</strong> → duration form (sweating, dirty hands)</li>\n                        <li><strong>Is there a specific past time?</strong> → Use Past Simple instead!</li>\n                    </ul>\n                </div>\n            ","tipBox":{"title":"💡 State Verbs List","content":"Common state verbs that DON'T use the duration form: <br><strong>Mental:</strong> know, believe, think, understand, remember <br><strong>Emotional:</strong> like, love, hate, want, need, prefer <br><strong>Possession:</strong> have, own, belong, possess"},"exercises":[{"id":"ex-common-mistakes","title":"Fix the Mistakes","instructions":"Choose the CORRECT version of each sentence.","items":[{"type":"radio","label":"Duration with a state verb:","options":[{"value":"wrong","label":"I have been owning this car for 5 years."},{"value":"correct","label":"I have owned this car for 5 years."}],"expectedAnswer":"correct"},{"type":"radio","label":"Counting completed items:","options":[{"value":"correct","label":"She has visited Paris 4 times."},{"value":"wrong","label":"She has been visiting Paris 4 times."}],"expectedAnswer":"correct"},{"type":"radio","label":"Talking about completion:","options":[{"value":"wrong","label":"Have you been finishing your project yet?"},{"value":"correct","label":"Have you finished your project yet?"}],"expectedAnswer":"correct"},{"type":"radio","label":"Emphasizing duration:","options":[{"value":"correct","label":"I have been waiting for 2 hours!"},{"value":"wrong","label":"I have waited for 2 hours!"}],"expectedAnswer":"correct"},{"type":"radio","label":"Evidence of recent activity (dirty hands):","options":[{"value":"wrong","label":"Have you worked in the garden?"},{"value":"correct","label":"Have you been working in the garden?"}],"expectedAnswer":"correct"}]}]},{"id":"family-mixed","title":"Mixed Practice: Real Life Scenarios","icon":"🧠","stepNumber":9,"explanation":"\n                <h3>Put It All Together!</h3>\n                <p>In real conversation, we switch back and forth between the result form and the duration form. Use your decision-making skills:</p>\n                <ul style=\"margin: 0.5rem 0; padding-left: 1.5rem;\">\n                    <li><strong>Result/Count/Completion?</strong> → result form</li>\n                    <li><strong>Duration/Activity/Evidence?</strong> → duration form</li>\n                    <li><strong>State verb?</strong> → result form (even for duration)</li>\n                </ul>\n\n                <h3>Real Conversation Examples</h3>\n                <p>See how native speakers naturally mix both forms in conversation:</p>\n\n                <div style=\"background: #f8fafc; padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 4px solid #6366f1;\">\n                    <p style=\"margin: 0; font-weight: 600;\">At the Office:</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-style: italic;\">\n                        \"I <strong style=\"color: #4338ca;\">have been working</strong> on this report all morning <span style=\"color: #6b7280;\">(duration)</span>,\n                        and I <strong style=\"color: #c2410c;\">have written</strong> 10 pages so far <span style=\"color: #6b7280;\">(count)</span>.\n                        I <strong style=\"color: #c2410c;\">haven't finished</strong> yet <span style=\"color: #6b7280;\">(completion)</span>,\n                        but I <strong style=\"color: #4338ca;\">have been making</strong> good progress <span style=\"color: #6b7280;\">(ongoing activity)</span>.\"\n                    </p>\n                </div>\n\n                <div style=\"background: #f8fafc; padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 4px solid #f97316;\">\n                    <p style=\"margin: 0; font-weight: 600;\">Meeting a Friend:</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-style: italic;\">\n                        \"Hey! I <strong style=\"color: #4338ca;\">have been trying</strong> to call you all day <span style=\"color: #6b7280;\">(duration)</span>!\n                        Where <strong style=\"color: #4338ca;\">have you been</strong> <span style=\"color: #6b7280;\">(recent activity)</span>?\n                        I <strong style=\"color: #c2410c;\">have bought</strong> tickets for the concert <span style=\"color: #6b7280;\">(result)</span>!\"\n                    </p>\n                </div>\n\n                <div style=\"background: #f8fafc; padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0; border-left: 4px solid #22c55e;\">\n                    <p style=\"margin: 0; font-weight: 600;\">At Home:</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-style: italic;\">\n                        \"You look exhausted! What <strong style=\"color: #4338ca;\">have you been doing</strong> <span style=\"color: #6b7280;\">(activity)</span>?\"\n                        <br>\"I <strong style=\"color: #4338ca;\">have been cleaning</strong> the house <span style=\"color: #6b7280;\">(duration/evidence)</span>.\n                        I <strong style=\"color: #c2410c;\">have done</strong> the kitchen and bathroom <span style=\"color: #6b7280;\">(completed items)</span>,\n                        but I <strong style=\"color: #c2410c;\">haven't started</strong> the bedrooms yet <span style=\"color: #6b7280;\">(not complete)</span>.\"\n                    </p>\n                </div>\n\n                <div style=\"background: #fef3c7; padding: 1rem; border-radius: 0.5rem; border-left: 4px solid #f59e0b; margin-top: 1rem;\">\n                    <p style=\"margin: 0; font-weight: 600;\">💡 Notice the Pattern:</p>\n                    <p style=\"margin: 0.5rem 0 0 0; font-size: 0.9rem;\">When telling a story, we often use <strong style=\"color: #4338ca;\">the duration form</strong> to set the scene (what's been happening) and <strong style=\"color: #c2410c;\">the result form</strong> to report specific results or facts.</p>\n                </div>\n            ","exercises":[{"id":"ex-mixed-scenarios","title":"Real Life Scenarios","instructions":"Choose the best form for each situation.","items":[{"type":"radio","label":"You have paint on your shirt! ___ you ___ the bedroom?","options":[{"value":"continuous","label":"Have / been painting"},{"value":"simple","label":"Have / painted"}],"expectedAnswer":"continuous"},{"type":"radio","label":"The bedroom looks great. I ___ it.","options":[{"value":"continuous","label":"have been painting"},{"value":"simple","label":"have painted"}],"expectedAnswer":"simple"},{"type":"radio","label":"I ___ this movie three times.","options":[{"value":"simple","label":"have seen"},{"value":"continuous","label":"have been seeing"}],"expectedAnswer":"simple"},{"type":"radio","label":"Sorry I'm late! ___ you ___ long?","options":[{"value":"simple","label":"Have / waited"},{"value":"continuous","label":"Have / been waiting"}],"expectedAnswer":"continuous"},{"type":"radio","label":"I ___ to Paris twice in my life.","options":[{"value":"simple","label":"have been"},{"value":"continuous","label":"have been being"}],"expectedAnswer":"simple"}]},{"id":"ex-mixed-fill","title":"Complete the Conversations","instructions":"Fill in the correct form based on context.","items":[{"type":"text","label":"A: You look tired! B: I ___ (study) all night for my exam.","expectedAnswer":"have been studying","placeholder":"have been studying"},{"type":"text","label":"A: How many apartments ___ you ___ (visit)? B: About 5 so far.","expectedAnswer":"have you visited","placeholder":"have you visited"},{"type":"text","label":"A: I ___ (know) Maria since high school. (state verb)","expectedAnswer":"have known","placeholder":"have known"},{"type":"text","label":"A: Why are your hands so dirty? B: I ___ (work) in the garden.","expectedAnswer":"have been working","placeholder":"have been working"}]}]},{"id":"family-summary","title":"Summary: The Present Perfect Family","icon":"📋","stepNumber":10,"explanation":"\n                <h3>What You've Learned</h3>\n                <p>Congratulations! You now understand both members of the Present Perfect Family. Here's everything in one place:</p>\n\n                <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;\">\n                    <div style=\"background: #fff7ed; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #f97316;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #c2410c;\">The Finisher (result form)</h4>\n                        <p style=\"margin: 0 0 0.5rem 0;\"><strong>Formula:</strong> have/has + past participle</p>\n                        <p style=\"margin: 0 0 0.5rem 0;\"><strong>Focus:</strong> Result, completion, count</p>\n                        <p style=\"margin: 0;\"><strong>Key words:</strong> already, yet, just, ever, never, how many</p>\n                    </div>\n                    <div style=\"background: #eef2ff; padding: 1rem; border-radius: 0.5rem; border-top: 4px solid #6366f1;\">\n                        <h4 style=\"margin: 0 0 0.5rem 0; color: #4338ca;\">The Worker (duration form)</h4>\n                        <p style=\"margin: 0 0 0.5rem 0;\"><strong>Formula:</strong> have/has been + verb-ing</p>\n                        <p style=\"margin: 0 0 0.5rem 0;\"><strong>Focus:</strong> Duration, activity, evidence</p>\n                        <p style=\"margin: 0;\"><strong>Key words:</strong> for, since, all day, lately, how long</p>\n                    </div>\n                </div>\n\n                <div style=\"background: #f0fdf4; border: 2px solid #22c55e; border-radius: 0.5rem; padding: 1rem; margin: 1rem 0;\">\n                    <h4 style=\"margin: 0 0 0.5rem 0; color: #16a34a;\">🎯 The Golden Question</h4>\n                    <p style=\"margin: 0; font-size: 1.1rem;\">Ask yourself: <strong>\"Do I care about the RESULT (count/completion) or the DURATION (time/activity)?\"</strong></p>\n                </div>\n\n                <h3>Quick Reference Chart</h3>\n                <table style=\"width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem;\">\n                    <tr style=\"background: #f8fafc;\">\n                        <th style=\"padding: 0.5rem; text-align: left; border-bottom: 2px solid #e2e8f0;\">Use...</th>\n                        <th style=\"padding: 0.5rem; text-align: left; border-bottom: 2px solid #f97316; color: #c2410c;\">Result form</th>\n                        <th style=\"padding: 0.5rem; text-align: left; border-bottom: 2px solid #6366f1; color: #4338ca;\">Duration form</th>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Life experience</td>\n                        <td style=\"padding: 0.5rem;\">✓ Have you ever...?</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Counting items</td>\n                        <td style=\"padding: 0.5rem;\">✓ I've read 3 books</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Just completed</td>\n                        <td style=\"padding: 0.5rem;\">✓ I've just finished</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Duration (how long)</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                        <td style=\"padding: 0.5rem;\">✓ I've been waiting for 2 hours</td>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Visible evidence</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                        <td style=\"padding: 0.5rem;\">✓ You've been crying</td>\n                    </tr>\n                    <tr style=\"border-bottom: 1px solid #e2e8f0;\">\n                        <td style=\"padding: 0.5rem;\">Recent activity</td>\n                        <td style=\"padding: 0.5rem;\">-</td>\n                        <td style=\"padding: 0.5rem;\">✓ What have you been doing?</td>\n                    </tr>\n                    <tr>\n                        <td style=\"padding: 0.5rem;\">State verbs</td>\n                        <td style=\"padding: 0.5rem;\">✓ I've known him for years</td>\n                        <td style=\"padding: 0.5rem;\">✗ Never use!</td>\n                    </tr>\n                </table>\n\n                <h4>Remember:</h4>\n                <ul style=\"margin: 0.5rem 0; padding-left: 1.5rem;\">\n                    <li>State verbs (know, believe, own) → Always result form, even for duration</li>\n                    <li>Counting completed items → result form</li>\n                    <li>Emphasizing how long/visible evidence → duration form</li>\n                    <li>Both use <strong>for</strong> (duration) and <strong>since</strong> (starting point)</li>\n                    <li>Don't use Present Perfect with specific past times (yesterday, last week, in 2020)</li>\n                </ul>\n\n                <h3>One Final Example</h3>\n                <div style=\"background: linear-gradient(135deg, #fff7ed 0%, #eef2ff 100%); padding: 1.25rem; border-radius: 0.5rem; margin: 1rem 0;\">\n                    <p style=\"margin: 0; font-style: italic; font-size: 1.05rem; line-height: 1.7;\">\n                        \"I <strong style=\"color: #4338ca;\">have been learning</strong> English for 2 years <span style=\"color: #6b7280;\">(duration)</span>.\n                        I <strong style=\"color: #c2410c;\">have taken</strong> 4 courses <span style=\"color: #6b7280;\">(count)</span>,\n                        and I <strong style=\"color: #c2410c;\">have improved</strong> a lot <span style=\"color: #6b7280;\">(result)</span>.\n                        I <strong style=\"color: #c2410c;\">have always wanted</strong> to speak fluently <span style=\"color: #6b7280;\">(state verb)</span>,\n                        and I <strong style=\"color: #4338ca;\">have been practicing</strong> every day <span style=\"color: #6b7280;\">(ongoing activity)</span>!\"\n                    </p>\n                </div>\n            ","tipBox":{"title":"🚀 Keep Practicing!","content":"The more you practice choosing between the result form and the duration form, the more natural it becomes. Pay attention to how native speakers use these forms in movies, podcasts, and conversations!"}}],"miniQuiz":[{"id":"quiz-1","question":"Which sentence talks about a completed result now?","options":[{"value":"a","label":"I have been cleaning the kitchen all morning."},{"value":"c","label":"I cleaned the kitchen yesterday."},{"value":"b","label":"I have cleaned the kitchen."}],"correctAnswer":"b","explanation":"The result form (Present Perfect) focuses on a completed action with a result now.","skillTag":"result-completed-action","difficulty":"easy"},{"id":"quiz-2","question":"Which sentence describes an action that started in the past and continues now?","options":[{"value":"b","label":"She has been working here since 2020."},{"value":"a","label":"She has worked here since 2020."},{"value":"c","label":"She worked here since 2020."}],"correctAnswer":"b","explanation":"The duration form (Present Perfect Continuous) emphasizes duration from the past to now.","skillTag":"duration-for-since-how-long","difficulty":"easy"},{"id":"quiz-3","question":"Fill in the blank with Present Perfect for a completed result now: \"I ___ three emails this morning.\"","options":[{"value":"a","label":"have been writing"},{"value":"b","label":"have written"},{"value":"c","label":"wrote"}],"correctAnswer":"b","explanation":"When you can count completed actions, use the result form.","skillTag":"result-count-how-many","difficulty":"easy"},{"id":"quiz-4","question":"Which sentence describes life experience (no specific time)?","options":[{"value":"a","label":"I have been traveling for two weeks."},{"value":"c","label":"I traveled to Mexico last year."},{"value":"b","label":"I have traveled to Mexico twice."}],"correctAnswer":"b","explanation":"Life experience uses the result form with ever/never or counts.","skillTag":"result-life-experience-ever-never","difficulty":"easy"},{"id":"quiz-5","question":"Which sentence uses the correct form of the verb 'know' for a situation that continues now?","options":[{"value":"b","label":"I have known her for years."},{"value":"a","label":"I have been knowing her for years."},{"value":"c","label":"I knew her for years."}],"correctAnswer":"b","explanation":"State verbs like 'know' do not use continuous forms.","skillTag":"error-stative-verb-continuous","difficulty":"easy"},{"id":"quiz-6","question":"Which sentence best explains a present situation using recent ongoing activity?","options":[{"value":"a","label":"I have cooked dinner."},{"value":"b","label":"I have been cooking all afternoon."},{"value":"c","label":"I cooked dinner at 6."}],"correctAnswer":"b","explanation":"The duration form explains current evidence or effects.","skillTag":"duration-recent-activity-evidence","difficulty":"easy"},{"id":"quiz-7","question":"Fill in the blank with the correct Present Perfect form for a completed result now: \"She ___ just finished her homework.\"","options":[{"value":"a","label":"has been"},{"value":"c","label":"is"},{"value":"b","label":"has"}],"correctAnswer":"b","explanation":"Words like 'just' go with the result form.","skillTag":"result-recent-completion-just-already-yet","difficulty":"easy"},{"id":"quiz-8","question":"Which sentence is grammatically incorrect for counting completed actions?","options":[{"value":"c","label":"I have been reading three books this month."},{"value":"a","label":"I have been reading for two hours."},{"value":"b","label":"I have read three books this month."}],"correctAnswer":"c","explanation":"Counting completed items requires the result form, not the duration form.","skillTag":"error-count-with-continuous","difficulty":"medium"},{"id":"quiz-9","question":"Which sentence focuses on duration (time spent), not a completed result?","options":[{"value":"a","label":"I have written the report."},{"value":"b","label":"I have been writing the report all day."},{"value":"c","label":"I wrote the report yesterday."}],"correctAnswer":"b","explanation":"The duration form focuses on duration or activity, not completion.","skillTag":"contrast-result-vs-duration","difficulty":"medium"},{"id":"quiz-10","question":"Which sentence is NOT grammatically correct with a specific past time?","options":[{"value":"b","label":"I saw her yesterday."},{"value":"c","label":"I have seen her before."},{"value":"a","label":"I have seen her yesterday."}],"correctAnswer":"a","explanation":"Specific past time expressions require Past Simple, not Present Perfect.","skillTag":"error-specific-past-time","difficulty":"easy"},{"id":"quiz-11","question":"Which question asks about duration from the past until now?","options":[{"value":"c","label":"How long have you been working?"},{"value":"a","label":"How many emails have you written?"},{"value":"b","label":"Have you finished your work?"}],"correctAnswer":"c","explanation":"How long signals duration and the duration form.","skillTag":"duration-for-since-how-long","difficulty":"easy"},{"id":"quiz-12","question":"Choose the best answer that explains why someone is tired now using recent ongoing activity.","options":[{"value":"a","label":"I have finished my homework."},{"value":"b","label":"I have been doing homework all night."},{"value":"c","label":"I did homework."}],"correctAnswer":"b","explanation":"The duration form explains a current condition.","skillTag":"duration-ongoing-temporary","difficulty":"medium"},{"id":"quiz-13","question":"Which sentence focuses on quantity (how many times), not duration?","options":[{"value":"a","label":"She has been calling all morning."},{"value":"c","label":"She called this morning."},{"value":"b","label":"She has called five times."}],"correctAnswer":"b","explanation":"Counting actions uses the result form.","skillTag":"result-count-how-many","difficulty":"easy"},{"id":"quiz-14","question":"Which sentence uses the correct form of the verb 'own' for a situation that continues now?","options":[{"value":"b","label":"I have owned this car for years."},{"value":"a","label":"I have been owning this car for years."},{"value":"c","label":"I owned this car for years."}],"correctAnswer":"b","explanation":"State verbs like 'own' stay in the simple form.","skillTag":"result-state-verb-duration","difficulty":"easy"},{"id":"quiz-15","question":"Which pair best shows the meaning difference between Present Perfect and Present Perfect Continuous?","options":[{"value":"b","label":"I wrote emails. / I have written emails."},{"value":"a","label":"I have written emails. / I have been writing emails."},{"value":"c","label":"I am writing emails. / I have written emails."}],"correctAnswer":"a","explanation":"Result form focuses on result; duration form focuses on activity or duration.","skillTag":"contrast-simple-vs-continuous-meaning","difficulty":"medium"}]}</script>
+  <script>
+    (function () {
+      const data = JSON.parse(document.getElementById('guideData').textContent);
+      const generatedSlides = document.getElementById('generatedSlides');
+      const quizWrap = document.getElementById('quizWrap');
+
+      function answerLabel(item) {
+        const options = item.options || [];
+        const choiceIndex = options.findIndex((o) => o.value === item.expectedAnswer);
+        if (choiceIndex >= 0) {
+          return 'Correct answer: ' + letterFor(choiceIndex) + ') ' + cleanOptionLabel(options[choiceIndex].label);
+        }
+        return 'Correct answer: ' + String(item.expectedAnswer || '');
+      }
+
+      function splitExplanation(html, maxChars) {
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = html || '';
+        const blocks = Array.from(wrapper.childNodes).filter((n) => {
+          if (n.nodeType === Node.TEXT_NODE) return (n.textContent || '').trim().length > 0;
+          return n.nodeType === Node.ELEMENT_NODE;
+        });
+
+        const chunks = [];
+        let current = [];
+        let currentLen = 0;
+
+        blocks.forEach((node) => {
+          const isHeading = node.nodeType === Node.ELEMENT_NODE && /^H[2-4]$/i.test(node.nodeName);
+          const textLen = (node.textContent || '').trim().length;
+          if (currentLen > 0 && (currentLen + textLen > maxChars || (isHeading && currentLen > maxChars * 0.55))) {
+            chunks.push(current.join(''));
+            current = [];
+            currentLen = 0;
+          }
+          current.push(node.outerHTML || node.textContent || '');
+          currentLen += textLen;
+        });
+
+        if (current.length) chunks.push(current.join(''));
+        if (!chunks.length) chunks.push('<p>No content.</p>');
+        return chunks;
+      }
+
+      function chunkItems(items, size) {
+        const out = [];
+        for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size));
+        return out;
+      }
+
+      function letterFor(index) {
+        return String.fromCharCode(65 + index);
+      }
+
+      function cleanOptionLabel(text) {
+        return String(text || '').replace(/^\s*[•\-]\s*/, '');
+      }
+
+      function appendDiscussionSlide(config) {
+        const sec = document.createElement('section');
+        sec.className = 'slide';
+        sec.dataset.kind = 'discussion';
+
+        const prompts = (config.prompts || []).map((p, i) =>
+          '<p><strong>' + (i + 1) + '.</strong> ' + p + '</p>'
+        ).join('');
+        const models = (config.models || []).map((m) =>
+          '<p>• ' + m + '</p>'
+        ).join('');
+
+        sec.innerHTML =
+          '<span class="kicker"></span>' +
+          '<h2>Class Discussion: ' + config.title + '</h2>' +
+          '<div class="discussion-card">' +
+            '<h3>' + config.subtitle + '</h3>' +
+            '<div class="discussion-grid">' +
+              '<div class="discussion-box"><strong>Discussion Prompts</strong>' + prompts + '</div>' +
+              '<div class="discussion-box"><strong>Model Sentences (Real Life)</strong>' + models + '</div>' +
+            '</div>' +
+            '<div class="teacher-board">' +
+              '<label>Live class examples (type student sentences here):</label>' +
+              '<textarea class="teacher-input" placeholder="1) I have ...&#10;2) She has been ... for ...&#10;3) We have not ... yet."></textarea>' +
+            '</div>' +
+          '</div>';
+
+        generatedSlides.appendChild(sec);
+      }
+
+      function visualPanel(section, variant) {
+        const title = (section.title || '').toLowerCase();
+        const hasDuration = title.includes('duration') || title.includes('continuous');
+        const hasResult = title.includes('result') || title.includes('simple') || title.includes('summary');
+        const hasQuestion = title.includes('question');
+        const hasTime = title.includes('time');
+        const hasMistake = title.includes('mistake');
+
+        if (hasQuestion) {
+          return '<div class="visual-panel">' +
+            '<p class="visual-title">Question Logic Map</p>' +
+            '<div class="flow">' +
+              '<span>How many?</span><b>→</b><span>Result form</span>' +
+            '</div>' +
+            '<div class="flow">' +
+              '<span>How long?</span><b>→</b><span>Duration form</span>' +
+            '</div>' +
+          '</div>';
+        }
+
+        if (hasTime) {
+          return '<div class="visual-panel">' +
+            '<p class="visual-title">Time Word Compass</p>' +
+            '<div class="diagram-row">' +
+              '<div class="diagram-card"><strong>Result clues</strong><br>already • just • yet • ever • never</div>' +
+              '<div class="diagram-card"><strong>Duration clues</strong><br>for • since • all day • lately • recently</div>' +
+            '</div>' +
+          '</div>';
+        }
+
+        if (hasMistake) {
+          return '<div class="visual-panel">' +
+            '<p class="visual-title">Fix-It Diagram</p>' +
+            '<div class="diagram-row">' +
+              '<div class="diagram-card"><strong>Wrong:</strong><br>Present Perfect + specific past time</div>' +
+              '<div class="diagram-card"><strong>Fix:</strong><br>Use Past Simple for yesterday/last year/in 2020</div>' +
+            '</div>' +
+          '</div>';
+        }
+
+        if (hasDuration && !hasResult) {
+          return '<div class="visual-panel">' +
+            '<p class="visual-title">Duration Timeline</p>' +
+            '<div class="flow"><span>Past start</span><b>→</b><span>ongoing activity</span><b>→</b><span>Now</span></div>' +
+            '<div class="diagram-card" style="margin-top:.45rem;"><strong>Formula:</strong> have/has been + verb-ing</div>' +
+          '</div>';
+        }
+
+        if (hasResult && !hasDuration) {
+          return '<div class="visual-panel">' +
+            '<p class="visual-title">Result Snapshot</p>' +
+            '<div class="flow"><span>Past action</span><b>→</b><span>completed result now</span></div>' +
+            '<div class="diagram-card" style="margin-top:.45rem;"><strong>Formula:</strong> have/has + past participle</div>' +
+          '</div>';
+        }
+
+        const visuals = [
+          '<div class="visual-panel"><p class="visual-title">Meaning Choice</p><div class="diagram-row"><div class="diagram-card"><strong>Result form</strong><br>completion / count / outcome</div><div class="diagram-card"><strong>Duration form</strong><br>time / process / evidence</div></div></div>',
+          '<div class="visual-panel"><p class="visual-title">Grammar Flow</p><div class="flow"><span>Do I care about result?</span><b>→</b><span>Yes: Result form</span></div><div class="flow"><span>Do I care about time/activity?</span><b>→</b><span>Yes: Duration form</span></div></div>',
+          '<div class="visual-panel"><p class="visual-title">Quick Contrast</p><div class="diagram-row"><div class="diagram-card"><strong>Photo 📸</strong><br>Result form</div><div class="diagram-card"><strong>Video 🎥</strong><br>Duration form</div></div></div>'
+        ];
+        return visuals[variant % visuals.length];
+      }
+
+      data.sections.forEach((section) => {
+        const explanationChunks = splitExplanation(section.explanation || '', 1800);
+        const step = section.stepNumber ? 'Step ' + section.stepNumber + ' • ' : '';
+        const icon = section.icon ? section.icon + ' ' : '';
+        const totalParts = explanationChunks.length;
+
+        explanationChunks.forEach((chunk, idxPart) => {
+          const sec = document.createElement('section');
+          sec.className = 'slide';
+          sec.dataset.kind = 'section';
+
+          const partLabel = totalParts > 1 ? ' (Part ' + (idxPart + 1) + ' of ' + totalParts + ')' : '';
+          const tip = section.tipBox && idxPart === totalParts - 1
+            ? '<div class="tipbox"><strong>' + section.tipBox.title + '</strong><p style="margin:.3rem 0 0;">' + section.tipBox.content + '</p></div>'
+            : '';
+
+          sec.innerHTML =
+            '<span class="kicker"></span>' +
+            '<h2>' + icon + step + (section.title || '') + partLabel + '</h2>' +
+            visualPanel(section, idxPart) +
+            '<div class="content-scroll">' + chunk + '</div>' +
+            tip;
+          generatedSlides.appendChild(sec);
+        });
+
+        if (Array.isArray(section.exercises) && section.exercises.length) {
+          section.exercises.forEach((ex) => {
+            const items = ex.items || [];
+            const itemChunks = chunkItems(items, 3);
+            const totalExParts = itemChunks.length;
+            itemChunks.forEach((itemsPart, idxExPart) => {
+              const sec = document.createElement('section');
+              sec.className = 'slide';
+              sec.dataset.kind = 'exercise';
+
+              const itemsHtml = itemsPart.map((item, itemIdx) => {
+                const displayNumber = idxExPart * 3 + itemIdx + 1;
+                const opts = (item.options || []).map((o, optIdx) =>
+                  '<span class="opt"><span class="opt-letter">' + letterFor(optIdx) + ')</span>' + cleanOptionLabel(o.label) + '</span>'
+                ).join('');
+                return '<div class="exercise-item">' +
+                         '<div class="item-label"><span class="item-number">' + displayNumber + '</span>' + item.label + '</div>' +
+                         '<div>' + opts + '</div>' +
+                         '<button class="reveal">Reveal Answer</button>' +
+                         '<div class="answer">' + answerLabel(item) + '</div>' +
+                       '</div>';
+              }).join('');
+
+              const exPartLabel = totalExParts > 1 ? ' (Set ' + (idxExPart + 1) + ' of ' + totalExParts + ')' : '';
+              sec.innerHTML =
+                '<span class="kicker"></span>' +
+                '<h2>' + icon + step + (section.title || '') + ' • Practice' + exPartLabel + '</h2>' +
+                '<div class="exercise-card">' +
+                  '<h4>' + ex.title + '</h4>' +
+                  '<p style="margin:.2rem 0 .45rem;">' + (ex.instructions || '') + '</p>' +
+                  itemsHtml +
+                '</div>';
+              generatedSlides.appendChild(sec);
+            });
+          });
+        }
+
+        if (section.id === 'timeline-comparison') {
+          appendDiscussionSlide({
+            title: 'Result vs Duration in Daily Life',
+            subtitle: 'Talk about your real week',
+            prompts: [
+              'What have you finished this week?',
+              'What have you been working on lately?',
+              'Which one is result, and which one is duration?'
+            ],
+            models: [
+              'I have finished my grocery shopping.',
+              'I have been looking for a better job.',
+              'I have called my family twice this week.',
+              'I have been helping my children with homework.'
+            ]
+          });
+        }
+
+        if (section.id === 'family-negatives') {
+          appendDiscussionSlide({
+            title: 'What You Have Not Done Yet',
+            subtitle: 'Negative forms and future plans',
+            prompts: [
+              'What have you not finished yet this week?',
+              'What have you not been doing enough lately?',
+              'What is one plan to change that?'
+            ],
+            models: [
+              'I have not finished my resume yet.',
+              'I have not been sleeping enough this month.',
+              'I have not called my dentist yet.',
+              'I have not been practicing speaking every day.'
+            ]
+          });
+        }
+
+        if (section.id === 'family-mixed') {
+          appendDiscussionSlide({
+            title: 'Story Round: Your Real Experience',
+            subtitle: 'Use both forms in one short story',
+            prompts: [
+              'Tell a 2-sentence story using both forms.',
+              'Partner asks one follow-up question: How long? or How many?',
+              'Share one best sentence in chat.'
+            ],
+            models: [
+              'I have been studying for my permit test, and I have completed 4 practice tests.',
+              'I have been working extra shifts, and I have saved money for rent.',
+              'I have been walking more lately, and I have lost 5 pounds.',
+              'I have been preparing for interviews, and I have applied to 6 jobs.'
+            ]
+          });
+        }
+      });
+
+      data.miniQuiz.forEach((q, i) => {
+        const card = document.createElement('div');
+        card.className = 'quiz-q';
+        const opts = q.options.map((o, optIdx) => {
+          return '<label><input type="radio" name="' + q.id + '" value="' + o.value + '"> <span class="opt-letter">' + letterFor(optIdx) + ')</span>' + cleanOptionLabel(o.label) + '</label>';
+        }).join('');
+        card.innerHTML =
+          '<p style="margin:.1rem 0 .35rem;"><strong>' + (i + 1) + '.</strong> ' + q.question + '</p>' +
+          opts +
+          '<div style="display:none; margin-top:.35rem; color:#1d4ed8;" data-exp="' + q.id + '"><strong>Why:</strong> ' + q.explanation + '</div>';
+        quizWrap.appendChild(card);
+      });
+
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const counter = document.getElementById('counter');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      const fsToggle = document.getElementById('fsToggle');
+      const jump = document.getElementById('jump');
+      const progressFill = document.getElementById('progressFill');
+      let idx = 0;
+
+      function applyKickers() {
+        slides.forEach((s, i) => {
+          const k = s.querySelector('.kicker');
+          if (k) k.textContent = 'Slide ' + (i + 1);
+        });
+      }
+
+      function renderJump() {
+        slides.forEach((_, i) => {
+          const b = document.createElement('button');
+          b.textContent = String(i + 1);
+          b.addEventListener('click', () => go(i));
+          jump.appendChild(b);
+        });
+      }
+
+      function refreshJump() {
+        Array.from(jump.children).forEach((b, i) => {
+          b.style.background = i === idx ? '#fb923c' : 'rgba(226,232,240,.2)';
+          b.style.color = i === idx ? '#fff' : '#e2e8f0';
+          b.style.borderColor = i === idx ? '#fb923c' : 'rgba(226,232,240,.5)';
+        });
+      }
+
+      function update() {
+        slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+        counter.textContent = 'Slide ' + (idx + 1) + ' of ' + slides.length;
+        prev.disabled = idx === 0;
+        next.disabled = idx === slides.length - 1;
+        if (progressFill) progressFill.style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + '%';
+        document.body.className = 'theme-' + (idx % 5);
+        refreshJump();
+      }
+
+      function go(n) {
+        idx = Math.max(0, Math.min(slides.length - 1, n));
+        update();
+      }
+
+      prev.addEventListener('click', () => go(idx - 1));
+      next.addEventListener('click', () => go(idx + 1));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(idx + 1); }
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(idx - 1); }
+        if (e.key === 'Home') go(0);
+        if (e.key === 'End') go(slides.length - 1);
+        if (e.key.toLowerCase() === 'f') toggleFullscreen();
+      });
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          document.exitFullscreen().catch(() => {});
+        }
+      }
+
+      if (fsToggle) fsToggle.addEventListener('click', toggleFullscreen);
+
+      document.addEventListener('fullscreenchange', () => {
+        if (!fsToggle) return;
+        fsToggle.textContent = document.fullscreenElement ? 'Exit Full Screen' : 'Full Screen';
+      });
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.reveal');
+        if (!btn) return;
+        const ans = btn.nextElementSibling;
+        if (!ans) return;
+        ans.classList.toggle('show');
+        btn.textContent = ans.classList.contains('show') ? 'Hide Answer' : (btn.textContent.includes('Answers') ? 'Reveal Answers' : 'Reveal Answer');
+      });
+
+      const gradeQuiz = document.getElementById('gradeQuiz');
+      const quizResult = document.getElementById('quizResult');
+      gradeQuiz.addEventListener('click', () => {
+        let score = 0;
+        data.miniQuiz.forEach((q) => {
+          const picked = document.querySelector('input[name="' + q.id + '"]:checked');
+          const exp = document.querySelector('[data-exp="' + q.id + '"]');
+          if (picked && picked.value === q.correctAnswer) score += 1;
+          if (exp) exp.style.display = 'block';
+        });
+        quizResult.style.display = 'block';
+        quizResult.innerHTML = '<p><strong>Score:</strong> ' + score + '/' + data.miniQuiz.length + '</p>' +
+          '<p>Review the blue “Why” notes under each question for correction and reteach.</p>';
+      });
+
+      // Timer
+      let tSec = 120;
+      let tInt = null;
+      const timer = document.getElementById('timer');
+      function fmt(s) { return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); }
+      function drawT() { timer.textContent = fmt(tSec); }
+      function stopT() { if (tInt) clearInterval(tInt); tInt = null; }
+      document.querySelectorAll('button[data-t]').forEach((b) => b.addEventListener('click', () => { stopT(); tSec = Number(b.dataset.t); drawT(); }));
+      document.getElementById('startT').addEventListener('click', () => {
+        if (tInt) return;
+        tInt = setInterval(() => {
+          if (tSec <= 0) { stopT(); timer.textContent = 'TIME'; return; }
+          tSec -= 1; drawT();
+        }, 1000);
+      });
+      document.getElementById('pauseT').addEventListener('click', stopT);
+      document.getElementById('resetT').addEventListener('click', () => { stopT(); tSec = 120; drawT(); });
+
+      // Scoreboard
+      let o = 0, b = 0;
+      const orange = document.getElementById('orange');
+      const blue = document.getElementById('blue');
+      function drawS() { orange.textContent = String(o); blue.textContent = String(b); }
+      document.getElementById('op').addEventListener('click', () => { o += 1; drawS(); });
+      document.getElementById('om').addEventListener('click', () => { o = Math.max(0, o - 1); drawS(); });
+      document.getElementById('bp').addEventListener('click', () => { b += 1; drawS(); });
+      document.getElementById('bm').addEventListener('click', () => { b = Math.max(0, b - 1); drawS(); });
+      document.getElementById('sr').addEventListener('click', () => { o = 0; b = 0; drawS(); });
+
+      applyKickers();
+      renderJump();
+      drawT();
+      drawS();
+      update();
+    })();
+  </script>
+</body>
+</html>
