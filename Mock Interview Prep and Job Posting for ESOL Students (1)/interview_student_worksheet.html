@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Practice - Student Worksheet</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+        color: #1f2933;
+        background: #f7f8fa;
+        margin: 0;
+        padding: 24px;
+        line-height: 1.4;
+    }
+    .sheet {
+        max-width: 980px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #d9dee5;
+        border-radius: 10px;
+        padding: 24px 28px;
+    }
+    h1 {
+        margin: 0 0 6px 0;
+        font-size: 1.8rem;
+        color: #172b4d;
+    }
+    .sub {
+        margin: 0 0 14px 0;
+        color: #52606d;
+        font-size: 1rem;
+    }
+    .meta {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    .field {
+        border: 1px solid #cbd2d9;
+        border-radius: 6px;
+        padding: 8px 10px;
+        min-height: 38px;
+        font-size: 0.98rem;
+    }
+    .section {
+        border: 1px solid #e4e7eb;
+        border-radius: 8px;
+        padding: 14px;
+        margin-bottom: 14px;
+    }
+    h2 {
+        margin: 0 0 8px 0;
+        font-size: 1.2rem;
+        color: #102a43;
+    }
+    h3 {
+        margin: 10px 0 6px 0;
+        font-size: 1.02rem;
+        color: #243b53;
+    }
+    .prompt {
+        background: #f0f4f8;
+        border-left: 4px solid #486581;
+        padding: 8px 10px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        font-size: 0.96rem;
+    }
+    ul {
+        margin: 6px 0 8px 18px;
+        padding: 0;
+    }
+    li { margin-bottom: 4px; }
+    .line {
+        border-bottom: 1px solid #9aa5b1;
+        height: 28px;
+        margin-bottom: 6px;
+    }
+    .line.small {
+        height: 24px;
+    }
+    .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    .reframe-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6px;
+    }
+    .reframe-table th,
+    .reframe-table td {
+        border: 1px solid #cbd2d9;
+        padding: 8px;
+        vertical-align: top;
+        font-size: 0.95rem;
+    }
+    .reframe-table th {
+        background: #f0f4f8;
+        text-align: left;
+    }
+    .checklist label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.96rem;
+    }
+    .note {
+        font-size: 0.9rem;
+        color: #52606d;
+        margin-top: 8px;
+    }
+    @media print {
+        body { background: #fff; padding: 0; }
+        .sheet {
+            border: none;
+            border-radius: 0;
+            max-width: none;
+            padding: 12mm;
+        }
+        .section { break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="sheet">
+    <h1>Interview Practice - Student Worksheet</h1>
+    <p class="sub">Use sentence frames. Write short, clear answers. Practice speaking with a partner.</p>
+
+    <div class="meta">
+        <div class="field"><strong>Name:</strong> ____________________________</div>
+        <div class="field"><strong>Date:</strong> __________________</div>
+        <div class="field"><strong>Role:</strong> Candidate / Interviewer</div>
+    </div>
+
+    <div class="section">
+        <h2>1) Opening</h2>
+        <div class="prompt"><strong>Say:</strong> "Hi, my name is ____. I am here for the Hotel Supervisor interview."</div>
+    </div>
+
+    <div class="section">
+        <h2>2) Core Interview Questions - Sentence Structures</h2>
+
+        <h3>Q1: Tell me about yourself.</h3>
+        <ul>
+            <li>I currently work as ____.</li>
+            <li>I have experience in ____.</li>
+            <li>I am interested in this position because ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q2: What experience do you have?</h3>
+        <ul>
+            <li>I worked as ____ for ____ years/months.</li>
+            <li>In that job, I ____.</li>
+            <li>This experience taught me ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q3: What are your strengths?</h3>
+        <ul>
+            <li>One of my strengths is ____.</li>
+            <li>For example, I ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q4: What is one weakness you are improving?</h3>
+        <ul>
+            <li>In the past, I sometimes ____.</li>
+            <li>Now I ____ to improve.</li>
+            <li>This helps me ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="section">
+        <h2>3) Safe Weakness Builder (Important)</h2>
+        <div class="grid-2">
+            <div>
+                <h3>Safe weakness ideas (choose one):</h3>
+                <div class="checklist">
+                    <label><input type="checkbox"> Public speaking</label>
+                    <label><input type="checkbox"> Asking for help</label>
+                    <label><input type="checkbox"> Speaking up in meetings</label>
+                    <label><input type="checkbox"> Being too detail-focused</label>
+                    <label><input type="checkbox"> Delegating tasks</label>
+                </div>
+            </div>
+            <div>
+                <h3>Do NOT use:</h3>
+                <ul>
+                    <li>"I am always late."</li>
+                    <li>"I do not like people."</li>
+                    <li>"I get angry easily."</li>
+                    <li>"I do not follow instructions."</li>
+                </ul>
+            </div>
+        </div>
+        <h3>My safe weakness answer (3 parts):</h3>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <div class="section">
+        <h2>4) Reframing Practice (Say it professionally)</h2>
+        <table class="reframe-table">
+            <thead>
+                <tr>
+                    <th>Risky version</th>
+                    <th>Professional reframe</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>"I want more money."</td>
+                    <td>"I am looking for more responsibility and growth."</td>
+                </tr>
+                <tr>
+                    <td>"My last boss was bad."</td>
+                    <td>"I learned a lot there, and now I want a better fit."</td>
+                </tr>
+                <tr>
+                    <td>"I just need any job."</td>
+                    <td>"I am excited for a long-term role where I can contribute."</td>
+                </tr>
+                <tr>
+                    <td>Write your own risky sentence:</td>
+                    <td><div class="line small"></div></td>
+                </tr>
+                <tr>
+                    <td>Write your professional reframe:</td>
+                    <td><div class="line small"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>5) No Direct Experience? Use This Reframe</h2>
+        <div class="prompt"><strong>Sentence frame:</strong> "I have not worked as a ____ yet, but in my ____ role I ____, and that helps me ____."</div>
+        <table class="reframe-table">
+            <thead>
+                <tr>
+                    <th>Target role/task</th>
+                    <th>Reframe example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Front desk / check-in</td>
+                    <td>"I have not worked front desk yet, but I speak with customers every day, and that helps me communicate clearly."</td>
+                </tr>
+                <tr>
+                    <td>Team leadership</td>
+                    <td>"I have not been a supervisor yet, but I helped train new coworkers, and that helps me support a team."</td>
+                </tr>
+                <tr>
+                    <td>Hotel experience</td>
+                    <td>"I have not worked in a hotel yet, but I keep work areas organized, and that helps me maintain high standards."</td>
+                </tr>
+                <tr>
+                    <td>Guest complaints</td>
+                    <td>"I have not handled complaints as a supervisor yet, but I stay calm with upset people, and that helps me solve problems."</td>
+                </tr>
+                <tr>
+                    <td>Write your own target:</td>
+                    <td><div class="line small"></div></td>
+                </tr>
+                <tr>
+                    <td>Write your own transfer-skill sentence:</td>
+                    <td><div class="line small"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>6) Final Questions</h2>
+        <h3>Q5: How do you handle an unhappy guest?</h3>
+        <ul>
+            <li>First, I ____.</li>
+            <li>Then, I ____.</li>
+            <li>Finally, I ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q6: Why do you want this job?</h3>
+        <ul>
+            <li>I want this job because ____.</li>
+            <li>I have experience in ____.</li>
+            <li>I am ready to ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q7: Why did you leave your last job?</h3>
+        <ul>
+            <li>I learned a lot in that role, especially ____.</li>
+            <li>Now I am looking for ____.</li>
+            <li>This position is a good fit because ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q8: How do you handle conflict with a coworker?</h3>
+        <ul>
+            <li>First, I ____.</li>
+            <li>Then, I ____.</li>
+            <li>My goal is to ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Q9: What does good customer service mean to you?</h3>
+        <ul>
+            <li>Good customer service means ____.</li>
+            <li>For example, I ____.</li>
+            <li>This helps customers/guests ____.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Bonus: What is your availability?</h3>
+        <ul>
+            <li>I am available ____.</li>
+            <li>I can be flexible when needed.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+    <p class="note"><strong>Speaking checklist:</strong> eye contact, clear voice, complete sentences, calm pace.</p>
+</div>
+</body>
+</html>
