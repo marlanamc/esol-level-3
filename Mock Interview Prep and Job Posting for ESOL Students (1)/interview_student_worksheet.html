@@ -6,143 +6,189 @@
 <title>Interview Practice - Student Worksheet</title>
 <style>
     * { box-sizing: border-box; }
-    body {
-        font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-        color: #1f2933;
-        background: #f7f8fa;
+    html, body {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        color: #1a1a1a;
+        background: #fff;
         margin: 0;
-        padding: 24px;
-        line-height: 1.4;
+        padding: 0;
+        line-height: 1.5;
+        font-size: 11pt;
     }
     .sheet {
-        max-width: 980px;
+        width: 100%;
+        max-width: 100%;
         margin: 0 auto;
+        padding: 0.4in 0.35in;
         background: #fff;
-        border: 1px solid #d9dee5;
-        border-radius: 10px;
-        padding: 24px 28px;
     }
     h1 {
-        margin: 0 0 6px 0;
-        font-size: 1.8rem;
-        color: #172b4d;
+        margin: 0 0 2px 0;
+        font-size: 1.4rem;
+        color: #000;
+        font-weight: 700;
     }
     .sub {
-        margin: 0 0 14px 0;
-        color: #52606d;
-        font-size: 1rem;
+        margin: 0 0 10px 0;
+        color: #000;
+        font-size: 0.9rem;
     }
     .meta {
         display: grid;
         grid-template-columns: 1.5fr 1fr 1fr;
-        gap: 10px;
-        margin-bottom: 16px;
+        gap: 6px;
+        margin-bottom: 10px;
     }
     .field {
-        border: 1px solid #cbd2d9;
-        border-radius: 6px;
-        padding: 8px 10px;
-        min-height: 38px;
-        font-size: 0.98rem;
+        padding: 4px 8px;
+        min-height: 28px;
+        font-size: 0.9rem;
+        background: #fff;
     }
     .section {
-        border: 1px solid #e4e7eb;
-        border-radius: 8px;
-        padding: 14px;
-        margin-bottom: 14px;
+        padding: 8px 0;
+        margin-bottom: 8px;
+        background: #fff;
     }
     h2 {
-        margin: 0 0 8px 0;
-        font-size: 1.2rem;
-        color: #102a43;
+        margin: 0 0 4px 0;
+        font-size: 1.05rem;
+        color: #000;
+        font-weight: 700;
     }
     h3 {
-        margin: 10px 0 6px 0;
-        font-size: 1.02rem;
-        color: #243b53;
+        margin: 6px 0 3px 0;
+        font-size: 0.95rem;
+        color: #000;
+        font-weight: 600;
     }
     .prompt {
-        background: #f0f4f8;
-        border-left: 4px solid #486581;
-        padding: 8px 10px;
-        border-radius: 4px;
-        margin-bottom: 8px;
-        font-size: 0.96rem;
+        padding: 5px 8px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        background: #fff;
     }
     ul {
-        margin: 6px 0 8px 18px;
+        margin: 3px 0 4px 16px;
         padding: 0;
     }
-    li { margin-bottom: 4px; }
+    li { margin-bottom: 2px; color: #000; font-size: 0.9rem; }
     .line {
-        border-bottom: 1px solid #9aa5b1;
-        height: 28px;
-        margin-bottom: 6px;
+        height: 20px;
+        margin-bottom: 3px;
+        border-bottom: 1px solid #ccc;
     }
     .line.small {
-        height: 24px;
+        height: 18px;
+    }
+    .in-writing-block {
+        margin-top: 8px;
+        padding: 8px 10px;
+        background: #f8f9fa;
+        border-left: 3px solid #2c3e50;
+    }
+    .in-writing-block h3 {
+        margin-top: 0;
+        font-size: 0.9rem;
+        color: #2c3e50;
     }
     .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 8px;
     }
     .reframe-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 6px;
+        margin-top: 4px;
+        font-size: 0.85rem;
     }
     .reframe-table th,
     .reframe-table td {
-        border: 1px solid #cbd2d9;
-        padding: 8px;
+        padding: 4px 6px;
         vertical-align: top;
-        font-size: 0.95rem;
+        background: #fff;
+        border: 1px solid #bbb;
     }
     .reframe-table th {
-        background: #f0f4f8;
+        background: #e8e8e8;
         text-align: left;
+        font-weight: 700;
     }
     .checklist label {
         display: block;
-        margin-bottom: 5px;
-        font-size: 0.96rem;
+        margin-bottom: 2px;
+        font-size: 0.9rem;
+        color: #000;
+    }
+    .checklist input[type="checkbox"] {
+        margin-right: 4px;
     }
     .note {
-        font-size: 0.9rem;
-        color: #52606d;
-        margin-top: 8px;
+        font-size: 0.85rem;
+        color: #000;
+        margin-top: 6px;
     }
+
+    /* Print/PDF: compact, letter-size, no scaling */
     @media print {
-        body { background: #fff; padding: 0; }
-        .sheet {
-            border: none;
-            border-radius: 0;
-            max-width: none;
-            padding: 12mm;
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
-        .section { break-inside: avoid; }
+        html, body {
+            background: #fff !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            min-height: auto !important;
+        }
+        .sheet {
+            width: 100% !important;
+            max-width: none !important;
+            padding: 0.35in 0.3in !important;
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        /* Allow sections to break across pages to avoid gap after short sections */
+        h2, h3 {
+            break-after: avoid;
+            page-break-after: avoid;
+        }
+        .grid-2 {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .reframe-table {
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .page-break-before {
+            break-before: page;
+            page-break-before: always;
+        }
+        @page {
+            margin: 0.35in;
+            size: 8.5in 11in;
+        }
     }
 </style>
 </head>
 <body>
 <div class="sheet">
-    <h1>Interview Practice - Student Worksheet</h1>
-    <p class="sub">Use sentence frames. Write short, clear answers. Practice speaking with a partner.</p>
 
-    <div class="meta">
-        <div class="field"><strong>Name:</strong> ____________________________</div>
-        <div class="field"><strong>Date:</strong> __________________</div>
-        <div class="field"><strong>Role:</strong> Candidate / Interviewer</div>
+
+    <h1>Interview Practice — Student Worksheet</h1>
+    <p class="sub">Complete written responses using the sentence frames below, then practice aloud with a partner. Aim for clear, complete sentences and a steady pace.</p>
+
+
+    <div class="section">
+        <h2>Part 1. Opening</h2>
+        <div class="prompt"><strong>Say:</strong> "Hi, my name is ______________. I am here for the ______________ (job title) interview."</div>
     </div>
 
     <div class="section">
-        <h2>1) Opening</h2>
-        <div class="prompt"><strong>Say:</strong> "Hi, my name is ____. I am here for the Hotel Supervisor interview."</div>
-    </div>
-
-    <div class="section">
-        <h2>2) Core Interview Questions - Sentence Structures</h2>
+        <h2>Part 2. Core Interview Questions — Sentence Structures</h2>
 
         <h3>Q1: Tell me about yourself.</h3>
         <ul>
@@ -189,7 +235,7 @@
     </div>
 
     <div class="section">
-        <h2>3) Safe Weakness Builder (Important)</h2>
+        <h2>Part 3. Safe Weakness Builder (Important)</h2>
         <div class="grid-2">
             <div>
                 <h3>Safe weakness ideas (choose one):</h3>
@@ -215,10 +261,11 @@
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
+        <div class="line"></div>
     </div>
 
     <div class="section">
-        <h2>4) Reframing Practice (Say it professionally)</h2>
+        <h2>Part 4. Reframing Practice (Say it professionally)</h2>
         <table class="reframe-table">
             <thead>
                 <tr>
@@ -252,7 +299,7 @@
     </div>
 
     <div class="section">
-        <h2>5) No Direct Experience? Use This Reframe</h2>
+        <h2>Part 5. No Direct Experience? Use This Reframe</h2>
         <div class="prompt"><strong>Sentence frame:</strong> "I have not worked as a ____ yet, but in my ____ role I ____, and that helps me ____."</div>
         <table class="reframe-table">
             <thead>
@@ -290,8 +337,8 @@
         </table>
     </div>
 
-    <div class="section">
-        <h2>6) Final Questions</h2>
+    <div class="section page-break-before">
+        <h2>Part 6. Final Questions</h2>
         <h3>Q5: How do you handle an unhappy guest?</h3>
         <ul>
             <li>First, I ____.</li>
@@ -355,9 +402,21 @@
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
+        <div class="line"></div>
+
+        <h3>Bonus: If they ask your salary range</h3>
+        <ul>
+            <li>I am open to discussing pay based on the role and the full package.</li>
+            <li>My expectation is in the ____ to ____ range, depending on responsibilities.</li>
+            <li>I am flexible and want to find a fit that works for both of us.</li>
+        </ul>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
     </div>
 
-    <p class="note"><strong>Speaking checklist:</strong> eye contact, clear voice, complete sentences, calm pace.</p>
+    <p class="note"><strong>Speaking checklist:</strong> Maintain eye contact; speak in a clear voice; use complete sentences; maintain a calm, steady pace.</p>
 </div>
 </body>
 </html>

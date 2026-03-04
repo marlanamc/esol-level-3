@@ -894,52 +894,199 @@
                 font-size: 4rem;
                 left: 20px;
             }
+
+            .image-container[style*="height: 400px"],
+            .image-container[style*="height: 380px"],
+            .image-container[style*="height: 260px"] {
+                height: 260px !important;
+            }
         }
 
         @media (max-width: 600px) {
             .slide {
-                padding: 34px 18px 84px;
+                padding: 24px 16px 100px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .slide.active {
+                display: flex;
             }
 
             .slide-meta {
-                top: 20px;
-                right: 24px;
-                font-size: 0.95rem;
+                top: 16px;
+                right: 16px;
+                font-size: 0.85rem;
+                gap: 12px;
             }
 
             .slide-meta::before {
-                width: 24px;
+                width: 20px;
             }
 
-            .controls {
-                padding: 16px;
+            .section-label {
+                font-size: 0.8rem;
+                padding: 8px 14px;
+                letter-spacing: 0.15em;
+                margin-bottom: 14px;
             }
 
-            .controls button {
-                padding: 14px 28px;
+            h1 {
+                font-size: clamp(2.2rem, 8vw, 3.5rem);
+                margin-bottom: 16px;
+            }
+
+            h2 {
+                font-size: clamp(1.75rem, 6vw, 2.5rem);
+                margin-bottom: 18px;
+            }
+
+            h3 {
+                font-size: clamp(1.2rem, 4vw, 1.5rem);
+                margin-bottom: 14px;
+            }
+
+            .subtitle, p {
                 font-size: 1rem;
             }
 
+            .controls {
+                padding: 12px 8px;
+                gap: 8px;
+            }
+
+            .controls button {
+                padding: 14px 20px;
+                font-size: 0.95rem;
+                min-height: 48px;
+                min-width: 48px;
+            }
+
+            .controls .divider {
+                height: 20px;
+            }
+
+            .controls .slide-indicator {
+                font-size: 0.95rem;
+                min-width: 50px;
+            }
+
             .question-card {
-                padding: 28px 24px;
+                padding: 20px 18px 24px;
+            }
+
+            .question-card::before {
+                font-size: 3rem;
+                left: 14px;
+            }
+
+            .question-card .question-text {
+                font-size: clamp(1.4rem, 5vw, 1.9rem);
             }
 
             .tips-box,
             .example-box {
-                padding: 24px 28px;
+                padding: 18px 20px;
+            }
+
+            .tips-box h4,
+            .example-box .example-label {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
             }
 
             .tips-box p,
             .example-box p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .practice-prompt {
-                padding: 24px 28px;
+                padding: 18px 20px;
             }
 
             .practice-prompt p {
-                font-size: 1.2rem;
+                font-size: 1.05rem;
+            }
+
+            .structure-box {
+                padding: 20px 18px;
+            }
+
+            .structure-box .step {
+                gap: 14px;
+                padding: 14px 0;
+            }
+
+            .structure-box .step-number {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .structure-box .step-text {
+                font-size: 1.05rem;
+            }
+
+            .content-list li {
+                padding: 12px 0 12px 36px;
+                font-size: 1rem;
+            }
+
+            .timer-display {
+                font-size: clamp(3.5rem, 18vw, 5rem);
+            }
+
+            .timer-controls {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .timer-controls button {
+                min-height: 48px;
+                padding: 12px 24px;
+                font-size: 1rem;
+                flex: 1 1 80px;
+            }
+
+            .skill-card {
+                padding: 18px;
+            }
+
+            .skill-card h4 {
+                font-size: 1.4rem;
+            }
+
+            .skill-card p {
+                font-size: 1.1rem;
+            }
+
+            .questions-list li {
+                padding: 14px 0;
+                font-size: 1rem;
+            }
+
+            /* TOC panel: full-width bottom sheet on mobile */
+            .toc-panel {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: auto;
+                width: 100%;
+                max-width: none;
+                max-height: 70vh;
+                border-radius: 16px 16px 0 0;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .slide {
+                padding: 20px 12px 100px;
+            }
+
+            .controls button {
+                padding: 12px 16px;
+                font-size: 0.9rem;
             }
         }
 
@@ -1991,7 +2138,10 @@
         content.style.transform = 'scale(1)';
         content.style.width = '100%';
 
-        // Scale down dense slides so no vertical scrolling is needed.
+        // On mobile, don't scale—allow scrolling for readability
+        if (window.innerWidth <= 600) return;
+
+        // Scale down dense slides so no vertical scrolling is needed (desktop/tablet)
         const availableHeight = slide.clientHeight - (content.offsetTop - slide.offsetTop) - 12;
         const contentHeight = content.scrollHeight;
         const scale = Math.min(1, availableHeight / contentHeight);
