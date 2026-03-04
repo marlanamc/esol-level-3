@@ -904,7 +904,7 @@
 
         @media (max-width: 600px) {
             .slide {
-                padding: 24px 16px 100px;
+                padding: 24px 16px 130px;
                 overflow-y: auto;
                 overflow-x: hidden;
                 -webkit-overflow-scrolling: touch;
@@ -912,6 +912,14 @@
 
             .slide.active {
                 display: flex;
+            }
+
+            /* Let content flow and scroll—don't clip on mobile */
+            .slide-content,
+            .slide .title-content {
+                overflow: visible;
+                flex: none;
+                min-height: auto;
             }
 
             .slide-meta {
@@ -954,6 +962,7 @@
             .controls {
                 padding: 12px 8px;
                 gap: 8px;
+                background: linear-gradient(to top, var(--cream) 60%, rgba(250, 247, 242, 0.95));
             }
 
             .controls button {
