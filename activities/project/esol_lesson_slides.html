@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESOL Modals Lesson Slides</title>
+        <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,800;1,9..144,600&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+
+        :root {
+            --bg-page: #e8eaef;
+            --bg-slide: linear-gradient(168deg, #fbfcfe 0%, #eef2f8 55%, #e8edf5 100%);
+            --surface: #ffffff;
+            --text: #15202b;
+            --text-muted: #5a6672;
+            --accent: #0f6b6b;
+            --accent-2: #1a8a8a;
+            --accent-soft: #e4f3f3;
+            --warm: #b87512;
+            --warm-soft: #faf5eb;
+            --danger: #c42b2b;
+            --border: rgba(21, 32, 43, 0.09);
+            --shadow: 0 4px 20px rgba(21, 32, 43, 0.07);
+            --shadow-lg: 0 16px 48px rgba(21, 32, 43, 0.11);
+            --radius: 18px;
+            --radius-lg: 26px;
+            --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+            --font-body: "Source Sans 3", system-ui, -apple-system, sans-serif;
+            --nav-h: 76px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { font-size: 18px; }
+
+        body {
+            margin: 0;
+            padding: 0 0 var(--nav-h) 0;
+            font-family: var(--font-body);
+            background: var(--bg-page);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .slide-deck {
+            width: 100%;
+            max-width: min(100vw - 20px, 1320px);
+            margin: 0 auto;
+            padding: 14px 10px 6px;
+        }
+
+        .slide-deck .slide-wrapper {
+            display: none;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .slide-deck .slide-wrapper.is-active {
+            display: block;
+        }
+
+        .slide-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            min-height: 360px;
+            background: var(--bg-slide);
+            font-family: var(--font-body);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(10px, 1.8vw, 26px) clamp(14px, 2.8vw, 36px) clamp(14px, 2.2vw, 28px);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .slide-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .slide-container--hook {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .big-question {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2rem, 6.5vw, 4.25rem);
+            line-height: 1.18;
+            color: var(--text);
+            margin: 0;
+            max-width: 95%;
+            padding: clamp(12px, 2vw, 28px);
+            letter-spacing: -0.02em;
+        }
+
+        .slide-container--spectrum {
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .slide-container--spectrum .header {
+            padding-top: clamp(4px, 1vw, 12px);
+            flex-shrink: 0;
+        }
+
+        .spectrum-lead {
+            font-weight: 500;
+            font-size: clamp(0.98rem, 1.45vw, 1.15rem);
+            color: var(--text-muted);
+            max-width: min(52rem, 98%);
+            margin: 0.35em auto 0;
+            line-height: 1.4;
+        }
+
+        .spectrum-wrap {
+            width: 100%;
+            max-width: 100%;
+            margin-top: clamp(8px, 1.5vw, 16px);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 0;
+            padding: 0 clamp(4px, 1vw, 8px);
+        }
+
+        .spectrum-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 2vw, 28px);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .spectrum-endcap {
+            flex: 0 0 clamp(4.5rem, 12vw, 7.5rem);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .spectrum-endcap--left {
+            text-align: right;
+            align-items: flex-end;
+        }
+
+        .spectrum-endcap--right {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .spectrum-endcap-pct {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2vw, 1.65rem);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .spectrum-endcap--left .spectrum-endcap-pct {
+            color: var(--danger);
+        }
+
+        .spectrum-endcap--right .spectrum-endcap-pct {
+            color: var(--accent);
+        }
+
+        .spectrum-endcap-text {
+            font-size: clamp(0.72rem, 1.05vw, 0.88rem);
+            font-weight: 600;
+            color: var(--text-muted);
+            max-width: 11rem;
+        }
+
+        .spectrum-core {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .spectrum-track {
+            position: relative;
+            padding: clamp(52px, 9vw, 72px) 0 clamp(10px, 1.5vw, 14px);
+        }
+
+        .spectrum-gradient {
+            height: clamp(22px, 3.2vw, 32px);
+            border-radius: 999px;
+            background: linear-gradient(
+                90deg,
+                #7c2d2d 0%,
+                #c45c5c 18%,
+                #94a3b8 42%,
+                #5eead4 52%,
+                #2dd4bf 58%,
+                #0d9488 82%,
+                #0f766e 100%
+            );
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.35), 0 2px 8px rgba(21, 32, 43, 0.12);
+            border: 1px solid var(--border);
+        }
+
+        .spectrum-ticks {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            padding: 0 2px;
+        }
+
+        .spectrum-tick {
+            font-weight: 600;
+            font-size: clamp(0.82rem, 1.15vw, 0.98rem);
+            color: var(--text-muted);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .spectrum-markers {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: clamp(4.25rem, 8vw, 5.75rem);
+            pointer-events: none;
+        }
+
+        .spectrum-marker {
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: none;
+        }
+
+        /* Second row so nearby % positions do not stack on one horizontal line */
+        .spectrum-marker--lane-lower {
+            top: clamp(1.75rem, 3.1vw, 2.55rem);
+        }
+
+        .spectrum-marker-name {
+            font-size: clamp(0.74rem, 1.05vw, 0.95rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-top: 0;
+            padding: 4px 9px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(21, 32, 43, 0.08);
+            white-space: nowrap;
+        }
+
+        .spectrum-marker--prohibition .spectrum-marker-name {
+            color: var(--danger);
+        }
+
+        .spectrum-marker--neutral .spectrum-marker-name {
+            color: var(--accent-2);
+        }
+
+        .spectrum-marker--obligation .spectrum-marker-name {
+            color: var(--warm);
+        }
+
+        .spectrum-marker--edge-start {
+            left: 0;
+            transform: translateX(0);
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .spectrum-marker--edge-end {
+            left: 100%;
+            transform: translateX(-100%);
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .spectrum-marker--edge-start,
+        .spectrum-marker--edge-end {
+            top: 0;
+        }
+
+        @media (max-width: 720px) {
+            .spectrum-row {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .spectrum-endcap {
+                flex: 1 1 40%;
+                max-width: none;
+            }
+
+            .spectrum-endcap--left,
+            .spectrum-endcap--right {
+                text-align: center;
+                align-items: center;
+            }
+
+            .spectrum-core {
+                flex: 1 1 100%;
+                order: 3;
+            }
+
+            .spectrum-endcap--left {
+                order: 1;
+            }
+
+            .spectrum-endcap--right {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .spectrum-marker-name {
+                white-space: normal;
+                max-width: 7rem;
+                text-align: center;
+            }
+
+            .spectrum-markers {
+                height: clamp(4.75rem, 11vw, 6.25rem);
+            }
+
+            .spectrum-marker--lane-lower {
+                top: clamp(2rem, 5vw, 2.85rem);
+            }
+
+            .spectrum-track {
+                padding-top: clamp(56px, 11vw, 80px);
+            }
+        }
+
+        .spectrum-combined-body {
+            display: grid;
+            grid-template-columns: minmax(260px, 36%) 1fr;
+            gap: clamp(10px, 1.8vw, 18px);
+            align-items: center;
+            width: 100%;
+            max-width: 1180px;
+            flex: 1;
+            min-height: 0;
+            margin-top: clamp(4px, 1vw, 10px);
+            padding: 0 clamp(4px, 1vw, 8px);
+        }
+
+        .spectrum-ref-panel {
+            min-width: 0;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+            padding: clamp(6px, 1vw, 10px) clamp(8px, 1.2vw, 12px);
+            align-self: center;
+        }
+
+        .spectrum-ref-panel h3 {
+            margin: 0 0 6px;
+            font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+
+        .spectrum-ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+        }
+
+        .spectrum-ref-table th,
+        .spectrum-ref-table td {
+            border-bottom: 1px solid var(--border);
+            padding: 5px 6px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .spectrum-ref-table th {
+            background: rgba(15, 107, 107, 0.08);
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .spectrum-ref-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .spectrum-ref-table .modal-cell {
+            width: auto;
+            min-width: 4.2rem;
+        }
+
+        .spectrum-ref-table .meaning-cell {
+            width: auto;
+        }
+
+        .spectrum-combined-body .spectrum-wrap {
+            margin-top: 0;
+            padding: 0;
+        }
+
+        @media (max-width: 960px) {
+            .spectrum-combined-body {
+                grid-template-columns: 1fr;
+                align-items: stretch;
+            }
+
+            .spectrum-ref-panel {
+                order: 1;
+            }
+
+            .spectrum-combined-body .spectrum-wrap {
+                order: 2;
+            }
+        }
+
+        .slide-nav-btn {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.08rem;
+            padding: 11px 26px;
+            border-radius: 999px;
+            border: 2px solid var(--accent);
+            background: var(--surface);
+            color: var(--accent);
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+        }
+
+        .slide-nav-btn:hover:not(:disabled) {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .slide-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            border-color: rgba(21, 32, 43, 0.15);
+            color: var(--text-muted);
+        }
+
+        .slide-nav-btn:focus-visible {
+            outline: 3px solid var(--warm);
+            outline-offset: 3px;
+        }
+
+        .slide-counter {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            min-width: 5rem;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .header {
+            padding-top: clamp(6px, 1.2vw, 22px);
+            text-align: center;
+            width: 100%;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.85rem, 4.5vw, 3.45rem);
+            line-height: 1.12;
+            margin: 0 0 0.3em;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.4rem, 3.4vw, 2.65rem);
+            color: var(--text);
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: clamp(1.15rem, 2.1vw, 1.72rem);
+            color: var(--accent-2);
+            margin: 0;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: clamp(28px, 4.5vw, 48px) clamp(24px, 3.8vw, 64px);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: min(900px, 94%);
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 18%;
+            bottom: 18%;
+            width: 4px;
+            border-radius: 4px;
+            background: linear-gradient(180deg, var(--warm), var(--accent));
+        }
+
+        .footer {
+            margin-top: 1.1rem;
+            font-size: clamp(0.8rem, 1.1vw, 0.98rem);
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .content-card {
+            margin-top: clamp(14px, 2.2vw, 32px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(18px, 2.6vw, 32px) clamp(18px, 2.6vw, 44px);
+            width: 100%;
+            max-width: min(900px, 94%);
+            min-height: 0;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .content-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 3px;
+            border-radius: 3px;
+            background: var(--accent);
+            opacity: 0.9;
+        }
+
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            padding-top: clamp(14px, 2vw, 22px);
+        }
+
+        .icon {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            color: var(--warm);
+            width: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .text {
+            font-weight: 500;
+            font-size: clamp(1.08rem, 1.65vw, 1.58rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .subtitle {
+            font-weight: 600;
+            font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+            color: var(--accent);
+            padding-top: 0.5rem;
+        }
+
+        .rule-card {
+            margin-top: clamp(14px, 2vw, 28px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(14px, 2vw, 22px) clamp(18px, 2.5vw, 44px) clamp(22px, 3vw, 36px);
+            width: 100%;
+            max-width: min(980px, 94%);
+            min-height: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .rule-item {
+            padding-top: clamp(12px, 1.6vw, 18px);
+            font-size: clamp(1.05rem, 1.55vw, 1.48rem);
+            font-weight: 500;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .modal-highlight {
+            font-weight: 700;
+            padding-left: 0.2em;
+            padding-right: 0.2em;
+        }
+
+        .obligation { color: var(--warm); }
+        .permission { color: var(--accent-2); }
+        .prohibition { color: var(--danger); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th {
+            background-color: var(--text);
+            color: #fff;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 1.3vw, 1.2rem);
+            text-align: left;
+            padding: 12px 14px;
+            height: auto;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border);
+            padding: 10px 14px;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .modal-cell {
+            font-weight: 700;
+            color: var(--warm);
+            width: 22%;
+            min-width: 6rem;
+        }
+
+        .meaning-cell {
+            width: auto;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        strong {
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+
+        .pros-cons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(12px, 2vw, 18px);
+            padding-top: clamp(14px, 2vw, 22px);
+        }
+
+        .pros-cons-col {
+            background: var(--accent-soft);
+            border-radius: var(--radius);
+            padding: clamp(14px, 2vw, 20px) clamp(16px, 2.2vw, 24px);
+            min-height: 0;
+            border: 1px solid var(--border);
+        }
+
+        .pros-cons-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .pros-cons-item {
+            font-weight: 500;
+            font-size: clamp(0.85rem, 1.15vw, 0.95rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+            margin-bottom: 8px;
+        }
+
+        .final-rule-box {
+            margin-top: clamp(14px, 2vw, 22px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(16px, 2vw, 22px) clamp(18px, 2.5vw, 26px);
+            min-height: 0;
+            text-align: center;
+            background: var(--warm-soft);
+            box-shadow: var(--shadow);
+        }
+
+        .final-rule-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1rem, 1.5vw, 1.35rem);
+            color: var(--warm);
+            line-height: 1.35;
+        }
+
+        .roles-card {
+            margin-top: clamp(16px, 2.2vw, 28px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(18px, 2.5vw, 32px) clamp(18px, 2.5vw, 44px);
+            width: 100%;
+            max-width: min(980px, 94%);
+            min-height: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .role-item {
+            display: flex;
+            align-items: flex-start;
+            padding-top: clamp(14px, 2vw, 22px);
+        }
+
+        .role-number {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            color: var(--warm);
+            width: 3.2rem;
+            flex-shrink: 0;
+        }
+
+        .role-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .role-title {
+            font-weight: 700;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: var(--text);
+        }
+
+        .role-desc {
+            font-weight: 500;
+            font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+            color: var(--text-muted);
+            padding-top: 6px;
+            line-height: 1.45;
+        }
+
+        .question-text {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1rem, 1.55vw, 1.3rem);
+            color: var(--accent);
+            text-align: center;
+        }
+
+        .points-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(12px, 1.8vw, 16px);
+            padding-top: clamp(14px, 2vw, 22px);
+        }
+
+        .point-item {
+            display: flex;
+            align-items: flex-start;
+            padding-top: 6px;
+        }
+
+        .point-item .icon {
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
+            color: var(--warm);
+            width: 2rem;
+        }
+
+        .point-item .text {
+            font-weight: 500;
+            font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .rule-prompt {
+            margin-top: clamp(18px, 2.5vw, 28px);
+            border: 1px solid var(--border);
+            padding: clamp(18px, 2.5vw, 26px) clamp(16px, 2.2vw, 28px);
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .content-card .rule-prompt {
+            margin-top: clamp(14px, 2vw, 22px);
+        }
+
+        .prompt-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1rem, 1.35vw, 1.1rem);
+            color: var(--text);
+        }
+
+        .rule-box {
+            padding-top: 12px;
+            font-weight: 500;
+            font-size: clamp(1rem, 1.7vw, 1.45rem);
+            color: var(--accent-2);
+        }
+
+        .check-card {
+            margin-top: clamp(16px, 2.2vw, 28px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(18px, 2.5vw, 32px) clamp(18px, 2.5vw, 44px);
+            width: 100%;
+            max-width: min(980px, 94%);
+            min-height: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            padding-top: clamp(14px, 2vw, 22px);
+        }
+
+        .check-icon {
+            font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+            color: var(--accent);
+            width: 3rem;
+            flex-shrink: 0;
+        }
+
+        .check-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .check-title {
+            font-weight: 700;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            color: var(--text);
+        }
+
+        .check-desc {
+            font-weight: 500;
+            font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+            color: var(--text-muted);
+            padding-top: 6px;
+            line-height: 1.45;
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(12px, 1.8vw, 16px);
+            padding-top: 14px;
+        }
+
+        .group-box {
+            background: var(--accent-soft);
+            padding: clamp(14px, 2vw, 18px);
+            border-radius: var(--radius);
+            text-align: center;
+            font-weight: 700;
+            font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        .tips-card {
+            margin-top: clamp(16px, 2.2vw, 28px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(18px, 2.5vw, 32px) clamp(18px, 2.5vw, 44px);
+            width: 100%;
+            max-width: min(880px, 94%);
+            min-height: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            padding-top: clamp(12px, 1.8vw, 20px);
+        }
+
+        .tip-icon {
+            font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+            color: var(--accent);
+            width: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            font-weight: 500;
+            font-size: clamp(1rem, 1.45vw, 1.25rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        .conclusion-card {
+            margin-top: clamp(16px, 2.2vw, 28px);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: clamp(36px, 5vw, 52px) clamp(28px, 4vw, 64px);
+            text-align: center;
+            max-width: min(900px, 94%);
+            box-shadow: var(--shadow);
+        }
+
+        .conclusion-text {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.15;
+            color: var(--text);
+        }
+
+        .thank-you {
+            font-weight: 600;
+            font-size: clamp(1rem, 1.8vw, 1.45rem);
+            color: var(--warm);
+            margin-top: 0.5em;
+        }
+
+        .question {
+            font-weight: 500;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--text-muted);
+            margin-top: 0.4em;
+        }
+
+        .cards-row {
+            width: 100%;
+            max-width: min(1040px, 96%);
+            margin-top: clamp(14px, 2.2vw, 24px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(14px, 2vw, 20px);
+        }
+
+        .cards-row .card {
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: clamp(18px, 2.5vw, 24px) clamp(18px, 2.2vw, 26px);
+            min-height: 0;
+            background: var(--surface);
+            text-align: left;
+            box-shadow: var(--shadow);
+        }
+
+        .cards-row .card::before {
+            display: none;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .list-item .text {
+            font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+            line-height: 1.45;
+        }
+
+        .pro-icon {
+            color: #2d7a4d;
+        }
+
+        .con-icon {
+            color: #b83232;
+        }
+
+        .mission-card {
+            margin-top: clamp(14px, 2vw, 24px);
+            width: 100%;
+            max-width: min(1000px, 94%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(14px, 2.2vw, 22px) clamp(22px, 3vw, 48px) clamp(20px, 2.8vw, 30px);
+            box-shadow: var(--shadow);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding-top: clamp(12px, 1.8vw, 20px);
+        }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+            color: var(--warm);
+            width: 3rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .step-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: clamp(1rem, 1.45vw, 1.25rem);
+            color: var(--text);
+        }
+
+        .step-desc {
+            font-weight: 500;
+            font-size: clamp(0.88rem, 1.15vw, 1.02rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+            padding-top: 6px;
+        }
+
+        .content-area {
+            width: 100%;
+            max-width: min(1040px, 96%);
+            margin-top: clamp(12px, 2vw, 22px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(14px, 2vw, 22px);
+            align-items: stretch;
+        }
+
+        .content-area--consider-only {
+            grid-template-columns: 1fr;
+            max-width: min(920px, 96%);
+        }
+
+        @media (max-width: 720px) {
+            .content-area {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .considerations {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(16px, 2.2vw, 22px) clamp(16px, 2.2vw, 24px);
+            min-height: 0;
+            box-shadow: var(--shadow);
+        }
+
+        .considerations h3 {
+            margin: 0 0 10px 0;
+            font-family: var(--font-display);
+            font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-area > .rule-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+            min-height: 280px;
+            padding: clamp(16px, 2.2vw, 22px);
+            background: var(--accent-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .content-area > .rule-box .rule-prompt {
+            margin-top: 0;
+            width: 100%;
+            max-width: 100%;
+            flex: 0 0 auto;
+        }
+
+        .highlight {
+            color: var(--warm);
+            font-weight: 700;
+            border-bottom: 2px dotted var(--warm);
+            min-width: clamp(100px, 18vw, 160px);
+            display: inline-block;
+        }
+
+        .tip-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tip-title {
+            font-weight: 700;
+            font-size: clamp(1rem, 1.45vw, 1.25rem);
+            color: var(--text);
+        }
+
+        .tip-desc {
+            font-weight: 500;
+            font-size: clamp(0.88rem, 1.15vw, 1.02rem);
+            color: var(--text-muted);
+            line-height: 1.45;
+            padding-top: 6px;
+        }
+
+        .summary-card {
+            margin-top: clamp(14px, 2vw, 24px);
+            width: 100%;
+            max-width: min(1000px, 94%);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: clamp(14px, 2.2vw, 22px) clamp(22px, 3vw, 44px) clamp(18px, 2.5vw, 26px);
+            box-shadow: var(--shadow);
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding-top: clamp(12px, 1.8vw, 18px);
+        }
+
+        .closing-message {
+            margin-top: clamp(14px, 2vw, 22px);
+            width: 100%;
+            max-width: min(920px, 94%);
+            text-align: center;
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.35;
+        }
+
+        @media (max-width: 640px) {
+            .pros-cons-grid,
+            .points-grid,
+            .cards-row,
+            .groups-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+<div id="deck" class="slide-deck">
+<div class="slide-wrapper is-active">
+ <div class="slide-container">
+  <div class="card">
+   <h1>
+    Boston Public Schools Rulemaking Committee
+   </h1>
+   <p>
+    Words for rules: <em>must</em>, <em>can</em>, <em>cannot</em>, and more
+   </p>
+  </div>
+  <div class="footer">
+   Intermediate ESOL Lesson
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Today's Learning Objectives
+   </h2>
+  </div>
+  <div class="content-card">
+   <div class="objective-item">
+    <div class="icon">
+     <i class="fas fa-check-circle">
+     </i>
+    </div>
+    <div class="text">
+     Use words like
+     <strong>
+      must, have to, can,
+     </strong>
+     and
+     <strong>
+      cannot
+     </strong>
+     in clear sentences about school rules.
+    </div>
+   </div>
+   <div class="objective-item">
+    <div class="icon">
+     <i class="fas fa-balance-scale">
+     </i>
+    </div>
+    <div class="text">
+     Talk about the
+     <strong>
+      good points and bad points
+     </strong>
+     of different school rules for the student guidebook.
+    </div>
+   </div>
+   <div class="objective-item">
+    <div class="icon">
+     <i class="fas fa-shield-alt">
+     </i>
+    </div>
+    <div class="text">
+     Explain your group’s rule and
+     <strong>
+      why
+     </strong>
+     you picked those words to the class.
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container slide-container--spectrum">
+  <div class="header">
+   <h2>
+    Modals: what they mean and how strong
+   </h2>
+   <p class="spectrum-lead">
+    Each word has a meaning and a place on the line.
+    <strong>
+     must not
+    </strong>
+    is at
+    <strong>
+     0%
+    </strong>
+    and
+    <strong>
+     must
+    </strong>
+    is at
+    <strong>
+     100%
+    </strong>
+    . Other words use steps of
+    <strong>
+     5%
+    </strong>
+    (for example 25%, 45%). We discuss this in class.
+   </p>
+  </div>
+  <div class="spectrum-combined-body">
+   <div class="spectrum-ref-panel">
+    <h3>
+     Quick reference
+    </h3>
+    <table class="spectrum-ref-table">
+     <thead>
+      <tr>
+       <th>
+        Modal
+       </th>
+       <th>
+        Meaning
+       </th>
+       <th>
+        Example
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="modal-cell">
+        Must not
+       </td>
+       <td class="meaning-cell">
+        Very strong “no” (serious / danger)
+       </td>
+       <td>
+        Students
+        <strong>
+         must not
+        </strong>
+        smoke on campus.
+       </td>
+      </tr>
+      <tr>
+       <td class="modal-cell">
+        Cannot
+       </td>
+       <td class="meaning-cell">
+        Not allowed
+       </td>
+       <td>
+        Students
+        <strong>
+         cannot
+        </strong>
+        leave during lunch.
+       </td>
+      </tr>
+      <tr>
+       <td class="modal-cell">
+        Don't have to
+       </td>
+       <td class="meaning-cell">
+        You don’t need to (optional)
+       </td>
+       <td>
+        You
+        <strong>
+         don't have to
+        </strong>
+        bring a lunch.
+       </td>
+      </tr>
+      <tr>
+       <td class="modal-cell">
+        Can
+       </td>
+       <td class="meaning-cell">
+        It is allowed / you are able to
+       </td>
+       <td>
+        You
+        <strong>
+         can
+        </strong>
+        use the library after school.
+       </td>
+      </tr>
+      <tr>
+       <td class="modal-cell">
+        Have to
+       </td>
+       <td class="meaning-cell">
+        The school or the law says you have to
+       </td>
+       <td>
+        You
+        <strong>
+         have to
+        </strong>
+        wear a seatbelt.
+       </td>
+      </tr>
+      <tr>
+       <td class="modal-cell">
+        Must
+       </td>
+       <td class="meaning-cell">
+        Very strong “you have to” (you feel it inside)
+       </td>
+       <td>
+        Students
+        <strong>
+         must
+        </strong>
+        arrive on time.
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="spectrum-wrap">
+   <div class="spectrum-row">
+    <div class="spectrum-endcap spectrum-endcap--left">
+     <span class="spectrum-endcap-pct">
+      0%
+     </span>
+     <span class="spectrum-endcap-text">
+      Strongest prohibition
+     </span>
+    </div>
+    <div class="spectrum-core">
+     <div class="spectrum-track" role="img" aria-label="Scale from prohibition at 0 percent to obligation at 100 percent">
+      <div class="spectrum-gradient">
+      </div>
+      <div class="spectrum-ticks">
+       <span class="spectrum-tick">
+        0%
+       </span>
+       <span class="spectrum-tick">
+        25%
+       </span>
+       <span class="spectrum-tick">
+        50%
+       </span>
+       <span class="spectrum-tick">
+        75%
+       </span>
+       <span class="spectrum-tick">
+        100%
+       </span>
+      </div>
+      <div class="spectrum-markers">
+     <div class="spectrum-marker spectrum-marker--prohibition spectrum-marker--edge-start">
+      <span class="spectrum-marker-name">
+       must not
+      </span>
+     </div>
+     <div class="spectrum-marker spectrum-marker--prohibition spectrum-marker--lane-lower" style="left: 25%;">
+      <span class="spectrum-marker-name">
+       cannot
+      </span>
+     </div>
+     <div class="spectrum-marker spectrum-marker--neutral" style="left: 45%;">
+      <span class="spectrum-marker-name">
+       don't have to
+      </span>
+     </div>
+     <div class="spectrum-marker spectrum-marker--neutral spectrum-marker--lane-lower" style="left: 55%;">
+      <span class="spectrum-marker-name">
+       can
+      </span>
+     </div>
+     <div class="spectrum-marker spectrum-marker--obligation spectrum-marker--lane-lower" style="left: 85%;">
+      <span class="spectrum-marker-name">
+       have to
+      </span>
+     </div>
+     <div class="spectrum-marker spectrum-marker--obligation spectrum-marker--edge-end">
+      <span class="spectrum-marker-name">
+       must
+      </span>
+     </div>
+      </div>
+     </div>
+    </div>
+    <div class="spectrum-endcap spectrum-endcap--right">
+     <span class="spectrum-endcap-pct">
+      100%
+     </span>
+     <span class="spectrum-endcap-text">
+      Strongest obligation
+     </span>
+    </div>
+   </div>
+  </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container slide-container--hook">
+  <p class="big-question">
+   Should students be able to eat ice cream in school?
+  </p>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    The Ice Cream Question
+   </h2>
+  </div>
+  <div class="cards-row">
+   <div class="card">
+    <div class="card-title">
+     <i class="fas fa-thumbs-up pro-icon">
+     </i>
+     Pros
+    </div>
+    <div class="list-item">
+     <div class="icon pro-icon">
+      <i class="fas fa-plus">
+      </i>
+     </div>
+     <div class="text">
+      Makes students happy and energetic.
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon pro-icon">
+      <i class="fas fa-plus">
+      </i>
+     </div>
+     <div class="text">
+      Can be a reward for good behavior.
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon pro-icon">
+      <i class="fas fa-plus">
+      </i>
+     </div>
+     <div class="text">
+      It's a fun treat during long days!
+     </div>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-title">
+     <i class="fas fa-thumbs-down con-icon">
+     </i>
+     Cons
+    </div>
+    <div class="list-item">
+     <div class="icon con-icon">
+      <i class="fas fa-minus">
+      </i>
+     </div>
+     <div class="text">
+      It's messy and could ruin property.
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon con-icon">
+      <i class="fas fa-minus">
+      </i>
+     </div>
+     <div class="text">
+      Not a healthy snack for every day.
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon con-icon">
+      <i class="fas fa-minus">
+      </i>
+     </div>
+     <div class="text">
+      Can cause sticky desks and floors.
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    How Modals Change the Rule
+   </h2>
+   <div class="subtitle">
+    One word changes everything!
+   </div>
+  </div>
+  <div class="rule-card">
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight obligation">
+     must
+    </span>
+    eat ice cream in school. (Required!)
+   </div>
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight obligation">
+     have to
+    </span>
+    eat ice cream in school. (It's the rule.)
+   </div>
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight permission">
+     can
+    </span>
+    eat ice cream in school. (Allowed.)
+   </div>
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight permission">
+     cannot
+    </span>
+    eat ice cream in school. (Not allowed.)
+   </div>
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight permission">
+     don't have to
+    </span>
+    eat ice cream. (Optional.)
+   </div>
+   <div class="rule-item">
+    Students
+    <span class="modal-highlight prohibition">
+     must not
+    </span>
+    eat ice cream in school. (Forbidden!)
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Your Mission: The Guidebook
+   </h2>
+  </div>
+  <div class="mission-card">
+   <div class="step-item">
+    <div class="step-number">
+     01
+    </div>
+    <div class="step-content">
+     <div class="step-title">
+      Talk About the Topic
+     </div>
+     <div class="step-desc">
+      In your group, talk about the
+      <strong>
+       good points and bad points
+      </strong>
+      of your topic.
+     </div>
+    </div>
+   </div>
+   <div class="step-item">
+    <div class="step-number">
+     02
+    </div>
+    <div class="step-content">
+     <div class="step-title">
+      Pick Your Words
+     </div>
+     <div class="step-desc">
+      Pick the
+      <strong>
+       best words
+      </strong>
+      (like <em>must</em>, <em>can</em>, <em>cannot</em>) to say your rule in a clear sentence.
+     </div>
+    </div>
+   </div>
+   <div class="step-item">
+    <div class="step-number">
+     03
+    </div>
+    <div class="step-content">
+     <div class="step-title">
+      Get Ready to Explain
+     </div>
+     <div class="step-desc">
+      Be ready to say
+      <strong>
+       why
+      </strong>
+      you picked those words and how your rule helps students at school.
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Group Roles: Pick Your Number!
+   </h2>
+  </div>
+  <div class="roles-card">
+   <div class="role-item">
+    <div class="role-number">
+     01
+    </div>
+    <div class="role-content">
+     <div class="role-title">
+      Writer #1
+     </div>
+     <div class="role-desc">
+      You will write the final rule for
+      <strong>
+       Topic 1: Cell Phones
+      </strong>
+      .
+     </div>
+    </div>
+   </div>
+   <div class="role-item">
+    <div class="role-number">
+     02
+    </div>
+    <div class="role-content">
+     <div class="role-title">
+      Writer #2
+     </div>
+     <div class="role-desc">
+      You will write the final rule for
+      <strong>
+       Topic 2: Using AI
+      </strong>
+      .
+     </div>
+    </div>
+   </div>
+   <div class="role-item">
+    <div class="role-number">
+     03
+    </div>
+    <div class="role-content">
+     <div class="role-title">
+      Writer #3
+     </div>
+     <div class="role-desc">
+      You will write the final rule for
+      <strong>
+       Topic 3: Dress Code
+      </strong>
+      .
+     </div>
+    </div>
+   </div>
+   <div class="role-item">
+    <div class="role-number">
+     04
+    </div>
+    <div class="role-content">
+     <div class="role-title">
+      Writer #4
+     </div>
+     <div class="role-desc">
+      You will write the final rule for
+      <strong>
+       Topic 4: Tardiness
+      </strong>
+      .
+     </div>
+    </div>
+   </div>
+   <div class="role-item">
+    <div class="role-number">
+     05
+    </div>
+    <div class="role-content">
+     <div class="role-title">
+      Writer #5
+     </div>
+     <div class="role-desc">
+      You will write the final rule for
+      <strong>
+       Topic 5: The Ultimate Debate!
+      </strong>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Topic 1: Cell Phones in School
+   </h2>
+  </div>
+  <div class="content-area content-area--consider-only">
+   <div class="considerations">
+    <h3>
+     <i class="fas fa-lightbulb">
+     </i>
+     Consider:
+    </h3>
+    <div class="list-item">
+     <div class="icon">
+      <i class="fas fa-mobile-alt">
+      </i>
+     </div>
+     <div class="text">
+      Are they a distraction or a learning tool?
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon">
+      <i class="fas fa-school">
+      </i>
+     </div>
+     <div class="text">
+      Should they be allowed in class? In the hallways? During lunch?
+     </div>
+    </div>
+    <div class="list-item">
+     <div class="icon">
+      <i class="fas fa-exclamation-triangle">
+      </i>
+     </div>
+     <div class="text">
+      What are the good points and bad points?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Topic 2: AI on Assignments
+   </h2>
+  </div>
+  <div class="content-card">
+   <div class="question-text">
+    Should students be allowed to use AI (like ChatGPT) for schoolwork?
+   </div>
+   <div class="points-grid">
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-brain">
+      </i>
+     </div>
+     <div class="text">
+      Does AI help learning or hurt learning?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-check-double">
+      </i>
+     </div>
+     <div class="text">
+      When is it OK to use AI?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-user-graduate">
+      </i>
+     </div>
+     <div class="text">
+      How can we make sure work is really the student’s own (honest work)?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-tools">
+      </i>
+     </div>
+     <div class="text">
+      Will students need AI for jobs later?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Topic 3: Dress Code and Uniforms
+   </h2>
+  </div>
+  <div class="content-card">
+   <div class="question-text">
+    Should there be a dress code or a required uniform for BPS students?
+   </div>
+   <div class="points-grid">
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-users">
+      </i>
+     </div>
+     <div class="text">
+      Does it help students feel like one group, or stop them from showing their own style?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-wallet">
+      </i>
+     </div>
+     <div class="text">
+      Is it more affordable or more expensive for families?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-tshirt">
+      </i>
+     </div>
+     <div class="text">
+      How does it change life at school and paying attention in class?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-balance-scale">
+      </i>
+     </div>
+     <div class="text">
+      What are fair rules — not too strict, not too loose?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Topic 4: Late and Absent
+   </h2>
+  </div>
+  <div class="content-card">
+   <div class="question-text">
+    What should the rule be for students who are late or miss school?
+   </div>
+   <div class="points-grid">
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-clock">
+      </i>
+     </div>
+     <div class="text">
+      How does being late or absent change learning for one student and for the class?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-gavel">
+      </i>
+     </div>
+     <div class="text">
+      What is fair if you are late or absent?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-notes-medical">
+      </i>
+     </div>
+     <div class="text">
+      What about special reasons (for example, sick days)?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-user-check">
+      </i>
+     </div>
+     <div class="text">
+      How can we get more students to come to school?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Topic 5: Security Cameras Everywhere!
+   </h2>
+  </div>
+  <div class="content-card">
+   <div class="question-text">
+    Should BPS have security cameras in all classrooms and hallways?
+   </div>
+   <div class="points-grid">
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-shield-alt">
+      </i>
+     </div>
+     <div class="text">
+      Does it make the school safer for everyone?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-eye">
+      </i>
+     </div>
+     <div class="text">
+      Does it take away our privacy and trust?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-user-lock">
+      </i>
+     </div>
+     <div class="text">
+      How does it change how school feels?
+     </div>
+    </div>
+    <div class="point-item">
+     <div class="icon">
+      <i class="fas fa-video">
+      </i>
+     </div>
+     <div class="text">
+      Is it a good use of school money?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    The Teacher Check-In
+   </h2>
+  </div>
+  <div class="check-card">
+   <div class="check-item">
+    <div class="check-icon">
+     <i class="fas fa-hand-paper">
+     </i>
+    </div>
+    <div class="check-content">
+     <div class="check-title">
+      Raise Your Hand!
+     </div>
+     <div class="check-desc">
+      When your group has a final rule, raise your hand.
+     </div>
+    </div>
+   </div>
+   <div class="groups-grid">
+    <div class="group-box">
+     Groups A &amp; B:
+     <br/>
+     Matt will check
+    </div>
+    <div class="group-box">
+     Groups C &amp; D:
+     <br/>
+     Marlie will check
+    </div>
+   </div>
+   <div class="check-item">
+    <div class="check-icon">
+     <i class="fas fa-comment-dots">
+     </i>
+    </div>
+    <div class="check-content">
+     <div class="check-title">
+      Be Ready to Justify!
+     </div>
+     <div class="check-desc">
+      Explain
+      <strong>
+       why
+      </strong>
+      you chose your modal. You can move to the next topic after the check!
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Defending Your Rule
+   </h2>
+  </div>
+  <div class="tips-card">
+   <div class="tip-item">
+    <div class="tip-icon">
+     <i class="fas fa-question-circle">
+     </i>
+    </div>
+    <div class="tip-content">
+     <div class="tip-title">
+      Why these words?
+     </div>
+     <div class="tip-desc">
+      Say why you used
+      <strong>
+       must, can, or cannot
+      </strong>
+      . How does the rule sound different?
+     </div>
+    </div>
+   </div>
+   <div class="tip-item">
+    <div class="tip-icon">
+     <i class="fas fa-balance-scale">
+     </i>
+    </div>
+    <div class="tip-content">
+     <div class="tip-title">
+      What was hard to decide?
+     </div>
+     <div class="tip-desc">
+      What were the most important
+      <strong>
+       good points and bad points
+      </strong>
+      your group talked about?
+     </div>
+    </div>
+   </div>
+   <div class="tip-item">
+    <div class="tip-icon">
+     <i class="fas fa-users">
+     </i>
+    </div>
+    <div class="tip-content">
+     <div class="tip-title">
+      People at School
+     </div>
+     <div class="tip-desc">
+      How will this rule help
+      <strong>
+       students and teachers
+      </strong>
+      at school?
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+<div class="slide-wrapper">
+ <div class="slide-container">
+  <div class="header">
+   <h2>
+    Review &amp; Next Steps
+   </h2>
+  </div>
+  <div class="summary-card">
+   <div class="summary-item">
+    <div class="icon">
+     <i class="fas fa-key">
+     </i>
+    </div>
+    <div class="text">
+     Today, we saw how words like
+     <strong>
+      must, can, and cannot
+     </strong>
+     change what a rule means.
+    </div>
+   </div>
+   <div class="summary-item">
+    <div class="icon">
+     <i class="fas fa-comments">
+     </i>
+    </div>
+    <div class="text">
+     We practiced
+     <strong>
+      good points and bad points
+     </strong>
+     and explaining our ideas to the class.
+    </div>
+   </div>
+   <div class="summary-item">
+    <div class="icon">
+     <i class="fas fa-book-open">
+     </i>
+    </div>
+    <div class="text">
+     Look for these words in real life — for example, at school, on signs, and in letters from school.
+    </div>
+   </div>
+  </div>
+  <div class="closing-message">
+   Great work today, Rulemaking Committee!
+   <br/>
+   The BPS Student Guidebook is in good hands.
+  </div>
+ </div>
+</div>
+</div>
+
+<nav class="slide-nav" aria-label="Slide navigation">
+    <button type="button" id="slide-prev" class="slide-nav-btn" aria-label="Previous slide">Previous</button>
+    <span id="slide-counter" class="slide-counter" aria-live="polite">1 / 16</span>
+    <button type="button" id="slide-next" class="slide-nav-btn" aria-label="Next slide">Next</button>
+</nav>
+<script>
+(function () {
+    const slides = document.querySelectorAll("#deck .slide-wrapper");
+    const prevBtn = document.getElementById("slide-prev");
+    const nextBtn = document.getElementById("slide-next");
+    const counter = document.getElementById("slide-counter");
+    let i = 0;
+    const n = slides.length;
+
+    function go(to) {
+        i = Math.max(0, Math.min(n - 1, to));
+        slides.forEach(function (el, idx) {
+            el.classList.toggle("is-active", idx === i);
+        });
+        prevBtn.disabled = i === 0;
+        nextBtn.disabled = i === n - 1;
+        counter.textContent = i + 1 + " / " + n;
+    }
+
+    prevBtn.addEventListener("click", function () { go(i - 1); });
+    nextBtn.addEventListener("click", function () { go(i + 1); });
+    document.addEventListener("keydown", function (e) {
+        if (e.target.closest("input, textarea, [contenteditable]")) return;
+        if (e.key === "ArrowLeft") go(i - 1);
+        if (e.key === "ArrowRight") go(i + 1);
+        if (e.key === "Home") go(0);
+        if (e.key === "End") go(n - 1);
+    });
+    go(0);
+})();
+</script>
+</body>
+</html>

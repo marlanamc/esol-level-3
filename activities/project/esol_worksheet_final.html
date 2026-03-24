@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESOL — Student Guidebook Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text: #15202b;
+            --text-muted: #5a6672;
+            --accent: #0f6b6b;
+            --accent-2: #1a8a8a;
+            --warm: #b87512;
+            --danger: #a82a2a;
+            --border: rgba(21, 32, 43, 0.12);
+            --surface: #ffffff;
+            --page-bg: #eef1f6;
+            --font-display: "Fraunces", Georgia, serif;
+            --font-body: "Source Sans 3", system-ui, sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.55;
+            color: var(--text);
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 1.25rem 1.25rem 2rem;
+            background: var(--page-bg);
+        }
+
+        .sheet {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 1.35rem 2rem;
+            box-shadow: 0 8px 28px rgba(21, 32, 43, 0.07);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 1.85rem);
+            font-weight: 700;
+            margin: 0 0 0.15em;
+            color: var(--text);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.4em;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+            font-weight: 600;
+            color: var(--accent);
+            margin: 0 0 1rem;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 1.35rem 0 0.5rem;
+        }
+
+        h3:first-of-type { margin-top: 0.5rem; }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0 0 1rem;
+        }
+
+        .member-block {
+            margin-bottom: 1rem;
+        }
+
+        .member-block-title {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+
+        .member-block-hint {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin: 0 0 0.65rem;
+            line-height: 1.45;
+        }
+
+        .member-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 0.65rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-row .member-label {
+            flex: 0 0 5.5rem;
+            font-weight: 600;
+            font-size: 0.88rem;
+            color: var(--text);
+            padding-bottom: 0.35rem;
+        }
+
+        .member-row .field-line {
+            flex: 1;
+            border-bottom: 2px solid var(--text);
+            min-height: 1.65rem;
+        }
+
+        .mission-strip {
+            background: linear-gradient(135deg, #e8f4f4 0%, #f0f4f8 100%);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .mission-strip h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        .mission-strip ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .mission-strip li { margin-bottom: 0.35rem; }
+
+        .slide-note {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 0.35rem 0 0.75rem;
+        }
+
+        table.data {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.5rem 0 1rem;
+            font-size: 0.9rem;
+        }
+
+        table.data th,
+        table.data td {
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.55rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table.data th {
+            background: rgba(15, 107, 107, 0.08);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .obligation { color: var(--warm); font-weight: 600; }
+        .permission { color: var(--accent-2); font-weight: 600; }
+        .prohibition { color: var(--danger); font-weight: 600; }
+
+        .scale-box {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            margin: 0.75rem 0 1rem;
+            background: #fafbfc;
+        }
+
+        .scale-bar {
+            height: 14px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #7c2d2d 0%, #94a3b8 45%, #0f766e 100%);
+            margin: 0.5rem 0 0.75rem;
+            border: 1px solid var(--border);
+        }
+
+        .combined-modals-table td:first-child {
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            width: 6.5rem;
+            vertical-align: top;
+        }
+
+        .combined-modals-table .write-cell {
+            min-height: 2.15rem;
+            vertical-align: top;
+        }
+
+        .combined-modals-table .hint {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            vertical-align: top;
+        }
+
+        .example-model {
+            background: linear-gradient(135deg, #f8fafb 0%, #eef6f6 100%);
+            border: 1px dashed var(--accent);
+            border-radius: 10px;
+            padding: 0.9rem 1rem 1rem;
+            margin: 0.75rem 0 1rem;
+        }
+
+        .example-model h3 {
+            margin-top: 0;
+        }
+
+        .example-model .example-body {
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .example-model .example-body p {
+            margin: 0.5rem 0 0;
+        }
+
+        .consider {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0 0 0.5rem;
+            font-style: italic;
+        }
+
+        table.pros-cons-table {
+            border-collapse: collapse;
+        }
+
+        table.pros-cons-table th {
+            font-size: 0.85rem;
+            border-bottom: none;
+            background: rgba(15, 107, 107, 0.06);
+        }
+
+        /* Inner box: table cells ignore min-height in many browsers / print — this keeps real writing space */
+        .pros-cons-cell-inner {
+            box-sizing: border-box;
+            min-height: 6.5rem;
+            width: 100%;
+        }
+
+        table.pros-cons-table tbody td {
+            vertical-align: top;
+            padding: 0.75rem 0.65rem;
+            border-top: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        table.pros-cons-table tbody td:last-child {
+            border-left: none;
+        }
+
+        table.pros-cons-table tbody td:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        table.pros-cons-table .example-cell .pros-cons-cell-inner p {
+            margin: 0 0 0.65rem;
+        }
+
+        table.pros-cons-table .example-cell .pros-cons-cell-inner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .topic-block {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            page-break-inside: avoid;
+        }
+
+        .topic-block:first-of-type { border-top: none; padding-top: 0; }
+
+        .write-label {
+            font-weight: 600;
+            font-size: 0.88rem;
+            margin: 0.75rem 0 0.35rem;
+            color: var(--text);
+        }
+
+        textarea.write-area {
+            --write-line-step: 1.65rem;
+            --write-line-color: rgba(21, 32, 43, 0.14);
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: var(--write-line-step);
+            /* Padding keeps first/last rules off the border; padding-box aligns the grid */
+            padding: 0.5rem 0.65rem 0.55rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 4.5rem;
+            background-color: var(--surface);
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent calc(var(--write-line-step) - 1px),
+                var(--write-line-color) calc(var(--write-line-step) - 1px),
+                var(--write-line-color) var(--write-line-step)
+            );
+            /* local = lines scroll with typing; print overrides — local breaks many print engines */
+            background-attachment: local;
+            background-origin: padding-box;
+            background-clip: padding-box;
+        }
+
+        textarea.write-area:focus {
+            outline: 2px solid rgba(15, 107, 107, 0.35);
+            outline-offset: 1px;
+        }
+
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+            height: 0;
+        }
+
+        hr.sep {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 1.25rem 0;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                max-width: none;
+            }
+
+            .sheet {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+                padding: 0.5rem 0;
+            }
+
+            @page {
+                margin: 12mm 14mm;
+            }
+
+            .topic-block {
+                page-break-inside: avoid;
+                margin-top: 0.85rem;
+                padding-top: 0.55rem;
+            }
+
+            textarea.write-area {
+                border: 1px solid #999;
+                border-radius: 4px;
+                resize: none;
+                overflow: visible;
+                --write-line-step: 14pt;
+                --write-line-color: rgba(0, 0, 0, 0.2);
+                font-size: 11pt;
+                line-height: var(--write-line-step);
+                padding: 9pt 10pt 10pt;
+                min-height: 0;
+                background-color: #fff;
+                background-image: repeating-linear-gradient(
+                    to bottom,
+                    transparent,
+                    transparent calc(var(--write-line-step) - 1px),
+                    var(--write-line-color) calc(var(--write-line-step) - 1px),
+                    var(--write-line-color) var(--write-line-step)
+                );
+                background-attachment: scroll;
+                background-origin: padding-box;
+                background-clip: padding-box;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            textarea.write-area[rows="3"] {
+                height: calc((14pt * 3) + 19pt);
+            }
+
+            textarea.write-area[rows="2"] {
+                height: calc((14pt * 2) + 19pt);
+            }
+
+            .pros-cons-cell-inner {
+                min-height: 27mm;
+            }
+            .write-label {
+                margin: 0.45rem 0 0.2rem;
+                font-size: 0.82rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="sheet">
+    <h1>Boston Public Schools Rulemaking Committee</h1>
+    <h2>Student Guidebook Project — Group worksheet</h2>
+    <p class="subtitle">Write your group’s ideas on this page. The slides are the lesson. Your writing goes here.</p>
+
+    <div class="member-block" role="group" aria-label="Group member names">
+        <span class="member-block-title">Group members (up to 5) — one sheet per group</span>
+        <p class="member-block-hint">Write each person’s <strong>name</strong> on the line. Then fill in the modal chart below <strong>together</strong>.</p>
+        <div class="member-row">
+            <span class="member-label">Member 1</span>
+            <div class="field-line"></div>
+        </div>
+        <div class="member-row">
+            <span class="member-label">Member 2</span>
+            <div class="field-line"></div>
+        </div>
+        <div class="member-row">
+            <span class="member-label">Member 3</span>
+            <div class="field-line"></div>
+        </div>
+        <div class="member-row">
+            <span class="member-label">Member 4</span>
+            <div class="field-line"></div>
+        </div>
+        <div class="member-row">
+            <span class="member-label">Member 5</span>
+            <div class="field-line"></div>
+        </div>
+    </div>
+
+    <div class="mission-strip">
+        <h3>Before your group writes</h3>
+        <ul>
+            <li>Discuss <strong>pros and cons</strong> for your topic.</li>
+            <li>Agree on a rule in <strong>full sentences</strong> (your own words — not only one missing word).</li>
+            <li>Be ready to say <strong>why</strong> you picked words like <em>must</em>, <em>can</em>, or <em>cannot</em>.</li>
+        </ul>
+    </div>
+
+    <hr class="sep">
+
+    <h3>Modals: what they mean and how strong</h3>
+    <div class="scale-box">
+        <div class="scale-bar" aria-hidden="true"></div>
+        <table class="data combined-modals-table">
+            <thead>
+                <tr>
+                    <th>% on the line</th>
+                    <th>Modal word</th>
+                    <th>What it means</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0% (start)</td>
+                    <td class="write-cell"></td>
+                    <td>Very strong “<span class="prohibition">__________</span>” (serious / danger)</td>
+                </tr>
+                <tr>
+                    <td>25%</td>
+                    <td class="write-cell"></td>
+                    <td class="hint">Often in class: <span class="prohibition">__________</span> — not allowed</td>
+                </tr>
+                <tr>
+                    <td>45%</td>
+                    <td class="write-cell"></td>
+                    <td class="hint">Often in class: <span class="permission">__________</span> — you don’t need to</td>
+                </tr>
+                <tr>
+                    <td>55%</td>
+                    <td class="write-cell"></td>
+                    <td class="hint">Often in class: <span class="permission">__________</span> — it is OK / allowed</td>
+                </tr>
+                <tr>
+                    <td>85%</td>
+                    <td class="write-cell"></td>
+                    <td class="hint">Often in class: <span class="obligation">__________</span> — the school or law says so</td>
+                </tr>
+                <tr>
+                    <td>100% (end)</td>
+                    <td class="write-cell"></td>
+                    <td>Very strong "<span class="obligation">__________</span>” (you feel it is necessary)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break" aria-hidden="true"></div>
+
+    <hr class="sep">
+
+    <div class="example-model">
+        <h3>Example — ice cream in school (how to fill out your page)</h3>
+        <p class="slide-note">This is a <strong>model</strong> from class. Each topic below is the same: good points and bad points, then your rule, then <em>why</em> you used words like <em>must</em> or <em>can</em>.</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (ideas for allowing)</th>
+                    <th>Cons (worries or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="example-cell">
+                        <div class="pros-cons-cell-inner">
+                            <p>It can make students happy and give them energy.</p>
+                            <p>It can be a reward for good behavior.</p>
+                            <p>It can be a fun treat during long school days.</p>
+                        </div>
+                    </td>
+                    <td class="example-cell">
+                        <div class="pros-cons-cell-inner">
+                            <p>It can be messy and break things at school.</p>
+                            <p>It is not a healthy snack for every day.</p>
+                            <p>It can make desks and floors sticky.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label">Our rule (write a full sentence) — example</p>
+        <div class="example-body">
+            <p>Students <strong class="permission">can</strong> eat ice cream in the cafeteria during lunch, but they <strong class="prohibition">must not</strong> eat it in the classroom.</p>
+        </div>
+        <p class="write-label">Why we used this word / these words — example</p>
+        <div class="example-body">
+            <p>We used <strong class="permission">can</strong> because ice cream is OK sometimes as a treat. We used <strong class="prohibition">must not</strong> in the classroom because it is too messy by books and computers.</p>
+        </div>
+    </div>
+
+    <hr class="sep">
+
+    <section class="topic-block" aria-labelledby="t1">
+        <h3 id="t1">Topic 1: Cell phones in school — Member 1</h3>
+        <p class="consider">Think about: Phones in class — bad for focus or good for learning? What about hallways and lunch? Good points and bad points?</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (of allowing / using phones)</th>
+                    <th>Cons (worries or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label" id="t1-rule">Our rule (write a full sentence)</p>
+        <textarea class="write-area" rows="3" aria-labelledby="t1-rule"></textarea>
+        <p class="write-label" id="t1-why">Why we used this word / these words (for example must, can)</p>
+        <textarea class="write-area" rows="2" aria-labelledby="t1-why"></textarea>
+    </section>
+
+    
+
+    <section class="topic-block" aria-labelledby="t2">
+        <h3 id="t2">Topic 2: Using AI on assignments — Member 2</h3>
+        <p class="consider">Think about: Does AI help learning or hurt it? When is it OK to use? Did the student really do the work alone? Will students need AI for work later?</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (of allowing AI in some way)</th>
+                    <th>Cons (risks or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label" id="t2-rule">Our rule (write a full sentence)</p>
+        <textarea class="write-area" rows="3" aria-labelledby="t2-rule"></textarea>
+        <p class="write-label" id="t2-why">Why we used this word / these words (for example must, can)</p>
+        <textarea class="write-area" rows="2" aria-labelledby="t2-why"></textarea>
+    </section>
+
+    
+
+    <section class="topic-block" aria-labelledby="t3">
+        <h3 id="t3">Topic 3: Dress code and uniforms — Member 3</h3>
+        <p class="consider">Think about: Do uniforms help the group feel together, or stop students from showing their own style? Money for families? Life at school?</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (of a dress code or uniform)</th>
+                    <th>Cons (worries or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label" id="t3-rule">Our rule (write a full sentence)</p>
+        <textarea class="write-area" rows="3" aria-labelledby="t3-rule"></textarea>
+        <p class="write-label" id="t3-why">Why we used this word / these words (for example must, can)</p>
+        <textarea class="write-area" rows="2" aria-labelledby="t3-why"></textarea>
+    </section>
+
+    <div class="page-break" aria-hidden="true"></div>
+
+    <section class="topic-block" aria-labelledby="t4">
+        <h3 id="t4">Topic 4: Late and absent — Member 4</h3>
+        <p class="consider">Think about: How does being late change learning? What is a fair result if you are late or absent? Special reasons (for example, sick)? How to get more students to come to school?</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (of clearer or stronger rules)</th>
+                    <th>Cons (worries or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label" id="t4-rule">Our rule (write a full sentence)</p>
+        <textarea class="write-area" rows="3" aria-labelledby="t4-rule"></textarea>
+        <p class="write-label" id="t4-why">Why we used this word / these words (for example must, can)</p>
+        <textarea class="write-area" rows="2" aria-labelledby="t4-why"></textarea>
+    </section>
+
+    <section class="topic-block" aria-labelledby="t5">
+        <h3 id="t5">Topic 5: Security cameras — Member 5</h3>
+        <p class="consider">Think about: Do cameras make school safer? Do we lose privacy? Do people still trust each other? Is it a good use of school money?</p>
+        <table class="data pros-cons-table">
+            <thead>
+                <tr>
+                    <th>Pros (of more cameras)</th>
+                    <th>Cons (worries or problems)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                    <td><div class="pros-cons-cell-inner"></div></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="write-label" id="t5-rule">Our rule (write a full sentence)</p>
+        <textarea class="write-area" rows="3" aria-labelledby="t5-rule"></textarea>
+        <p class="write-label" id="t5-why">Why we used this word / these words (for example must, can)</p>
+        <textarea class="write-area" rows="2" aria-labelledby="t5-why"></textarea>
+    </section>
+</div>
+</body>
+</html>
