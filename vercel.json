@@ -30,6 +30,10 @@
     {
       "source": "/housing-discussion-game",
       "destination": "/housing_discussion_game.html"
+    },
+    {
+      "source": "/health-game",
+      "destination": "/health_game_all_in_one.html"
     }
   ],
   "headers": [
