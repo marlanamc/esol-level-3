@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESOL Level 3 – Post Test Review · Answer Key Slides</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #b05740;
+      --primary-light: #f5ebe7;
+      --primary-dark: #8f4330;
+      --secondary: #6a8d73;
+      --secondary-light: #eef5f0;
+      --secondary-dark: #4d6e57;
+      --accent: #e9c46a;
+      --accent-light: #fdf6e3;
+      --ink: #1a202c;
+      --muted: #4a5568;
+      --muted-light: #718096;
+      --card: #fffdf8;
+      --card-border: #e2d9cd;
+      --surface: #f7f4ef;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Open Sans', system-ui, sans-serif;
+      background: linear-gradient(150deg, #2d3a35 0%, #1a202c 50%, #3d2e28 100%);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── Deck wrapper ── */
+    .deck {
+      width: min(1100px, 96vw);
+      margin: 0 auto;
+      padding: 0.75rem 0.75rem 5rem;
+    }
+
+    /* ── Toolbar ── */
+    .toolbar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      margin-bottom: 0.65rem;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 12px;
+      background: rgba(26, 32, 44, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fdf9f0;
+    }
+
+    .toolbar-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+
+    .toolbar-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toolbar-hint {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 0.05rem 0.3rem;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.68rem;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .progress {
+      font-family: 'Poppins', sans-serif;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+
+    .nav-btns {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .nav-btns button {
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-radius: 10px;
+      padding: 0 0.75rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .nav-btns button:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .nav-btns button:active {
+      transform: scale(0.94);
+    }
+
+    /* ── Slide ── */
+    .slide {
+      display: none;
+      min-height: clamp(420px, 72vh, 720px);
+      padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.75rem);
+      border-radius: 16px;
+      background: var(--card);
+      border: 1.5px solid var(--card-border);
+      box-shadow:
+        0 2px 6px rgba(0,0,0,0.08),
+        0 20px 60px rgba(0,0,0,0.3);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide.active {
+      display: block;
+      animation: slideIn 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide.active { animation: none; }
+      .hidden-ans.show { animation: none; }
+    }
+
+    /* ── Kicker badge ── */
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 0.55rem;
+      padding: 0.22rem 0.7rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #5c4a1a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Headings ── */
+    h1 {
+      margin: 0 0 0.6rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0 0 0.75rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+      font-weight: 600;
+      color: var(--secondary-dark);
+      line-height: 1.25;
+    }
+
+    .lead {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.55;
+    }
+
+    /* ── Answer list (title slide / wrap-up) ── */
+    .answer-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .answer-list li {
+      padding: 0.6rem 0.85rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--card-border);
+      background: var(--surface);
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.5;
+    }
+
+    .answer-list .num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+      margin-right: 0.4rem;
+    }
+
+    /* ── Slide actions row ── */
+    .slide-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .show-all, .hide-all {
+      min-height: 38px;
+      border-radius: 9px;
+      padding: 0.35rem 0.9rem;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .show-all:active, .hide-all:active { transform: scale(0.96); }
+
+    .show-all {
+      border: 1.5px solid var(--primary);
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .show-all:hover { background: var(--primary); color: #fff; }
+
+    .hide-all {
+      border: 1.5px solid var(--card-border);
+      background: var(--surface);
+      color: var(--muted);
+    }
+
+    .hide-all:hover { background: var(--muted); color: #fff; }
+
+    /* ── Reveal grid ── */
+    .reveal-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+
+    @media (max-width: 640px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+      /* Override inline grid-column spans on mobile */
+      .two-col > [style*="grid-column"] {
+        grid-column: 1 !important;
+      }
+    }
+
+    /* ── Reveal row card ── */
+    .reveal-row {
+      padding: 0.7rem 0.85rem;
+      border-radius: 10px;
+      border: 1.5px solid var(--card-border);
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+
+    .reveal-row.revealed {
+      border-color: var(--secondary);
+      background: var(--secondary-light);
+    }
+
+    .reveal-row .prompt {
+      font-size: clamp(0.9rem, 1.4vw, 1rem);
+      margin: 0 0 0.5rem;
+      line-height: 1.45;
+      color: var(--ink);
+    }
+
+    .reveal-row .num {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* ── Reveal button ── */
+    .reveal-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 36px;
+      border: 1.5px solid var(--secondary);
+      background: var(--secondary-light);
+      color: var(--secondary-dark);
+      border-radius: 8px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    .reveal-btn::before {
+      content: '▶';
+      font-size: 0.6rem;
+      transition: transform 0.18s;
+    }
+
+    .reveal-btn:hover {
+      background: var(--secondary);
+      color: #fff;
+      border-color: var(--secondary);
+    }
+
+    .reveal-btn:active { transform: scale(0.95); }
+
+    .reveal-btn:disabled {
+      opacity: 0.55;
+      cursor: default;
+      transform: none;
+    }
+
+    .reveal-btn:disabled::before {
+      content: '✓';
+    }
+
+    /* ── Hidden answer panel ── */
+    .hidden-ans {
+      display: none;
+      margin-top: 0.55rem;
+      padding: 0.7rem 0.85rem;
+      border-radius: 8px;
+      background: var(--secondary-light);
+      border: 2px solid var(--secondary);
+    }
+
+    .hidden-ans.show {
+      display: block;
+      animation: revealDown 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes revealDown {
+      from { opacity: 0; transform: translateY(-6px); max-height: 0; }
+      to   { opacity: 1; transform: translateY(0);    max-height: 300px; }
+    }
+
+    .answer-label {
+      font-size: 0.67rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--secondary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .answer-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.25;
+    }
+
+    .answer-note {
+      margin-top: 0.4rem;
+      padding-top: 0.35rem;
+      border-top: 1px dashed #a8c4b0;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── Tip box ── */
+    .tip-box {
+      margin-top: 0.85rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 10px;
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    .tip-box strong { color: #7c4a12; }
+
+    /* ── Quick-reference grid (slide 10) ── */
+    .ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .ref-grid { grid-template-columns: 1fr; }
+    }
+
+    .ref-grid p {
+      margin: 0 0 0.5rem;
+    }
+
+    /* ── Mobile tweaks ── */
+    @media (max-width: 480px) {
+      .toolbar-hint { display: none; }
+      .progress { font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <div class="toolbar-wrap">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <span class="toolbar-title">⚓ Level 3 Post Test Review · Answer Key</span>
+          <span class="toolbar-hint">
+            <kbd>←</kbd><kbd>→</kbd><kbd>Space</kbd> to navigate · tap cards to reveal answers
+          </span>
+        </div>
+        <div class="toolbar-right">
+          <span class="progress" id="progress">1 / 12</span>
+          <div class="nav-btns">
+            <button type="button" id="prevBtn" aria-label="Previous slide">&#8592;</button>
+            <button type="button" id="nextBtn" aria-label="Next slide">&#8594;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 0 Title -->
+    <section class="slide active" data-title="Title">
+      <span class="kicker">Teacher slides</span>
+      <h1>Post Test Review — Answer Key</h1>
+      <p class="lead">Goes with <em>level3_group_review_print.html</em>. Use after groups finish, or pause between parts.</p>
+      <ul class="answer-list">
+        <li><span class="num">Part A</span> Vocabulary (Q1–7)</li>
+        <li><span class="num">Part B</span> Grammar MC + best sentence + verb forms (Q8–32)</li>
+        <li><span class="num">Part C</span> Unscramble (Q33–36)</li>
+        <li><span class="num">Part D</span> Writing samples (Q37–41)</li>
+      </ul>
+    </section>
+
+    <!-- 1 Part A -->
+    <section class="slide" data-title="Part A" data-reveal-slide>
+      <span class="kicker">Part A · Vocabulary</span>
+      <h2>Questions 1–7</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list two-col">
+        <div class="reveal-row"><p class="prompt"><span class="num">1.</span> Daily exercise is _______ for your health.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">beneficial</div></div></div>
+        <div class="reveal-row"><p class="prompt"><span class="num">2.</span> Accountants must be _______ to avoid mistakes with numbers.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">detail-oriented</div></div></div>
+        <div class="reveal-row"><p class="prompt"><span class="num">3.</span> She is taking a _______ class to learn how to repair cars.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">vocational</div></div></div>
+        <div class="reveal-row"><p class="prompt"><span class="num">4.</span> He used a map to _______ through the new neighborhood.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">navigate</div></div></div>
+        <div class="reveal-row"><p class="prompt"><span class="num">5.</span> Moving to a new city was a big _______ for my family.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">transition</div></div></div>
+        <div class="reveal-row"><p class="prompt"><span class="num">6.</span> The apartment building needs regular _______, like fixing lights.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">maintenance</div></div></div>
+        <div class="reveal-row" style="grid-column:1/-1"><p class="prompt"><span class="num">7.</span> My assistant needs to _______ more interviews for this week.</p><button type="button" class="reveal-btn">Show answer</button><div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">set up</div></div></div>
+      </div>
+    </section>
+
+    <!-- 2 Part B MC 8-12 -->
+    <section class="slide" data-title="Grammar MC 8–12" data-reveal-slide>
+      <span class="kicker">Part B · Multiple choice</span>
+      <h2>Questions 8–12</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list two-col" id="mc-8-12">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">8.</span> I forgot to drink water all day, _______ I felt very thirsty.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">so</div><div class="answer-note">cause → result (same pattern as Q15)</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">9.</span> If she takes classes, she _______ a better job.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">will get</div><div class="answer-note">first conditional</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">10.</span> He is _______ student in the class.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">the fastest</div><div class="answer-note">superlative</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">11.</span> I _______ go to bed late when I was in college.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">used to</div><div class="answer-note">past habit (not <em>am used to</em>)</div></div>
+        </div>
+        <div class="reveal-row" style="grid-column: 1 / -1;">
+          <p class="prompt"><span class="num">12.</span> I decided _______ early in the morning.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">to jog</div><div class="answer-note">decide + to-infinitive</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 Part B MC 13-17 -->
+    <section class="slide" data-title="Grammar MC 13–17" data-reveal-slide>
+      <span class="kicker">Part B · Multiple choice</span>
+      <h2>Questions 13–17</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list two-col">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">13.</span> <em>finished</em> in: He finished the project quickly.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">Verb</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">14.</span> <em>quickly</em> modifies the verb.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">Adverb</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">15.</span> She was thirsty, _______ she drank water.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">so</div><div class="answer-note">not <em>because</em> (reverses cause)</div></div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">16.</span> The manager _______ the new employee last week.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">trained</div><div class="answer-note">simple past + finished time</div></div>
+        </div>
+        <div class="reveal-row" style="grid-column: 1 / -1;">
+          <p class="prompt"><span class="num">17.</span> She has been studying English _______ she moved to Boston.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans"><div class="answer-label">Correct answer</div><div class="answer-value">since</div><div class="answer-note">Point in time — not <em>for</em> or <em>during</em></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Part B 18-21 -->
+    <section class="slide" data-title="Best sentence 18–21" data-reveal-slide>
+      <span class="kicker">Part B · Best sentence</span>
+      <h2>Questions 18–21</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">18.</span> Circle the correct sentence.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">He has gone to the career center twice.</div>
+            <div class="answer-note">Not <em>has went</em> — irregular past participle</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">19.</span> Circle the correct sentence.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">I have lived here for three years.</div>
+            <div class="answer-note"><em>for</em> + length · not <em>since three years</em></div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">20.</span> Circle the correct sentence.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">He doesn't have enough experience yet.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">21.</span> Circle the correct sentence.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">If I get the job, I will celebrate.</div>
+            <div class="answer-note">If-clause = present, not <em>will get</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 PP 22-26 -->
+    <section class="slide" data-title="Present Perfect 22–26" data-reveal-slide>
+      <span class="kicker">Present Perfect</span>
+      <h2>Questions 22–26</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">22.</span> She _______ (eat) sushi before.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">has eaten</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">23.</span> Derek _______ (forget) his password many times.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">has forgotten</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">24.</span> I _______ (not write) the report yet.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">haven't written / have not written</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">25.</span> They _______ (see) that movie three times.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">have seen</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">26.</span> We _______ (be) to New York twice.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">have been</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box"><strong>Tip:</strong> Q26 — <em>be</em> → <strong>been</strong> (not <em>beed</em> or <em>was</em>).</div>
+    </section>
+
+    <!-- 6 PP 27-32 -->
+    <section class="slide" data-title="PP 27–32 & PPC" data-reveal-slide>
+      <span class="kicker">Present Perfect · Continuous</span>
+      <h2>Questions 27–32</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">27.</span> He _______ (take) the career workshop twice.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">has taken</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">28.</span> She _______ already _______ (send) her résumé.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">has … sent</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">29.</span> I _______ never _______ (go) to a vocational school.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">have … gone</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">30.</span> How long _______ you _______ (speak) English?</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">have … been speaking</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">31.</span> She _______ (drive) to the clinic since January.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">has been driving</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">32.</span> They _______ (run) a small business for five years.</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">have been running</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box"><strong>Tip:</strong> Q30–32 — PPC = <strong>has/have been + -ing</strong>; <em>since</em> = point in time, <em>for</em> = length.</div>
+    </section>
+
+    <!-- 7 Part C -->
+    <section class="slide" data-title="Unscramble 33–36" data-reveal-slide>
+      <span class="kicker">Part C · Unscramble</span>
+      <h2>Questions 33–36</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">33.</span> Unscramble: used · I · to · drive · to · work</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">I used to drive to work.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">34.</span> Unscramble: never · she · has · gone · to · vocational · school</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">She has never gone to vocational school.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">35.</span> Unscramble: If · I · get · the · job · I · will · celebrate</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">If I get the job, I will celebrate.</div>
+            <div class="answer-note">Comma optional after <em>job</em></div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">36.</span> Unscramble: has · already · taken · He · the · test · twice</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">He has already taken the test twice.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 Part D -->
+    <section class="slide" data-title="Writing 37–41" data-reveal-slide>
+      <span class="kicker">Part D · Writing samples</span>
+      <h2>Questions 37–41</h2>
+      <div class="slide-actions">
+        <button type="button" class="show-all" data-show-all>Reveal all answers</button>
+        <button type="button" class="hide-all" data-hide-all>Hide all</button>
+      </div>
+      <div class="reveal-list">
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">37.</span> <strong>If + present, will + verb</strong> — career or education</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">If I get a better job, I will take more classes.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">38.</span> <strong>Present Perfect</strong> + irregular participle + <strong>for/since</strong></p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">I have lived in Boston for two years.</div>
+            <div class="answer-note">Also accept other correct PP + for/since</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">39.</span> <strong>Superlative</strong> — compare two people or things</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">Maria is the most detail-oriented student in our class.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">40.</span> One sentence with <strong>used to</strong> + one in the <strong>present</strong></p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">I used to work on Saturdays. / I work full-time now.</div>
+          </div>
+        </div>
+        <div class="reveal-row">
+          <p class="prompt"><span class="num">41.</span> Use <strong>two words</strong> from the Part A word bank</p>
+          <button type="button" class="reveal-btn">Show answer</button>
+          <div class="hidden-ans">
+            <div class="answer-label">Correct answer</div>
+            <div class="answer-value">It is beneficial to navigate a career transition with vocational training.</div>
+            <div class="answer-note">Any two word-bank words used correctly</div>
+          </div>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:0.85rem; margin-bottom:0;">Accept other correct sentences if grammar matches the prompt.</p>
+    </section>
+
+    <!-- 9 Common mistakes -->
+    <section class="slide" data-title="Common mistakes">
+      <span class="kicker">Wrap-up</span>
+      <h2>Common mistakes to discuss</h2>
+      <ul class="answer-list">
+        <li><strong>so vs because</strong> — Q8 &amp; Q15: first clause = cause, second = result → <em>so</em></li>
+        <li><strong>used to vs am used to</strong> — past habit vs current comfort</li>
+        <li><strong>for vs since</strong> — length vs starting point</li>
+        <li><strong>has went</strong> → has <strong>gone</strong></li>
+        <li><strong>If + will</strong> in the if-clause → If I <strong>get</strong>…, I will…</li>
+        <li><strong>PPC</strong> — don't forget <em>been</em>: has been studying</li>
+      </ul>
+    </section>
+
+    <!-- 10 Answer grid -->
+    <section class="slide" data-title="Quick grid">
+      <span class="kicker">Quick reference</span>
+      <h2>All answers at a glance</h2>
+      <div class="ref-grid">
+        <div>
+          <p><strong>1–7:</strong> beneficial, detail-oriented, vocational, navigate, transition, maintenance, set up</p>
+          <p><strong>8–17:</strong> so, will get, the fastest, used to, to jog, Verb, Adverb, so, trained, since</p>
+          <p><strong>18–21:</strong> gone…; for three years; doesn't; If I get…</p>
+        </div>
+        <div>
+          <p><strong>22–29:</strong> has eaten; has forgotten; haven't written; have seen; have been; has taken; has…sent; have…gone</p>
+          <p><strong>30–32:</strong> have…been speaking; has been driving; have been running</p>
+          <p><strong>33–36:</strong> I used to drive…; She has never gone…; If I get…; He has already taken…</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.deck -->
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progress = document.getElementById('progress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let idx = 0;
+
+    function go(n) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      const title = slides[idx].dataset.title;
+      progress.textContent = (idx + 1) + ' / ' + slides.length + (title ? ' · ' + title : '');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', () => go(idx - 1));
+    nextBtn.addEventListener('click', () => go(idx + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault(); go(idx + 1);
+      }
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault(); go(idx - 1);
+      }
+      if (e.key === 'Home') { e.preventDefault(); go(0); }
+      if (e.key === 'End')  { e.preventDefault(); go(slides.length - 1); }
+    });
+
+    /* Touch / swipe navigation */
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) go(dx < 0 ? idx + 1 : idx - 1);
+    }, { passive: true });
+
+    function revealOne(btn) {
+      const ans = btn.nextElementSibling;
+      if (ans && ans.classList.contains('hidden-ans')) {
+        ans.classList.add('show');
+        btn.textContent = 'Answer shown';
+        btn.disabled = true;
+        btn.closest('.reveal-row')?.classList.add('revealed');
+      }
+    }
+
+    function revealAllInSlide(slide) {
+      slide.querySelectorAll('.hidden-ans').forEach((el) => el.classList.add('show'));
+      slide.querySelectorAll('.reveal-btn').forEach((b) => { b.textContent = 'Answer shown'; b.disabled = true; });
+      slide.querySelectorAll('.reveal-row').forEach((r) => r.classList.add('revealed'));
+    }
+
+    function hideAllInSlide(slide) {
+      slide.querySelectorAll('.hidden-ans').forEach((el) => el.classList.remove('show'));
+      slide.querySelectorAll('.reveal-btn').forEach((b) => { b.textContent = 'Show answer'; b.disabled = false; });
+      slide.querySelectorAll('.reveal-row').forEach((r) => r.classList.remove('revealed'));
+    }
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.reveal-btn');
+      if (btn) { revealOne(btn); return; }
+      if (e.target.closest('[data-show-all]')) { revealAllInSlide(e.target.closest('.slide')); return; }
+      if (e.target.closest('[data-hide-all]')) { hideAllInSlide(e.target.closest('.slide')); }
+    });
+
+    go(0);
+  </script>
+</body>
+</html>
