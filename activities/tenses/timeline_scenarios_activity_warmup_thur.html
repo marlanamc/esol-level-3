@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline Warm-up — Thursday</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    @page {
+      size: letter portrait;
+      margin: 0.3in;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 8in;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+      }
+      .page { break-after: auto; }
+      .page + .page { break-before: page; }
+      .card, .timeline-card, .qa-card { break-inside: auto; }
+      .phrase-card, .circle-row, .vocab-section { break-inside: avoid; }
+    }
+
+    .page {
+      padding: 6px 8px;
+    }
+
+    .hero {
+      border-radius: 12px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #fffdf7 0%, #f8fbff 100%);
+      border: 1.5px dashed #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      margin: 0 0 2px;
+      font-size: 19px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .section-title {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      margin: 0 0 6px;
+      font-size: 10.5px;
+      color: #64748b;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .card {
+      border-radius: 11px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card.scenario-1 {
+      background: #fffdf7;
+      border-color: #fde7a8;
+    }
+
+    .card.scenario-2 {
+      background: #f6fffb;
+      border-color: #b9efd8;
+    }
+
+    .card.scenario-3 {
+      background: #f8fbff;
+      border-color: #cfe0fb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .scenario-1 .badge {
+      background: #fff5d9;
+      color: #b45309;
+    }
+
+    .scenario-2 .badge {
+      background: #dcfce9;
+      color: #047857;
+    }
+
+    .scenario-3 .badge {
+      background: #e5f0ff;
+      color: #1d4ed8;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .stacked {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .list-box,
+    .timeline-card,
+    .qa-card {
+      border-radius: 10px;
+      background: #fff;
+      border: 1.5px solid #dbe4ee;
+      padding: 6px 8px;
+    }
+
+    .timeline-card.polished {
+      padding: 8px 8px 6px;
+    }
+
+    .list-box h3,
+    .timeline-card h3,
+    .qa-card h3 {
+      margin: 0 0 5px;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+    }
+
+    .sentence-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .sentence-list li + li {
+      margin-top: 3px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 4px 4px 0;
+    }
+
+    .line {
+      position: relative;
+      height: 148px;
+      margin-top: 2px;
+    }
+
+    .line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 78px;
+      height: 3px;
+      border-radius: 999px;
+      background: #cbd5e1;
+    }
+
+    .tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 73px;
+      width: 2px;
+      height: 10px;
+      background: #cbd5e1;
+    }
+
+    .year {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 88px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .now-tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 66px;
+      width: 3px;
+      height: 24px;
+      background: #10b981;
+      border-radius: 2px;
+      z-index: 5;
+    }
+
+    .year.now-year {
+      color: #059669;
+      font-weight: 900;
+      font-size: 10.5px;
+    }
+
+    .event-dot {
+      position: absolute;
+      top: 78px;
+      transform: translate(-50%, -50%);
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #d97706;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .event-label {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 9px;
+      font-weight: 900;
+      color: #334155;
+      text-align: center;
+      line-height: 1.15;
+      max-width: 150px;
+    }
+
+    .event-label.top {
+      top: 12px;
+    }
+
+    .event-label.bottom {
+      top: 106px;
+    }
+
+    .event-label.pill {
+      padding: 3px 6px;
+      border-radius: 12px;
+      background: rgb(255 255 255 / 0.98);
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+      font-size: 8.5px;
+      white-space: normal;
+    }
+
+    .event-label.with-stem::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .event-label.top.with-stem::after {
+      top: 100%;
+      height: 18px;
+    }
+
+    .event-label.bottom.with-stem::after {
+      bottom: 100%;
+      height: 14px;
+    }
+
+    .event-label.orange {
+      color: #b45309;
+      border: 1px solid #fcd34d;
+    }
+
+    .event-label.green {
+      color: #047857;
+      border: 1px solid #86efac;
+    }
+
+    .event-label.blue {
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+
+    .event-label.gray {
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .line.ana-line {
+      height: 196px;
+      margin-top: 0;
+    }
+
+    .line.ana-line::before {
+      top: 84px;
+    }
+
+    .line.ana-line .tick {
+      top: 79px;
+    }
+
+    .line.ana-line .now-tick {
+      top: 72px;
+    }
+
+    .line.ana-line .year {
+      top: 94px;
+    }
+
+    .line.ana-line .event-label {
+      max-width: 168px;
+    }
+
+    .line.ana-line .event-label.bottom {
+      top: 124px;
+    }
+
+    .line.ana-line .event-label.top {
+      top: 14px;
+    }
+
+    .line.ana-line .event-label.top.with-stem::after {
+      height: 38px;
+    }
+
+    .line.ana-line .event-label.bottom.with-stem::after {
+      height: 22px;
+    }
+
+    .line.ana-line .event-dot {
+      top: 84px;
+    }
+
+    .duration {
+      position: absolute;
+      top: 78px;
+      transform: translateY(-50%);
+      height: 7px;
+      border-radius: 999px;
+      z-index: 4;
+    }
+
+    .duration.orange {
+      background: #f59e0b;
+    }
+
+    .duration.green {
+      background: #10b981;
+    }
+
+    .duration.blue {
+      background: #3b82f6;
+    }
+
+    .line.ana-line .duration.orange,
+    .line.ana-line .duration.green {
+      top: 84px;
+    }
+
+    .line.ana-line .duration.blue {
+      top: 148px;
+      height: 8px;
+    }
+
+    .questions {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .questions li + li {
+      margin-top: 4px;
+    }
+
+    .answer-line {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 13px;
+      margin-top: 2px;
+    }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 8px;
+      margin-top: 6px;
+    }
+
+    .prompt-card {
+      border-radius: 8px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 6px 7px;
+    }
+
+    .prompt-card h4 {
+      margin: 0 0 3px;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .prompt-card p {
+      margin: 0;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.28;
+    }
+
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 8px;
+      margin-top: 6px;
+    }
+
+    .phrase-card {
+      border-radius: 8px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 7px 8px;
+    }
+
+    .phrase-card h4 {
+      margin: 0 0 4px;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .phrase-card p {
+      margin: 0;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.32;
+    }
+
+    .phrase-model {
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .phrase-write {
+      margin-top: 5px;
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #475569;
+    }
+
+    .phrase-lines {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .phrase-lines .answer-line {
+      height: 12px;
+      margin-top: 0;
+    }
+
+    .circle-activity {
+      margin-top: 8px;
+      border-radius: 10px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 8px;
+    }
+
+    .circle-activity h3 {
+      margin: 0 0 5px;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+    }
+
+    .circle-activity p {
+      margin: 0;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.3;
+    }
+
+    .circle-grid {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .circle-row {
+      display: grid;
+      grid-template-columns: 1.2fr auto auto;
+      align-items: center;
+      gap: 8px;
+      border: 1.2px solid #dbe4ee;
+      border-radius: 7px;
+      background: #f8fbff;
+      padding: 5px 7px;
+    }
+
+    .circle-prompt {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .circle-choice {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #334155;
+      white-space: nowrap;
+    }
+
+    .circle-dot {
+      width: 14px;
+      height: 14px;
+      border: 1.8px solid #94a3b8;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .homework-card {
+      border-radius: 11px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .homework-card .badge {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .homework-card .questions li + li {
+      margin-top: 6px;
+    }
+
+    .homework-card .answer-line {
+      height: 16px;
+      margin-top: 3px;
+    }
+
+    .prompt-answer-lines {
+      margin-top: 5px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .prompt-answer-lines div {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 14px;
+    }
+
+    .student-timeline {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 6px 8px;
+    }
+
+    .student-lines {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .student-lines div {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 18px;
+    }
+
+    .blank-line {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 18px;
+      margin-top: 6px;
+    }
+
+    .blank-pill {
+      position: absolute;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      min-width: 118px;
+      height: 28px;
+      border-radius: 16px;
+      border: 2px dashed #cbd5e1;
+      background: rgb(255 255 255 / 0.9);
+    }
+
+    .blank-pill.top {
+      top: 24px;
+    }
+
+    .blank-pill.bottom {
+      top: 128px;
+    }
+
+    .blank-pill.open-left {
+      border-left: 0;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .blank-pill.open-left::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      width: 54px;
+      border-top: 2px dashed #cbd5e1;
+      transform: translateY(-50%);
+    }
+
+    .timeline-note {
+      margin-top: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .formula-mini-box {
+      border-radius: 12px;
+      padding: 10px;
+      background: #f8fbff;
+      border: 1.5px solid #cfe0fb;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .formula-item {
+      font-size: 11px;
+      font-weight: 800;
+      color: #1e40af;
+      line-height: 1.25;
+    }
+
+    .formula-item span {
+      display: block;
+      font-size: 9.5px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .tense-legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin: 8px 0 4px;
+      padding-top: 8px;
+      border-top: 1.5px dotted #cbd5e1;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #475569;
+    }
+
+    .legend-color {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+    }
+
+    .past-c { background: #f59e0b; }
+    .present-c { background: #10b981; }
+    .future-c { background: #1d4ed8; }
+
+    .vocab-section {
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
+      background: linear-gradient(180deg, #fefce8 0%, #fff 50%);
+      padding: 6px 10px;
+      margin-bottom: 8px;
+    }
+
+    .vocab-section .vocab-head {
+      margin: 0 0 2px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .vocab-section .vocab-instructions {
+      margin: 0 0 5px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.3;
+    }
+
+    /* One grid row per word + definition so blanks stay aligned with defs */
+    .vocab-match {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .vocab-match-row {
+      display: grid;
+      grid-template-columns: 1.25rem minmax(5rem, 7.5rem) 2rem 1fr;
+      column-gap: 8px;
+      align-items: baseline;
+    }
+
+    .vocab-match-row--head {
+      margin-bottom: 0;
+    }
+
+    .vocab-match-row--head .vocab-head-skip {
+      grid-column: 1;
+    }
+
+    .vocab-match-row--head .vocab-th--words {
+      grid-column: 2 / 4;
+    }
+
+    .vocab-match-row--head .vocab-th--defs {
+      grid-column: 4;
+    }
+
+    .vocab-th {
+      margin: 0;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      color: #64748b;
+    }
+
+    .vocab-match-row .num {
+      color: #94a3b8;
+      font-weight: 900;
+      font-size: 11px;
+      line-height: 1.3;
+      justify-self: end;
+      padding-right: 2px;
+    }
+
+    .vocab-w {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      justify-self: start;
+    }
+
+    .vocab-def-cell {
+      margin: 0;
+      font-size: 10px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.3;
+    }
+
+    .vocab-def-cell .def-letter {
+      font-weight: 900;
+      color: #0f172a;
+      margin-right: 2px;
+    }
+
+    .match-blank {
+      display: block;
+      width: 100%;
+      max-width: 2rem;
+      height: 0.95em;
+      border-bottom: 1.5px solid #94a3b8;
+      box-sizing: border-box;
+      justify-self: start;
+    }
+
+    @media print {
+      /* Fit to 2 printed sides and keep grayscale-friendly styling */
+      * {
+        color: #000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      body,
+      .sheet,
+      .page,
+      .hero,
+      .card,
+      .timeline-card,
+      .qa-card,
+      .list-box,
+      .vocab-section,
+      .phrase-card,
+      .circle-activity,
+      .circle-row,
+      .mini-practice {
+        background: #fff !important;
+      }
+
+      .hero,
+      .card,
+      .timeline-card,
+      .qa-card,
+      .list-box,
+      .vocab-section,
+      .phrase-card,
+      .circle-activity,
+      .circle-row,
+      .badge {
+        border-color: #777 !important;
+      }
+
+      .duration.orange,
+      .duration.green,
+      .duration.blue,
+      .legend-color {
+        background: #666 !important;
+      }
+
+      .event-dot,
+      .circle-dot {
+        background: #fff !important;
+        border-color: #555 !important;
+      }
+
+      .page { padding: 3px 5px; }
+      .hero { padding: 6px 8px; margin-bottom: 6px; }
+      .hero h1 { font-size: 17px; }
+      .hero p { font-size: 10px; }
+
+      .card { padding: 6px; margin-bottom: 6px; }
+      .section-title { font-size: 14px; margin-bottom: 3px; }
+      .section-subtitle { margin-bottom: 5px; font-size: 10px; }
+
+      .phrase-grid { gap: 5px 6px; }
+      .phrase-card { padding: 5px 6px; }
+      .phrase-card h4 { font-size: 9.5px; margin-bottom: 2px; }
+      .phrase-card p { font-size: 9.5px; line-height: 1.2; }
+      .phrase-model { margin-top: 2px; font-size: 9px; line-height: 1.2; }
+      .phrase-write { margin-top: 3px; font-size: 8.5px; }
+      .phrase-lines { margin-top: 2px; gap: 2px; }
+      .phrase-lines .answer-line { height: 9px; }
+
+      .circle-activity { margin-top: 6px; padding: 6px; }
+      .circle-activity h3 { font-size: 10.5px; margin-bottom: 3px; }
+      .circle-activity p { font-size: 9.5px; }
+      .circle-grid { margin-top: 4px; gap: 3px; }
+      .circle-row { padding: 3px 5px; gap: 6px; }
+      .circle-prompt { font-size: 9.5px; }
+      .circle-choice { font-size: 9px; }
+      .circle-dot { width: 11px; height: 11px; border-width: 1.4px; }
+
+      .qa-card { margin-top: 5px !important; }
+      .qa-card h3 { margin-bottom: 3px; }
+      .questions { font-size: 10px; line-height: 1.25; }
+      .questions li + li { margin-top: 2px; }
+      .answer-line { height: 9px; margin-top: 1px; }
+
+      .homework-card {
+        padding: 8px;
+        break-inside: avoid;
+      }
+
+      .homework-card .answer-line {
+        height: 12px;
+        margin-top: 2px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .vocab-match-row:not(.vocab-match-row--head) {
+        grid-template-columns: 1.25rem 6.5rem 2rem;
+        grid-template-rows: auto auto;
+        row-gap: 6px;
+      }
+
+      .vocab-match-row:not(.vocab-match-row--head) .vocab-def-cell {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .vocab-match-row--head {
+        grid-template-columns: 1fr;
+        row-gap: 4px;
+      }
+
+      .vocab-match-row--head .vocab-head-skip {
+        display: none;
+      }
+
+      .vocab-match-row--head .vocab-th--words,
+      .vocab-match-row--head .vocab-th--defs {
+        grid-column: 1;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="page">
+      <div class="hero">
+        <h1>Timeline Warm-up — Thursday</h1>
+        <p>Use the vocabulary and sentence frames to prepare for next week. Focus on clear comparisons and give yourself time to write complete ideas.</p>
+      </div>
+
+      <div class="vocab-section">
+        <h2 class="vocab-head">Vocabulary matching</h2>
+        <p class="vocab-instructions">Write the letter of the correct definition next to each word (a–f).</p>
+        <div class="vocab-match">
+          <div class="vocab-match-row vocab-match-row--head">
+            <span class="vocab-head-skip" aria-hidden="true"></span>
+            <div class="vocab-th vocab-th--words">Words</div>
+            <div class="vocab-th vocab-th--defs">Definitions</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">1.</span>
+            <span class="vocab-w">experience</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">a.</span> your work life over many years</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">2.</span>
+            <span class="vocab-w">recommend</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">b.</span> knowledge or skill gained from doing something</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">3.</span>
+            <span class="vocab-w">choice</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">c.</span> to suggest something is good</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">4.</span>
+            <span class="vocab-w">result</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">d.</span> a decision you make</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">5.</span>
+            <span class="vocab-w">career</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">e.</span> what happens because of an action</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">6.</span>
+            <span class="vocab-w">feedback</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">f.</span> comments or advice about your work</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card scenario-3">
+        <div class="badge">🗣️ Next Week Prep</div>
+        <h2 class="section-title">Get Ready To Compare Your Country And The U.S.</h2>
+        <p class="section-subtitle">Next week, you will work in groups of 3 with a volunteer. Practice these useful phrases now so you feel more ready to compare life in your country and life in the United States.</p>
+
+        <div class="phrase-grid">
+          <div class="phrase-card">
+            <h4>1. In my country..., but in the U.S....</h4>
+            <p>Use this to compare two places.</p>
+            <div class="phrase-model"><strong>Model:</strong> In my country, buses are crowded, but in the U.S., buses are usually quieter.</div>
+            <div class="phrase-write">Your sentence:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+          <div class="phrase-card">
+            <h4>2. In my country, people usually..., but here, people usually...</h4>
+            <p>Use this to talk about habits or daily life.</p>
+            <div class="phrase-model"><strong>Model:</strong> In my country, people usually eat dinner late, but here, people usually eat earlier.</div>
+            <div class="phrase-write">Your sentence:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+          <div class="phrase-card">
+            <h4>3. One big difference is that...</h4>
+            <p>Use this to introduce an important comparison.</p>
+            <div class="phrase-model"><strong>Model:</strong> One big difference is that rent is much more expensive in U.S. cities.</div>
+            <div class="phrase-write">Your sentence:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+          <div class="phrase-card">
+            <h4>4. One thing that is similar is that...</h4>
+            <p>Use this to talk about something the same.</p>
+            <div class="phrase-model"><strong>Model:</strong> One thing that is similar is that families enjoy spending weekends together.</div>
+            <div class="phrase-write">Your sentence:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+          <div class="phrase-card">
+            <h4>5. I prefer..., because...</h4>
+            <p>Use this to share your opinion and give a reason.</p>
+            <div class="phrase-model"><strong>Model:</strong> I prefer taking the train, because it is faster and less stressful.</div>
+            <div class="phrase-write">Your sentence:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+          <div class="phrase-card">
+            <h4>Bonus question starter: What about in your country?</h4>
+            <p>Use this to keep the conversation going in your group.</p>
+            <div class="phrase-model"><strong>Model:</strong> People usually walk a lot in my city. What about in your country?</div>
+            <div class="phrase-write">Your question:</div>
+            <div class="phrase-lines"><div class="answer-line"></div><div class="answer-line"></div></div>
+          </div>
+        </div>
+
+        <div class="circle-activity">
+          <h3>Circle Activity: U.S. vs My Country</h3>
+          <p>For each idea, check one: <strong>U.S.</strong> or <strong>My Country</strong>.</p>
+          <div class="circle-grid">
+            <div class="circle-row">
+              <div class="circle-prompt">Worse traffic</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">Larger variety of restaurants</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">Better public transportation</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">Friendlier customer service</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">More public parks and green spaces</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">More cultural events and festivals</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">Easier to find a job</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+            <div class="circle-row">
+              <div class="circle-prompt">Better work-life balance</div>
+              <div class="circle-choice"><span class="circle-dot"></span> U.S.</div>
+              <div class="circle-choice"><span class="circle-dot"></span> My Country</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="homework-card">
+        <div class="badge">📘 Homework</div>
+        <h2 class="section-title">Write 5 Practice Sentences</h2>
+        <p class="section-subtitle">Use the frames from class. Write complete ideas with details.</p>
+        <ol class="questions">
+          <li>Write one sentence using <strong>In my country..., but in the U.S....</strong><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></li>
+          <li>Write one sentence using <strong>One thing that is similar is that...</strong><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></li>
+          <li>Write one sentence using <strong>I prefer..., because...</strong><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></li>
+          <li>Write one sentence using <strong>One big difference is that...</strong><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></li>
+          <li>Write one follow-up question using <strong>What about in your country?</strong><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div><div class="answer-line"></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline Warm-up — Tuesday (Scenarios 1 &amp; 2)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    @page {
+      size: letter portrait;
+      margin: 0.3in;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 8in;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { break-after: page; }
+      .page:last-child { break-after: auto; }
+      .card, .timeline-card, .qa-card { break-inside: avoid; }
+    }
+
+    .page {
+      padding: 6px 8px;
+    }
+
+    .hero {
+      border-radius: 12px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, #fffdf7 0%, #f8fbff 100%);
+      border: 1.5px dashed #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 {
+      margin: 0 0 2px;
+      font-size: 19px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .section-title {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      margin: 0 0 6px;
+      font-size: 10.5px;
+      color: #64748b;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .card {
+      border-radius: 11px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card.scenario-1 {
+      background: #fffdf7;
+      border-color: #fde7a8;
+    }
+
+    .card.scenario-2 {
+      background: #f6fffb;
+      border-color: #b9efd8;
+    }
+
+    .card.scenario-3 {
+      background: #f8fbff;
+      border-color: #cfe0fb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .scenario-1 .badge {
+      background: #fff5d9;
+      color: #b45309;
+    }
+
+    .scenario-2 .badge {
+      background: #dcfce9;
+      color: #047857;
+    }
+
+    .scenario-3 .badge {
+      background: #e5f0ff;
+      color: #1d4ed8;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .stacked {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .list-box,
+    .timeline-card,
+    .qa-card {
+      border-radius: 10px;
+      background: #fff;
+      border: 1.5px solid #dbe4ee;
+      padding: 6px 8px;
+    }
+
+    .timeline-card.polished {
+      padding: 8px 8px 6px;
+    }
+
+    .list-box h3,
+    .timeline-card h3,
+    .qa-card h3 {
+      margin: 0 0 5px;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+    }
+
+    .sentence-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .sentence-list li + li {
+      margin-top: 3px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 4px 4px 0;
+    }
+
+    .line {
+      position: relative;
+      height: 148px;
+      margin-top: 2px;
+    }
+
+    .line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 78px;
+      height: 3px;
+      border-radius: 999px;
+      background: #cbd5e1;
+    }
+
+    .tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 73px;
+      width: 2px;
+      height: 10px;
+      background: #cbd5e1;
+    }
+
+    .year {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 88px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .now-tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 66px;
+      width: 3px;
+      height: 24px;
+      background: #10b981;
+      border-radius: 2px;
+      z-index: 5;
+    }
+
+    .year.now-year {
+      color: #059669;
+      font-weight: 900;
+      font-size: 10.5px;
+    }
+
+    .event-dot {
+      position: absolute;
+      top: 78px;
+      transform: translate(-50%, -50%);
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #d97706;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .event-label {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 9px;
+      font-weight: 900;
+      color: #334155;
+      text-align: center;
+      line-height: 1.15;
+      max-width: 150px;
+    }
+
+    .event-label.top {
+      top: 12px;
+    }
+
+    .event-label.bottom {
+      top: 106px;
+    }
+
+    .event-label.pill {
+      padding: 3px 6px;
+      border-radius: 12px;
+      background: rgb(255 255 255 / 0.98);
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+      font-size: 8.5px;
+      white-space: normal;
+    }
+
+    .event-label.with-stem::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .event-label.top.with-stem::after {
+      top: 100%;
+      height: 18px;
+    }
+
+    .event-label.bottom.with-stem::after {
+      bottom: 100%;
+      height: 14px;
+    }
+
+    .event-label.orange {
+      color: #b45309;
+      border: 1px solid #fcd34d;
+    }
+
+    .event-label.green {
+      color: #047857;
+      border: 1px solid #86efac;
+    }
+
+    .event-label.blue {
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+
+    .event-label.gray {
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .line.ana-line {
+      height: 196px;
+      margin-top: 0;
+    }
+
+    .line.ana-line::before {
+      top: 84px;
+    }
+
+    .line.ana-line .tick {
+      top: 79px;
+    }
+
+    .line.ana-line .now-tick {
+      top: 72px;
+    }
+
+    .line.ana-line .year {
+      top: 94px;
+    }
+
+    .line.ana-line .event-label {
+      max-width: 168px;
+    }
+
+    .line.ana-line .event-label.bottom {
+      top: 124px;
+    }
+
+    .line.ana-line .event-label.top {
+      top: 14px;
+    }
+
+    .line.ana-line .event-label.top.with-stem::after {
+      height: 38px;
+    }
+
+    .line.ana-line .event-label.bottom.with-stem::after {
+      height: 22px;
+    }
+
+    .line.ana-line .event-dot {
+      top: 84px;
+    }
+
+    .duration {
+      position: absolute;
+      top: 78px;
+      transform: translateY(-50%);
+      height: 7px;
+      border-radius: 999px;
+      z-index: 4;
+    }
+
+    .duration.orange {
+      background: #f59e0b;
+    }
+
+    .duration.green {
+      background: #10b981;
+    }
+
+    .duration.blue {
+      background: #3b82f6;
+    }
+
+    .line.ana-line .duration.orange,
+    .line.ana-line .duration.green {
+      top: 84px;
+    }
+
+    .line.ana-line .duration.blue {
+      top: 148px;
+      height: 8px;
+    }
+
+    /* Luis (Scenario 2): second row for a concurrent job bar; extra height for bottom summary */
+    .line.luis-line {
+      height: 208px;
+    }
+
+    .line.luis-line .duration.job {
+      top: 112px;
+      height: 8px;
+    }
+
+    .line.luis-line .event-label.luis-school-work {
+      top: 8px;
+    }
+
+    .line.luis-line .duration.blue {
+      top: 160px;
+    }
+
+    .line.luis-line .event-label.luis-summary {
+      top: 182px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(220px, 92%);
+    }
+
+    /* One stem centered on both bars (2023 → NOW) */
+    .line.luis-line .event-label.luis-school-work.pill {
+      border-color: #cbd5e1;
+    }
+
+    .line.luis-line .event-label.luis-school-work .lw-school {
+      display: block;
+      color: #047857;
+      font-weight: 900;
+      font-size: 8.5px;
+    }
+
+    .line.luis-line .event-label.luis-school-work .lw-job {
+      display: block;
+      color: #b45309;
+      font-weight: 900;
+      font-size: 8.5px;
+      margin-top: 3px;
+    }
+
+    .line.luis-line .event-label.luis-school-work .lw-since {
+      display: block;
+      font-size: 7.5px;
+      font-weight: 800;
+      color: #64748b;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    .questions {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.32;
+    }
+
+    .questions li + li {
+      margin-top: 4px;
+    }
+
+    .answer-line {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 13px;
+      margin-top: 2px;
+    }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 8px;
+      margin-top: 6px;
+    }
+
+    .prompt-card {
+      border-radius: 8px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 6px 7px;
+    }
+
+    .prompt-card h4 {
+      margin: 0 0 3px;
+      font-size: 10.5px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .prompt-card p {
+      margin: 0;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.28;
+    }
+
+    .prompt-answer-lines {
+      margin-top: 5px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .prompt-answer-lines div {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 14px;
+    }
+
+    .student-timeline {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 6px 8px;
+    }
+
+    .student-lines {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .student-lines div {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 18px;
+    }
+
+    .blank-line {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 18px;
+      margin-top: 6px;
+    }
+
+    .blank-pill {
+      position: absolute;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      min-width: 118px;
+      height: 28px;
+      border-radius: 16px;
+      border: 2px dashed #cbd5e1;
+      background: rgb(255 255 255 / 0.9);
+    }
+
+    .blank-pill.top {
+      top: 24px;
+    }
+
+    .blank-pill.bottom {
+      top: 128px;
+    }
+
+    .blank-pill.open-left {
+      border-left: 0;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .blank-pill.open-left::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      width: 54px;
+      border-top: 2px dashed #cbd5e1;
+      transform: translateY(-50%);
+    }
+
+    .timeline-note {
+      margin-top: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .formula-mini-box {
+      border-radius: 12px;
+      padding: 10px;
+      background: #f8fbff;
+      border: 1.5px solid #cfe0fb;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .formula-item {
+      font-size: 11px;
+      font-weight: 800;
+      color: #1e40af;
+      line-height: 1.25;
+    }
+
+    .formula-item span {
+      display: block;
+      font-size: 9.5px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .tense-legend {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin: 8px 0 4px;
+      padding-top: 8px;
+      border-top: 1.5px dotted #cbd5e1;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #475569;
+    }
+
+    .legend-color {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+    }
+
+    .past-c { background: #f59e0b; }
+    .present-c { background: #10b981; }
+    .future-c { background: #1d4ed8; }
+
+    .vocab-section {
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
+      background: linear-gradient(180deg, #fefce8 0%, #fff 50%);
+      padding: 6px 10px;
+      margin-bottom: 8px;
+    }
+
+    .vocab-section .vocab-head {
+      margin: 0 0 2px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .vocab-section .vocab-instructions {
+      margin: 0 0 5px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.3;
+    }
+
+    /* One grid row per word + definition so blanks stay aligned with defs */
+    .vocab-match {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .vocab-match-row {
+      display: grid;
+      grid-template-columns: 1.25rem minmax(5rem, 7.5rem) 2rem 1fr;
+      column-gap: 8px;
+      align-items: baseline;
+    }
+
+    .vocab-match-row--head {
+      margin-bottom: 0;
+    }
+
+    .vocab-match-row--head .vocab-head-skip {
+      grid-column: 1;
+    }
+
+    .vocab-match-row--head .vocab-th--words {
+      grid-column: 2 / 4;
+    }
+
+    .vocab-match-row--head .vocab-th--defs {
+      grid-column: 4;
+    }
+
+    .vocab-th {
+      margin: 0;
+      font-size: 9.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      color: #64748b;
+    }
+
+    .vocab-match-row .num {
+      color: #94a3b8;
+      font-weight: 900;
+      font-size: 11px;
+      line-height: 1.3;
+      justify-self: end;
+      padding-right: 2px;
+    }
+
+    .vocab-w {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.3;
+      justify-self: start;
+    }
+
+    .vocab-def-cell {
+      margin: 0;
+      font-size: 10px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.3;
+    }
+
+    .vocab-def-cell .def-letter {
+      font-weight: 900;
+      color: #0f172a;
+      margin-right: 2px;
+    }
+
+    .match-blank {
+      display: block;
+      width: 100%;
+      max-width: 2rem;
+      height: 0.95em;
+      border-bottom: 1.5px solid #94a3b8;
+      box-sizing: border-box;
+      justify-self: start;
+    }
+
+    @media print {
+      .vocab-section { break-inside: avoid; }
+      .page { padding: 4px 6px; }
+    }
+
+    @media (max-width: 640px) {
+      .vocab-match-row:not(.vocab-match-row--head) {
+        grid-template-columns: 1.25rem 6.5rem 2rem;
+        grid-template-rows: auto auto;
+        row-gap: 6px;
+      }
+
+      .vocab-match-row:not(.vocab-match-row--head) .vocab-def-cell {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .vocab-match-row--head {
+        grid-template-columns: 1fr;
+        row-gap: 4px;
+      }
+
+      .vocab-match-row--head .vocab-head-skip {
+        display: none;
+      }
+
+      .vocab-match-row--head .vocab-th--words,
+      .vocab-match-row--head .vocab-th--defs {
+        grid-column: 1;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="page">
+      <div class="hero">
+        <h1>Timeline Warm-up — Tuesday</h1>
+        <p>Scenarios 1 &amp; 2. Use timelines to understand real stories about study, work, and moving. Match the vocabulary first, then use past, present, and future language when it helps.</p>
+      </div>
+
+      <div class="vocab-section">
+        <h2 class="vocab-head">Vocabulary matching</h2>
+        <p class="vocab-instructions">Write the letter of the correct definition next to each word (a–f).</p>
+        <div class="vocab-match">
+          <div class="vocab-match-row vocab-match-row--head">
+            <span class="vocab-head-skip" aria-hidden="true"></span>
+            <div class="vocab-th vocab-th--words">Words</div>
+            <div class="vocab-th vocab-th--defs">Definitions</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">1.</span>
+            <span class="vocab-w">advice</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">a.</span> a result or effect of an action</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">2.</span>
+            <span class="vocab-w">risk</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">b.</span> the possibility of something bad happening</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">3.</span>
+            <span class="vocab-w">reflect</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">c.</span> suggestions or recommendations about what to do</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">4.</span>
+            <span class="vocab-w">decision</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">d.</span> to feel sorry about something you did or didn’t do</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">5.</span>
+            <span class="vocab-w">consequence</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">e.</span> a choice you make</div>
+          </div>
+          <div class="vocab-match-row">
+            <span class="num">6.</span>
+            <span class="vocab-w">regret</span>
+            <span class="match-blank"></span>
+            <div class="vocab-def-cell"><span class="def-letter">f.</span> to think carefully about something</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card scenario-1">
+        <div class="badge">🕰️ Scenario 1</div>
+        <h2 class="section-title">Solve Maya’s Story And Build The Timeline</h2>
+        <p class="section-subtitle">Put Maya’s life events in order on the timeline. Then answer questions that show you understand her story, not just the dates.</p>
+
+        <div class="stacked">
+          <div class="list-box">
+            <h3>Clues About Maya</h3>
+            <ol class="sentence-list">
+              <li>After four years of study, Maya finished her nursing degree in May 2021.</li>
+              <li>She moved from Bogota to Miami in January 2022.</li>
+              <li>In Miami, she worked as a prep cook at a Cuban restaurant.</li>
+              <li>After she moved to Boston in August 2022, she took English courses for two years.</li>
+              <li>In September 2024, she started working as a medical assistant.</li>
+              <li>She has been working as a medical assistant since 2024.</li>
+              <li>By 2027, she will have been living in the U.S. for 5 years.</li>
+            </ol>
+          </div>
+
+          <div class="timeline-card">
+            <h3>Use The Clues</h3>
+            <div class="timeline">
+              <div class="line">
+                <div class="tick" style="left: 12%;"></div>
+                <div class="year" style="left: 12%;">2021</div>
+                <div class="tick" style="left: 34%;"></div>
+                <div class="year" style="left: 34%;">2022</div>
+                <div class="tick" style="left: 56%;"></div>
+                <div class="year" style="left: 56%;">2024</div>
+                <div class="now-tick" style="left: 78%;"></div>
+                <div class="year now-year" style="left: 78%;">2026 (NOW)</div>
+                <div class="tick" style="left: 92%;"></div>
+                <div class="year" style="left: 92%;">2027</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card" style="margin-top: 6px;">
+          <h3>Questions</h3>
+          <ol class="questions">
+            <li>What had Maya already finished before she moved to the U.S.?<div class="answer-line"></div></li>
+            <li>Why do you think Maya worked as a prep cook first, and then later became a medical assistant?<div class="answer-line"></div></li>
+            <li>What do Maya’s two years of English courses suggest about her goals in Boston?<div class="answer-line"></div></li>
+            <li>If Maya talks about her life in 2027, what will she be able to say about the progress she has made?<div class="answer-line"></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card scenario-2">
+        <div class="badge">🕰️ Scenario 2</div>
+        <h2 class="section-title">Read Luis’s Timeline, Then Explain His Story</h2>
+        <p class="section-subtitle">Study Luis’s timeline. Then answer in full sentences and show that you understand the important changes in his life.</p>
+
+        <div class="stacked">
+          <div class="timeline-card polished">
+            <h3>Luis's Timeline</h3>
+            <div class="timeline">
+              <div class="line ana-line luis-line">
+                <div class="tick" style="left: 8%;"></div>
+                <div class="year" style="left: 8%;">2020</div>
+                <div class="tick" style="left: 24%;"></div>
+                <div class="year" style="left: 24%;">2021</div>
+                <div class="tick" style="left: 44%;"></div>
+                <div class="year" style="left: 44%;">2023</div>
+                <div class="tick" style="left: 64%;"></div>
+                <div class="year" style="left: 64%;">2024</div>
+                <div class="now-tick" style="left: 82%;"></div>
+                <div class="year now-year" style="left: 82%;">2026 (NOW)</div>
+                <div class="tick" style="left: 94%;"></div>
+                <div class="year" style="left: 94%;">2027</div>
+
+                <div class="duration orange" style="left: 8%; width: 16%;"></div>
+                <div class="event-label top pill orange with-stem" style="left: 16%; top: 14px; width: 148px;">studied English in Peru</div>
+
+                <div class="event-dot" style="left: 24%;"></div>
+                <div class="event-label bottom pill gray with-stem" style="left: 24%; top: 124px; width: 136px;">moved to New York</div>
+
+                <div class="duration green" style="left: 44%; width: 38%;"></div>
+                <div class="duration orange job" style="left: 44%; width: 38%;"></div>
+                <div class="event-label top pill with-stem luis-school-work" style="left: 63%; width: 200px;">
+                  <span class="lw-school">Studies engineering at CUNY</span>
+                  <span class="lw-job">Works as a food runner</span>
+                  <span class="lw-since">at the same time (since 2023)</span>
+                </div>
+
+                <div class="duration blue" style="left: 24%; width: 70%;"></div>
+                <div class="event-label bottom pill blue with-stem luis-summary">by 2027: 6 years in the U.S.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qa-card">
+            <h3>Questions</h3>
+            <ol class="questions">
+              <li>What had Luis already been doing before he moved to New York?<div class="answer-line"></div></li>
+              <li>How does Luis’s timeline show that he kept building his life step by step?<div class="answer-line"></div></li>
+              <li>What do studying engineering and working as a food runner suggest about his goals?<div class="answer-line"></div></li>
+              <li>What does Luis’s story show about how he kept going and building his life?<div class="answer-line"></div></li>
+              <li>In 2027, how might Luis describe his progress and what he has achieved since moving to the U.S.?<div class="answer-line"></div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="tense-legend">
+        <div class="legend-item"><div class="legend-color past-c"></div> 🕰️ Past</div>
+        <div class="legend-item"><div class="legend-color present-c"></div> 📍 Present / Now</div>
+        <div class="legend-item"><div class="legend-color future-c"></div> 🔮 Future</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

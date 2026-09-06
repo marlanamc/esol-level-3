@@ -16,10 +16,7 @@
     --highlight-pink: #ffd4e5;
     --highlight-blue: #cfe7ff;
     --highlight-green: #d4f4dd;
-    --tab-red: #e74c3c;
-    --tab-orange: #ff9f43;
-    --tab-teal: #00b894;
-    --tab-purple: #a29bfe;
+    --tab-green: #2D6A4F;
     --margin-red: #e17f7f;
     --shadow: rgba(0, 0, 0, 0.08);
   }
@@ -60,7 +57,7 @@
   }
 
   .notebook-container {
-    max-width: 1400px;
+    max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
     position: relative;
@@ -80,17 +77,10 @@
   }
 
   @keyframes pageSlide {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Notebook margin line */
   .notebook-page::before {
     content: '';
     position: absolute;
@@ -102,7 +92,6 @@
     opacity: 0.3;
   }
 
-  /* Notebook holes */
   .notebook-page::after {
     content: '';
     position: absolute;
@@ -123,7 +112,7 @@
   }
 
   header {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     border-bottom: 3px solid var(--ink-dark);
     padding-bottom: 25px;
     position: relative;
@@ -131,14 +120,8 @@
   }
 
   @keyframes fadeSlide {
-    from {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   h1 {
@@ -158,14 +141,26 @@
     letter-spacing: 0.3px;
   }
 
+  .subtitle a { color: var(--ink-dark); }
+
+  .model-note {
+    margin-top: 18px;
+    padding: 16px 20px;
+    background: rgba(45, 106, 79, 0.07);
+    border: 1px solid rgba(45, 106, 79, 0.25);
+    border-radius: 4px;
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--ink-dark);
+    max-width: 640px;
+  }
+
+  .model-note strong { color: var(--tab-green); }
+
   .category-section {
     margin-bottom: 50px;
     animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
   }
-
-  .category-section:nth-child(2) { animation-delay: 0.3s; }
-  .category-section:nth-child(3) { animation-delay: 0.4s; }
-  .category-section:nth-child(4) { animation-delay: 0.5s; }
 
   .category-header {
     display: flex;
@@ -176,7 +171,7 @@
   }
 
   .category-tab {
-    background: var(--tab-orange);
+    background: var(--tab-green);
     color: white;
     padding: 8px 20px;
     font-weight: 700;
@@ -189,16 +184,20 @@
     top: 2px;
   }
 
-  .category-section:nth-child(2) .category-tab { background: var(--tab-teal); }
-  .category-section:nth-child(3) .category-tab { background: var(--tab-purple); }
-  .category-section:nth-child(4) .category-tab { background: var(--tab-red); }
-
   .category-title {
     font-family: 'Caveat', cursive;
     font-size: 36px;
     font-weight: 600;
     color: var(--ink-dark);
     line-height: 1;
+  }
+
+  .category-sub {
+    font-size: 14.5px;
+    color: var(--pencil-gray);
+    margin: -8px 0 20px;
+    max-width: 620px;
+    line-height: 1.5;
   }
 
   .activities-grid {
@@ -223,32 +222,22 @@
   .activity-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 0;
-    background: var(--highlight-yellow);
-    transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    inset: 0;
+    background: var(--highlight-green);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 0;
   }
 
-  .activity-card:hover::before {
-    height: 100%;
-  }
+  .activity-card:hover::before { transform: scaleY(1); }
 
   .activity-card:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
   }
 
-  .activity-card:nth-child(4n+2)::before { background: var(--highlight-pink); }
-  .activity-card:nth-child(4n+3)::before { background: var(--highlight-blue); }
-  .activity-card:nth-child(4n+4)::before { background: var(--highlight-green); }
-
-  .activity-content {
-    position: relative;
-    z-index: 1;
-  }
+  .activity-content { position: relative; z-index: 1; }
 
   .activity-icon {
     font-size: 40px;
@@ -272,6 +261,16 @@
     line-height: 1.5;
   }
 
+  .coming-card {
+    border: 2px dashed rgba(45, 42, 38, 0.35);
+    padding: 24px;
+    color: var(--pencil-gray);
+    background: rgba(0,0,0,0.015);
+  }
+
+  .coming-card .activity-icon { filter: grayscale(1); opacity: 0.5; }
+  .coming-card .activity-title { color: var(--pencil-gray); }
+
   footer {
     text-align: center;
     padding: 40px 20px;
@@ -287,51 +286,26 @@
     font-weight: 600;
   }
 
+  .footer-links {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .footer-links a { color: var(--pencil-gray); }
+
   @media (max-width: 768px) {
-    .notebook-page {
-      padding: 40px 30px 40px 60px;
-    }
-
-    .notebook-page::before {
-      left: 50px;
-    }
-
-    .notebook-page::after {
-      left: 20px;
-      top: 60px;
-    }
-
-    h1 {
-      font-size: 48px;
-    }
-
-    .category-title {
-      font-size: 28px;
-    }
-
-    .activities-grid {
-      grid-template-columns: 1fr;
-    }
+    .notebook-page { padding: 40px 30px 40px 60px; }
+    .notebook-page::before { left: 50px; }
+    .notebook-page::after { left: 20px; top: 60px; }
+    h1 { font-size: 48px; }
+    .category-title { font-size: 28px; }
+    .activities-grid { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
-    .notebook-page {
-      padding: 30px 20px 30px 50px;
-    }
-
-    .notebook-page::before {
-      left: 40px;
-    }
-
-    .notebook-page::after {
-      left: 15px;
-      width: 10px;
-      height: 10px;
-    }
-
-    h1 {
-      font-size: 40px;
-    }
+    .notebook-page { padding: 30px 20px 30px 50px; }
+    .notebook-page::before { left: 40px; }
+    .notebook-page::after { left: 15px; width: 10px; height: 10px; }
+    h1 { font-size: 40px; }
   }
 </style>
 </head>
@@ -340,239 +314,24 @@
     <div class="notebook-page">
       <header>
         <h1>Marlie's ESOL Class</h1>
-        <p class="subtitle">Interactive English grammar activities and exercises for learners</p>
+        <p class="subtitle">Real-life task classes for busy adult learners — built around whole tasks, not grammar drills.</p>
+        <div class="model-note">
+          <strong>How this site works now:</strong> Activities are grouped into <strong>task classes</strong> — a set of real-life tasks in one domain (like housing), sequenced easiest to hardest. Sentence starters and phrase banks are available right when a task needs them, and fade out as tasks get harder. No standalone grammar lessons required.
+        </div>
       </header>
 
       <div class="category-section">
         <div class="category-header">
-          <div class="category-tab">Present Perfect</div>
-          <div class="category-title">Present Perfect Tense</div>
+          <div class="category-tab">Task Class</div>
+          <div class="category-title">Housing</div>
         </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Complete Guide Set</h3>
+        <p class="category-sub">Four real-life housing tasks, easiest to hardest: describe your home, compare apartments, report a problem, negotiate a lease.</p>
         <div class="activities-grid">
-          <a href="activities/present-perfect/present-perfect-guide.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📚</span>
-              <div class="activity-title">Complete Present Perfect Guide</div>
-              <div class="activity-description">Comprehensive workbook with 14 activities. Learn when to use Present Perfect vs. Past Simple, with clear examples and practice exercises.</div>
-            </div>
-          </a>
-
-          <a href="activities/present-perfect/present-perfect-guide-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📊</span>
-              <div class="activity-title">Teacher's Presentation with Answers</div>
-              <div class="activity-description">Slide version of the guide above with answer keys. Perfect for teachers to review and present solutions in class.</div>
-            </div>
-          </a>
-
-          <a href="activities/present-perfect/present-perfect-guide-slides-no-answers.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">👥</span>
-              <div class="activity-title">Student Practice Presentation</div>
-              <div class="activity-description">Same presentation without answers. Use this for classroom practice, group work, or homework review sessions.</div>
-            </div>
-          </a>
-        </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 30px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Focused Practice Activities</h3>
-        <div class="activities-grid">
-          <a href="activities/present-perfect/present-perfect-daily-routines.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">⏰</span>
-              <div class="activity-title">Daily Routines: Already, Yet, Just</div>
-              <div class="activity-description">Practice using "already," "yet," and "just" with everyday activities. Interactive slides walk through a typical day with present perfect questions.</div>
-            </div>
-          </a>
-
-          <a href="activities/present-perfect/present-perfect-time-expressions-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📅</span>
-              <div class="activity-title">Time Expressions Reference</div>
-              <div class="activity-description">Master time words: Already, Yet, Just, Ever, and Never. Includes definitions, examples, usage comparisons, and practice activities.</div>
-            </div>
-          </a>
-
-          <a href="present-perfect-family-follow-along-slides-2026-03-02.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">👨‍👩‍👧‍👦</span>
-              <div class="activity-title">Present Perfect Family Follow-Along Slides</div>
-              <div class="activity-description">Full guide slides with family topics and -ed endings practice. Follow-along presentation for class use.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Tenses</div>
-          <div class="category-title">Complete Tense Practice</div>
-        </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Tense Practice Set</h3>
-        <div class="activities-grid">
-          <a href="activities/tenses/complete-tense-worksheet.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📝</span>
-              <div class="activity-title">Tense Practice Worksheet</div>
-              <div class="activity-description">Fill-in-the-blank exercises to practice choosing and using the correct verb tense. Work at your own pace.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/complete-tense-worksheet-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📊</span>
-              <div class="activity-title">Tense Practice Slides</div>
-              <div class="activity-description">Slide version of the worksheet above. Great for classroom display and group exercises.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/tense-worksheet-answer-checker.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">✅</span>
-              <div class="activity-title">Interactive Answer Checker</div>
-              <div class="activity-description">Check your work instantly. Type in your answers for word scrambles and cross-out exercises to see if you got them right.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/present-perfect-answer-checker.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">✅</span>
-              <div class="activity-title">Present Perfect Answer Checker</div>
-              <div class="activity-description">Practice Present Perfect and Present Perfect Continuous. Word scrambles and cross-out exercises with instant feedback.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/cardgame.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🃏</span>
-              <div class="activity-title">Verb Tense Sentence Game</div>
-              <div class="activity-description">Projector-friendly card game. Flip cards for meaning, subject, verb, time word, and sentence type. Share everyone's sentences, then fix the error sentence together.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/cardgame-worksheet.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📝</span>
-              <div class="activity-title">Verb Tense Sentence Game Worksheet</div>
-              <div class="activity-description">Printable student worksheet to use with the card game. Circle categories, write one sentence per round, and rewrite the corrected sentence.</div>
-            </div>
-          </a>
-
-          <a href="activities/tenses/Verb-Bootcamp-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">📊</span>
-              <div class="activity-title">Verb Bootcamp Slides</div>
-              <div class="activity-description">Simple & continuous verb review: patterns, formulas, and the six meanings (habit, finished, now, background, future, future continuous). Projector-friendly slides.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Sentences</div>
-          <div class="category-title">Sentence Building</div>
-        </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Sentence Order Practice</h3>
-        <div class="activities-grid">
-          <a href="activities/sentence-builders/sentence-order-activity.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🔤</span>
-              <div class="activity-title">Sentence Structure Builder</div>
-              <div class="activity-description">Learn proper English word order: WHO + VERB + WHAT + WHERE + WHEN. Start with simple sentences and progress to more complex patterns through 12 exercises.</div>
-            </div>
-          </a>
-
-          <a href="sentencebuilder_answers.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">✅</span>
-              <div class="activity-title">Sentence Builder Answer Key</div>
-              <div class="activity-description">Answer key for the activity above. Review the correct answers for all sentence ordering exercises and learn from any mistakes.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Superlatives</div>
-          <div class="category-title">Superlatives & Quantifiers</div>
-        </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Grammar Practice</h3>
-        <div class="activities-grid">
-          <a href="activities/superlatives/superlatives-quantifiers-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">⭐</span>
-              <div class="activity-title">Superlatives & Quantifiers Slides</div>
-              <div class="activity-description">Learn and practice superlative forms and quantifiers. Interactive slides with examples, rules, and exercises for mastering the most, the least, and quantifier usage.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">More</div>
-        <div class="category-title">Games & Phonics</div>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/games/test-prep-trivia-game.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🎮</span>
-              <div class="activity-title">Level 3 Unit 2 Trivia Game</div>
-              <div class="activity-description">Fun review game to prepare for your test. Answer questions about Level 3 Unit 2 material in an interactive quiz format.</div>
-            </div>
-          </a>
-
-          <a href="level3_group_review_answer_slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🗝️</span>
-              <div class="activity-title">Level 3 Post Test Review — Answer Key Slides</div>
-              <div class="activity-description">Teacher answer-key slideshow for the Level 3 group post-test review. Reveal answers one at a time or all at once. Covers vocabulary, grammar, unscramble, and writing prompts (Q1–41).</div>
-            </div>
-          </a>
-
-          <a href="activities/phonics/index.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🔤</span>
-              <div class="activity-title">Phonics & Reading Center</div>
-              <div class="activity-description">Improve pronunciation and reading skills with games and lessons. Includes Laubach method activities designed for Spanish-speaking learners.</div>
-            </div>
-          </a>
-
-          <a href="housing-game" class="activity-card">
+          <a href="activities/housing/task-class.html" class="activity-card">
             <div class="activity-content">
               <span class="activity-icon">🏠</span>
-              <div class="activity-title">Housing Superlatives Game</div>
-              <div class="activity-description">Practice English by discussing housing topics! Flip cards to reveal categories and adjectives, then discuss which items are the nicest, most expensive, best for families, and more.</div>
-            </div>
-          </a>
-
-          <a href="health-game" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">❤️</span>
-              <div class="activity-title">Health & Wellness Superlatives Game</div>
-              <div class="activity-description">Practice health vocabulary with superlative adjectives! Flip cards to explore topics like body parts, healthy habits, nutrition, mental health, and medical professionals.</div>
-            </div>
-          </a>
-
-          <a href="housing-discussion-game" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">💬</span>
-              <div class="activity-title">Housing Discussion Game</div>
-              <div class="activity-description">Open-ended discussion prompts about home life, landlords, housing problems, and safety. Flip cards to reveal a category and six topic cards with questions to discuss in class.</div>
-            </div>
-          </a>
-
-          <a href="Mock%20Interview%20Prep%20and%20Job%20Posting%20for%20ESOL%20Students%20(1)/slideshow_boston.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon">🎤</span>
-              <div class="activity-title">Interview Practice Slideshow (Boston)</div>
-              <div class="activity-description">Slideshow for conversation class: practice interview skills with Boston-themed prompts. Interactive presentation for job interview preparation.</div>
+              <div class="activity-title">Start the Housing Task Class</div>
+              <div class="activity-description">All four tasks in sequence, with support that fades as you go. Start here.</div>
             </div>
           </a>
         </div>
@@ -580,32 +339,30 @@
 
       <div class="category-section">
         <div class="category-header">
-          <div class="category-tab">Project</div>
-          <div class="category-title">Guidebook & Modals</div>
+          <div class="category-title" style="color: var(--pencil-gray);">Coming Next</div>
         </div>
-
-        <h3 style="font-family: 'Karla', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink-dark); margin: 20px 0 12px 0; padding-left: 8px; border-left: 4px solid var(--accent-orange);">Student materials</h3>
+        <p class="category-sub">More task classes are being built using the same model.</p>
         <div class="activities-grid">
-          <a href="activities/project/esol_worksheet_final.html" class="activity-card">
+          <div class="activity-card coming-card">
             <div class="activity-content">
-              <span class="activity-icon">📝</span>
-              <div class="activity-title">Student Guidebook Worksheet</div>
-              <div class="activity-description">Printable-style worksheet for the guidebook project. Work through tasks at your own pace or assign for homework.</div>
+              <span class="activity-icon">❤️</span>
+              <div class="activity-title">Health & Wellness (planned)</div>
+              <div class="activity-description">Talking with a doctor, describing symptoms, understanding instructions — not built yet.</div>
             </div>
-          </a>
-
-          <a href="activities/project/esol_lesson_slides.html" class="activity-card">
+          </div>
+          <div class="activity-card coming-card">
             <div class="activity-content">
-              <span class="activity-icon">📊</span>
-              <div class="activity-title">ESOL Modals Lesson Slides</div>
-              <div class="activity-description">Projector-friendly slide deck for the modals lesson. Use in class alongside the guidebook worksheet.</div>
+              <span class="activity-icon">💼</span>
+              <div class="activity-title">Jobs & Interviews (planned)</div>
+              <div class="activity-description">Reading a job posting, mock interviews, workplace conversations — not built yet.</div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
 
       <footer>
-        <p class="footer-note">Happy learning!</p>
+        <p class="footer-note">Every task here is something you'd actually do.</p>
+        <p class="footer-links"><a href="index-fy26.html">← FY26 Archive (grammar-topic activities, for reference)</a></p>
       </footer>
     </div>
   </div>

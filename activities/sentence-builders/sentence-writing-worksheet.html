@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sentence Writing Worksheet</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;      /* Pastel sky blue */
+    --tobe:#b3ebe7;         /* Pastel teal */
+    --helper:#a8e6cf;       /* Pastel mint */
+    --v1:#c1e99b;           /* Pastel lime green */
+    --ving:#b8d9a8;         /* Pastel sage green */
+    --v2:#9dd4a8;           /* Pastel mint-green */
+    --object:#ffd9b3;       /* Pastel peach */
+    --time:#ffb3ba;         /* Pastel coral pink */
+    --place:#c5a3ff;        /* Pastel periwinkle */
+    --border:#222;
+    --muted:#666;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.35in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 8px;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  
+  h1{
+    color: var(--ink);
+    border-bottom: 2px solid var(--subject);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  .instructions{
+    background: #f0f8ff;
+    border: 1px solid var(--subject);
+    border-radius: 4px;
+    padding: 4px 6px;
+    margin-bottom: 8px;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+  
+  .instructions-title{
+    font-weight: bold;
+    color: var(--subject);
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+  
+  .instructions ul{
+    margin: 2px 0;
+    padding-left: 14px;
+  }
+  
+  .instructions li{
+    margin-bottom: 1px;
+  }
+  
+  .tense-group{
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  
+  .tense-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--subject);
+  }
+  
+  .tense-number{
+    background: var(--subject);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 11px;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  
+  .tense-title{
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--ink);
+    margin: 0;
+  }
+  
+  .sentence-item{
+    margin-bottom: 8px;
+    padding: 6px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    border-left: 3px solid var(--subject);
+  }
+  
+  .sentence-label{
+    font-weight: bold;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+  
+  .sentence-line{
+    border-bottom: 2px solid #333;
+    min-height: 24px;
+    padding: 4px 0;
+    font-size: 13px;
+    line-height: 1.4;
+    position: relative;
+  }
+  
+  .word-bank-reminder{
+    background: #fff9e6;
+    border-left: 3px solid #ffcc00;
+    padding: 6px 8px;
+    margin: 8px 0;
+    border-radius: 3px;
+    font-size: 9px;
+  }
+  
+  .word-bank-reminder-title{
+    font-weight: bold;
+    color: #b8860b;
+    margin-bottom: 3px;
+    font-size: 10px;
+  }
+  
+  .word-bank-reminder-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  
+  .word-bank-reminder-item{
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 2px 6px;
+    font-size: 9px;
+  }
+  
+  @media print{
+    body{ 
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact;
+      font-size: 11px;
+    }
+    .tense-group{
+      page-break-inside: avoid;
+      margin-bottom: 8px;
+      padding: 6px;
+    }
+    .sentence-item{
+      page-break-inside: avoid;
+      margin-bottom: 6px;
+      padding: 5px;
+    }
+    .sentence-line{
+      border-bottom: 2px solid #333;
+      min-height: 22px;
+    }
+    .word-bank-reminder{
+      page-break-inside: avoid;
+      margin: 6px 0;
+      padding: 4px 6px;
+    }
+    h1{
+      margin-bottom: 6px;
+      padding-bottom: 3px;
+    }
+    .instructions{
+      margin-bottom: 6px;
+      padding: 3px 5px;
+      font-size: 9px;
+    }
+  }
+  
+</style>
+</head>
+<body>
+
+<h1>Sentence Writing Worksheet</h1>
+
+<div class="instructions">
+  <div class="instructions-title">Instructions:</div>
+  <div>Write <strong>18 sentences</strong> using word banks. Each tense: <strong>Affirmative</strong>, <strong>Negative</strong>, <strong>Question</strong>. Use: WHO, VERB, WHAT, WHERE, WHEN, TIME.</div>
+</div>
+
+<!-- Simple Present -->
+<div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">1</div>
+      <h2 class="tense-title">Present Simple</h2>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+  <!-- Present Continuous -->
+  <div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">2</div>
+      <h2 class="tense-title">Present Continuous</h2>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+  <!-- Simple Past -->
+  <div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">3</div>
+      <h2 class="tense-title">Past Simple</h2>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+  <!-- Past Continuous -->
+  <div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">4</div>
+      <h2 class="tense-title">Past Continuous</h2>
+    </div>
+    
+    <div style="background: #fff9e6; border-left: 3px solid #ffcc00; padding: 4px 6px; margin-bottom: 6px; border-radius: 3px; font-size: 9px; color: #b8860b;">
+      <strong>💡 Reminder:</strong> You may need to use a past simple verb in your sentence as well (e.g., "I was cooking when he came home").
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+  <!-- Future Simple -->
+  <div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">5</div>
+      <h2 class="tense-title">Future Simple</h2>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+  <!-- Future Continuous -->
+  <div class="tense-group">
+    <div class="tense-header">
+      <div class="tense-number">6</div>
+      <h2 class="tense-title">Future Continuous</h2>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Affirmative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Negative</div>
+      <div class="sentence-line"></div>
+    </div>
+    
+    <div class="sentence-item">
+      <div class="sentence-label">Question</div>
+      <div class="sentence-line"></div>
+    </div>
+  </div>
+
+<!-- Word Bank Reminder -->
+<div class="word-bank-reminder">
+  <div class="word-bank-reminder-title">💡 Word Banks:</div>
+  <div class="word-bank-reminder-list">
+    <span class="word-bank-reminder-item" style="background: var(--subject);">WHO</span>
+    <span class="word-bank-reminder-item" style="background: var(--v1);">VERB</span>
+    <span class="word-bank-reminder-item" style="background: var(--object);">WHAT</span>
+    <span class="word-bank-reminder-item" style="background: var(--place);">WHERE</span>
+    <span class="word-bank-reminder-item" style="background: var(--time);">WHEN</span>
+    <span class="word-bank-reminder-item" style="background: var(--time); opacity: 0.9;">TIME</span>
+  </div>
+</div>
+
+
+</body>
+</html>
+

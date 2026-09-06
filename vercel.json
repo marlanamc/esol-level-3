@@ -25,15 +25,23 @@
     },
     {
       "source": "/housing-game",
-      "destination": "/housing_game_all_in_one.html"
+      "destination": "/activities/housing/housing-game-all-in-one.html"
     },
     {
       "source": "/housing-discussion-game",
-      "destination": "/housing_discussion_game.html"
+      "destination": "/activities/housing/housing-discussion-game.html"
+    },
+    {
+      "source": "/housing-task-class",
+      "destination": "/activities/housing/task-class.html"
     },
     {
       "source": "/health-game",
-      "destination": "/health_game_all_in_one.html"
+      "destination": "/activities/superlatives/health-game-all-in-one.html"
+    },
+    {
+      "source": "/fy26",
+      "destination": "/index-fy26.html"
     }
   ],
   "headers": [

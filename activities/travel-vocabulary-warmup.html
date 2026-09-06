@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23.1 TRAVEL - Vocabulary Warmup</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            padding: 30px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 4px solid #000;
+            padding-bottom: 20px;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .instructions {
+            font-size: 32px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .example-section {
+            background: #f0f0f0;
+            border: 3px solid #000;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .example-label {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .example-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .example-image {
+            width: 200px;
+            height: 150px;
+            background: #e0e0e0;
+            border: 3px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .example-answer {
+            font-size: 36px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .pictures-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .picture-item {
+            background: #ffffff;
+            border: 4px solid #000;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .picture-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 15px;
+            background: #ffff00;
+            padding: 8px 16px;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #000;
+        }
+
+        .picture-placeholder {
+            width: 100%;
+            height: 120px;
+            background: #e8e8e8;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #666;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .picture-label {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border-top: 2px dashed #ccc;
+            padding-top: 10px;
+        }
+
+        .word-bank {
+            background: #f9f9f9;
+            border: 4px solid #000;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .word-bank-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+        }
+
+        .word-bank-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .word-item {
+            font-size: 28px;
+            font-weight: 600;
+            color: #000;
+            padding: 15px;
+            background: #ffffff;
+            border: 2px solid #000;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .word-item.used {
+            text-decoration: line-through;
+            color: #999;
+            background: #f0f0f0;
+        }
+
+        @media print {
+            body {
+                padding: 20px;
+            }
+            
+            .pictures-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .pictures-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .word-bank-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 36px;
+            }
+            
+            .instructions {
+                font-size: 24px;
+            }
+            
+            .pictures-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .word-bank-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">23.1 TRAVEL</div>
+            <div class="instructions">WRITE THE WORDS FROM THE PANEL UNDER THE CORRECT PICTURES</div>
+        </div>
+
+        <div class="example-section">
+            <div class="example-label">Example:</div>
+            <div class="example-content">
+                <div class="example-image">🏨</div>
+                <div class="example-answer">stay in a hotel</div>
+            </div>
+        </div>
+
+        <div class="pictures-grid">
+            <!-- Picture 1: Bus -->
+            <div class="picture-item">
+                <div class="picture-number">1</div>
+                <div class="picture-placeholder">🚌 BUS</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 2: Bus Stop -->
+            <div class="picture-item">
+                <div class="picture-number">2</div>
+                <div class="picture-placeholder">🚏 BUS STOP</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 3: Drive a Car -->
+            <div class="picture-item">
+                <div class="picture-number">3</div>
+                <div class="picture-placeholder">🚗 DRIVING</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 4: Airport -->
+            <div class="picture-item">
+                <div class="picture-number">4</div>
+                <div class="picture-placeholder">✈️ AIRPORT</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 5: Pack Your Bags -->
+            <div class="picture-item">
+                <div class="picture-number">5</div>
+                <div class="picture-placeholder">🧳 PACKING</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 6: Port -->
+            <div class="picture-item">
+                <div class="picture-number">6</div>
+                <div class="picture-placeholder">🚢 PORT</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 7: Get on a Bus -->
+            <div class="picture-item">
+                <div class="picture-number">7</div>
+                <div class="picture-placeholder">🚌 GETTING ON</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 8: Hotel -->
+            <div class="picture-item">
+                <div class="picture-number">8</div>
+                <div class="picture-placeholder">🏨 HOTEL</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 9: Bicycle -->
+            <div class="picture-item">
+                <div class="picture-number">9</div>
+                <div class="picture-placeholder">🚲 BICYCLE</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 10: Cruise -->
+            <div class="picture-item">
+                <div class="picture-number">10</div>
+                <div class="picture-placeholder">🛳️ CRUISE</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 11: Arrive at the Airport -->
+            <div class="picture-item">
+                <div class="picture-number">11</div>
+                <div class="picture-placeholder">✈️ ARRIVING</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 12: Helicopter -->
+            <div class="picture-item">
+                <div class="picture-number">12</div>
+                <div class="picture-placeholder">🚁 HELICOPTER</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 13: Train Station -->
+            <div class="picture-item">
+                <div class="picture-number">13</div>
+                <div class="picture-placeholder">🚂 STATION</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 14: Runway -->
+            <div class="picture-item">
+                <div class="picture-number">14</div>
+                <div class="picture-placeholder">🛫 RUNWAY</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 15: Taxi Rank -->
+            <div class="picture-item">
+                <div class="picture-number">15</div>
+                <div class="picture-placeholder">🚕 TAXI RANK</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 16: Reception -->
+            <div class="picture-item">
+                <div class="picture-number">16</div>
+                <div class="picture-placeholder">🏢 RECEPTION</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 17: Train Ride -->
+            <div class="picture-item">
+                <div class="picture-number">17</div>
+                <div class="picture-placeholder">🚂 TRAIN RIDE</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 18: Tram -->
+            <div class="picture-item">
+                <div class="picture-number">18</div>
+                <div class="picture-placeholder">🚋 TRAM</div>
+                <div class="picture-label">_____________</div>
+            </div>
+
+            <!-- Picture 19: Luggage -->
+            <div class="picture-item">
+                <div class="picture-number">19</div>
+                <div class="picture-placeholder">🧳 LUGGAGE</div>
+                <div class="picture-label">_____________</div>
+            </div>
+        </div>
+
+        <div class="word-bank">
+            <div class="word-bank-title">WORD BANK</div>
+            <div class="word-bank-grid">
+                <div class="word-item used">stay in a hotel</div>
+                <div class="word-item">arrive at the airport</div>
+                <div class="word-item">train ride</div>
+                <div class="word-item">get on a bus</div>
+                <div class="word-item">bicycle</div>
+                <div class="word-item">helicopter</div>
+                <div class="word-item">cruise</div>
+                <div class="word-item">tram</div>
+                <div class="word-item">taxi rank</div>
+                <div class="word-item">hotel</div>
+                <div class="word-item">bus stop</div>
+                <div class="word-item">drive a car</div>
+                <div class="word-item">airport</div>
+                <div class="word-item">luggage</div>
+                <div class="word-item">train station</div>
+                <div class="word-item">pack your bags</div>
+                <div class="word-item">reception</div>
+                <div class="word-item">port</div>
+                <div class="word-item">coach</div>
+                <div class="word-item">runway</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

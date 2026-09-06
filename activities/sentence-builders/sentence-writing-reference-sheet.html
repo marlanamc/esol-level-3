@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Sentence Writing Reference Sheet</title>
+<style>
+  :root{
+    --ink:#111;
+    --bg:#fff;
+    --subject:#9fd3ff;      /* Pastel sky blue */
+    --tobe:#b3ebe7;         /* Pastel teal */
+    --helper:#a8e6cf;       /* Pastel mint */
+    --v1:#c1e99b;           /* Pastel lime green */
+    --ving:#b8d9a8;         /* Pastel sage green */
+    --v2:#9dd4a8;           /* Pastel mint-green */
+    --object:#ffd9b3;       /* Pastel peach */
+    --time:#ffb3ba;         /* Pastel coral pink */
+    --place:#c5a3ff;        /* Pastel periwinkle */
+    --border:#222;
+    --muted:#666;
+  }
+  
+  @page{ 
+    size: Letter; 
+    margin: 0.35in;
+  }
+  
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+    padding: 8px;
+    line-height: 1.3;
+    font-size: 12px;
+  }
+  
+  h1{
+    color: var(--ink);
+    border-bottom: 2px solid var(--subject);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+  
+  h2{
+    color: var(--subject);
+    margin-top: 12px;
+    margin-bottom: 6px;
+    padding: 6px;
+    background: #f5f5f5;
+    border-left: 3px solid var(--subject);
+    font-size: 15px;
+  }
+  
+  .word-bank-section{
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  
+  .word-bank-title{
+    font-weight: bold;
+    font-size: 12px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  
+  .word-bank-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .word-item{
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .word-bank-who .word-item{ background: var(--subject); border-color: var(--subject); }
+  .word-bank-verb .word-item{ background: var(--v1); border-color: var(--v1); }
+  .word-bank-what .word-item{ background: var(--object); border-color: var(--object); }
+  .word-bank-where .word-item{ background: var(--place); border-color: var(--place); }
+  .word-bank-when .word-item{ background: var(--time); border-color: var(--time); }
+  .word-bank-time .word-item{ background: var(--time); border-color: var(--time); opacity: 0.9; }
+  
+  .formula-box{
+    background: white;
+    border: 1px dashed var(--border);
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px 0;
+    text-align: center;
+  }
+  
+  .formula-title{
+    font-weight: bold;
+    font-size: 10px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  
+  .formula-parts{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+  }
+  
+  .formula-part{
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  
+  .formula-who{ background: var(--subject); border-color: var(--subject); }
+  .formula-verb{ background: var(--v1); border-color: var(--v1); }
+  .formula-what{ background: var(--object); border-color: var(--object); }
+  .formula-where{ background: var(--place); border-color: var(--place); }
+  .formula-when{ background: var(--time); border-color: var(--time); }
+  
+  .tense-section{
+    background: #f0f8ff;
+    border: 1px solid var(--subject);
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+  
+  .tense-title{
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  
+  .tense-examples{
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    padding-left: 8px;
+    line-height: 1.4;
+  }
+  
+  .tense-examples strong{
+    color: var(--ink);
+  }
+  
+  .tip-box{
+    background: #fff9e6;
+    border-left: 3px solid #ffcc00;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    font-size: 11px;
+  }
+  
+  .tip-title{
+    font-weight: bold;
+    color: #b8860b;
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+  
+  @media print{
+    body{ 
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact; 
+      print-color-adjust: exact;
+      font-size: 12px;
+    }
+    .word-bank-section,
+    .tense-section{
+      page-break-inside: avoid;
+      margin-bottom: 8px;
+      padding: 6px;
+    }
+    h2 {
+      page-break-after: avoid;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      padding: 4px;
+    }
+    .formula-box{
+      padding: 6px;
+      margin: 6px 0;
+    }
+    .tip-box{
+      padding: 6px;
+      margin: 8px 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Sentence Writing Reference Sheet</h1>
+
+<p style="font-size: 11px; color: var(--muted); margin-bottom: 10px; text-align: center;">
+  Use this reference sheet to help you write sentences. Choose words from each word bank to create complete sentences.
+</p>
+
+<!-- Visual Framework -->
+<div style="background: #f0f0f0; border: 1px solid var(--border); border-radius: 6px; padding: 10px; margin: 10px 0; text-align: center;">
+  <div style="font-weight: bold; font-size: 10px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Sentence Building Framework</div>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap;">
+    <div style="background: var(--subject); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border);">WHO</div>
+    <span style="color: var(--muted); font-size: 14px;">→</span>
+    <div style="background: var(--v1); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border);">VERB</div>
+    <span style="color: var(--muted); font-size: 14px;">→</span>
+    <div style="background: var(--object); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border);">WHAT</div>
+    <span style="color: var(--muted); font-size: 14px;">→</span>
+    <div style="background: var(--place); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border);">WHERE</div>
+    <span style="color: var(--muted); font-size: 14px;">→</span>
+    <div style="background: var(--time); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border);">WHEN</div>
+    <span style="color: var(--muted); font-size: 14px;">→</span>
+    <div style="background: var(--time); color: var(--ink); padding: 6px 10px; border-radius: 4px; font-weight: bold; font-size: 12px; border: 1px solid var(--border); opacity: 0.9;">TIME</div>
+  </div>
+  <p style="font-size: 9px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">
+    Ask yourself: <strong>WHO</strong> is doing it? <strong>VERB</strong> - what action? <strong>WHAT</strong> are they doing it to? <strong>WHERE</strong>? <strong>WHEN</strong>? <strong>TIME EXPRESSION</strong>?
+  </p>
+</div>
+
+<!-- Word Banks Section -->
+<h2>Word Banks</h2>
+
+<div class="word-bank-section word-bank-who">
+  <div class="word-bank-title">WHO</div>
+  <div class="word-bank-list">
+    <span class="word-item">I</span>
+    <span class="word-item">you</span>
+    <span class="word-item">he</span>
+    <span class="word-item">she</span>
+    <span class="word-item">we</span>
+    <span class="word-item">they</span>
+    <span class="word-item">my friend</span>
+    <span class="word-item">my sister</span>
+    <span class="word-item">my brother</span>
+    <span class="word-item">my mom</span>
+    <span class="word-item">my dad</span>
+    <span class="word-item">my coworker</span>
+    <span class="word-item">my teacher</span>
+    <span class="word-item">my classmate</span>
+    <span class="word-item">my neighbor</span>
+  </div>
+</div>
+
+<div class="word-bank-section word-bank-verb">
+  <div class="word-bank-title">VERBS</div>
+  <div class="word-bank-list">
+    <span class="word-item">eat</span>
+    <span class="word-item">drink</span>
+    <span class="word-item">cook</span>
+    <span class="word-item">clean</span>
+    <span class="word-item">study</span>
+    <span class="word-item">read</span>
+    <span class="word-item">watch</span>
+    <span class="word-item">listen</span>
+    <span class="word-item">walk</span>
+    <span class="word-item">call</span>
+    <span class="word-item">go</span>
+    <span class="word-item">make</span>
+    <span class="word-item">wash</span>
+    <span class="word-item">take</span>
+    <span class="word-item">do</span>
+  </div>
+</div>
+
+<div class="word-bank-section word-bank-what">
+  <div class="word-bank-title">WHAT (Objects)</div>
+  <div class="word-bank-list">
+    <span class="word-item">breakfast</span>
+    <span class="word-item">dinner</span>
+    <span class="word-item">vegetables</span>
+    <span class="word-item">coffee</span>
+    <span class="word-item">tea</span>
+    <span class="word-item">homework</span>
+    <span class="word-item">the dishes</span>
+    <span class="word-item">the kitchen</span>
+    <span class="word-item">a book</span>
+    <span class="word-item">the news</span>
+    <span class="word-item">music</span>
+    <span class="word-item">my family</span>
+    <span class="word-item">my friend</span>
+    <span class="word-item">the bus</span>
+    <span class="word-item">a shower</span>
+  </div>
+</div>
+
+<div class="word-bank-section word-bank-where">
+  <div class="word-bank-title">WHERE (Places)</div>
+  <div class="word-bank-list">
+    <span class="word-item">at home</span>
+    <span class="word-item">at work</span>
+    <span class="word-item">at school</span>
+    <span class="word-item">in the kitchen</span>
+    <span class="word-item">at the park</span>
+    <span class="word-item">on the bus</span>
+    <span class="word-item">in my neighborhood</span>
+  </div>
+</div>
+
+<div class="word-bank-section word-bank-when">
+  <div class="word-bank-title">WHEN (Situational Phrases)</div>
+  <div style="font-weight: bold; font-size: 10px; margin-bottom: 4px; color: var(--ink);">When (use with any tense)</div>
+  <div class="word-bank-list">
+    <span class="word-item">before work</span>
+    <span class="word-item">after work</span>
+    <span class="word-item">before bed</span>
+    <span class="word-item">after school</span>
+    <span class="word-item">during lunch</span>
+    <span class="word-item">on the weekend</span>
+    <span class="word-item">on my day off</span>
+    <span class="word-item">after class</span>
+  </div>
+</div>
+
+<div class="word-bank-section word-bank-time">
+  <div class="word-bank-title">TIME EXPRESSIONS</div>
+  
+  <div style="margin-bottom: 8px;">
+    <div style="font-weight: bold; font-size: 10px; margin-bottom: 4px; color: var(--ink);">Simple Tense Time Expressions</div>
+    <div class="word-bank-list">
+      <span class="word-item">every day</span>
+      <span class="word-item">every weekend</span>
+      <span class="word-item">on weekdays</span>
+      <span class="word-item">at night</span>
+      <span class="word-item">in the morning</span>
+      <span class="word-item">yesterday</span>
+      <span class="word-item">last weekend</span>
+      <span class="word-item">last night</span>
+      <span class="word-item">tomorrow</span>
+      <span class="word-item">next week</span>
+    </div>
+  </div>
+  
+  <div style="margin-bottom: 8px;">
+    <div style="font-weight: bold; font-size: 10px; margin-bottom: 4px; color: var(--ink);">Continuous Time Expressions</div>
+    <div class="word-bank-list">
+      <span class="word-item">right now</span>
+      <span class="word-item">today</span>
+      <span class="word-item">this morning</span>
+      <span class="word-item">this afternoon</span>
+      <span class="word-item">tonight</span>
+      <span class="word-item">this week</span>
+      <span class="word-item">this month</span>
+      <span class="word-item">at the moment</span>
+    </div>
+  </div>
+  
+  <div>
+    <div style="font-weight: bold; font-size: 10px; margin-bottom: 4px; color: var(--ink);">Specific Times</div>
+    <div class="word-bank-list">
+      <span class="word-item">at 6 pm</span>
+      <span class="word-item">at 3 pm</span>
+      <span class="word-item">at 2 pm</span>
+      <span class="word-item">at 9 am</span>
+    </div>
+  </div>
+</div>
+
+<!-- Tense Formulas Section -->
+<h2>Sentence Formulas by Tense</h2>
+
+<div class="tense-section">
+  <div class="tense-title">Present Simple</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span class="formula-part formula-verb">VERB (V1/V1-3rd)</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> I eat breakfast every day.<br>
+    <strong>Negative:</strong> I don't eat breakfast every day.<br>
+    <strong>Question:</strong> Do you eat breakfast every day?
+  </div>
+</div>
+
+<div class="tense-section">
+  <div class="tense-title">Present Continuous</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span style="background: var(--tobe); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">am/is/are</span>
+      <span>+</span>
+      <span style="background: var(--ving); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">VERB-ing</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> She is cooking dinner right now.<br>
+    <strong>Negative:</strong> She isn't cooking dinner right now.<br>
+    <strong>Question:</strong> Are you cooking dinner right now?
+  </div>
+</div>
+
+<div class="tense-section">
+  <div class="tense-title">Past Simple</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span style="background: var(--v2); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">VERB (V2)</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> They watched the news yesterday.<br>
+    <strong>Negative:</strong> They didn't watch the news yesterday.<br>
+    <strong>Question:</strong> Did you watch the news yesterday?
+  </div>
+</div>
+
+<div class="tense-section">
+  <div class="tense-title">Past Continuous</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span style="background: var(--tobe); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">was/were</span>
+      <span>+</span>
+      <span style="background: var(--ving); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">VERB-ing</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> He was studying at home last night.<br>
+    <strong>Negative:</strong> He wasn't studying at home last night.<br>
+    <strong>Question:</strong> Were you studying at home last night?
+  </div>
+</div>
+
+<div class="tense-section">
+  <div class="tense-title">Future Simple</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span style="background: var(--helper); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">will</span>
+      <span>+</span>
+      <span class="formula-part formula-verb">VERB (V1)</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> I will call my friend tomorrow.<br>
+    <strong>Negative:</strong> I won't call my friend tomorrow.<br>
+    <strong>Question:</strong> Will you call your friend tomorrow?
+  </div>
+</div>
+
+<div class="tense-section">
+  <div class="tense-title">Future Continuous</div>
+  <div class="formula-box">
+    <div class="formula-title">Formula</div>
+    <div class="formula-parts">
+      <span class="formula-part formula-who">WHO</span>
+      <span>+</span>
+      <span style="background: var(--helper); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">will</span>
+      <span>+</span>
+      <span style="background: var(--tobe); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">be</span>
+      <span>+</span>
+      <span style="background: var(--ving); padding: 4px 8px; border-radius: 3px; font-weight: 600; font-size: 10px;">VERB-ing</span>
+      <span>+</span>
+      <span class="formula-part formula-what">WHAT</span>
+      <span>+</span>
+      <span class="formula-part formula-when">TIME</span>
+    </div>
+  </div>
+  <div class="tense-examples">
+    <strong>Affirmative:</strong> We will be cooking dinner tonight.<br>
+    <strong>Negative:</strong> We won't be cooking dinner tonight.<br>
+    <strong>Question:</strong> Will you be cooking dinner tonight?
+  </div>
+</div>
+
+</body>
+</html>
+

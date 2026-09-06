@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer Speaking Assessment Cards</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #3498db;
+            --border: #7f8c8d; /* Darker border */
+            --bg: #f8f9fa;
+            --text-muted: #576574; /* Darker gray for labels */
+            --line-color: #bdc3c7; /* Darker lines */
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--primary);
+            line-height: 1.4;
+        }
+
+        @media print {
+            body {
+                background-color: white;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 0.4in;
+                height: 10.2in;
+                overflow: hidden;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+            }
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .page {
+            background: white;
+            padding: 40px;
+            margin-bottom: 20px;
+            page-break-after: always;
+            min-height: 10.5in;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* lucide icon alignment */
+        .icon {
+            vertical-align: middle;
+            margin-right: 8px;
+            stroke-width: 2.5px; /* Thicker icons */
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Page 1: Interview Prompts (CLEAN) */
+        .prompts-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .prompts-header {
+            margin-bottom: 60px;
+        }
+
+        .prompts-header h1 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .prompts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .prompts-list li {
+            font-size: 1.4rem;
+            margin-bottom: 35px;
+            padding: 25px;
+            border-left: 4px solid var(--accent);
+            background: #fdfdfd;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .prompts-list li span.q-num {
+            font-weight: 600;
+            color: var(--accent);
+            margin-right: 20px;
+            font-size: 1.2rem;
+        }
+
+        /* Page 2: Volunteer Handbook */
+        .handbook-header {
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .handbook-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .handbook-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+        }
+
+        .handbook-section h3 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .instruction-list li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .rubric-container {
+            background: #fdfdfd;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .rubric-item {
+            margin-bottom: 15px;
+        }
+
+        .rubric-item:last-child { margin-bottom: 0; }
+
+        .rubric-item strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .tip-box {
+            margin-top: 30px;
+            padding: 15px;
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        /* Page 3 & 4: Student Cards (10 to a page) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Back to 2 columns */
+            gap: 12px; /* Slightly reduced gap */
+            margin-top: 0;
+        }
+
+        .card {
+            border: 1.8px solid var(--border); /* Slightly thicker border for dark mode look */
+            border-radius: 8px;
+            padding: 12px;
+            height: 170px; /* Reduced to fit 5 rows per page */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            break-inside: avoid;
+        }
+
+        .card-header {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 2px;
+        }
+
+        .input-group { margin-bottom: 8px; }
+
+        .input-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1px;
+            display: block;
+            font-weight: 700; /* Darker labels */
+        }
+
+        .line {
+            border-bottom: 1.8px solid var(--line-color);
+            height: 24px;
+        }
+
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+
+        .score-box { 
+            display: flex; 
+            gap: 8px; 
+            margin-top: 5px;
+        }
+
+        .score-circle {
+            width: 34px;
+            height: 34px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .notes-area {
+            flex-grow: 1;
+            margin-left: 15px;
+            padding-left: 10px;
+            border-left: 1.5px solid #eee;
+        }
+
+        .notes-line {
+            border-bottom: 1.2px dashed var(--line-color); /* Thicker dashed line */
+            height: 20px;
+            width: 100%;
+        }
+
+        .mini-scoring-key {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+            text-align: center;
+            font-style: italic;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- PAGE 1: CONVERSATION PROMPTS (CLEAN) -->
+        <div class="page prompts-page">
+            <div class="prompts-header">
+                <h1>Conversation Prompts</h1>
+            </div>
+            <ul class="prompts-list">
+                <li><span class="q-num">1</span> What is your name? (First name only)</li>
+                <li><span class="q-num">2</span> Can you spell that?</li>
+                <li><span class="q-num">3</span> When did you come to the United States?</li>
+                <li><span class="q-num">4</span> Where did you live before coming here?</li>
+                <li><span class="q-num">5</span> What had you been doing there before you moved here?</li>
+            </ul>
+            <div style="margin-top: 40px; color: var(--text-muted); font-size: 1rem; font-weight: 600;">
+                <i data-lucide="clock" class="icon"></i> Take your time. No rush.
+            </div>
+        </div>
+
+        <!-- PAGE 2: VOLUNTEER HANDBOOK -->
+        <div class="page">
+            <div class="handbook-header">
+                <h2><i data-lucide="compass" class="icon"></i> Speaking Assessment 1</h2>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Assessment Guide</div>
+            </div>
+
+            <div class="handbook-grid">
+                <div class="handbook-section">
+                    <h3><i data-lucide="message-square" class="icon"></i> How to Run It</h3>
+                    <ul class="instruction-list">
+                        <li><strong>Start casual:</strong> "Hi! How are you?"</li>
+                        <li><strong>Ask the questions:</strong> (Use the clean prompt sheet)</li>
+                        <li><strong>Let it flow:</strong> If they're doing well, ask simple follow-ups like "What did you study?" or "Did you like it?"</li>
+                        <li><strong>If they get stuck:</strong> Repeat or rephrase. "Take your time," "You're good!"</li>
+                        <li style="border-top: 2px solid #eee; padding-top: 10px; margin-top: 10px;">
+                            <strong>Note:</strong> We only need their <strong>first name</strong>. No corrections needed during the chat—just focus on understanding.
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="handbook-section">
+                    <h3><i data-lucide="bar-chart-3" class="icon"></i> Scoring Rubric</h3>
+                    <div class="rubric-container">
+                        <div class="rubric-item">
+                            <strong>⭐ 3 – Strong</strong>
+                            Understands easily, answers clearly, sounds confident.
+                        </div>
+                        <div class="rubric-item">
+                            <strong>⭐ 2 – Getting there</strong>
+                            Understands most, answers with some pauses or small mistakes.
+                        </div>
+                        <div class="rubric-item">
+                            <strong>⭐ 1 – Needs support</strong>
+                            Trouble understanding or answering, unsure or hesitant.
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <i data-lucide="lightbulb" class="icon" style="color: #e67e22;"></i>
+                        <strong>Quick Scoring Thought:</strong>
+                        <div style="margin-top: 5px;">
+                            • Easy/Natural → 3<br>
+                            • Little effort for both? → 2<br>
+                            • Pretty difficult? → 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3 & 4: STUDENT CARDS -->
+        <script>
+            function generateCardsPage() {
+                document.write(`
+                <div class="page">
+                    <div class="cards-grid">
+                `);
+                
+                for(let i=1; i<=10; i++) {
+                    document.write(`
+                    <div class="card">
+                        <div class="card-header">STUDENT EVALUATION CARD</div>
+                        <div class="input-group">
+                            <span class="input-label">Student First Name</span>
+                            <div class="line"></div>
+                        </div>
+                        <div class="footer-row">
+                            <div class="score-box">
+                                <div class="score-circle">1</div>
+                                <div class="score-circle">2</div>
+                                <div class="score-circle">3</div>
+                            </div>
+                            <div class="notes-area">
+                                <span class="input-label">Notes</span>
+                                <div class="notes-line"></div>
+                                <div class="notes-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                }
+                
+                document.write(`
+                    </div>
+                </div>
+                `);
+            }
+
+            generateCardsPage(); // Page 3 (Students 1-10)
+            generateCardsPage(); // Page 4 (Students 11-20)
+        </script>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

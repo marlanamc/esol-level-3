@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline Crime Mystery Activity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    @page portrait {
+      size: letter portrait;
+      margin: 0.35in;
+    }
+
+    @page landscape {
+      size: letter landscape;
+      margin: 0.35in;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 8in;
+      margin: 0 auto;
+      background: #fff;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { break-after: page; }
+      .page:last-child { break-after: auto; }
+      .page.landscape { page: landscape; }
+      .page.portrait { page: portrait; }
+      .hero, .card, .suspect-card, .comparison-card, .solve-card { break-inside: avoid; }
+    }
+
+    .page { padding: 12px; }
+
+    /* ───── HERO ───── */
+    .hero {
+      border-radius: 18px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #fef9e7 0%, #fdf2f8 40%, #eff6ff 100%);
+      border: 2px solid #e2e8f0;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '🔍';
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      font-size: 38px;
+      opacity: 0.18;
+    }
+
+    .hero h1 {
+      margin: 0 0 4px;
+      font-size: 23px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .hero > p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    .roles {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .role-chip, .note-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: #fff;
+      border: 1px solid #dbe4ee;
+      color: #334155;
+    }
+
+    .note-chip {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+      color: #1d4ed8;
+    }
+
+    /* ───── CARDS ───── */
+    .card {
+      border-radius: 16px;
+      border: 2px solid #dbe4ee;
+      background: #fff;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card.case-file { background: #fffdf7; border-color: #fde7a8; }
+    .card.suspects  { background: #f6fffb; border-color: #b9efd8; }
+    .card.compare   { background: #f8fbff; border-color: #cfe0fb; }
+    .card.solve     { background: #fff7fb; border-color: #f5c8dd; }
+    .card.new-evidence { background: #fefce8; border-color: #fde68a; }
+    .card.discuss   { background: #faf5ff; border-color: #e9d5ff; }
+    .card.report    { background: #f0fdf4; border-color: #bbf7d0; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+      background: #fff;
+      border: 1px solid #dbe4ee;
+    }
+
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .section-subtitle {
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    /* ───── LAYOUTS ───── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .quick-check {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1.5px solid #dbe4ee;
+      padding: 8px 10px;
+    }
+
+    .quick-check h4 {
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+
+    .check-item {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.3;
+    }
+
+    .check-box {
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid #94a3b8;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: -2px;
+    }
+
+    .fun-note {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      padding: 8px 10px;
+    }
+
+    .fun-note h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #1d4ed8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .fun-note p, .fun-note li {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .fun-note ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .verdict-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .verdict-pill {
+      border-radius: 12px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .verdict-pill h4 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .verdict-pill div {
+      height: 22px;
+      border-bottom: 1.5px solid #cbd5e1;
+    }
+
+    .box {
+      border-radius: 12px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .box h3, .suspect-card h3, .comparison-card h3, .solve-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ───── LISTS ───── */
+    .case-list, .clue-list, .sentence-list, .question-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.42;
+    }
+
+    .case-list li + li, .clue-list li + li,
+    .sentence-list li + li, .question-list li + li {
+      margin-top: 6px;
+    }
+
+    /* ───── VOCAB BANK (mystery terms) ───── */
+    .vocab-bank {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1.5px solid #dbe4ee;
+      padding: 8px 10px;
+    }
+
+    .vocab-bank h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px 12px;
+    }
+
+    .vocab-def {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.3;
+    }
+
+    .vocab-def strong {
+      color: #92400e;
+    }
+
+    /* ───── SUSPECT CARDS ───── */
+    .suspect-card {
+      border-radius: 14px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 1.05fr 1.2fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .suspect-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 8px;
+      background: #f8fafc;
+      border: 1px solid #dbe4ee;
+      color: #334155;
+    }
+
+    .suspect-name.nora  { background: #fff4e7; border-color: #fdba74; color: #b45309; }
+    .suspect-name.mateo { background: #ecfdf5; border-color: #86efac; color: #047857; }
+    .suspect-name.jules { background: #eff6ff; border-color: #93c5fd; color: #1d4ed8; }
+
+    .suspect-left {
+      min-width: 0;
+    }
+
+    .suspect-right {
+      min-width: 0;
+    }
+
+    /* ───── MINI TIMELINES (Part 2) ───── */
+    .mini-timeline {
+      position: relative;
+      height: 138px;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    .mini-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      top: 76px; height: 4px;
+      border-radius: 999px;
+      background: #d7e0ea;
+    }
+
+    .mini-tick, .mini-year {
+      position: absolute;
+      transform: translateX(-50%);
+    }
+
+    .mini-tick {
+      top: 68px; width: 2px; height: 14px;
+      background: #94a3b8;
+    }
+
+    .mini-year {
+      top: 86px;
+      font-size: 10px; font-weight: 800;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .blank-band {
+      position: absolute;
+      transform: translateX(-50%);
+      min-width: 116px; height: 26px;
+      border-radius: 16px;
+      border: 2px dashed #cbd5e1;
+      background: rgb(255 255 255 / 0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .blank-band .hint {
+      font-size: 8px; font-weight: 800;
+      color: #c0c9d6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+    .blank-band.top    { top: 12px; }
+    .blank-band.bottom { top: 46px; }
+    .blank-band.wide   { min-width: 138px; }
+
+    .timeline-help {
+      margin: 4px 0 6px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
+    }
+
+    /* ───── COMPARISON TIMELINE (Part 3 — grid layout) ───── */
+    .comparison-card, .solve-card {
+      border-radius: 14px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 12px;
+      overflow: visible;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 0;
+      margin-top: 8px;
+    }
+
+    .compare-label-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lane-label {
+      height: 68px;
+      display: flex;
+      align-items: center;
+    }
+
+    .lane-label-tag {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fff;
+      white-space: nowrap;
+    }
+
+    .lane-label-tag.nora  { color: #b45309; border: 1.5px solid #fdba74; background: #fff7ed; }
+    .lane-label-tag.mateo { color: #047857; border: 1.5px solid #86efac; background: #f0fdf4; }
+    .lane-label-tag.jules { color: #1d4ed8; border: 1.5px solid #93c5fd; background: #eff6ff; }
+
+    .compare-timeline-col {
+      position: relative;
+      padding-bottom: 36px;
+    }
+
+    .compare-axis {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 0; height: 36px;
+      border-top: 3px solid #cbd5e1;
+    }
+
+    .axis-tick {
+      position: absolute;
+      top: -6px; width: 2px; height: 12px;
+      background: #94a3b8;
+      transform: translateX(-50%);
+    }
+
+    .axis-label {
+      position: absolute;
+      top: 10px;
+      transform: translateX(-50%);
+      font-size: 11px; font-weight: 800;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .crime-marker-line {
+      position: absolute;
+      width: 3px;
+      background: #ef4444;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .crime-tag {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 9.5px; font-weight: 900;
+      color: #b91c1c;
+      background: #fff1f2;
+      border: 1.5px solid #fecdd3;
+      border-radius: 999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .suspect-lane {
+      position: relative;
+      height: 68px;
+    }
+
+    .lane-build-hint {
+      position: absolute;
+      top: 2px;
+      left: 10px;
+      font-size: 9px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .lane-workline {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 24px;
+      height: 10px;
+      border-radius: 999px;
+      border: 2px dashed #cbd5e1;
+      background: #fff;
+    }
+
+    .lane-clue-line {
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 14px;
+      border-bottom: 1.5px solid #dbe4ee;
+    }
+
+    .lane-clue-line.one { top: 40px; }
+    .lane-clue-line.two { top: 54px; }
+
+    .lane-bar {
+      position: absolute;
+      height: 8px; top: 22px;
+      border-radius: 999px;
+    }
+
+    .lane-bar.nora  { background: #f59e0b; }
+    .lane-bar.mateo { background: #10b981; }
+    .lane-bar.jules { background: #3b82f6; }
+
+    .lane-dot {
+      position: absolute;
+      top: 18px; width: 16px; height: 16px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 3px solid #fff;
+      box-shadow: 0 1px 3px rgb(15 23 42 / 0.12);
+      z-index: 10;
+    }
+
+    .lane-dot.nora  { background: #d97706; }
+    .lane-dot.mateo { background: #059669; }
+    .lane-dot.jules { background: #2563eb; }
+
+    .lane-note {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 9px; font-weight: 800;
+      line-height: 1.15;
+      text-align: center;
+      padding: 3px 6px;
+      white-space: nowrap;
+      border-radius: 10px;
+      background: rgb(255 255 255 / 0.98);
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+      white-space: normal;
+      z-index: 8;
+    }
+
+    .lane-note.above { top: 0; }
+    .lane-note.below { top: 34px; }
+
+    .lane-note.nora  { color: #b45309; border: 1px solid #fdba74; }
+    .lane-note.mateo { color: #047857; border: 1px solid #86efac; }
+    .lane-note.jules { color: #1d4ed8; border: 1px solid #93c5fd; }
+
+    /* ───── ANSWER LINES ───── */
+    .question-list { margin-bottom: 10px; }
+
+    .answer-line {
+      height: 18px;
+      border-bottom: 1.5px solid #cbd5e1;
+      margin-top: 4px;
+    }
+
+    .answer-line.tall {
+      height: 26px;
+      margin-top: 6px;
+    }
+
+    .long-line {
+      height: 22px;
+      border-bottom: 1.5px solid #cbd5e1;
+      margin-top: 8px;
+    }
+
+    .conclusion-box {
+      margin-top: 10px;
+      border-radius: 12px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .conclusion-title {
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ───── SENTENCE STARTERS ───── */
+    .starters-box {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: #fefce8;
+      border: 1.5px solid #fde68a;
+      padding: 8px 10px;
+    }
+
+    .starters-box h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .starters-list {
+      margin: 0;
+      padding-left: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #78350f;
+      line-height: 1.4;
+    }
+
+    .starters-list li + li { margin-top: 4px; }
+
+    /* ───── WORD BANK ───── */
+    .word-bank {
+      margin-top: 10px;
+      border-radius: 12px;
+      background: #fdf4ff;
+      border: 1.5px solid #e9d5ff;
+      padding: 8px 10px;
+    }
+
+    .word-bank h3 {
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #7e22ce;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .word-bank-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .wb-word {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      font-style: italic;
+      background: #faf5ff;
+      border: 1px solid #d8b4fe;
+      color: #6b21a8;
+    }
+
+    /* ───── DISCUSSION PROMPTS ───── */
+    .discuss-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .discuss-card {
+      border-radius: 12px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .discuss-card h4 {
+      margin: 0 0 4px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .discuss-card p {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.3;
+    }
+
+    .answer-lines-sm {
+      margin-top: 6px;
+    }
+
+    .answer-lines-sm div {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 18px;
+      margin-top: 4px;
+    }
+
+    /* ───── REPORT SECTION ───── */
+    .report-frame {
+      border-radius: 14px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 12px;
+    }
+
+    .report-frame h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .report-prompt {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      margin: 0 0 8px;
+      line-height: 1.35;
+    }
+
+    .report-section-label {
+      margin: 10px 0 4px;
+      font-size: 11px;
+      font-weight: 900;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* New Evidence alert box */
+    .alert-box {
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fef2f2;
+      border: 1.5px solid #fecaca;
+      margin-bottom: 10px;
+    }
+
+    .alert-box h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #991b1b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .alert-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #7f1d1d;
+      line-height: 1.42;
+    }
+
+    .alert-list li + li { margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE 1: Case File + Intro               ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+    <div class="page portrait">
+      <div class="hero">
+        <h1>🔎 Timeline Mystery: Who Took The Tip Jar?</h1>
+        <p>A tip jar disappeared from the back counter at Lago Bistro on Friday night. Your team is the detective squad. Read the clues, rule people out, and find the most likely suspect without overthinking.</p>
+        <div class="roles">
+          <span class="note-chip">👥 Teams Of 3</span>
+          <span class="role-chip">📖 Reader</span>
+          <span class="role-chip">🕒 Time Detective</span>
+          <span class="role-chip">🧩 Evidence Finder</span>
+          <span class="role-chip">🎤 Speaker</span>
+        </div>
+      </div>
+
+      <div class="card case-file">
+        <div class="badge">🔍 Part 1 — The Case</div>
+        <h2 class="section-title">Case File</h2>
+        <p class="section-subtitle">The tip jar disappeared at about <strong>9:15 p.m.</strong> on Friday from the back service counter at Lago Bistro. Only two employees were connected to that area. Your first job is simple: figure out who can be ruled out and who still looks suspicious.</p>
+        <div class="two-col">
+          <div class="box">
+            <h3>📋 Known Facts</h3>
+            <ul class="case-list">
+              <li>The jar was still there at 8:55 p.m.</li>
+              <li>It was gone when the manager checked at 9:15 p.m.</li>
+              <li>The back counter is near the kitchen door and the staff lockers.</li>
+              <li>No customers were allowed in that area.</li>
+              <li>The security camera near the back counter was broken that night.</li>
+              <li>One employee reported hearing a locker door close around <strong>9:12 p.m.</strong></li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>🧩 Clues</h3>
+            <ul class="clue-list">
+              <li>A dishwasher says one suspect had already left the kitchen before 9:00.</li>
+              <li>A camera in the <em>dining room</em> shows one suspect was carrying bread trays at 9:10.</li>
+              <li>One suspect had been waiting near the staff lockers before the jar disappeared.</li>
+              <li>The manager remembers one suspect saying, "I'll be back here in a minute," around 9:05.</li>
+              <li>A server saw one suspect walking quickly from the back hallway toward the parking lot at 9:14.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="vocab-bank">
+          <h3>📚 Key Vocabulary</h3>
+          <div class="vocab-grid">
+            <div class="vocab-def"><strong>alibi</strong> — proof that a person was somewhere else when a crime happened</div>
+            <div class="vocab-def"><strong>suspect</strong> — a person police think may have done something wrong</div>
+            <div class="vocab-def"><strong>evidence</strong> — facts or information that show what really happened</div>
+            <div class="vocab-def"><strong>rule out</strong> — to decide someone probably did not do it</div>
+            <div class="vocab-def"><strong>doesn’t match</strong> — when a story and the facts are different</div>
+            <div class="vocab-def"><strong>witness</strong> — a person who saw or heard something happen</div>
+          </div>
+        </div>
+        <div class="fun-note">
+          <h3>🎮 How To Play</h3>
+          <ul>
+            <li><strong>Round 1:</strong> Read the case and circle the suspect who already looks safest.</li>
+            <li><strong>Round 2:</strong> Read each alibi and choose only the <strong>2 most important time clues</strong>.</li>
+            <li><strong>Round 3:</strong> Compare suspects, read the new evidence, and make one final team decision.</li>
+            <li><strong>Tip:</strong> You only need the strongest clues, not every detail.</li>
+            <li>You do <strong>not</strong> need every detail. Look for what matters around <strong>9:15 p.m.</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE 2: Suspect Alibis                  ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+    <div class="page portrait">
+      <div class="card suspects">
+        <div class="badge">🕵️ Part 2 — Alibis</div>
+        <h2 class="section-title">Suspect Alibis</h2>
+        <p class="section-subtitle">Read each suspect’s story. Find the <strong>2 strongest clues</strong>. Decide: who looks safer, and who looks more suspicious?</p>
+
+        <div class="three-col">
+          <div class="suspect-card">
+            <div class="suspect-left">
+              <div class="suspect-name nora">🟠 Suspect A: Nora</div>
+              <ol class="sentence-list">
+                <li>Nora had already finished her break before 8:55.</li>
+                <li>At 9:05, she told the manager, "I'll be back here in a minute."</li>
+                <li>She was near the staff lockers before 9:10.</li>
+                <li>At 9:12, another worker heard a locker door close near where Nora had been standing.</li>
+                <li>At <strong>9:15 p.m.</strong>, Nora said she was looking for her phone charger near the lockers.</li>
+              </ol>
+              <div class="quick-check">
+                <h4>Team Quick Check</h4>
+                <div class="check-grid">
+                  <div class="check-item"><span class="check-box"></span>Best clue 1: _____________________</div>
+                  <div class="check-item"><span class="check-box"></span>Best clue 2: _____________________</div>
+                  <div class="check-item">Safer or Suspicious: _____________________</div>
+                </div>
+              </div>
+            </div>
+            <div class="suspect-right">
+              <div class="mini-timeline">
+                <div class="mini-tick" style="left: 10%;"></div>
+                <div class="mini-year" style="left: 10%;">8:30</div>
+                <div class="mini-tick" style="left: 34%;"></div>
+                <div class="mini-year" style="left: 34%;">8:55</div>
+                <div class="mini-tick" style="left: 58%;"></div>
+                <div class="mini-year" style="left: 58%;">9:05</div>
+                <div class="mini-tick" style="left: 84%;"></div>
+                <div class="mini-year" style="left: 84%;">9:15</div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="suspect-card">
+            <div class="suspect-left">
+              <div class="suspect-name mateo">🟢 Suspect B: Mateo</div>
+              <ol class="sentence-list">
+                <li>Mateo had already left the kitchen before 9:00.</li>
+                <li>At <strong>9:10 p.m.</strong>, he was carrying bread trays in the dining room.</li>
+                <li>At <strong>9:12 p.m.</strong>, a camera shows him near table 6.</li>
+                <li>By <strong>9:15 p.m.</strong>, he had started clearing dessert plates at table 8.</li>
+                <li>Two servers confirmed Mateo had been in the dining room the whole time between 9:00 and 9:20.</li>
+              </ol>
+              <div class="quick-check">
+                <h4>Team Quick Check</h4>
+                <div class="check-grid">
+                  <div class="check-item"><span class="check-box"></span>Best clue 1: _____________________</div>
+                  <div class="check-item"><span class="check-box"></span>Best clue 2: _____________________</div>
+                  <div class="check-item">Safer or Suspicious: _____________________</div>
+                </div>
+              </div>
+            </div>
+            <div class="suspect-right">
+              <div class="mini-timeline">
+                <div class="mini-tick" style="left: 10%;"></div>
+                <div class="mini-year" style="left: 10%;">8:30</div>
+                <div class="mini-tick" style="left: 34%;"></div>
+                <div class="mini-year" style="left: 34%;">8:55</div>
+                <div class="mini-tick" style="left: 58%;"></div>
+                <div class="mini-year" style="left: 58%;">9:05</div>
+                <div class="mini-tick" style="left: 84%;"></div>
+                <div class="mini-year" style="left: 84%;">9:15</div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE 3: Comparison                       ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+    <div class="page landscape">
+      <div class="card compare">
+        <div class="badge">📊 Part 3 — Compare</div>
+        <h2 class="section-title">Blank Team Timeline</h2>
+        <p class="section-subtitle">Use this blank timeline to plot both suspects and your best evidence.</p>
+
+        <div class="comparison-card">
+          <h3>🕒 Build Your Team Timeline</h3>
+          <p class="section-subtitle" style="margin-bottom: 8px;">Add the important times for Nora and Mateo. Then mark the crime time at <strong>9:15 p.m.</strong></p>
+          <div class="compare-timeline-col" style="min-height: 280px;">
+            <div class="compare-axis">
+              <div class="axis-tick" style="left: 10%;"></div>
+              <div class="axis-label" style="left: 10%;">8:30</div>
+              <div class="axis-tick" style="left: 30%;"></div>
+              <div class="axis-label" style="left: 30%;">8:55</div>
+              <div class="axis-tick" style="left: 50%;"></div>
+              <div class="axis-label" style="left: 50%;">9:05</div>
+              <div class="axis-tick" style="left: 66%;"></div>
+              <div class="axis-label" style="left: 66%;">9:15</div>
+              <div class="axis-tick" style="left: 86%;"></div>
+              <div class="axis-label" style="left: 86%;">9:30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE 4: New Evidence                    ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+    <div class="page landscape">
+      <div class="card new-evidence">
+        <div class="badge">🚨 Part 4 — New Evidence</div>
+        <h2 class="section-title">Breaking News: New Evidence Arrives!</h2>
+        <p class="section-subtitle">Plot twist. The manager found more evidence. Read it, then make a new decision. If your first idea was wrong, that is good detective work, not failure.</p>
+
+        <div class="alert-box">
+          <h3>⚠️ New Evidence</h3>
+          <ul class="alert-list">
+            <li>Nora's phone records show she sent a text message at <strong>9:13 p.m.</strong> from <em>outside the building</em>, near the parking lot.</li>
+            <li>A receipt from Mateo's table shows he took a credit card payment at <strong>9:11 p.m.</strong> in the dining room.</li>
+          </ul>
+        </div>
+
+        <div class="two-col">
+          <div class="box">
+            <h3>❓ New Evidence Questions</h3>
+            <ol class="question-list">
+              <li>Which new clue helps Mateo?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+              <li>Which new clue helps Nora?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+              <li>Who looks more suspicious now?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+            </ol>
+          </div>
+          <div class="box">
+            <h3>📝 Update Your Timeline</h3>
+            <p class="section-subtitle" style="margin-bottom: 6px;">Add the new times and locations to your timeline from Part 3. Mark anything that doesn’t match with a ❌.</p>
+            <ol class="question-list">
+              <li>Who can your team rule out now?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+              <li>Who is still possible?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+              <li>Who is your top suspect now?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║  PAGE 5: Final Verdict                   ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+    <div class="page landscape">
+
+      <div class="card solve">
+        <div class="badge">⚖️ Part 5 — Verdict</div>
+        <h2 class="section-title">Solve The Mystery</h2>
+        <p class="section-subtitle">Make your final decision. Use one strong clue and explain it simply.</p>
+
+        <div class="solve-card">
+          <h3>❓ Final Questions</h3>
+          <ol class="question-list">
+            <li>Who took the tip jar?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+            <li>What is your best clue, and why is it important?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+            <li>Who can you rule out?<div class="answer-line"></div><div class="answer-line tall"></div></li>
+          </ol>
+          <div class="word-bank">
+            <h3>🧩 Word Bank</h3>
+            <div class="word-bank-words">
+              <span class="wb-word">alibi</span>
+              <span class="wb-word">evidence</span>
+              <span class="wb-word">doesn’t match</span>
+              <span class="wb-word">rule out</span>
+              <span class="wb-word">witness</span>
+              <span class="wb-word">suspicious</span>
+              <span class="wb-word">confirmed</span>
+              <span class="wb-word">before</span>
+              <span class="wb-word">after</span>
+              <span class="wb-word">at that time</span>
+              <span class="wb-word">according to</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+</html>

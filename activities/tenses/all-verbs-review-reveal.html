@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verb Forms Review: Quiz 1-7 (Click to Reveal)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --ink: #1a1a1a; --gray: #444; --light: #666; --line: #333; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--ink); background: #fff; padding: 20px; line-height: 1.45; font-size: 14px; }
+    .sheet { max-width: 8in; margin: 0 auto; background: #fff; padding: 0.45in 0.55in; }
+    .header {
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .header-fields {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      font-size: 13px;
+    }
+    .field { display: flex; align-items: baseline; gap: 5px; }
+    .field label { font-weight: bold; }
+    .field-line { border-bottom: 1px solid var(--ink); width: 160px; height: 16px; }
+    .instruction { font-size: 12px; color: var(--light); font-style: italic; margin-bottom: 12px; }
+    .verb-forms-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
+    .verb-forms-table th, .verb-forms-table td { border: 1px solid var(--ink); padding: 10px 12px; }
+    .verb-forms-table th { font-weight: bold; text-align: center; background: #e0e0e0; }
+    .verb-forms-table td.reveal-cell {
+      cursor: pointer;
+      text-align: center;
+      min-height: 36px;
+      background: #f8f8f8;
+      transition: background 0.2s;
+    }
+    .verb-forms-table td.reveal-cell:hover {
+      background: #eee;
+    }
+    .verb-forms-table td.reveal-cell.revealed {
+      background: #fff;
+      cursor: default;
+      font-weight: 500;
+    }
+    @media print {
+      @page { size: letter; margin: 0.45in; }
+      body { background: #fff; padding: 0; }
+      .sheet { padding: 0; max-width: none; }
+      .verb-forms-table td.reveal-cell.revealed { background: #fff; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="header">
+      <h1>Verb Forms Review: Quizzes 1-7</h1>
+      <div class="header-fields">
+        <div class="field">
+          <label>Name</label>
+          <div class="field-line" style="width: 160px;"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="instruction">
+      Click each box to reveal the answer. Try to recall the form before clicking!
+    </div>
+
+    <table class="verb-forms-table">
+      <thead>
+        <tr>
+          <th>V1<br>(Base)</th>
+          <th>V1 (3rd)<br>(he/she/it)</th>
+          <th>V1-ing<br>(present)</th>
+          <th>V2<br>(past)</th>
+          <th>V3<br>(participle)</th>
+        </tr>
+      </thead>
+      <tbody id="verb-tbody">
+        <!-- Populated by JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const verbData = [
+      ['be (am/are)', 'is', 'being', 'was/were', 'been'],
+      ['have', 'has', 'having', 'had', 'had'],
+      ['do', 'does', 'doing', 'did', 'done'],
+      ['make', 'makes', 'making', 'made', 'made'],
+      ['go', 'goes', 'going', 'went', 'gone'],
+      ['come', 'comes', 'coming', 'came', 'come'],
+      ['find', 'finds', 'finding', 'found', 'found'],
+      ['buy', 'buys', 'buying', 'bought', 'bought'],
+      ['keep', 'keeps', 'keeping', 'kept', 'kept'],
+      ['build', 'builds', 'building', 'built', 'built'],
+      ['pay', 'pays', 'paying', 'paid', 'paid'],
+      ['hold', 'holds', 'holding', 'held', 'held'],
+      ['break', 'breaks', 'breaking', 'broke', 'broken'],
+      ['leave', 'leaves', 'leaving', 'left', 'left'],
+      ['sell', 'sells', 'selling', 'sold', 'sold'],
+      ['burst', 'bursts', 'bursting', 'burst', 'burst'],
+      ['freeze', 'freezes', 'freezing', 'froze', 'frozen'],
+      ['leak', 'leaks', 'leaking', 'leaked', 'leaked'],
+      ['call', 'calls', 'calling', 'called', 'called'],
+      ['fix', 'fixes', 'fixing', 'fixed', 'fixed'],
+      ['sleep', 'sleeps', 'sleeping', 'slept', 'slept'],
+      ['wake', 'wakes', 'waking', 'woke', 'woken'],
+      ['eat', 'eats', 'eating', 'ate', 'eaten'],
+      ['drink', 'drinks', 'drinking', 'drank', 'drunk'],
+      ['sit', 'sits', 'sitting', 'sat', 'sat'],
+      ['spend', 'spends', 'spending', 'spent', 'spent'],
+      ['cost', 'costs', 'costing', 'cost', 'cost'],
+      ['lend', 'lends', 'lending', 'lent', 'lent'],
+      ['give', 'gives', 'giving', 'gave', 'given'],
+      ['send', 'sends', 'sending', 'sent', 'sent'],
+      ['write', 'writes', 'writing', 'wrote', 'written'],
+      ['submit', 'submits', 'submitting', 'submitted', 'submitted'],
+      ['work', 'works', 'working', 'worked', 'worked'],
+      ['apply', 'applies', 'applying', 'applied', 'applied'],
+      ['meet', 'meets', 'meeting', 'met', 'met']
+    ];
+
+    const tbody = document.getElementById('verb-tbody');
+
+    // Exact pre-filled column for each row (from original all-verbs-review.html)
+    const hintCols = [0,1,2,3,4, 1,2,3,4,0, 1,2,3,4,0, 1,2,3,4,0, 1,2,3,4,0, 1,2,3,4,0, 1,2,3,4,0];
+    verbData.forEach((row, rowIndex) => {
+      const hintCol = hintCols[rowIndex];
+      const tr = document.createElement('tr');
+      row.forEach((answer, colIndex) => {
+        const td = document.createElement('td');
+        td.className = 'reveal-cell';
+        td.dataset.answer = answer;
+        const isPreFilled = colIndex === hintCol;
+        if (isPreFilled) {
+          td.textContent = answer;
+          td.classList.add('revealed');
+        }
+        td.addEventListener('click', () => {
+          if (!td.classList.contains('revealed')) {
+            td.textContent = answer;
+            td.classList.add('revealed');
+          }
+        });
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>

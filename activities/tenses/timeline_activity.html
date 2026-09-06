@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Talking About Your Timeline</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    @page {
+      size: letter portrait;
+      margin: 0.3in;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 8in; /* Matches standard portrait width inside margins */
+      margin: 0 auto;
+      padding: 0;
+      background: #fff;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .box, .footer-card, .example-box { break-inside: avoid; }
+      .page-break { page-break-before: always; break-before: page; margin-top: 0.5in; }
+    }
+
+    /* Print utility to force page break */
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+      margin-top: 30px;
+    }
+
+    /* Visual Timeline Header */
+    .timeline-visual {
+      position: relative;
+      width: 100%;
+      margin: 0 auto 8px;
+      padding: 4px 0;
+      display: grid;
+      grid-template-columns: 98px 1fr 1fr 1fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .timeline-visual::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      right: 10px;
+      height: 3px;
+      background: #d7e0ea;
+      z-index: 1;
+      transform: translateY(-50%);
+      border-radius: 2px;
+    }
+
+    .tl-node {
+      position: relative;
+      z-index: 2;
+      background: #fff;
+      padding: 3px 14px;
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 14px;
+      border: 2px solid;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      justify-self: center;
+    }
+
+    .tl-spacer {
+      width: 100%;
+    }
+
+    .tl-node.past { border-color: #f59e0b; color: #b45309; background: #fffdf7; }
+    .tl-node.present { border-color: #34d399; color: #047857; background: #f5fffa; box-shadow: 0 0 0 3px #dcfce7; }
+    .tl-node.future { border-color: #60a5fa; color: #1d4ed8; background: #f8fbff; }
+
+    .tense-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tense-row {
+      display: grid;
+      grid-template-columns: 98px 1fr 1fr 1fr;
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .row-head {
+      border-radius: 12px;
+      padding: 8px 7px;
+      background: #f8fafc;
+      border: 1px solid #dbe4ee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .row-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.75px;
+      line-height: 1.05;
+    }
+
+    .row-goal {
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #64748b;
+      line-height: 1.15;
+    }
+
+    .cell {
+      border-radius: 12px;
+      padding: 6px;
+    }
+
+    /* Past Styling */
+    .cell.col-past { background: #fffdf7; border: 2px solid #fde7a8; }
+    .cell.col-past .box { background: #fff; border-color: #f7d77a; }
+    .cell.col-past .tag-use { background: #fff5d9; color: #d97706; }
+    .cell.col-past .prompt { color: #92400e; }
+    .cell.col-past .words-container { background: #fff7de; color: #9a5a14; }
+    
+    /* Present Styling */
+    .cell.col-present { background: #f6fffb; border: 2px solid #b9efd8; }
+    .cell.col-present .box { background: #fff; border-color: #85e7bc; }
+    .cell.col-present .tag-use { background: #dcfce9; color: #059669; }
+    .cell.col-present .prompt { color: #065f46; }
+    .cell.col-present .words-container { background: #def9eb; color: #166534; }
+
+    /* Future Styling */
+    .cell.col-future { background: #f8fbff; border: 2px solid #cfe0fb; }
+    .cell.col-future .box { background: #fff; border-color: #a8cdfc; }
+    .cell.col-future .tag-use { background: #e5f0ff; color: #2563eb; }
+    .cell.col-future .prompt { color: #1e40af; }
+    .cell.col-future .words-container { background: #e6f0ff; color: #2347a8; }
+
+    .box {
+      margin-bottom: 3px;
+      padding: 4px 5px;
+      border: 1.5px solid;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.03);
+      display: flex;
+      flex-direction: column;
+    }
+    .box:last-child { margin-bottom: 0; }
+
+    .prompt {
+      font-size: 9.5px;
+      font-weight: 800;
+      margin-bottom: 1px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.45px;
+      opacity: 0.72;
+    }
+
+    .use-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 1px;
+    }
+
+    .tag-use {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 4px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .use-name {
+      font-size: 11px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .mini-timeline {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 1px 0 2px;
+      overflow: visible;
+    }
+
+    /* Formulas Grid */
+    .formulas {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      margin: 1px 0;
+      padding: 2px 3px;
+      background: #fbfdff;
+      border: 1px solid #d9e2ec;
+      border-radius: 6px;
+    }
+    
+    .formula-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      font-size: 8.5px;
+      font-weight: 800;
+      color: #475569;
+      line-height: 1.1;
+    }
+    
+    .formula-icon {
+      font-weight: 900;
+      width: 12px;
+      text-align: center;
+      flex-shrink: 0;
+      border-radius: 3px;
+      font-size: 8px;
+      padding: 1px 0;
+      display: inline-block;
+    }
+    
+    .icon-pos { background: #d1fae5; color: #065f46; }
+    .icon-neg { background: #ffe4e6; color: #9f1239; }
+    .icon-que { background: #ede9fe; color: #5b21b6; }
+
+    /* Time Words Container */
+    .words-container {
+      margin: 1px 0;
+      padding: 3px 4px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      border: 1px solid rgb(255 255 255 / 0.65);
+    }
+
+    .words-label {
+      font-weight: 900;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      opacity: 0.72;
+    }
+
+    .words-list {
+      font-size: 9.5px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .example-sent {
+      font-size: 9.8px;
+      font-weight: 700;
+      color: #475569;
+      font-style: italic;
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Chips at the bottom */
+    .chips-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+      padding-top: 2px;
+      border-top: 1px dotted #d7dee8;
+    }
+
+    .chips-bottom span {
+      font-size: 7.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      cursor: help;
+      box-shadow: none;
+    }
+
+    .cell.col-past .tag-two-verbs {
+      background: #fff4e7;
+      color: #b45309;
+      border: 1px solid #f9c98c;
+    }
+    .cell.col-future .tag-two-verbs {
+      background: #edf4ff;
+      color: #1d4ed8;
+      border: 1px solid #bdd6fb;
+    }
+
+    .tag-action {
+      background: #fff3f8;
+      color: #be185d;
+      border: 1px solid #f6c7df;
+    }
+
+    .tag-irregular {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .tag-warning {
+      background: #fef08a;
+      color: #854d0e;
+      border: 1px solid #fde047;
+    }
+
+    @media print {
+      .tense-row { break-inside: avoid; }
+    }
+
+    /* PAGE TWO ELEMENTS */
+    .page-two-content {
+      padding: 10px;
+    }
+
+    .example-box {
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-top: 10px;
+      background: #f1f5f9;
+      border: 2px dashed #cbd5e1;
+    }
+
+    .example-box h2 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      color: #0f172a;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+    }
+
+    .example-subtitle {
+      margin: 0 0 10px;
+      font-size: 12.5px;
+      color: #64748b;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .example-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .example-group {
+      margin-top: 6px;
+    }
+
+    .example-group-label {
+      margin: 0 0 4px;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+    
+    .example-tip {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #cbd5e1;
+      font-size: 12px;
+      color: #64748b;
+      font-style: italic;
+      text-align: center;
+    }
+    
+    .example-line {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .example-line::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #94a3b8;
+      font-weight: 900;
+    }
+
+    /* Verb Highlighting Matching Column Colors */
+    .v-past { color: #b45309; font-weight: 800; }
+    .v-present { color: #059669; font-weight: 800; }
+    .v-future { color: #1d4ed8; font-weight: 800; }
+
+    .footer {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .footer-card {
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .footer-card.challenge {
+      background: #faf5ff;
+      border: 2px solid #e9d5ff;
+    }
+    .footer-card.challenge h4 { color: #7e22ce; margin: 0 0 6px; font-size: 16px; }
+
+    .footer-card.remember {
+      background: #fdf2f8;
+      border: 2px solid #fbcfe8;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .footer-card.remember h4 { color: #be185d; margin: 0 0 6px; font-size: 16px; }
+
+    .footer-card h4 {
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .challenge-flex {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .challenge-list {
+      margin: 0;
+      padding: 0 0 0 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4c1d95;
+    }
+    
+    .challenge-list li {
+      margin-bottom: 2px;
+    }
+
+    .challenge-bonus {
+      background: #fff;
+      border: 1px solid #d8b4fe;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #6b21a8;
+    }
+
+    .challenge-bonus-title {
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      color: #9333ea;
+    }
+
+    .note {
+      font-weight: 800;
+      font-size: 16px;
+      color: #831843;
+      margin-bottom: 2px;
+    }
+    
+    .subtext {
+      font-size: 14px;
+      color: #9d174d;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <!-- Visual Timeline Header (Replaces the large text titles) -->
+    <div class="timeline-visual">
+      <div class="tl-spacer" aria-hidden="true"></div>
+      <div class="tl-node past">🕰️ Past</div>
+      <div class="tl-node present">📍 Now</div>
+      <div class="tl-node future">🔮 Future</div>
+    </div>
+
+    <div class="tense-grid">
+      <div class="tense-row">
+        <div class="row-head">
+          <div class="row-title">Simple</div>
+          <div class="row-goal">Basic statement</div>
+        </div>
+        <div class="cell col-past">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Past Simple</span></div>
+            <div class="prompt">Basic past event</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="65" cy="16" r="6" fill="#d97706"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + V2</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + did not + V1</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Did + subject + V1?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">yesterday, last ___, ___ ago</div>
+            </div>
+            <div class="example-sent">"I moved to Chelsea in 2022."</div>
+          </div>
+        </div>
+        <div class="cell col-present">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Present Simple</span></div>
+            <div class="prompt">Basic present fact or routine</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#059669" stroke-width="3"/>
+              <circle cx="50" cy="16" r="4" fill="#047857"/>
+              <circle cx="90" cy="16" r="4" fill="#047857"/>
+              <circle cx="170" cy="16" r="4" fill="#047857"/>
+              <circle cx="210" cy="16" r="4" fill="#047857"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + V1 or V1-3rd</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + do(es) not + V1</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Do(es) + subject + V1?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">always, usually, never, every ___</div>
+            </div>
+            <div class="example-sent">"I live in Revere now."</div>
+          </div>
+        </div>
+        <div class="cell col-future">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Future Simple</span></div>
+            <div class="prompt">Basic future statement</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="195" cy="16" r="6" fill="#2563eb"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + will + V1</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + will not + V1</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Will + subject + V1?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">tomorrow, next ___, soon</div>
+            </div>
+            <div class="example-sent">"I will live in the U.S. in 2027."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tense-row">
+        <div class="row-head">
+          <div class="row-title">Cont.</div>
+          <div class="row-goal">Action in progress</div>
+        </div>
+        <div class="cell col-past">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Past Continuous</span></div>
+            <div class="prompt">Past action in progress</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="30" y1="16" x2="100" y2="16" stroke="#d97706" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + was/were + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + was/were not + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Was/Were + subject + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">when, while, as, at 8pm</div>
+            </div>
+            <div class="example-sent">"I was living in El Salvador when I decided to move."</div>
+            <div class="chips-bottom">
+              <span class="tag-two-verbs" title="Usually requires another action or specific time in the sentence">⛓️ 2 Verbs</span>
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+        <div class="cell col-present">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Present Cont.</span></div>
+            <div class="prompt">Action happening now</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="80" y1="16" x2="180" y2="16" stroke="#059669" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + am/is/are + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + am/is/are not + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Am/Is/Are + sub + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">now, right now, at the moment</div>
+            </div>
+            <div class="example-sent">"I am studying English right now."</div>
+            <div class="chips-bottom">
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+        <div class="cell col-future">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Future Cont.</span></div>
+            <div class="prompt">Future action in progress</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="160" y1="16" x2="230" y2="16" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + will be + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + will not be + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Will + subject + be + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">at 8pm tomorrow, this time next ___</div>
+            </div>
+            <div class="example-sent">"I will be living in the U.S. next year."</div>
+            <div class="chips-bottom">
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tense-row">
+        <div class="row-head">
+          <div class="row-title">Perfect</div>
+          <div class="row-goal">Connection or completion</div>
+        </div>
+        <div class="cell col-past">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Past Perfect</span></div>
+            <div class="prompt">Earlier past event or result</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="50" cy="16" r="5" fill="#d97706"/>
+              <path d="M 50 16 Q 75 -2 100 16" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="4 4"/>
+              <circle cx="100" cy="16" r="6" fill="#b45309"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + had + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + had not + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Had + subject + V3?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">before, after, by the time, already</div>
+            </div>
+            <div class="example-sent">"I had lived in Chelsea before I moved to Revere."</div>
+            <div class="chips-bottom">
+              <span class="tag-two-verbs" title="Requires another past action for context">⛓️ 2 Verbs</span>
+            </div>
+          </div>
+        </div>
+        <div class="cell col-present">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Present Perfect</span></div>
+            <div class="prompt">Past connected to now</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="60" cy="16" r="5" fill="#059669"/>
+              <path d="M 60 16 Q 95 -6 130 16" fill="none" stroke="#059669" stroke-width="3"/>
+              <circle cx="130" cy="16" r="6" fill="#047857"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + have/has + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + have/has not + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Have/Has + subject + V3?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">recently, already, yet, since, for</div>
+            </div>
+            <div class="example-sent">"I have lived in Revere since 2024."</div>
+          </div>
+        </div>
+        <div class="cell col-future">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Future Perfect</span></div>
+            <div class="prompt">Completed by a future point</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <circle cx="160" cy="16" r="5" fill="#2563eb"/>
+              <path d="M 160 16 Q 185 -2 210 16" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="4 4"/>
+              <circle cx="210" cy="16" r="6" fill="#1d4ed8"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + will have + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + will not have + V3</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Will + subject + have + V3?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">by next ___, by the time, by 2050</div>
+            </div>
+            <div class="example-sent">"I will have finished school by 2027."</div>
+            <div class="chips-bottom">
+              <span class="tag-two-verbs" title="Requires another future action or time for context">⛓️ 2 Verbs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tense-row">
+        <div class="row-head">
+          <div class="row-title">Perf. Cont.</div>
+          <div class="row-goal">Duration up to a point</div>
+        </div>
+        <div class="cell col-past">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Past Perf. Cont.</span></div>
+            <div class="prompt">Duration before a past point</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="30" y1="16" x2="90" y2="16" stroke="#d97706" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="90" cy="16" r="6" fill="#b45309"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>subject + had been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>subject + had not been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Had + sub + been + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">for ___ hours, since, before</div>
+            </div>
+            <div class="example-sent">"I had been living in El Salvador before 2022."</div>
+            <div class="chips-bottom">
+              <span class="tag-two-verbs" title="Requires another past action for context">⛓️ 2 Verbs</span>
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+        <div class="cell col-present">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Pres. Perf. Cont.</span></div>
+            <div class="prompt">Duration continuing until now</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="60" y1="16" x2="130" y2="16" stroke="#059669" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="130" cy="16" r="6" fill="#047857"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>sub. + have/has been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>sub. + have/has not been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Have/has + sub. + been + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">all day, lately, since, for</div>
+            </div>
+            <div class="example-sent">"I have been living in Revere for 2 years."</div>
+            <div class="chips-bottom">
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+        <div class="cell col-future">
+          <div class="box">
+            <div class="use-row"><span class="tag-use">Use</span><span class="use-name">Future Perf. Cont.</span></div>
+            <div class="prompt">Duration up to a future point</div>
+            <svg class="mini-timeline" viewBox="0 0 260 32">
+              <line x1="0" y1="16" x2="260" y2="16" stroke="#cbd5e1" stroke-width="3"/>
+              <line x1="130" y1="8" x2="130" y2="24" stroke="#94a3b8" stroke-width="3"/>
+              <line x1="150" y1="16" x2="220" y2="16" stroke="#2563eb" stroke-width="6" stroke-linecap="round" stroke-dasharray="8 5"/>
+              <circle cx="220" cy="16" r="6" fill="#1d4ed8"/>
+            </svg>
+            <div class="formulas">
+              <div class="formula-row"><span class="formula-icon icon-pos">+</span><span>sub. + will have been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-neg">-</span><span>sub. + will not have been + V1-ing</span></div>
+              <div class="formula-row"><span class="formula-icon icon-que">?</span><span>Will + sub. + have been + V1-ing?</span></div>
+            </div>
+            <div class="words-container">
+              <div class="words-label">⏳ Time words</div>
+              <div class="words-list">for ___ hours/yrs by the time...</div>
+            </div>
+            <div class="example-sent">"By 2027, I will have been living in the U.S. for 5 years."</div>
+            <div class="chips-bottom">
+              <span class="tag-two-verbs" title="Requires another future action or time for context">⛓️ 2 Verbs</span>
+              <span class="tag-action" title="Do not use with feeling, thought, or sense verbs">🏃 Action</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE TWO CONTENT -->
+    <div class="page-break">
+      <div class="page-two-content">
+        <div class="example-box">
+          <h2>⭐ Building a Timeline of Where You Have Lived</h2>
+          <p class="example-subtitle">The same timeline can be described in different ways.</p>
+          
+          <!-- Master Comparison Timeline -->
+          <svg class="master-timeline" viewBox="0 10 800 180" style="width: 100%; height: auto; margin-bottom: 14px; overflow: visible;">
+            <!-- Main Axis -->
+            <line x1="50" y1="110" x2="750" y2="110" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
+            
+            <!-- Year Markers & Vertical Ticks -->
+            <g font-family="Nunito" font-size="12" font-weight="800" fill="#94a3b8">
+              <text x="100" y="135" text-anchor="middle">2021</text>
+              <text x="200" y="135" text-anchor="middle">2022</text>
+              <text x="300" y="135" text-anchor="middle">2023</text>
+              <text x="400" y="135" text-anchor="middle">2024</text>
+              <text x="500" y="135" text-anchor="middle">2025</text>
+              <text x="700" y="135" text-anchor="middle">2027</text>
+              
+              <!-- NOW MARKER -->
+              <text x="600" y="135" text-anchor="middle" fill="#059669" font-weight="900" font-size="14">2026 (NOW)</text>
+              
+              <line x1="100" y1="105" x2="100" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+              <line x1="200" y1="105" x2="200" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+              <line x1="300" y1="105" x2="300" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+              <line x1="400" y1="105" x2="400" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+              <line x1="500" y1="105" x2="500" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+              <line x1="600" y1="90" x2="600" y2="120" stroke="#059669" stroke-width="4"/>
+              <line x1="700" y1="105" x2="700" y2="115" stroke="#cbd5e1" stroke-width="2"/>
+            </g>
+
+            <!-- 1. Had been living in El Salvador (Top Layer) -->
+            <line x1="50" y1="35" x2="200" y2="35" stroke="#fde68a" stroke-width="6" stroke-linecap="round"/>
+            <text x="50" y="27" font-family="Nunito" font-size="10.5" font-weight="900" fill="#b45309">Had been living in El Salvador (before 2022)</text>
+
+            <!-- 2. Finishing High School (Ends before 2022) -->
+            <line x1="100" y1="65" x2="190" y2="65" stroke="#f59e0b" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+            <text x="100" y="55" font-family="Nunito" font-size="11" font-weight="900" fill="#b45309">...finished school...</text>
+
+            <!-- 3. Moved to Chelsea (2022) -->
+            <circle cx="200" cy="110" r="8" fill="#d97706" stroke="#fff" stroke-width="3"/>
+            <text x="170" y="100" text-anchor="middle" font-family="Nunito" font-size="10" font-weight="900" fill="#92400e">MOVED TO CHELSEA</text>
+
+            <!-- 3b. Moved to Revere (2024) -->
+            <circle cx="400" cy="110" r="8" fill="#d97706" stroke="#fff" stroke-width="3"/>
+            <text x="400" y="100" text-anchor="middle" font-family="Nunito" font-size="10" font-weight="900" fill="#92400e">MOVED TO REVERE</text>
+
+            <!-- 4. Have lived in Revere since 2024 (Arc) -->
+            <path d="M 400 110 Q 500 60 600 110" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="8 4" opacity="0.7"/>
+            <text x="500" y="70" text-anchor="middle" font-family="Nunito" font-size="11" font-weight="900" fill="#047857">I have lived in Revere since 2024</text>
+
+            <!-- 5. Will have been living in U.S. for 5 years by 2027 (Bottom Layer) -->
+            <line x1="200" y1="165" x2="700" y2="165" stroke="#3b82f6" stroke-width="8" stroke-linecap="round"/>
+            <circle cx="700" cy="165" r="7" fill="#1d4ed8"/>
+            <text x="450" y="182" text-anchor="middle" font-family="Nunito" font-size="12" font-weight="900" fill="#1e40af">"By 2027, I will have been living in the U.S. for 5 years."</text>
+          </svg>
+
+          <div class="example-lines">
+            <div class="example-group">
+              <div class="example-group-label">Basic Facts</div>
+              <div class="example-line">I <span class="v-past">lived</span> in El Salvador. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Past)</span></div>
+              <div class="example-line">I <span class="v-past">moved</span> to Chelsea in 2022. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Past)</span></div>
+              <div class="example-line">I <span class="v-past">moved</span> to Revere in 2024. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Past)</span></div>
+              <div class="example-line">Now I <span class="v-present">live</span> in Revere. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Present)</span></div>
+            </div>
+            <div class="example-group">
+              <div class="example-group-label">More Detailed Past</div>
+              <div class="example-line">I <span class="v-past">finished</span> high school before I <span class="v-past">moved</span> to Chelsea. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Past)</span></div>
+              <div class="example-line">I <span class="v-past">had just finished</span> high school when I <span class="v-past">moved</span> to Chelsea. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Past Perfect)</span></div>
+              <div class="example-line">I <span class="v-past">lived</span> in Chelsea from 2022 to 2024. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Past)</span></div>
+              <div class="example-line">I <span class="v-past">had lived</span> in Chelsea before I <span class="v-past">moved</span> to Revere. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Past Perfect)</span></div>
+            </div>
+            <div class="example-group">
+              <div class="example-group-label">Present And Future Connection</div>
+              <div class="example-line">I <span class="v-present">have lived</span> in Revere since 2024. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Present Perfect)</span></div>
+              <div class="example-line">I <span class="v-present">have been living</span> in Revere for 2 years. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Pres. Perfect Cont.)</span></div>
+              <div class="example-line">In 2027, I <span class="v-future">will live</span> in the U.S. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Simple Future)</span></div>
+              <div class="example-line">By 2027, I <span class="v-future">will have been living</span> in the U.S. for 5 years. <span style="font-size: 10px; color: #94a3b8; font-weight: 800;">(Future Perfect Cont.)</span></div>
+            </div>
+          </div>
+
+          <div class="example-tip">
+            <strong>Try this:</strong> Start with a simple sentence like "I moved to Revere in 2024." Then make it more detailed: "I have lived in Revere since 2024."
+          </div>
+        </div>
+
+          <div class="footer">
+            <div class="footer-card remember">
+              <h4>🧠 Remember</h4>
+              <div class="note">
+                You are not choosing the right tense.
+              </div>
+              <div class="subtext">
+                You are choosing your focus.
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

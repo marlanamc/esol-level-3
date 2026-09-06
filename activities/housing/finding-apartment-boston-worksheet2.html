@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --ink: #111;
+      --muted: #444;
+      --border: #999;
+      --light: #eee;
+    }
+
+    @page {
+      size: Letter;
+      margin: 0.5in;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
+      color: var(--ink);
+      background: #fff;
+      margin: 0;
+      padding: 0.5in;
+      max-width: 8.5in;
+    }
+
+    h1 {
+      font-size: 12pt;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 0 2pt;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 4pt;
+    }
+    .subtitle {
+      font-size: 9pt;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 10pt;
+    }
+    .skills-box {
+      font-size: 9pt;
+      border: 1px solid var(--border);
+      padding: 6pt 10pt;
+      margin-bottom: 10pt;
+      background: var(--light);
+    }
+    .skills-box strong { font-size: 9pt; }
+
+    h2 {
+      font-size: 11pt;
+      font-weight: bold;
+      margin: 10pt 0 3pt;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2pt;
+    }
+    .directions {
+      font-size: 9pt;
+      color: var(--muted);
+      margin-bottom: 6pt;
+    }
+
+    .listing {
+      margin-bottom: 6pt;
+      page-break-inside: avoid;
+    }
+    .listing-title {
+      font-weight: bold;
+      font-size: 10pt;
+      margin-bottom: 2pt;
+    }
+    .listing ol { margin: 0; padding-left: 18pt; }
+    .listing li { margin: 4pt 0; }
+    .answer-line { border-bottom: 1px solid var(--ink); min-height: 1.2em; margin-top: 2pt; display: block; }
+
+    .listings-grid {
+      column-count: 2;
+      column-gap: 20pt;
+      column-fill: auto;
+    }
+    .listings-grid .listing {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .language-check {
+      font-size: 10pt;
+      margin-bottom: 10pt;
+    }
+    .language-check .row { margin: 4pt 0; }
+    .language-check .line { border-bottom: 1px solid var(--ink); display: inline-block; min-width: 2.2in; min-height: 1em; margin-left: 4pt; vertical-align: bottom; }
+
+    .personas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6pt 12pt;
+    }
+    .persona {
+      border: 1px solid var(--border);
+      padding: 6pt 8pt;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    .persona-title { font-weight: bold; margin-bottom: 2pt; }
+    .persona p { margin: 2pt 0; }
+
+    .challenge-box {
+      border: 1px solid var(--border);
+      padding: 6pt 10pt;
+      margin: 6pt 0 10pt;
+      font-size: 9pt;
+    }
+    .challenge-box strong { display: block; margin-bottom: 2pt; }
+    .challenge-box .example { font-style: italic; margin-top: 4pt; }
+
+    .discussion ol { margin: 4pt 0; padding-left: 18pt; }
+    .discussion li { margin: 3pt 0; }
+
+    .optional {
+      font-size: 9pt;
+      margin-top: 10pt;
+      padding-top: 6pt;
+      border-top: 1px dashed var(--border);
+    }
+    .optional .example { font-style: italic; margin-top: 2pt; }
+
+    @media print {
+      body { padding: 0; }
+      h2 { margin-top: 8pt; }
+      .listing, .persona { page-break-inside: avoid; }
+      .skills-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div style="margin-bottom: 10pt; font-size: 10pt;">
+    <strong>Name:</strong> <span style="border-bottom: 1px solid var(--ink); display: inline-block; min-width: 3in; min-height: 1.2em; margin-left: 8pt;"></span>
+</div> 
+
+<h1>Finding an Apartment in Boston</h1>
+
+
+<h2>Part 1: Reading Apartment Listings</h2>
+<p class="directions">Look at the apartment listings (Images 1–5). Answer the questions for <strong>each listing</strong> using complete sentences when possible.</p>
+
+<div class="listings-grid">
+<div class="listing">
+  <div class="listing-title">Listing 1: Back Bay Studio</div>
+  <ol>
+    <li>What is the monthly rent?<span class="answer-line"></span></li>
+    <li>What two utilities are included in the rent?<span class="answer-line"></span></li>
+    <li>Is the washing machine and dryer in the apartment or in the building?<span class="answer-line"></span></li>
+    <li>Are pets allowed?<span class="answer-line"></span></li>
+    <li>Why do you think this apartment is a <strong>studio</strong> and not a one-bedroom?<span class="answer-line"></span></li>
+  </ol>
+</div>
+
+<div class="listing">
+  <div class="listing-title">Listing 2: South Boston</div>
+  <ol>
+    <li>How many bedrooms and bathrooms does this apartment have?<span class="answer-line"></span></li>
+    <li>What is the total size of the apartment in square feet?<span class="answer-line"></span></li>
+    <li>Is parking included in the rent?<span class="answer-line"></span></li>
+    <li>What is the apartment located close to?<span class="answer-line"></span></li>
+    <li>Which features make this apartment <strong>more expensive</strong> than Listing 1?<span class="answer-line"></span></li>
+  </ol>
+</div>
+
+<div class="listing">
+  <div class="listing-title">Listing 3: Dorchester</div>
+  <ol>
+    <li>How much is the rent per month?<span class="answer-line"></span></li>
+    <li>Are utilities included? If yes, which ones?<span class="answer-line"></span></li>
+    <li>What is one special feature of the outside area?<span class="answer-line"></span></li>
+    <li>Are pets allowed?<span class="answer-line"></span></li>
+    <li>What kind of family or person would like this apartment? Why?<span class="answer-line"></span></li>
+  </ol>
+</div>
+
+<div class="listing">
+  <div class="listing-title">Listing 4: Seaport</div>
+  <ol>
+    <li>How much is the rent per month?<span class="answer-line"></span></li>
+    <li>Does this apartment have central air conditioning?<span class="answer-line"></span></li>
+    <li>When will this apartment be available?<span class="answer-line"></span></li>
+    <li>What neighborhood is this apartment in?<span class="answer-line"></span></li>
+    <li>Which amenities make this apartment <strong>the most expensive</strong> so far?<span class="answer-line"></span></li>
+  </ol>
+</div>
+
+<div class="listing">
+  <div class="listing-title">Listing 5: East Boston</div>
+  <ol>
+    <li>How many bedrooms does this apartment have?<span class="answer-line"></span></li>
+    <li>What two transportation options is this apartment located near?<span class="answer-line"></span></li>
+    <li>Is parking included?<span class="answer-line"></span></li>
+    <li>What is the total size of the apartment?<span class="answer-line"></span></li>
+    <li>Why might this apartment be a good choice for someone without a car?<span class="answer-line"></span></li>
+  </ol>
+</div>
+
+<h2>Part 2: Language Check</h2>
+<p class="directions">Look back at the apartment listings. Find and write:</p>
+<div class="language-check">
+  <div class="row">1 <strong>noun</strong> (thing): <span class="answer-line"></span></div>
+  <div class="row">1 <strong>adjective</strong>: <span class="answer-line"></span></div>
+  <div class="row">1 <strong>number or price</strong>: <span class="answer-line"></span></div>
+  <div class="row">1 <strong>abbreviation</strong> (e.g. W/D, incl., util): <span class="answer-line"></span></div>
+</div>
+</div>
+
+<h2>Part 3: Persona Matching</h2>
+<p class="directions">Read about each person or group. Choose the <strong>best apartment</strong> for them. Be ready to explain your answer.</p>
+
+<div class="personas">
+  <div class="persona">
+    <div class="persona-title">A. The Student</div>
+    <p>Maria is a student who needs to save money. Her maximum budget is <strong>$2,200/month</strong>. She has no car and no pets.</p>
+    <p><em>Best apartment: _______</em></p>
+  </div>
+  <div class="persona">
+    <div class="persona-title">B. The Family</div>
+    <p>The Chen family has <strong>two children and a large dog</strong>. They need at least two bedrooms and a safe outdoor space. Budget: <strong>$3,600/month</strong>.</p>
+    <p><em>Best apartment: _______</em></p>
+  </div>
+  <div class="persona">
+    <div class="persona-title">C. The Young Professional</div>
+    <p>David works long hours downtown. He wants a <strong>luxury apartment</strong> with a gym and pool. Budget: <strong>$4,200/month</strong>; no pets.</p>
+    <p><em>Best apartment: _______</em></p>
+  </div>
+  <div class="persona">
+    <div class="persona-title">D. The Roommates</div>
+    <p>Sarah and Jessica need <strong>two bedrooms</strong> and <strong>parking for one car</strong>. They enjoy the beach. Budget: <strong>$3,300/month</strong>.</p>
+    <p><em>Best apartment: _______</em></p>
+  </div>
+  <div class="persona">
+    <div class="persona-title">E. The Minimalist</div>
+    <p>Alex travels often. He wants a <strong>small, simple</strong> apartment with many costs included. Budget: <strong>$3,000/month</strong>.</p>
+    <p><em>Best apartment: _______</em></p>
+  </div>
+</div>
+
+<h2>Part 4: Discussion Questions</h2>
+<p class="directions">Discuss with a partner or small group.</p>
+<ol class="discussion">
+  <li>Which apartment is <strong>the most expensive</strong>, and why do you think it costs so much?</li>
+  <li>Which apartment is <strong>the cheapest</strong>? What could be a problem with the cheapest option?</li>
+  <li>Which apartment is best for someone <strong>without a car</strong>? How do you know?</li>
+  <li>Imagine you are one of the people in Part 3. What is <strong>the most important thing</strong> you look for in an apartment?</li>
+  <li>What does <strong>“W/D in unit”</strong> mean? Why is it better than <strong>“W/D in building”</strong>?</li>
+  <li>If you were a landlord, which apartment would be <strong>the easiest</strong> to rent? <strong>The hardest</strong>? Why?</li>
+</ol>
+

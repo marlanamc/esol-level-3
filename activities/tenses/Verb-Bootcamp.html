@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple & Continuous Verb Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modernized Design System */
+        :root {
+            /* Palette: Modern & Vibrant */
+            --habit: #059669;       /* Emerald 600 */
+            --habit-bg: #ecfdf5;    /* Emerald 50 */
+            --habit-border: #10b981;
+
+            --finished: #e11d48;    /* Rose 600 */
+            --finished-bg: #fff1f2; /* Rose 50 */
+            --finished-border: #f43f5e;
+
+            --now: #d97706;         /* Amber 600 */
+            --now-bg: #fffbeb;      /* Amber 50 */
+            --now-border: #f59e0b;
+
+            --background: #7c3aed;  /* Violet 600 */
+            --background-bg: #f5f3ff; /* Violet 50 */
+            --background-border: #8b5cf6;
+
+            --future: #0284c7;      /* Sky 600 */
+            --future-bg: #f0f9ff;   /* Sky 50 */
+            --future-border: #0ea5e9;
+
+            --future-cont: #4f46e5; /* Indigo 600 */
+            --future-cont-bg: #eef2ff; /* Indigo 50 */
+            --future-cont-border: #6366f1;
+
+            /* Visuals */
+            --bg-body: #f8fafc;     /* Slate 50 */
+            --bg-card: #ffffff;
+            --text-main: #1e293b;   /* Slate 800 */
+            --text-secondary: #475569; /* Slate 600 */
+            --border-color: #cbd5e1;
+            
+            --v1: #0369a1; /* Sky 700 */
+            --v2: #be123c; /* Rose 700 */
+            --v3: #6d28d9; /* Violet 700 */
+            --ving: #d97706; /* Amber 600 */
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--text-main);
+            background: var(--bg-body);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: var(--border-color);
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+
+        .goal {
+            font-size: 1.05em;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 20px 24px;
+            border-radius: 12px;
+            border-left: 5px solid var(--v1);
+            box-shadow: var(--shadow);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 60px 0;
+        }
+
+        /* --- TABLES --- */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 24px 0;
+            font-size: 15px;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            font-weight: 700;
+            background: #f8fafc;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Meaning-colored rows in tables */
+        tr.meaning-habit td { background: var(--habit-bg); }
+        tr.meaning-finished td { background: var(--finished-bg); }
+        tr.meaning-now td { background: var(--now-bg); }
+        tr.meaning-background td { background: var(--background-bg); }
+        tr.meaning-future td { background: var(--future-bg); }
+        tr.meaning-future-cont td { background: var(--future-cont-bg); }
+        
+        /* Stronger left accent for formula table rows */
+        tr[class^="meaning-"] td:first-child {
+            position: relative;
+            padding-left: 24px;
+            font-weight: 600;
+        }
+        tr[class^="meaning-"] td:first-child::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+        }
+        tr.meaning-habit td:first-child::before { background: var(--habit-border); }
+        tr.meaning-finished td:first-child::before { background: var(--finished-border); }
+        tr.meaning-now td:first-child::before { background: var(--now-border); }
+        tr.meaning-background td:first-child::before { background: var(--background-border); }
+        tr.meaning-future td:first-child::before { background: var(--future-border); }
+        tr.meaning-future-cont td:first-child::before { background: var(--future-cont-border); }
+        
+        /* Separator before Present Continuous */
+        tr.separator-top td {
+            border-top: 3px solid #94a3b8 !important; /* Slate 400 */
+        }
+
+        .verb-forms-table th { text-align: center; }
+        .verb-forms-table td { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1.05em; }
+        
+        /* Specific header colors for Verb Forms Table to match v1/v2/v3 colors slightly */
+        .verb-forms-table th:nth-child(1), .verb-forms-table th:nth-child(2) { color: var(--v1); background: #f0f9ff; }
+        .verb-forms-table th:nth-child(3) { color: var(--ving); background: #fffbeb; }
+        .verb-forms-table th:nth-child(4) { color: var(--v2); background: #fff1f2; }
+        .verb-forms-table th:nth-child(5) { color: var(--v3); background: #f5f3ff; }
+
+        .v1-color { color: var(--v1); font-weight: 700; }
+        .v2-color { color: var(--v2); font-weight: 700; }
+        .v3-color { color: var(--v3); font-weight: 700; }
+        .ving-color { color: var(--ving); font-weight: 700; }
+        
+        .v-legend { margin: 16px 0 24px 0; color: var(--text-secondary); font-size: 0.95em; }
+
+        /* --- CARDS --- */
+        .meaning-card {
+            margin-bottom: 32px;
+            padding: 24px 32px;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: var(--shadow);
+            border: 1px solid transparent; /* default */
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .meaning-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Top Accent Line (replaces left border) */
+        .meaning-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+        }
+
+        .meaning-card.habit::before { background: var(--habit-border); }
+        .meaning-card.finished::before { background: var(--finished-border); }
+        .meaning-card.future::before { background: var(--future-border); }
+        .meaning-card.now::before { background: var(--now-border); }
+        .meaning-card.background::before { background: var(--background-border); }
+        .meaning-card.future-cont::before { background: var(--future-cont-border); }
+
+        .meaning-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            gap: 24px;
+            flex-wrap: wrap; 
+        }
+
+        .meaning-card .card-title {
+            flex: 0 1 auto;
+            min-width: 180px;
+        }
+
+        /* Diagrams in Header */
+        .tense-diagram {
+            flex: 1;
+            min-width: 240px;
+            max-width: 300px;
+            height: 70px;
+            margin: 0;
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #f1f5f9;
+            display: block;
+            overflow: visible;
+        }
+        
+        .diagram-x { stroke-width: 2.5; stroke-linecap: round; }
+        .diagram-arc { fill: none; stroke-width: 3; stroke-linecap: round; }
+        .diagram-line { stroke: #94a3b8; stroke-width: 2; }
+        .diagram-present-line { stroke: #475569; stroke-width: 2; }
+        .diagram-label { font-size: 8px; fill: #94a3b8; font-weight: 600; text-transform: uppercase; font-family: sans-serif; }
+        
+        /* Subtle animation for wavy lines */
+        .wavy-line {
+            stroke-dasharray: 100;
+            animation: dash 3s linear infinite;
+        }
+        
+        @keyframes dash {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+        
+        .pulse-dot {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% { r: 3; opacity: 1; }
+            50% { r: 6; opacity: 0.5; }
+            100% { r: 3; opacity: 1; }
+        }
+
+        .meaning-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+            gap: 24px;
+            flex-wrap: wrap; 
+        }
+
+        .meaning-card .card-title {
+            flex: 1;
+        }
+
+        .meaning-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            color: var(--text-main);
+        }
+
+        .meaning-card .tense-name {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: #f1f5f9;
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .meaning-card .time-words {
+            font-size: 13px;
+            color: var(--text-secondary);
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            flex: 0 1 280px;
+            min-width: 200px;
+            line-height: 1.5;
+            text-align: right;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+        
+        /* Mobile adjustment for time words */
+        @media (max-width: 600px) {
+            .meaning-card .time-words { text-align: left; max-width: 100%; }
+        }
+
+        .meaning-card .time-words strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text-main);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+        }
+
+        .meaning-card .examples {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px 32px;
+            padding: 0;
+            margin-top: 16px;
+        }
+
+        .meaning-card .examples li {
+            position: relative;
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .meaning-card .examples li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #cbd5e1;
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        .meaning-card .examples li b {
+            color: var(--text-main);
+            font-weight: 700;
+            background: linear-gradient(to right, rgb(255,255,255,0), rgba(0,0,0,0.03)); 
+            border-radius: 2px;
+        }
+        
+        /* Example chart caption */
+        .example-chart-caption {
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* --- VS SECTION --- */
+        .vs-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin: 32px 0;
+        }
+        
+        .vs-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        
+        @media (max-width: 600px) {
+            .vs-grid { grid-template-columns: 1fr; }
+        }
+
+        .vs-box {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 6px solid #ccc;
+            transition: transform 0.2s;
+        }
+        .vs-box:hover { transform: translateY(-2px); }
+
+        .vs-box h4 {
+            margin-bottom: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .vs-box p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .vs-box p em {
+            display: block;
+            margin-top: 8px;
+            color: var(--text-main);
+            font-style: normal;
+            font-weight: 500;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 8px;
+        }
+
+        /* VS Box Colors */
+        .vs-box.present:nth-child(1) { border-top-color: var(--habit-border); }
+        .vs-box.present:nth-child(2) { border-top-color: var(--now-border); }
+        .vs-box.past:nth-child(1) { border-top-color: var(--finished-border); }
+        .vs-box.past:nth-child(2) { border-top-color: var(--background-border); }
+        .vs-box.future:nth-child(1) { border-top-color: var(--future-border); }
+        .vs-box.future:nth-child(2) { border-top-color: var(--future-cont-border); }
+
+        /* --- INPUTS --- */
+        input.blank-input {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #cbd5e1;
+            background: rgba(248,250,252, 0.5); /* Slate 50 with opacity */
+            padding: 8px 12px;
+            font-size: 15px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s;
+            color: var(--text-main);
+            font-family: inherit;
+        }
+        
+        input.blank-input:focus {
+            outline: none;
+            border-bottom-color: var(--v1);
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        input.blank-input::placeholder { color: transparent; } /* Clean look */
+
+        /* Matching Activity */
+        .matching-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: stretch;
+            margin: 24px 0;
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .matching-item {
+            background: #fff;
+            padding: 14px 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            min-height: 60px;
+            font-size: 15px;
+            position: relative;
+        }
+
+        .meaning-item { border-left: 6px solid #ccc; }
+        .meaning-item:nth-child(1) { border-left-color: var(--habit-border); }
+        .meaning-item:nth-child(2) { border-left-color: var(--finished-border); }
+        .meaning-item:nth-child(3) { border-left-color: var(--future-border); }
+        .meaning-item:nth-child(4) { border-left-color: var(--now-border); }
+        .meaning-item:nth-child(5) { border-left-color: var(--background-border); }
+        .meaning-item:nth-child(6) { border-left-color: var(--future-cont-border); }
+
+        .matching-input {
+            width: 45px;
+            height: 45px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            margin: 0 4px;
+            color: var(--v1);
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .matching-input:focus { outline: none; border-color: var(--v1); box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.1); }
+
+        .example-item {
+            justify-content: flex-start;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .example-letter {
+            font-weight: 800;
+            margin-right: 12px;
+            color: var(--text-main);
+            background: #f1f5f9;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-style: normal;
+        }
+
+        /* Formula/Review List styles */
+        ul.meaning-list { margin: 0; padding: 0; list-style: none; }
+        ul.meaning-list li, ol.meaning-list li {
+            padding: 16px;
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+            border-left: 6px solid #ccc;
+            font-size: 15px;
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        ul.meaning-list li strong, ol.meaning-list li strong {
+            min-width: 180px;
+            color: var(--text-main);
+        }
+
+        ul.meaning-list li:nth-child(1), ol.meaning-list li:nth-child(1) { border-left-color: var(--habit-border); background: #fff; }
+        ul.meaning-list li:nth-child(2), ol.meaning-list li:nth-child(2) { border-left-color: var(--finished-border); background: #fff; }
+        ul.meaning-list li:nth-child(3), ol.meaning-list li:nth-child(3) { border-left-color: var(--future-border); background: #fff; }
+        ul.meaning-list li:nth-child(4), ol.meaning-list li:nth-child(4) { border-left-color: var(--now-border); background: #fff; }
+        ul.meaning-list li:nth-child(5), ol.meaning-list li:nth-child(5) { border-left-color: var(--background-border); background: #fff; }
+        ul.meaning-list li:nth-child(6), ol.meaning-list li:nth-child(6) { border-left-color: var(--future-cont-border); background: #fff; }
+        
+        ol.meaning-list { counter-reset: item; list-style: none; }
+        ol.meaning-list li { position: relative; padding-left: 40px; }
+        ol.meaning-list li:before {
+            content: counter(item) ".";
+            counter-increment: item;
+            position: absolute;
+            left: 12px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .blank-verb-caption {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            margin-top: 40px;
+            color: var(--text-main);
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Sentence Formula Header (WHO + VERB + WHAT...) */
+        .sentence-formula {
+            margin: 48px auto;
+            padding: 24px;
+            border: 3px solid #3b82f6; /* Blue border to match WHO */
+            border-radius: 20px;
+            text-align: center;
+            background: #fff;
+            max-width: 800px;
+            box-shadow: var(--shadow);
+        }
+
+        .formula-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 24px;
+        }
+
+        .formula-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .f-box {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+            text-transform: uppercase;
+            box-shadow: var(--shadow-sm);
+            min-width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .f-who { background: #bae6fd; color: #0284c7; } /* Sky Blue */
+        .f-verb { background: #bbf7d0; color: #15803d; } /* Emerald Green */
+        .f-what { background: #fef08a; color: #a16207; } /* Amber Yellow */
+        .f-where { background: #e9d5ff; color: #7e22ce; } /* Violet Purple */
+        .f-when { background: #fecaca; color: #b91c1c; } /* Rose Pink */
+
+        .f-plus {
+            font-size: 24px;
+            font-weight: 700;
+            color: #94a3b8;
+        }
+
+        /* Pattern Pills for Table */
+        .pattern-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid transparent;
+            min-width: 50px;
+        }
+        .pill-who { background: #f0f9ff; color: #0284c7; border-color: #bae6fd; }
+        .pill-verb { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+        .pill-what { background: #fffbeb; color: #92400e; border-color: #fef08a; }
+        .pill-where { background: #f5f3ff; color: #6d28d9; border-color: #e9d5ff; }
+        .pill-when { background: #fff1f2; color: #be123c; border-color: #fecaca; }
+        
+        .pattern-row { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+        .pattern-plus { color: #94a3b8; font-weight: bold; font-size: 14px; }
+        
+        .pattern-table td { padding: 12px 16px; vertical-align: middle; }
+        .pattern-table th { font-size: 14px; color: var(--text-main); text-transform: none; letter-spacing: normal; }
+
+        .ready {
+            background: #1e293b;
+            color: #f1f5f9;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 1.25em;
+            margin-top: 64px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #334155;
+        }
+        .ready strong { color: #38bdf8; display: block; margin-bottom: 8px; font-size: 1.1em; }
+
+        @media print {
+            body { background: #fff; padding: 10mm; max-width: 100%; color: #000; font-size: 12px; line-height: 1.4; }
+            .meaning-card, .vs-box, table, .goal { box-shadow: none !important; background: #fff !important; border: 1px solid #ddd !important; }
+            
+            /* Compact Padding & Spacing */
+            .meaning-card { padding: 12px 16px !important; margin-bottom: 12px !important; }
+            .meaning-card .card-header { margin-bottom: 8px !important; gap: 12px !important; }
+            .vs-box { padding: 12px !important; }
+            .vs-grid { gap: 12px !important; }
+            th, td { padding: 6px 10px !important; font-size: 11px !important; }
+            h1 { font-size: 22px !important; margin-bottom: 12px !important; }
+            h2 { font-size: 18px !important; margin-top: 24px !important; margin-bottom: 12px !important; }
+            h3 { font-size: 16px !important; }
+            .goal { padding: 12px !important; margin-bottom: 16px !important; font-size: 11px !important; }
+            hr { margin: 16px 0 !important; }
+            .tense-diagram { height: 50px !important; min-width: 180px !important; }
+            .time-words { padding: 6px 10px !important; font-size: 11px !important; flex-basis: 220px !important; }
+            
+            /* Matching Activity Spacing */
+            .matching-container { gap: 10px !important; margin: 12px 0 !important; }
+            .matching-item { min-height: 40px !important; padding: 8px 12px !important; font-size: 12px !important; }
+            .matching-column { gap: 6px !important; }
+            .matching-input { width: 35px !important; height: 35px !important; font-size: 16px !important; }
+
+            /* Lists and Caps */
+            .meaning-card .examples { margin-top: 8px !important; gap: 4px 16px !important; }
+            .meaning-card .examples li { font-size: 13px !important; }
+            .blank-verb-caption { margin-top: 16px !important; margin-bottom: 8px !important; font-size: 14px !important; }
+            
+            /* Keep Color Accents but thinner */
+            .meaning-card::before { height: 4px !important; }
+            .meaning-item, ul.meaning-list li { border-left-width: 4px !important; padding: 8px 12px !important; }
+            
+            /* Static Diagrams for Print */
+            .wavy-line {
+                animation: none !important;
+                stroke-dasharray: none !important;
+                stroke-dashoffset: 0 !important;
+            }
+            .pulse-dot {
+                animation: none !important;
+                r: 4 !important;
+                opacity: 1 !important;
+            }
+            .tense-diagram {
+                background: #fff !important;
+                border: 1px solid #e2e8f0 !important;
+                page-break-inside: avoid;
+            }
+            .meaning-card, .vs-box, .vs-section, .sentence-formula, .blank-verb-table, .pattern-table tr {
+                page-break-inside: avoid;
+            }
+            .verb-chart-block { page-break-inside: avoid; }
+            .blank-tables-section { display: block !important; page-break-inside: auto !important; }
+            .blank-verb-caption { page-break-after: avoid; }
+            h1, h2, h3 { page-break-after: avoid; margin-bottom: 10px !important; }
+            hr { display: none; } /* Hide horizontal lines in print to save space */
+
+            .sentence-formula { margin-top: 24px !important; padding: 16px !important; border-width: 2px !important; box-shadow: none !important; }
+            .formula-label { margin-bottom: 12px !important; font-size: 11px !important; }
+            .f-box { padding: 8px 16px !important; font-size: 14px !important; min-width: 75px !important; }
+            .f-plus { font-size: 16px !important; }
+            .vs-mini-quiz { margin-top: 8px !important; padding: 8px !important; }
+            .quiz-option { border-width: 1px !important; padding: 1px 6px !important; }
+            .vs-mini-quiz { background: transparent !important; }
+            .print-page-break { page-break-before: always !important; break-before: page !important; }
+        }
+
+        /* Mini Quiz Styles */
+        .vs-mini-quiz {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            text-align: left;
+        }
+        .vs-mini-quiz strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .quiz-sentence {
+            font-size: 1.05em;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+        .quiz-option {
+            padding: 2px 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            background: #fff;
+            user-select: none;
+        }
+        .quiz-option:hover { border-color: #94a3b8; color: var(--text-main); }
+        .quiz-option.selected { border-color: #3b82f6; background: #eff6ff; color: #1d4ed8; }
+
+        /* Quick Check T/F */
+        .quick-check-tf {
+            margin: 16px 0;
+        }
+        .quick-check-tf .tf-item {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 6px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+        }
+        .quick-check-tf .tf-item:last-child { border-bottom: none; }
+        .quick-check-tf .tf-sentence { flex: 1; color: var(--text-main); }
+        .quick-check-tf .tf-choices {
+            flex-shrink: 0;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.3em;
+        }
+        
+    </style>
+</head>
+<body>
+
+
+
+    <h1>Simple & Continuous Verb Review</h1>
+    <p class="goal"><strong>Goal:</strong> Know the six patterns by heart so you can form sentences quickly when you see the cards.</p>
+
+
+    <h2>Verb Charts</h2>
+
+    <p class="example-chart-caption">Verb forms:</p>
+    <table class="verb-forms-table">
+        <thead>
+            <tr>
+                <th>V1 (base)</th>
+                <th>V1-3rd (he/she/it)</th>
+                <th><span class="ving-color">V1-ing</span></th>
+                <th>V2 (past)</th>
+                <th>V3 (past participle)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>verb</td>
+                <td>verb<strong>-s</strong></td>
+                <td>verb<strong>-ing</strong></td>
+                <td>past simple verb</td>
+                <td>past participle</td>
+            </tr>
+            <tr>
+                <td>walk</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>eat</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="example-chart-caption">Formula chart — tense × affirmative / negative / question:</p>
+    <table class="formula-table blank-verb-table">
+        <thead>
+            <tr>
+                <th>Tense</th>
+                <th>Affirmative</th>
+                <th>Negative</th>
+                <th>Question</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="meaning-habit">
+                <td><strong>Present Simple</strong></td>
+                <td>subject + <span class="v1-color">V1</span> or <span class="v1-color">V1-3rd</span></td>
+                <td>subject + do(es) not + <span class="v1-color">V1</span></td>
+                <td>Do(es) + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-habit">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+            <tr class="meaning-finished">
+                <td><strong>Past Simple</strong></td>
+                <td>subject + <span class="v2-color">V2</span></td>
+                <td>subject + did not + <span class="v1-color">V1</span></td>
+                <td>Did + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-finished">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+            <tr class="meaning-future">
+                <td><strong>Future Simple</strong></td>
+                <td>subject + will + <span class="v1-color">V1</span></td>
+                <td>subject + will not + <span class="v1-color">V1</span></td>
+                <td>Will + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-future">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+            <tr class="meaning-now separator-top">
+                <td><strong>Present Continuous</strong></td>
+                <td>subject + am/is/are + <span class="ving-color">V1-ing</span></td>
+                <td>subject + am/is/are not + <span class="ving-color">V1-ing</span></td>
+                <td>Am/Is/Are + subject + <span class="ving-color">V1-ing</span>?</td>
+            </tr>
+            <tr class="meaning-now">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+            <tr class="meaning-background">
+                <td><strong>Past Continuous</strong></td>
+                <td>subject + was/were + <span class="ving-color">V1-ing</span></td>
+                <td>subject + was/were not + <span class="ving-color">V1-ing</span></td>
+                <td>Was/Were + subject + <span class="ving-color">V1-ing</span>?</td>
+            </tr>
+            <tr class="meaning-background">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+            <tr class="meaning-future-cont">
+                <td><strong>Future Continuous</strong></td>
+                <td>subject + <strong>will be</strong> + <span class="ving-color">V1-ing</span></td>
+                <td>subject + <strong>will not be</strong> + <span class="ving-color">V1-ing</span></td>
+                <td><strong>Will</strong> + subject + <strong>be</strong> + <span class="ving-color">V1-ing</span>?</td>
+            </tr>
+            <tr class="meaning-future-cont">
+                <td><em>Your Example:</em></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="example-chart-caption">Example filled in (verb: help, subject: he) — see the pattern in each cell:</p>
+    <table class="formula-table">
+        <thead>
+            <tr>
+                <th>Tense</th>
+                <th>Affirmative</th>
+                <th>Negative</th>
+                <th>Question</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="meaning-habit">
+                <td><strong>Present Simple</strong></td>
+                <td>He helps.</td>
+                <td>He doesn’t help.</td>
+                <td>Does he help?</td>
+            </tr>
+            <tr class="meaning-finished">
+                <td><strong>Past Simple</strong></td>
+                <td>He helped.</td>
+                <td>He didn’t help.</td>
+                <td>Did he help?</td>
+            </tr>
+            <tr class="meaning-future">
+                <td><strong>Future Simple</strong></td>
+                <td>He will help.</td>
+                <td>He won’t help.</td>
+                <td>Will he help?</td>
+            </tr>
+            <tr class="meaning-now">
+                <td><strong>Present Continuous</strong></td>
+                <td>He is helping.</td>
+                <td>He isn’t helping.</td>
+                <td>Is he helping?</td>
+            </tr>
+            <tr class="meaning-background">
+                <td><strong>Past Continuous</strong></td>
+                <td>He was helping.</td>
+                <td>He wasn’t helping.</td>
+                <td>Was he helping?</td>
+            </tr>
+            <tr class="meaning-future-cont">
+                <td><strong>Future Continuous</strong></td>
+                <td>He will be helping.</td>
+                <td>He won’t be helping.</td>
+                <td>Will he be helping?</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>1. The Six Meanings → One Pattern Each</h2>
+    <p>Each meaning has one pattern. Learn the pattern, and you can make any sentence.</p>
+
+    <div class="meaning-card habit">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Habit / Fact</h3>
+                <div class="tense-name">Present Simple</div>
+            </div>
+            
+            <!-- Habit Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+                    </marker>
+                </defs>
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <text x="40" y="65" text-anchor="middle" class="diagram-label">Past</text>
+                <text x="260" y="65" text-anchor="middle" class="diagram-label">Future</text>
+                <g stroke="var(--habit)" class="diagram-x">
+                    <path d="M40,40 l10,10 m0,-10 l-10,10" /> <path d="M70,35 l10,10 m0,-10 l-10,10" />
+                    <path d="M100,40 l10,10 m0,-10 l-10,10" /> <path d="M130,35 l10,10 m0,-10 l-10,10" />
+                    <path d="M160,40 l10,10 m0,-10 l-10,10" /> <path d="M190,35 l10,10 m0,-10 l-10,10" />
+                    <path d="M220,40 l10,10 m0,-10 l-10,10" /> <path d="M250,35 l10,10 m0,-10 l-10,10" />
+                </g>
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>always, usually, often, sometimes, never, every day/week/month</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>walk</b> to work.</li>
+            <li>She <b>drinks</b> coffee every morning.</li>
+            <li>They <b>don't eat</b> meat.</li>
+            <li>He <b>doesn't play</b> soccer.</li>
+            <li><b>Do</b> you <b>speak</b> Spanish?</li>
+            <li><b>Does</b> she <b>live</b> here?</li>
+        </ul>
+    </div>
+
+    <div class="meaning-card finished">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Finished Action</h3>
+                <div class="tense-name">Past Simple</div>
+            </div>
+
+            <!-- Finished Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <g stroke="var(--finished)" class="diagram-x">
+                    <path d="M80,35 l10,10 m0,-10 l-10,10" />
+                </g>
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>yesterday, last week/month/year, ago, in 2020, when I was young</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>walked</b> to the store yesterday.</li>
+            <li>She <b>ate</b> breakfast at 8:00.</li>
+            <li>They <b>didn't watch</b> the movie.</li>
+            <li>He <b>didn't call</b> his mom.</li>
+            <li><b>Did</b> you <b>finish</b> the project?</li>
+            <li><b>Did</b> she <b>see</b> the email?</li>
+        </ul>
+    </div>
+
+    <div class="meaning-card future">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Plans / Promises</h3>
+                <div class="tense-name">Future Simple</div>
+            </div>
+
+            <!-- Future Simple Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <g stroke="var(--future)" class="diagram-x">
+                    <path d="M180,35 l10,10 m0,-10 l-10,10" />
+                    <path d="M210,40 l10,10 m0,-10 l-10,10" />
+                    <path d="M240,35 l10,10 m0,-10 l-10,10" />
+                </g>
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>tomorrow, next week/month/year, soon, later, in the future</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>will help</b> you tomorrow.</li>
+            <li>She <b>will call</b> you later.</li>
+            <li>They <b>won't arrive</b> on time.</li>
+            <li>He <b>won't forget</b>.</li>
+            <li><b>Will</b> you <b>come</b> to the party?</li>
+            <li><b>Will</b> she <b>finish</b> the report?</li>
+        </ul>
+    </div>
+
+    <div class="meaning-card now">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Now / Near Future</h3>
+                <div class="tense-name">Present Continuous</div>
+            </div>
+
+            <!-- Now Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <path d="M100,50 A50,50 0 0 1 200,50" class="diagram-arc wavy-line" stroke="var(--now)" />
+                <circle class="pulse-dot" cx="150" cy="20" r="4" fill="var(--now)" />
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>now, right now, at the moment, currently, today, this week</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>am studying</b> right now.</li>
+            <li>She <b>is cooking</b> dinner.</li>
+            <li>They <b>aren't watching</b> TV.</li>
+            <li>He <b>isn't working</b> today.</li>
+            <li><b>Are</b> you <b>listening</b>?</li>
+            <li><b>Is</b> she <b>coming</b> tomorrow?</li>
+        </ul>
+    </div>
+
+    <div class="meaning-card background">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Interrupted Background Action</h3>
+                <div class="tense-name">Past Continuous</div>
+            </div>
+
+            <!-- Background Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <path d="M40,50 A50,50 0 0 1 140,50" class="diagram-arc wavy-line" stroke="var(--background)" />
+                <g stroke="#333" class="diagram-x" transform="translate(90, 15)">
+                    <path d="M0,0 l8,8 m0,-8 l-8,8" />
+                </g>
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>when, while, at that moment, at 6:00 yesterday, all day/night</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>was sleeping</b> when you called.</li>
+            <li>She <b>was reading</b> a book.</li>
+            <li>They <b>weren't paying</b> attention.</li>
+            <li>He <b>wasn't driving</b> fast.</li>
+            <li><b>Were</b> you <b>waiting</b> long?</li>
+            <li><b>Was</b> she <b>working</b> at 9:00?</li>
+        </ul>
+    </div>
+
+    <div class="meaning-card future-cont">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>In Progress Later</h3>
+                <div class="tense-name">Future Continuous</div>
+            </div>
+
+            <!-- Future Cont Diagram -->
+            <svg class="tense-diagram" viewBox="0 0 300 80">
+                <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                <text x="150" y="70" text-anchor="middle" class="diagram-label">Present</text>
+                <path d="M160,50 A50,50 0 0 1 260,50" class="diagram-arc wavy-line" stroke="var(--future-cont)" />
+            </svg>
+
+            <div class="time-words"><strong>TIME WORDS:</strong><br>at 3:00 tomorrow, this time next week, when you arrive, all day tomorrow</div>
+        </div>
+        <ul class="examples">
+            <li>I <b>will be working</b> at 3:00 PM.</li>
+            <li>She <b>will be sleeping</b> when you arrive.</li>
+            <li>They <b>won't be traveling</b> tomorrow.</li>
+            <li>He <b>won't be studying</b> then.</li>
+            <li><b>Will</b> you <b>be waiting</b> for me?</li>
+            <li><b>Will</b> she <b>be using</b> the car?</li>
+        </ul>
+    </div>
+
+
+
+    <hr>
+
+    <h2>2. Matching Challenge: Meanings × Tense Names</h2>
+    <p>Match the <strong>Meaning</strong> on the left with the correct <strong>Tense Name</strong> on the right. Write the letter in the box.</p>
+    
+    <div class="matching-container">
+        <!-- Meanings -->
+        <div class="matching-column">
+            <div class="matching-item meaning-item">
+                <span><strong>habit / fact</strong></span>
+            </div>
+            <div class="matching-item meaning-item">
+                <span><strong>completed action</strong></span>
+            </div>
+            <div class="matching-item meaning-item">
+                <span><strong>plans / promises</strong></span>
+            </div>
+            <div class="matching-item meaning-item">
+                <span><strong>now / near future</strong></span>
+            </div>
+            <div class="matching-item meaning-item">
+                <span><strong>interrupted background</strong></span>
+            </div>
+            <div class="matching-item meaning-item">
+                <span><strong>in progress later</strong></span>
+            </div>
+        </div>
+
+        <!-- Boxes -->
+        <div class="matching-column" style="justify-content: space-around;">
+            <input type="text" class="matching-input" maxlength="1">
+            <input type="text" class="matching-input" maxlength="1">
+            <input type="text" class="matching-input" maxlength="1">
+            <input type="text" class="matching-input" maxlength="1">
+            <input type="text" class="matching-input" maxlength="1">
+            <input type="text" class="matching-input" maxlength="1">
+        </div>
+
+        <!-- Scrambled Tense Names -->
+        <div class="matching-column">
+            <div class="matching-item example-item"><span class="example-letter">A</span> <strong>Present Continuous</strong></div>
+            <div class="matching-item example-item"><span class="example-letter">B</span> <strong>Future Simple</strong></div>
+            <div class="matching-item example-item"><span class="example-letter">C</span> <strong>Past Simple</strong></div>
+            <div class="matching-item example-item"><span class="example-letter">D</span> <strong>Future Continuous</strong></div>
+            <div class="matching-item example-item"><span class="example-letter">E</span> <strong>Present Simple</strong></div>
+            <div class="matching-item example-item"><span class="example-letter">F</span> <strong>Past Continuous</strong></div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>3. Simple vs. Continuous: What’s the difference?</h2>
+    <div class="vs-section present">
+        <div class="vs-title">Present: Habit / Fact vs. Now</div>
+        <div class="vs-grid">
+            <div class="vs-box present">
+                <h4>Simple (Habit / Fact)</h4>
+                <p>For things that happen <strong>regularly</strong> or always.<br><em>"I drink coffee every morning."</em></p>
+                <!-- Simple Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <g stroke="var(--habit)" class="diagram-x">
+                        <path d="M70,40 l10,10 m0,-10 l-10,10" />
+                        <path d="M100,35 l10,10 m0,-10 l-10,10" />
+                        <path d="M130,40 l10,10 m0,-10 l-10,10" />
+                        <path d="M160,35 l10,10 m0,-10 l-10,10" />
+                        <path d="M190,40 l10,10 m0,-10 l-10,10" />
+                    </g>
+                </svg>
+            </div>
+            <div class="vs-box present">
+                <h4>Continuous (Now)</h4>
+                <p>For things happening <strong>right now</strong> or temporary.<br><em>"I am drinking coffee right now."</em></p>
+                <!-- Continuous Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <path d="M100,50 A50,50 0 0 1 200,50" class="diagram-arc wavy-line" stroke="var(--now)" />
+                    <circle class="pulse-dot" cx="150" cy="20" r="4" fill="var(--now)" />
+                </svg>
+            </div>
+        </div>
+        <!-- Mini Quiz Present -->
+        <div class="vs-mini-quiz">
+            <strong>Check Your Understanding:</strong>
+            <div class="quiz-sentence">1. I <span class="quiz-option" onclick="this.classList.toggle('selected')">talk</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">am talking</span> on the phone right now.</div>
+            <div class="quiz-sentence">2. I <span class="quiz-option" onclick="this.classList.toggle('selected')">talk</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">am talking</span> to my mom every Sunday.</div>
+        </div>
+    </div>
+
+    <div class="vs-section past">
+        <div class="vs-title">Past: Completed at a specific time vs. Interrupted background action</div>
+        <div class="vs-grid">
+            <div class="vs-box past">
+                <h4>Simple (Completed at a specific time)</h4>
+                <p>A <strong>completed</strong> action in the past.<br><em>"I cooked dinner at 6:00."</em></p>
+                <!-- Simple Past Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <g stroke="var(--finished)" class="diagram-x">
+                        <path d="M80,35 l10,10 m0,-10 l-10,10" />
+                    </g>
+                </svg>
+            </div>
+            <div class="vs-box past">
+                <h4>Continuous (Interrupted background action)</h4>
+                <p>An action that was <strong>already in progress</strong>.<br><em>"I was cooking dinner when you called."</em></p>
+                <!-- Past Continuous Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <path d="M40,50 A50,50 0 0 1 140,50" class="diagram-arc wavy-line" stroke="var(--background)" />
+                    <g stroke="#333" class="diagram-x" transform="translate(90, 15)">
+                        <path d="M0,0 l8,8 m0,-8 l-8,8" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <!-- Mini Quiz Past -->
+        <div class="vs-mini-quiz">
+            <strong>Check Your Understanding:</strong>
+            <div class="quiz-sentence">1. I <span class="quiz-option" onclick="this.classList.toggle('selected')">slept</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">was sleeping</span> for 8 hours last night.</div>
+            <div class="quiz-sentence">2. I <span class="quiz-option" onclick="this.classList.toggle('selected')">slept</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">was sleeping</span> when the alarm rang.</div>
+        </div>
+    </div>
+
+    <div class="vs-section future print-page-break">
+        <div class="vs-title">Future: Fact vs. In Progress</div>
+        <div class="vs-grid">
+            <div class="vs-box future">
+                <h4>Simple (Plans / promises)</h4>
+                <p>A <strong>planned</strong> event or simple fact.<br><em>"I will work tomorrow."</em></p>
+                <!-- Future Simple Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <g stroke="var(--future)" class="diagram-x">
+                        <path d="M180,35 l10,10 m0,-10 l-10,10" />
+                        <path d="M210,40 l10,10 m0,-10 l-10,10" />
+                        <path d="M240,35 l10,10 m0,-10 l-10,10" />
+                    </g>
+                </svg>
+            </div>
+            <div class="vs-box future">
+                <h4>Continuous (In progress later)</h4>
+                <p>An action that will be <strong>active</strong> at a specific time.<br><em>"I will be working at 10:00 AM."</em></p>
+                <!-- Future Continuous Diagram -->
+                <svg class="tense-diagram" viewBox="0 0 300 80">
+                    <line x1="30" y1="50" x2="270" y2="50" class="diagram-line" marker-start="url(#arrow)" marker-end="url(#arrow)" />
+                    <line x1="150" y1="20" x2="150" y2="60" class="diagram-present-line" />
+                    <path d="M160,50 A50,50 0 0 1 260,50" class="diagram-arc wavy-line" stroke="var(--future-cont)" />
+                </svg>
+            </div>
+        </div>
+        <!-- Mini Quiz Future -->
+        <div class="vs-mini-quiz">
+            <strong>Check Your Understanding:</strong>
+            <div class="quiz-sentence">1. I <span class="quiz-option" onclick="this.classList.toggle('selected')">will watch</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">will be watching</span> the movie later.</div>
+            <div class="quiz-sentence">2. At 10 PM tonight, I <span class="quiz-option" onclick="this.classList.toggle('selected')">will watch</span> / <span class="quiz-option" onclick="this.classList.toggle('selected')">will be watching</span> a movie.</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>4. Negative &amp; Question (Same Helper, Different Order)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Tense</th>
+                <th>Negative</th>
+                <th>Question</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="meaning-habit">
+                <td><strong>Present Simple</strong></td>
+                <td>subject + <strong>don’t/doesn’t</strong> + <span class="v1-color">V1</span></td>
+                <td><strong>Do/Does</strong> + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-finished">
+                <td><strong>Past Simple</strong></td>
+                <td>subject + <strong>didn’t</strong> + <span class="v1-color">V1</span></td>
+                <td><strong>Did</strong> + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-future">
+                <td><strong>Future Simple</strong></td>
+                <td>subject + <strong>won’t</strong> + <span class="v1-color">V1</span></td>
+                <td><strong>Will</strong> + subject + <span class="v1-color">V1</span>?</td>
+            </tr>
+            <tr class="meaning-now">
+                <td><strong>Present Continuous</strong></td>
+                <td>subject + <strong>am/is/are not</strong> + V1-ing</td>
+                <td><strong>Am/Is/Are</strong> + subject + V1-ing?</td>
+            </tr>
+            <tr class="meaning-background">
+                <td><strong>Past Continuous</strong></td>
+                <td>subject + <strong>was/were not</strong> + V1-ing</td>
+                <td><strong>Was/Were</strong> + subject + V1-ing?</td>
+            </tr>
+            <tr class="meaning-future-cont">
+                <td><strong>Future Continuous</strong></td>
+                <td>subject + <strong>will not be</strong> + V1-ing</td>
+                <td><strong>Will</strong> + subject + <strong>be</strong> + V1-ing?</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2>5. Must-Know: am / is / are / was / were</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Present (be)</th>
+                <th>Past (be)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>I</td><td>am</td><td>was</td></tr>
+            <tr><td>you</td><td>are</td><td>were</td></tr>
+            <tr><td>he / she / it</td><td>is</td><td>was</td></tr>
+            <tr><td>we / they</td><td>are</td><td>were</td></tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2 class="print-page-break">6. Fill in the verb tables</h2>
+
+    <div class="blank-tables-section">
+        <p class="blank-verb-caption">1. Verb: <strong>make</strong> &nbsp;|&nbsp; Subject: <strong>she</strong></p>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>V1 (base)</th>
+                    <th>V1-3rd</th>
+                    <th>V1-ing</th>
+                    <th>V2 (past)</th>
+                    <th>V3 (past participle)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>Tense</th>
+                    <th>Affirmative</th>
+                    <th>Negative</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="meaning-habit"><td><strong>Present Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-finished"><td><strong>Past Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future"><td><strong>Future Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-now"><td><strong>Present Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-background"><td><strong>Past Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future-cont"><td><strong>Future Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+            </tbody>
+        </table>
+
+        <p class="blank-verb-caption">2. Verb: <strong>take</strong> &nbsp;|&nbsp; Subject: <strong>they</strong></p>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>V1 (base)</th>
+                    <th>V1-3rd</th>
+                    <th>V1-ing</th>
+                    <th>V2 (past)</th>
+                    <th>V3 (past participle)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>Tense</th>
+                    <th>Affirmative</th>
+                    <th>Negative</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="meaning-habit"><td><strong>Present Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-finished"><td><strong>Past Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future"><td><strong>Future Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-now"><td><strong>Present Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-background"><td><strong>Past Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future-cont"><td><strong>Future Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+            </tbody>
+        </table>
+
+        <div class="verb-chart-block print-page-break">
+        <p class="blank-verb-caption">3. Verb: <strong>look</strong> &nbsp;|&nbsp; Subject: <strong>he</strong></p>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>V1 (base)</th>
+                    <th>V1-3rd</th>
+                    <th>V1-ing</th>
+                    <th>V2 (past)</th>
+                    <th>V3 (past participle)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>Tense</th>
+                    <th>Affirmative</th>
+                    <th>Negative</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="meaning-habit"><td><strong>Present Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-finished"><td><strong>Past Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future"><td><strong>Future Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-now"><td><strong>Present Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-background"><td><strong>Past Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future-cont"><td><strong>Future Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <p class="blank-verb-caption">4. Verb: <strong>buy</strong> &nbsp;|&nbsp; Subject: <strong>I</strong></p>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>V1 (base)</th>
+                    <th>V1-3rd</th>
+                    <th>V1-ing</th>
+                    <th>V2 (past)</th>
+                    <th>V3 (past participle)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>Tense</th>
+                    <th>Affirmative</th>
+                    <th>Negative</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="meaning-habit"><td><strong>Present Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-finished"><td><strong>Past Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future"><td><strong>Future Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-now"><td><strong>Present Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-background"><td><strong>Past Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future-cont"><td><strong>Future Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+            </tbody>
+        </table>
+
+        <div class="verb-chart-block print-page-break">
+        <p class="blank-verb-caption">5. Verb: <strong>travel</strong> &nbsp;|&nbsp; Subject: <strong>we</strong></p>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>V1 (base)</th>
+                    <th>V1-3rd</th>
+                    <th>V1-ing</th>
+                    <th>V2 (past)</th>
+                    <th>V3 (past participle)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                    <td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="blank-verb-table formula-table">
+            <thead>
+                <tr>
+                    <th>Tense</th>
+                    <th>Affirmative</th>
+                    <th>Negative</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="meaning-habit"><td><strong>Present Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-finished"><td><strong>Past Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future"><td><strong>Future Simple</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-now"><td><strong>Present Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-background"><td><strong>Past Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+                <tr class="meaning-future-cont"><td><strong>Future Continuous</strong></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td><td class="blank-cell"><input type="text" class="blank-input" placeholder=" "></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <h2>7. Correct Patterns - All Possible Options</h2>
+
+    <!-- Final Word Order Formula -->
+    <div class="sentence-formula">
+        <span class="formula-label">Sentence Formula:</span>
+        <div class="formula-row">
+            <div class="f-box f-who">Who</div>
+            <div class="f-plus">+</div>
+            <div class="f-box f-verb">Verb</div>
+            <div class="f-plus">+</div>
+            <div class="f-box f-what">What</div>
+            <div class="f-plus">+</div>
+            <div class="f-box f-where">Where</div>
+            <div class="f-plus">+</div>
+            <div class="f-box f-when">When</div>
+        </div>
+    </div>
+    <table class="pattern-table">
+        <thead>
+            <tr>
+                <th style="width: 45%;">Pattern</th>
+                <th>Example</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="pattern-row">
+                        <span class="pattern-pill pill-who">Who</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-verb">Verb</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-what">What</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-where">Where</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-when">When</span>
+                    </div>
+                </td>
+                <td>They played soccer in the park last weekend.</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="pattern-row">
+                        <span class="pattern-pill pill-when">When</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-who">Who</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-verb">Verb</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-what">What</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-where">Where</span>
+                    </div>
+                </td>
+                <td>Last night, we watched a movie at home.</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="pattern-row">
+                        <span class="pattern-pill pill-where">Where</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-who">Who</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-verb">Verb</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-what">What</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-when">When</span>
+                    </div>
+                </td>
+                <td>At the café, she met her friend yesterday.</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="pattern-row">
+                        <span class="pattern-pill pill-when">When</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-where">Where</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-who">Who</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-verb">Verb</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-what">What</span>
+                    </div>
+                </td>
+                <td>Tomorrow at the restaurant, I will order pizza.</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="pattern-row">
+                        <span class="pattern-pill pill-where">Where</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-when">When</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-who">Who</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-verb">Verb</span> <span class="pattern-plus">+</span>
+                        <span class="pattern-pill pill-what">What</span>
+                    </div>
+                </td>
+                <td>In the library this morning, he read a book.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h2 class="print-page-break">8. Quick Check: Correct Word Order?</h2>
+    <p>Is the sentence in correct order? Circle <strong>T</strong> or <strong>F</strong>.</p>
+    <div class="quick-check-tf">
+        <div class="tf-item">
+            <span class="tf-sentence">1. My brother studies English at the library every Tuesday.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+        <div class="tf-item">
+            <span class="tf-sentence">2. Last summer, they visited their grandparents in Florida.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+        <div class="tf-item">
+            <span class="tf-sentence">3. Pizza will order I tomorrow for dinner.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+        <div class="tf-item">
+            <span class="tf-sentence">4. Runs she every morning in the park.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+        <div class="tf-item">
+            <span class="tf-sentence">5. On weekends, we usually cook dinner together.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+        <div class="tf-item">
+            <span class="tf-sentence">6. The email sent he yesterday to his boss.</span>
+            <span class="tf-choices">T &nbsp;&nbsp; F</span>
+        </div>
+    </div>
+
+</body>
+</html>

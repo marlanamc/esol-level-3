@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Housing Scripts - Memorization Practice</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0.5in;
+      line-height: 1.25;
+      font-size: 11px;
+      background-color: #ffffff;
+    }
+
+    .sections-container {
+      column-count: 2;
+      column-gap: 0.4rem;
+      column-fill: balance;
+      column-width: auto;
+    }
+
+    .section {
+      margin-bottom: 0.5rem;
+      border: 1px solid #000;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .full-width {
+      column-span: all;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    h1 {
+      font-size: 16px;
+      color: #000000;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 11px;
+      margin-top: 0.5rem;
+      color: #000000;
+      border-bottom: 1px solid #000;
+      padding-bottom: 0.1rem;
+    }
+
+    .instructions {
+      border: 1px solid #000;
+      padding: 0.4rem;
+      margin-bottom: 0.5rem;
+      font-size: 10px;
+      background-color: #ffffff;
+    }
+
+    .instructions strong {
+      color: #000000;
+    }
+
+
+    .prompt-label {
+      font-weight: bold;
+      font-size: 10px;
+      color: #000000;
+      margin-top: 0.25rem;
+    }
+
+    .example-box {
+      border: 1px solid #000;
+      padding: 0.25rem 0.4rem;
+      margin: 0.2rem 0 0.3rem 0;
+      background-color: #ffffff;
+      font-size: 9px;
+      line-height: 1.3;
+    }
+
+    .example-box strong {
+      color: #000000;
+      font-weight: bold;
+    }
+
+    .student-task {
+      margin: 0.25rem 0 0.4rem 0;
+      font-size: 10px;
+      font-weight: 500;
+      color: #000000;
+    }
+
+
+
+    .checkbox-row {
+      font-size: 9px;
+      margin-top: 0.25rem;
+      padding: 0.25rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+    }
+
+    .checkbox-row input {
+      margin-right: 0.3rem;
+    }
+
+    .practice-section {
+      margin-top: 0.3rem;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+    }
+
+    .practice-section strong {
+      color: #000000;
+    }
+
+    .lines {
+      border-bottom: 1px solid #000;
+      margin: 0.15rem 0;
+      height: 0.8rem;
+    }
+
+    .full-script {
+      margin-top: 0.3rem;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+    }
+
+    .full-script strong {
+      color: #000000;
+    }
+
+    .pattern-box {
+      margin-top: 0.3rem;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+      font-size: 9px;
+    }
+
+    .pattern-box strong {
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .word-bank {
+      margin-top: 0.3rem;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+      font-size: 9px;
+    }
+
+    .word-bank strong {
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .word-bank span {
+      display: inline-block;
+      margin: 0.1rem 0.2rem 0.1rem 0;
+      padding: 0.05rem 0.2rem;
+    }
+
+    .practice-step {
+      margin-top: 0.3rem;
+      padding: 0.3rem;
+      background-color: #ffffff;
+      border: 1px solid #000;
+      font-size: 9px;
+    }
+
+    .practice-step strong {
+      font-weight: bold;
+      color: #000000;
+    }
+
+    .sentence-frame {
+      font-weight: normal;
+    }
+
+    @media print {
+      body {
+        margin: 0.3in;
+        font-size: 9px;
+      }
+
+      .instructions {
+        font-size: 8px;
+        padding: 0.3rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .sections-container {
+        column-count: 2;
+        column-gap: 0.3rem;
+        column-fill: balance;
+      }
+
+      .section {
+        margin-bottom: 0.4rem;
+        padding: 0.25rem;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        display: inline-block;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      h2 {
+        margin-top: 0.4rem;
+        font-size: 10px;
+      }
+
+      .example-box {
+        font-size: 8px;
+        padding: 0.2rem 0.3rem;
+      }
+
+
+      .checkbox-row {
+        font-size: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Housing Scripts - Memorization Practice</h1>
+  <div class="instructions">
+    <p><strong>Instructions:</strong> 1) Read example 3 times. 2) Find the patterns. 3) Practice with word bank. 4) Change one word. 5) Create your own. 6) Write full script.</p>
+  </div>
+
+  <div class="sections-container">
+  <div class="section full-width" style="border: 2px solid #000; padding: 0.5rem; margin-bottom: 0.75rem; text-align: center;">
+    <h2 style="margin-top: 0; border: none;">Most Important Scripts (Practice These First)</h2>
+    <p style="font-size: 10px; margin: 0.25rem 0;">Scripts 1-7: Emergencies and Common Housing Problems</p>
+  </div>
+  
+  <!-- 1. Calling 911 -->
+  <div class="section">
+    <h2>1. Calling 911 - Emergency</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>Operator:</strong> 911. What is your emergency?<br><br>
+      <strong>You:</strong> My address is <strong>312 Border Street, Boston</strong>.<br>
+      <strong>You:</strong> There is a <strong>fire</strong>.<br>
+      <strong>You:</strong> We need <strong>help</strong>.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> My address is [your address].</p>
+      <p><strong>Pattern 2:</strong> There is a [emergency].</p>
+      <p><strong>Pattern 3:</strong> We need [help type].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Emergency words:</strong> <span>fire</span> <span>smoke</span> <span>a person hurt</span> <span>gas smell</span></p>
+      <p><strong>Help words:</strong> <span>help</span> <span>ambulance</span> <span>fire department</span> <span>police</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>My address is [your address].</p>
+      <p>There is a [emergency: fire / smoke / a person hurt / gas smell].</p>
+      <p>We need [help: help / ambulance / fire department / police].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: There is a <strong>fire</strong>.</p>
+      <p>Change to: There is a <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+      <p>Example: We need <strong>help</strong>.</p>
+      <p>Change to: We need <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write your own emergency call.</p>
+    <p>My address is _________.</p>
+    <p>There is _________.</p>
+    <p>We need _________.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 2. Fire at Work Restaurant -->
+  <div class="section">
+    <h2>2. Fire at Work Restaurant - Injury</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>Operator:</strong> 911. What is your emergency?<br><br>
+      <strong>You:</strong> There is a <strong>fire</strong> at <strong>Mario's Restaurant</strong>.<br>
+      <strong>You:</strong> The address is <strong>125 Main Street, Boston</strong>.<br>
+      <strong>You:</strong> A <strong>cook</strong> is <strong>hurt</strong>.<br>
+      <strong>You:</strong> Please send <strong>ambulance</strong> and <strong>fire</strong>.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> There is a [emergency] at [place].</p>
+      <p><strong>Pattern 2:</strong> The address is [address].</p>
+      <p><strong>Pattern 3:</strong> A [person] is [condition].</p>
+      <p><strong>Pattern 4:</strong> Please send [help type].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Emergency words:</strong> <span>fire</span> <span>problem</span> <span>accident</span></p>
+      <p><strong>People:</strong> <span>cook</span> <span>worker</span> <span>person</span></p>
+      <p><strong>Conditions:</strong> <span>hurt</span> <span>injured</span> <span>not moving</span></p>
+      <p><strong>Help needed:</strong> <span>ambulance</span> <span>fire</span> <span>police</span> <span>ambulance and fire</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>There is a [fire / problem / accident] at [your work place].</p>
+      <p>The address is [address].</p>
+      <p>A [cook / worker / person] is [hurt / injured / not moving].</p>
+      <p>Please send [ambulance / fire / ambulance and fire].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: There is a <strong>fire</strong> at Mario's Restaurant.</p>
+      <p>Change to: There is a <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span> at _________.</p>
+      <p>Example: A <strong>cook</strong> is <strong>hurt</strong>.</p>
+      <p>Change to: A <span class="lines" style="display: inline-block; width: 60px; margin: 0 5px;"></span> is <span class="lines" style="display: inline-block; width: 60px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about a fire and injury at your work.</p>
+    <p>There is a _________ at _________.</p>
+    <p>The address is _________.</p>
+    <p>A _________ is _________.</p>
+    <p>Please send _________.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 3. Car Accident Witness -->
+  <div class="section">
+    <h2>3. Car Accident - You Witnessed It</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>Operator:</strong> 911. What is your emergency?<br><br>
+      <strong>You:</strong> I saw a <strong>car accident</strong>.<br>
+      <strong>You:</strong> It is outside <strong>Maverick Station</strong>.<br>
+      <strong>You:</strong> I think someone is <strong>hurt</strong>.<br>
+      <strong>You:</strong> Please send <strong>help</strong>.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> I saw a [thing].</p>
+      <p><strong>Pattern 2:</strong> It is outside [location].</p>
+      <p><strong>Pattern 3:</strong> I think someone is [condition].</p>
+      <p><strong>Pattern 4:</strong> Please send [help type].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>What you saw:</strong> <span>car accident</span> <span>fire</span> <span>problem</span></p>
+      <p><strong>Locations:</strong> <span>Maverick Station</span> <span>outside my building</span> <span>on Main Street</span></p>
+      <p><strong>Conditions:</strong> <span>hurt</span> <span>injured</span> <span>not moving</span></p>
+      <p><strong>Help needed:</strong> <span>help</span> <span>ambulance</span> <span>police</span> <span>ambulance and police</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>I saw a [car accident / fire / problem].</p>
+      <p>It is outside [location].</p>
+      <p>I think someone is [hurt / injured / not moving].</p>
+      <p>Please send [help / ambulance / police].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I saw a <strong>car accident</strong>.</p>
+      <p>Change to: I saw a <span class="lines" style="display: inline-block; width: 100px; margin: 0 5px;"></span>.</p>
+      <p>Example: It is outside <strong>Maverick Station</strong>.</p>
+      <p>Change to: It is outside <span class="lines" style="display: inline-block; width: 120px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about a car accident you witnessed.</p>
+    <p>I saw a _________.</p>
+    <p>It is outside _________.</p>
+    <p>I think someone is _________.</p>
+    <p>Please send _________.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 4. Poison Control -->
+  <div class="section">
+    <h2>4. Poison Control - Child Ate Cleaning Products</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>Operator:</strong> Poison Control. What happened?<br><br>
+      <strong>You:</strong> A <strong>child</strong> in my home ate <strong>cleaning products</strong>.<br>
+      <strong>You:</strong> The child is <strong>5 years old</strong>.<br>
+      <strong>You:</strong> This happened <strong>10 minutes ago</strong>.<br>
+      <strong>You:</strong> What should I do?
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> A [person] in my home ate [thing].</p>
+      <p><strong>Pattern 2:</strong> The child is [age].</p>
+      <p><strong>Pattern 3:</strong> This happened [time].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>People:</strong> <span>child</span> <span>person</span></p>
+      <p><strong>What they ate:</strong> <span>cleaning products</span> <span>medicine</span> <span>pills</span> <span>something bad</span></p>
+      <p><strong>Ages:</strong> <span>3 years old</span> <span>5 years old</span> <span>7 years old</span></p>
+      <p><strong>Time:</strong> <span>10 minutes ago</span> <span>20 minutes ago</span> <span>just now</span> <span>30 minutes ago</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (break into parts):</p>
+    <div class="practice-step">
+      <p><strong>Part 1:</strong> A [child / person] in my home</p>
+      <p><strong>Part 2:</strong> ate [cleaning products / medicine / pills].</p>
+      <p><strong>Now combine:</strong> A [child] in my home ate [cleaning products].</p>
+      <p>The child is [3 years old / 5 years old / 7 years old].</p>
+      <p>This happened [10 minutes ago / 20 minutes ago / just now].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: A <strong>child</strong> in my home ate <strong>cleaning products</strong>.</p>
+      <p>Change person: A <span class="lines" style="display: inline-block; width: 60px; margin: 0 5px;"></span> in my home ate cleaning products.</p>
+      <p>Change what they ate: A child in my home ate <span class="lines" style="display: inline-block; width: 120px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about calling poison control.</p>
+    <p>A _________ in my home ate _________.</p>
+    <p>The child is _________.</p>
+    <p>This happened _________.</p>
+    <p>What should I do?</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 5. No Heat / Broken Thing -->
+  <div class="section">
+    <h2>5. Calling About a Problem (No Heat / Broken Thing)</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. This is <strong>Maria</strong>.<br>
+      <strong>You:</strong> I live at <strong>45 Green Street</strong>.<br>
+      <strong>You:</strong> There is a problem with the <strong>heat</strong>.<br>
+      <strong>You:</strong> It is not <strong>working</strong>.<br>
+      <strong>You:</strong> Please help. Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. This is [your name].</p>
+      <p><strong>Pattern 2:</strong> I live at [address].</p>
+      <p><strong>Pattern 3:</strong> There is a problem with [thing].</p>
+      <p><strong>Pattern 4:</strong> It is not [working/okay].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Things that break:</strong> <span>heat</span> <span>water</span> <span>stove</span> <span>light</span> <span>refrigerator</span> <span>door</span> <span>window</span></p>
+      <p><strong>Not working:</strong> <span>working</span> <span>okay</span> <span>good</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. This is [your name].</p>
+      <p>I live at [address].</p>
+      <p>There is a problem with [heat / water / stove / light].</p>
+      <p>It is not [working / okay].</p>
+      <p>Please help. Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: There is a problem with the <strong>heat</strong>.</p>
+      <p>Change to: There is a problem with the <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+      <p>Example: It is not <strong>working</strong>.</p>
+      <p>Change to: It is not <span class="lines" style="display: inline-block; width: 70px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Complete the message with your information.</p>
+    <p>Hello. This is _________.</p>
+    <p>I live at _________.</p>
+    <p>There is a problem with _________.</p>
+    <p>It is not _________.</p>
+    <p>Please help. Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 6. Noisy Neighbors -->
+  <div class="section">
+    <h2>6. Noisy Neighbors - Complaint</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I live at <strong>12 Oak Street</strong>.<br>
+      <strong>You:</strong> There is a noise problem at <strong>night</strong>.<br>
+      <strong>You:</strong> It is very <strong>loud</strong>.<br>
+      <strong>You:</strong> I cannot <strong>sleep</strong>.<br>
+      <strong>You:</strong> Can you help? Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I live at [address].</p>
+      <p><strong>Pattern 2:</strong> There is a noise problem at [time].</p>
+      <p><strong>Pattern 3:</strong> It is very [adjective].</p>
+      <p><strong>Pattern 4:</strong> I cannot [verb].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Time:</strong> <span>night</span> <span>morning</span> <span>afternoon</span> <span>evening</span></p>
+      <p><strong>Adjectives (loud):</strong> <span>loud</span> <span>very loud</span> <span>too loud</span></p>
+      <p><strong>What you cannot do:</strong> <span>sleep</span> <span>study</span> <span>work</span> <span>rest</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. I live at [address].</p>
+      <p>There is a noise problem at [night / morning / evening].</p>
+      <p>It is very [loud / very loud].</p>
+      <p>I cannot [sleep / study / work].</p>
+      <p>Can you help? Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: There is a noise problem at <strong>night</strong>.</p>
+      <p>Change to: There is a noise problem at <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+      <p>Example: I cannot <strong>sleep</strong>.</p>
+      <p>Change to: I cannot <span class="lines" style="display: inline-block; width: 70px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about a noise problem.</p>
+    <p>Hello. I live at _________.</p>
+    <p>There is a noise problem at _________.</p>
+    <p>It is very _________.</p>
+    <p>I cannot _________.</p>
+    <p>Can you help? Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+
+  <!-- 7. Water / Leak Problem -->
+  <div class="section">
+    <h2>7. Water Leak Problem</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I live at <strong>9 River Road</strong>.<br>
+      <strong>You:</strong> Water is coming from the <strong>ceiling</strong>.<br>
+      <strong>You:</strong> It is getting <strong>worse</strong>.<br>
+      <strong>You:</strong> Please send someone. Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I live at [address].</p>
+      <p><strong>Pattern 2:</strong> Water is coming from [place].</p>
+      <p><strong>Pattern 3:</strong> It is getting [worse/better].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Where water comes from:</strong> <span>ceiling</span> <span>wall</span> <span>floor</span> <span>the ceiling</span> <span>the wall</span></p>
+      <p><strong>Getting worse:</strong> <span>worse</span> <span>getting worse</span> <span>very bad</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. I live at [address].</p>
+      <p>Water is coming from [ceiling / wall / floor].</p>
+      <p>It is getting [worse].</p>
+      <p>Please send someone. Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: Water is coming from the <strong>ceiling</strong>.</p>
+      <p>Change to: Water is coming from the <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Complete the sentences about a water problem.</p>
+    <p>Hello. I live at _________.</p>
+    <p>Water is coming from _________.</p>
+    <p>It is getting _________.</p>
+    <p>Please send someone. Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <div class="section full-width" style="border: 2px solid #000; padding: 0.5rem; margin: 0.75rem 0; text-align: center;">
+    <h2 style="margin-top: 0; border: none;">More Scripts (Extension Practice)</h2>
+    <p style="font-size: 10px; margin: 0.25rem 0;">Scripts 8-15: Additional Situations</p>
+  </div>
+
+  <!-- 8. Rent Question / Late Rent -->
+  <div class="section">
+    <h2>8. Talking About Rent (Late Payment)</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I have a <strong>question</strong> about my rent.<br>
+      <strong>You:</strong> I will pay on <strong>March 10</strong>.<br>
+      <strong>You:</strong> Thank you for understanding.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I have a [question] about my rent.</p>
+      <p><strong>Pattern 2:</strong> I will pay on [date].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>What you have:</strong> <span>question</span> <span>problem</span></p>
+      <p><strong>Dates (examples):</strong> <span>March 10</span> <span>April 5</span> <span>May 1</span> <span>June 15</span> <span>next week</span> <span>Monday</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. I have a [question / problem] about my rent.</p>
+      <p>I will pay on [date].</p>
+      <p>Thank you for understanding.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I have a <strong>question</strong> about my rent.</p>
+      <p>Change to: I have a <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span> about my rent.</p>
+      <p>Example: I will pay on <strong>March 10</strong>.</p>
+      <p>Change to: I will pay on <span class="lines" style="display: inline-block; width: 100px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write your message about rent.</p>
+    <p>Hello. I have a _________ about my rent.</p>
+    <p>I will pay on _________.</p>
+    <p>Thank you for understanding.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 9. Cleaning / Shared Space -->
+  <div class="section">
+    <h2>9. Talking About Cleaning (Shared Space)</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> We need to talk about <strong>cleaning</strong>.<br>
+      <strong>You:</strong> I clean on <strong>Saturday</strong>.<br>
+      <strong>You:</strong> I think this is <strong>fair</strong>.<br>
+      <strong>You:</strong> What do you think?
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> We need to talk about [topic].</p>
+      <p><strong>Pattern 2:</strong> I clean on [day].</p>
+      <p><strong>Pattern 3:</strong> I think this is [adjective].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Topics:</strong> <span>cleaning</span> <span>the apartment</span> <span>chores</span></p>
+      <p><strong>Days:</strong> <span>Monday</span> <span>Tuesday</span> <span>Wednesday</span> <span>Thursday</span> <span>Friday</span> <span>Saturday</span> <span>Sunday</span></p>
+      <p><strong>Adjectives:</strong> <span>fair</span> <span>okay</span> <span>good</span> <span>fine</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>We need to talk about [cleaning / the apartment / chores].</p>
+      <p>I clean on [Monday / Saturday / Sunday].</p>
+      <p>I think this is [fair / okay / good].</p>
+      <p>What do you think?</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I clean on <strong>Saturday</strong>.</p>
+      <p>Change to: I clean on <span class="lines" style="display: inline-block; width: 90px; margin: 0 5px;"></span>.</p>
+      <p>Example: I think this is <strong>fair</strong>.</p>
+      <p>Change to: I think this is <span class="lines" style="display: inline-block; width: 70px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about cleaning in your home.</p>
+    <p>We need to talk about _________.</p>
+    <p>I clean on _________.</p>
+    <p>I think this is _________.</p>
+    <p>What do you think?</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 10. Text Message to Landlord -->
+  <div class="section">
+    <h2>10. Text Message to Landlord</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hi. This is <strong>Maria</strong>.<br>
+      <strong>You:</strong> I live at <strong>45 Green Street, apartment 3B</strong>.<br>
+      <strong>You:</strong> The <strong>light</strong> in the kitchen is broken.<br>
+      <strong>You:</strong> Can you fix it? Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hi. This is [your name].</p>
+      <p><strong>Pattern 2:</strong> I live at [address].</p>
+      <p><strong>Pattern 3:</strong> The [thing] is broken.</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Things that break:</strong> <span>light</span> <span>stove</span> <span>refrigerator</span> <span>door</span> <span>window</span> <span>heat</span> <span>water</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hi. This is [your name].</p>
+      <p>I live at [address].</p>
+      <p>The [light / stove / refrigerator / door] is broken.</p>
+      <p>Can you fix it? Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: The <strong>light</strong> in the kitchen is broken.</p>
+      <p>Change to: The <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span> is broken.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write a text message to your landlord.</p>
+    <p>Hi. This is _________.</p>
+    <p>I live at _________.</p>
+    <p>The _________ is broken.</p>
+    <p>Can you fix it? Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 11. Smell of Gas -->
+  <div class="section">
+    <h2>11. Emergency - Smell of Gas</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I smell <strong>gas</strong> in my <strong>kitchen</strong>.<br>
+      <strong>You:</strong> My address is <strong>312 Border Street, apartment 2A</strong>.<br>
+      <strong>You:</strong> Please send help <strong>now</strong>.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I smell [thing] in my [place].</p>
+      <p><strong>Pattern 2:</strong> My address is [address].</p>
+      <p><strong>Pattern 3:</strong> Please send help [when].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>What you smell:</strong> <span>gas</span> <span>smoke</span> <span>something bad</span></p>
+      <p><strong>Places:</strong> <span>kitchen</span> <span>bathroom</span> <span>apartment</span> <span>home</span></p>
+      <p><strong>When (urgent):</strong> <span>now</span> <span>immediately</span> <span>right now</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (break into parts):</p>
+    <div class="practice-step">
+      <p><strong>Part 1:</strong> Hello. I smell [gas / smoke]</p>
+      <p><strong>Part 2:</strong> in my [kitchen / bathroom / apartment].</p>
+      <p><strong>Now combine:</strong> Hello. I smell [gas] in my [kitchen].</p>
+      <p>My address is [address].</p>
+      <p>Please send help [now / immediately].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I smell <strong>gas</strong> in my <strong>kitchen</strong>.</p>
+      <p>Change what: I smell <span class="lines" style="display: inline-block; width: 60px; margin: 0 5px;"></span> in my kitchen.</p>
+      <p>Change where: I smell gas in my <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write an emergency call about gas.</p>
+    <p>Hello. I smell _________ in my _________.</p>
+    <p>My address is _________.</p>
+    <p>Please send help _________.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 12. Fire Alarm -->
+  <div class="section">
+    <h2>12. Fire Alarm - What to Do</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> The fire alarm is <strong>ringing</strong>.<br>
+      <strong>You:</strong> I am leaving my apartment <strong>now</strong>.<br>
+      <strong>You:</strong> I will go to the <strong>exit</strong>.<br>
+      <strong>You:</strong> I will wait <strong>outside</strong>.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> The fire alarm is [ringing/going off].</p>
+      <p><strong>Pattern 2:</strong> I am [verb-ing] [when/where].</p>
+      <p><strong>Pattern 3:</strong> I will go to [place].</p>
+      <p><strong>Pattern 4:</strong> I will wait [where].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Alarm status:</strong> <span>ringing</span> <span>going off</span></p>
+      <p><strong>When:</strong> <span>now</span> <span>right now</span> <span>immediately</span></p>
+      <p><strong>Where to go:</strong> <span>exit</span> <span>the exit</span> <span>outside</span> <span>the door</span></p>
+      <p><strong>Where to wait:</strong> <span>outside</span> <span>outside the building</span> <span>in the street</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>The fire alarm is [ringing / going off].</p>
+      <p>I am leaving my apartment [now / right now].</p>
+      <p>I will go to [exit / the exit / outside].</p>
+      <p>I will wait [outside / outside the building].</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I will go to the <strong>exit</strong>.</p>
+      <p>Change to: I will go to <span class="lines" style="display: inline-block; width: 100px; margin: 0 5px;"></span>.</p>
+      <p>Example: I will wait <strong>outside</strong>.</p>
+      <p>Change to: I will wait <span class="lines" style="display: inline-block; width: 120px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write what you will do if the fire alarm rings.</p>
+    <p>The fire alarm is _________.</p>
+    <p>I am leaving my apartment _________.</p>
+    <p>I will go to _________.</p>
+    <p>I will wait _________.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 13. No Heat in Winter -->
+  <div class="section">
+    <h2>13. No Heat in Winter</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. This is <strong>Maria</strong>.<br>
+      <strong>You:</strong> I live at <strong>45 Green Street</strong>.<br>
+      <strong>You:</strong> There is <strong>no heat</strong> in my apartment.<br>
+      <strong>You:</strong> It is very <strong>cold</strong>.<br>
+      <strong>You:</strong> Please send someone <strong>today</strong>. Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. This is [your name].</p>
+      <p><strong>Pattern 2:</strong> I live at [address].</p>
+      <p><strong>Pattern 3:</strong> There is [no heat / problem] in my apartment.</p>
+      <p><strong>Pattern 4:</strong> It is very [cold / hot].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Problems:</strong> <span>no heat</span> <span>no water</span> <span>a problem</span></p>
+      <p><strong>Temperature:</strong> <span>cold</span> <span>very cold</span> <span>hot</span> <span>very hot</span></p>
+      <p><strong>When:</strong> <span>today</span> <span>tomorrow</span> <span>now</span> <span>as soon as possible</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. This is [your name].</p>
+      <p>I live at [address].</p>
+      <p>There is [no heat / no water] in my apartment.</p>
+      <p>It is very [cold / very cold].</p>
+      <p>Please send someone [today / tomorrow / now]. Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: There is <strong>no heat</strong> in my apartment.</p>
+      <p>Change to: There is <span class="lines" style="display: inline-block; width: 100px; margin: 0 5px;"></span> in my apartment.</p>
+      <p>Example: It is very <strong>cold</strong>.</p>
+      <p>Change to: It is very <span class="lines" style="display: inline-block; width: 70px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about no heat in winter.</p>
+    <p>Hello. This is _________.</p>
+    <p>I live at _________.</p>
+    <p>There is _________ in my apartment.</p>
+    <p>It is very _________.</p>
+    <p>Please send someone _________. Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+
+  <!-- 14. Pests Problem -->
+  <div class="section">
+    <h2>14. Pests in the Apartment</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I live at <strong>12 Oak Street, apartment 1B</strong>.<br>
+      <strong>You:</strong> I see <strong>mice</strong> in my <strong>kitchen</strong>.<br>
+      <strong>You:</strong> Can you send someone to help?<br>
+      <strong>You:</strong> Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I live at [address].</p>
+      <p><strong>Pattern 2:</strong> I see [pest] in my [place].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Pests:</strong> <span>mice</span> <span>bugs</span> <span>roaches</span> <span>ants</span></p>
+      <p><strong>Places:</strong> <span>kitchen</span> <span>bathroom</span> <span>apartment</span> <span>home</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (break into parts):</p>
+    <div class="practice-step">
+      <p><strong>Part 1:</strong> I see [mice / bugs / roaches]</p>
+      <p><strong>Part 2:</strong> in my [kitchen / bathroom / apartment].</p>
+      <p><strong>Now combine:</strong> I see [mice] in my [kitchen].</p>
+      <p>Can you send someone to help?</p>
+      <p>Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I see <strong>mice</strong> in my <strong>kitchen</strong>.</p>
+      <p>Change pest: I see <span class="lines" style="display: inline-block; width: 70px; margin: 0 5px;"></span> in my kitchen.</p>
+      <p>Change place: I see mice in my <span class="lines" style="display: inline-block; width: 80px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about pests in your apartment.</p>
+    <p>Hello. I live at _________.</p>
+    <p>I see _________ in my _________.</p>
+    <p>Can you send someone to help?</p>
+    <p>Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+
+  <!-- 15. Rent Increase Question -->
+  <div class="section">
+    <h2>15. Question About Rent Increase</h2>
+    
+    <p class="prompt-label">Step 1: Read Example (read 3 times):</p>
+    <div class="example-box">
+      <strong>You:</strong> Hello. I received a notice about <strong>rent increase</strong>.<br>
+      <strong>You:</strong> I have a <strong>question</strong>.<br>
+      <strong>You:</strong> Can we talk about this?<br>
+      <strong>You:</strong> Thank you.
+    </div>
+
+    <p class="prompt-label">Step 2: Find the Patterns:</p>
+    <div class="pattern-box">
+      <p><strong>Pattern 1:</strong> Hello. I received a notice about [topic].</p>
+      <p><strong>Pattern 2:</strong> I have a [question].</p>
+    </div>
+
+    <p class="prompt-label">Step 3: Word Bank:</p>
+    <div class="word-bank">
+      <p><strong>Topics:</strong> <span>rent increase</span> <span>the lease</span> <span>my rent</span> <span>the apartment</span></p>
+      <p><strong>What you have:</strong> <span>question</span> <span>problem</span> <span>concern</span></p>
+    </div>
+
+    <p class="prompt-label">Step 4: Practice with Support (use word bank):</p>
+    <div class="practice-step">
+      <p>Hello. I received a notice about [rent increase / the lease / my rent].</p>
+      <p>I have a [question / problem / concern].</p>
+      <p>Can we talk about this?</p>
+      <p>Thank you.</p>
+    </div>
+
+    <p class="prompt-label">Step 5: Change One Word:</p>
+    <div class="practice-step">
+      <p>Example: I received a notice about <strong>rent increase</strong>.</p>
+      <p>Change to: I received a notice about <span class="lines" style="display: inline-block; width: 120px; margin: 0 5px;"></span>.</p>
+      <p>Example: I have a <strong>question</strong>.</p>
+      <p>Change to: I have a <span class="lines" style="display: inline-block; width: 90px; margin: 0 5px;"></span>.</p>
+    </div>
+
+    <p class="prompt-label">Step 6: Create Your Own:</p>
+    <p class="student-task">Write about a rent increase question.</p>
+    <p>Hello. I received a notice about _________.</p>
+    <p>I have a _________.</p>
+    <p>Can we talk about this?</p>
+    <p>Thank you.</p>
+
+    <div class="full-script">
+      <p><strong>Step 7: Practice the full script - Write it completely:</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I read the example 3 times.</label>
+      <label><input type="checkbox"> I found the patterns.</label>
+      <label><input type="checkbox"> I practiced with word bank.</label>
+      <label><input type="checkbox"> I changed one word.</label>
+      <label><input type="checkbox"> I wrote my own sentences.</label>
+      <label><input type="checkbox"> I wrote the full script.</label>
+    </div>
+  </div>
+  </div>
+
+  <!-- Final Practice Section -->
+  <div class="section full-width">
+    <h2>Final Practice - Choose 3 Scripts</h2>
+    <p class="student-task" style="font-size: 14px; font-weight: bold;">
+      Choose 3 scripts from above. Write them completely here. Then practice saying them without looking.
+    </p>
+    
+    <div class="practice-section">
+      <p><strong>Script 1 (which one?):</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="practice-section">
+      <p><strong>Script 2 (which one?):</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="practice-section">
+      <p><strong>Script 3 (which one?):</strong></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+      <p class="lines"></p>
+    </div>
+
+    <div class="checkbox-row">
+      <label><input type="checkbox"> I wrote 3 complete scripts.</label>
+      <label><input type="checkbox"> ✅ I practiced saying each script 3 times.</label>
+      <label><input type="checkbox"> I can say at least one script without looking.</label>
+    </div>
+  </div>
+
+</body>
+</html>

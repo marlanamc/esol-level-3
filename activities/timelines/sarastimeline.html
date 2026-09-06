@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara's English Learning Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px 20px;
+            background: #f8f8f8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #2c3e50;
+        }
+
+        .timeline-wrapper {
+            position: relative;
+            height: 600px;
+            margin: 40px 0;
+        }
+
+        /* Background colored zones */
+        .background-zones {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+        }
+
+        .zone-past {
+            flex: 0 0 50%;
+            background: linear-gradient(to right, #FFF5E6, #FFE8CC);
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .zone-now {
+            flex: 0 0 8%;
+            background: linear-gradient(to right, #D4EDDA, #C3E6CB);
+        }
+
+        .zone-future {
+            flex: 0 0 42%;
+            background: linear-gradient(to right, #D6EAF8, #AED6F1);
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        /* Zone labels at top */
+        .zone-label {
+            position: absolute;
+            top: 30px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .label-past {
+            left: 25%;
+            color: #D97706;
+            transform: translateX(-50%);
+        }
+
+        .label-now {
+            left: 54%;
+            color: #059669;
+            transform: translateX(-50%);
+        }
+
+        .label-future {
+            right: 21%;
+            color: #2563EB;
+        }
+
+        /* Main timeline line */
+        .timeline-line {
+            position: absolute;
+            top: 280px;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: linear-gradient(to right, #D97706 0%, #D97706 48%, #059669 50%, #059669 52%, #2563EB 54%, #2563EB 100%);
+        }
+
+        /* NOW vertical divider */
+        .now-divider {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            width: 4px;
+            height: 440px;
+            background: #059669;
+            z-index: 10;
+        }
+
+        .now-label {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            font-weight: bold;
+            color: #059669;
+            background: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            z-index: 11;
+        }
+
+        /* Timeline events */
+        .event {
+            position: absolute;
+        }
+
+        /* Event shapes */
+        .shape-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid;
+            background: white;
+        }
+
+        .shape-dot.brown { border-color: #92400E; }
+        .shape-dot.orange { border-color: #D97706; }
+        .shape-dot.green { border-color: #059669; }
+        .shape-dot.blue { border-color: #2563EB; }
+
+        /* Three dots for present simple */
+        .shape-three-dots {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .shape-three-dots .dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #059669;
+            border: 3px solid #059669;
+        }
+
+        /* Continuous line (dashed) */
+        .shape-continuous {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background-image: repeating-linear-gradient(
+                to right,
+                currentColor 0px,
+                currentColor 15px,
+                transparent 15px,
+                transparent 30px
+            );
+        }
+
+        .shape-continuous.brown { color: #92400E; }
+        .shape-continuous.green { color: #059669; }
+
+        /* Arc for perfect tenses */
+        .shape-arc {
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+
+        /* Labels */
+        .label-top {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .label-bottom {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .label-tense {
+            font-size: 13px;
+            font-style: italic;
+            color: #666;
+            display: block;
+            margin-top: 3px;
+        }
+
+        .label-brown { color: #92400E; }
+        .label-orange { color: #D97706; }
+        .label-green { color: #059669; }
+        .label-blue { color: #2563EB; }
+
+        /* Year markers */
+        .year-marker {
+            position: absolute;
+            top: 480px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Bottom timeline (duplicate events with years) */
+        .bottom-timeline {
+            position: absolute;
+            top: 420px;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: linear-gradient(to right, #D97706 0%, #D97706 48%, #059669 50%, #059669 52%, #2563EB 54%, #2563EB 100%);
+        }
+
+        .tick {
+            position: absolute;
+            top: -10px;
+            width: 2px;
+            height: 24px;
+            background: #666;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sara's English Learning Timeline</h1>
+
+        <div class="timeline-wrapper">
+            <!-- Background zones -->
+            <div class="background-zones">
+                <div class="zone-past"></div>
+                <div class="zone-now"></div>
+                <div class="zone-future"></div>
+            </div>
+
+            <!-- Zone labels -->
+            <div class="zone-label label-past">PAST</div>
+            <div class="zone-label label-now">NOW</div>
+            <div class="zone-label label-future">FUTURE</div>
+
+            <!-- Main timeline line -->
+            <div class="timeline-line"></div>
+
+            <!-- NOW divider -->
+            <div class="now-divider"></div>
+            <div class="now-label">NOW<br>2026</div>
+
+            <!-- PAST EVENTS -->
+
+            <!-- Event 1: Had started (Past Perfect) - arc -->
+            <div class="event" style="left: 80px; top: 190px; width: 100px;">
+                <div class="label-top label-brown">
+                    Had started<span class="label-tense">(Past Perfect)</span>
+                </div>
+                <div class="shape-arc">
+                    <svg viewBox="0 0 100 50" style="width: 100%; height: 50px;">
+                        <path d="M 10 45 Q 50 5 90 45" stroke="#92400E" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Event 2: Moved 2014 (Past Simple) - dot -->
+            <div class="event" style="left: 200px; top: 265px; width: 60px;">
+                <div class="label-bottom label-orange">
+                    Moved<span class="label-tense">(Past Simple)</span>
+                </div>
+                <div class="shape-dot orange"></div>
+                <div class="year-marker">2014</div>
+                <div class="tick"></div>
+            </div>
+
+            <!-- Event 3: Was practicing (Past Continuous) - dashed line -->
+            <div class="event" style="left: 280px; top: 277px; width: 140px;">
+                <div class="label-top label-brown">
+                    Was practicing<span class="label-tense">(Past Continuous)</span>
+                </div>
+                <div class="shape-continuous brown"></div>
+            </div>
+
+            <!-- Event 4: Was listening (Past Continuous) - dashed line -->
+            <div class="event" style="left: 440px; top: 277px; width: 130px;">
+                <div class="label-bottom label-brown">
+                    Was listening to<br>Taylor Swift<span class="label-tense">(Past Continuous)</span>
+                </div>
+                <div class="shape-continuous brown"></div>
+            </div>
+
+            <!-- Event 5: Work started (Past Simple) - dot -->
+            <div class="event" style="left: 590px; top: 265px; width: 60px;">
+                <div class="label-top label-brown">
+                    Work started<span class="label-tense">(Past Simple)</span>
+                </div>
+                <div class="shape-dot brown"></div>
+            </div>
+
+            <!-- Event 6: Enrolled 2016 (Past Simple) - dot -->
+            <div class="event" style="left: 340px; top: 405px; width: 60px;">
+                <div class="label-bottom label-orange">
+                    Enrolled<span class="label-tense">(Past Simple)</span>
+                </div>
+                <div class="shape-dot orange" style="top: -138px;"></div>
+                <div class="year-marker" style="top: 60px;">2016</div>
+                <div class="tick" style="top: 6px;"></div>
+            </div>
+
+            <!-- Event 7: Promoted 2019 (Past Simple) - dot -->
+            <div class="event" style="left: 470px; top: 405px; width: 60px;">
+                <div class="label-bottom label-orange">
+                    Promoted<span class="label-tense">(Past Simple)</span>
+                </div>
+                <div class="shape-dot orange" style="top: -138px;"></div>
+                <div class="year-marker" style="top: 60px;">2019</div>
+                <div class="tick" style="top: 6px;"></div>
+            </div>
+
+            <!-- Event 8: Has been manager (Present Perfect) - arc -->
+            <div class="event" style="left: 610px; top: 190px; width: 130px;">
+                <div class="label-top label-brown">
+                    Manager 7 years<span class="label-tense">(Present Perfect)</span>
+                </div>
+                <div class="shape-arc">
+                    <svg viewBox="0 0 130 50" style="width: 100%; height: 50px;">
+                        <path d="M 10 45 Q 65 5 120 45" stroke="#92400E" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- NOW EVENTS -->
+
+            <!-- Event 9: Loves music (Present Simple) - 3 dots -->
+            <div class="event" style="left: calc(50% - 40px); top: 265px; width: 80px;">
+                <div class="label-top label-green">
+                    Loves music<span class="label-tense">(Present Simple)</span>
+                </div>
+                <div class="shape-three-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+
+            <!-- Event 10: Has been learning 15y (Present Perfect Continuous) - dashed arc -->
+            <div class="event" style="left: calc(50% - 90px); top: 180px; width: 180px;">
+                <div class="label-bottom label-green" style="top: 130px;">
+                    Learning 15 years<span class="label-tense">(Present Perf. Cont.)</span>
+                </div>
+                <div class="shape-arc">
+                    <svg viewBox="0 0 180 60" style="width: 100%; height: 60px;">
+                        <path d="M 10 55 Q 90 5 170 55" stroke="#059669" stroke-width="3" fill="none" stroke-dasharray="8,8"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- FUTURE EVENTS -->
+
+            <!-- Event 11: Will become GM (Future Simple) - dot -->
+            <div class="event" style="left: calc(50% + 110px); top: 265px; width: 80px;">
+                <div class="label-top label-blue">
+                    Will become<br>General Manager<span class="label-tense">(Future Simple)</span>
+                </div>
+                <div class="shape-dot blue"></div>
+                <div class="year-marker">By Summer</div>
+                <div class="tick"></div>
+            </div>
+
+            <!-- Event 12: Will have been speaking (Future Perfect Continuous) - dashed arc -->
+            <div class="event" style="left: calc(50% + 210px); top: 180px; width: 200px;">
+                <div class="label-bottom label-blue" style="top: 130px;">
+                    Speaking 15+ years<span class="label-tense">(Future Perf. Cont.)</span>
+                </div>
+                <div class="shape-arc">
+                    <svg viewBox="0 0 200 60" style="width: 100%; height: 60px;">
+                        <path d="M 10 55 Q 100 5 190 55" stroke="#2563EB" stroke-width="3" fill="none" stroke-dasharray="8,8"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Event 13: Life will have changed (Future Perfect) - arc -->
+            <div class="event" style="left: calc(50% + 430px); top: 190px; width: 170px;">
+                <div class="label-top label-blue">
+                    Life changed<span class="label-tense">(Future Perfect)</span>
+                </div>
+                <div class="shape-arc">
+                    <svg viewBox="0 0 170 50" style="width: 100%; height: 50px;">
+                        <path d="M 10 45 Q 85 5 160 45" stroke="#2563EB" stroke-width="3" fill="none"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Bottom timeline with year markers -->
+            <div class="bottom-timeline"></div>
+
+            <!-- Additional year marker at right -->
+            <div class="event" style="left: calc(50% + 330px); top: 405px; width: 80px;">
+                <div class="year-marker" style="top: 60px;">By next year</div>
+                <div class="tick" style="top: 6px;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

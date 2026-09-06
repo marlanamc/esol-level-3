@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonics Week 4 - Review (B/V, Sit/Seat) & The /w/ Sound in Jobs</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #000;
+            background: white;
+            padding: 20px;
+            max-width: 8.5in;
+            margin: 0 auto;
+            line-height: 1.5;
+            font-size: 11pt;
+        }
+
+        .worksheet-header {
+            text-align: center;
+            border-bottom: 3px double #000;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .worksheet-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: repeating-linear-gradient(
+                to right,
+                #000 0px,
+                #000 4px,
+                transparent 4px,
+                transparent 8px
+            );
+        }
+
+        .worksheet-title {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .worksheet-subtitle {
+            font-size: 11pt;
+            margin-bottom: 5px;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        .student-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 2px solid #000;
+            border-style: double;
+            font-size: 10pt;
+        }
+
+        .info-line {
+            border-bottom: 2px dotted #000;
+            min-height: 28px;
+            padding: 6px 8px;
+        }
+
+        .section {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #000;
+            padding-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title::before {
+            content: '▌';
+            margin-right: 8px;
+        }
+
+        .sound-rule {
+            text-align: center;
+            font-size: 11pt;
+            font-weight: bold;
+            margin: 10px 0;
+            padding: 10px;
+            border: 3px double #000;
+            background: #f9f9f9;
+        }
+
+        .pronunciation-chart {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+
+        .pronunciation-chart th,
+        .pronunciation-chart td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            font-size: 10pt;
+        }
+
+        .pronunciation-chart th {
+            background: #eee;
+            text-transform: uppercase;
+        }
+
+        .spanish-note {
+            background: #fffbe6;
+            border: 2px dashed #000;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 10pt;
+        }
+
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .vocab-card {
+            border: 1px solid #000;
+            padding: 10px;
+            background: #fff;
+        }
+
+        .vocab-word {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 11pt;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 5px;
+        }
+
+        .reading-text {
+            border: 2px solid #000;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: justify;
+            background: #fff;
+        }
+
+        .story-title {
+            font-size: 14pt;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .story-paragraph {
+            margin-bottom: 10px;
+            text-indent: 0.3in;
+        }
+
+        .activity-box {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .minimal-pairs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .minimal-pairs-table td {
+            padding: 5px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        @media print {
+            body { padding: 0.25in; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="worksheet-header">
+        <div class="worksheet-title">Phonics & Pronunciation</div>
+        <div class="worksheet-subtitle">Review: B vs V, Sit vs Seat | Lesson: The /w/ Sound in Jobs</div>
+    </div>
+
+    <div class="student-info">
+        <div class="info-line">Name: __________________________</div>
+
+    </div>
+
+    <!-- Section 1: Review -->
+    <div class="section">
+        <div class="section-title">Part 1: Review - Minimal Pairs</div>
+        
+        <div style="display: flex; gap: 20px;">
+            <div style="flex: 1;">
+                <p><strong>B vs V</strong> (Lips vs. Teeth)</p>
+                <table class="minimal-pairs-table">
+                    <tr><th>B (Two Lips)</th><th>V (Teeth/Lip)</th></tr>
+                    <tr><td>Berry</td><td>Very</td></tr>
+                    <tr><td>Best</td><td>Vest</td></tr>
+                    <tr><td>Boat</td><td>Vote</td></tr>
+                    <tr><td>Ban</td><td>Van</td></tr>
+                </table>
+            </div>
+            <div style="flex: 1;">
+                <p><strong>Short I vs. Long E</strong></p>
+                <table class="minimal-pairs-table">
+                    <tr><th>/ĭ/ (Quick)</th><th>/ē/ (Long)</th></tr>
+                    <tr><td>Sit</td><td>Seat</td></tr>
+                    <tr><td>Bit</td><td>Beat</td></tr>
+                    <tr><td>Fit</td><td>Feet</td></tr>
+                    <tr><td>Hit</td><td>Heat</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: /w/ Sound -->
+    <div class="section">
+        <div class="section-title">Part 2: The /w/ Sound - "Double-U"</div>
+        
+        <div class="sound-rule">
+            Mouth Position: Round your lips like a small circle (O). <br>
+            Practice: /w/ ... /w/ ... /w/
+        </div>
+
+        <div class="spanish-note">
+            <strong>💡 Spanish Connection:</strong> The English <strong>/w/</strong> sound is like the Spanish <strong>"u"</strong> (like in <em>huevo</em>, <em>web</em>, or <em>cuando</em>). 
+            Make sure your lips are tight and round!
+        </div>
+
+        <p><strong>Jobs with the /w/ sound:</strong></p>
+        <div class="vocabulary-grid">
+            <div class="vocab-card">
+                <div class="vocab-word">Worker</div>
+                <p>A person who does a job.</p>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-word">Waiter / Waitress</div>
+                <p>A person who serves food in a restaurant.</p>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-word">Welder</div>
+                <p>A person who joins metal together.</p>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-word">Web Designer</div>
+                <p>A person who makes websites.</p>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-word">Warehouse Worker</div>
+                <p>A person who works in a large storage building.</p>
+            </div>
+            <div class="vocab-card">
+                <div class="vocab-word">Writer</div>
+                <p>A person who writes books or articles.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Reading -->
+    <div class="section">
+        <div class="section-title">Part 3: Reading Practice</div>
+        <div class="reading-text">
+            <div class="story-title">William’s Work Week</div>
+            <div class="story-paragraph">
+                <strong>W</strong>illiam is a hard <strong>w</strong>orker. He <strong>w</strong>ants a <strong>v</strong>ery good job. Last <strong>w</strong>eek, he <strong>w</strong>ore his <strong>b</strong>est <strong>v</strong>est for an interview. He <strong>w</strong>ent to a <strong>w</strong>arehouse to meet the manager. 
+            </div>
+            <div class="story-paragraph">
+                He had to <strong>w</strong>ait for a <strong>s</strong>eat in the <strong>w</strong>aiting room. While he <strong>s</strong>at, he <strong>w</strong>atched the other <strong>w</strong>orkers. He saw a <strong>w</strong>elder <strong>w</strong>orking with flames. He saw a <strong>w</strong>oman <strong>w</strong>riting on a computer. 
+            </div>
+            <div class="story-paragraph">
+                The manager liked William. He said, "You are a <strong>w</strong>onderful <strong>w</strong>orker. You can start on <strong>W</strong>ednesday!" Now William is <strong>w</strong>orking and earning <strong>w</strong>ages. He is <strong>v</strong>ery happy with his ne<strong>w</strong> <strong>w</strong>orkplace.
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Activities -->
+    <div class="section">
+        <div class="section-title">Part 4: Practice Activities</div>
+        
+        <div class="activity-box">
+            <p><strong>Activity 1: Listening - Circle the word you hear</strong></p>
+            <table class="minimal-pairs-table" style="margin-top: 5px;">
+                <tr><td>1. Berry / Very</td><td>2. Best / Vest</td><td>3. Boat / Vote</td></tr>
+                <tr><td>4. Sit / Seat</td><td>5. Bit / Beat</td><td>6. Fit / Feet</td></tr>
+                <tr><td>7. West / Vest</td><td>8. Wet / Vet</td><td>9. Wheel / Veal</td></tr>
+            </table>
+        </div>
+
+        <div class="activity-box" style="margin-top: 15px;">
+            <p><strong>Activity 2: Fill in the Blanks (/w/ words)</strong></p>
+            <p style="font-size: 10pt; margin-bottom: 5px;">(Worker, Waiter, Wages, Wednesday, Warehouse, Web)</p>
+            <ol style="margin-left: 25px; line-height: 2;">
+                <li>The __________ serves food at the restaurant.</li>
+                <li>I work in a big __________ with many boxes.</li>
+                <li>The __________ designer creates beautiful websites.</li>
+                <li>I get my __________ (money) every Friday.</li>
+                <li>William starts his new job on __________.</li>
+            </ol>
+        </div>
+
+        <div class="activity-box" style="margin-top: 15px;">
+            <p><strong>Activity 3: B or V? Choose the correct word</strong></p>
+            <ol style="margin-left: 25px; line-height: 2;">
+                <li>I am (berry / very) tired today.</li>
+                <li>She wore a blue (best / vest) to the meeting.</li>
+                <li>Don't forget to (boat / vote) in the election!</li>
+                <li>The delivery (ban / van) is outside.</li>
+            </ol>
+        </div>
+    </div>
+
+</body>
+</html>

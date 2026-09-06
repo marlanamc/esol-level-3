@@ -1,0 +1,7 @@
+{
+  "scripts": {},
+  "dependencies": {
+    "jsdom": "^23.2.0",
+    "playwright-chromium": "^1.44.0"
+  }
+}

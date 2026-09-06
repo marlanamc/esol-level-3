@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline Scenarios Activity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    @page {
+      size: letter portrait;
+      margin: 0.35in;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .sheet {
+      width: 100%;
+      max-width: 8in;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page { break-after: page; }
+      .page:last-child { break-after: auto; }
+      .card, .timeline-card, .qa-card { break-inside: avoid; }
+    }
+
+    .page {
+      padding: 12px;
+    }
+
+    .hero {
+      border-radius: 16px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, #fffdf7 0%, #f8fbff 100%);
+      border: 2px dashed #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .section-subtitle {
+      margin: 0 0 10px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .card {
+      border-radius: 14px;
+      border: 2px solid #dbe4ee;
+      background: #fff;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card.scenario-1 {
+      background: #fffdf7;
+      border-color: #fde7a8;
+    }
+
+    .card.scenario-2 {
+      background: #f6fffb;
+      border-color: #b9efd8;
+    }
+
+    .card.scenario-3 {
+      background: #f8fbff;
+      border-color: #cfe0fb;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 6px;
+    }
+
+    .scenario-1 .badge {
+      background: #fff5d9;
+      color: #b45309;
+    }
+
+    .scenario-2 .badge {
+      background: #dcfce9;
+      color: #047857;
+    }
+
+    .scenario-3 .badge {
+      background: #e5f0ff;
+      color: #1d4ed8;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .stacked {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .list-box,
+    .timeline-card,
+    .qa-card {
+      border-radius: 12px;
+      background: #fff;
+      border: 1.5px solid #dbe4ee;
+      padding: 10px;
+    }
+
+    .timeline-card.polished {
+      padding: 12px 12px 10px;
+    }
+
+    .list-box h3,
+    .timeline-card h3,
+    .qa-card h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sentence-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.38;
+    }
+
+    .sentence-list li + li {
+      margin-top: 5px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 8px 6px 0;
+    }
+
+    .line {
+      position: relative;
+      height: 172px;
+      margin-top: 4px;
+    }
+
+    .line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 92px;
+      height: 4px;
+      border-radius: 999px;
+      background: #cbd5e1;
+    }
+
+    .tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 86px;
+      width: 2px;
+      height: 12px;
+      background: #cbd5e1;
+    }
+
+    .year {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 104px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    .now-tick {
+      position: absolute;
+      transform: translateX(-50%);
+      top: 78px;
+      width: 4px;
+      height: 28px;
+      background: #10b981;
+      border-radius: 2px;
+      z-index: 5;
+    }
+
+    .year.now-year {
+      color: #059669;
+      font-weight: 900;
+      font-size: 12.5px;
+    }
+
+    .event-dot {
+      position: absolute;
+      top: 92px;
+      transform: translate(-50%, -50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #d97706;
+      border: 3px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .event-label {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 900;
+      color: #334155;
+      text-align: center;
+      line-height: 1.18;
+      max-width: 150px;
+    }
+
+    .event-label.top {
+      top: 16px;
+    }
+
+    .event-label.bottom {
+      top: 124px;
+    }
+
+    .event-label.pill {
+      padding: 4px 8px;
+      border-radius: 16px;
+      background: rgb(255 255 255 / 0.98);
+      box-shadow: 0 1px 2px rgb(15 23 42 / 0.06);
+      font-size: 9.5px;
+      white-space: normal;
+    }
+
+    .event-label.with-stem::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      background: #cbd5e1;
+      border-radius: 999px;
+    }
+
+    .event-label.top.with-stem::after {
+      top: 100%;
+      height: 22px;
+    }
+
+    .event-label.bottom.with-stem::after {
+      bottom: 100%;
+      height: 18px;
+    }
+
+    .event-label.orange {
+      color: #b45309;
+      border: 1px solid #fcd34d;
+    }
+
+    .event-label.green {
+      color: #047857;
+      border: 1px solid #86efac;
+    }
+
+    .event-label.blue {
+      color: #1d4ed8;
+      border: 1px solid #93c5fd;
+    }
+
+    .event-label.gray {
+      color: #334155;
+      border: 1px solid #cbd5e1;
+    }
+
+    .line.ana-line {
+      height: 222px;
+      margin-top: 0;
+    }
+
+    .line.ana-line::before {
+      top: 100px;
+    }
+
+    .line.ana-line .tick {
+      top: 94px;
+    }
+
+    .line.ana-line .now-tick {
+      top: 86px;
+    }
+
+    .line.ana-line .year {
+      top: 112px;
+    }
+
+    .line.ana-line .event-label {
+      max-width: 168px;
+    }
+
+    .line.ana-line .event-label.bottom {
+      top: 146px;
+    }
+
+    .line.ana-line .event-label.top {
+      top: 18px;
+    }
+
+    .line.ana-line .event-label.top.with-stem::after {
+      height: 48px;
+    }
+
+    .line.ana-line .event-label.bottom.with-stem::after {
+      height: 28px;
+    }
+
+    .line.ana-line .event-dot {
+      top: 100px;
+    }
+
+    .duration {
+      position: absolute;
+      top: 92px;
+      transform: translateY(-50%);
+      height: 8px;
+      border-radius: 999px;
+      z-index: 4;
+    }
+
+    .duration.orange {
+      background: #f59e0b;
+    }
+
+    .duration.green {
+      background: #10b981;
+    }
+
+    .duration.blue {
+      background: #3b82f6;
+    }
+
+    .line.ana-line .duration.orange,
+    .line.ana-line .duration.green {
+      top: 100px;
+    }
+
+    .line.ana-line .duration.blue {
+      top: 176px;
+      height: 10px;
+    }
+
+    .questions {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      line-height: 1.4;
+    }
+
+    .questions li + li {
+      margin-top: 6px;
+    }
+
+    .answer-line {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 18px;
+      margin-top: 4px;
+    }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 12px;
+      margin-top: 8px;
+    }
+
+    .prompt-card {
+      border-radius: 10px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 9px 10px;
+    }
+
+    .prompt-card h4 {
+      margin: 0 0 4px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .prompt-card p {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.3;
+    }
+
+    .prompt-answer-lines {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .prompt-answer-lines div {
+      border-bottom: 1.5px solid #cbd5e1;
+      height: 18px;
+    }
+
+    .student-timeline {
+      margin-top: 10px;
+      border-radius: 12px;
+      border: 1.5px solid #dbe4ee;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .student-lines {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .student-lines div {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 24px;
+    }
+
+    .blank-line {
+      border-bottom: 2px dashed #cbd5e1;
+      height: 24px;
+      margin-top: 10px;
+    }
+
+    .blank-pill {
+      position: absolute;
+      transform: translateX(-50%);
+      padding: 4px 10px;
+      min-width: 118px;
+      height: 28px;
+      border-radius: 16px;
+      border: 2px dashed #cbd5e1;
+      background: rgb(255 255 255 / 0.9);
+    }
+
+    .blank-pill.top {
+      top: 24px;
+    }
+
+    .blank-pill.bottom {
+      top: 128px;
+    }
+
+    .blank-pill.open-left {
+      border-left: 0;
+      border-radius: 0 16px 16px 0;
+    }
+
+    .blank-pill.open-left::before {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      width: 54px;
+      border-top: 2px dashed #cbd5e1;
+      transform: translateY(-50%);
+    }
+
+    .timeline-note {
+      margin-top: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .formula-mini-box {
+      border-radius: 12px;
+      padding: 10px;
+      background: #f8fbff;
+      border: 1.5px solid #cfe0fb;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .formula-item {
+      font-size: 11px;
+      font-weight: 800;
+      color: #1e40af;
+      line-height: 1.25;
+    }
+
+    .formula-item span {
+      display: block;
+      font-size: 9.5px;
+      color: #64748b;
+      margin-top: 1px;
+    }
+
+    .tense-legend {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 25px 0 10px;
+      padding-top: 15px;
+      border-top: 1.5px dotted #cbd5e1;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #475569;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    .past-c { background: #f59e0b; }
+    .present-c { background: #10b981; }
+    .future-c { background: #1d4ed8; }
+
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="page">
+      <div class="hero">
+        <h1>Timeline Scenarios</h1>
+        <p>Use timelines to understand real stories about study, work, and moving. First solve the situation, then use past, present, and future language when it helps.</p>
+      </div>
+
+      <div class="card scenario-1">
+        <div class="badge">🕰️ Scenario 1</div>
+        <h2 class="section-title">Solve Maya’s Story And Build The Timeline</h2>
+        <p class="section-subtitle">Put Maya’s life events in order on the timeline. Then answer questions that show you understand her story, not just the dates.</p>
+
+        <div class="stacked">
+          <div class="list-box">
+            <h3>Clues About Maya</h3>
+            <ol class="sentence-list">
+              <li>After four years of study, Maya finished her nursing degree in May 2021.</li>
+              <li>She moved from Bogota to Miami in January 2022.</li>
+              <li>In Miami, she worked as a prep cook at a Cuban restaurant.</li>
+              <li>She moved to Boston in August 2024.</li>
+              <li>In December 2024, she started working as a line cook at an Italian restaurant.</li>
+              <li>She has been working as a line cook since 2024.</li>
+              <li>By 2027, she will have been living in the U.S. for 5 years.</li>
+            </ol>
+          </div>
+
+          <div class="timeline-card">
+            <h3>Use The Clues</h3>
+            <div class="timeline">
+              <div class="line">
+                <div class="tick" style="left: 12%;"></div>
+                <div class="year" style="left: 12%;">2021</div>
+                <div class="tick" style="left: 34%;"></div>
+                <div class="year" style="left: 34%;">2022</div>
+                <div class="tick" style="left: 56%;"></div>
+                <div class="year" style="left: 56%;">2024</div>
+                <div class="now-tick" style="left: 78%;"></div>
+                <div class="year now-year" style="left: 78%;">2026 (NOW)</div>
+                <div class="tick" style="left: 92%;"></div>
+                <div class="year" style="left: 92%;">2027</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card" style="margin-top: 12px;">
+          <h3>Questions</h3>
+          <ol class="questions">
+            <li>What had Maya already finished before she moved to the U.S.?<div class="answer-line"></div></li>
+            <li>Why do you think Maya first worked as a prep cook in Miami?<div class="answer-line"></div></li>
+            <li>What changed after she moved to Boston?<div class="answer-line"></div></li>
+            <li>If Maya goes to a job interview in 2027, what will she be able to say about her time in the U.S.?<div class="answer-line"></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card scenario-2">
+        <div class="badge">🕰️ Scenario 2</div>
+        <h2 class="section-title">Read Luis’s Timeline, Then Explain His Story</h2>
+        <p class="section-subtitle">Study Luis’s timeline. Then answer in full sentences and show that you understand the important changes in his life.</p>
+
+        <div class="stacked">
+          <div class="timeline-card polished">
+            <h3>Luis's Timeline</h3>
+            <div class="timeline">
+              <div class="line ana-line">
+                <div class="tick" style="left: 8%;"></div>
+                <div class="year" style="left: 8%;">2020</div>
+                <div class="tick" style="left: 24%;"></div>
+                <div class="year" style="left: 24%;">2021</div>
+                <div class="tick" style="left: 44%;"></div>
+                <div class="year" style="left: 44%;">2023</div>
+                <div class="tick" style="left: 64%;"></div>
+                <div class="year" style="left: 64%;">2024</div>
+                <div class="now-tick" style="left: 82%;"></div>
+                <div class="year now-year" style="left: 82%;">2026 (NOW)</div>
+                <div class="tick" style="left: 94%;"></div>
+                <div class="year" style="left: 94%;">2027</div>
+
+                <div class="duration orange" style="left: 8%; width: 16%;"></div>
+                <div class="event-label top pill orange with-stem" style="left: 16%; top: 18px; width: 148px;">studied English in Peru</div>
+
+                <div class="event-dot" style="left: 24%;"></div>
+                <div class="event-label bottom pill gray with-stem" style="left: 24%; top: 146px; width: 136px;">moved to New York</div>
+
+                <div class="event-dot green" style="left: 44%;"></div>
+                <div class="event-label top pill green with-stem" style="left: 44%; top: 18px; width: 150px;">started community college</div>
+
+                <div class="duration green" style="left: 64%; width: 18%;"></div>
+                <div class="event-dot green" style="left: 64%;"></div>
+                <div class="event-label top pill green with-stem" style="left: 73%; top: 18px; width: 158px;">has lived in Queens since 2024</div>
+
+                <div class="duration blue" style="left: 24%; width: 70%;"></div>
+                <div class="event-label bottom pill blue with-stem" style="left: 59%; top: 190px; width: 176px;">by 2027: 6 years in the U.S.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="qa-card">
+            <h3>Questions</h3>
+            <ol class="questions">
+              <li>Where had Luis been studying English before he moved to New York?<div class="answer-line"></div></li>
+              <li>What major life change happened in 2021?<div class="answer-line"></div></li>
+              <li>What had Luis started doing by 2023?<div class="answer-line"></div></li>
+              <li>What has been true since 2024?<div class="answer-line"></div></li>
+              <li>Imagine Luis is talking about his life in 2027. What will he be able to say?<div class="answer-line"></div></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="card scenario-3">
+        <div class="badge">📍 Scenario 3</div>
+        <h2 class="section-title">Study Ana’s Timeline And Tell Her Story</h2>
+        <p class="section-subtitle">Read Ana’s timeline. Then choose language that helps you explain what happened before, what is true now, and what may be true later.</p>
+
+
+        <div class="timeline-card polished">
+          <h3>Ana's Timeline</h3>
+          <div class="timeline">
+            <div class="line ana-line">
+              <div class="tick" style="left: 8%;"></div>
+              <div class="year" style="left: 8%;">2019</div>
+              <div class="tick" style="left: 24%;"></div>
+              <div class="year" style="left: 24%;">2021</div>
+              <div class="tick" style="left: 44%;"></div>
+              <div class="year" style="left: 44%;">2023</div>
+              <div class="tick" style="left: 64%;"></div>
+              <div class="year" style="left: 64%;">2024</div>
+              <div class="now-tick" style="left: 82%;"></div>
+              <div class="year now-year" style="left: 82%;">2026 (NOW)</div>
+              <div class="tick" style="left: 94%;"></div>
+              <div class="year" style="left: 94%;">2027</div>
+
+              <div class="duration orange" style="left: 8%; width: 16%;"></div>
+              <div class="event-label top pill orange with-stem" style="left: 16%; top: 18px; width: 156px;">studied English in the Dominican Republic</div>
+
+              <div class="event-dot" style="left: 24%;"></div>
+              <div class="event-label bottom pill gray with-stem" style="left: 24%; top: 146px; width: 128px;">moved to Orlando</div>
+
+              <div class="event-dot green" style="left: 44%;"></div>
+              <div class="event-label top pill green with-stem" style="left: 44%; top: 18px; width: 158px;">started working at a bakery</div>
+
+              <div class="event-dot" style="left: 64%;"></div>
+              <div class="event-label bottom pill gray with-stem" style="left: 64%; top: 146px; width: 120px;">moved to Tampa</div>
+
+              <div class="duration green" style="left: 64%; width: 18%;"></div>
+              <div class="event-label top pill green with-stem" style="left: 73%; top: 18px; width: 158px;">has lived in Tampa since 2024</div>
+
+              <div class="duration blue" style="left: 24%; width: 70%;"></div>
+              <div class="event-label bottom pill blue with-stem" style="left: 59%; top: 190px; width: 170px;">by 2027: 6 years in the U.S.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card" style="margin-top: 12px;">
+          <h3>Write Sentences</h3>
+          <ol class="questions">
+            <li>Write one sentence about an important past event in Ana’s life.<div class="answer-line"></div></li>
+            <li>Write one sentence that shows what had happened before she moved to Orlando or Tampa.<div class="answer-line"></div></li>
+            <li>Write one sentence that connects Ana’s past to her life now.<div class="answer-line"></div></li>
+            <li>Write one sentence about what Ana will be able to say by 2027.<div class="answer-line"></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card scenario-3">
+        <div class="badge">🔮 Scenario 4</div>
+        <h2 class="section-title">Create Your Own English Journey Timeline</h2>
+        <p class="section-subtitle">Think about your real English journey. Add important moments to your timeline, then use it to tell your story.</p>
+
+        <div class="prompt-grid">
+          <div class="prompt-card">
+            <h4>1. When did you first start learning English?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+            </div>
+          </div>
+          <div class="prompt-card">
+            <h4>2. Where were you living then?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+            </div>
+          </div>
+          <div class="prompt-card">
+            <h4>3. What was one important moment in your English journey?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="prompt-card">
+            <h4>4. What can you say about your English now?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="prompt-card">
+            <h4>5. What is one important goal for your English future?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+          <div class="prompt-card">
+            <h4>6. What do you hope will be true later?</h4>
+            <div class="prompt-answer-lines">
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="student-timeline">
+          <h3>Map Your Story</h3>
+          <div class="timeline">
+            <div class="line">
+              <div class="tick" style="left: 10%;"></div>
+              <div class="year" style="left: 10%;">past</div>
+              <div class="tick" style="left: 35%;"></div>
+              <div class="year" style="left: 35%;">important step</div>
+              <div class="tick" style="left: 62%;"></div>
+              <div class="year" style="left: 62%;">now</div>
+              <div class="tick" style="left: 90%;"></div>
+              <div class="year" style="left: 90%;">future</div>
+            </div>
+            <div class="blank-line"></div>
+            <div class="blank-line"></div>
+            <div class="blank-line"></div>
+          </div>
+
+          <div style="margin-top: 15px; background: #faf5ff; border: 1.5px solid #e9d5ff; padding: 10px; border-radius: 12px;">
+            <h4 style="margin: 0 0 6px; font-size: 11px; color: #7e22ce; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 900;">✏️ Language Check</h4>
+            <div style="display: flex; gap: 15px; font-size: 11.5px; font-weight: 700; color: #6b21a8;">
+              <span style="display: flex; align-items: center; gap: 5px;"><input type="checkbox" style="width: 13px; height: 13px;"> past</span>
+              <span style="display: flex; align-items: center; gap: 5px;"><input type="checkbox" style="width: 13px; height: 13px;"> past to now</span>
+              <span style="display: flex; align-items: center; gap: 5px;"><input type="checkbox" style="width: 13px; height: 13px;"> future</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="qa-card" style="margin-top: 12px;">
+          <h3>Write 3 Sentences About Your Timeline</h3>
+          <ol class="questions">
+            <li>Write one sentence about where your English journey began.<div class="answer-line"></div></li>
+            <li>Write one sentence that connects your past to your English now.<div class="answer-line"></div></li>
+            <li>Write one sentence about what you hope will be true in the future.<div class="answer-line"></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="tense-legend">
+        <div class="legend-item"><div class="legend-color past-c"></div> 🕰️ Past</div>
+        <div class="legend-item"><div class="legend-color present-c"></div> 📍 Present / Now</div>
+        <div class="legend-item"><div class="legend-color future-c"></div> 🔮 Future</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

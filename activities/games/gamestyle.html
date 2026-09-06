@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Housing Cards (Front/Back Print)</title>
+  <style>
+    :root{
+      --page-pad: 0.5in;
+      --border: 1px solid #000;
+      --front-bg: #1f4b7a;
+      --front-fg: #fff;
+    }
+
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f5f5;
+    }
+
+    h1{ text-align:center; margin: 0 0 8px; }
+    .tagline{ text-align:center; color:#555; margin: 0 0 16px; }
+
+    /* Toggle */
+    .controls{
+      max-width: 900px;
+      margin: 0 auto 16px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .controls label{ display:flex; gap:10px; align-items:center; }
+    .controls small{ display:block; color:#666; margin-top: 6px; line-height: 1.35; }
+
+    /* Screen preview (simple) */
+    .preview{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .preview-card{
+      background:#fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      overflow:hidden;
+    }
+    .preview-front{
+      background: linear-gradient(135deg, #1f4b7a 0%, #2b6cb0 100%);
+      color:#fff;
+      padding: 10px 12px;
+      font-weight: 700;
+      text-align:center;
+    }
+    .preview-back{ padding: 12px 14px; }
+    .preview-back h3{ margin: 0 0 6px; font-size: 1.05rem; }
+    .preview-back p{ margin: 0.35rem 0; color:#222; line-height: 1.35; }
+
+    /* PRINT PACK (and optional on-screen print layout) */
+    .print-pack{ display:none; }
+
+    /* Show print layout on screen when checkbox is checked */
+    #showPrint:checked ~ .print-pack{ display:block; }
+    #showPrint:checked ~ .screen-stuff{ display:none; }
+
+    .sheet{
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin: 18px auto;
+      max-width: 1100px;
+      overflow: hidden;
+    }
+    .sheet-header{
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      font-weight: 700;
+      color: #333;
+    }
+
+    /* 8 cards per page: 4 columns x 2 rows */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 0;
+      padding: 12px;
+    }
+
+    .slot{
+      border: var(--border);
+      min-height: 170px;
+      box-sizing: border-box;
+      padding: 10px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align:center;
+    }
+
+    /* FRONT DESIGN (Category + Title clearly visible) */
+    .front{
+      background: var(--front-bg);
+      color: var(--front-fg);
+    }
+    .front .cat{
+      font-size: 0.95rem;
+      letter-spacing: 0.4px;
+      opacity: 0.95;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .front .title{
+      margin-top: 10px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .front .num{
+      margin-top: 10px;
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    /* BACK DESIGN */
+    .back{
+      align-items: flex-start;
+      text-align: left;
+      justify-content: flex-start;
+      background: #fff;
+      color: #111;
+    }
+    .back h3{
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+    }
+    .back p{
+      margin: 0.25rem 0;
+      font-size: 0.78rem;
+      line-height: 1.28;
+    }
+    .back .label{
+      margin-top: auto;
+      padding-top: 8px;
+      font-size: 0.72rem;
+      color:#444;
+      border-top: 1px solid #eee;
+      width: 100%;
+    }
+
+    /* Print rules */
+    @media print{
+      body{ background:#fff; padding:0; }
+      .controls, .screen-stuff{ display:none !important; }
+
+      .print-pack{ display:block !important; }
+
+      .sheet{
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        max-width: none;
+      }
+      .sheet-header{ display:none; }
+
+      .grid{
+        padding: var(--page-pad);
+        height: 10in;
+        box-sizing: border-box;
+      }
+      .sheet{ page-break-after: always; }
+      .sheet:last-child{ page-break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Housing Cards (Front/Back)</h1>
+  <p class="tagline">Duplex print, flip on long edge.</p>
+
+  <div class="controls">
+    <label>
+      <input id="showPrint" type="checkbox" />
+      <strong>Show print layout on screen</strong>
+    </label>
+    <small>
+      If this is unchecked, you see a normal preview. If checked, you will see the exact front/back pages that will print.
+      When printing: choose two-sided (duplex) and flip on long edge.
+    </small>
+  </div>
+
+  <!-- NORMAL SCREEN STUFF -->
+  <div class="screen-stuff">
+    <div class="preview">
+      <div class="preview-card">
+        <div class="preview-front">Daily Life at Home</div>
+        <div class="preview-back">
+          <h3>Favorite Room</h3>
+          <p>Ask: “What is your favorite room in your home and why?”</p>
+          <p>Then describe 3 things in that room.</p>
+        </div>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-front">Landlords & Communication</div>
+        <div class="preview-back">
+          <h3>Call Your Landlord: No Heat</h3>
+          <p>Introduce yourself, explain the problem, ask when someone can come today.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT PACK -->
+  <div class="print-pack">
+
+    <!-- SHEET 1: FRONTS 1–8 -->
+    <div class="sheet">
+      <div class="sheet-header">Sheet 1 (Fronts 1–8)</div>
+      <div class="grid">
+        <div class="slot front"><div class="cat">Daily Life at Home</div><div class="title">Favorite Room</div><div class="num">Card 1</div></div>
+        <div class="slot front"><div class="cat">Daily Life at Home</div><div class="title">Weeknight at Home</div><div class="num">Card 2</div></div>
+        <div class="slot front"><div class="cat">Daily Life at Home</div><div class="title">Room Tour</div><div class="num">Card 3</div></div>
+        <div class="slot front"><div class="cat">Daily Life at Home</div><div class="title">Household Chores</div><div class="num">Card 4</div></div>
+
+        <div class="slot front"><div class="cat">Landlords & Communication</div><div class="title">Call: No Heat</div><div class="num">Card 5</div></div>
+        <div class="slot front"><div class="cat">Landlords & Communication</div><div class="title">Call: Noisy Neighbors</div><div class="num">Card 6</div></div>
+        <div class="slot front"><div class="cat">Tenant Rights in Boston</div><div class="title">Repairs and Safety</div><div class="num">Card 7</div></div>
+        <div class="slot front"><div class="cat">Tenant Rights in Boston</div><div class="title">No Retaliation</div><div class="num">Card 8</div></div>
+      </div>
+    </div>
+
+    <!-- SHEET 2: BACKS 1–8 -->
+    <!-- IMPORTANT: order is reversed for alignment when duplex printing (long edge) -->
+    <div class="sheet">
+      <div class="sheet-header">Sheet 2 (Backs 1–8, reversed order for duplex alignment)</div>
+      <div class="grid">
+        <!-- backs for cards 4,3,2,1 -->
+        <div class="slot back">
+          <h3>Household Chores</h3>
+          <p>Explain which chores you do at home and how often.</p>
+          <p>Ask one partner: “How often do you…?”</p>
+          <div class="label">Back of Card 4</div>
+        </div>
+        <div class="slot back">
+          <h3>Room Tour</h3>
+          <p>Describe one room. Use there is/there are.</p>
+          <p>Name 5 objects.</p>
+          <div class="label">Back of Card 3</div>
+        </div>
+        <div class="slot back">
+          <h3>Weeknight at Home</h3>
+          <p>Describe a typical weeknight. Use 5 verbs.</p>
+          <p>Ask 2 “Do you…?” questions.</p>
+          <div class="label">Back of Card 2</div>
+        </div>
+        <div class="slot back">
+          <h3>Favorite Room</h3>
+          <p>Ask: “What is your favorite room and why?”</p>
+          <p>Describe 3 things in the room.</p>
+          <div class="label">Back of Card 1</div>
+        </div>
+
+        <!-- backs for cards 8,7,6,5 -->
+        <div class="slot back">
+          <h3>No Retaliation</h3>
+          <p>Practice: “It is not legal to punish me for asking for repairs.”</p>
+          <p>Role-play asking for help from a community group.</p>
+          <div class="label">Back of Card 8</div>
+        </div>
+        <div class="slot back">
+          <h3>Repairs and Safety</h3>
+          <p>Practice: “I have the right to a safe home. This is an emergency repair.”</p>
+          <p>Role-play asking: “When can someone come today?”</p>
+          <div class="label">Back of Card 7</div>
+        </div>
+        <div class="slot back">
+          <h3>Call: Noisy Neighbors</h3>
+          <p>Explain the problem, ask for a solution.</p>
+          <p>Use: “Could you…?” “Is it possible…?”</p>
+          <div class="label">Back of Card 6</div>
+        </div>
+        <div class="slot back">
+          <h3>Call: No Heat</h3>
+          <p>Say your name and address, explain no heat.</p>
+          <p>Ask: “When can someone come today?”</p>
+          <div class="label">Back of Card 5</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

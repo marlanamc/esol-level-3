@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Pairs Diagnostic Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        .info-field {
+            border-bottom: 1px solid #999;
+            width: 200px;
+            display: inline-block;
+        }
+        .section {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .section-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border-left: 5px solid #333;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .item-number {
+            font-weight: bold;
+            margin-right: 15px;
+            width: 25px;
+        }
+        .options {
+            display: flex;
+            gap: 30px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #333;
+            margin-right: 8px;
+            display: inline-block;
+        }
+        @media print {
+            body {
+                padding: 20px;
+            }
+            .section-title {
+                background-color: #eee !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pronunciation Diagnostic Test</h1>
+
+    <div class="header-info">
+        <div>Name: <span class="info-field"></span></div>
+        <div>Date: <span class="info-field"></span></div>
+        <div>Score: <span class="info-field"></span> / 25</div>
+    </div>
+
+    <p><strong>Instructions:</strong> Listen to your teacher. Check the box next to the word you hear.</p>
+
+    <!-- Section 1: i: vs ɪ -->
+    <div class="section">
+        <div class="section-title">Part 1: The "I" Sounds (Seat vs. Sit)</div>
+        <div class="items-grid">
+            <div class="test-item">
+                <span class="item-number">1.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Seat</div>
+                    <div class="option"><span class="checkbox"></span> Sit</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">2.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Sheep</div>
+                    <div class="option"><span class="checkbox"></span> Ship</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">3.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Eat</div>
+                    <div class="option"><span class="checkbox"></span> It</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">4.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Feet</div>
+                    <div class="option"><span class="checkbox"></span> Fit</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">5.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Leave</div>
+                    <div class="option"><span class="checkbox"></span> Live</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: ʃ vs tʃ -->
+    <div class="section">
+        <div class="section-title">Part 2: SH vs. CH (Share vs. Chair)</div>
+        <div class="items-grid">
+            <div class="test-item">
+                <span class="item-number">6.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Share</div>
+                    <div class="option"><span class="checkbox"></span> Chair</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">7.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Shoe</div>
+                    <div class="option"><span class="checkbox"></span> Chew</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">8.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Wash</div>
+                    <div class="option"><span class="checkbox"></span> Watch</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">9.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Cash</div>
+                    <div class="option"><span class="checkbox"></span> Catch</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">10.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Shop</div>
+                    <div class="option"><span class="checkbox"></span> Chop</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: dʒ vs j -->
+    <div class="section">
+        <div class="section-title">Part 3: J vs. Y (Jeep vs. Yellow)</div>
+        <div class="items-grid">
+            <div class="test-item">
+                <span class="item-number">11.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Jam</div>
+                    <div class="option"><span class="checkbox"></span> Yam</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">12.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Jet</div>
+                    <div class="option"><span class="checkbox"></span> Yet</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">13.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Joke</div>
+                    <div class="option"><span class="checkbox"></span> Yolk</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">14.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Juice</div>
+                    <div class="option"><span class="checkbox"></span> Use</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">15.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Jess</div>
+                    <div class="option"><span class="checkbox"></span> Yes</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: n vs ŋ -->
+    <div class="section">
+        <div class="section-title">Part 4: Endings N vs. NG (Thin vs. Thing)</div>
+        <div class="items-grid">
+            <div class="test-item">
+                <span class="item-number">16.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Thin</div>
+                    <div class="option"><span class="checkbox"></span> Thing</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">17.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Ran</div>
+                    <div class="option"><span class="checkbox"></span> Rang</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">18.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Sin</div>
+                    <div class="option"><span class="checkbox"></span> Sing</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">19.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Win</div>
+                    <div class="option"><span class="checkbox"></span> Wing</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">20.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Fan</div>
+                    <div class="option"><span class="checkbox"></span> Fang</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: æ vs ʌ -->
+    <div class="section">
+        <div class="section-title">Part 5: Vowels A vs. U (Bat vs. But)</div>
+        <div class="items-grid">
+            <div class="test-item">
+                <span class="item-number">21.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Bat</div>
+                    <div class="option"><span class="checkbox"></span> But</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">22.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Cat</div>
+                    <div class="option"><span class="checkbox"></span> Cut</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">23.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Hat</div>
+                    <div class="option"><span class="checkbox"></span> Hut</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">24.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Cap</div>
+                    <div class="option"><span class="checkbox"></span> Cup</div>
+                </div>
+            </div>
+            <div class="test-item">
+                <span class="item-number">25.</span>
+                <div class="options">
+                    <div class="option"><span class="checkbox"></span> Ankle</div>
+                    <div class="option"><span class="checkbox"></span> Uncle</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
