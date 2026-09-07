@@ -3,1591 +3,578 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Marlie's ESOL Class</title>
+<title>Marlie's Class Materials</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --paper-cream: #faf8f3;
-    --ink-dark: #2d2a26;
-    --pencil-gray: #6b6b6b;
-    --highlight-yellow: #fff4a3;
-    --highlight-pink: #ffd4e5;
-    --highlight-blue: #cfe7ff;
-    --highlight-green: #d4f4dd;
-    --tab-green: #2D6A4F;
-    --margin-red: #e17f7f;
-    --shadow: rgba(0, 0, 0, 0.08);
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  html, body { background: #f4f1ea; }
 
   body {
     font-family: 'Karla', sans-serif;
-    background: #e8e4dc;
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 31px,
-        rgba(139, 107, 82, 0.05) 31px,
-        rgba(139, 107, 82, 0.05) 32px
-      );
-    color: var(--ink-dark);
-    padding: 0;
-    min-height: 100vh;
-    position: relative;
+    color: #22201d;
   }
 
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px 64px;
   }
 
-  .notebook-container {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-  }
-
-  .notebook-page {
-    background: var(--paper-cream);
-    border-radius: 3px;
-    box-shadow:
-      0 1px 3px var(--shadow),
-      0 10px 40px rgba(0, 0, 0, 0.05),
-      inset 0 0 0 1px rgba(0, 0, 0, 0.02);
-    padding: 40px 50px 40px 90px;
-    position: relative;
-    animation: pageSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @keyframes pageSlide {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .notebook-page::before {
-    content: '';
-    position: absolute;
-    left: 70px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--margin-red);
-    opacity: 0.3;
-  }
-
-  .notebook-page::after {
-    content: '';
-    position: absolute;
-    left: 30px;
-    top: 80px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #e8e4dc;
-    box-shadow:
-      0 0 0 2px rgba(0, 0, 0, 0.03),
-      0 100px 0 0 #e8e4dc,
-      0 100px 0 2px rgba(0, 0, 0, 0.03),
-      0 200px 0 0 #e8e4dc,
-      0 200px 0 2px rgba(0, 0, 0, 0.03),
-      0 300px 0 0 #e8e4dc,
-      0 300px 0 2px rgba(0, 0, 0, 0.03);
-  }
-
+  /* Header */
   header {
-    margin-bottom: 26px;
-    border-bottom: 3px solid var(--ink-dark);
-    padding-bottom: 18px;
-    position: relative;
-    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
+    padding: 44px 0 20px;
   }
 
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
+  .eyebrow {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: #2D6A4F;
+    margin-bottom: 10px;
   }
 
   h1 {
     font-family: 'Atkinson Hyperlegible', sans-serif;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: 700;
-    color: var(--ink-dark);
-    line-height: 1.1;
-    margin-bottom: 6px;
-    letter-spacing: -0.3px;
+    line-height: 1.05;
+    letter-spacing: -0.4px;
+    color: #22201d;
+    margin: 0 0 8px;
   }
 
-  .subtitle {
+  .subhead {
+    margin: 0;
     font-size: 16px;
-    color: var(--pencil-gray);
-    font-weight: 400;
-    letter-spacing: 0.3px;
+    color: #6b6b6b;
+    max-width: 52ch;
+    text-wrap: pretty;
   }
 
-  .subtitle a { color: var(--ink-dark); }
-
-  .model-note {
-    margin-top: 14px;
-    padding: 12px 18px;
-    background: rgba(45, 106, 79, 0.07);
-    border: 1px solid rgba(45, 106, 79, 0.25);
-    border-radius: 4px;
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--ink-dark);
-    max-width: 640px;
+  /* Sticky toolbar */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: #f4f1ea;
+    padding: 12px 0 14px;
+    border-bottom: 1px solid rgba(34, 32, 29, 0.12);
+    margin-bottom: 8px;
   }
 
-  .model-note strong { color: var(--tab-green); }
-
-  .category-section {
-    margin-bottom: 34px;
-    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-  }
-
-  .category-header {
+  .toolbar-row {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-    position: relative;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
   }
 
-  .warmup-link {
-    margin-left: auto;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--tab-green);
-    text-decoration: none;
-    white-space: nowrap;
-    padding: 11px 4px;
-    margin-top: -11px;
-    margin-bottom: -11px;
-    display: inline-block;
-  }
-
-  .warmup-link:hover { text-decoration: underline; }
-
-  .category-tab {
-    background: var(--tab-green);
-    color: white;
-    padding: 5px 14px;
-    font-weight: 700;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 3px 3px 0 0;
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  .search-field {
     position: relative;
-    top: 2px;
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 360px;
   }
 
-  .category-title {
+  .search-field input {
+    width: 100%;
+    box-sizing: border-box;
+    font: 400 15px 'Karla', sans-serif;
+    padding: 12px 14px 12px 40px;
+    border: 1px solid rgba(34, 32, 29, 0.2);
+    border-radius: 8px;
+    background: #fffdf9;
+    color: #22201d;
+    outline: none;
+  }
+
+  .search-field input::placeholder { color: #8d867c; }
+
+  .search-field input:focus {
+    border-color: #2D6A4F;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #8d867c;
+    display: flex;
+    pointer-events: none;
+  }
+
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    font: 600 13px 'Karla', sans-serif;
+    padding: 9px 13px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    background: #fffdf9;
+    color: #4a453e;
+    border: 1px solid rgba(34, 32, 29, 0.2);
+  }
+
+  .chip[aria-pressed="true"] {
+    background: #2D6A4F;
+    color: #fff;
+    border: 1px solid #2D6A4F;
+  }
+
+  .chip .count { opacity: 0.55; margin-left: 6px; }
+
+  .toggle-all {
+    margin-left: auto;
+    font: 600 13px 'Karla', sans-serif;
+    padding: 9px 4px;
+    border: none;
+    background: transparent;
+    color: #2D6A4F;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .result-line {
+    font-size: 13px;
+    color: #6b6b6b;
+    margin-top: 10px;
+  }
+
+  /* Unit list */
+  .unit {
+    border-bottom: 1px solid rgba(34, 32, 29, 0.1);
+  }
+
+  .unit-header {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 18px 2px;
+    cursor: pointer;
+    font-family: 'Karla', sans-serif;
+  }
+
+  .unit-header:hover { background: rgba(45, 106, 79, 0.04); }
+
+  .unit-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-self: center;
+  }
+
+  .unit-label {
     font-family: 'Atkinson Hyperlegible', sans-serif;
-    font-size: 21px;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--ink-dark);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    flex: 0 0 auto;
+  }
+
+  .unit-title {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #22201d;
     line-height: 1.2;
   }
 
-  .category-sub {
-    font-size: 13.5px;
-    color: var(--pencil-gray);
-    margin: -4px 0 14px;
-    max-width: 620px;
-    line-height: 1.45;
-  }
-
-  .activities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 14px;
-    margin-bottom: 0;
-  }
-
-  .activity-card {
-    background: white;
-    border: 2px solid var(--ink-dark);
-    padding: 16px 18px;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    position: relative;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  }
-
-  .activity-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--highlight-green);
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0;
-  }
-
-  .activity-card:hover::before { transform: scaleY(1); }
-
-  .activity-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.15);
-  }
-
-  .activity-card:focus-visible,
-  .toggle-btn:focus-visible,
-  .warmup-link:focus-visible {
-    outline: 3px solid var(--tab-green);
-    outline-offset: 2px;
-  }
-
-  .activity-content { position: relative; z-index: 1; }
-
-  .card-chip {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 9.5px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: var(--paper-cream);
-    border: 1.5px solid var(--ink-dark);
-    color: var(--ink-dark);
-    z-index: 2;
-  }
-
-  .activity-icon {
-    display: block;
-    margin-bottom: 8px;
-    line-height: 1;
-  }
-
-  .activity-icon svg {
-    width: 26px;
-    height: 26px;
-    color: var(--ink-dark);
-  }
-
-  .activity-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink-dark);
-    margin-bottom: 4px;
-    line-height: 1.3;
-  }
-
-  .activity-description {
-    font-size: 13px;
-    color: var(--pencil-gray);
-    line-height: 1.4;
-  }
-
-  .warmup-card .activity-description { font-style: italic; }
-
-  .warmup-card[style*="--accent"] .activity-icon svg {
-    color: var(--accent);
-  }
-  .warmup-card[style*="--accent"]:hover {
-    border-color: var(--accent);
-  }
-
-
-  .view-toggle {
-    display: inline-flex;
-    background: rgba(0, 0, 0, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    padding: 3px;
-    margin-bottom: 24px;
-  }
-
-  .toggle-btn {
-    font-family: 'Karla', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 13px 18px;
-    border: none;
-    border-radius: 4px;
-    background: transparent;
-    color: var(--pencil-gray);
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .toggle-btn.active {
-    background: white;
-    color: var(--ink-dark);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  }
-
-  .toggle-btn:hover:not(.active) {
-    color: var(--ink-dark);
-  }
-
-  .view { display: none; }
-  .view.active { display: block; }
-
-  footer {
-    text-align: center;
-    padding: 24px 20px;
-    margin-top: 20px;
-    border-top: 2px dashed var(--pencil-gray);
-    animation: fadeSlide 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
-  }
-
-  .footer-note {
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    color: var(--pencil-gray);
+  .unit-count {
+    font-size: 12px;
     font-weight: 600;
+    color: #6b6b6b;
+    flex: 0 0 auto;
   }
 
-  .footer-links {
-    margin-top: 12px;
+  .unit-chevron {
+    margin-left: auto;
+    flex: 0 0 auto;
+    color: #8d867c;
+    display: flex;
+    transition: transform 0.2s ease;
+  }
+
+  .unit-chevron.collapsed { transform: rotate(-90deg); }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    padding: 0 0 22px;
+  }
+
+  .card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #fffdf9;
+    border: 1px solid rgba(34, 32, 29, 0.14);
+    border-left: 3px solid;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(34, 32, 29, 0.09);
+    border-color: rgba(34, 32, 29, 0.3);
+  }
+
+  .card-icon {
+    flex: 0 0 auto;
+    margin-top: 2px;
+    display: flex;
+  }
+
+  .card-text {
+    min-width: 0;
+    display: block;
+  }
+
+  .card-eyebrow {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #6b6b6b;
+    margin-bottom: 5px;
+  }
+
+  .card-title {
+    display: block;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #22201d;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .card-desc {
+    display: block;
+    font-size: 13px;
+    color: #6b6b6b;
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+
+  /* Empty state */
+  .empty-state {
+    padding: 56px 20px;
+    text-align: center;
+  }
+
+  .empty-state .empty-title {
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #22201d;
+    margin-bottom: 6px;
+  }
+
+  .empty-state .empty-sub {
     font-size: 14px;
-  }
-  .footer-links a { color: var(--pencil-gray); }
-
-  @media (max-width: 768px) {
-    .notebook-page { padding: 28px 24px 28px 50px; }
-    .notebook-page::before { left: 40px; }
-    .notebook-page::after { left: 20px; top: 60px; }
-    h1 { font-size: 32px; }
-    .category-title { font-size: 19px; }
-    .activities-grid { grid-template-columns: 1fr; }
-    .warmup-link { margin-left: 0; }
+    color: #6b6b6b;
   }
 
-  @media (max-width: 480px) {
-    .notebook-page { padding: 22px 16px 22px 40px; }
-    .notebook-page::before { left: 30px; }
-    .notebook-page::after { left: 15px; width: 10px; height: 10px; }
-    h1 { font-size: 27px; }
+  /* Footer */
+  footer {
+    padding: 28px 0 0;
+    margin-top: 26px;
+    border-top: 1px dashed rgba(34, 32, 29, 0.25);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    font-size: 13.5px;
   }
+
+  footer a { color: #6b6b6b; }
+  footer a:hover { color: #2D6A4F; }
 
   @media (prefers-reduced-motion: reduce) {
-    .notebook-page,
-    header,
-    .category-section,
-    footer {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-
-    .activity-card,
-    .activity-card::before,
-    .toggle-btn {
+    .card, .unit-chevron {
       transition: none;
     }
   }
 </style>
 </head>
 <body>
-  <div class="notebook-container">
-    <div class="notebook-page">
-      <header>
-        <h1>Marlie's ESOL Class</h1>
-      </header>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">ESOL Level 3</div>
+    <h1>Marlie's Class Materials</h1>
+  </header>
 
-      <div class="view-toggle" role="group" aria-label="Organize activities">
-        <button type="button" class="toggle-btn active" data-view="unit" onclick="setView('unit')">By Unit</button>
-        <button type="button" class="toggle-btn" data-view="category" onclick="setView('category')">By Category</button>
+  <div class="toolbar">
+    <div class="toolbar-row">
+      <div class="search-field">
+        <input type="search" id="search-input" placeholder="Search activities" aria-label="Search activities">
+        <span class="search-icon" aria-hidden="true" id="search-icon"></span>
       </div>
-
-      <div id="view-unit" class="view active">
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 1</div>
-          <h2 class="category-title">Getting to Know You</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit1-getting-to-know-you-game.html" class="activity-card warmup-card" style="--accent: #EA580C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
-                <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
-                <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
-                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Personal daily life, school &amp; classroom procedures.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit1-getting-to-know-you-discussion-game.html" class="activity-card warmup-card" style="--accent: #EA580C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about school, classmates, and daily routines.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 2</div>
-          <h2 class="category-title">Daily Life in the Community</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit2-daily-life-community-game.html" class="activity-card warmup-card" style="--accent: #7E22CE;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                <circle cx="9" cy="7" r="4" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Staying connected to community and family.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit2-daily-life-community-discussion-game.html" class="activity-card warmup-card" style="--accent: #7E22CE;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about community and family life.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 3</div>
-          <h2 class="category-title">Community Participation</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit3-community-participation-game.html" class="activity-card warmup-card" style="--accent: #0E7490;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m11 17 2 2a1 1 0 1 0 3-3" />
-                <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
-                <path d="m21 3 1 11h-2" />
-                <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
-                <path d="M3 4h8" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Where communities exist and how we interact with them.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit3-community-participation-discussion-game.html" class="activity-card warmup-card" style="--accent: #0E7490;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about civic life and community involvement.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 4</div>
-          <h2 class="category-title">Consumer Smarts</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit4-consumer-smarts-game.html" class="activity-card warmup-card" style="--accent: #BE185D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
-                <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
-                <circle cx="18" cy="20" r="2" />
-                <circle cx="8" cy="20" r="2" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Knowing the best way to spend our money.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit4-consumer-smarts-discussion-game.html" class="activity-card warmup-card" style="--accent: #BE185D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about money, shopping, and budgeting.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 5</div>
-          <h2 class="category-title">Housing</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/housing/task-class.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon" aria-hidden="true">🏠</span>
-              <div class="activity-title">Task Class</div>
-              <div class="activity-description">All four tasks in sequence, with support that fades as you go. Start here.</div>
-            </div>
-          </a>
-          <a href="activities/housing/housing-game-all-in-one.html" class="activity-card warmup-card" style="--accent: #0F766E;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Community housing issues and resources.</div>
-            </div>
-          </a>
-          <a href="activities/housing/housing-discussion-game.html" class="activity-card warmup-card" style="--accent: #0F766E;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about home, landlords, and safety.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 6</div>
-          <h2 class="category-title">Workforce Preparation</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit6-workforce-preparation-game.html" class="activity-card warmup-card" style="--accent: #3730A3;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                <rect width="20" height="14" x="2" y="6" rx="2" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Communication skills and career opportunities.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit6-workforce-preparation-discussion-game.html" class="activity-card warmup-card" style="--accent: #3730A3;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about job searching and workplace communication.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 7</div>
-          <h2 class="category-title">Career Awareness</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit7-career-awareness-game.html" class="activity-card warmup-card" style="--accent: #B45309;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                <path d="M12 11h4" />
-                <path d="M12 16h4" />
-                <path d="M8 11h.01" />
-                <path d="M8 16h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Understanding rights and self-advocacy at work.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit7-career-awareness-discussion-game.html" class="activity-card warmup-card" style="--accent: #B45309;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about workplace rights and self-advocacy.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 8</div>
-          <h2 class="category-title">Health</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/health-game-all-in-one.html" class="activity-card warmup-card" style="--accent: #2563EB;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-                <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Advocating for yourself in health situations.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/health-discussion-game.html" class="activity-card warmup-card" style="--accent: #2563EB;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about health, doctors, and self-advocacy.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 9</div>
-          <h2 class="category-title">Holistic Wellness</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit9-holistic-wellness-game.html" class="activity-card warmup-card" style="--accent: #15803D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" />
-                <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">How health impacts home, work, and community.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit9-holistic-wellness-discussion-game.html" class="activity-card warmup-card" style="--accent: #15803D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about whole-life wellness and self-care.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Unit 10</div>
-          <h2 class="category-title">Future Academic Goals</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/future-academic-goals-game.html" class="activity-card warmup-card" style="--accent: #B91C1C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                <path d="M22 10v6" />
-                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-              </svg>
-              </span>
-              <div class="activity-title">Superlative Game</div>
-              <div class="activity-description">Becoming a lifelong learner.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/future-academic-goals-discussion-game.html" class="activity-card warmup-card" style="--accent: #B91C1C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Discussion Game</div>
-              <div class="activity-description">Open-ended speaking questions about lifelong learning and future goals.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab" style="background: var(--pencil-gray);">Unsorted</div>
-          <h2 class="category-title">Not Yet Assigned to a Unit</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/where-im-from/full-class-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="card-chip">Task Class</span>
-              <span class="activity-icon" aria-hidden="true">👋</span>
-              <div class="activity-title">Where I'm From, Where I Live</div>
-              <div class="activity-description">Full 2.5-Hour Class (Slideshow) — introduce yourself, describe your daily route, introduce someone else, tell your story.</div>
-            </div>
-          </a>
-          <a href="activities/community-life/task-class.html" class="activity-card">
-            <div class="activity-content">
-              <span class="card-chip">Task Class</span>
-              <span class="activity-icon" aria-hidden="true">🚇</span>
-              <div class="activity-title">Community Life</div>
-              <div class="activity-description">Start the Community Life Task Class — get around by T, use a community resource, report a neighborhood issue, take part in civic life.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div id="view-category" class="view">
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Reference</div>
-          <h2 class="category-title">Superlative Games</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit1-getting-to-know-you-game.html" class="activity-card warmup-card" style="--accent: #EA580C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2" />
-                <path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2" />
-                <path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8" />
-                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 1: Getting to Know You</div>
-              <div class="activity-description">Personal daily life, school &amp; classroom procedures.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit2-daily-life-community-game.html" class="activity-card warmup-card" style="--accent: #7E22CE;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                <circle cx="9" cy="7" r="4" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 2: Daily Life in the Community</div>
-              <div class="activity-description">Staying connected to community and family.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit3-community-participation-game.html" class="activity-card warmup-card" style="--accent: #0E7490;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m11 17 2 2a1 1 0 1 0 3-3" />
-                <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
-                <path d="m21 3 1 11h-2" />
-                <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
-                <path d="M3 4h8" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 3: Community Participation</div>
-              <div class="activity-description">Where communities exist and how we interact with them.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit4-consumer-smarts-game.html" class="activity-card warmup-card" style="--accent: #BE185D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
-                <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
-                <circle cx="18" cy="20" r="2" />
-                <circle cx="8" cy="20" r="2" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 4: Consumer Smarts</div>
-              <div class="activity-description">Knowing the best way to spend our money.</div>
-            </div>
-          </a>
-          <a href="activities/housing/housing-game-all-in-one.html" class="activity-card warmup-card" style="--accent: #0F766E;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 5: Housing</div>
-              <div class="activity-description">Community housing issues and resources.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit6-workforce-preparation-game.html" class="activity-card warmup-card" style="--accent: #3730A3;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                <rect width="20" height="14" x="2" y="6" rx="2" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 6: Workforce Preparation</div>
-              <div class="activity-description">Communication skills and career opportunities.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit7-career-awareness-game.html" class="activity-card warmup-card" style="--accent: #B45309;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
-                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                <path d="M12 11h4" />
-                <path d="M12 16h4" />
-                <path d="M8 11h.01" />
-                <path d="M8 16h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 7: Career Awareness</div>
-              <div class="activity-description">Understanding rights and self-advocacy at work.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/health-game-all-in-one.html" class="activity-card warmup-card" style="--accent: #2563EB;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-                <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 8: Health</div>
-              <div class="activity-description">Advocating for yourself in health situations.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit9-holistic-wellness-game.html" class="activity-card warmup-card" style="--accent: #15803D;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" />
-                <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 9: Holistic Wellness</div>
-              <div class="activity-description">How health impacts home, work, and community.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/future-academic-goals-game.html" class="activity-card warmup-card" style="--accent: #B91C1C;">
-            <div class="activity-content">
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
-                <path d="M22 10v6" />
-                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
-              </svg>
-              </span>
-              <div class="activity-title">Future Academic Goals</div>
-              <div class="activity-description">Becoming a lifelong learner.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Reference</div>
-          <h2 class="category-title">Discussion Games</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/superlatives/unit1-getting-to-know-you-discussion-game.html" class="activity-card warmup-card" style="--accent: #EA580C;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 1: Getting to Know You — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about school, classmates, and daily routines.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit2-daily-life-community-discussion-game.html" class="activity-card warmup-card" style="--accent: #7E22CE;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 2: Daily Life in the Community — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about community and family life.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit3-community-participation-discussion-game.html" class="activity-card warmup-card" style="--accent: #0E7490;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 3: Community Participation — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about civic life and community involvement.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit4-consumer-smarts-discussion-game.html" class="activity-card warmup-card" style="--accent: #BE185D;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 4: Consumer Smarts — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about money, shopping, and budgeting.</div>
-            </div>
-          </a>
-          <a href="activities/housing/housing-discussion-game.html" class="activity-card warmup-card" style="--accent: #0F766E;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 5: Housing — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about home, landlords, and safety.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit6-workforce-preparation-discussion-game.html" class="activity-card warmup-card" style="--accent: #3730A3;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 6: Workforce Preparation — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about job searching and workplace communication.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit7-career-awareness-discussion-game.html" class="activity-card warmup-card" style="--accent: #B45309;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 7: Career Awareness — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about workplace rights and self-advocacy.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/health-discussion-game.html" class="activity-card warmup-card" style="--accent: #2563EB;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 8: Health — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about health, doctors, and self-advocacy.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/unit9-holistic-wellness-discussion-game.html" class="activity-card warmup-card" style="--accent: #15803D;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Unit 9: Holistic Wellness — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about whole-life wellness and self-care.</div>
-            </div>
-          </a>
-          <a href="activities/superlatives/future-academic-goals-discussion-game.html" class="activity-card warmup-card" style="--accent: #B91C1C;">
-            <div class="activity-content">
-              <span class="card-chip">Discussion Game</span>
-              <span class="activity-icon">
-<svg aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-                <path d="M12 17h.01" />
-              </svg>
-              </span>
-              <div class="activity-title">Future Academic Goals — Discussion</div>
-              <div class="activity-description">Open-ended speaking questions about lifelong learning and future goals.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Task Class</div>
-          <h2 class="category-title">Unit 1: Getting to Know You</h2>
-          <a href="activities/superlatives/unit1-getting-to-know-you-game.html" class="warmup-link">⚡ Warmup game →</a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Task Class</div>
-          <h2 class="category-title">Where I'm From, Where I Live</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/where-im-from/full-class-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon" aria-hidden="true">👋</span>
-              <div class="activity-title">Full 2.5-Hour Class (Slideshow)</div>
-              <div class="activity-description">Board-projected version for live teaching — warm-up, all four tasks, a break, and discussion prompts for pairs and groups. No typing required.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Task Class</div>
-          <h2 class="category-title">Housing</h2>
-          <a href="activities/housing/housing-game-all-in-one.html" class="warmup-link">⚡ Warmup game →</a>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/housing/task-class.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon" aria-hidden="true">🏠</span>
-              <div class="activity-title">Start the Housing Task Class</div>
-              <div class="activity-description">All four tasks in sequence, with support that fades as you go. Start here.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <div class="category-tab">Task Class</div>
-          <h2 class="category-title">Community Life</h2>
-        </div>
-        <div class="activities-grid">
-          <a href="activities/community-life/task-class.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon" aria-hidden="true">🚇</span>
-              <div class="activity-title">Start the Community Life Task Class</div>
-              <div class="activity-description">All four tasks in sequence, with support that fades as you go. Start here.</div>
-            </div>
-          </a>
-          <a href="activities/community-life/full-class-slides.html" class="activity-card">
-            <div class="activity-content">
-              <span class="activity-icon" aria-hidden="true">📽️</span>
-              <div class="activity-title">Full 2.5-Hour Class (Slideshow)</div>
-              <div class="activity-description">Board-projected version for live teaching — warm-up, all four tasks, a break, and discussion prompts for pairs and groups. No typing required.</div>
-            </div>
-          </a>
-        </div>
-      </div>
-
-      <div class="category-section">
-        <div class="category-header">
-          <h2 class="category-title" style="color: var(--pencil-gray);">Coming Next</h2>
-        </div>
-      </div>
-      </div>
-
-      <footer>
-        <p class="footer-links"><a href="index-fy26.html">← FY26 Archive (grammar-topic activities, for reference)</a></p>
-      </footer>
+      <div role="group" aria-label="Filter by type" class="chip-group" id="chip-group"></div>
+      <button type="button" class="toggle-all" id="toggle-all">Collapse all</button>
     </div>
+    <div class="result-line" id="result-line"></div>
   </div>
 
-  <script>
-    function setView(view) {
-      document.getElementById('view-unit').classList.toggle('active', view === 'unit');
-      document.getElementById('view-category').classList.toggle('active', view === 'category');
-      document.querySelectorAll('.toggle-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.view === view);
-      });
-      try { localStorage.setItem('esol-index-view', view); } catch (e) {}
-    }
+  <div id="unit-list"></div>
 
-    (function () {
-      var saved = null;
-      try { saved = localStorage.getItem('esol-index-view'); } catch (e) {}
-      if (saved === 'category') setView('category');
-    })();
-  </script>
+  <div class="empty-state" id="empty-state" hidden>
+    <div class="empty-title">Nothing matches that</div>
+    <div class="empty-sub">Try a shorter word, or clear the type filter.</div>
+  </div>
+
+  <footer>
+    <a href="index-fy26.html">&larr; FY26 archive (grammar-topic activities)</a>
+    <a href="teacher-builder.html">Teacher activity builder &rarr;</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ICONS = {
+    disc: { p: ["M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719", "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3", "M12 17h.01"] },
+    u1: { p: ["M20 21a8 8 0 0 0-16 0"], c: [[12, 8, 5]] },
+    u2: { p: ["M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", "M16 3.128a4 4 0 0 1 0 7.744", "M22 21v-2a4 4 0 0 0-3-3.87"], c: [[9, 7, 4]] },
+    u3: { p: ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2 20 7H4Z"] },
+    u4: { p: ["m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18", "M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25"], c: [[18, 20, 2], [8, 20, 2]] },
+    u5: { p: ["M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", "M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"] },
+    u6: { p: ["M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"], r: [[20, 14, 2, 6, 2]] },
+    u7: { p: ["m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1", "m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1", "M7 21h10", "M12 3v18", "M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"] },
+    u8: { p: ["M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5", "M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"] },
+    u9: { p: ["M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20", "M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13"] },
+    u10: { p: ["M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z", "M22 10v6", "M6 12.5V16a6 3 0 0 0 12 0v-3.5"] },
+    task: { p: ["m3 17 2 2 4-4", "m3 7 2 2 4-4", "M13 6h8", "M13 12h8", "M13 18h8"] },
+    trophy: { p: ["M6 9H4.5a2.5 2.5 0 0 1 0-5H6", "M18 9h1.5a2.5 2.5 0 0 0 0-5H18", "M4 22h16", "M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22", "M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22", "M18 2H6v7a6 6 0 0 0 12 0V2Z"] },
+    folder: { p: ["M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"] },
+    slides: { p: ["M12 17v4", "M8 21h8"], r: [[20, 14, 2, 3, 2]] },
+    search: { p: ["m21 21-4.34-4.34"], c: [[11, 11, 8]] },
+    chevron: { p: ["m6 9 6 6 6-6"] }
+  };
+
+  var UNITS = [
+    { id: "u1", label: "Unit 1", title: "Getting to Know You", accent: "#B0432B", icon: "u1", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Personal daily life, school & classroom procedures.", href: "activities/superlatives/unit1-getting-to-know-you-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about school, classmates, and daily routines.", href: "activities/superlatives/unit1-getting-to-know-you-discussion-game.html" }
+    ] },
+    { id: "u2", label: "Unit 2", title: "Daily Life in the Community", accent: "#8A5A0B", icon: "u2", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Staying connected to community and family.", href: "activities/superlatives/unit2-daily-life-community-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about community and family life.", href: "activities/superlatives/unit2-daily-life-community-discussion-game.html" }
+    ] },
+    { id: "u3", label: "Unit 3", title: "Community Participation", accent: "#4B6B1F", icon: "u3", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Where communities exist and how we interact with them.", href: "activities/superlatives/unit3-community-participation-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about civic life and community involvement.", href: "activities/superlatives/unit3-community-participation-discussion-game.html" }
+    ] },
+    { id: "u4", label: "Unit 4", title: "Consumer Smarts", accent: "#1E6E5C", icon: "u4", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Knowing the best way to spend our money.", href: "activities/superlatives/unit4-consumer-smarts-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about money, shopping, and budgeting.", href: "activities/superlatives/unit4-consumer-smarts-discussion-game.html" }
+    ] },
+    { id: "u5", label: "Unit 5", title: "Housing", accent: "#17667F", icon: "u5", activities: [
+      { type: "Task Class", title: "Housing Task Class", desc: "All four tasks in sequence, with support that fades as you go. Start here.", href: "activities/housing/task-class.html", icon: "task" },
+      { type: "Superlative Game", title: "Superlative Game", desc: "Community housing issues and resources.", href: "activities/housing/housing-game-all-in-one.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about home, landlords, and safety.", href: "activities/housing/housing-discussion-game.html" }
+    ] },
+    { id: "u6", label: "Unit 6", title: "Workforce Preparation", accent: "#2A5599", icon: "u6", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Communication skills and career opportunities.", href: "activities/superlatives/unit6-workforce-preparation-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about job searching and workplace communication.", href: "activities/superlatives/unit6-workforce-preparation-discussion-game.html" }
+    ] },
+    { id: "u7", label: "Unit 7", title: "Career Awareness", accent: "#4A46A0", icon: "u7", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Understanding rights and self-advocacy at work.", href: "activities/superlatives/unit7-career-awareness-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about workplace rights and self-advocacy.", href: "activities/superlatives/unit7-career-awareness-discussion-game.html" }
+    ] },
+    { id: "u8", label: "Unit 8", title: "Health", accent: "#7A3E9D", icon: "u8", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Advocating for yourself in health situations.", href: "activities/superlatives/health-game-all-in-one.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about health, doctors, and self-advocacy.", href: "activities/superlatives/health-discussion-game.html" }
+    ] },
+    { id: "u9", label: "Unit 9", title: "Holistic Wellness", accent: "#9C3272", icon: "u9", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "How health impacts home, work, and community.", href: "activities/superlatives/unit9-holistic-wellness-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about whole-life wellness and self-care.", href: "activities/superlatives/unit9-holistic-wellness-discussion-game.html" }
+    ] },
+    { id: "u10", label: "Unit 10", title: "Future Academic Goals", accent: "#A32B4A", icon: "u10", activities: [
+      { type: "Superlative Game", title: "Superlative Game", desc: "Becoming a lifelong learner.", href: "activities/superlatives/future-academic-goals-game.html" },
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about lifelong learning and future goals.", href: "activities/superlatives/future-academic-goals-discussion-game.html" }
+    ] },
+    { id: "unsorted", label: "No unit yet", title: "Not assigned to a unit", accent: "#5C5751", icon: "folder", activities: [
+      { type: "Slideshow", title: "Where I'm From, Where I Live", desc: "Full 2.5-hour class slideshow — introduce yourself, describe your daily route, introduce someone else, tell your story.", href: "activities/where-im-from/full-class-slides.html", icon: "slides" },
+      { type: "Task Class", title: "Community Life Task Class", desc: "Get around by T, use a community resource, report a neighborhood issue, take part in civic life.", href: "activities/community-life/task-class.html", icon: "task" },
+      { type: "Slideshow", title: "Community Life — Full Class", desc: "Board-projected version for live teaching: warm-up, all four tasks, a break, and discussion prompts.", href: "activities/community-life/full-class-slides.html", icon: "slides" }
+    ] }
+  ];
+
+  var TYPES = ["Task Class", "Superlative Game", "Discussion Game", "Slideshow"];
+
+  var initialCollapsed = {};
+  UNITS.forEach(function (u) { initialCollapsed[u.id] = true; });
+  var state = { query: "", type: "All", collapsed: initialCollapsed, allCollapsed: true };
+
+  function svgMarkup(spec, size) {
+    var s = size || 20;
+    var inner = "";
+    (spec.p || []).forEach(function (d) { inner += '<path d="' + d + '"></path>'; });
+    (spec.c || []).forEach(function (c) { inner += '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="' + c[2] + '"></circle>'; });
+    (spec.r || []).forEach(function (r) { inner += '<rect width="' + r[0] + '" height="' + r[1] + '" x="' + r[2] + '" y="' + r[3] + '" rx="' + r[4] + '"></rect>'; });
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+  }
+
+  function iconFor(unit, act) {
+    if (act.icon) return svgMarkup(ICONS[act.icon]);
+    if (act.type === "Discussion Game") return svgMarkup(ICONS.disc);
+    if (act.type === "Superlative Game") return svgMarkup(ICONS.trophy);
+    if (act.type === "Task Class") return svgMarkup(ICONS.task);
+    if (act.type === "Slideshow") return svgMarkup(ICONS.slides);
+    return svgMarkup(ICONS[unit.icon]);
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function matches(unit, act) {
+    var q = state.query.trim().toLowerCase();
+    if (state.type !== "All" && act.type !== state.type) return false;
+    if (!q) return true;
+    return (act.title + " " + act.desc + " " + act.type + " " + unit.title + " " + unit.label).toLowerCase().indexOf(q) > -1;
+  }
+
+  var searchIconEl = document.getElementById("search-icon");
+  searchIconEl.innerHTML = svgMarkup(ICONS.search, 17);
+
+  var chipGroup = document.getElementById("chip-group");
+  var unitList = document.getElementById("unit-list");
+  var resultLine = document.getElementById("result-line");
+  var emptyState = document.getElementById("empty-state");
+  var toggleAllBtn = document.getElementById("toggle-all");
+  var searchInput = document.getElementById("search-input");
+
+  function render() {
+    var searching = state.query.trim().length > 0 || state.type !== "All";
+    var counts = { All: 0 };
+    TYPES.forEach(function (t) { counts[t] = 0; });
+    UNITS.forEach(function (u) {
+      u.activities.forEach(function (a) {
+        counts.All++;
+        counts[a.type] = (counts[a.type] || 0) + 1;
+      });
+    });
+
+    // Chips
+    var chipsHtml = "";
+    ["All"].concat(TYPES).forEach(function (t) {
+      var active = state.type === t;
+      var label = t === "All" ? "All" : t.replace(" Game", "").replace("Task Class", "Task class");
+      chipsHtml += '<button type="button" class="chip" data-type="' + escapeHtml(t) + '" aria-pressed="' + active + '">' +
+        escapeHtml(label) + '<span class="count">' + (counts[t] || 0) + '</span></button>';
+    });
+    chipGroup.innerHTML = chipsHtml;
+
+    // Units
+    var shown = 0;
+    var unitsHtml = "";
+    var anyUnits = false;
+
+    UNITS.forEach(function (u) {
+      var acts = u.activities.filter(function (a) { return matches(u, a); });
+      if (!acts.length) return;
+      anyUnits = true;
+      shown += acts.length;
+      var open = searching ? true : !state.collapsed[u.id];
+
+      var cardsHtml = "";
+      if (open) {
+        acts.forEach(function (a) {
+          var eyebrowHtml = searching
+            ? '<span class="card-eyebrow">' + escapeHtml(u.label + " · " + u.title) + '</span>'
+            : "";
+          cardsHtml += '<a class="card" href="' + escapeHtml(a.href) + '" style="border-left-color:' + u.accent + '">' +
+            '<span class="card-icon" style="color:' + u.accent + '">' + iconFor(u, a) + '</span>' +
+            '<span class="card-text">' + eyebrowHtml +
+            '<span class="card-title">' + escapeHtml(a.title) + '</span>' +
+            '<span class="card-desc">' + escapeHtml(a.desc) + '</span>' +
+            '</span></a>';
+        });
+      }
+
+      unitsHtml += '<section class="unit">' +
+        '<button type="button" class="unit-header" data-unit="' + u.id + '" aria-expanded="' + open + '">' +
+        '<span class="unit-icon" style="color:' + u.accent + '">' + svgMarkup(ICONS[u.icon], 22) + '</span>' +
+        '<span class="unit-label" style="color:' + u.accent + '">' + escapeHtml(u.label) + '</span>' +
+        '<span class="unit-title">' + escapeHtml(u.title) + '</span>' +
+        '<span class="unit-count">' + (acts.length === 1 ? "1 activity" : acts.length + " activities") + '</span>' +
+        '<span class="unit-chevron' + (open ? "" : " collapsed") + '">' + svgMarkup(ICONS.chevron, 20) + '</span>' +
+        '</button>' +
+        (open ? '<div class="card-grid">' + cardsHtml + '</div>' : '') +
+        '</section>';
+    });
+
+    unitList.innerHTML = unitsHtml;
+    emptyState.hidden = anyUnits;
+
+    resultLine.textContent = searching
+      ? shown + " of " + counts.All + " activities match"
+      : counts.All + " activities · 10 units";
+
+    toggleAllBtn.textContent = state.allCollapsed ? "Expand all" : "Collapse all";
+
+    bindDynamicEvents();
+  }
+
+  function bindDynamicEvents() {
+    chipGroup.querySelectorAll(".chip").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        state.type = btn.getAttribute("data-type") === "All" ? "All" : btn.getAttribute("data-type");
+        render();
+      });
+    });
+
+    unitList.querySelectorAll(".unit-header").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var id = btn.getAttribute("data-unit");
+        state.collapsed[id] = !state.collapsed[id];
+        render();
+      });
+    });
+  }
+
+  searchInput.addEventListener("input", function (e) {
+    state.query = e.target.value;
+    render();
+  });
+
+  toggleAllBtn.addEventListener("click", function () {
+    var collapse = !state.allCollapsed;
+    UNITS.forEach(function (u) { state.collapsed[u.id] = collapse; });
+    state.allCollapsed = collapse;
+    render();
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
