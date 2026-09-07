@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 3: Community Participation Discussion Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .slide-container {
+            width: 100vw;
+            min-height: 100vh;
+            background: #ECFEFF;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* HOME PAGE STYLES */
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            z-index: 10;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .home-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: #0E7490;
+            text-align: center;
+        }
+
+        .home-title-icon svg {
+            width: 64px;
+            height: 64px;
+            stroke-width: 1.75;
+        }
+
+        .home-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+        }
+
+        .start-game-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #0E7490 0%, #155E75 100%);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .start-game-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* GAME PAGE STYLES */
+        .game-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .question-counter {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+            background: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 20;
+        }
+
+        .timer-container {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .timer-display {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: #1A1A1A;
+            background: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 140px;
+            text-align: center;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .timer-btn {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .start-btn { background: #0E7490; color: white; }
+        .reset-btn { background: #333333; color: white; }
+        .timer-btn:hover { opacity: 0.8; }
+
+        .nav-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            z-index: 20;
+            background: linear-gradient(to top, #ECFEFF 80%, transparent);
+        }
+
+        .nav-btn {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #0E7490;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #155E75;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn.back { background: #333333; }
+        .nav-btn.back:hover:not(:disabled) { background: #1a1a1a; }
+        .nav-btn.home { background: #0E7490; }
+        .nav-btn.home:hover { background: #155E75; }
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            z-index: 10;
+            padding: 120px 24px 24px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* CATEGORY CARD (always visible, no flip) */
+        .category-card {
+            width: 420px;
+            height: 100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #0E7490 0%, #155E75 100%);
+            color: #ECFEFF;
+        }
+
+        .category-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* TOPIC CARDS GRID */
+        .topic-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .topic-flip-card {
+            background-color: transparent;
+            width: 100%;
+            min-height: 180px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .topic-flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .topic-flip-card-front, .topic-flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+            padding: 16px;
+        }
+
+        .topic-flip-card-front {
+            background: #0E7490;
+            color: #ECFEFF;
+        }
+
+        .topic-flip-card-back {
+            background: #0E7490;
+            color: #ECFEFF;
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            overflow-y: auto;
+        }
+
+        .topic-flip-card .topic-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+            padding: 0 8px;
+        }
+
+        .topic-flip-card-front::after {
+            content: "Click to see questions";
+            position: absolute;
+            bottom: 10px;
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            opacity: 0.85;
+        }
+
+        .topic-flip-card-back ul {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.5;
+            list-style: disc;
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .topic-flip-card-back li {
+            margin-bottom: 8px;
+        }
+
+        .topic-flip-card-back li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Backdrop for expanded card — click to close */
+        .topic-card-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.18);
+            z-index: 99;
+            cursor: pointer;
+        }
+
+        .topic-flip-card.flipped {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            max-width: 680px;
+            height: 75vh;
+            max-height: 520px;
+            z-index: 100;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            min-height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front,
+        .topic-flip-card.flipped .topic-flip-card-back {
+            min-height: 100%;
+            padding: 28px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            padding-bottom: 72px;
+            background: #FFFFFF;
+            color: #1a1a1a;
+            border-left: 6px solid #0E7490;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.7;
+            padding-left: 28px;
+            color: #1a1a1a;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back li {
+            margin-bottom: 18px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back li::marker {
+            color: #0E7490;
+        }
+
+        .topic-card-close-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #FFFFFF;
+            background: #0E7490;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 28px;
+            cursor: pointer;
+        }
+
+        .topic-card-close-btn:hover {
+            background: #155E75;
+        }
+
+        .instruction-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333333;
+            text-align: center;
+            font-style: italic;
+            letter-spacing: 0.3px;
+            line-height: 1.5;
+        }
+
+        .decorative-line {
+            position: absolute;
+            background: #0E7490;
+            opacity: 0.1;
+        }
+
+        .line-1 { width: 100%; height: 2px; top: 100px; }
+        .line-2 { width: 100%; height: 2px; bottom: 100px; }
+
+        /* MOBILE */
+        @media (max-width: 900px) {
+            .topic-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-container { overflow-y: auto; }
+
+            .home-title { font-size: 42px; padding: 0 20px; }
+            .home-title-icon svg { width: 42px; height: 42px; }
+            .home-subtitle { font-size: 18px; padding: 0 20px; }
+            .start-game-btn { font-size: 20px; padding: 16px 40px; }
+
+            .question-counter {
+                top: 20px; left: 20px;
+                font-size: 14px; padding: 8px 16px;
+            }
+            .timer-container { top: 20px; right: 20px; gap: 8px; }
+            .timer-display { font-size: 32px; padding: 8px 16px; min-width: 100px; }
+            .timer-btn { font-size: 12px; padding: 6px 12px; }
+
+            .content-area {
+                gap: 24px;
+                padding: 100px 16px 24px;
+            }
+
+            .category-card {
+                width: 90%;
+                max-width: 360px;
+                height: 88px;
+            }
+            .category-card h2 { font-size: 22px; }
+
+            .topic-cards-grid {
+                gap: 14px;
+                max-width: 100%;
+            }
+            .topic-flip-card { min-height: 160px; }
+            .topic-flip-card-inner { min-height: 160px; }
+            .topic-flip-card-front, .topic-flip-card-back { min-height: 160px; }
+            .topic-flip-card .topic-name { font-size: 16px; }
+            .topic-flip-card-back ul { font-size: 12px; }
+            .topic-flip-card-back li { margin-bottom: 6px; }
+            .topic-flip-card.flipped .topic-flip-card-back ul { font-size: 20px; }
+            .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 14px; }
+
+            .instruction-text { font-size: 14px; padding: 0 16px; }
+            .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
+            .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
+        }
+
+        @media (max-width: 480px) {
+            .home-title { font-size: 32px; }
+            .home-title-icon svg { width: 32px; height: 32px; }
+            .home-subtitle { font-size: 16px; }
+            .start-game-btn { font-size: 18px; padding: 14px 32px; }
+            .question-counter { font-size: 12px; padding: 6px 12px; top: 10px; left: 10px; }
+            .timer-container { top: 10px; right: 10px; }
+            .timer-display { font-size: 28px; padding: 6px 12px; min-width: 90px; }
+            .content-area { padding: 90px 12px 20px; gap: 20px; }
+            .category-card { height: 80px; }
+            .category-card h2 { font-size: 18px; }
+            .topic-cards-grid { grid-template-columns: 1fr; gap: 12px; }
+            .topic-flip-card { min-height: 150px; }
+            .topic-flip-card-inner, .topic-flip-card-front, .topic-flip-card-back { min-height: 150px; }
+            .topic-flip-card .topic-name { font-size: 15px; }
+            .topic-flip-card-back ul { font-size: 11px; }
+            .topic-flip-card.flipped .topic-flip-card-back ul { font-size: 18px; }
+            .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 12px; }
+            .instruction-text { font-size: 13px; }
+            .nav-container { padding: 12px; }
+            .nav-btn { font-size: 13px; padding: 10px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container" id="slideContainer">
+        <div class="decorative-line line-1"></div>
+        <div class="decorative-line line-2"></div>
+
+        <!-- HOME PAGE -->
+        <div id="homePage" class="home-page">
+            <h1 class="home-title" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;"><span class="home-title-icon" style="display: inline-flex;">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m11 17 2 2a1 1 0 1 0 3-3" />
+                      <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+                      <path d="m21 3 1 11h-2" />
+                      <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+                      <path d="M3 4h8" />
+                    </svg>
+                </span> Unit 3: Community Participation Discussion Game</h1>
+            <p class="home-subtitle">Open-ended questions to practice talking about civic life and community involvement</p>
+            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- GAME PAGE -->
+        <div id="gamePage" class="game-page hidden">
+            <div class="question-counter" id="questionCounter">Category 1 of 4</div>
+            <div class="timer-container">
+                <div class="timer-display" id="timer">01:30</div>
+                <div class="timer-controls">
+                    <button class="timer-btn start-btn" onclick="toggleTimer()" id="timerBtn">Start</button>
+                    <button class="timer-btn reset-btn" onclick="resetTimer()">Reset</button>
+                </div>
+            </div>
+
+            <div id="topicCardBackdrop" class="topic-card-backdrop"></div>
+
+            <div class="content-area" id="contentArea">
+                <!-- CATEGORY CARD (always visible) -->
+                <div class="category-card">
+                    <h2 id="categoryTitle">CATEGORY</h2>
+                </div>
+
+                <!-- 6 TOPIC CARDS -->
+                <div class="topic-cards-grid" id="topicCardsGrid">
+                    <!-- filled by JS -->
+                </div>
+
+                <div class="instruction-text">Click each topic card to flip and see discussion questions • Click Close or the dark area to close</div>
+            </div>
+
+            <div class="nav-container">
+                <button class="nav-btn back" onclick="previousCategory()" id="backBtn">← Back</button>
+                <button class="nav-btn home" onclick="goHome()">🏠 Home</button>
+                <button class="nav-btn" onclick="nextCategory()" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const categories = [
+                        {
+                                        "title": "Types of Communities",
+                                        "topics": [
+                                                        {
+                                                                        "name": "Neighborhood Community",
+                                                                        "questions": [
+                                                                                        "Describe the neighborhood where you live.",
+                                                                                        "Who are the people you see most often nearby?",
+                                                                                        "What makes your neighborhood feel like a community?",
+                                                                                        "How is your neighborhood different from your home country?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Cultural or Language Community",
+                                                                        "questions": [
+                                                                                        "Do you belong to a community that shares your language or culture?",
+                                                                                        "How did you find this community?",
+                                                                                        "What activities does this community organize?",
+                                                                                        "Why is this community important to you?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Online Communities",
+                                                                        "questions": [
+                                                                                        "Are you part of any online groups or forums?",
+                                                                                        "How do you communicate with people in this group?",
+                                                                                        "What topics do you discuss in this online community?",
+                                                                                        "How is an online community different from an in-person one?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Workplace Community",
+                                                                        "questions": [
+                                                                                        "Describe the community of people at your job.",
+                                                                                        "How do coworkers support each other?",
+                                                                                        "What activities bring your coworkers together?",
+                                                                                        "How do you build relationships with people at work?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "School Community",
+                                                                        "questions": [
+                                                                                        "Describe the community here at your school.",
+                                                                                        "Who do you feel closest to in this school?",
+                                                                                        "What activities help build community in your class?",
+                                                                                        "How can a school community support new students?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Faith or Interest Groups",
+                                                                        "questions": [
+                                                                                        "Are you part of a group based on a shared interest or belief?",
+                                                                                        "How often does this group meet?",
+                                                                                        "What do you enjoy about being part of this group?",
+                                                                                        "How did you decide to join this group?"
+                                                                        ]
+                                                        }
+                                        ]
+                        },
+                        {
+                                        "title": "Where Communities Exist",
+                                        "topics": [
+                                                        {
+                                                                        "name": "Parks and Public Spaces",
+                                                                        "questions": [
+                                                                                        "Describe a park or public space you visit often.",
+                                                                                        "Who do you usually see there?",
+                                                                                        "What activities happen in this space?",
+                                                                                        "How do public spaces bring people together?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Community Centers",
+                                                                        "questions": [
+                                                                                        "Describe a community center near your home.",
+                                                                                        "What programs or classes are offered there?",
+                                                                                        "Have you attended an event at a community center?",
+                                                                                        "What would you like to see offered there?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Local Businesses",
+                                                                        "questions": [
+                                                                                        "Describe a local business you visit regularly.",
+                                                                                        "How do you know the people who work there?",
+                                                                                        "Why do you choose this business over others?",
+                                                                                        "How do local businesses support a community?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Schools and Libraries",
+                                                                        "questions": [
+                                                                                        "How do schools bring a community together?",
+                                                                                        "Describe an event at a school or library you attended.",
+                                                                                        "Who uses the library in your area?",
+                                                                                        "What resources make libraries important to communities?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Places of Worship",
+                                                                        "questions": [
+                                                                                        "How do places of worship function as communities?",
+                                                                                        "Describe activities that happen there beyond services.",
+                                                                                        "Who attends these gatherings in your area?",
+                                                                                        "How does this type of community support its members?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Digital Spaces",
+                                                                        "questions": [
+                                                                                        "Where online do you find your community?",
+                                                                                        "How is a digital community similar to a physical one?",
+                                                                                        "What are the benefits of a digital community?",
+                                                                                        "What are some challenges of connecting online instead of in person?"
+                                                                        ]
+                                                        }
+                                        ]
+                        },
+                        {
+                                        "title": "How You Interact with Your Community",
+                                        "topics": [
+                                                        {
+                                                                        "name": "Attending Local Events",
+                                                                        "questions": [
+                                                                                        "Describe a local event you attended recently.",
+                                                                                        "How did you find out about this event?",
+                                                                                        "Who did you go with?",
+                                                                                        "What made the event enjoyable or memorable?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Volunteering and Giving Back",
+                                                                        "questions": [
+                                                                                        "Have you volunteered for a community organization? Describe it.",
+                                                                                        "What motivates you to help others in your community?",
+                                                                                        "How much time do you spend volunteering?",
+                                                                                        "What volunteer opportunity would you like to try?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Participating in Local Decisions",
+                                                                        "questions": [
+                                                                                        "Have you ever attended a community meeting? Describe it.",
+                                                                                        "How can residents share opinions about local issues?",
+                                                                                        "What issue in your community would you like to discuss?",
+                                                                                        "Why is it important for community members to participate?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Supporting Neighbors",
+                                                                        "questions": [
+                                                                                        "Describe a time you helped a neighbor.",
+                                                                                        "How do neighbors support each other in your area?",
+                                                                                        "What would you do if a neighbor needed help?",
+                                                                                        "How does helping others build a stronger community?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Sharing Skills and Knowledge",
+                                                                        "questions": [
+                                                                                        "What skill could you teach someone in your community?",
+                                                                                        "Have you ever helped someone learn something new?",
+                                                                                        "How can sharing skills bring people together?",
+                                                                                        "What skill would you like to learn from someone else?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Respecting Community Rules",
+                                                                        "questions": [
+                                                                                        "What rules help your community function smoothly?",
+                                                                                        "Describe a rule you think is important to follow.",
+                                                                                        "What happens when community rules are not followed?",
+                                                                                        "How do rules help build trust between neighbors?"
+                                                                        ]
+                                                        }
+                                        ]
+                        },
+                        {
+                                        "title": "Building a Stronger Community",
+                                        "topics": [
+                                                        {
+                                                                        "name": "Identifying Community Needs",
+                                                                        "questions": [
+                                                                                        "What is one need you notice in your community?",
+                                                                                        "How did you learn about this need?",
+                                                                                        "Who could help address this need?",
+                                                                                        "What would improve life for people in your area?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Organizing a Community Event",
+                                                                        "questions": [
+                                                                                        "Imagine you are planning a small community event.",
+                                                                                        "What type of event would you organize?",
+                                                                                        "Who would you invite?",
+                                                                                        "What steps would you take to plan it?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Communicating with Community Leaders",
+                                                                        "questions": [
+                                                                                        "How would you contact a local leader about a concern?",
+                                                                                        "What information would you include in your message?",
+                                                                                        "Why is clear communication important with leaders?",
+                                                                                        "What concern would you like to raise in your community?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Working with Diverse Groups",
+                                                                        "questions": [
+                                                                                        "Describe a time you worked with people from different backgrounds.",
+                                                                                        "What did you learn from this experience?",
+                                                                                        "How can diverse groups work together successfully?",
+                                                                                        "What challenges come from working with different cultures?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Encouraging Others to Participate",
+                                                                        "questions": [
+                                                                                        "How would you invite a friend to join a community activity?",
+                                                                                        "What reasons would you give them to participate?",
+                                                                                        "Describe a time someone encouraged you to get involved.",
+                                                                                        "Why is participation important for a healthy community?"
+                                                                        ]
+                                                        },
+                                                        {
+                                                                        "name": "Reflecting on Community Impact",
+                                                                        "questions": [
+                                                                                        "How has your community changed your life since you arrived?",
+                                                                                        "What impact would you like to have on your community?",
+                                                                                        "Describe one way you have already contributed.",
+                                                                                        "What is your goal for community involvement in the future?"
+                                                                        ]
+                                                        }
+                                        ]
+                        }
+        ];
+
+        let currentCategoryIndex = 0;
+        let timeLeft = 90;
+        let timerId = null;
+
+        function startGame() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('gamePage').classList.remove('hidden');
+            loadCategory(0);
+        }
+
+        function loadCategory(index) {
+            if (index < 0) index = categories.length - 1;
+            if (index >= categories.length) index = 0;
+            currentCategoryIndex = index;
+            const cat = categories[index];
+
+            document.querySelectorAll('.topic-flip-card').forEach(c => c.classList.remove('flipped'));
+            var bd = document.getElementById('topicCardBackdrop');
+            if (bd) bd.style.display = 'none';
+
+            document.getElementById('categoryTitle').textContent = cat.title;
+            document.getElementById('questionCounter').textContent = `Category ${index + 1} of ${categories.length}`;
+
+            const grid = document.getElementById('topicCardsGrid');
+            grid.innerHTML = '';
+
+            cat.topics.forEach((t, i) => {
+                const card = document.createElement('div');
+                card.className = 'topic-flip-card';
+                card.onclick = function() { toggleFlip(this); };
+                card.innerHTML =
+                    '<div class="topic-flip-card-inner">' +
+                    '  <div class="topic-flip-card-front">' +
+                    '    <span class="topic-name">' + escapeHtml(t.name) + '</span>' +
+                    '  </div>' +
+                    '  <div class="topic-flip-card-back">' +
+                    '    <ul>' + t.questions.map(q => '<li>' + escapeHtml(q) + '</li>').join('') + '</ul>' +
+                    '    <button type="button" class="topic-card-close-btn" onclick="event.stopPropagation(); this.closest(\'.topic-flip-card\').classList.remove(\'flipped\'); document.getElementById(\'topicCardBackdrop\').style.display=\'none\';">Close</button>' +
+                    '  </div>' +
+                    '</div>';
+                grid.appendChild(card);
+            });
+
+            resetTimer();
+        }
+
+        function escapeHtml(s) {
+            const d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        function toggleFlip(el) {
+            if (!el || !el.classList.contains('topic-flip-card')) return;
+            var backdrop = document.getElementById('topicCardBackdrop');
+            el.classList.toggle('flipped');
+            if (el.classList.contains('flipped')) {
+                if (backdrop) {
+                    backdrop.style.display = 'block';
+                    backdrop.onclick = function() {
+                        el.classList.remove('flipped');
+                        backdrop.style.display = 'none';
+                    };
+                }
+            } else {
+                if (backdrop) backdrop.style.display = 'none';
+            }
+        }
+
+        function nextCategory() { loadCategory(currentCategoryIndex + 1); }
+        function previousCategory() { loadCategory(currentCategoryIndex - 1); }
+
+        function goHome() {
+            document.getElementById('gamePage').classList.add('hidden');
+            document.getElementById('homePage').classList.remove('hidden');
+            clearInterval(timerId);
+            timerId = null;
+        }
+
+        const display = document.getElementById('timer');
+        const btn = document.getElementById('timerBtn');
+
+        function updateDisplay() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            display.textContent = (m + '').padStart(2, '0') + ':' + (s + '').padStart(2, '0');
+            display.style.color = timeLeft <= 10 ? '#E04E39' : '#1A1A1A';
+        }
+
+        function toggleTimer() {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                btn.textContent = 'Start';
+            } else {
+                btn.textContent = 'Pause';
+                timerId = setInterval(function() {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        btn.textContent = 'Start';
+                        alert('Time is up!');
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 90;
+            btn.textContent = 'Start';
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>

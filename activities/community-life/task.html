@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Life Task</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: #F4F4F0;
+      color: #1a1a1a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 40px 24px 100px; }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .back-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: #2D6A4F;
+      text-decoration: none;
+    }
+    .back-link:hover { text-decoration: underline; }
+    .task-pill {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #fff;
+      background: #2D6A4F;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    h1 {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 32px;
+      font-weight: 600;
+      color: #E04E39;
+      margin-bottom: 6px;
+    }
+    .task-sub {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    .block {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      padding: 22px 26px;
+      margin-bottom: 20px;
+    }
+
+    .block-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #2D6A4F;
+      margin-bottom: 10px;
+    }
+
+    /* GOAL block */
+    .goal-text { font-size: 17px; line-height: 1.55; }
+
+    /* MODEL block */
+    .model-block { background: #FBF7EE; border: 1px dashed #d8c9a3; }
+    .model-block .block-label { color: #9a6b00; }
+    .model-line {
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+    .model-line .speaker { font-weight: 700; color: #1a1a1a; }
+
+    /* TASK STEPS block */
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 38px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .steps li:last-child { margin-bottom: 0; }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #2D6A4F;
+      color: #fff;
+      font-family: 'Lora', serif;
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .steps textarea {
+      width: 100%;
+      margin-top: 8px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 15px;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      min-height: 44px;
+    }
+    .steps textarea:focus { outline: 2px solid #2D6A4F; outline-offset: 1px; }
+
+    /* SELF-CHECK block */
+    .check-block { background: #EFF6F1; }
+    .check-block .block-label { color: #2D6A4F; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .check-item:last-child { margin-bottom: 0; }
+    .check-item input { margin-top: 4px; width: 17px; height: 17px; accent-color: #2D6A4F; }
+    .check-done {
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #2D6A4F;
+      display: none;
+    }
+    .check-done.show { display: block; }
+
+    .go-home-btn {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      background: #E04E39;
+      padding: 12px 26px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    /* PHRASE BANK PANEL (just-in-time supportive info) */
+    .phrase-bank-toggle {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 25;
+        font-family: 'Source Sans 3', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #fff;
+        background: #1A1A1A;
+        border: none;
+        border-radius: 24px;
+        padding: 12px 20px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .phrase-bank-toggle:hover { background: #333; }
+
+    .phrase-bank-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 340px;
+        max-width: 88vw;
+        background: #fff;
+        box-shadow: -8px 0 24px rgba(0,0,0,0.15);
+        z-index: 30;
+        padding: 24px 20px;
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+    }
+    .phrase-bank-panel.open { transform: translateX(0); }
+    .phrase-bank-panel h3 {
+        font-family: 'Lora', serif;
+        font-size: 18px;
+        color: #2D6A4F;
+        margin-bottom: 4px;
+    }
+    .phrase-bank-panel .pb-sub {
+        font-size: 12px;
+        color: #777;
+        margin-bottom: 16px;
+    }
+    .phrase-bank-panel .pb-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        border: none;
+        background: none;
+        font-size: 20px;
+        cursor: pointer;
+        color: #999;
+    }
+    .pb-section { margin-bottom: 18px; }
+    .pb-section h4 {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+    .pb-starter {
+        font-size: 13px;
+        line-height: 1.5;
+        background: #F4F4F0;
+        border-radius: 6px;
+        padding: 6px 10px 6px 26px;
+        margin-bottom: 6px;
+        position: relative;
+    }
+    .pb-starter::before {
+        content: '"';
+        position: absolute;
+        left: 8px;
+        top: 2px;
+        font-family: 'Lora', serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #2D6A4F;
+        line-height: 1;
+    }
+    .pb-words span {
+        display: inline-block;
+        font-size: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 3px 8px;
+        margin: 0 4px 4px 0;
+    }
+    .pb-locked {
+        font-size: 13px;
+        color: #999;
+        font-style: italic;
+        padding: 12px;
+        background: #F4F4F0;
+        border-radius: 6px;
+    }
+    .pb-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.15);
+        z-index: 29;
+    }
+    .pb-backdrop.open { display: block; }
+
+    @media (max-width: 600px) {
+      .wrap { padding: 28px 16px 90px; }
+      h1 { font-size: 25px; }
+      .block { padding: 18px 18px; }
+      .phrase-bank-toggle { bottom: 16px; right: 16px; padding: 10px 16px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top-row">
+      <a href="task-class.html" class="back-link">← Back to task sequence</a>
+      <span class="task-pill" id="taskPill">Task 1 of 4</span>
+    </div>
+
+    <h1 id="taskTitle">Task Title</h1>
+    <p class="task-sub" id="taskSub">Task description</p>
+
+    <div class="block">
+      <div class="block-label">Your Goal</div>
+      <div class="goal-text" id="goalText"></div>
+    </div>
+
+    <div class="block model-block" id="modelBlock">
+      <div class="block-label">See an Example First</div>
+      <div id="modelBody"></div>
+    </div>
+
+    <div class="block">
+      <div class="block-label">Now You Try</div>
+      <ol class="steps" id="stepsList"></ol>
+    </div>
+
+    <div class="block check-block">
+      <div class="block-label">Check Your Own Work</div>
+      <div id="checkList"></div>
+      <div class="check-done" id="checkDone">✓ Nice work — you completed this task on your own.</div>
+    </div>
+
+    <a href="task-class.html" class="go-home-btn">Done — Back to Task Sequence</a>
+  </div>
+
+  <button class="phrase-bank-toggle" id="phraseBankToggle" onclick="togglePhraseBank()">💬 Phrase Help</button>
+  <div class="pb-backdrop" id="pbBackdrop" onclick="togglePhraseBank(false)"></div>
+  <div class="phrase-bank-panel" id="phraseBankPanel">
+    <button class="pb-close" onclick="togglePhraseBank(false)">✕</button>
+    <h3 id="pbTitle">Phrase Help</h3>
+    <div class="pb-sub" id="pbSub"></div>
+    <div id="pbBody"></div>
+  </div>
+
+  <script>
+    const stage = Math.min(4, Math.max(1, parseInt(new URLSearchParams(location.search).get('stage') || '1', 10)));
+
+    /* ---- Each task is fully self-contained: goal, worked model, steps, self-check ---- */
+    const tasks = {
+      1: {
+        pill: 'Task 1 of 4',
+        title: 'Get Around Boston by T',
+        sub: 'Plan one real trip on the MBTA from start to finish.',
+        goal: 'You need to get from where you are to a specific place in Boston using the T. By the end of this task, you will know which line to take, whether you need to transfer, and how to buy your fare.',
+        model: [
+          { speaker: 'You:', text: '"Excuse me, does this train go to Downtown Crossing?"' },
+          { speaker: 'MBTA worker:', text: '"Yes, this is the Red Line, inbound. Downtown Crossing is 4 stops from here."' },
+          { speaker: 'You:', text: '"Thank you. Do I need to transfer?"' },
+          { speaker: 'MBTA worker:', text: '"No, this line goes straight there."' }
+        ],
+        steps: [
+          'Pick a real place in Boston you want to go (a store, a friend\'s house, a park). Write it here.',
+          'Look up which T line goes there: Red, Orange, Green, Blue, or Silver. Write the line name.',
+          'Decide: do you need to transfer to a different line? Write yes or no, and which line if so.',
+          'Write one full sentence asking someone for help, using a sentence starter from Phrase Help if you need it.'
+        ],
+        checks: [
+          'I named a real place in Boston.',
+          'I identified one specific T line.',
+          'I said whether I need a transfer.',
+          'I wrote a full sentence asking for help or directions.'
+        ]
+      },
+      3: {
+        pill: 'Task 3 of 4',
+        title: 'Report a Neighborhood Issue',
+        sub: 'Report one real or imagined problem to Boston 311.',
+        goal: 'Something in your neighborhood needs fixing — a broken streetlight, a pothole, graffiti, or trash that wasn\'t picked up. By the end of this task, you will have written a clear, complete report someone else could act on.',
+        model: [
+          { speaker: 'You:', text: '"Hello, I want to report a broken streetlight."' },
+          { speaker: '311 operator:', text: '"Okay, what is the address or nearest cross street?"' },
+          { speaker: 'You:', text: '"It\'s on Main Street, near the corner of Oak Street."' },
+          { speaker: '311 operator:', text: '"Thank you. We will send someone to look at it."' }
+        ],
+        steps: [
+          'Choose one problem: a broken streetlight, a pothole, graffiti, or trash. Write which one.',
+          'Write the location: a street name and the nearest cross street.',
+          'Write one sentence that describes the problem clearly (use a word from Phrase Help if you need it).',
+          'Write one full report combining the problem and the location, as if you were calling 311.'
+        ],
+        checks: [
+          'I chose one specific problem.',
+          'I gave a clear location (street + cross street).',
+          'My report describes the problem in a full sentence.',
+          'Someone else could act on my report without asking me more questions.'
+        ]
+      },
+      4: {
+        pill: 'Task 4 of 4',
+        title: 'Take Part in Civic Life',
+        sub: 'Prepare one thing you would say at a public comment period.',
+        goal: 'City council meetings and community meetings have time for public comment, where any resident can speak. By the end of this task, you will have written what you would say about something that matters to your neighborhood.',
+        model: [
+          { speaker: 'You:', text: '"My name is Carlos, and I live on Bennington Street. I am here to talk about the crosswalk near the elementary school."' },
+          { speaker: 'You:', text: '"Many children cross there every morning, and there is no light. I am asking the city to add a crosswalk signal."' },
+          { speaker: 'You:', text: '"Thank you for your time."' }
+        ],
+        steps: [
+          'Choose one real issue in your neighborhood you care about (safety, transportation, a park, housing).',
+          'Write one sentence that introduces yourself and where you live.',
+          'Write one or two sentences explaining the issue and why it matters.',
+          'Write one sentence that clearly asks for what you want the city to do.'
+        ],
+        checks: [
+          'I introduced myself and my neighborhood.',
+          'I explained one specific issue.',
+          'I said why it matters to me or my neighbors.',
+          'I made one clear, specific request.'
+        ]
+      }
+    };
+
+    const stageInfo = {
+      1: {
+        label: 'Task 1 of 4 — Get Around Boston by T',
+        sub: 'Full support: sentence starters and phrase bank',
+        starters: [
+          'Excuse me, how do I get to ___?',
+          'Does this train go to ___?',
+          'Do I need to transfer at ___?',
+          'What time is the next ___ train?'
+        ],
+        words: ['Red Line', 'Orange Line', 'Green Line', 'Blue Line', 'Silver Line', 'CharlieCard', 'transfer', 'schedule', 'inbound', 'outbound']
+      },
+      3: {
+        label: 'Task 3 of 4 — Report a Neighborhood Issue',
+        sub: 'Word list only — no sentence starters',
+        starters: [],
+        words: ['broken', 'not working', 'pothole', 'streetlight', 'graffiti', 'trash pickup', 'Boston 311', 'address', 'nearest cross street']
+      },
+      4: {
+        label: 'Task 4 of 4 — Take Part in Civic Life',
+        sub: 'Minimal help — available only if you ask',
+        starters: [],
+        words: [],
+        locked: true
+      }
+    };
+
+    function escapeHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function renderTask() {
+      const t = tasks[stage] || tasks[1];
+
+      document.getElementById('taskPill').textContent = t.pill;
+      document.getElementById('taskTitle').textContent = t.title;
+      document.getElementById('taskSub').textContent = t.sub;
+      document.getElementById('goalText').textContent = t.goal;
+
+      const modelBody = document.getElementById('modelBody');
+      modelBody.innerHTML = t.model.map(line =>
+        '<div class="model-line"><span class="speaker">' + escapeHtml(line.speaker) + '</span> ' + escapeHtml(line.text) + '</div>'
+      ).join('');
+
+      const stepsList = document.getElementById('stepsList');
+      stepsList.innerHTML = t.steps.map((s, i) =>
+        '<li>' + escapeHtml(s) + '<textarea rows="2" aria-label="Your answer for step ' + (i + 1) + '"></textarea></li>'
+      ).join('');
+
+      const checkList = document.getElementById('checkList');
+      checkList.innerHTML = t.checks.map((c, i) =>
+        '<label class="check-item"><input type="checkbox" data-check="' + i + '"> <span>' + escapeHtml(c) + '</span></label>'
+      ).join('');
+
+      document.querySelectorAll('[data-check]').forEach(cb => {
+        cb.addEventListener('change', updateCheckDone);
+      });
+    }
+
+    function updateCheckDone() {
+      const boxes = document.querySelectorAll('[data-check]');
+      const allChecked = Array.from(boxes).every(b => b.checked);
+      document.getElementById('checkDone').classList.toggle('show', allChecked);
+    }
+
+    function renderPhraseBank() {
+      const info = stageInfo[stage] || stageInfo[1];
+      document.getElementById('pbTitle').textContent = info.label;
+      document.getElementById('pbSub').textContent = info.sub;
+      const body = document.getElementById('pbBody');
+      body.innerHTML = '';
+
+      if (info.locked) {
+        body.innerHTML = '<div class="pb-locked">Try it on your own first. If you get stuck, ask your teacher for a phrase.</div>';
+        return;
+      }
+
+      if (info.starters.length) {
+        const sec = document.createElement('div');
+        sec.className = 'pb-section';
+        sec.innerHTML = '<h4>Sentence Starters</h4>' +
+          info.starters.map(s => '<div class="pb-starter">' + escapeHtml(s) + '</div>').join('');
+        body.appendChild(sec);
+      }
+
+      if (info.words.length) {
+        const sec = document.createElement('div');
+        sec.className = 'pb-section';
+        sec.innerHTML = '<h4>Useful Words</h4><div class="pb-words">' +
+          info.words.map(w => '<span>' + escapeHtml(w) + '</span>').join('') + '</div>';
+        body.appendChild(sec);
+      }
+    }
+
+    function togglePhraseBank(force) {
+      const panel = document.getElementById('phraseBankPanel');
+      const backdrop = document.getElementById('pbBackdrop');
+      const open = typeof force === 'boolean' ? force : !panel.classList.contains('open');
+      panel.classList.toggle('open', open);
+      backdrop.classList.toggle('open', open);
+    }
+
+    renderTask();
+    renderPhraseBank();
+  </script>
+</body>
+</html>

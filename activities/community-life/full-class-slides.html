@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Life — Full Class</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2D6A4F;
+    --green-dark: #1f4a35;
+    --orange: #E04E39;
+    --cream: #F4F4F0;
+    --ink: #1a1a1a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .progress-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: rgba(0,0,0,0.06);
+    z-index: 100;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, var(--green), var(--orange));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .slide {
+    display: none;
+    position: absolute;
+    inset: 0;
+    padding: 56px 64px 100px;
+    overflow-y: auto;
+  }
+  .slide.active { display: flex; flex-direction: column; }
+  .slideshow-container { position: relative; height: 100%; width: 100%; }
+
+  .slide-meta {
+    position: fixed;
+    top: 18px; right: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #666;
+    z-index: 50;
+    background: rgba(255,255,255,0.85);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .section-label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .slide h1 {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 46px;
+    font-weight: 600;
+    color: var(--orange);
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .slide h2 {
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .slide .sub {
+    font-size: 19px;
+    color: #444;
+    line-height: 1.5;
+    max-width: 900px;
+    margin-bottom: 6px;
+  }
+  .slide .body-text {
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 880px;
+  }
+
+  .content-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .content-wrap.top-aligned { justify-content: flex-start; padding-top: 20px; }
+
+  /* TITLE SLIDE */
+  .title-slide { align-items: center; text-align: center; justify-content: center; }
+  .title-slide .emoji { font-size: 72px; margin-bottom: 8px; }
+  .title-slide h1 { font-size: 58px; }
+  .title-slide .sub { font-size: 22px; }
+  .title-meta-row {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .title-meta-pill {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    background: #E8F3EC;
+    padding: 8px 18px;
+    border-radius: 20px;
+  }
+
+  /* GOAL PREVIEW SLIDE */
+  .goal-steps { list-style: none; margin-top: 26px; }
+  .goal-steps li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 20px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+  }
+  .goal-num {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* TASK INTRO SLIDE */
+  .task-intro-badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--green);
+    padding: 7px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .support-row {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #E8F3EC;
+    color: var(--green);
+  }
+  .chip.faded { background: #FFF6E5; color: #9a6b00; }
+  .chip.gone { background: #F0F0F0; color: #999; text-decoration: line-through; }
+
+  /* MODEL DIALOGUE SLIDE */
+  .model-box {
+    background: #FBF7EE;
+    border: 2px dashed #d8c9a3;
+    border-radius: 12px;
+    padding: 30px 36px;
+    margin-top: 12px;
+  }
+  .model-line {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .model-line .speaker { font-weight: 700; color: var(--ink); }
+  .model-line.you .speaker { color: var(--green); }
+
+  /* DISCUSSION SLIDE */
+  .discuss-scenario {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    padding: 32px 40px;
+    margin-bottom: 20px;
+  }
+  .discuss-scenario .scenario-tag {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .discuss-scenario .scenario-text {
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .discuss-scenario ul {
+    list-style: none;
+  }
+  .discuss-scenario li {
+    font-size: 19px;
+    line-height: 1.6;
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .discuss-scenario li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+  .pair-note {
+    font-size: 15px;
+    font-style: italic;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  /* DEBRIEF SLIDE */
+  .debrief-box {
+    background: #EFF6F1;
+    border-radius: 14px;
+    padding: 32px 40px;
+    margin-top: 10px;
+  }
+  .debrief-box .body-text { font-size: 23px; }
+
+  /* WORD BANK / PHRASE PANEL ON SLIDE (for board display) */
+  .phrase-panel {
+    margin-top: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    padding: 20px 26px;
+  }
+  .phrase-panel h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  .phrase-panel.faded { opacity: 0.6; }
+  .starter-line {
+    font-size: 17px;
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 8px 14px 8px 30px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .starter-line::before {
+    content: '"';
+    position: absolute;
+    left: 10px;
+    top: 4px;
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .word-chip-row span {
+    display: inline-block;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 5px 12px;
+    margin: 0 8px 8px 0;
+  }
+  .locked-note {
+    font-size: 15px;
+    font-style: italic;
+    color: #999;
+  }
+
+  /* BREAK SLIDE */
+  .break-slide { align-items: center; text-align: center; justify-content: center; }
+  .break-slide .emoji { font-size: 64px; margin-bottom: 12px; }
+  .break-timer {
+    font-family: 'Lora', serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: var(--green);
+    margin: 24px 0;
+  }
+  .timer-btn-row { display: flex; gap: 12px; justify-content: center; }
+  .timer-ctrl-btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--green);
+    color: #fff;
+  }
+  .timer-ctrl-btn.reset { background: #555; }
+
+  /* CLOSING SLIDE */
+  .closing-slide { align-items: center; text-align: center; justify-content: center; }
+
+  /* NAV */
+  .nav-container {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px;
+    z-index: 60;
+    background: linear-gradient(to top, var(--cream) 75%, transparent);
+  }
+  .nav-btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .nav-btn:hover:not(:disabled) { background: var(--green-dark); }
+  .nav-btn.home { background: var(--orange); }
+  .nav-btn.home:hover { background: #c73d2a; }
+  .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+  @media (max-width: 900px) {
+    .slide { padding: 40px 24px 90px; }
+    .slide h1 { font-size: 34px; }
+    .slide h2 { font-size: 24px; }
+    .title-slide h1 { font-size: 38px; }
+    .slide .body-text, .discuss-scenario .scenario-text, .debrief-box .body-text { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+<div class="slide-meta" id="slideMeta">Slide 1 / 1</div>
+
+<div class="slideshow-container" id="slideshowContainer"></div>
+
+<div class="nav-container">
+  <button class="nav-btn" id="prevBtn">← Back</button>
+  <a href="task-class.html" class="nav-btn home" style="text-decoration:none; display:inline-flex; align-items:center;">🚇 Task Sequence</a>
+  <button class="nav-btn" id="nextBtn">Next →</button>
+</div>
+
+<script>
+/* ============================================================
+   COMMUNITY LIFE — FULL 2.5-HOUR CLASS
+   Built as one continuous 4C/ID whole-task class:
+   warmup (part-task) -> 4 learning tasks with fading scaffolds
+   -> break -> debrief/transfer. Designed for a teacher to run
+   live, projected on a board, with students discussing out loud
+   in pairs/groups rather than typing anything.
+   ============================================================ */
+
+function scenario(tag, text, prompts, pairNote) {
+  return { tag, text, prompts, pairNote };
+}
+
+function taskIntroSlide(taskNum, title, goal, minutes, chips) {
+  return {
+    render: () => `
+      <div class="content-wrap">
+        <span class="task-intro-badge">Task ${taskNum} of 4 &middot; ~${minutes} min</span>
+        <h1>${title}</h1>
+        <p class="body-text">${goal}</p>
+        <div class="support-row">${chips}</div>
+      </div>`
+  };
+}
+
+function modelSlide(title, lines) {
+  return {
+    render: () => `
+      <div class="content-wrap top-aligned">
+        <div class="section-label">See an Example First</div>
+        <h2>${title}</h2>
+        <div class="model-box">
+          ${lines.map(l => `<div class="model-line ${l.you ? 'you' : ''}"><span class="speaker">${l.speaker}</span> ${l.text}</div>`).join('')}
+        </div>
+      </div>`
+  };
+}
+
+function discussSlide(roundLabel, sc, phraseHtml) {
+  return {
+    render: () => `
+      <div class="content-wrap top-aligned">
+        <div class="section-label">${roundLabel}</div>
+        <div class="discuss-scenario">
+          <div class="scenario-tag">${sc.tag}</div>
+          <div class="scenario-text">${sc.text}</div>
+          <ul>${sc.prompts.map(p => `<li>${p}</li>`).join('')}</ul>
+          ${sc.pairNote ? `<div class="pair-note">${sc.pairNote}</div>` : ''}
+        </div>
+        ${phraseHtml || ''}
+      </div>`
+  };
+}
+
+function debriefSlide(question) {
+  return {
+    render: () => `
+      <div class="content-wrap">
+        <div class="section-label">Whole-Class Debrief</div>
+        <div class="debrief-box">
+          <p class="body-text">${question}</p>
+        </div>
+      </div>`
+  };
+}
+
+function phrasePanel(starters, words, faded, locked) {
+  if (locked) {
+    return `<div class="phrase-panel faded"><h4>Phrase Help</h4><div class="locked-note">No phrase help this round — encourage students to try on their own first.</div></div>`;
+  }
+  let html = `<div class="phrase-panel${faded ? ' faded' : ''}"><h4>Phrase Help</h4>`;
+  if (starters && starters.length) {
+    html += starters.map(s => `<div class="starter-line">${s}</div>`).join('');
+  }
+  if (words && words.length) {
+    html += `<div class="word-chip-row" style="margin-top:8px;">${words.map(w => `<span>${w}</span>`).join('')}</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+const slides = [];
+
+/* ---------- 1. TITLE ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap title-slide">
+      <div class="emoji">🚇</div>
+      <h1>Community Life in Boston</h1>
+      <p class="sub">A full class built around four real things you will actually do in this city.</p>
+      <div class="title-meta-row">
+        <span class="title-meta-pill">2.5 hours</span>
+        <span class="title-meta-pill">4 real-life tasks</span>
+        <span class="title-meta-pill">Pair &amp; group discussion</span>
+      </div>
+    </div>`
+});
+
+/* ---------- 2. TODAY'S GOAL (whole-task preview) ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap">
+      <div class="section-label">Today's Goal</div>
+      <h2>By the end of today, you will be able to:</h2>
+      <ul class="goal-steps">
+        <li><span class="goal-num">1</span> Plan a real trip on the MBTA and ask for help if you need it.</li>
+        <li><span class="goal-num">2</span> Compare community resources and ask about how to use them.</li>
+        <li><span class="goal-num">3</span> Report a problem in your neighborhood clearly.</li>
+        <li><span class="goal-num">4</span> Share your opinion about something your community needs.</li>
+      </ul>
+    </div>`
+});
+
+/* ---------- 3-5. WARM-UP (part-task practice) ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap">
+      <div class="section-label">Warm-Up &middot; 10 minutes</div>
+      <h2>Quick Round: Boston or Not Boston?</h2>
+      <p class="body-text">Teacher reads each word. Students say "Boston!" and give a thumbs up if it's a real Boston thing, or stay quiet if it's made up.</p>
+      <div class="phrase-panel" style="margin-top:24px;">
+        <h4>Words to Read Aloud</h4>
+        <div class="word-chip-row">
+          <span>Red Line</span><span>CharlieCard</span><span>Green Line</span><span>Purple Line (fake!)</span>
+          <span>Boston 311</span><span>Fenway Park</span><span>the Silver Line</span><span>Boston Public Library</span>
+          <span>the Yellow Line (fake!)</span><span>Downtown Crossing</span>
+        </div>
+      </div>
+    </div>`
+});
+slides.push({
+  render: () => `
+    <div class="content-wrap">
+      <div class="section-label">Warm-Up &middot; continued</div>
+      <h2>Quick Pairs: Have You Ever...?</h2>
+      <p class="body-text">In pairs, ask your partner these questions. 3 minutes, then switch.</p>
+      <ul class="goal-steps" style="margin-top:20px;">
+        <li><span class="goal-num">•</span> Have you ever taken the T? Which line?</li>
+        <li><span class="goal-num">•</span> Have you ever visited a public library in the U.S.?</li>
+        <li><span class="goal-num">•</span> Have you ever called a city or town office for help?</li>
+        <li><span class="goal-num">•</span> Have you ever voted, here or in another country?</li>
+      </ul>
+    </div>`
+});
+slides.push({
+  render: () => `
+    <div class="content-wrap">
+      <div class="section-label">Warm-Up &middot; optional extra</div>
+      <h2>More Vocabulary Practice</h2>
+      <p class="body-text">If you have extra time, try the <strong>Housing Superlatives Game</strong> style warm-up for this unit — the full <a href="community-life-game.html" style="color:var(--green); font-weight:700;">Community Life Discussion Game</a> has 24 more discussion topics across all four themes, useful for review days or a second class.</p>
+    </div>`
+});
+
+/* ============================================================
+   TASK 1 — GET AROUND BOSTON BY T   (~30 min, heaviest scaffold)
+   ============================================================ */
+slides.push(taskIntroSlide(1, 'Get Around Boston by T',
+  'You need to get from where you are to a specific place in Boston using the MBTA. By the end of this task, you will know how to plan a trip, ask for help, and handle a problem.',
+  30,
+  `<span class="chip">Sentence starters</span><span class="chip">Phrase bank</span>`));
+
+slides.push(modelSlide('Asking for Directions at a T Station', [
+  { speaker: 'You:', text: '"Excuse me, does this train go to Downtown Crossing?"', you: true },
+  { speaker: 'MBTA worker:', text: '"Yes, this is the Red Line, inbound. Downtown Crossing is 4 stops from here."' },
+  { speaker: 'You:', text: '"Thank you. Do I need to transfer?"', you: true },
+  { speaker: 'MBTA worker:', text: '"No, this line goes straight there."' }
+]));
+
+slides.push(discussSlide('Round 1 of 4', scenario(
+  'Planning a Trip',
+  'Choose a real place in Boston. Plan how you would get there by T.',
+  ['Where do you need to go?', 'Which line will you take: Red, Orange, Green, Blue, or Silver?', 'Do you need to transfer to a different line?'],
+  'Pairs, 4 minutes. Each person picks a different place.'
+), phrasePanel(['Excuse me, how do I get to ___?', 'Does this train go to ___?'], ['Red Line', 'Orange Line', 'Green Line', 'Blue Line', 'Silver Line'])));
+
+slides.push(discussSlide('Round 2 of 4', scenario(
+  'Buying a Fare',
+  'You need a CharlieCard or CharlieTicket to ride the T.',
+  ['What do you say at the fare machine or to an attendant?', 'What if the machine doesn\'t work?', 'What is the difference between a CharlieCard and a CharlieTicket?'],
+  'Pairs, 4 minutes. Act it out — one person is the rider, one is the machine or attendant.'
+), phrasePanel(['Do I need to transfer at ___?'], ['CharlieCard', 'CharlieTicket', 'transfer', 'fare'])));
+
+slides.push(discussSlide('Round 3 of 4', scenario(
+  'Bus vs. Train',
+  'Sometimes a bus is better than the T.',
+  ['When would you take a bus instead of the T?', 'What is different about waiting for a bus?', 'Which do you prefer? Why?'],
+  'Small groups of 3, 4 minutes.'
+), phrasePanel(['What time is the next ___ train?'], ['schedule', 'inbound', 'outbound', 'bus stop'])));
+
+slides.push(discussSlide('Round 4 of 4', scenario(
+  'A Delay or Problem',
+  'Your train is delayed or the line is stopped.',
+  ['What announcement might you hear?', 'What would you do next?', 'Who could you ask for help?'],
+  'Whole class: teacher calls on 3-4 students to answer out loud.'
+), phrasePanel([], ['delay', 'shuttle bus', 'next train', 'service change'], true)));
+
+slides.push(debriefSlide('Turn to a partner: tell them about one real trip you could take on the T this week. Which line, and do you need to transfer?'));
+
+/* ============================================================
+   TASK 2 — USE A COMMUNITY RESOURCE  (~25 min, scaffold fading)
+   ============================================================ */
+slides.push(taskIntroSlide(2, 'Use a Community Resource',
+  'Boston has many free or low-cost resources: libraries, health centers, adult education programs, and community centers. By the end of this task, you will be able to compare resources and ask how to use one.',
+  25,
+  `<span class="chip">Phrase bank</span><span class="chip faded">Sentence starters</span>`));
+
+slides.push({
+  render: () => `
+    <div class="content-wrap top-aligned">
+      <div class="section-label">See Real Examples First</div>
+      <h2>Five Boston Community Resources</h2>
+      <div class="phrase-panel">
+        <h4>Compare These</h4>
+        <div class="word-chip-row">
+          <span>Boston Public Library (Central, Copley Square)</span>
+          <span>Neighborhood branch library</span>
+          <span>Community health center</span>
+          <span>Adult Education / ESOL program</span>
+          <span>Boston Centers for Youth &amp; Families</span>
+        </div>
+      </div>
+      <p class="body-text" style="margin-top:20px;">Teacher: briefly describe each one, or hand out the printed <a href="community-resources-worksheet.html" style="color:var(--green); font-weight:700;">Community Resources worksheet</a> for Part 1 reading first.</p>
+    </div>`
+});
+
+slides.push(discussSlide('Round 1 of 3 — Persona', scenario(
+  'The New Arrival',
+  'Ana just moved to Boston. She wants to improve her English and meet people, but she works during the day.',
+  ['Which resource is best for Ana? Why?', 'What would she need to bring to sign up?', 'What question should she ask first?'],
+  'Pairs, 4 minutes.'
+), phrasePanel(['Do I need an appointment or can I walk in?'], ['library card', 'sign up for', 'walk-in', 'appointment'], true)));
+
+slides.push(discussSlide('Round 2 of 3 — Persona', scenario(
+  'The Uninsured Worker',
+  'Fatima needs to see a doctor but does not have health insurance yet.',
+  ['Which resource is best for Fatima? Why?', 'What is the difference between this and a hospital emergency room?', 'What would she say to make her first appointment?'],
+  'Pairs, 4 minutes — switch partners from Round 1.'
+), phrasePanel([], ['Is it free?', 'What are your hours?', 'interpreter', 'appointment'], true)));
+
+slides.push(discussSlide('Round 3 of 3 — Persona', scenario(
+  'The Parent',
+  'Marcus has two children, ages 7 and 10, and wants after-school activities that don\'t cost much.',
+  ['Which resource is best for Marcus\' family?', 'What would he ask about cost and age groups?', 'What is one other resource that could also help him?'],
+  'Small groups of 3-4, 5 minutes.'
+), phrasePanel([], ['sign up', 'age group', 'membership', 'program'], true)));
+
+slides.push(debriefSlide('Whole class: which resource did YOU not know about before today? Raise your hand and share one thing you learned.'));
+
+/* ---------- BREAK ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap break-slide">
+      <div class="emoji">☕</div>
+      <h1>Break Time</h1>
+      <p class="sub">10 minutes</p>
+      <div class="break-timer" id="breakTimerDisplay">10:00</div>
+      <div class="timer-btn-row">
+        <button class="timer-ctrl-btn" id="breakStartBtn">Start</button>
+        <button class="timer-ctrl-btn reset" id="breakResetBtn">Reset</button>
+      </div>
+    </div>`
+});
+
+/* ============================================================
+   TASK 3 — REPORT A NEIGHBORHOOD ISSUE (~30 min, functional)
+   ============================================================ */
+slides.push(taskIntroSlide(3, 'Report a Neighborhood Issue',
+  'A streetlight is out, there\'s a pothole, or trash wasn\'t picked up. By the end of this task, you will be able to describe a problem clearly enough for someone else to fix it.',
+  30,
+  `<span class="chip faded">Phrase bank (word list only)</span><span class="chip gone">Sentence starters</span>`));
+
+slides.push(modelSlide('Calling Boston 311', [
+  { speaker: 'You:', text: '"Hello, I want to report a broken streetlight."', you: true },
+  { speaker: '311 operator:', text: '"Okay, what is the address or nearest cross street?"' },
+  { speaker: 'You:', text: '"It\'s on Main Street, near the corner of Oak Street."', you: true },
+  { speaker: '311 operator:', text: '"Thank you. We will send someone to look at it."' }
+]));
+
+slides.push(discussSlide('Round 1 of 4 — Role-play', scenario(
+  'Broken Streetlight',
+  'A streetlight on your street is broken.',
+  ['How would you report it to Boston 311?', 'What information do they need?'],
+  'Pairs: one person calls, one person is the 311 operator. Switch roles after.'
+), phrasePanel([], ['broken', 'streetlight', 'address', 'nearest cross street'])));
+
+slides.push(discussSlide('Round 2 of 4 — Role-play', scenario(
+  'Pothole in the Road',
+  'There is a large pothole on your street.',
+  ['Why is this dangerous?', 'How would you describe it in a report?'],
+  'Pairs, switch roles from Round 1.'
+), phrasePanel([], ['pothole', 'dangerous', 'not working'])));
+
+slides.push(discussSlide('Round 3 of 4 — Role-play', scenario(
+  'Graffiti or Trash',
+  'You see graffiti or trash that hasn\'t been picked up.',
+  ['How would you describe the location clearly?', 'What should happen next?'],
+  'New pairs, 4 minutes.'
+), phrasePanel([], ['graffiti', 'trash pickup', 'location'])));
+
+slides.push(discussSlide('Round 4 of 4 — Discussion', scenario(
+  'Following Up',
+  'You reported a problem last week and nothing changed.',
+  ['How would you politely follow up?', 'What would you ask?'],
+  'Whole class: 2-3 volunteers share their answer out loud.'
+), phrasePanel([], ['follow up', 'still not fixed', 'when will'], true)));
+
+slides.push(debriefSlide('Whole class: what is one real problem in YOUR neighborhood you could report this week?'));
+
+/* ============================================================
+   TASK 4 — TAKE PART IN CIVIC LIFE (~30 min, least scaffold)
+   ============================================================ */
+slides.push(taskIntroSlide(4, 'Take Part in Civic Life',
+  'City meetings have time for public comment, where any resident can speak. By the end of this task, you will be able to share an opinion about something your community needs.',
+  30,
+  `<span class="chip faded">Phrase bank (on request only)</span>`));
+
+slides.push(modelSlide('Speaking at a Public Comment Period', [
+  { speaker: 'You:', text: '"My name is Carlos, and I live on Bennington Street. I am here to talk about the crosswalk near the elementary school."', you: true },
+  { speaker: 'You:', text: '"Many children cross there every morning, and there is no light. I am asking the city to add a crosswalk signal."', you: true },
+  { speaker: 'You:', text: '"Thank you for your time."', you: true }
+]));
+
+slides.push(discussSlide('Round 1 of 3', scenario(
+  'Understanding a Ballot Question',
+  'Look at a real ballot question (teacher shows one on the board).',
+  ['What is it asking voters to decide?', 'What would you need to research before voting?'],
+  'Small groups of 3, 5 minutes.'
+), phrasePanel([], [], false, true)));
+
+slides.push(discussSlide('Round 2 of 3', scenario(
+  'Speaking Up for Your Community',
+  'Something in your neighborhood needs to change: a crosswalk, a park, a bus route.',
+  ['Why does it matter to you and your neighbors?', 'Who has the power to make this change?', 'What would you say if you had 2 minutes to speak?'],
+  'Pairs, 5 minutes. Try saying it out loud to your partner.'
+), phrasePanel([], [], false, true)));
+
+slides.push(discussSlide('Round 3 of 3 — Town Hall', scenario(
+  'Mini Public Comment Period',
+  'Pretend this class is a city council meeting.',
+  ['One at a time, stand and introduce yourself.', 'Say one thing you would want the city to change.', 'Thank the "council" (the class) for their time.'],
+  'Whole class: as many students as time allows stand and speak for 30 seconds each.'
+), phrasePanel([], [], false, true)));
+
+slides.push(debriefSlide('Whole class: which task today felt hardest — getting around, using a resource, reporting a problem, or speaking up? Why?'));
+
+/* ---------- WRAP-UP / TRANSFER ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap">
+      <div class="section-label">Wrap-Up</div>
+      <h2>What Will You Actually Use This Week?</h2>
+      <ul class="goal-steps">
+        <li><span class="goal-num">1</span> Plan a real T trip you need to take.</li>
+        <li><span class="goal-num">2</span> Visit or call one community resource from today.</li>
+        <li><span class="goal-num">3</span> Notice one thing in your neighborhood you could report.</li>
+        <li><span class="goal-num">4</span> Think of one thing you'd want to say at a community meeting.</li>
+      </ul>
+    </div>`
+});
+
+/* ---------- CLOSING ---------- */
+slides.push({
+  render: () => `
+    <div class="content-wrap closing-slide">
+      <div class="emoji">🎉</div>
+      <h1>Great work today.</h1>
+      <p class="sub">You practiced four real things you will actually do in Boston — no grammar rules, just real life.</p>
+    </div>`
+});
+
+/* ================= ENGINE ================= */
+const container = document.getElementById('slideshowContainer');
+slides.forEach((s, i) => {
+  const div = document.createElement('div');
+  div.className = 'slide' + (i === 0 ? ' active' : '');
+  div.innerHTML = s.render();
+  container.appendChild(div);
+});
+
+const totalSlides = slides.length;
+let currentSlide = 0;
+const slideEls = () => document.querySelectorAll('.slide');
+
+function updateMeta() {
+  document.getElementById('slideMeta').textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+  document.getElementById('progressBar').style.transform = 'scaleX(' + ((currentSlide + 1) / totalSlides) + ')';
+  document.getElementById('prevBtn').disabled = currentSlide === 0;
+  document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+}
+
+function showSlide(n) {
+  if (n < 0 || n >= totalSlides) return;
+  slideEls()[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slideEls()[currentSlide].classList.add('active');
+  updateMeta();
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => showSlide(currentSlide - 1));
+document.getElementById('nextBtn').addEventListener('click', () => showSlide(currentSlide + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { showSlide(currentSlide + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft') { showSlide(currentSlide - 1); e.preventDefault(); }
+});
+
+updateMeta();
+
+/* ---- Break timer ---- */
+let breakSeconds = 600;
+let breakTimerId = null;
+const breakDisplay = document.getElementById('breakTimerDisplay');
+const breakStartBtn = document.getElementById('breakStartBtn');
+const breakResetBtn = document.getElementById('breakResetBtn');
+
+function updateBreakDisplay() {
+  const m = Math.floor(breakSeconds / 60);
+  const s = breakSeconds % 60;
+  breakDisplay.textContent = (m + '').padStart(2, '0') + ':' + (s + '').padStart(2, '0');
+}
+
+if (breakStartBtn) {
+  breakStartBtn.addEventListener('click', () => {
+    if (breakTimerId) {
+      clearInterval(breakTimerId);
+      breakTimerId = null;
+      breakStartBtn.textContent = 'Start';
+    } else {
+      breakStartBtn.textContent = 'Pause';
+      breakTimerId = setInterval(() => {
+        breakSeconds--;
+        updateBreakDisplay();
+        if (breakSeconds <= 0) {
+          clearInterval(breakTimerId);
+          breakTimerId = null;
+          breakStartBtn.textContent = 'Start';
+        }
+      }, 1000);
+    }
+  });
+  breakResetBtn.addEventListener('click', () => {
+    clearInterval(breakTimerId);
+    breakTimerId = null;
+    breakSeconds = 600;
+    breakStartBtn.textContent = 'Start';
+    updateBreakDisplay();
+  });
+}
+</script>
+</body>
+</html>

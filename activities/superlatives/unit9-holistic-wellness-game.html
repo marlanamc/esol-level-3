@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 5: Housing Superlatives Game</title>
+    <title>Unit 9: Holistic Wellness Superlatives Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -11,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body, html {
             width: 100%;
             height: 100%;
@@ -21,11 +21,11 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        
+
         .slide-container {
             width: 100vw;
             height: 100vh;
-            background: #F4F4F0;
+            background: #F0FDF4;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -33,18 +33,18 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         @media (max-width: 768px) {
             .slide-container {
                 overflow-y: auto;
                 overflow-x: hidden;
             }
         }
-        
+
         .hidden {
             display: none !important;
         }
-        
+
         /* HOME PAGE STYLES */
         .home-page {
             display: flex;
@@ -56,12 +56,12 @@
             width: 100%;
             height: 100%;
         }
-        
+
         .home-title {
             font-family: 'Montserrat', sans-serif;
             font-size: 72px;
             font-weight: 700;
-            color: #0F766E;
+            color: #15803D;
             text-align: center;
         }
 
@@ -70,7 +70,7 @@
             height: 64px;
             stroke-width: 1.75;
         }
-        
+
         .home-subtitle {
             font-family: 'Inter', sans-serif;
             font-size: 24px;
@@ -78,7 +78,7 @@
             color: #333333;
             text-align: center;
         }
-        
+
         .start-game-btn {
             font-family: 'Montserrat', sans-serif;
             font-size: 24px;
@@ -86,18 +86,18 @@
             padding: 20px 60px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #0F766E 0%, #115E56 100%);
+            background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .start-game-btn:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         /* GAME PAGE STYLES */
         .game-page {
             display: flex;
@@ -108,7 +108,7 @@
             width: 100%;
             height: 100%;
         }
-        
+
         @media (max-width: 768px) {
             .game-page {
                 min-height: 100vh;
@@ -116,7 +116,7 @@
                 padding-top: 0;
             }
         }
-        
+
         .question-counter {
             position: absolute;
             top: 40px;
@@ -131,7 +131,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             z-index: 20;
         }
-        
+
         .timer-container {
             position: absolute;
             top: 40px;
@@ -142,7 +142,7 @@
             gap: 10px;
             z-index: 20;
         }
-        
+
         .timer-display {
             font-family: 'Montserrat', sans-serif;
             font-size: 48px;
@@ -155,12 +155,12 @@
             min-width: 140px;
             text-align: center;
         }
-        
+
         .timer-controls {
             display: flex;
             gap: 10px;
         }
-        
+
         .timer-btn {
             font-family: 'Inter', sans-serif;
             font-size: 14px;
@@ -170,11 +170,11 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
-        .start-btn { background: #0F766E; color: white; }
+
+        .start-btn { background: #16A34A; color: white; }
         .reset-btn { background: #333333; color: white; }
         .timer-btn:hover { opacity: 0.8; }
-        
+
         .nav-container {
             position: absolute;
             bottom: 40px;
@@ -184,7 +184,7 @@
             gap: 20px;
             z-index: 20;
         }
-        
+
         .nav-btn {
             font-family: 'Montserrat', sans-serif;
             font-size: 16px;
@@ -193,7 +193,7 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            background: #0F766E;
+            background: #16A34A;
             color: white;
             text-decoration: none;
             display: inline-flex;
@@ -204,39 +204,39 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             letter-spacing: 0.5px;
         }
-        
+
         .nav-btn:hover:not(:disabled) {
-            background: #115E56;
+            background: #15803D;
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
-        
+
         .nav-btn:active:not(:disabled) {
             transform: translateY(0);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
-        
+
         .nav-btn.back {
             background: #333333;
         }
-        
+
         .nav-btn.back:hover:not(:disabled) {
             background: #1a1a1a;
         }
-        
+
         .nav-btn.home {
-            background: #0F766E;
+            background: #15803D;
         }
-        
+
         .nav-btn.home:hover {
-            background: #115E56;
+            background: #166534;
         }
-        
+
         .nav-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
         }
-        
+
         .content-area {
             display: flex;
             flex-direction: column;
@@ -244,7 +244,7 @@
             gap: 60px;
             z-index: 10;
         }
-        
+
         /* FLIP CARD STYLES */
         .flip-card {
             background-color: transparent;
@@ -254,7 +254,7 @@
             cursor: pointer;
             margin: 0 auto;
         }
-        
+
         .flip-card-inner {
             position: relative;
             width: 100%;
@@ -263,11 +263,11 @@
             transition: transform 0.6s;
             transform-style: preserve-3d;
         }
-        
+
         .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
-        
+
         .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
@@ -279,24 +279,24 @@
             border-radius: 8px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
-        
+
         .flip-card-front {
-            background: linear-gradient(135deg, #0F766E 0%, #115E56 100%);
-            color: #F4F4F0;
+            background: linear-gradient(135deg, #15803D 0%, #166534 100%);
+            color: #F0FDF4;
         }
-        
+
         .flip-card-back {
-            background: linear-gradient(135deg, #0F766E 0%, #115E56 100%);
-            color: #F4F4F0;
+            background: linear-gradient(135deg, #15803D 0%, #166534 100%);
+            color: #F0FDF4;
             transform: rotateY(180deg);
         }
-        
+
         .flip-card h2 {
             font-family: 'Montserrat', sans-serif;
             font-size: 48px;
             font-weight: 700;
         }
-        
+
         .flip-card-front::after {
             content: "Click to reveal";
             position: absolute;
@@ -305,22 +305,25 @@
             font-family: 'Inter', sans-serif;
             opacity: 0.8;
         }
-        
+
         /* ADJECTIVE CARDS */
         .adjectives-container {
             display: flex;
-            gap: 40px;
+            gap: 24px;
             justify-content: center;
+            width: 100%;
+            max-width: 1200px;
         }
-        
+
         .adjective-flip-card {
             background-color: transparent;
-            width: 200px;
-            height: 150px;
+            width: 370px;
+            height: 240px;
             perspective: 1000px;
             cursor: pointer;
+            flex: 1;
         }
-        
+
         .adjective-flip-card-inner {
             position: relative;
             width: 100%;
@@ -329,11 +332,11 @@
             transition: transform 0.6s;
             transform-style: preserve-3d;
         }
-        
+
         .adjective-flip-card.flipped .adjective-flip-card-inner {
             transform: rotateY(180deg);
         }
-        
+
         .adjective-flip-card-front, .adjective-flip-card-back {
             position: absolute;
             width: 100%;
@@ -345,25 +348,27 @@
             border-radius: 8px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
-        
+
         .adjective-flip-card-front {
-            background: #14B8A6;
-            color: #F4F4F0;
+            background: #16A34A;
+            color: #F0FDF4;
         }
-        
+
         .adjective-flip-card-back {
-            background: #14B8A6;
-            color: #F4F4F0;
+            background: #16A34A;
+            color: #F0FDF4;
             transform: rotateY(180deg);
         }
-        
+
         .adjective-flip-card p {
             font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
-            padding: 20px;
+            padding: 24px;
+            line-height: 1.25;
+            overflow-wrap: break-word;
         }
-        
+
         .adjective-flip-card-front::after {
             content: "Click";
             position: absolute;
@@ -372,7 +377,7 @@
             font-family: 'Inter', sans-serif;
             opacity: 0.8;
         }
-        
+
         .instruction-text {
             font-family: 'Inter', sans-serif;
             font-size: 16px;
@@ -384,16 +389,16 @@
             letter-spacing: 0.3px;
             line-height: 1.5;
         }
-        
+
         .decorative-line {
             position: absolute;
-            background: #0F766E;
+            background: #15803D;
             opacity: 0.1;
         }
-        
+
         .line-1 { width: 100%; height: 2px; top: 100px; }
         .line-2 { width: 100%; height: 2px; bottom: 100px; }
-        
+
         /* MOBILE RESPONSIVE STYLES */
         @media (max-width: 768px) {
             .home-title {
@@ -405,87 +410,89 @@
                 width: 42px;
                 height: 42px;
             }
-            
+
             .home-subtitle {
                 font-size: 18px;
                 padding: 0 20px;
             }
-            
+
             .start-game-btn {
                 font-size: 20px;
                 padding: 16px 40px;
             }
-            
+
             .question-counter {
                 top: 20px;
                 left: 20px;
                 font-size: 14px;
                 padding: 8px 16px;
             }
-            
+
             .timer-container {
                 top: 20px;
                 right: 20px;
                 gap: 8px;
             }
-            
+
             .timer-display {
                 font-size: 32px;
                 padding: 8px 16px;
                 min-width: 100px;
             }
-            
+
             .timer-btn {
                 font-size: 12px;
                 padding: 6px 12px;
             }
-            
+
             .content-area {
                 gap: 30px;
                 padding: 100px 20px 120px 20px;
                 width: 100%;
                 max-width: 100%;
             }
-            
+
             .flip-card {
                 width: 90%;
                 max-width: 400px;
                 height: 160px;
             }
-            
+
             .flip-card h2 {
                 font-size: 32px;
             }
-            
+
             .flip-card-front::after {
                 font-size: 12px;
                 bottom: 15px;
             }
-            
+
             .adjectives-container {
                 flex-direction: column;
                 gap: 20px;
                 width: 100%;
                 align-items: center;
             }
-            
+
             .adjective-flip-card {
                 width: 90%;
-                max-width: 300px;
-                height: 120px;
+                max-width: 420px;
+                height: 190px;
+                flex: none;
             }
-            
+
             .adjective-flip-card p {
-                font-size: 18px;
-                padding: 15px;
+                font-size: 22px;
+                padding: 16px;
+                line-height: 1.25;
             }
-            
+
             .instruction-text {
                 font-size: 14px;
                 padding: 0 20px;
                 margin-top: 20px;
             }
-            
+
             .nav-container {
                 bottom: 20px;
                 flex-wrap: wrap;
@@ -493,20 +500,20 @@
                 width: 90%;
                 max-width: 500px;
             }
-            
+
             .nav-btn {
                 font-size: 14px;
                 padding: 12px 20px;
                 flex: 1;
                 min-width: 100px;
             }
-            
+
             .game-page {
                 padding: 0;
                 overflow-y: auto;
             }
         }
-        
+
         @media (max-width: 480px) {
             .home-title {
                 font-size: 32px;
@@ -516,16 +523,16 @@
                 width: 32px;
                 height: 32px;
             }
-            
+
             .home-subtitle {
                 font-size: 16px;
             }
-            
+
             .start-game-btn {
                 font-size: 18px;
                 padding: 14px 32px;
             }
-            
+
             .question-counter {
                 font-size: 12px;
                 padding: 6px 12px;
@@ -534,64 +541,65 @@
                 right: auto;
                 max-width: calc(50% - 15px);
             }
-            
+
             .timer-container {
                 top: 10px;
                 right: 10px;
                 left: auto;
                 max-width: calc(50% - 15px);
             }
-            
+
             .timer-display {
                 font-size: 28px;
                 padding: 6px 12px;
                 min-width: 90px;
             }
-            
+
             .timer-controls {
                 flex-direction: column;
                 gap: 6px;
             }
-            
+
             .timer-btn {
                 font-size: 11px;
                 padding: 5px 10px;
             }
-            
+
             .content-area {
                 padding: 90px 15px 140px 15px;
                 gap: 25px;
             }
-            
+
             .flip-card {
                 width: 95%;
                 height: 140px;
             }
-            
+
             .flip-card h2 {
                 font-size: 28px;
             }
-            
+
             .adjective-flip-card {
                 width: 95%;
-                height: 110px;
+                height: 180px;
             }
-            
+
             .adjective-flip-card p {
-                font-size: 16px;
+                font-size: 19px;
                 padding: 12px;
+                line-height: 1.2;
             }
-            
+
             .instruction-text {
                 font-size: 13px;
                 padding: 0 15px;
             }
-            
+
             .nav-container {
                 bottom: 15px;
                 gap: 10px;
             }
-            
+
             .nav-btn {
                 font-size: 13px;
                 padding: 10px 16px;
@@ -603,7 +611,7 @@
     <div class="slide-container" id="slideContainer">
         <div class="decorative-line line-1"></div>
         <div class="decorative-line line-2"></div>
-        
+
         <!-- HOME PAGE -->
         <div id="homePage" class="home-page">
             <h1 class="home-title" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;"><span class="home-title-icon" style="display: inline-flex;">
@@ -618,18 +626,18 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
-                      <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                      <path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" />
+                      <path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" />
                     </svg>
-                </span> Unit 5: Housing Superlatives Game</h1>
-            <p class="home-subtitle">Learn English by discussing housing topics!</p>
+                </span> Unit 9: Holistic Wellness Superlatives Game</h1>
+            <p class="home-subtitle">Practice whole-life wellness vocabulary with superlative adjectives</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
         </div>
-        
+
         <!-- GAME PAGE -->
         <div id="gamePage" class="game-page hidden">
             <div class="question-counter" id="questionCounter">Question 1 of 10</div>
-            
+
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:30</div>
                 <div class="timer-controls">
@@ -637,7 +645,7 @@
                     <button class="timer-btn reset-btn" onclick="resetTimer()">Reset</button>
                 </div>
             </div>
-            
+
             <div class="content-area" id="contentArea">
                 <!-- CATEGORY CARD -->
                 <div class="flip-card" onclick="toggleFlip(this)">
@@ -650,7 +658,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- ADJECTIVE CARDS -->
                 <div class="adjectives-container">
                     <div class="adjective-flip-card" onclick="toggleFlip(this)">
@@ -684,10 +692,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="instruction-text">Click the cards to flip and reveal • Write your answers on your whiteboard (1, 2, 3)</div>
             </div>
-            
+
             <!-- NAVIGATION BUTTONS -->
             <div class="nav-container">
                 <button class="nav-btn back" onclick="previousCategory()" id="backBtn">← Back</button>
@@ -701,102 +709,123 @@
         // Game data
         const categories = [
             {
-                title: "Boston Neighborhoods",
-                adj1: "Nicest",
-                adj2: "Sketchiest",
-                adj3: "Best place to go shopping"
+                title: "Ways to Reduce Stress",
+                adj1: "Most effective",
+                adj2: "Easiest to do at home",
+                adj3: "Most likely to be forgotten the moment you actually need it"
             },
             {
-                title: "Things in an Apartment",
-                adj1: "Most essential",
-                adj2: "Most expensive",
-                adj3: "Most likely to break"
-            },
-            {
-                title: "Types of Homes",
-                adj1: "Most affordable",
-                adj2: "Most luxurious",
-                adj3: "Best for families"
-            },
-            {
-                title: "Kitchen Appliances",
-                adj1: "Most used",
-                adj2: "Most annoying to clean",
-                adj3: "Most likely to break down"
-            },
-            {
-                title: "Home Safety",
-                adj1: "Most important safety feature",
-                adj2: "Most common hazard",
-                adj3: "Best way to prevent accidents"
-            },
-            {
-                title: "House Hunting",
-                adj1: "Most important feature",
-                adj2: "Most frustrating part",
-                adj3: "Best deal to find"
-            },
-            {
-                title: "Furniture",
-                adj1: "Most comfortable",
-                adj2: "Most expensive",
-                adj3: "Hardest to move"
-            },
-            {
-                title: "Neighborhood Amenities",
+                title: "Work-Life Balance Habits",
                 adj1: "Most important",
-                adj2: "Most expensive to use",
-                adj3: "Best for families"
+                adj2: "Hardest to maintain",
+                adj3: "Most likely to fall apart during a busy week"
             },
             {
-                title: "Home Repairs",
-                adj1: "Most expensive",
-                adj2: "Most annoying",
-                adj3: "Most important to fix"
+                title: "Areas of Life Health Affects",
+                adj1: "Most impacted",
+                adj2: "Most overlooked",
+                adj3: "Most likely to surprise you with how connected it is"
             },
             {
-                title: "Dream Home",
-                adj1: "Most important room",
-                adj2: "Most desired feature",
-                adj3: "Best location"
+                title: "Self-Care Activities",
+                adj1: "Most relaxing",
+                adj2: "Easiest to skip",
+                adj3: "Most likely to get replaced by 'just five more minutes of scrolling'"
+            },
+            {
+                title: "Sleep Habits",
+                adj1: "Most important",
+                adj2: "Hardest to fix",
+                adj3: "Most likely to be ruined by one extra cup of coffee"
+            },
+            {
+                title: "Ways to Support a Friend",
+                adj1: "Most meaningful",
+                adj2: "Easiest to offer",
+                adj3: "Most likely to just be showing up with snacks"
+            },
+            {
+                title: "Community Wellness Resources",
+                adj1: "Most helpful",
+                adj2: "Most underused",
+                adj3: "Most likely to be free and yet still a secret"
+            },
+            {
+                title: "Signs of Burnout",
+                adj1: "Most common",
+                adj2: "Easiest to ignore",
+                adj3: "Most likely to be blamed on 'just needing more coffee'"
+            },
+            {
+                title: "Healthy Boundaries",
+                adj1: "Most important",
+                adj2: "Hardest to set",
+                adj3: "Most likely to start with an awkward but necessary 'no'"
+            },
+            {
+                title: "Ways to Practice Gratitude",
+                adj1: "Most meaningful",
+                adj2: "Easiest to build into your day",
+                adj3: "Most likely to turn a bad day slightly less bad"
             }
         ];
-        
+
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;
-        
+
         // Start game from home page
         function startGame() {
             document.getElementById('homePage').classList.add('hidden');
             document.getElementById('gamePage').classList.remove('hidden');
             loadCategory(0);
         }
-        
+
         // Load category
         function loadCategory(index) {
             if (index < 0) index = categories.length - 1;
             if (index >= categories.length) index = 0;
-            
+
             currentCategoryIndex = index;
             const category = categories[index];
-            
-            // Reset flip cards FIRST before changing content
-            document.querySelectorAll('.flip-card, .adjective-flip-card').forEach(card => {
-                card.classList.remove('flipped');
-            });
-            
-            // Then update the content
-            document.getElementById('categoryTitle').textContent = category.title;
-            document.getElementById('adj1').textContent = category.adj1;
-            document.getElementById('adj2').textContent = category.adj2;
-            document.getElementById('adj3').textContent = category.adj3;
+
+            const cards = document.querySelectorAll('.flip-card, .adjective-flip-card');
+            const anyFlipped = Array.from(cards).some(card => card.classList.contains('flipped'));
+
+            const updateContent = () => {
+                document.getElementById('categoryTitle').textContent = category.title;
+                setAdjectiveText('adj1', category.adj1);
+                setAdjectiveText('adj2', category.adj2);
+                setAdjectiveText('adj3', category.adj3);
+            };
+
+            if (anyFlipped) {
+                // Wait for the flip-back animation to finish before swapping the answer text
+                cards.forEach(card => card.classList.remove('flipped'));
+                setTimeout(updateContent, 600);
+            } else {
+                cards.forEach(card => card.classList.remove('flipped'));
+                updateContent();
+            }
+
             document.getElementById('questionCounter').textContent = `Question ${index + 1} of ${categories.length}`;
-            
+
             // Reset timer
             resetTimer();
         }
-        
+
+        function setAdjectiveText(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            if (text.length > 60) {
+                el.style.fontSize = '25px';
+            } else if (text.length > 45) {
+                el.style.fontSize = '28px';
+            } else {
+                el.style.fontSize = '';
+            }
+        }
+
         function toggleFlip(element) {
             if (element.classList.contains('flip-card')) {
                 element.classList.toggle('flipped');
@@ -804,26 +833,26 @@
                 element.classList.toggle('flipped');
             }
         }
-        
+
         function nextCategory() {
             loadCategory(currentCategoryIndex + 1);
         }
-        
+
         function previousCategory() {
             loadCategory(currentCategoryIndex - 1);
         }
-        
+
         function goHome() {
             document.getElementById('gamePage').classList.add('hidden');
             document.getElementById('homePage').classList.remove('hidden');
             clearInterval(timerId);
             timerId = null;
         }
-        
+
         // TIMER FUNCTIONALITY
         const display = document.getElementById('timer');
         const btn = document.getElementById('timerBtn');
-        
+
         function updateDisplay() {
             const mins = Math.floor(timeLeft / 60);
             const secs = timeLeft % 60;
@@ -831,7 +860,7 @@
             if (timeLeft <= 10) display.style.color = '#E04E39';
             else display.style.color = '#1A1A1A';
         }
-        
+
         function toggleTimer() {
             if (timerId) {
                 clearInterval(timerId);
@@ -851,7 +880,7 @@
                 }, 1000);
             }
         }
-        
+
         function resetTimer() {
             clearInterval(timerId);
             timerId = null;
