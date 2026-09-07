@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unit 6: Workforce Preparation Superlatives Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -25,7 +25,7 @@
         .slide-container {
             width: 100vw;
             height: 100vh;
-            background: #EEF2FF;
+            background: #EAF0F9;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,10 +58,10 @@
         }
 
         .home-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 72px;
             font-weight: 700;
-            color: #3730A3;
+            color: #21447A;
             text-align: center;
         }
 
@@ -72,7 +72,7 @@
         }
 
         .home-subtitle {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             font-size: 24px;
             font-weight: 500;
             color: #333333;
@@ -80,13 +80,13 @@
         }
 
         .start-game-btn {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 24px;
             font-weight: 700;
             padding: 20px 60px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #4338CA 0%, #3730A3 100%);
+            background: linear-gradient(135deg, #2A5599 0%, #21447A 100%);
             color: white;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -121,7 +121,7 @@
             position: absolute;
             top: 40px;
             left: 40px;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 20px;
             font-weight: 700;
             color: #333333;
@@ -144,7 +144,7 @@
         }
 
         .timer-display {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 48px;
             font-weight: 700;
             color: #1A1A1A;
@@ -162,7 +162,7 @@
         }
 
         .timer-btn {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             font-size: 14px;
             font-weight: 600;
             padding: 8px 16px;
@@ -171,7 +171,7 @@
             cursor: pointer;
         }
 
-        .start-btn { background: #4338CA; color: white; }
+        .start-btn { background: #2A5599; color: white; }
         .reset-btn { background: #333333; color: white; }
         .timer-btn:hover { opacity: 0.8; }
 
@@ -186,14 +186,14 @@
         }
 
         .nav-btn {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 16px;
             font-weight: 700;
             padding: 14px 32px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            background: #4338CA;
+            background: #2A5599;
             color: white;
             text-decoration: none;
             display: inline-flex;
@@ -206,7 +206,7 @@
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: #3730A3;
+            background: #21447A;
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
@@ -225,11 +225,11 @@
         }
 
         .nav-btn.home {
-            background: #3730A3;
+            background: #21447A;
         }
 
         .nav-btn.home:hover {
-            background: #312E81;
+            background: #19335C;
         }
 
         .nav-btn:disabled {
@@ -281,18 +281,18 @@
         }
 
         .flip-card-front {
-            background: linear-gradient(135deg, #3730A3 0%, #312E81 100%);
-            color: #EEF2FF;
+            background: linear-gradient(135deg, #21447A 0%, #19335C 100%);
+            color: #EAF0F9;
         }
 
         .flip-card-back {
-            background: linear-gradient(135deg, #3730A3 0%, #312E81 100%);
-            color: #EEF2FF;
+            background: linear-gradient(135deg, #21447A 0%, #19335C 100%);
+            color: #EAF0F9;
             transform: rotateY(180deg);
         }
 
         .flip-card h2 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 48px;
             font-weight: 700;
         }
@@ -302,7 +302,7 @@
             position: absolute;
             bottom: 20px;
             font-size: 14px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             opacity: 0.8;
         }
 
@@ -350,18 +350,18 @@
         }
 
         .adjective-flip-card-front {
-            background: #4338CA;
-            color: #EEF2FF;
+            background: #2A5599;
+            color: #EAF0F9;
         }
 
         .adjective-flip-card-back {
-            background: #4338CA;
-            color: #EEF2FF;
+            background: #2A5599;
+            color: #EAF0F9;
             transform: rotateY(180deg);
         }
 
         .adjective-flip-card p {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 32px;
             font-weight: 700;
             padding: 24px;
@@ -374,12 +374,12 @@
             position: absolute;
             bottom: 10px;
             font-size: 12px;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             opacity: 0.8;
         }
 
         .instruction-text {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Karla', sans-serif;
             font-size: 16px;
             font-weight: 500;
             color: #333333;
@@ -392,7 +392,7 @@
 
         .decorative-line {
             position: absolute;
-            background: #3730A3;
+            background: #21447A;
             opacity: 0.1;
         }
 
@@ -626,8 +626,12 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                      <rect width="20" height="14" x="2" y="6" rx="2" />
+                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                      <path d="M4 22h16" />
+                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
                     </svg>
                 </span> Unit 6: Workforce Preparation Superlatives Game</h1>
             <p class="home-subtitle">Practice workplace communication vocabulary with superlative adjectives</p>
