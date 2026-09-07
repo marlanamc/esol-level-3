@@ -25,11 +25,11 @@
     },
     {
       "source": "/housing-game",
-      "destination": "/activities/housing/housing-game-all-in-one.html"
+      "destination": "/activities/games/superlative/housing-game-all-in-one.html"
     },
     {
       "source": "/housing-discussion-game",
-      "destination": "/activities/housing/housing-discussion-game.html"
+      "destination": "/activities/games/discussion/housing-discussion-game.html"
     },
     {
       "source": "/housing-task-class",
@@ -37,7 +37,7 @@
     },
     {
       "source": "/health-game",
-      "destination": "/activities/superlatives/health-game-all-in-one.html"
+      "destination": "/activities/games/superlative/health-game-all-in-one.html"
     },
     {
       "source": "/fy26",
