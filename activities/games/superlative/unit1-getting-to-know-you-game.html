@@ -60,16 +60,36 @@
 
         .home-title {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 72px;
+            font-size: 56px;
             font-weight: 700;
             color: #B0432B;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            line-height: 1.15;
+            padding: 0 28px;
         }
 
-        .home-title-icon svg {
-            width: 64px;
-            height: 64px;
-            stroke-width: 1.75;
+        .home-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .home-title-icon { display: inline-flex; flex-shrink: 0; }
+        .home-title-icon svg { width: 52px; height: 52px; stroke-width: 1.75; }
+
+        .home-title-game {
+            display: block;
+            font-weight: 400;
+            font-size: 32px;
+            letter-spacing: .04em;
+            line-height: 1.2;
         }
 
         .home-subtitle {
@@ -417,14 +437,16 @@
         /* MOBILE RESPONSIVE STYLES */
         @media (max-width: 768px) {
             .home-title {
-                font-size: 42px;
+                font-size: 32px;
                 padding: 0 20px;
             }
 
             .home-title-icon svg {
-                width: 42px;
-                height: 42px;
+                width: 36px;
+                height: 36px;
             }
+
+            .home-title-game { font-size: 20px; }
 
             .home-subtitle {
                 font-size: 18px;
@@ -531,13 +553,15 @@
 
         @media (max-width: 480px) {
             .home-title {
-                font-size: 32px;
+                font-size: 26px;
             }
 
             .home-title-icon svg {
-                width: 32px;
-                height: 32px;
+                width: 28px;
+                height: 28px;
             }
+
+            .home-title-game { font-size: 18px; }
 
             .home-subtitle {
                 font-size: 16px;
@@ -629,7 +653,7 @@
 
         <!-- HOME PAGE -->
         <div id="homePage" class="home-page">
-            <h1 class="home-title" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;"><span class="home-title-icon" style="display: inline-flex;">
+            <h1 class="home-title"><span class="home-title-row"><span class="home-title-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -648,7 +672,8 @@
                       <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
                       <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
                     </svg>
-                </span> Unit 1: Getting to Know You Superlatives Game</h1>
+                </span> Unit 1: Getting to Know You</span>
+                <span class="home-title-game">Superlatives Game</span></h1>
             <p class="home-subtitle">Practice personal & daily life vocabulary with superlative adjectives</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>

@@ -53,16 +53,36 @@
 
         .home-title {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 72px;
+            font-size: 56px;
             font-weight: 700;
             color: #1E6E5C;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            line-height: 1.15;
+            padding: 0 28px;
         }
 
-        .home-title-icon svg {
-            width: 64px;
-            height: 64px;
-            stroke-width: 1.75;
+        .home-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .home-title-icon { display: inline-flex; flex-shrink: 0; }
+        .home-title-icon svg { width: 52px; height: 52px; stroke-width: 1.75; }
+
+        .home-title-game {
+            display: block;
+            font-weight: 400;
+            font-size: 32px;
+            letter-spacing: .04em;
+            line-height: 1.2;
         }
 
         .home-subtitle {
@@ -459,8 +479,9 @@
         @media (max-width: 768px) {
             .slide-container { overflow-y: auto; }
 
-            .home-title { font-size: 42px; padding: 0 20px; }
-            .home-title-icon svg { width: 42px; height: 42px; }
+            .home-title { font-size: 32px; padding: 0 20px; }
+            .home-title-icon svg { width: 36px; height: 36px; }
+            .home-title-game { font-size: 20px; }
             .home-subtitle { font-size: 18px; padding: 0 20px; }
             .start-game-btn { font-size: 20px; padding: 16px 40px; }
 
@@ -503,8 +524,9 @@
         }
 
         @media (max-width: 480px) {
-            .home-title { font-size: 32px; }
-            .home-title-icon svg { width: 32px; height: 32px; }
+            .home-title { font-size: 26px; }
+            .home-title-icon svg { width: 28px; height: 28px; }
+            .home-title-game { font-size: 18px; }
             .home-subtitle { font-size: 16px; }
             .start-game-btn { font-size: 18px; padding: 14px 32px; }
             .question-counter { font-size: 12px; padding: 6px 12px; top: 10px; left: 10px; }
@@ -533,7 +555,7 @@
 
         <!-- HOME PAGE -->
         <div id="homePage" class="home-page">
-            <h1 class="home-title" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;"><span class="home-title-icon" style="display: inline-flex;">
+            <h1 class="home-title"><span class="home-title-row"><span class="home-title-icon">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -549,7 +571,8 @@
                       <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                       <path d="M12 17h.01" />
                     </svg>
-                </span> Unit 4: Consumer Smarts Discussion Game</h1>
+                </span> Unit 4: Consumer Smarts</span>
+                <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about money, shopping, and budgeting</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
