@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 4: Consumer Smarts Taboo Game</title>
+    <title>Unit 4: Consumer Smarts Guess the Word</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,11 +35,28 @@
 
         .home-title {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 72px; font-weight: 700;
+            font-size: 56px; font-weight: 700;
             color: #1E6E5C; text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 10px; line-height: 1.15; padding: 0 28px;
         }
 
-        .home-title-icon svg { width: 64px; height: 64px; stroke-width: 1.75; }
+        .home-title-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; flex-wrap: wrap;
+        }
+
+        .home-title-icon { display: inline-flex; flex-shrink: 0; }
+        .home-title-icon svg { width: 52px; height: 52px; stroke-width: 1.75; }
+
+        .home-title-game {
+            display: block;
+            font-weight: 400;
+            font-size: 32px;
+            letter-spacing: .04em;
+            line-height: 1.2;
+        }
 
         .home-subtitle {
             font-size: 24px; font-weight: 500; color: #333333;
@@ -160,7 +177,7 @@
             color: #1E6E5C; text-align: center;
         }
 
-        /* TABOO CARD */
+        /* CLUE CARD */
         .taboo-card {
             width: 100%; max-width: 620px;
             background: #FFFFFF; border-radius: 12px;
@@ -185,33 +202,30 @@
 
         .taboo-body { padding: 22px 24px 28px; }
 
+        .taboo-hidden-mark {
+            display: none;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
+            font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: .12em;
+            opacity: .9;
+        }
+
         .taboo-label {
             font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
-            text-transform: uppercase; color: #E04E39; margin-bottom: 14px;
+            text-transform: uppercase; color: #5a5a5a; margin-bottom: 14px;
         }
 
         .taboo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
         .taboo-list li {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 30px; font-weight: 700; color: #1a1a1a;
-            padding: 8px 12px; background: #FDF0EE;
-            border-radius: 6px; text-decoration: line-through;
-            text-decoration-color: #E04E39; text-decoration-thickness: 3px;
+            font-size: 36px; font-weight: 700; color: #1a1a1a;
+            padding: 10px 14px; background: #F3EEE6;
+            border-radius: 6px;
         }
 
-        /* hide-word mode for the guessers' side */
-        .taboo-card.concealed .taboo-word,
-        .taboo-card.concealed .taboo-body { display: none; }
-
-        .taboo-card.concealed .taboo-head {
-            padding: 44px 24px;
-        }
-
-        .taboo-card.concealed .taboo-head::after {
-            content: "Tap Reveal when the describer is ready";
-            display: block; font-size: 19px; font-weight: 600; opacity: .9;
-        }
+        /* hide the answer until Reveal; clues stay visible */
+        .taboo-card.concealed .taboo-word { display: none; }
+        .taboo-card.concealed .taboo-hidden-mark { display: block; }
 
         .action-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
@@ -259,8 +273,9 @@
 
         @media (max-width: 768px) {
             .slide-container { overflow-y: auto; }
-            .home-title { font-size: 40px; padding: 0 20px; }
-            .home-title-icon svg { width: 40px; height: 40px; }
+            .home-title { font-size: 32px; padding: 0 20px; }
+            .home-title-icon svg { width: 36px; height: 36px; }
+            .home-title-game { font-size: 20px; }
             .home-subtitle { font-size: 18px; }
             .rules-box li { font-size: 15px; }
             .start-game-btn { font-size: 20px; padding: 16px 40px; }
@@ -273,21 +288,24 @@
             .team { min-width: 0; flex: 1; padding: 10px 12px; }
             .team-score { font-size: 26px; }
             .taboo-word { font-size: 38px; }
-            .taboo-list li { font-size: 22px; }
+            .taboo-list li { font-size: 26px; }
+            .taboo-hidden-mark { font-size: 38px; }
             .action-btn { font-size: 15px; padding: 13px 22px; }
             .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
             .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
         }
 
         @media (max-width: 480px) {
-            .home-title { font-size: 30px; }
+            .home-title { font-size: 26px; }
+            .home-title-game { font-size: 18px; }
             .home-subtitle { font-size: 16px; }
             .question-counter { font-size: 12px; padding: 6px 12px; top: 10px; left: 10px; }
             .timer-container { top: 10px; right: 10px; }
             .timer-display { font-size: 26px; padding: 6px 12px; min-width: 88px; }
             .content-area { padding: 90px 12px 20px; }
             .taboo-word { font-size: 30px; }
-            .taboo-list li { font-size: 19px; }
+            .taboo-list li { font-size: 22px; }
+            .taboo-hidden-mark { font-size: 30px; }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
 
@@ -305,22 +323,23 @@
 
         <!-- HOME -->
         <div id="homePage" class="home-page">
-            <h1 class="home-title" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;"><span class="home-title-icon" style="display:inline-flex;">
+            <h1 class="home-title"><span class="home-title-row"><span class="home-title-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" />
                       <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" />
                       <circle cx="18" cy="20" r="2" />
                       <circle cx="8" cy="20" r="2" />
                     </svg>
-                </span> Unit 4: Consumer Smarts Taboo</h1>
-            <p class="home-subtitle">Describe the word to your team &mdash; without saying the three words below it. 16 words from this unit.</p>
+                </span> Unit 4: Consumer Smarts</span>
+                <span class="home-title-game">Guess the Word</span></h1>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 16 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
-                    <li>One student describes the big word to their team.</li>
-                    <li>They may <strong>not</strong> say any of the three crossed-out words &mdash; or the word itself.</li>
-                    <li>The team guesses. 60 seconds per turn.</li>
-                    <li>Press <strong>Got it</strong> for a point, or <strong>Skip</strong> to pass.</li>
+                    <li>Read the three clue words on the card.</li>
+                    <li>Say the unit vocabulary word that goes with them.</li>
+                    <li>60 seconds per turn. Teams take turns guessing.</li>
+                    <li>Press <strong>Got it</strong> for a point, or <strong>Skip</strong> to pass. Use <strong>Reveal answer</strong> to check.</li>
                 </ol>
             </div>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
@@ -358,26 +377,27 @@
                     </div>
                 </div>
 
-                <div class="turn-banner" id="turnBanner">Team A is describing</div>
+                <div class="turn-banner" id="turnBanner">Team A is guessing</div>
 
                 <div class="taboo-card concealed" id="tabooCard">
                     <div class="taboo-head">
                         <div class="taboo-topic" id="tabooTopic">TOPIC</div>
                         <div class="taboo-word" id="tabooWord">WORD</div>
+                        <div class="taboo-hidden-mark" aria-hidden="true">???</div>
                     </div>
                     <div class="taboo-body">
-                        <div class="taboo-label">Do not say</div>
+                        <div class="taboo-label">Clues</div>
                         <ul class="taboo-list" id="tabooList"></ul>
                     </div>
                 </div>
 
                 <div class="action-row">
-                    <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal word</button>
+                    <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">The describer looks at the screen &bull; Got it scores a point for the describing team and switches turns</div>
+                <div class="instruction-text">Everyone looks at the clues &bull; Got it scores a point for the guessing team and switches turns</div>
             </div>
 
             <div class="nav-container">
@@ -391,22 +411,22 @@
 
     <script>
         const cards = [
-            { word: "purchase", forbidden: ["buy", "money", "store"], topic: "Shopping Smart" },
-            { word: "compare", forbidden: ["two", "different", "which"], topic: "Shopping Smart" },
-            { word: "budget", forbidden: ["money", "plan", "spend"], topic: "Shopping Smart" },
-            { word: "save", forbidden: ["money", "keep", "bank"], topic: "Shopping Smart" },
-            { word: "spend", forbidden: ["money", "buy", "pay"], topic: "Shopping Smart" },
-            { word: "calculate", forbidden: ["math", "numbers", "add"], topic: "Shopping Smart" },
-            { word: "exchange", forbidden: ["change", "trade", "give back"], topic: "Banking Basics" },
-            { word: "refund", forbidden: ["money back", "return", "store"], topic: "Banking Basics" },
-            { word: "withdraw", forbidden: ["money", "take out", "ATM"], topic: "Banking Basics" },
-            { word: "deposit", forbidden: ["money", "put in", "bank"], topic: "Banking Basics" },
-            { word: "charge", forbidden: ["pay", "card", "money"], topic: "Banking Basics" },
-            { word: "dispute", forbidden: ["disagree", "wrong", "argue"], topic: "Banking Basics" },
-            { word: "receipt", forbidden: ["paper", "store", "proof"], topic: "Shopping Smart" },
-            { word: "warranty", forbidden: ["broken", "fix", "promise"], topic: "Shopping Smart" },
-            { word: "coupon", forbidden: ["discount", "paper", "save"], topic: "Shopping Smart" },
-            { word: "expensive", forbidden: ["money", "cost", "much"], topic: "Shopping Smart" }
+            { word: "purchase", clues: ["buy", "money", "store"], topic: "Shopping Smart" },
+            { word: "compare", clues: ["two", "different", "which"], topic: "Shopping Smart" },
+            { word: "budget", clues: ["money", "plan", "spend"], topic: "Shopping Smart" },
+            { word: "save", clues: ["money", "keep", "bank"], topic: "Shopping Smart" },
+            { word: "spend", clues: ["money", "buy", "pay"], topic: "Shopping Smart" },
+            { word: "calculate", clues: ["math", "numbers", "add"], topic: "Shopping Smart" },
+            { word: "exchange", clues: ["change", "trade", "give back"], topic: "Banking Basics" },
+            { word: "refund", clues: ["money back", "return", "store"], topic: "Banking Basics" },
+            { word: "withdraw", clues: ["money", "take out", "ATM"], topic: "Banking Basics" },
+            { word: "deposit", clues: ["money", "put in", "bank"], topic: "Banking Basics" },
+            { word: "charge", clues: ["pay", "card", "money"], topic: "Banking Basics" },
+            { word: "dispute", clues: ["disagree", "wrong", "argue"], topic: "Banking Basics" },
+            { word: "receipt", clues: ["paper", "store", "proof"], topic: "Shopping Smart" },
+            { word: "warranty", clues: ["broken", "fix", "promise"], topic: "Shopping Smart" },
+            { word: "coupon", clues: ["discount", "paper", "save"], topic: "Shopping Smart" },
+            { word: "expensive", clues: ["money", "cost", "much"], topic: "Shopping Smart" }
         ];
 
         let order = cards.map(function (_, i) { return i; });
@@ -436,12 +456,12 @@
             document.getElementById('tabooTopic').textContent = c.topic;
             document.getElementById('tabooWord').textContent = c.word;
             document.getElementById('tabooList').innerHTML =
-                c.forbidden.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+                c.clues.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
             document.getElementById('questionCounter').textContent =
                 'Card ' + (i + 1) + ' of ' + order.length;
-            // Each new card starts concealed so the describer controls the reveal.
+            // Each new card starts with the answer hidden so the class can guess from the clues.
             document.getElementById('tabooCard').classList.add('concealed');
-            document.getElementById('revealBtn').textContent = 'Reveal word';
+            document.getElementById('revealBtn').textContent = 'Reveal answer';
             resetTimer();
         }
 
@@ -449,7 +469,7 @@
             const card = document.getElementById('tabooCard');
             card.classList.toggle('concealed');
             document.getElementById('revealBtn').textContent =
-                card.classList.contains('concealed') ? 'Reveal word' : 'Hide word';
+                card.classList.contains('concealed') ? 'Reveal answer' : 'Hide answer';
         }
 
         function paintScores() {
@@ -458,7 +478,7 @@
             document.getElementById('teamA').classList.toggle('active', turn === 'a');
             document.getElementById('teamB').classList.toggle('active', turn === 'b');
             document.getElementById('turnBanner').textContent =
-                'Team ' + (turn === 'a' ? 'A' : 'B') + ' is describing';
+                'Team ' + (turn === 'a' ? 'A' : 'B') + ' is guessing';
         }
 
         function bump(team, n) {

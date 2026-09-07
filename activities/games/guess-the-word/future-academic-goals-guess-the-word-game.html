@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit 8: Health Taboo Game</title>
+    <title>Unit 10: Future Academic Goals Guess the Word</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,7 +18,7 @@
 
         .slide-container {
             width: 100vw; min-height: 100vh;
-            background: #F0F9FF;
+            background: #FEF2F2;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             position: relative; overflow-x: hidden;
@@ -35,11 +35,28 @@
 
         .home-title {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 72px; font-weight: 700;
-            color: #7A3E9D; text-align: center;
+            font-size: 56px; font-weight: 700;
+            color: #A32B4A; text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 10px; line-height: 1.15; padding: 0 28px;
         }
 
-        .home-title-icon svg { width: 64px; height: 64px; stroke-width: 1.75; }
+        .home-title-row {
+            display: flex; align-items: center; justify-content: center;
+            gap: 14px; flex-wrap: wrap;
+        }
+
+        .home-title-icon { display: inline-flex; flex-shrink: 0; }
+        .home-title-icon svg { width: 52px; height: 52px; stroke-width: 1.75; }
+
+        .home-title-game {
+            display: block;
+            font-weight: 400;
+            font-size: 32px;
+            letter-spacing: .04em;
+            line-height: 1.2;
+        }
 
         .home-subtitle {
             font-size: 24px; font-weight: 500; color: #333333;
@@ -47,7 +64,7 @@
         }
 
         .rules-box {
-            background: #FFFFFF; border-left: 6px solid #7A3E9D;
+            background: #FFFFFF; border-left: 6px solid #A32B4A;
             border-radius: 8px; padding: 20px 26px;
             max-width: 620px; margin: 0 20px;
             box-shadow: 0 4px 10px rgba(0,0,0,.07); text-align: left;
@@ -56,7 +73,7 @@
         .rules-box h3 {
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 14px; font-weight: 700; letter-spacing: 1px;
-            text-transform: uppercase; color: #7A3E9D; margin-bottom: 10px;
+            text-transform: uppercase; color: #A32B4A; margin-bottom: 10px;
         }
 
         .rules-box ol { padding-left: 20px; }
@@ -66,7 +83,7 @@
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 24px; font-weight: 700;
             padding: 20px 60px; border: none; border-radius: 8px;
-            background: linear-gradient(135deg, #7A3E9D 0%, #61327e 100%);
+            background: linear-gradient(135deg, #A32B4A 0%, #82223b 100%);
             color: white; cursor: pointer; transition: all .3s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,.15);
         }
@@ -75,7 +92,7 @@
 
         .all-activities-link {
             display: inline-block; margin-top: 6px;
-            font-size: 14px; font-weight: 600; color: #7A3E9D; text-decoration: none;
+            font-size: 14px; font-weight: 600; color: #A32B4A; text-decoration: none;
         }
         .all-activities-link:hover { text-decoration: underline; }
 
@@ -112,7 +129,7 @@
             font-size: 14px; font-weight: 600; padding: 8px 16px;
             border: none; border-radius: 4px; cursor: pointer;
         }
-        .start-btn { background: #7A3E9D; color: white; }
+        .start-btn { background: #A32B4A; color: white; }
         .reset-btn { background: #333333; color: white; }
         .timer-btn:hover { opacity: .8; }
 
@@ -132,13 +149,13 @@
             border-top: 5px solid #C9CFD2; min-width: 150px;
         }
 
-        .team.active { border-top-color: #7A3E9D; box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+        .team.active { border-top-color: #A32B4A; box-shadow: 0 6px 16px rgba(0,0,0,.14); }
 
         .team-name {
             font-size: 12px; font-weight: 700; letter-spacing: 1.2px;
             text-transform: uppercase; color: #6b6b6b;
         }
-        .team.active .team-name { color: #7A3E9D; }
+        .team.active .team-name { color: #A32B4A; }
 
         .team-score {
             font-family: 'Atkinson Hyperlegible', sans-serif;
@@ -150,17 +167,17 @@
         .score-btn {
             font-size: 15px; font-weight: 700; line-height: 1;
             width: 32px; height: 26px; border: none; border-radius: 4px;
-            background: #EDF0F1; color: #7A3E9D; cursor: pointer;
+            background: #EDF0F1; color: #A32B4A; cursor: pointer;
         }
-        .score-btn:hover { background: #7A3E9D; color: #FFFFFF; }
+        .score-btn:hover { background: #A32B4A; color: #FFFFFF; }
 
         .turn-banner {
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 15px; font-weight: 700; letter-spacing: .6px;
-            color: #7A3E9D; text-align: center;
+            color: #A32B4A; text-align: center;
         }
 
-        /* TABOO CARD */
+        /* CLUE CARD */
         .taboo-card {
             width: 100%; max-width: 620px;
             background: #FFFFFF; border-radius: 12px;
@@ -169,7 +186,7 @@
         }
 
         .taboo-head {
-            background: linear-gradient(135deg, #7A3E9D 0%, #61327e 100%);
+            background: linear-gradient(135deg, #A32B4A 0%, #82223b 100%);
             color: #FFFFFF; padding: 30px 24px 26px;
         }
 
@@ -185,33 +202,30 @@
 
         .taboo-body { padding: 22px 24px 28px; }
 
+        .taboo-hidden-mark {
+            display: none;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
+            font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: .12em;
+            opacity: .9;
+        }
+
         .taboo-label {
             font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
-            text-transform: uppercase; color: #E04E39; margin-bottom: 14px;
+            text-transform: uppercase; color: #5a5a5a; margin-bottom: 14px;
         }
 
         .taboo-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
         .taboo-list li {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 30px; font-weight: 700; color: #1a1a1a;
-            padding: 8px 12px; background: #FDF0EE;
-            border-radius: 6px; text-decoration: line-through;
-            text-decoration-color: #E04E39; text-decoration-thickness: 3px;
+            font-size: 36px; font-weight: 700; color: #1a1a1a;
+            padding: 10px 14px; background: #F3EEE6;
+            border-radius: 6px;
         }
 
-        /* hide-word mode for the guessers' side */
-        .taboo-card.concealed .taboo-word,
-        .taboo-card.concealed .taboo-body { display: none; }
-
-        .taboo-card.concealed .taboo-head {
-            padding: 44px 24px;
-        }
-
-        .taboo-card.concealed .taboo-head::after {
-            content: "Tap Reveal when the describer is ready";
-            display: block; font-size: 19px; font-weight: 600; opacity: .9;
-        }
+        /* hide the answer until Reveal; clues stay visible */
+        .taboo-card.concealed .taboo-word { display: none; }
+        .taboo-card.concealed .taboo-hidden-mark { display: block; }
 
         .action-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 
@@ -227,8 +241,8 @@
         .got-it:hover { background: #235f3f; }
         .skip { background: #8A6D3B; }
         .skip:hover { background: #6d5630; }
-        .reveal { background: #7A3E9D; }
-        .reveal:hover { background: #61327e; }
+        .reveal { background: #A32B4A; }
+        .reveal:hover { background: #82223b; }
 
         .instruction-text {
             font-size: 15px; font-weight: 500; color: #333333;
@@ -238,29 +252,30 @@
         .nav-container {
             position: fixed; bottom: 0; left: 0; right: 0;
             display: flex; justify-content: center; gap: 20px; padding: 20px; z-index: 20;
-            background: linear-gradient(to top, #F0F9FF 80%, transparent);
+            background: linear-gradient(to top, #FEF2F2 80%, transparent);
         }
 
         .nav-btn {
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 16px; font-weight: 700;
             padding: 14px 32px; border: none; border-radius: 6px; cursor: pointer;
-            background: #7A3E9D; color: white;
+            background: #A32B4A; color: white;
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             transition: all .3s ease; box-shadow: 0 4px 12px rgba(0,0,0,.15); letter-spacing: .5px;
         }
-        .nav-btn:hover:not(:disabled) { background: #61327e; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.2); }
+        .nav-btn:hover:not(:disabled) { background: #82223b; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,.2); }
         .nav-btn.back { background: #333333; }
         .nav-btn.back:hover { background: #1a1a1a; }
 
-        .decorative-line { position: absolute; background: #7A3E9D; opacity: .1; }
+        .decorative-line { position: absolute; background: #A32B4A; opacity: .1; }
         .line-1 { width: 100%; height: 2px; top: 100px; }
         .line-2 { width: 100%; height: 2px; bottom: 100px; }
 
         @media (max-width: 768px) {
             .slide-container { overflow-y: auto; }
-            .home-title { font-size: 40px; padding: 0 20px; }
-            .home-title-icon svg { width: 40px; height: 40px; }
+            .home-title { font-size: 32px; padding: 0 20px; }
+            .home-title-icon svg { width: 36px; height: 36px; }
+            .home-title-game { font-size: 20px; }
             .home-subtitle { font-size: 18px; }
             .rules-box li { font-size: 15px; }
             .start-game-btn { font-size: 20px; padding: 16px 40px; }
@@ -273,28 +288,31 @@
             .team { min-width: 0; flex: 1; padding: 10px 12px; }
             .team-score { font-size: 26px; }
             .taboo-word { font-size: 38px; }
-            .taboo-list li { font-size: 22px; }
+            .taboo-list li { font-size: 26px; }
+            .taboo-hidden-mark { font-size: 38px; }
             .action-btn { font-size: 15px; padding: 13px 22px; }
             .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
             .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
         }
 
         @media (max-width: 480px) {
-            .home-title { font-size: 30px; }
+            .home-title { font-size: 26px; }
+            .home-title-game { font-size: 18px; }
             .home-subtitle { font-size: 16px; }
             .question-counter { font-size: 12px; padding: 6px 12px; top: 10px; left: 10px; }
             .timer-container { top: 10px; right: 10px; }
             .timer-display { font-size: 26px; padding: 6px 12px; min-width: 88px; }
             .content-area { padding: 90px 12px 20px; }
             .taboo-word { font-size: 30px; }
-            .taboo-list li { font-size: 19px; }
+            .taboo-list li { font-size: 22px; }
+            .taboo-hidden-mark { font-size: 30px; }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
 
         @media print {
             .timer-container, .nav-container, .action-row, .scoreboard, .decorative-line { display: none !important; }
             .slide-container { background: #FFFFFF; }
-            .taboo-card { box-shadow: none; border: 2px solid #7A3E9D; page-break-inside: avoid; }
+            .taboo-card { box-shadow: none; border: 2px solid #A32B4A; page-break-inside: avoid; }
         }
     </style>
 </head>
@@ -305,20 +323,22 @@
 
         <!-- HOME -->
         <div id="homePage" class="home-page">
-            <h1 class="home-title" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;"><span class="home-title-icon" style="display:inline-flex;">
+            <h1 class="home-title"><span class="home-title-row"><span class="home-title-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-                      <path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+                      <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                      <path d="M22 10v6" />
+                      <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
                     </svg>
-                </span> Unit 8: Health Taboo</h1>
-            <p class="home-subtitle">Describe the word to your team &mdash; without saying the three words below it. 16 words from this unit.</p>
+                </span> Unit 10: Future Academic Goals</span>
+                <span class="home-title-game">Guess the Word</span></h1>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 16 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
-                    <li>One student describes the big word to their team.</li>
-                    <li>They may <strong>not</strong> say any of the three crossed-out words &mdash; or the word itself.</li>
-                    <li>The team guesses. 60 seconds per turn.</li>
-                    <li>Press <strong>Got it</strong> for a point, or <strong>Skip</strong> to pass.</li>
+                    <li>Read the three clue words on the card.</li>
+                    <li>Say the unit vocabulary word that goes with them.</li>
+                    <li>60 seconds per turn. Teams take turns guessing.</li>
+                    <li>Press <strong>Got it</strong> for a point, or <strong>Skip</strong> to pass. Use <strong>Reveal answer</strong> to check.</li>
                 </ol>
             </div>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
@@ -356,26 +376,27 @@
                     </div>
                 </div>
 
-                <div class="turn-banner" id="turnBanner">Team A is describing</div>
+                <div class="turn-banner" id="turnBanner">Team A is guessing</div>
 
                 <div class="taboo-card concealed" id="tabooCard">
                     <div class="taboo-head">
                         <div class="taboo-topic" id="tabooTopic">TOPIC</div>
                         <div class="taboo-word" id="tabooWord">WORD</div>
+                        <div class="taboo-hidden-mark" aria-hidden="true">???</div>
                     </div>
                     <div class="taboo-body">
-                        <div class="taboo-label">Do not say</div>
+                        <div class="taboo-label">Clues</div>
                         <ul class="taboo-list" id="tabooList"></ul>
                     </div>
                 </div>
 
                 <div class="action-row">
-                    <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal word</button>
+                    <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">The describer looks at the screen &bull; Got it scores a point for the describing team and switches turns</div>
+                <div class="instruction-text">Everyone looks at the clues &bull; Got it scores a point for the guessing team and switches turns</div>
             </div>
 
             <div class="nav-container">
@@ -389,22 +410,22 @@
 
     <script>
         const cards = [
-            { word: "cough", forbidden: ["throat", "sick", "sound"], topic: "Getting Sick" },
-            { word: "infected", forbidden: ["germs", "sick", "bacteria"], topic: "Getting Sick" },
-            { word: "depressed", forbidden: ["sad", "feeling", "down"], topic: "Getting Sick" },
-            { word: "habit", forbidden: ["every day", "usually", "routine"], topic: "Getting Sick" },
-            { word: "quit", forbidden: ["stop", "smoking", "finish"], topic: "Getting Sick" },
-            { word: "recover", forbidden: ["better", "after", "well"], topic: "Getting Better" },
-            { word: "lifestyle", forbidden: ["way", "live", "habits"], topic: "Getting Better" },
-            { word: "adjust", forbidden: ["change", "little", "fix"], topic: "Getting Better" },
-            { word: "appointment", forbidden: ["doctor", "time", "schedule"], topic: "At the Doctor" },
-            { word: "checkup", forbidden: ["doctor", "regular", "exam"], topic: "At the Doctor" },
-            { word: "diagnosis", forbidden: ["doctor", "what", "sick"], topic: "At the Doctor" },
-            { word: "prescription", forbidden: ["doctor", "medicine", "pharmacy"], topic: "At the Doctor" },
-            { word: "fever", forbidden: ["hot", "temperature", "sick"], topic: "At the Doctor" },
-            { word: "contagious", forbidden: ["catch", "spread", "others"], topic: "At the Doctor" },
-            { word: "pharmacy", forbidden: ["medicine", "store", "pick up"], topic: "At the Doctor" },
-            { word: "insurance", forbidden: ["pay", "card", "doctor"], topic: "At the Doctor" }
+            { word: "goal", clues: ["want", "future", "reach"], topic: "Looking Ahead" },
+            { word: "achievement", clues: ["success", "did", "proud"], topic: "Looking Ahead" },
+            { word: "growth", clues: ["grow", "bigger", "better"], topic: "Looking Ahead" },
+            { word: "confident", clues: ["sure", "believe", "yourself"], topic: "Looking Ahead" },
+            { word: "commitment", clues: ["promise", "stay", "serious"], topic: "Looking Ahead" },
+            { word: "appreciate", clues: ["thank", "grateful", "value"], topic: "Looking Ahead" },
+            { word: "enroll", clues: ["sign up", "school", "register"], topic: "Next Steps" },
+            { word: "certificate", clues: ["paper", "finish", "program"], topic: "Next Steps" },
+            { word: "tuition", clues: ["money", "school", "pay"], topic: "Next Steps" },
+            { word: "schedule", clues: ["time", "classes", "plan"], topic: "Next Steps" },
+            { word: "deadline", clues: ["last day", "due", "time"], topic: "Next Steps" },
+            { word: "apply", clues: ["application", "form", "school"], topic: "Next Steps" },
+            { word: "counselor", clues: ["help", "advice", "school"], topic: "Next Steps" },
+            { word: "motivation", clues: ["want", "energy", "push"], topic: "Looking Ahead" },
+            { word: "obstacle", clues: ["problem", "block", "hard"], topic: "Looking Ahead" },
+            { word: "persist", clues: ["keep going", "not stop", "continue"], topic: "Looking Ahead" }
         ];
 
         let order = cards.map(function (_, i) { return i; });
@@ -434,12 +455,12 @@
             document.getElementById('tabooTopic').textContent = c.topic;
             document.getElementById('tabooWord').textContent = c.word;
             document.getElementById('tabooList').innerHTML =
-                c.forbidden.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
+                c.clues.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
             document.getElementById('questionCounter').textContent =
                 'Card ' + (i + 1) + ' of ' + order.length;
-            // Each new card starts concealed so the describer controls the reveal.
+            // Each new card starts with the answer hidden so the class can guess from the clues.
             document.getElementById('tabooCard').classList.add('concealed');
-            document.getElementById('revealBtn').textContent = 'Reveal word';
+            document.getElementById('revealBtn').textContent = 'Reveal answer';
             resetTimer();
         }
 
@@ -447,7 +468,7 @@
             const card = document.getElementById('tabooCard');
             card.classList.toggle('concealed');
             document.getElementById('revealBtn').textContent =
-                card.classList.contains('concealed') ? 'Reveal word' : 'Hide word';
+                card.classList.contains('concealed') ? 'Reveal answer' : 'Hide answer';
         }
 
         function paintScores() {
@@ -456,7 +477,7 @@
             document.getElementById('teamA').classList.toggle('active', turn === 'a');
             document.getElementById('teamB').classList.toggle('active', turn === 'b');
             document.getElementById('turnBanner').textContent =
-                'Team ' + (turn === 'a' ? 'A' : 'B') + ' is describing';
+                'Team ' + (turn === 'a' ? 'A' : 'B') + ' is guessing';
         }
 
         function bump(team, n) {
