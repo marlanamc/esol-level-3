@@ -150,12 +150,6 @@
     text-underline-offset: 3px;
   }
 
-  .result-line {
-    font-size: 13px;
-    color: #6b6b6b;
-    margin-top: 10px;
-  }
-
   /* Unit list */
   .unit {
     border-bottom: 1px solid rgba(34, 32, 29, 0.1);
@@ -253,15 +247,6 @@
     display: block;
   }
 
-  .card-eyebrow {
-    display: block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #6b6b6b;
-    margin-bottom: 5px;
-  }
 
   .card-title {
     display: block;
@@ -337,7 +322,6 @@
       <div role="group" aria-label="Filter by type" class="chip-group" id="chip-group"></div>
       <button type="button" class="toggle-all" id="toggle-all">Collapse all</button>
     </div>
-    <div class="result-line" id="result-line"></div>
   </div>
 
   <div id="unit-list"></div>
@@ -373,6 +357,7 @@
     trophy: { p: ["M6 9H4.5a2.5 2.5 0 0 1 0-5H6", "M18 9h1.5a2.5 2.5 0 0 0 0-5H18", "M4 22h16", "M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22", "M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22", "M18 2H6v7a6 6 0 0 0 12 0V2Z"] },
     folder: { p: ["M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"] },
     slides: { p: ["M12 17v4", "M8 21h8"], r: [[20, 14, 2, 3, 2]] },
+    rank: { p: ["M3 21h18", "M6 21v-5", "M12 21V11", "M18 21V6"] },
     search: { p: ["m21 21-4.34-4.34"], c: [[11, 11, 8]] },
     chevron: { p: ["m6 9 6 6 6-6"] }
   };
@@ -380,53 +365,57 @@
   var UNITS = [
     { id: "u1", label: "Unit 1", title: "Getting to Know You", accent: "#B0432B", icon: "u1", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Personal daily life, school & classroom procedures.", href: "activities/superlatives/unit1-getting-to-know-you-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about school, classmates, and daily routines.", href: "activities/superlatives/unit1-getting-to-know-you-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about school, classmates, and daily routines.", href: "activities/superlatives/unit1-getting-to-know-you-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank classroom habits, first impressions, and study routines — then defend the order.", href: "activities/superlatives/unit1-getting-to-know-you-ranking-game.html" }
     ] },
     { id: "u2", label: "Unit 2", title: "Daily Life in the Community", accent: "#8A5A0B", icon: "u2", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Staying connected to community and family.", href: "activities/superlatives/unit2-daily-life-community-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about community and family life.", href: "activities/superlatives/unit2-daily-life-community-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about community and family life.", href: "activities/superlatives/unit2-daily-life-community-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank errands, transportation, and family routines — then defend the order.", href: "activities/superlatives/unit2-daily-life-community-ranking-game.html" }
     ] },
     { id: "u3", label: "Unit 3", title: "Community Participation", accent: "#4B6B1F", icon: "u3", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Where communities exist and how we interact with them.", href: "activities/superlatives/unit3-community-participation-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about civic life and community involvement.", href: "activities/superlatives/unit3-community-participation-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about civic life and community involvement.", href: "activities/superlatives/unit3-community-participation-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank community services, civic actions, and ways to get involved — then defend the order.", href: "activities/superlatives/unit3-community-participation-ranking-game.html" }
     ] },
     { id: "u4", label: "Unit 4", title: "Consumer Smarts", accent: "#1E6E5C", icon: "u4", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Knowing the best way to spend our money.", href: "activities/superlatives/unit4-consumer-smarts-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about money, shopping, and budgeting.", href: "activities/superlatives/unit4-consumer-smarts-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about money, shopping, and budgeting.", href: "activities/superlatives/unit4-consumer-smarts-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank spending choices, scams, and savings habits — then defend the order.", href: "activities/superlatives/unit4-consumer-smarts-ranking-game.html" }
     ] },
     { id: "u5", label: "Unit 5", title: "Housing", accent: "#17667F", icon: "u5", activities: [
-      { type: "Task Class", title: "Housing Task Class", desc: "All four tasks in sequence, with support that fades as you go. Start here.", href: "activities/housing/task-class.html", icon: "task" },
       { type: "Superlative Game", title: "Superlative Game", desc: "Community housing issues and resources.", href: "activities/housing/housing-game-all-in-one.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about home, landlords, and safety.", href: "activities/housing/housing-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about home, landlords, and safety.", href: "activities/housing/housing-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank apartment features, costs, and repairs \u2014 then defend the order.", href: "activities/housing/housing-ranking-game.html" }
     ] },
     { id: "u6", label: "Unit 6", title: "Workforce Preparation", accent: "#2A5599", icon: "u6", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Communication skills and career opportunities.", href: "activities/superlatives/unit6-workforce-preparation-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about job searching and workplace communication.", href: "activities/superlatives/unit6-workforce-preparation-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about job searching and workplace communication.", href: "activities/superlatives/unit6-workforce-preparation-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank job search steps, interview skills, and workplace habits — then defend the order.", href: "activities/superlatives/unit6-workforce-preparation-ranking-game.html" }
     ] },
     { id: "u7", label: "Unit 7", title: "Career Awareness", accent: "#4A46A0", icon: "u7", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Understanding rights and self-advocacy at work.", href: "activities/superlatives/unit7-career-awareness-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about workplace rights and self-advocacy.", href: "activities/superlatives/unit7-career-awareness-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about workplace rights and self-advocacy.", href: "activities/superlatives/unit7-career-awareness-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank workplace rights, career moves, and self-advocacy — then defend the order.", href: "activities/superlatives/unit7-career-awareness-ranking-game.html" }
     ] },
     { id: "u8", label: "Unit 8", title: "Health", accent: "#7A3E9D", icon: "u8", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Advocating for yourself in health situations.", href: "activities/superlatives/health-game-all-in-one.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about health, doctors, and self-advocacy.", href: "activities/superlatives/health-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about health, doctors, and self-advocacy.", href: "activities/superlatives/health-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank symptoms, doctor visits, and self-advocacy — then defend the order.", href: "activities/superlatives/health-ranking-game.html" }
     ] },
     { id: "u9", label: "Unit 9", title: "Holistic Wellness", accent: "#9C3272", icon: "u9", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "How health impacts home, work, and community.", href: "activities/superlatives/unit9-holistic-wellness-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about whole-life wellness and self-care.", href: "activities/superlatives/unit9-holistic-wellness-discussion-game.html" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about whole-life wellness and self-care.", href: "activities/superlatives/unit9-holistic-wellness-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank stress relievers, life balance, and healthy habits — then defend the order.", href: "activities/superlatives/unit9-holistic-wellness-ranking-game.html" }
     ] },
     { id: "u10", label: "Unit 10", title: "Future Academic Goals", accent: "#A32B4A", icon: "u10", activities: [
       { type: "Superlative Game", title: "Superlative Game", desc: "Becoming a lifelong learner.", href: "activities/superlatives/future-academic-goals-game.html" },
-      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about lifelong learning and future goals.", href: "activities/superlatives/future-academic-goals-discussion-game.html" }
-    ] },
-    { id: "unsorted", label: "No unit yet", title: "Not assigned to a unit", accent: "#5C5751", icon: "folder", activities: [
-      { type: "Slideshow", title: "Where I'm From, Where I Live", desc: "Full 2.5-hour class slideshow — introduce yourself, describe your daily route, introduce someone else, tell your story.", href: "activities/where-im-from/full-class-slides.html", icon: "slides" },
-      { type: "Task Class", title: "Community Life Task Class", desc: "Get around by T, use a community resource, report a neighborhood issue, take part in civic life.", href: "activities/community-life/task-class.html", icon: "task" },
-      { type: "Slideshow", title: "Community Life — Full Class", desc: "Board-projected version for live teaching: warm-up, all four tasks, a break, and discussion prompts.", href: "activities/community-life/full-class-slides.html", icon: "slides" }
+      { type: "Discussion Game", title: "Discussion Game", desc: "Open-ended speaking questions about lifelong learning and future goals.", href: "activities/superlatives/future-academic-goals-discussion-game.html" },
+      { type: "Ranking Game", title: "Ranking Game", desc: "Rank learning goals, study plans, and next steps — then defend the order.", href: "activities/superlatives/future-academic-goals-ranking-game.html" }
     ] }
   ];
 
-  var TYPES = ["Task Class", "Superlative Game", "Discussion Game", "Slideshow"];
+  var TYPES = ["Superlative Game", "Discussion Game", "Ranking Game"];
 
   var initialCollapsed = {};
   UNITS.forEach(function (u) { initialCollapsed[u.id] = true; });
@@ -445,6 +434,7 @@
     if (act.icon) return svgMarkup(ICONS[act.icon]);
     if (act.type === "Discussion Game") return svgMarkup(ICONS.disc);
     if (act.type === "Superlative Game") return svgMarkup(ICONS.trophy);
+    if (act.type === "Ranking Game") return svgMarkup(ICONS.rank);
     if (act.type === "Task Class") return svgMarkup(ICONS.task);
     if (act.type === "Slideshow") return svgMarkup(ICONS.slides);
     return svgMarkup(ICONS[unit.icon]);
@@ -468,7 +458,6 @@
 
   var chipGroup = document.getElementById("chip-group");
   var unitList = document.getElementById("unit-list");
-  var resultLine = document.getElementById("result-line");
   var emptyState = document.getElementById("empty-state");
   var toggleAllBtn = document.getElementById("toggle-all");
   var searchInput = document.getElementById("search-input");
@@ -495,7 +484,6 @@
     chipGroup.innerHTML = chipsHtml;
 
     // Units
-    var shown = 0;
     var unitsHtml = "";
     var anyUnits = false;
 
@@ -503,18 +491,14 @@
       var acts = u.activities.filter(function (a) { return matches(u, a); });
       if (!acts.length) return;
       anyUnits = true;
-      shown += acts.length;
       var open = searching ? true : !state.collapsed[u.id];
 
       var cardsHtml = "";
       if (open) {
         acts.forEach(function (a) {
-          var eyebrowHtml = searching
-            ? '<span class="card-eyebrow">' + escapeHtml(u.label + " · " + u.title) + '</span>'
-            : "";
           cardsHtml += '<a class="card" href="' + escapeHtml(a.href) + '" style="border-left-color:' + u.accent + '">' +
             '<span class="card-icon" style="color:' + u.accent + '">' + iconFor(u, a) + '</span>' +
-            '<span class="card-text">' + eyebrowHtml +
+            '<span class="card-text">' +
             '<span class="card-title">' + escapeHtml(a.title) + '</span>' +
             '<span class="card-desc">' + escapeHtml(a.desc) + '</span>' +
             '</span></a>';
@@ -535,10 +519,6 @@
 
     unitList.innerHTML = unitsHtml;
     emptyState.hidden = anyUnits;
-
-    resultLine.textContent = searching
-      ? shown + " of " + counts.All + " activities match"
-      : counts.All + " activities · 10 units";
 
     toggleAllBtn.textContent = state.allCollapsed ? "Expand all" : "Collapse all";
 
