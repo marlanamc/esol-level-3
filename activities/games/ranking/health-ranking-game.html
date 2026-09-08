@@ -503,6 +503,38 @@
             gap: 12px;
         }
 
+        /* Collapsed: a quiet button-shaped prompt. Expanded: the full box. */
+        .reveal-box.is-collapsed {
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: transparent;
+            border-style: solid;
+            border-color: #7A3E9D55;
+        }
+
+        .reveal-box.is-collapsed .reveal-label,
+        .reveal-box.is-collapsed .reveal-text { display: none; }
+
+        .reveal-toggle {
+            display: none;
+            width: 100%;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            color: #7A3E9D;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 18px;
+            cursor: pointer;
+            transition: background .2s ease;
+        }
+
+        .reveal-box.is-collapsed .reveal-toggle { display: block; }
+        .reveal-toggle:hover { background: #7A3E9D14; }
+
         .reveal-label {
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 13px;
@@ -636,7 +668,9 @@
                         <ul id="framesList"></ul>
                     </div>
 
-                    <div class="reveal-box" id="revealBox">
+                    <div class="reveal-box is-collapsed" id="revealBox">
+                        <button type="button" class="reveal-toggle" id="revealToggle"
+                                onclick="showCompare()">Compare answers &#9662;</button>
                         <span class="reveal-label">Compare</span>
                         <span class="reveal-text" id="revealText"></span>
                     </div>
@@ -808,7 +842,7 @@
                 frames.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
 
             document.getElementById('instructionText').textContent = r.type === 'rank'
-                ? 'Drag the cards or use the arrows to reorder • Then compare orders with a partner and explain one choice'
+                ? 'Drag the cards or use the arrows to reorder • When everyone has an order, tap Compare answers'
                 : 'Click a side to choose • Click again to count more votes • Ask three students to explain why';
 
             document.getElementById('shuffleBtn').style.display = r.type === 'rank' ? '' : 'none';
@@ -817,12 +851,19 @@
             if (r.type === 'rank' && r.reveal) {
                 document.getElementById('revealText').textContent = r.reveal;
                 revealBox.style.display = '';
+                // Start collapsed each round so the prompt cannot give away
+                // the interesting answer before students commit to an order.
+                revealBox.classList.add('is-collapsed');
             } else {
                 revealBox.style.display = 'none';
             }
 
             if (r.type === 'rank') renderRank(); else renderWyr();
             resetTimer();
+        }
+
+        function showCompare() {
+            document.getElementById('revealBox').classList.remove('is-collapsed');
         }
 
         /* ---------- RANKING ROUND ---------- */
