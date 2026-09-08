@@ -135,7 +135,7 @@
 
         .content-area {
             display: flex; flex-direction: column; align-items: center;
-            gap: 24px; z-index: 10; padding: 120px 24px 24px;
+            gap: 24px; z-index: 10; padding: 120px 24px 48px;
             width: 100%; max-width: 1100px;
         }
 
@@ -253,12 +253,50 @@
         .taboo-card.concealed .taboo-word { display: none; }
         .taboo-card.concealed .taboo-hidden-mark { display: block; }
 
-        .action-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+        /* Two tiers: assist row (small) above the play row (large) */
+        .assist-row {
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+        }
+
+        .assist-btn {
+            font-family: 'Karla', sans-serif;
+            font-size: 14px; font-weight: 700;
+            padding: 9px 18px;
+            border: 1.5px solid #8A5A0B66;
+            border-radius: 999px;
+            background: transparent; color: #8A5A0B;
+            cursor: pointer; transition: all .2s ease;
+        }
+
+        .assist-btn:hover { background: #8A5A0B14; border-color: #8A5A0B; }
+
+        .action-row {
+            display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
+        }
+
+        /* Setup controls, quiet, beside the card counter */
+        .setup-row {
+            position: absolute; top: 96px; left: 40px;
+            display: flex; gap: 8px; z-index: 20;
+        }
+
+        .setup-btn {
+            font-family: 'Karla', sans-serif;
+            font-size: 13px; font-weight: 600;
+            padding: 7px 12px;
+            border: none; border-radius: 6px;
+            background: #FFFFFF; color: #555555;
+            cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,.10);
+            transition: all .2s ease;
+        }
+
+        .setup-btn:hover { color: #1a1a1a; box-shadow: 0 3px 10px rgba(0,0,0,.16); }
+
 
         .action-btn {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 17px; font-weight: 700;
-            padding: 15px 34px; border: none; border-radius: 6px;
+            font-size: 20px; font-weight: 700;
+            padding: 18px 52px; border: none; border-radius: 8px;
             cursor: pointer; color: #FFFFFF;
             box-shadow: 0 4px 12px rgba(0,0,0,.15); transition: all .25s ease;
         }
@@ -297,6 +335,29 @@
         .line-1 { width: 100%; height: 2px; top: 100px; }
         .line-2 { width: 100%; height: 2px; bottom: 100px; }
 
+        /* SHORT VIEWPORTS: keep Got it / Skip on screen without scrolling */
+        @media (max-height: 1000px) {
+            .content-area { padding-top: 108px; padding-bottom: 28px; gap: 16px; }
+            .question-counter { top: 18px; left: 20px; font-size: 15px; padding: 8px 16px; }
+            .setup-row { top: 64px; left: 20px; }
+            .timer-container { top: 16px; right: 20px; gap: 6px; }
+            .timer-display { font-size: 30px; padding: 6px 14px; min-width: 104px; }
+            .timer-btn { font-size: 12px; padding: 5px 11px; }
+            .scoreboard { gap: 12px; }
+            .team { padding: 8px 16px; }
+            .team-score { font-size: 26px; }
+            .turn-banner { font-size: 15px; }
+            .taboo-head { padding: 18px 24px 16px; }
+            .taboo-word, .taboo-hidden-mark { font-size: 42px; }
+            .taboo-body { padding: 14px 24px 18px; }
+            .taboo-list { gap: 7px; }
+            .taboo-list li { font-size: 27px; padding: 7px 14px; }
+            .taboo-label { margin-bottom: 8px; }
+            .action-btn { font-size: 18px; padding: 14px 44px; }
+            .assist-btn { font-size: 13px; padding: 7px 15px; }
+            .instruction-text { font-size: 14px; }
+        }
+
         @media (max-width: 768px) {
             .slide-container { overflow-y: auto; }
             .home-title { font-size: 32px; padding: 0 20px; }
@@ -316,9 +377,9 @@
             .taboo-word { font-size: 38px; }
             .taboo-list li { font-size: 26px; }
             .taboo-hidden-mark { font-size: 38px; }
-            .action-btn { font-size: 15px; padding: 13px 22px; }
-            .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
-            .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
+            .action-btn { font-size: 17px; padding: 15px 30px; }
+            .setup-row { top: 62px; left: 20px; gap: 6px; }
+            .setup-btn { font-size: 12px; padding: 6px 10px; }
         }
 
         @media (max-width: 480px) {
@@ -332,11 +393,12 @@
             .taboo-word { font-size: 30px; }
             .taboo-list li { font-size: 22px; }
             .taboo-hidden-mark { font-size: 30px; }
-            .nav-btn { font-size: 13px; padding: 10px 16px; }
+            .action-btn { font-size: 15px; padding: 13px 22px; }
+            .setup-row { top: 48px; left: 10px; }
         }
 
         @media print {
-            .timer-container, .nav-container, .action-row, .scoreboard, .decorative-line { display: none !important; }
+            .timer-container, .action-row, .assist-row, .setup-row, .scoreboard, .decorative-line { display: none !important; }
             .slide-container { background: #FFFFFF; }
             .taboo-card { box-shadow: none; border: 2px solid #8A5A0B; page-break-inside: avoid; }
         }
@@ -374,6 +436,12 @@
 
         <!-- GAME -->
         <div id="gamePage" class="game-page hidden">
+            <div class="setup-row">
+                <button class="setup-btn" onclick="previousCard()" title="Previous card">&larr; Back</button>
+                <button class="setup-btn" onclick="shuffleDeck()" title="Shuffle the deck">Shuffle</button>
+                <button class="setup-btn" onclick="goHome()" title="Back to the start screen">Home</button>
+            </div>
+
             <div class="question-counter" id="questionCounter">Card 1 of 22</div>
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:00</div>
@@ -418,22 +486,19 @@
                     </div>
                 </div>
 
+                <div class="assist-row">
+                    <button class="assist-btn" id="hintBtn" onclick="toggleHint()">Need a hint?</button>
+                    <button class="assist-btn" id="revealBtn" onclick="revealCard()">Reveal answer</button>
+                </div>
+
                 <div class="action-row">
-                    <button class="action-btn hint" id="hintBtn" onclick="toggleHint()">Need a hint?</button>
-                    <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">Everyone looks at the clues &bull; Stuck? Use Need a hint? for the first letter &bull; Got it scores a point and switches turns</div>
+                <div class="instruction-text">Guess from the clues &bull; Got it scores a point and switches turns</div>
             </div>
 
-            <div class="nav-container">
-                <button class="nav-btn back" onclick="previousCard()">&larr; Back</button>
-                <button class="nav-btn" onclick="goHome()">&#127968; Home</button>
-                <button class="nav-btn" onclick="shuffleDeck()">&#128256; Shuffle</button>
-                <button class="nav-btn" onclick="nextCard()">Next &rarr;</button>
-            </div>
         </div>
     </div>
 
