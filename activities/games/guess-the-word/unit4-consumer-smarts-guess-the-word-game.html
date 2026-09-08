@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 4: Consumer Smarts Guess the Word</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -315,7 +315,7 @@
 
         .nav-container {
             position: fixed; bottom: 0; left: 0; right: 0;
-            display: flex; justify-content: center; gap: 20px; padding: 20px; z-index: 20;
+            display: flex; justify-content: center; gap: 20px; padding: 20px; padding-bottom: max(20px, env(safe-area-inset-bottom)); z-index: 20;
             background: linear-gradient(to top, #EAF6F3 80%, transparent);
         }
 

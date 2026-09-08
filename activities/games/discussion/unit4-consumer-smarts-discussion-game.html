@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 4: Consumer Smarts Discussion Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -205,6 +205,7 @@
             justify-content: center;
             gap: 20px;
             padding: 20px;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
             z-index: 20;
             background: linear-gradient(to top, #EAF6F3 80%, transparent);
         }
@@ -519,7 +520,7 @@
             .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 14px; }
 
             .instruction-text { font-size: 14px; padding: 0 16px; }
-            .nav-container { padding: 16px; gap: 12px; flex-wrap: wrap; }
+            .nav-container { padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 12px; flex-wrap: wrap; }
             .nav-btn { font-size: 14px; padding: 12px 20px; flex: 1; min-width: 100px; }
         }
 
@@ -543,7 +544,7 @@
             .topic-flip-card.flipped .topic-flip-card-back ul { font-size: 20px; }
             .topic-flip-card.flipped .topic-flip-card-back li { margin-bottom: 12px; }
             .instruction-text { font-size: 13px; }
-            .nav-container { padding: 12px; }
+            .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
     </style>
