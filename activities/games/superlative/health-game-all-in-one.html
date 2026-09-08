@@ -344,16 +344,19 @@
         /* ADJECTIVE CARDS */
         .adjectives-container {
             display: flex;
-            gap: 40px;
+            gap: 24px;
             justify-content: center;
+            width: 100%;
+            max-width: 1200px;
         }
 
         .adjective-flip-card {
             background-color: transparent;
-            width: 200px;
-            height: 150px;
+            width: 370px;
+            height: 240px;
             perspective: 1000px;
             cursor: pointer;
+            flex: 1;
         }
 
         .adjective-flip-card-inner {
@@ -394,9 +397,11 @@
 
         .adjective-flip-card p {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 700;
-            padding: 20px;
+            padding: 24px;
+            line-height: 1.25;
+            overflow-wrap: break-word;
         }
 
         .adjective-flip-card-front::after {
@@ -508,13 +513,15 @@
 
             .adjective-flip-card {
                 width: 90%;
-                max-width: 300px;
-                height: 120px;
+                max-width: 420px;
+                height: 190px;
+                flex: none;
             }
 
             .adjective-flip-card p {
-                font-size: 18px;
-                padding: 15px;
+                font-size: 22px;
+                padding: 16px;
+                line-height: 1.25;
             }
 
             .instruction-text {
@@ -613,12 +620,13 @@
 
             .adjective-flip-card {
                 width: 95%;
-                height: 110px;
+                height: 180px;
             }
 
             .adjective-flip-card p {
-                font-size: 16px;
+                font-size: 19px;
                 padding: 12px;
+                line-height: 1.2;
             }
 
             .instruction-text {
@@ -749,61 +757,61 @@
                 title: "Body Parts",
                 adj1: "Most important",
                 adj2: "Hardest to pronounce",
-                adj3: "First to show signs of aging"
+                adj3: "Most likely to be sore after a long day"
             },
             {
                 title: "Internal Organs",
                 adj1: "Most essential for life",
-                adj2: "Most likely to cause problems",
-                adj3: "Hardest to live without"
+                adj2: "Hardest to live without",
+                adj3: "Most likely to be talked about at the doctor"
             },
             {
                 title: "Healthy Habits",
                 adj1: "Easiest to start",
-                adj2: "Most important for longevity",
-                adj3: "Hardest to maintain"
+                adj2: "Hardest to maintain",
+                adj3: "Most likely to be easier with a friend"
             },
             {
                 title: "Nutritious Foods",
                 adj1: "Best for energy",
-                adj2: "Most important for children",
-                adj3: "Hardest to find fresh"
+                adj2: "Hardest to find fresh",
+                adj3: "Most likely to go bad before you eat it"
             },
             {
                 title: "Common Symptoms",
                 adj1: "Most worrying",
-                adj2: "Easiest to treat",
-                adj3: "Most commonly ignored"
+                adj2: "Most commonly ignored",
+                adj3: "Hardest to explain to a doctor"
             },
             {
                 title: "Medical Professionals",
                 adj1: "Most important for prevention",
                 adj2: "Most specialized",
-                adj3: "Best to see annually"
+                adj3: "Most likely to have a three-month wait"
             },
             {
                 title: "Exercise Types",
                 adj1: "Best for heart health",
-                adj2: "Most enjoyable",
-                adj3: "Easiest for beginners"
+                adj2: "Easiest for beginners",
+                adj3: "Most likely to make you sore the next day"
             },
             {
                 title: "Mental Health",
                 adj1: "Most important for wellbeing",
-                adj2: "Best stress reliever",
-                adj3: "Hardest to talk about"
+                adj2: "Hardest to talk about",
+                adj3: "Most helpful to hear from a friend"
             },
             {
                 title: "First Aid Supplies",
                 adj1: "Most essential",
                 adj2: "Most expensive",
-                adj3: "Most likely to be missing"
+                adj3: "Most likely to be missing when you need it"
             },
             {
                 title: "Preventive Care",
                 adj1: "Most effective",
                 adj2: "Most overlooked",
-                adj3: "Best investment in health"
+                adj3: "Easiest to keep postponing"
             }
         ];
 
@@ -826,20 +834,41 @@
             currentCategoryIndex = index;
             const category = categories[index];
 
-            // Reset flip cards FIRST before changing content
-            document.querySelectorAll('.flip-card, .adjective-flip-card').forEach(card => {
-                card.classList.remove('flipped');
-            });
+            const cards = document.querySelectorAll('.flip-card, .adjective-flip-card');
+            const anyFlipped = Array.from(cards).some(card => card.classList.contains('flipped'));
 
-            // Then update the content
-            document.getElementById('categoryTitle').textContent = category.title;
-            document.getElementById('adj1').textContent = category.adj1;
-            document.getElementById('adj2').textContent = category.adj2;
-            document.getElementById('adj3').textContent = category.adj3;
+            const updateContent = () => {
+                document.getElementById('categoryTitle').textContent = category.title;
+                setAdjectiveText('adj1', category.adj1);
+                setAdjectiveText('adj2', category.adj2);
+                setAdjectiveText('adj3', category.adj3);
+            };
+
+            if (anyFlipped) {
+                // Wait for the flip-back animation to finish before swapping the answer text
+                cards.forEach(card => card.classList.remove('flipped'));
+                setTimeout(updateContent, 600);
+            } else {
+                cards.forEach(card => card.classList.remove('flipped'));
+                updateContent();
+            }
+
             document.getElementById('questionCounter').textContent = `Question ${index + 1} of ${categories.length}`;
 
             // Reset timer
             resetTimer();
+        }
+
+        function setAdjectiveText(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            if (text.length > 60) {
+                el.style.fontSize = '25px';
+            } else if (text.length > 45) {
+                el.style.fontSize = '28px';
+            } else {
+                el.style.fontSize = '';
+            }
         }
 
         function toggleFlip(element) {
