@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Talking to Health Providers",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Describing Symptoms",
-                                                                        "questions": [
-                                                                                        "Describe symptoms you might explain to a doctor.",
-                                                                                        "How would you explain how long you have felt sick?",
-                                                                                        "What words describe different kinds of pain?",
-                                                                                        "Why is it important to describe symptoms clearly?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Scheduling a Doctor's Appointment",
-                                                                        "questions": [
-                                                                                        "Describe how you would schedule a doctor's appointment.",
-                                                                                        "What information does the office usually ask for?",
-                                                                                        "What would you say if you need to reschedule?",
-                                                                                        "Why is it helpful to write down your appointment time?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Asking Questions During a Visit",
-                                                                        "questions": [
-                                                                                        "What question would you ask about a new medicine?",
-                                                                                        "How would you ask the doctor to explain something again?",
-                                                                                        "Describe a time you did not understand medical advice.",
-                                                                                        "Why is it okay to ask a doctor many questions?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Medical Instructions",
-                                                                        "questions": [
-                                                                                        "Describe instructions a doctor might give after a visit.",
-                                                                                        "How do you make sure you understand instructions correctly?",
-                                                                                        "What would you do if you forgot part of the instructions?",
-                                                                                        "Why is it important to follow medical instructions carefully?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Requesting an Interpreter",
-                                                                        "questions": [
-                                                                                        "Why might someone need an interpreter at a medical visit?",
-                                                                                        "How would you ask for an interpreter at a clinic?",
-                                                                                        "Describe a situation where an interpreter would help.",
-                                                                                        "Why do patients have a right to request language help?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Talking About Family Medical History",
-                                                                        "questions": [
-                                                                                        "What questions might a doctor ask about your family's health?",
-                                                                                        "How would you explain a health condition in your family?",
-                                                                                        "Why is family medical history important for doctors to know?",
-                                                                                        "What would you say if you did not know the answer?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Understanding Health Insurance and Costs",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Choosing Health Insurance",
-                                                                        "questions": [
-                                                                                        "What do you know about your health insurance plan?",
-                                                                                        "What questions would you ask when choosing a plan?",
-                                                                                        "Describe what a copay or deductible means to you.",
-                                                                                        "Why is understanding insurance important?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Finding an In-Network Doctor",
-                                                                        "questions": [
-                                                                                        "What does it mean when a doctor is in-network?",
-                                                                                        "How would you find an in-network doctor?",
-                                                                                        "Describe a time you needed to check if a provider was covered.",
-                                                                                        "Why does this affect the cost of a visit?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reading a Medical Bill",
-                                                                        "questions": [
-                                                                                        "Describe a medical bill you have received.",
-                                                                                        "What information is confusing on medical bills?",
-                                                                                        "What would you do if you thought a bill was wrong?",
-                                                                                        "Who could help you understand a medical bill?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Applying for Health Coverage",
-                                                                        "questions": [
-                                                                                        "Describe the process of applying for health insurance.",
-                                                                                        "What documents are usually needed?",
-                                                                                        "Where can someone get help applying for coverage?",
-                                                                                        "Why is having health insurance important?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Prescription Costs",
-                                                                        "questions": [
-                                                                                        "How do you find out the cost of a prescription?",
-                                                                                        "Describe a time a medicine cost more than you expected.",
-                                                                                        "What options exist if you cannot afford a medicine?",
-                                                                                        "Why should you ask your pharmacist questions?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Emergency Room versus Urgent Care",
-                                                                        "questions": [
-                                                                                        "What is the difference between the emergency room and urgent care?",
-                                                                                        "Describe a situation for each type of visit.",
-                                                                                        "How does cost differ between these two options?",
-                                                                                        "How would you decide where to go for a health problem?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Managing Personal Health",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Taking Medication Correctly",
-                                                                        "questions": [
-                                                                                        "Describe how you remember to take your medication.",
-                                                                                        "What would you do if you missed a dose?",
-                                                                                        "How do you read instructions on a medicine label?",
-                                                                                        "Why is it dangerous to take more medicine than prescribed?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Preventive Health Checkups",
-                                                                        "questions": [
-                                                                                        "What checkups do you get regularly, such as dental or vision?",
-                                                                                        "How often should someone see a doctor for a checkup?",
-                                                                                        "Describe a checkup you have scheduled or attended recently.",
-                                                                                        "Why is preventive care important for staying healthy?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Managing a Chronic Condition",
-                                                                        "questions": [
-                                                                                        "Describe a chronic health condition you know about, such as diabetes.",
-                                                                                        "What daily habits help manage this condition?",
-                                                                                        "How can a person track their symptoms over time?",
-                                                                                        "Why is it important to see a doctor regularly for this condition?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Mental Health Awareness",
-                                                                        "questions": [
-                                                                                        "What does mental health mean to you?",
-                                                                                        "How can stress affect a person's daily life?",
-                                                                                        "Describe a healthy way to cope with stress.",
-                                                                                        "Who could someone talk to if they feel overwhelmed?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Nutrition and Healthy Eating",
-                                                                        "questions": [
-                                                                                        "Describe your typical daily meals.",
-                                                                                        "What healthy foods do you try to eat regularly?",
-                                                                                        "What makes it difficult to eat healthy sometimes?",
-                                                                                        "What small change could improve your diet?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Sleep and Rest",
-                                                                        "questions": [
-                                                                                        "How many hours do you usually sleep each night?",
-                                                                                        "What affects the quality of your sleep?",
-                                                                                        "Describe a habit that helps you sleep better.",
-                                                                                        "Why is enough sleep important for your health?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Advocating for Yourself in Health Situations",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Disagreeing with a Diagnosis",
-                                                                        "questions": [
-                                                                                        "What would you do if you disagreed with a doctor's diagnosis?",
-                                                                                        "How would you ask for a second opinion?",
-                                                                                        "Describe how you would explain your concerns to a doctor.",
-                                                                                        "Why is it okay to ask for more information?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Refusing a Treatment",
-                                                                        "questions": [
-                                                                                        "What would you say if you did not want a certain treatment?",
-                                                                                        "How would you explain your reasons to a doctor?",
-                                                                                        "What questions would you ask about other options?",
-                                                                                        "Why do patients have the right to refuse treatment?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Getting a Second Opinion",
-                                                                        "questions": [
-                                                                                        "Describe a situation where a second opinion would help.",
-                                                                                        "How would you ask your doctor about getting one?",
-                                                                                        "What would you say to a new doctor about your situation?",
-                                                                                        "Why is a second opinion sometimes useful?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Bringing Someone to an Appointment",
-                                                                        "questions": [
-                                                                                        "Why might someone bring a friend or family member to an appointment?",
-                                                                                        "How can this person help during the visit?",
-                                                                                        "Describe a time you helped someone at a medical appointment.",
-                                                                                        "What would you ask this person to help you remember?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reporting a Problem at a Clinic",
-                                                                        "questions": [
-                                                                                        "Describe a problem you might report about a clinic visit.",
-                                                                                        "Who would you talk to about this problem?",
-                                                                                        "What information would you include in your complaint?",
-                                                                                        "Why is it important to speak up about health care concerns?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Knowing Your Patient Rights",
-                                                                        "questions": [
-                                                                                        "What rights do patients have during a medical visit?",
-                                                                                        "Where can you learn more about your patient rights?",
-                                                                                        "Describe a right that is important to you.",
-                                                                                        "How does knowing your rights help you get better care?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                        const categories = [
+            {
+                "title": "Talking to Health Providers",
+                "topics": [
+                    {
+                        "name": "Describing Symptoms",
+                        "questions": [
+                            "Describe symptoms you might explain to a doctor.",
+                            "How would you explain how long you have felt sick?",
+                            "What words describe different kinds of pain?",
+                            "What is the hardest symptom to put into words?"
+                        ]
+                    },
+                    {
+                        "name": "Scheduling a Doctor's Appointment",
+                        "questions": [
+                            "Describe how you would schedule a doctor's appointment.",
+                            "What information do they always ask for on the phone?",
+                            "What would you say if you need to reschedule?",
+                            "Would you rather book by phone or online? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Asking Questions During a Visit",
+                        "questions": [
+                            "What question would you ask about a new medicine?",
+                            "How would you ask the doctor to explain something again?",
+                            "Describe a time you did not understand medical advice.",
+                            "What question do you wish doctors would answer better?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Medical Instructions",
+                        "questions": [
+                            "Describe instructions a doctor might give after a visit.",
+                            "How do you make sure you understand instructions correctly?",
+                            "What would you do if you forgot part of the instructions?",
+                            "Have you ever left an appointment and forgotten everything?"
+                        ]
+                    },
+                    {
+                        "name": "Requesting an Interpreter",
+                        "questions": [
+                            "Why might someone need an interpreter at a medical visit?",
+                            "How would you ask for an interpreter at a clinic?",
+                            "Describe a situation where an interpreter would help.",
+                            "What makes it easier to ask for language help?"
+                        ]
+                    },
+                    {
+                        "name": "Talking About Family Medical History",
+                        "questions": [
+                            "What questions might a doctor ask about your family's health?",
+                            "How would you explain a health condition in your family?",
+                            "How much do you know about your family's health history?",
+                            "Who in your family knows all the family health stories?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Understanding Health Insurance and Costs",
+                "topics": [
+                    {
+                        "name": "Choosing Health Insurance",
+                        "questions": [
+                            "What do you know about your health insurance plan?",
+                            "What questions would you ask when choosing a plan?",
+                            "Describe what a copay or deductible means to you.",
+                            "What is the most confusing word on an insurance form?"
+                        ]
+                    },
+                    {
+                        "name": "Finding an In-Network Doctor",
+                        "questions": [
+                            "What does it mean when a doctor is in-network?",
+                            "How would you find an in-network doctor?",
+                            "Describe a time you needed to check if a provider was covered.",
+                            "How do you decide to trust a new doctor?"
+                        ]
+                    },
+                    {
+                        "name": "Reading a Medical Bill",
+                        "questions": [
+                            "Describe a medical bill you have received.",
+                            "What information is confusing on medical bills?",
+                            "What would you do if you thought a bill was wrong?",
+                            "What is the most surprising bill you have ever received?"
+                        ]
+                    },
+                    {
+                        "name": "Applying for Health Coverage",
+                        "questions": [
+                            "Describe the process of applying for health insurance.",
+                            "What documents are usually needed?",
+                            "Where can someone get help applying for coverage?",
+                            "Which part of the paperwork would you gladly skip?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Prescription Costs",
+                        "questions": [
+                            "How do you find out the cost of a prescription?",
+                            "Describe a time a medicine cost more than you expected.",
+                            "What options exist if you cannot afford a medicine?",
+                            "Do you ask the pharmacist questions, or just take the bag?"
+                        ]
+                    },
+                    {
+                        "name": "Emergency Room versus Urgent Care",
+                        "questions": [
+                            "What is the difference between the emergency room and urgent care?",
+                            "Describe a situation for each type of visit.",
+                            "How does cost differ between these two options?",
+                            "Someone has a bad cut at 9pm. Where should they go? Discuss."
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Managing Personal Health",
+                "topics": [
+                    {
+                        "name": "Taking Medication Correctly",
+                        "questions": [
+                            "Describe how you remember to take your medication.",
+                            "What would you do if you missed a dose?",
+                            "How do you read instructions on a medicine label?",
+                            "What is your trick for remembering something every day?"
+                        ]
+                    },
+                    {
+                        "name": "Preventive Health Checkups",
+                        "questions": [
+                            "What checkups do you get regularly, such as dental or vision?",
+                            "How often should someone see a doctor for a checkup?",
+                            "Describe a checkup you have scheduled or attended recently.",
+                            "Which checkup do people put off the longest?"
+                        ]
+                    },
+                    {
+                        "name": "Managing a Chronic Condition",
+                        "questions": [
+                            "Describe a chronic health condition you know about, such as diabetes.",
+                            "What daily habits help manage this condition?",
+                            "How can a person track their symptoms over time?",
+                            "What makes a daily health routine easier to keep?"
+                        ]
+                    },
+                    {
+                        "name": "Mental Health Awareness",
+                        "questions": [
+                            "What does mental health mean to you?",
+                            "How can stress affect a person's daily life?",
+                            "Describe a healthy way to cope with stress.",
+                            "What helps most when someone is having a hard week?"
+                        ]
+                    },
+                    {
+                        "name": "Nutrition and Healthy Eating",
+                        "questions": [
+                            "Describe your typical daily meals.",
+                            "What healthy foods do you try to eat regularly?",
+                            "What makes it difficult to eat healthy sometimes?",
+                            "What food could you never give up?"
+                        ]
+                    },
+                    {
+                        "name": "Sleep and Rest",
+                        "questions": [
+                            "How many hours do you usually sleep each night?",
+                            "What affects the quality of your sleep?",
+                            "Describe a habit that helps you sleep better.",
+                            "What is the latest you have stayed up for something worth it?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Advocating for Yourself in Health Situations",
+                "topics": [
+                    {
+                        "name": "Disagreeing with a Diagnosis",
+                        "questions": [
+                            "What would you do if you disagreed with a doctor's diagnosis?",
+                            "How would you ask for a second opinion?",
+                            "Describe how you would explain your concerns to a doctor.",
+                            "Is it hard for you to disagree with a doctor? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Refusing a Treatment",
+                        "questions": [
+                            "What would you say if you did not want a certain treatment?",
+                            "How would you explain your reasons to a doctor?",
+                            "What questions would you ask about other options?",
+                            "Why do patients have the right to refuse treatment?"
+                        ]
+                    },
+                    {
+                        "name": "Getting a Second Opinion",
+                        "questions": [
+                            "Describe a situation where a second opinion would help.",
+                            "How would you ask your doctor about getting one?",
+                            "What would you say to a new doctor about your situation?",
+                            "Would you tell your first doctor you are getting another opinion?"
+                        ]
+                    },
+                    {
+                        "name": "Bringing Someone to an Appointment",
+                        "questions": [
+                            "Why might someone bring a friend or family member to an appointment?",
+                            "How can this person help during the visit?",
+                            "Describe a time you helped someone at a medical appointment.",
+                            "Who would you bring to an important appointment, and why them?"
+                        ]
+                    },
+                    {
+                        "name": "Reporting a Problem at a Clinic",
+                        "questions": [
+                            "Describe a problem you might report about a clinic visit.",
+                            "Who would you talk to about this problem?",
+                            "What information would you include in your complaint?",
+                            "Have you ever spoken up when something felt wrong?"
+                        ]
+                    },
+                    {
+                        "name": "Knowing Your Patient Rights",
+                        "questions": [
+                            "What rights do patients have during a medical visit?",
+                            "Where can you learn more about your patient rights?",
+                            "Which patient right do you think people use least?",
+                            "Which patient right surprised you the most?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

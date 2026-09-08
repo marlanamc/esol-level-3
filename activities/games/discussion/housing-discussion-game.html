@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Housing Discussion Game — Open-Ended</title>
+    <title>Unit 5: Housing Discussion Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -110,6 +110,48 @@
         .start-game-btn:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .stage-picker {
+            margin-top: 26px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stage-picker-label {
+            width: 100%;
+            text-align: center;
+            font-family: 'Karla', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #5a5a52;
+            margin-bottom: 2px;
+        }
+
+        .stage-btn {
+            font-family: 'Karla', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border: 2px solid #17667F;
+            border-radius: 8px;
+            background: transparent;
+            color: #17667F;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .stage-btn:hover {
+            background: #17667F;
+            color: #FFFFFF;
+        }
+
+        .stage-btn.is-current {
+            background: #17667F;
+            color: #FFFFFF;
         }
 
         .all-activities-link {
@@ -673,10 +715,17 @@
                       <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                       <path d="M12 17h.01" />
                     </svg>
-                </span> Housing</span>
+                </span> Unit 5: Housing</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about home, landlords, and safety</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="stage-picker" id="stagePicker">
+                <span class="stage-picker-label">Support level &mdash; starters and word banks fade as you go</span>
+                <a class="stage-btn" href="?stage=1" data-stage="1">Task 1 &middot; Most support</a>
+                <a class="stage-btn" href="?stage=2" data-stage="2">Task 2</a>
+                <a class="stage-btn" href="?stage=3" data-stage="3">Task 3</a>
+                <a class="stage-btn" href="?stage=4" data-stage="4">Task 4 &middot; On your own</a>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
         
@@ -725,53 +774,244 @@
     </div>
 
     <script>
-        const categories = [
+                const categories = [
             {
-                title: "Daily Life at Home",
-                topics: [
-                    { name: "Favorite Room", questions: ["What is your favorite room in your home?", "Why do you like this room?", "Describe at least three things in the room."] },
-                    { name: "Weeknight at Home", questions: ["Describe a typical weeknight at home.", "What time do you get home?", "What do you usually do in the evening?"] },
-                    { name: "Room Description", questions: ["Describe one room in your home.", "Use there is and there are.", "Name at least five objects in the room."] },
-                    { name: "Household Chores", questions: ["What chores do you do at home?", "How often do you do each chore?", "Which chore do you like the most? Which do you like the least?"] },
-                    { name: "First Home in Boston or the U.S.", questions: ["Describe the first place you lived in Boston or in the U.S.", "Was it small or big? Quiet or noisy? Cheap or expensive?", "What is one thing you liked and one thing you did not like?"] },
-                    { name: "Dream Apartment or House", questions: ["Describe your dream apartment or house.", "Where is it?", "How many rooms does it have?", "What is around it?", "Use at least three sentences with \"I would like to have…\""] }
+                "title": "Daily Life at Home",
+                "topics": [
+                    {
+                        "name": "Favorite Room",
+                        "questions": [
+                            "What is your favorite room in your home?",
+                            "Why do you like this room?",
+                            "Describe at least three things in that room.",
+                            "Which room does your family argue about most?"
+                        ]
+                    },
+                    {
+                        "name": "Weeknight at Home",
+                        "questions": [
+                            "Describe a typical weeknight at home.",
+                            "What time do you usually get home?",
+                            "What do you do first when you walk in the door?",
+                            "What is the laziest thing you do on a weeknight?"
+                        ]
+                    },
+                    {
+                        "name": "Describing a Room",
+                        "questions": [
+                            "Describe one room in your home.",
+                            "Name at least five objects in that room.",
+                            "Which object in the room is the most useful?",
+                            "What is one thing in your home you would never throw away?"
+                        ]
+                    },
+                    {
+                        "name": "Household Chores",
+                        "questions": [
+                            "What chores do you do at home?",
+                            "How often do you do each chore?",
+                            "How are chores divided in your home?",
+                            "Which chore do you avoid until the last possible minute?"
+                        ]
+                    },
+                    {
+                        "name": "Your First Home Here",
+                        "questions": [
+                            "Describe the first place you lived after you arrived.",
+                            "Was it small or big? Quiet or noisy?",
+                            "What is one thing you liked and one thing you did not like?",
+                            "What surprised you most about homes here?"
+                        ]
+                    },
+                    {
+                        "name": "Dream Home",
+                        "questions": [
+                            "Describe your dream apartment or house.",
+                            "Where is it, and how many rooms does it have?",
+                            "What is around it in the neighborhood?",
+                            "What is one thing in your dream home nobody else would want?"
+                        ]
+                    }
                 ]
             },
             {
-                title: "Landlords & Communication",
-                topics: [
-                    { name: "Heat Problem", questions: ["Your apartment has no heat and it is very cold.", "Describe the problem clearly.", "What information should you give to your landlord?", "What questions should you ask?"] },
-                    { name: "Noisy Neighbors", questions: ["Your neighbors are very noisy late at night.", "Describe the situation.", "What would you say to the building manager?", "What solution would you ask for?"] },
-                    { name: "Text Message to Landlord", questions: ["Think of a small problem in your apartment (for example, a broken light or leaking faucet).", "What text message would you send to your landlord?", "Include a greeting, the problem, and a thank you."] },
-                    { name: "Rent Increase", questions: ["You receive a notice about a rent increase.", "What questions would you ask your landlord?", "How would you ask for more information or a smaller increase?"] },
-                    { name: "New Lease", questions: ["You want to renew your lease.", "What questions would you ask about rent, lease length, or discounts?", "What is important to you in a new lease?"] },
-                    { name: "Leaving a Voicemail", questions: ["What information should you include in a voicemail to your landlord?", "What problem would you explain?", "Why is speaking clearly important?"] }
+                "title": "Landlords & Communication",
+                "topics": [
+                    {
+                        "name": "A Problem with Heat",
+                        "questions": [
+                            "How would you tell a landlord your apartment is too cold?",
+                            "What information should you give them?",
+                            "What questions should you ask?",
+                            "Who is the most patient person you know? Would they stay calm here?"
+                        ]
+                    },
+                    {
+                        "name": "Noisy Neighbors",
+                        "questions": [
+                            "How would you describe a noise problem to a building manager?",
+                            "What solution would you ask for?",
+                            "What would you say to the neighbor directly?",
+                            "What is the strangest noise you have heard from a neighbor?"
+                        ]
+                    },
+                    {
+                        "name": "Messaging a Landlord",
+                        "questions": [
+                            "What would you write to a landlord about a broken light?",
+                            "What should the message include besides the problem?",
+                            "How is a text different from a phone call for this?",
+                            "Would you rather call or text a landlord? Why?"
+                        ]
+                    },
+                    {
+                        "name": "A Rent Increase",
+                        "questions": [
+                            "What would you ask a landlord about a rent increase?",
+                            "How would you ask for more information?",
+                            "What would you do if the new rent was too high?",
+                            "Do you think renters should be told further in advance? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Renewing a Lease",
+                        "questions": [
+                            "What questions would you ask before renewing a lease?",
+                            "What is most important to you in a new lease?",
+                            "How would you ask about a discount or repairs?",
+                            "What would make you leave an apartment you liked?"
+                        ]
+                    },
+                    {
+                        "name": "Leaving a Voicemail",
+                        "questions": [
+                            "What information belongs in a voicemail to a landlord?",
+                            "How would you explain a problem clearly and briefly?",
+                            "What would you do if nobody returned your call?",
+                            "Do you like leaving voicemails? Why or why not?"
+                        ]
+                    }
                 ]
             },
             {
-                title: "Housing Problems & Solutions",
-                topics: [
-                    { name: "Leaking Ceiling", questions: ["Your ceiling leaks when it rains.", "Describe the problem in detail.", "What should you do first, second, and third?"] },
-                    { name: "Pests in the Apartment", questions: ["You see mice or bugs in your kitchen.", "What can you do yourself?", "What should the landlord do?", "Use at least three sentences with \"should.\""] },
-                    { name: "Broken Elevator", questions: ["You live on a high floor and the elevator is broken.", "How does this affect your daily life?", "What solutions would you ask for?"] },
-                    { name: "Cleaning Disagreement", questions: ["Two people in an apartment disagree about how often to clean.", "What are both opinions?", "What is a fair compromise?", "How can people talk about this calmly?"] },
-                    { name: "Late Rent", questions: ["You need to pay rent a few days late.", "How would you explain the situation politely?", "What information should you include?"] },
-                    { name: "Laundry Problems", questions: ["The laundry machines in your building often cause problems.", "What problems can happen in shared laundry spaces?", "What rules or solutions could help?"] }
+                "title": "Housing Problems & Solutions",
+                "topics": [
+                    {
+                        "name": "A Leak in the Ceiling",
+                        "questions": [
+                            "How would you describe a ceiling leak to a landlord?",
+                            "What should you do first, second, and third?",
+                            "Who else in the building should know?",
+                            "What is the worst home repair problem you have had?"
+                        ]
+                    },
+                    {
+                        "name": "Pests in the Kitchen",
+                        "questions": [
+                            "What would you do if you saw mice or bugs in your kitchen?",
+                            "What can you do yourself, and what should a landlord do?",
+                            "How would you report this problem?",
+                            "Which household pest bothers you the most?"
+                        ]
+                    },
+                    {
+                        "name": "A Broken Elevator",
+                        "questions": [
+                            "How does a broken elevator affect daily life in a building?",
+                            "Who is most affected when it breaks?",
+                            "What solutions would you ask for?",
+                            "How many flights of stairs would you climb before complaining?"
+                        ]
+                    },
+                    {
+                        "name": "Disagreeing About Cleaning",
+                        "questions": [
+                            "Two people disagree about how often to clean. What are both opinions?",
+                            "What would be a fair compromise?",
+                            "How can people talk about this calmly?",
+                            "Are you the tidy one or the messy one in your home?"
+                        ]
+                    },
+                    {
+                        "name": "Paying Rent Late",
+                        "questions": [
+                            "How would you explain politely that rent will be a few days late?",
+                            "What information should you include?",
+                            "How far in advance should you tell a landlord?",
+                            "Do you think landlords should charge a late fee? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Shared Laundry",
+                        "questions": [
+                            "What problems happen in shared laundry rooms?",
+                            "What rules would help everyone?",
+                            "How would you handle someone leaving clothes in a machine?",
+                            "What is the most annoying thing people do in a shared laundry room?"
+                        ]
+                    }
                 ]
             },
             {
-                title: "Safety & Emergencies at Home",
-                topics: [
-                    { name: "Smell of Gas", questions: ["You smell gas in your kitchen.", "What should you do?", "What should you not do?", "Why are these steps important?"] },
-                    { name: "Fire Alarm", questions: ["The fire alarm goes off in your building.", "What should you do step by step?", "Where is the exit in your building?"] },
-                    { name: "Water from Upstairs", questions: ["Water is coming through your ceiling from the apartment above.", "How would you feel?", "What actions should you take?", "Who should you contact?"] },
-                    { name: "Stranger at the Door", questions: ["Someone you do not know knocks on your door late at night.", "What would you do?", "What safety rules are important in this situation?"] },
-                    { name: "No Heat in Winter", questions: ["It is winter and your apartment has no heat.", "What temporary solutions can you use inside your home?", "What help would you request from your landlord?"] },
-                    { name: "Calling 911 from Home", questions: ["Choose one emergency at home (fire, injury, smoke, or gas).", "What information do you need to give when calling 911?", "Why is it important to stay calm and clear?"] }
+                "title": "Safety & Emergencies at Home",
+                "topics": [
+                    {
+                        "name": "Smelling Gas",
+                        "questions": [
+                            "What should you do if you smell gas in your kitchen?",
+                            "What should you NOT do?",
+                            "Who would you call first?",
+                            "Who in your home stays calmest in an emergency?"
+                        ]
+                    },
+                    {
+                        "name": "A Fire Alarm",
+                        "questions": [
+                            "What should you do step by step if a fire alarm goes off?",
+                            "Where are the exits in your building?",
+                            "What would you take with you if you had ten seconds?",
+                            "Have you ever been woken up by an alarm that was a false alarm?"
+                        ]
+                    },
+                    {
+                        "name": "Water from Upstairs",
+                        "questions": [
+                            "What would you do if water came through your ceiling?",
+                            "Who should you contact, and in what order?",
+                            "How would you protect your things?",
+                            "How would you feel about knocking on a stranger's door to ask?"
+                        ]
+                    },
+                    {
+                        "name": "Someone at the Door",
+                        "questions": [
+                            "What would you do if someone you did not know knocked late at night?",
+                            "What safety habit did you learn only after moving here?",
+                            "How do you check who is at the door?",
+                            "Do you answer the door if you are not expecting anyone?"
+                        ]
+                    },
+                    {
+                        "name": "No Heat in Winter",
+                        "questions": [
+                            "What would you do if your apartment had no heat in winter?",
+                            "What can you do inside your home while you wait?",
+                            "What help would you request from a landlord?",
+                            "What is your best trick for staying warm cheaply?"
+                        ]
+                    },
+                    {
+                        "name": "Calling for Help",
+                        "questions": [
+                            "What information do you give when you call 911?",
+                            "Which emergencies need a call right away?",
+                            "How would you describe your address clearly?",
+                            "Why do you think some people hesitate to call for help?"
+                        ]
+                    }
                 ]
             }
         ];
-        
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;
@@ -905,19 +1145,19 @@
                 words: ['now', 'every day', 'usually', 'last night', 'small', 'big', 'quiet', 'noisy', 'cheap', 'expensive']
             },
             2: {
-                label: 'Task 2 of 4 — Compare Two Apartments',
+                label: 'Task 2 of 4 — Talk with a Landlord',
                 sub: 'Phrase bank only — sentence starters have faded',
                 starters: [],
-                words: ['rent', 'utilities included', 'W/D in unit', 'parking', 'more expensive than', 'the cheapest', 'the most expensive', 'budget']
+                words: ['rent', 'lease', 'utilities included', 'repair', 'notice', 'could you please', 'I would like to ask about', 'when would you', 'thank you for']
             },
             3: {
-                label: 'Task 3 of 4 — Report a Problem to a Landlord',
+                label: 'Task 3 of 4 — Report a Housing Problem',
                 sub: 'Word list only — no sentence starters',
                 starters: [],
                 words: ['no heat', 'no water', 'broken', 'not working', 'leak', 'noise problem', 'very loud', 'getting worse', 'please help', 'can you fix it']
             },
             4: {
-                label: 'Task 4 of 4 — Negotiate a Lease or Rent Increase',
+                label: 'Task 4 of 4 — Handle a Home Emergency',
                 sub: 'Minimal help — available only if you ask',
                 starters: [],
                 words: [],
@@ -963,6 +1203,12 @@
         }
 
         renderPhraseBank();
+
+        // Mark the active task in the home-screen stage picker
+        (function markCurrentStage() {
+            const btn = document.querySelector('.stage-btn[data-stage="' + stage + '"]');
+            if (btn) btn.classList.add('is-current');
+        })();
     </script>
 </body>
 </html>

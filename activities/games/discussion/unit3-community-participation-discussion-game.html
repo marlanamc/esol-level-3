@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Types of Communities",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Neighborhood Community",
-                                                                        "questions": [
-                                                                                        "Describe the neighborhood where you live.",
-                                                                                        "Who are the people you see most often nearby?",
-                                                                                        "What makes your neighborhood feel like a community?",
-                                                                                        "How is your neighborhood different from your home country?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Cultural or Language Community",
-                                                                        "questions": [
-                                                                                        "Do you belong to a community that shares your language or culture?",
-                                                                                        "How did you find this community?",
-                                                                                        "What activities does this community organize?",
-                                                                                        "Why is this community important to you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Online Communities",
-                                                                        "questions": [
-                                                                                        "Are you part of any online groups or forums?",
-                                                                                        "How do you communicate with people in this group?",
-                                                                                        "What topics do you discuss in this online community?",
-                                                                                        "How is an online community different from an in-person one?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Workplace Community",
-                                                                        "questions": [
-                                                                                        "Describe the community of people at your job.",
-                                                                                        "How do coworkers support each other?",
-                                                                                        "What activities bring your coworkers together?",
-                                                                                        "How do you build relationships with people at work?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "School Community",
-                                                                        "questions": [
-                                                                                        "Describe the community here at your school.",
-                                                                                        "Who do you feel closest to in this school?",
-                                                                                        "What activities help build community in your class?",
-                                                                                        "How can a school community support new students?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Faith or Interest Groups",
-                                                                        "questions": [
-                                                                                        "Are you part of a group based on a shared interest or belief?",
-                                                                                        "How often does this group meet?",
-                                                                                        "What do you enjoy about being part of this group?",
-                                                                                        "How did you decide to join this group?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Where Communities Exist",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Parks and Public Spaces",
-                                                                        "questions": [
-                                                                                        "Describe a park or public space you visit often.",
-                                                                                        "Who do you usually see there?",
-                                                                                        "What activities happen in this space?",
-                                                                                        "How do public spaces bring people together?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Community Centers",
-                                                                        "questions": [
-                                                                                        "Describe a community center near your home.",
-                                                                                        "What programs or classes are offered there?",
-                                                                                        "Have you attended an event at a community center?",
-                                                                                        "What would you like to see offered there?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Local Businesses",
-                                                                        "questions": [
-                                                                                        "Describe a local business you visit regularly.",
-                                                                                        "How do you know the people who work there?",
-                                                                                        "Why do you choose this business over others?",
-                                                                                        "How do local businesses support a community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Schools and Libraries",
-                                                                        "questions": [
-                                                                                        "How do schools bring a community together?",
-                                                                                        "Describe an event at a school or library you attended.",
-                                                                                        "Who uses the library in your area?",
-                                                                                        "What resources make libraries important to communities?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Places of Worship",
-                                                                        "questions": [
-                                                                                        "How do places of worship function as communities?",
-                                                                                        "Describe activities that happen there beyond services.",
-                                                                                        "Who attends these gatherings in your area?",
-                                                                                        "How does this type of community support its members?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Digital Spaces",
-                                                                        "questions": [
-                                                                                        "Where online do you find your community?",
-                                                                                        "How is a digital community similar to a physical one?",
-                                                                                        "What are the benefits of a digital community?",
-                                                                                        "What are some challenges of connecting online instead of in person?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "How You Interact with Your Community",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Attending Local Events",
-                                                                        "questions": [
-                                                                                        "Describe a local event you attended recently.",
-                                                                                        "How did you find out about this event?",
-                                                                                        "Who did you go with?",
-                                                                                        "What made the event enjoyable or memorable?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Volunteering and Giving Back",
-                                                                        "questions": [
-                                                                                        "Have you volunteered for a community organization? Describe it.",
-                                                                                        "What motivates you to help others in your community?",
-                                                                                        "How much time do you spend volunteering?",
-                                                                                        "What volunteer opportunity would you like to try?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Participating in Local Decisions",
-                                                                        "questions": [
-                                                                                        "Have you ever attended a community meeting? Describe it.",
-                                                                                        "How can residents share opinions about local issues?",
-                                                                                        "What issue in your community would you like to discuss?",
-                                                                                        "Why is it important for community members to participate?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Supporting Neighbors",
-                                                                        "questions": [
-                                                                                        "Describe a time you helped a neighbor.",
-                                                                                        "How do neighbors support each other in your area?",
-                                                                                        "What would you do if a neighbor needed help?",
-                                                                                        "How does helping others build a stronger community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Sharing Skills and Knowledge",
-                                                                        "questions": [
-                                                                                        "What skill could you teach someone in your community?",
-                                                                                        "Have you ever helped someone learn something new?",
-                                                                                        "How can sharing skills bring people together?",
-                                                                                        "What skill would you like to learn from someone else?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Respecting Community Rules",
-                                                                        "questions": [
-                                                                                        "What rules help your community function smoothly?",
-                                                                                        "Describe a rule you think is important to follow.",
-                                                                                        "What happens when community rules are not followed?",
-                                                                                        "How do rules help build trust between neighbors?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Building a Stronger Community",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Identifying Community Needs",
-                                                                        "questions": [
-                                                                                        "What is one need you notice in your community?",
-                                                                                        "How did you learn about this need?",
-                                                                                        "Who could help address this need?",
-                                                                                        "What would improve life for people in your area?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Organizing a Community Event",
-                                                                        "questions": [
-                                                                                        "Imagine you are planning a small community event.",
-                                                                                        "What type of event would you organize?",
-                                                                                        "Who would you invite?",
-                                                                                        "What steps would you take to plan it?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Communicating with Community Leaders",
-                                                                        "questions": [
-                                                                                        "How would you contact a local leader about a concern?",
-                                                                                        "What information would you include in your message?",
-                                                                                        "Why is clear communication important with leaders?",
-                                                                                        "What concern would you like to raise in your community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Working with Diverse Groups",
-                                                                        "questions": [
-                                                                                        "Describe a time you worked with people from different backgrounds.",
-                                                                                        "What did you learn from this experience?",
-                                                                                        "How can diverse groups work together successfully?",
-                                                                                        "What challenges come from working with different cultures?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Encouraging Others to Participate",
-                                                                        "questions": [
-                                                                                        "How would you invite a friend to join a community activity?",
-                                                                                        "What reasons would you give them to participate?",
-                                                                                        "Describe a time someone encouraged you to get involved.",
-                                                                                        "Why is participation important for a healthy community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reflecting on Community Impact",
-                                                                        "questions": [
-                                                                                        "How has your community changed your life since you arrived?",
-                                                                                        "What impact would you like to have on your community?",
-                                                                                        "Describe one way you have already contributed.",
-                                                                                        "What is your goal for community involvement in the future?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                                const categories = [
+            {
+                "title": "Types of Communities",
+                "topics": [
+                    {
+                        "name": "Neighborhood Community",
+                        "questions": [
+                            "Describe the neighborhood where you live.",
+                            "Who are the people you see most often nearby?",
+                            "What makes your neighborhood feel like a community?",
+                            "What do you like best about where you live now?"
+                        ]
+                    },
+                    {
+                        "name": "Cultural or Language Community",
+                        "questions": [
+                            "Do you belong to a community that shares your language or culture?",
+                            "How did you find this community?",
+                            "What activities does this community organize?",
+                            "What do you miss most when you are away from this community?"
+                        ]
+                    },
+                    {
+                        "name": "Online Communities",
+                        "questions": [
+                            "Are you part of any online groups or forums?",
+                            "How do you communicate with people in this group?",
+                            "What topics do you discuss in this online community?",
+                            "Are online friends real friends? Discuss."
+                        ]
+                    },
+                    {
+                        "name": "Workplace Community",
+                        "questions": [
+                            "Describe the community of people at your job.",
+                            "How do coworkers support each other?",
+                            "What activities bring your coworkers together?",
+                            "What makes a workplace feel like a team?"
+                        ]
+                    },
+                    {
+                        "name": "School Community",
+                        "questions": [
+                            "Describe the community here at your school.",
+                            "Who do you feel closest to in this school?",
+                            "What activities help build community in your class?",
+                            "What would make this school feel more like a community?"
+                        ]
+                    },
+                    {
+                        "name": "Faith or Interest Groups",
+                        "questions": [
+                            "Are you part of a group based on a shared interest or belief?",
+                            "How often does this group meet?",
+                            "What do you enjoy about being part of this group?",
+                            "What group would you start if you had the time?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Where Communities Exist",
+                "topics": [
+                    {
+                        "name": "Parks and Public Spaces",
+                        "questions": [
+                            "Describe a park or public space you visit often.",
+                            "Who do you usually see there?",
+                            "What activities happen in this space?",
+                            "What is your favorite place to sit outside in your city?"
+                        ]
+                    },
+                    {
+                        "name": "Community Centers",
+                        "questions": [
+                            "Describe a community center near your home.",
+                            "What programs or classes are offered there?",
+                            "Have you attended an event at a community center?",
+                            "What should every community center have?"
+                        ]
+                    },
+                    {
+                        "name": "Local Businesses",
+                        "questions": [
+                            "Describe a local business you visit regularly.",
+                            "How do you know the people who work there?",
+                            "What keeps you going back to the same place?",
+                            "Which local business would you miss most if it closed?"
+                        ]
+                    },
+                    {
+                        "name": "Schools and Libraries",
+                        "questions": [
+                            "How do schools bring a community together?",
+                            "Describe an event at a school or library you attended.",
+                            "Who uses the library in your area?",
+                            "When did you last use a library? What for?"
+                        ]
+                    },
+                    {
+                        "name": "Places of Worship",
+                        "questions": [
+                            "How do places of worship function as communities?",
+                            "Describe activities that happen there beyond services.",
+                            "Who attends these gatherings in your area?",
+                            "What brings people back to the same place week after week?"
+                        ]
+                    },
+                    {
+                        "name": "Digital Spaces",
+                        "questions": [
+                            "Where online do you find your community?",
+                            "How is a digital community similar to a physical one?",
+                            "What are the benefits of a digital community?",
+                            "Would you rather meet online or in person? Why?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "How You Interact with Your Community",
+                "topics": [
+                    {
+                        "name": "Attending Local Events",
+                        "questions": [
+                            "Describe a local event you attended recently.",
+                            "How did you find out about this event?",
+                            "Who did you go with?",
+                            "What was the best local event you have ever been to?"
+                        ]
+                    },
+                    {
+                        "name": "Volunteering and Giving Back",
+                        "questions": [
+                            "Have you volunteered for a community organization? Describe it.",
+                            "What motivates you to help others in your community?",
+                            "How much time do you spend volunteering?",
+                            "What kind of help do people need most in your area?"
+                        ]
+                    },
+                    {
+                        "name": "Participating in Local Decisions",
+                        "questions": [
+                            "Have you ever attended a community meeting? Describe it.",
+                            "How can residents share opinions about local issues?",
+                            "What issue in your community would you like to discuss?",
+                            "What local issue would get you to speak at a meeting?"
+                        ]
+                    },
+                    {
+                        "name": "Supporting Neighbors",
+                        "questions": [
+                            "Describe a time you helped a neighbor.",
+                            "How do neighbors support each other in your area?",
+                            "What would you do if a neighbor needed help?",
+                            "What is the kindest thing a neighbor has done for you?"
+                        ]
+                    },
+                    {
+                        "name": "Sharing Skills and Knowledge",
+                        "questions": [
+                            "What skill could you teach someone in your community?",
+                            "Have you ever helped someone learn something new?",
+                            "How can sharing skills bring people together?",
+                            "What skill could you trade with someone in this room?"
+                        ]
+                    },
+                    {
+                        "name": "Respecting Community Rules",
+                        "questions": [
+                            "What rules help your community function smoothly?",
+                            "Describe a rule you think is important to follow.",
+                            "What happens when community rules are not followed?",
+                            "Which rule in your building or street does everyone ignore?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Building a Stronger Community",
+                "topics": [
+                    {
+                        "name": "Identifying Community Needs",
+                        "questions": [
+                            "What is one need you notice in your community?",
+                            "How did you learn about this need?",
+                            "Who could help address this need?",
+                            "What is missing from your neighborhood?"
+                        ]
+                    },
+                    {
+                        "name": "Organizing a Community Event",
+                        "questions": [
+                            "Imagine you are planning a small community event.",
+                            "What type of event would you organize?",
+                            "Who would you invite?",
+                            "Plan a street party. Who does what?"
+                        ]
+                    },
+                    {
+                        "name": "Communicating with Community Leaders",
+                        "questions": [
+                            "How would you contact a local leader about a concern?",
+                            "What information would you include in your message?",
+                            "Do leaders in your area listen? Give an example.",
+                            "What would you say to your mayor in one minute?"
+                        ]
+                    },
+                    {
+                        "name": "Working with Diverse Groups",
+                        "questions": [
+                            "How many languages are spoken at your job or in your building?",
+                            "What did you learn from this experience?",
+                            "How can diverse groups work together successfully?",
+                            "What did you learn from someone very different from you?"
+                        ]
+                    },
+                    {
+                        "name": "Encouraging Others to Participate",
+                        "questions": [
+                            "How would you invite a friend to join a community activity?",
+                            "What reasons would you give them to participate?",
+                            "Who invited you to your first event or group here?",
+                            "How would you convince a shy friend to join you?"
+                        ]
+                    },
+                    {
+                        "name": "Reflecting on Community Impact",
+                        "questions": [
+                            "How has your community changed your life since you arrived?",
+                            "What impact would you like to have on your community?",
+                            "Describe one way you have already contributed.",
+                            "What do you want your neighbors to remember about you?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

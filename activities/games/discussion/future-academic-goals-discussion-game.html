@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Academic Goals Discussion Game</title>
+    <title>Unit 10: Future Academic Goals Discussion Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -571,7 +571,7 @@
                       <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
                       <path d="M12 17h.01" />
                     </svg>
-                </span> Future Academic Goals</span>
+                </span> Unit 10: Future Academic Goals</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about lifelong learning and future goals</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Reflecting on Your Learning Journey",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Why You Started Learning English",
-                                                                        "questions": [
-                                                                                        "Why did you decide to start learning English?",
-                                                                                        "Describe how you felt on your first day of class.",
-                                                                                        "What has surprised you most about learning English?",
-                                                                                        "How has your motivation changed since you started?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Progress You Have Made",
-                                                                        "questions": [
-                                                                                        "Describe one skill that has improved since you started.",
-                                                                                        "What was difficult before that feels easier now?",
-                                                                                        "How do you notice your own progress?",
-                                                                                        "What are you most proud of in your learning journey?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Challenges You Have Overcome",
-                                                                        "questions": [
-                                                                                        "Describe a challenge you faced while learning English.",
-                                                                                        "How did you work through this challenge?",
-                                                                                        "Who helped you during a difficult moment?",
-                                                                                        "What did this challenge teach you about yourself?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning from Mistakes",
-                                                                        "questions": [
-                                                                                        "Describe a mistake that helped you learn something important.",
-                                                                                        "How do you feel when you make a mistake in English?",
-                                                                                        "Why are mistakes a normal part of learning?",
-                                                                                        "What would you tell a new student about making mistakes?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "People Who Support Your Learning",
-                                                                        "questions": [
-                                                                                        "Who encourages you to keep studying English?",
-                                                                                        "How does this person or group support you?",
-                                                                                        "Describe a time someone helped you understand something new.",
-                                                                                        "How can you support another learner's journey?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "What Learning English Means to You",
-                                                                        "questions": [
-                                                                                        "What does speaking English allow you to do now?",
-                                                                                        "How has learning English changed your daily life?",
-                                                                                        "Describe a moment you felt proud using English.",
-                                                                                        "Why does continuing to learn matter to you?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Setting Future Academic Goals",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Short-Term Learning Goals",
-                                                                        "questions": [
-                                                                                        "What is one English skill you want to improve this month?",
-                                                                                        "How will you practice this skill?",
-                                                                                        "What will show you that you have improved?",
-                                                                                        "Who can help you reach this short-term goal?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Long-Term Education Goals",
-                                                                        "questions": [
-                                                                                        "What education goal do you have for the next few years?",
-                                                                                        "What steps are needed to reach this goal?",
-                                                                                        "How will you find information about programs or classes?",
-                                                                                        "Why is this goal important to you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Exploring Further Education Options",
-                                                                        "questions": [
-                                                                                        "What types of classes or programs interest you?",
-                                                                                        "Where could you find these programs in your area?",
-                                                                                        "What questions do you have about continuing your education?",
-                                                                                        "What would help you take the next step?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Balancing Goals with Daily Life",
-                                                                        "questions": [
-                                                                                        "How will you find time to study while managing work and family?",
-                                                                                        "What changes could help you make time for learning?",
-                                                                                        "Describe a schedule that could work for you.",
-                                                                                        "Who can support you in balancing these responsibilities?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Overcoming Obstacles to Learning",
-                                                                        "questions": [
-                                                                                        "What obstacles might stop you from reaching your goals?",
-                                                                                        "How could you plan around these obstacles?",
-                                                                                        "Describe a time you overcame a barrier to learning.",
-                                                                                        "What resource could help you overcome a current obstacle?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Getting Support for Your Goals",
-                                                                        "questions": [
-                                                                                        "What programs or advisors could help you plan your education?",
-                                                                                        "How would you ask a teacher or counselor for advice?",
-                                                                                        "Describe support you have received in the past.",
-                                                                                        "What kind of support do you need most right now?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Becoming a Lifelong Learner",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Learning Outside the Classroom",
-                                                                        "questions": [
-                                                                                        "What have you learned recently outside of class?",
-                                                                                        "How do you practice English in your daily life?",
-                                                                                        "Describe a resource you use to keep learning, such as an app or video.",
-                                                                                        "What new skill would you like to teach yourself?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning from Experience",
-                                                                        "questions": [
-                                                                                        "Describe something you learned from a difficult experience.",
-                                                                                        "How do daily experiences help you grow?",
-                                                                                        "What lesson from this year will you remember?",
-                                                                                        "Why is learning from life as valuable as learning in school?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Curiosity and Asking Questions",
-                                                                        "questions": [
-                                                                                        "What topic are you curious to learn more about?",
-                                                                                        "How do you find answers to your questions?",
-                                                                                        "Describe a time your curiosity led you to learn something new.",
-                                                                                        "Why is asking questions important for lifelong learning?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning New Technology",
-                                                                        "questions": [
-                                                                                        "What new technology have you learned to use recently?",
-                                                                                        "What technology skill would help you in daily life?",
-                                                                                        "Describe a time technology was difficult for you at first.",
-                                                                                        "Who could help you learn a new technology skill?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Passing on Knowledge to Others",
-                                                                        "questions": [
-                                                                                        "What have you taught someone else recently?",
-                                                                                        "How does teaching others help you learn too?",
-                                                                                        "Describe a skill you could share with your community.",
-                                                                                        "Why is sharing knowledge important for a community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Staying Motivated to Keep Learning",
-                                                                        "questions": [
-                                                                                        "What keeps you motivated to keep studying?",
-                                                                                        "Describe a moment when you almost gave up but continued.",
-                                                                                        "What reward do you give yourself for reaching a goal?",
-                                                                                        "How do you plan to keep learning after this class ends?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "How Learning Improves Your Life",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Learning and Career Opportunities",
-                                                                        "questions": [
-                                                                                        "How has learning English opened new job opportunities?",
-                                                                                        "What career goal depends on continuing your education?",
-                                                                                        "Describe a skill from class that helps you at work.",
-                                                                                        "How will more education change your career path?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning and Family Life",
-                                                                        "questions": [
-                                                                                        "How does your learning affect your family?",
-                                                                                        "Describe a time you helped a family member because of what you learned.",
-                                                                                        "What example do you want to set for your children?",
-                                                                                        "How does your family support your learning?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning and Independence",
-                                                                        "questions": [
-                                                                                        "Describe a task you can now do independently because of English.",
-                                                                                        "How has learning English changed how you handle daily tasks?",
-                                                                                        "What situation used to be difficult that is now easier?",
-                                                                                        "Why is independence important to you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning and Confidence",
-                                                                        "questions": [
-                                                                                        "How has learning new things affected your confidence?",
-                                                                                        "Describe a moment you felt confident using a new skill.",
-                                                                                        "What would you tell your past self about learning?",
-                                                                                        "How does confidence help you take on new challenges?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning and Community Involvement",
-                                                                        "questions": [
-                                                                                        "How has learning English helped you connect with your community?",
-                                                                                        "Describe a way you participate more because of your progress.",
-                                                                                        "What new activity could you join with more confidence in English?",
-                                                                                        "How can lifelong learning benefit an entire community?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Your Vision for the Future",
-                                                                        "questions": [
-                                                                                        "Where do you see yourself in five years?",
-                                                                                        "What role does learning play in reaching this vision?",
-                                                                                        "Describe one step you will take this month toward your future.",
-                                                                                        "How does becoming a lifelong learner change what is possible for you?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                                const categories = [
+            {
+                "title": "Reflecting on Your Learning Journey",
+                "topics": [
+                    {
+                        "name": "Why You Started Learning English",
+                        "questions": [
+                            "Why did you decide to start learning English?",
+                            "Describe how you felt on your first day of class.",
+                            "What has surprised you most about learning English?",
+                            "Was starting easier or harder than you expected?"
+                        ]
+                    },
+                    {
+                        "name": "Progress You Have Made",
+                        "questions": [
+                            "Describe one skill that has improved since you started.",
+                            "What was difficult before that feels easier now?",
+                            "How do you notice your own progress?",
+                            "What can you do in English now that you could not do last year?"
+                        ]
+                    },
+                    {
+                        "name": "Challenges You Have Overcome",
+                        "questions": [
+                            "What part of English was hardest for you at the beginning?",
+                            "How did you work through this challenge?",
+                            "Who helped you during a difficult moment?",
+                            "Which is harder: listening or speaking? Convince the group."
+                        ]
+                    },
+                    {
+                        "name": "Learning from Mistakes",
+                        "questions": [
+                            "What is an English mistake you used to make and no longer make?",
+                            "How do you feel when you make a mistake in English?",
+                            "What mistake do you hear learners make most often?",
+                            "What is a mistake you now find funny?"
+                        ]
+                    },
+                    {
+                        "name": "People Who Support Your Learning",
+                        "questions": [
+                            "Who encourages you to keep studying English?",
+                            "How does this person or group support you?",
+                            "Who explained something to you in a way that finally made sense?",
+                            "Who would be surprised to hear how far you have come?"
+                        ]
+                    },
+                    {
+                        "name": "What Learning English Means to You",
+                        "questions": [
+                            "What does speaking English allow you to do now?",
+                            "How has learning English changed your daily life?",
+                            "Describe a moment you felt proud using English.",
+                            "What is the first thing you want to do in English outside class?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Setting Future Academic Goals",
+                "topics": [
+                    {
+                        "name": "Short-Term Learning Goals",
+                        "questions": [
+                            "What is one English skill you want to improve this month?",
+                            "How will you practice this skill?",
+                            "What will show you that you have improved?",
+                            "Would you rather study 20 minutes daily or two hours once a week?"
+                        ]
+                    },
+                    {
+                        "name": "Long-Term Education Goals",
+                        "questions": [
+                            "What education goal do you have for the next few years?",
+                            "What steps are needed to reach this goal?",
+                            "How will you find information about programs or classes?",
+                            "What would you study if money and time were not a problem?"
+                        ]
+                    },
+                    {
+                        "name": "Exploring Further Education Options",
+                        "questions": [
+                            "What types of classes or programs interest you?",
+                            "Where could you find these programs in your area?",
+                            "What questions do you have about continuing your education?",
+                            "Would you rather learn in a classroom or online? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Balancing Goals with Daily Life",
+                        "questions": [
+                            "How will you find time to study while managing work and family?",
+                            "What changes could help you make time for learning?",
+                            "Describe a schedule that could work for you.",
+                            "If you got one free hour every day, where would it go?"
+                        ]
+                    },
+                    {
+                        "name": "Overcoming Obstacles to Learning",
+                        "questions": [
+                            "What obstacles might stop you from reaching your goals?",
+                            "How could you plan around these obstacles?",
+                            "What stopped you from studying last month, and what did you do?",
+                            "What excuse do you use most often for not studying?"
+                        ]
+                    },
+                    {
+                        "name": "Getting Support for Your Goals",
+                        "questions": [
+                            "What programs or advisors could help you plan your education?",
+                            "How would you ask a teacher or counselor for advice?",
+                            "Describe support you have received in the past.",
+                            "Is it easy or hard for you to ask for help? Be honest."
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Becoming a Lifelong Learner",
+                "topics": [
+                    {
+                        "name": "Learning Outside the Classroom",
+                        "questions": [
+                            "What have you learned recently outside of class?",
+                            "How do you practice English in your daily life?",
+                            "Describe a resource you use to keep learning, such as an app or video.",
+                            "What is the strangest place you have practiced English?"
+                        ]
+                    },
+                    {
+                        "name": "Learning from Experience",
+                        "questions": [
+                            "Describe something you learned from a difficult experience.",
+                            "How do daily experiences help you grow?",
+                            "What lesson from this year will you remember?",
+                            "What did life teach you that school never could?"
+                        ]
+                    },
+                    {
+                        "name": "Curiosity and Asking Questions",
+                        "questions": [
+                            "What topic are you curious to learn more about?",
+                            "How do you find answers to your questions?",
+                            "What is the last thing you looked up because you wanted to know?",
+                            "What is a question you have always wanted to ask someone?"
+                        ]
+                    },
+                    {
+                        "name": "Learning New Technology",
+                        "questions": [
+                            "What new technology have you learned to use recently?",
+                            "What technology skill would help you in daily life?",
+                            "Describe a time technology was difficult for you at first.",
+                            "What piece of technology defeated you completely?"
+                        ]
+                    },
+                    {
+                        "name": "Passing on Knowledge to Others",
+                        "questions": [
+                            "What have you taught someone else recently?",
+                            "How does teaching others help you learn too?",
+                            "Describe a skill you could share with your community.",
+                            "What could you teach this class in five minutes?"
+                        ]
+                    },
+                    {
+                        "name": "Staying Motivated to Keep Learning",
+                        "questions": [
+                            "What keeps you motivated to keep studying?",
+                            "What made you want to quit English, and why did you stay?",
+                            "What reward do you give yourself for reaching a goal?",
+                            "What reward do you give yourself after a hard week?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "How Learning Improves Your Life",
+                "topics": [
+                    {
+                        "name": "Learning and Career Opportunities",
+                        "questions": [
+                            "How has learning English opened new job opportunities?",
+                            "What career goal depends on continuing your education?",
+                            "Describe a skill from class that helps you at work.",
+                            "What job would you take tomorrow if your English were perfect?"
+                        ]
+                    },
+                    {
+                        "name": "Learning and Family Life",
+                        "questions": [
+                            "How does your learning affect your family?",
+                            "Describe a time you helped a family member because of what you learned.",
+                            "What example do you want to set for your children?",
+                            "Who in your family is the most curious learner?"
+                        ]
+                    },
+                    {
+                        "name": "Learning and Independence",
+                        "questions": [
+                            "Describe a task you can now do independently because of English.",
+                            "How has learning English changed how you handle daily tasks?",
+                            "What situation used to be difficult that is now easier?",
+                            "What task did you dread that you now do without thinking?"
+                        ]
+                    },
+                    {
+                        "name": "Learning and Confidence",
+                        "questions": [
+                            "How has learning new things affected your confidence?",
+                            "When was the last time someone understood your English easily?",
+                            "What would you tell your past self about learning?",
+                            "When did you last surprise yourself?"
+                        ]
+                    },
+                    {
+                        "name": "Learning and Community Involvement",
+                        "questions": [
+                            "How has learning English helped you connect with your community?",
+                            "Describe a way you participate more because of your progress.",
+                            "What new activity could you join with more confidence in English?",
+                            "What would you join if you felt completely confident?"
+                        ]
+                    },
+                    {
+                        "name": "Your Vision for the Future",
+                        "questions": [
+                            "Where do you see yourself in five years?",
+                            "What role does learning play in reaching this vision?",
+                            "Describe one step you will take this month toward your future.",
+                            "Where do you want to be in five years? Say it out loud."
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Physical Wellness",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Staying Active",
-                                                                        "questions": [
-                                                                                        "What physical activities do you enjoy?",
-                                                                                        "How often do you exercise during the week?",
-                                                                                        "Describe how your body feels after you exercise.",
-                                                                                        "What activity would you like to try to stay active?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Healthy Eating Habits",
-                                                                        "questions": [
-                                                                                        "Describe a meal you consider healthy.",
-                                                                                        "What food habits would you like to improve?",
-                                                                                        "How does eating well affect your energy during the day?",
-                                                                                        "What is a small change that could improve your diet?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Rest and Recovery",
-                                                                        "questions": [
-                                                                                        "How do you rest after a long day?",
-                                                                                        "What signs tell you that your body needs rest?",
-                                                                                        "Describe a time you felt tired because of poor sleep.",
-                                                                                        "Why is rest important for your overall health?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Managing Physical Stress",
-                                                                        "questions": [
-                                                                                        "Where do you feel stress in your body?",
-                                                                                        "What activity helps release physical tension?",
-                                                                                        "Describe a time stress affected your physical health.",
-                                                                                        "What habit could reduce stress in your daily life?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Balancing Screen Time",
-                                                                        "questions": [
-                                                                                        "How much time do you spend on screens each day?",
-                                                                                        "How does screen time affect your body or eyes?",
-                                                                                        "What activity could replace some screen time?",
-                                                                                        "Why is it important to take breaks from screens?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Preventive Health Habits",
-                                                                        "questions": [
-                                                                                        "What habits help you stay healthy long term?",
-                                                                                        "Describe a checkup or health habit you keep regularly.",
-                                                                                        "What health goal would you like to set for this year?",
-                                                                                        "Who supports you in staying healthy?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Emotional and Mental Wellness",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Managing Stress",
-                                                                        "questions": [
-                                                                                        "What causes you the most stress right now?",
-                                                                                        "How do you usually cope with stress?",
-                                                                                        "Describe a healthy way to relax after a stressful day.",
-                                                                                        "Who do you talk to when you feel stressed?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Talking About Feelings",
-                                                                        "questions": [
-                                                                                        "How comfortable are you talking about your feelings?",
-                                                                                        "Describe a time you shared how you felt with someone.",
-                                                                                        "Why is it helpful to express emotions instead of hiding them?",
-                                                                                        "Who do you feel most comfortable talking to?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Coping with Change",
-                                                                        "questions": [
-                                                                                        "Describe a big change you have experienced in your life.",
-                                                                                        "How did you feel during this change?",
-                                                                                        "What helped you adjust to this new situation?",
-                                                                                        "What advice would you give someone facing a big change?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Building Confidence",
-                                                                        "questions": [
-                                                                                        "Describe a moment you felt proud of yourself.",
-                                                                                        "What activity helps build your confidence?",
-                                                                                        "How has learning English affected your confidence?",
-                                                                                        "What would help you feel more confident in daily life?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Practicing Gratitude",
-                                                                        "questions": [
-                                                                                        "What is something you are grateful for today?",
-                                                                                        "How does noticing good things affect your mood?",
-                                                                                        "Describe a small moment that made you happy recently.",
-                                                                                        "Who would you like to thank for their support?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Seeking Support When Needed",
-                                                                        "questions": [
-                                                                                        "Who do you turn to when you need emotional support?",
-                                                                                        "Describe a resource in your community for mental health.",
-                                                                                        "What would you say to a friend who seems overwhelmed?",
-                                                                                        "Why is asking for help a sign of strength?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Wellness in Different Areas of Life",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Wellness at Home",
-                                                                        "questions": [
-                                                                                        "How does your home environment affect your wellness?",
-                                                                                        "What makes your home feel calm and comfortable?",
-                                                                                        "Describe a habit at home that supports your health.",
-                                                                                        "What change at home would improve your wellness?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Wellness at Work",
-                                                                        "questions": [
-                                                                                        "How does your job affect your physical or mental health?",
-                                                                                        "What helps you feel balanced during a work day?",
-                                                                                        "Describe a workplace habit that supports your wellness.",
-                                                                                        "What would make your work environment healthier?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Wellness in the Community",
-                                                                        "questions": [
-                                                                                        "How does your community support your overall wellness?",
-                                                                                        "Describe a community resource that helps you stay healthy.",
-                                                                                        "What activities in your community bring you joy?",
-                                                                                        "What is missing from your community for better wellness?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Wellness in Relationships",
-                                                                        "questions": [
-                                                                                        "How do your relationships affect your wellness?",
-                                                                                        "Describe a relationship that supports your well-being.",
-                                                                                        "What makes a relationship healthy?",
-                                                                                        "How do you set healthy boundaries with others?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Financial Wellness",
-                                                                        "questions": [
-                                                                                        "How does money stress affect your overall health?",
-                                                                                        "Describe a habit that helps you feel secure about money.",
-                                                                                        "What financial goal would improve your peace of mind?",
-                                                                                        "How do you separate financial stress from other parts of your life?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Balancing All Areas of Life",
-                                                                        "questions": [
-                                                                                        "Which area of your life needs the most attention right now?",
-                                                                                        "How do home, work, and community wellness connect for you?",
-                                                                                        "Describe a time one area of life affected another.",
-                                                                                        "What is one step you could take to feel more balanced?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Building Long-Term Wellness Habits",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Setting Wellness Goals",
-                                                                        "questions": [
-                                                                                        "What is one wellness goal you have for this year?",
-                                                                                        "How will you know when you reach this goal?",
-                                                                                        "What steps will help you get started?",
-                                                                                        "Who can support you in reaching this goal?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Creating Healthy Routines",
-                                                                        "questions": [
-                                                                                        "Describe a daily routine that supports your health.",
-                                                                                        "What time of day do you feel most energetic?",
-                                                                                        "How do you stay consistent with healthy habits?",
-                                                                                        "What routine would you like to add to your day?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Overcoming Setbacks",
-                                                                        "questions": [
-                                                                                        "Describe a time you struggled to keep a healthy habit.",
-                                                                                        "What caused you to get off track?",
-                                                                                        "How did you get back to your routine?",
-                                                                                        "What would help you stay consistent in the future?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Wellness Resources in the Community",
-                                                                        "questions": [
-                                                                                        "What wellness resources exist in your community, such as classes or clinics?",
-                                                                                        "Have you used any of these resources? Describe your experience.",
-                                                                                        "How did you find out about this resource?",
-                                                                                        "What resource would you like to learn more about?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Teaching Wellness Habits to Family",
-                                                                        "questions": [
-                                                                                        "What healthy habit would you like to teach your family?",
-                                                                                        "How do you encourage family members to be healthy?",
-                                                                                        "Describe a wellness activity you do together.",
-                                                                                        "Why is it important to model healthy habits for children?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reflecting on Personal Growth",
-                                                                        "questions": [
-                                                                                        "How have your wellness habits changed over the past year?",
-                                                                                        "What are you most proud of in your health journey?",
-                                                                                        "What area of wellness do you want to focus on next?",
-                                                                                        "How does taking care of yourself help every part of your life?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                                const categories = [
+            {
+                "title": "Physical Wellness",
+                "topics": [
+                    {
+                        "name": "Staying Active",
+                        "questions": [
+                            "What physical activities do you enjoy?",
+                            "How often do you exercise during the week?",
+                            "Describe how your body feels after you exercise.",
+                            "What activity do you actually enjoy, not just tolerate?"
+                        ]
+                    },
+                    {
+                        "name": "Healthy Eating Habits",
+                        "questions": [
+                            "Describe a meal you consider healthy.",
+                            "What food habits would you like to improve?",
+                            "How does eating well affect your energy during the day?",
+                            "What healthy food do you genuinely like?"
+                        ]
+                    },
+                    {
+                        "name": "Rest and Recovery",
+                        "questions": [
+                            "How do you rest after a long day?",
+                            "What signs tell you that your body needs rest?",
+                            "Describe a time you felt tired because of poor sleep.",
+                            "What is your ideal way to spend a completely free day?"
+                        ]
+                    },
+                    {
+                        "name": "Managing Physical Stress",
+                        "questions": [
+                            "Where do you feel stress in your body?",
+                            "What activity helps release physical tension?",
+                            "Describe a time stress affected your physical health.",
+                            "Where does stress show up in your body first?"
+                        ]
+                    },
+                    {
+                        "name": "Balancing Screen Time",
+                        "questions": [
+                            "How much time do you spend on screens each day?",
+                            "How does screen time affect your body or eyes?",
+                            "What activity could replace some screen time?",
+                            "How long could you last without your phone?"
+                        ]
+                    },
+                    {
+                        "name": "Preventive Health Habits",
+                        "questions": [
+                            "What habits help you stay healthy long term?",
+                            "Describe a checkup or health habit you keep regularly.",
+                            "What health goal would you like to set for this year?",
+                            "Which healthy habit is hardest to keep? Compare answers."
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Emotional and Mental Wellness",
+                "topics": [
+                    {
+                        "name": "Managing Stress",
+                        "questions": [
+                            "What causes you the most stress right now?",
+                            "How do you usually cope with stress?",
+                            "Describe a healthy way to relax after a stressful day.",
+                            "What is your fastest way to calm down?"
+                        ]
+                    },
+                    {
+                        "name": "Talking About Feelings",
+                        "questions": [
+                            "How comfortable are you talking about your feelings?",
+                            "Describe a time you shared how you felt with someone.",
+                            "Is it easier to talk to family or to a friend? Why?",
+                            "Is it easier to talk about feelings in your first language? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Coping with Change",
+                        "questions": [
+                            "Describe a big change you have experienced in your life.",
+                            "How did you feel during this change?",
+                            "What helped you adjust to this new situation?",
+                            "What change turned out better than you expected?"
+                        ]
+                    },
+                    {
+                        "name": "Building Confidence",
+                        "questions": [
+                            "What did you do this year that you did not think you could do?",
+                            "What activity helps build your confidence?",
+                            "How has learning English affected your confidence?",
+                            "What are you better at than you give yourself credit for?"
+                        ]
+                    },
+                    {
+                        "name": "Practicing Gratitude",
+                        "questions": [
+                            "What is something you are grateful for today?",
+                            "How does noticing good things affect your mood?",
+                            "Describe a small moment that made you happy recently.",
+                            "Name one small good thing from today."
+                        ]
+                    },
+                    {
+                        "name": "Seeking Support When Needed",
+                        "questions": [
+                            "Who do you turn to when you need emotional support?",
+                            "Describe a resource in your community for mental health.",
+                            "What would you say to a friend who seems overwhelmed?",
+                            "What makes it hard for people to ask for help?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Wellness in Different Areas of Life",
+                "topics": [
+                    {
+                        "name": "Wellness at Home",
+                        "questions": [
+                            "How does your home environment affect your wellness?",
+                            "What makes your home feel calm and comfortable?",
+                            "Describe a habit at home that supports your health.",
+                            "What one change would make your home more relaxing?"
+                        ]
+                    },
+                    {
+                        "name": "Wellness at Work",
+                        "questions": [
+                            "How does your job affect your physical or mental health?",
+                            "What helps you feel balanced during a work day?",
+                            "Describe a workplace habit that supports your wellness.",
+                            "What would make your workday feel lighter?"
+                        ]
+                    },
+                    {
+                        "name": "Wellness in the Community",
+                        "questions": [
+                            "How does your community support your overall wellness?",
+                            "Describe a community resource that helps you stay healthy.",
+                            "What activities in your community bring you joy?",
+                            "What free thing in your area makes life better?"
+                        ]
+                    },
+                    {
+                        "name": "Wellness in Relationships",
+                        "questions": [
+                            "How do your relationships affect your wellness?",
+                            "Describe a relationship that supports your well-being.",
+                            "What makes a relationship healthy?",
+                            "What does a good friend do that a nice person does not?"
+                        ]
+                    },
+                    {
+                        "name": "Financial Wellness",
+                        "questions": [
+                            "How does money stress affect your overall health?",
+                            "Describe a habit that helps you feel secure about money.",
+                            "What financial goal would improve your peace of mind?",
+                            "What money habit helps you sleep better?"
+                        ]
+                    },
+                    {
+                        "name": "Balancing All Areas of Life",
+                        "questions": [
+                            "Which area of your life needs the most attention right now?",
+                            "How do home, work, and community wellness connect for you?",
+                            "When work gets hard, what is the first thing at home that suffers?",
+                            "Which part of your life needs the most attention right now?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Building Long-Term Wellness Habits",
+                "topics": [
+                    {
+                        "name": "Setting Wellness Goals",
+                        "questions": [
+                            "What is one wellness goal you have for this year?",
+                            "How will you know when you reach this goal?",
+                            "What steps will help you get started?",
+                            "What is one small goal you could start this week?"
+                        ]
+                    },
+                    {
+                        "name": "Creating Healthy Routines",
+                        "questions": [
+                            "Describe a daily routine that supports your health.",
+                            "What time of day do you feel most energetic?",
+                            "How do you stay consistent with healthy habits?",
+                            "Are you better in the morning or the evening?"
+                        ]
+                    },
+                    {
+                        "name": "Overcoming Setbacks",
+                        "questions": [
+                            "Describe a time you struggled to keep a healthy habit.",
+                            "What caused you to get off track?",
+                            "How did you get back to your routine?",
+                            "What helps you start again after you fall off a routine?"
+                        ]
+                    },
+                    {
+                        "name": "Wellness Resources in the Community",
+                        "questions": [
+                            "What wellness resources exist in your community, such as classes or clinics?",
+                            "Have you used any of these resources? Describe your experience.",
+                            "How did you find out about this resource?",
+                            "What resource should more people know about?"
+                        ]
+                    },
+                    {
+                        "name": "Teaching Wellness Habits to Family",
+                        "questions": [
+                            "What healthy habit would you like to teach your family?",
+                            "How do you encourage family members to be healthy?",
+                            "Describe a wellness activity you do together.",
+                            "What habit did you learn from your family, good or bad?"
+                        ]
+                    },
+                    {
+                        "name": "Reflecting on Personal Growth",
+                        "questions": [
+                            "How have your wellness habits changed over the past year?",
+                            "What are you most proud of in your health journey?",
+                            "What area of wellness do you want to focus on next?",
+                            "What are you proud of that nobody noticed?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

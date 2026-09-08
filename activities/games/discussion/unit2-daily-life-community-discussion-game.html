@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Staying Connected with Family",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Calling Family Back Home",
-                                                                        "questions": [
-                                                                                        "How often do you talk to family in your home country?",
-                                                                                        "What app or method do you use to call them?",
-                                                                                        "Describe a recent conversation you had with them.",
-                                                                                        "Why is staying in touch with family important to you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Family Traditions",
-                                                                        "questions": [
-                                                                                        "Describe a tradition your family celebrates together.",
-                                                                                        "Who usually organizes family gatherings?",
-                                                                                        "How do you keep traditions alive while living far from family?",
-                                                                                        "What tradition would you like to pass on to your children?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Sharing News and Photos",
-                                                                        "questions": [
-                                                                                        "How do you share good news with your family?",
-                                                                                        "What app do you use to send photos to relatives?",
-                                                                                        "Describe a time you shared exciting news with family.",
-                                                                                        "How does technology help families stay close?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Supporting Family Members",
-                                                                        "questions": [
-                                                                                        "How do you help family members who need support?",
-                                                                                        "Describe a time your family helped you through a hard moment.",
-                                                                                        "What does it mean to support each other as a family?",
-                                                                                        "How can distance make it harder to support family?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Family Celebrations",
-                                                                        "questions": [
-                                                                                        "Describe how your family celebrates birthdays.",
-                                                                                        "Who do you usually invite to a family celebration?",
-                                                                                        "What food is served at your family celebrations?",
-                                                                                        "How do celebrations feel different away from home?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Raising Children Far from Family",
-                                                                        "questions": [
-                                                                                        "What challenges come from raising children away from grandparents?",
-                                                                                        "How do you teach your children about your culture?",
-                                                                                        "Who helps you with childcare here?",
-                                                                                        "How do you stay connected to family for support and advice?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Building Community Connections",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Meeting Neighbors",
-                                                                        "questions": [
-                                                                                        "Describe a time you met a new neighbor.",
-                                                                                        "How do you greet people in your neighborhood?",
-                                                                                        "What do you talk about with your neighbors?",
-                                                                                        "How can neighbors help each other?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Community Centers and Groups",
-                                                                        "questions": [
-                                                                                        "What community centers or groups exist near your home?",
-                                                                                        "Have you joined any local group or class? Describe it.",
-                                                                                        "How did you find out about this group?",
-                                                                                        "What would encourage you to join a new group?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Places of Worship",
-                                                                        "questions": [
-                                                                                        "Do you attend a place of worship? Describe it.",
-                                                                                        "How does this community support its members?",
-                                                                                        "What activities happen there besides religious services?",
-                                                                                        "How did you find your community of faith here?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Cultural Events in the Community",
-                                                                        "questions": [
-                                                                                        "Describe a cultural event you attended in your community.",
-                                                                                        "How did this event make you feel connected?",
-                                                                                        "What cultural events would you like to see more of?",
-                                                                                        "Who did you go with, and what did you do together?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Making New Friends",
-                                                                        "questions": [
-                                                                                        "How did you meet your closest friend here?",
-                                                                                        "What activities help you meet new people?",
-                                                                                        "Describe a challenge in making friends in a new country.",
-                                                                                        "What advice would you give someone trying to make friends?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Helping a New Neighbor",
-                                                                        "questions": [
-                                                                                        "A new family just moved in near you.",
-                                                                                        "What information would you share to help them settle in?",
-                                                                                        "How would you welcome them?",
-                                                                                        "What did someone do to help you when you first arrived?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Daily Life Outside the Home",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Grocery Shopping Routine",
-                                                                        "questions": [
-                                                                                        "Describe your usual grocery shopping routine.",
-                                                                                        "Where do you shop for food each week?",
-                                                                                        "How do you decide what to buy?",
-                                                                                        "Who do you shop with, and why?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Using Public Transportation",
-                                                                        "questions": [
-                                                                                        "Describe how you travel around your community.",
-                                                                                        "What bus or train routes do you use most?",
-                                                                                        "What is difficult about using public transportation here?",
-                                                                                        "How did you learn to use the transportation system?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Visiting the Library or Post Office",
-                                                                        "questions": [
-                                                                                        "How often do you visit the library or post office?",
-                                                                                        "What services do you use there?",
-                                                                                        "Describe a recent visit to one of these places.",
-                                                                                        "What would make these visits easier for you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Weekly Errands",
-                                                                        "questions": [
-                                                                                        "What errands do you run during a typical week?",
-                                                                                        "How do you plan your errands to save time?",
-                                                                                        "Who helps you with errands if you are busy?",
-                                                                                        "Describe an errand that took longer than expected."
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Eating Out in the Community",
-                                                                        "questions": [
-                                                                                        "Describe a restaurant you like in your community.",
-                                                                                        "Who do you usually eat out with?",
-                                                                                        "How often do you eat at restaurants?",
-                                                                                        "What kind of food do you order most often?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Community Health and Fitness",
-                                                                        "questions": [
-                                                                                        "Where do you go to exercise or stay active?",
-                                                                                        "Describe a park or gym you use in your area.",
-                                                                                        "How often do you exercise each week?",
-                                                                                        "What activity would you like to try in your community?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Community Resources and Support",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Finding Local Services",
-                                                                        "questions": [
-                                                                                        "What local services have you used, such as clinics or food pantries?",
-                                                                                        "How did you learn about these services?",
-                                                                                        "Describe your experience using one of these services.",
-                                                                                        "What service do you wish you knew more about?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Asking for Directions",
-                                                                        "questions": [
-                                                                                        "Describe a time you needed directions in your community.",
-                                                                                        "How did you ask someone for help finding a place?",
-                                                                                        "What information helps you understand directions clearly?",
-                                                                                        "How do you find directions using your phone?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Community Bulletin Boards and Flyers",
-                                                                        "questions": [
-                                                                                        "Where do you see flyers or announcements about local events?",
-                                                                                        "Describe an event you learned about this way.",
-                                                                                        "How do you decide if information on a flyer is useful?",
-                                                                                        "What information should a flyer include?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Getting Help in an Emergency",
-                                                                        "questions": [
-                                                                                        "Who would you contact if you needed help quickly in your community?",
-                                                                                        "What number do you call for non-emergency help?",
-                                                                                        "Describe a time you needed community support.",
-                                                                                        "How do you explain your address to someone helping you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Volunteering Locally",
-                                                                        "questions": [
-                                                                                        "Have you ever volunteered in your community? Describe it.",
-                                                                                        "What organizations in your area accept volunteers?",
-                                                                                        "How does volunteering help build community connections?",
-                                                                                        "What kind of volunteer work interests you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Local Government Services",
-                                                                        "questions": [
-                                                                                        "What services does your local city or town office provide?",
-                                                                                        "Have you ever visited the town hall or city hall? Why?",
-                                                                                        "How do you find information about local rules or permits?",
-                                                                                        "What question would you ask a city office employee?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                        const categories = [
+            {
+                "title": "Staying Connected with Family",
+                "topics": [
+                    {
+                        "name": "Calling Family Back Home",
+                        "questions": [
+                            "How often do you talk to family in your home country?",
+                            "What app or method do you use to call them?",
+                            "Describe a recent conversation you had with them.",
+                            "Who in your family talks the longest on the phone?"
+                        ]
+                    },
+                    {
+                        "name": "Family Traditions",
+                        "questions": [
+                            "Describe a tradition your family celebrates together.",
+                            "Who usually organizes family gatherings?",
+                            "How do you keep traditions alive while living far from family?",
+                            "Which family tradition do you secretly want to skip?"
+                        ]
+                    },
+                    {
+                        "name": "Sharing News and Photos",
+                        "questions": [
+                            "How do you share good news with your family?",
+                            "What app do you use to send photos to relatives?",
+                            "Describe a time you shared exciting news with family.",
+                            "Who sends the most photos in your family?"
+                        ]
+                    },
+                    {
+                        "name": "Supporting Family Members",
+                        "questions": [
+                            "How do you help family members who need support?",
+                            "Who in your family do you call first when something goes wrong?",
+                            "What does it mean to support each other as a family?",
+                            "What is the best advice a family member ever gave you?"
+                        ]
+                    },
+                    {
+                        "name": "Family Celebrations",
+                        "questions": [
+                            "Describe how your family celebrates birthdays.",
+                            "Who do you usually invite to a family celebration?",
+                            "What food is served at your family celebrations?",
+                            "What food must be on the table, or it is not a real celebration?"
+                        ]
+                    },
+                    {
+                        "name": "Raising Children Far from Family",
+                        "questions": [
+                            "What challenges come from raising children away from grandparents?",
+                            "How do you teach your children about your culture?",
+                            "Who helps you with childcare here?",
+                            "What do you want your children to keep from your culture?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Building Community Connections",
+                "topics": [
+                    {
+                        "name": "Meeting Neighbors",
+                        "questions": [
+                            "Describe a time you met a new neighbor.",
+                            "How do you greet people in your neighborhood?",
+                            "What do you talk about with your neighbors?",
+                            "What makes someone a good neighbor? Rank your top three."
+                        ]
+                    },
+                    {
+                        "name": "Community Centers and Groups",
+                        "questions": [
+                            "What community centers or groups exist near your home?",
+                            "Have you joined any local group or class? Describe it.",
+                            "How did you find out about this group?",
+                            "What class would you sign up for tomorrow if it were free?"
+                        ]
+                    },
+                    {
+                        "name": "Places of Worship",
+                        "questions": [
+                            "Do you attend a place of worship? Describe it.",
+                            "How does this community support its members?",
+                            "What activities happen there besides religious services?",
+                            "What makes a place feel welcoming to a newcomer?"
+                        ]
+                    },
+                    {
+                        "name": "Cultural Events in the Community",
+                        "questions": [
+                            "Describe a cultural event you attended in your community.",
+                            "How did this event make you feel connected?",
+                            "What cultural events would you like to see more of?",
+                            "What event should your city hold every year?"
+                        ]
+                    },
+                    {
+                        "name": "Making New Friends",
+                        "questions": [
+                            "How did you meet your closest friend here?",
+                            "What activities help you meet new people?",
+                            "Describe a challenge in making friends in a new country.",
+                            "Is it harder to make friends as an adult? Discuss."
+                        ]
+                    },
+                    {
+                        "name": "Helping a New Neighbor",
+                        "questions": [
+                            "A new family just moved in near you.",
+                            "What information would you share to help them settle in?",
+                            "How would you welcome them?",
+                            "What is the one thing you would tell a newcomer first?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Daily Life Outside the Home",
+                "topics": [
+                    {
+                        "name": "Grocery Shopping Routine",
+                        "questions": [
+                            "Describe your usual grocery shopping routine.",
+                            "Where do you shop for food each week?",
+                            "How do you decide what to buy?",
+                            "Who in your home is the best at grocery shopping?"
+                        ]
+                    },
+                    {
+                        "name": "Using Public Transportation",
+                        "questions": [
+                            "Describe how you travel around your community.",
+                            "What bus or train routes do you use most?",
+                            "What is difficult about using public transportation here?",
+                            "What is your best or worst bus or train story?"
+                        ]
+                    },
+                    {
+                        "name": "Visiting the Library or Post Office",
+                        "questions": [
+                            "How often do you visit the library or post office?",
+                            "What services do you use there?",
+                            "Describe a recent visit to one of these places.",
+                            "Which errand feels the slowest?"
+                        ]
+                    },
+                    {
+                        "name": "Weekly Errands",
+                        "questions": [
+                            "What errands do you run during a typical week?",
+                            "How do you plan your errands to save time?",
+                            "Who helps you with errands if you are busy?",
+                            "Which errand do you put off the longest?"
+                        ]
+                    },
+                    {
+                        "name": "Eating Out in the Community",
+                        "questions": [
+                            "Describe a restaurant you like in your community.",
+                            "Who do you usually eat out with?",
+                            "How often do you eat at restaurants?",
+                            "What is the best cheap meal in your neighborhood?"
+                        ]
+                    },
+                    {
+                        "name": "Community Health and Fitness",
+                        "questions": [
+                            "Where do you go to exercise or stay active?",
+                            "Describe a park or gym you use in your area.",
+                            "How often do you exercise each week?",
+                            "Would you rather exercise alone or with a group? Why?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Community Resources and Support",
+                "topics": [
+                    {
+                        "name": "Finding Local Services",
+                        "questions": [
+                            "What local services have you used, such as clinics or food pantries?",
+                            "How did you learn about these services?",
+                            "Describe your experience using one of these services.",
+                            "What service did you wish you had known about sooner?"
+                        ]
+                    },
+                    {
+                        "name": "Asking for Directions",
+                        "questions": [
+                            "Describe a time you needed directions in your community.",
+                            "How did you ask someone for help finding a place?",
+                            "What information helps you understand directions clearly?",
+                            "Do you ask a person or trust your phone? Why?"
+                        ]
+                    },
+                    {
+                        "name": "Community Bulletin Boards and Flyers",
+                        "questions": [
+                            "Where do you see flyers or announcements about local events?",
+                            "Describe an event you learned about this way.",
+                            "How do you decide if information on a flyer is useful?",
+                            "What makes you actually stop and read a flyer?"
+                        ]
+                    },
+                    {
+                        "name": "Getting Help in an Emergency",
+                        "questions": [
+                            "Who would you contact if you needed help quickly in your community?",
+                            "What number do you call for non-emergency help?",
+                            "Who helped you the most in your first month here?",
+                            "Who is your emergency contact, and why that person?"
+                        ]
+                    },
+                    {
+                        "name": "Volunteering Locally",
+                        "questions": [
+                            "Have you ever volunteered in your community? Describe it.",
+                            "What organizations in your area accept volunteers?",
+                            "How does volunteering help build community connections?",
+                            "If you had one free Saturday to help, what would you do?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Local Government Services",
+                        "questions": [
+                            "What services does your local city or town office provide?",
+                            "Have you ever visited the town hall or city hall? Why?",
+                            "How do you find information about local rules or permits?",
+                            "What one thing would you change about your city?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

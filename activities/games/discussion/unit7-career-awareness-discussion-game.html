@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Exploring Career Paths",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Your Current Job",
-                                                                        "questions": [
-                                                                                        "Describe your current job and daily tasks.",
-                                                                                        "What do you like most about your job?",
-                                                                                        "What is challenging about your job?",
-                                                                                        "How did you find this job?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "A Career You Are Interested In",
-                                                                        "questions": [
-                                                                                        "What career would you like to pursue in the future?",
-                                                                                        "What steps are needed to work in this field?",
-                                                                                        "What training or education does this career require?",
-                                                                                        "Why does this career interest you?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Comparing Two Careers",
-                                                                        "questions": [
-                                                                                        "Name two careers you are considering.",
-                                                                                        "How are these two careers different?",
-                                                                                        "Which career pays better or offers more hours?",
-                                                                                        "Which career would you choose, and why?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Skills Needed for a Career",
-                                                                        "questions": [
-                                                                                        "What skills are needed for a career you want?",
-                                                                                        "Which of these skills do you already have?",
-                                                                                        "Which skill do you need to develop?",
-                                                                                        "How could you learn this new skill?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Career Changes",
-                                                                        "questions": [
-                                                                                        "Have you ever changed careers or considered it? Describe it.",
-                                                                                        "What made you think about changing careers?",
-                                                                                        "What is difficult about starting a new career?",
-                                                                                        "What support would help someone change careers successfully?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning About Job Requirements",
-                                                                        "questions": [
-                                                                                        "How do you find out what a job requires?",
-                                                                                        "Describe a job posting and its requirements.",
-                                                                                        "What requirements are hardest for you to meet?",
-                                                                                        "Who can help you understand job requirements?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Understanding Workplace Rights",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Minimum Wage",
-                                                                        "questions": [
-                                                                                        "What do you know about minimum wage laws?",
-                                                                                        "How is minimum wage decided?",
-                                                                                        "Why is minimum wage important for workers?",
-                                                                                        "What would you do if you were paid less than minimum wage?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Safe Working Conditions",
-                                                                        "questions": [
-                                                                                        "What makes a workplace safe?",
-                                                                                        "Describe an unsafe condition you have seen or heard about.",
-                                                                                        "What right do workers have regarding safety?",
-                                                                                        "Who would you report an unsafe situation to?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Breaks and Overtime",
-                                                                        "questions": [
-                                                                                        "What do you know about break times at work?",
-                                                                                        "What is overtime pay?",
-                                                                                        "Describe a situation where overtime pay would apply.",
-                                                                                        "Why is it important to understand these rules?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Protection from Discrimination",
-                                                                        "questions": [
-                                                                                        "What does workplace discrimination mean to you?",
-                                                                                        "Why are workers protected from discrimination?",
-                                                                                        "Describe a situation where someone might face unfair treatment.",
-                                                                                        "What would you do if you experienced discrimination at work?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding a Paycheck",
-                                                                        "questions": [
-                                                                                        "What information appears on a paycheck?",
-                                                                                        "What deductions do you usually see on a paycheck?",
-                                                                                        "What would you do if your paycheck seemed incorrect?",
-                                                                                        "Why is it important to check your paycheck regularly?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Workers' Compensation",
-                                                                        "questions": [
-                                                                                        "What happens if someone gets injured at work?",
-                                                                                        "What do you know about workers' compensation?",
-                                                                                        "Why is it important to report an injury right away?",
-                                                                                        "Who should an injured worker talk to first?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Advocating for Yourself at Work",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Asking for a Raise",
-                                                                        "questions": [
-                                                                                        "How would you ask your supervisor for a raise?",
-                                                                                        "What information would you prepare before asking?",
-                                                                                        "What would you say if your supervisor said no?",
-                                                                                        "Why is it useful to practice this conversation?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reporting a Problem at Work",
-                                                                        "questions": [
-                                                                                        "Describe a problem you might need to report at work.",
-                                                                                        "Who would you talk to about this problem?",
-                                                                                        "What would you say to explain the situation clearly?",
-                                                                                        "Why is it important to report problems instead of staying silent?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Requesting Reasonable Accommodations",
-                                                                        "questions": [
-                                                                                        "What is an accommodation at work?",
-                                                                                        "Describe a situation where someone might need one.",
-                                                                                        "How would you request an accommodation from your employer?",
-                                                                                        "Why do employees have a right to ask for accommodations?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Disagreeing with a Decision Respectfully",
-                                                                        "questions": [
-                                                                                        "Describe a time you disagreed with a decision at work.",
-                                                                                        "How would you express disagreement respectfully?",
-                                                                                        "What questions would you ask to understand the decision better?",
-                                                                                        "Why is staying calm helpful in this situation?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Knowing Who to Contact for Help",
-                                                                        "questions": [
-                                                                                        "Who can employees contact if they have a workplace problem?",
-                                                                                        "What is the role of human resources at a company?",
-                                                                                        "Describe a situation where you would contact HR.",
-                                                                                        "Why is it useful to know your workplace resources?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Your Employee Rights",
-                                                                        "questions": [
-                                                                                        "What employee rights are most important to you?",
-                                                                                        "Where can you find information about your workplace rights?",
-                                                                                        "Describe a right that surprised you to learn about.",
-                                                                                        "Why does understanding your rights help you at work?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Growing in Your Career",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Continuing Education",
-                                                                        "questions": [
-                                                                                        "What classes or training could help your career?",
-                                                                                        "Describe a certification or class you want to complete.",
-                                                                                        "How would this education change your job opportunities?",
-                                                                                        "What is stopping you from starting this training now?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Finding a Mentor",
-                                                                        "questions": [
-                                                                                        "What is a mentor, and how can one help your career?",
-                                                                                        "Do you have someone who guides you at work? Describe them.",
-                                                                                        "What questions would you ask a mentor?",
-                                                                                        "How could you find a mentor in your field?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Building a Professional Network",
-                                                                        "questions": [
-                                                                                        "Who is part of your professional network right now?",
-                                                                                        "How do you meet new people in your field?",
-                                                                                        "Describe an event where you could meet professional contacts.",
-                                                                                        "Why is networking helpful for career growth?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Preparing for a Promotion",
-                                                                        "questions": [
-                                                                                        "What skills would help you get a promotion?",
-                                                                                        "Describe a promotion you would like to receive.",
-                                                                                        "How would you show your supervisor you are ready?",
-                                                                                        "What steps can you take now to prepare?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Company Benefits",
-                                                                        "questions": [
-                                                                                        "What benefits does your job offer, such as health insurance?",
-                                                                                        "How do you find information about your workplace benefits?",
-                                                                                        "Describe a benefit that is important to you.",
-                                                                                        "What questions would you ask about benefits at a new job?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Long-Term Career Planning",
-                                                                        "questions": [
-                                                                                        "Where do you see your career in five years?",
-                                                                                        "What steps will help you reach this goal?",
-                                                                                        "Who can support you in your career journey?",
-                                                                                        "How will improving your English help you get there?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                        const categories = [
+            {
+                "title": "Exploring Career Paths",
+                "topics": [
+                    {
+                        "name": "Your Current Job",
+                        "questions": [
+                            "Describe your current job and daily tasks.",
+                            "What do you like most about your job?",
+                            "What is challenging about your job?",
+                            "What is the best part of your workday?"
+                        ]
+                    },
+                    {
+                        "name": "A Career You Are Interested In",
+                        "questions": [
+                            "What career would you like to pursue in the future?",
+                            "What steps are needed to work in this field?",
+                            "What training or education does this career require?",
+                            "What job did you dream about as a child?"
+                        ]
+                    },
+                    {
+                        "name": "Comparing Two Careers",
+                        "questions": [
+                            "Name two careers you are considering.",
+                            "How are these two careers different?",
+                            "Which career pays better or offers more hours?",
+                            "Better pay or better hours? Choose and defend it."
+                        ]
+                    },
+                    {
+                        "name": "Skills Needed for a Career",
+                        "questions": [
+                            "What skills are needed for a career you want?",
+                            "Which of these skills do you already have?",
+                            "Which skill do you need to develop?",
+                            "Which skill of yours is most underrated?"
+                        ]
+                    },
+                    {
+                        "name": "Career Changes",
+                        "questions": [
+                            "Have you ever changed careers or considered it? Describe it.",
+                            "What made you think about changing careers?",
+                            "What is difficult about starting a new career?",
+                            "Is it ever too late to change careers? Discuss."
+                        ]
+                    },
+                    {
+                        "name": "Learning About Job Requirements",
+                        "questions": [
+                            "How do you find out what a job requires?",
+                            "Describe a job posting and its requirements.",
+                            "What requirements are hardest for you to meet?",
+                            "Which job requirement seems unnecessary to you?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Understanding Workplace Rights",
+                "topics": [
+                    {
+                        "name": "Minimum Wage",
+                        "questions": [
+                            "What do you know about minimum wage laws?",
+                            "How is minimum wage decided?",
+                            "Who decides what a fair wage is?",
+                            "Is the minimum wage enough to live on here? Discuss."
+                        ]
+                    },
+                    {
+                        "name": "Safe Working Conditions",
+                        "questions": [
+                            "What makes a workplace safe?",
+                            "Describe an unsafe condition you have seen or heard about.",
+                            "What right do workers have regarding safety?",
+                            "What unsafe thing have you seen people accept as normal?"
+                        ]
+                    },
+                    {
+                        "name": "Breaks and Overtime",
+                        "questions": [
+                            "What do you know about break times at work?",
+                            "What is overtime pay?",
+                            "Describe a situation where overtime pay would apply.",
+                            "Would you rather have a longer break or leave earlier?"
+                        ]
+                    },
+                    {
+                        "name": "Protection from Discrimination",
+                        "questions": [
+                            "What does workplace discrimination mean to you?",
+                            "What does fair treatment at work look like day to day?",
+                            "Describe a situation where someone might face unfair treatment.",
+                            "What makes it hard for people to speak up about unfair treatment?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding a Paycheck",
+                        "questions": [
+                            "What information appears on a paycheck?",
+                            "What deductions do you usually see on a paycheck?",
+                            "What would you do if your paycheck seemed incorrect?",
+                            "Which deduction on a paycheck surprises people most?"
+                        ]
+                    },
+                    {
+                        "name": "Workers' Compensation",
+                        "questions": [
+                            "What happens if someone gets injured at work?",
+                            "What do you know about workers' compensation?",
+                            "What should a worker do in the first hour after an injury?",
+                            "Why do you think some workers do not report injuries?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Advocating for Yourself at Work",
+                "topics": [
+                    {
+                        "name": "Asking for a Raise",
+                        "questions": [
+                            "How would you ask your supervisor for a raise?",
+                            "What information would you prepare before asking?",
+                            "What would you say if your supervisor said no?",
+                            "Practice it now: ask for a raise in two sentences."
+                        ]
+                    },
+                    {
+                        "name": "Reporting a Problem at Work",
+                        "questions": [
+                            "Describe a problem you might need to report at work.",
+                            "Who would you talk to about this problem?",
+                            "What would you say to explain the situation clearly?",
+                            "What would make it easier to report a problem?"
+                        ]
+                    },
+                    {
+                        "name": "Requesting Reasonable Accommodations",
+                        "questions": [
+                            "What is an accommodation at work?",
+                            "Describe a situation where someone might need one.",
+                            "How would you request an accommodation from your employer?",
+                            "What small change at work would help you most?"
+                        ]
+                    },
+                    {
+                        "name": "Disagreeing with a Decision Respectfully",
+                        "questions": [
+                            "Describe a time you disagreed with a decision at work.",
+                            "How would you express disagreement respectfully?",
+                            "What questions would you ask to understand the decision better?",
+                            "How do you disagree without starting an argument?"
+                        ]
+                    },
+                    {
+                        "name": "Knowing Who to Contact for Help",
+                        "questions": [
+                            "Who can employees contact if they have a workplace problem?",
+                            "What is the role of human resources at a company?",
+                            "Describe a situation where you would contact HR.",
+                            "Who do you go to first when something goes wrong at work?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Your Employee Rights",
+                        "questions": [
+                            "What employee rights are most important to you?",
+                            "Where can you find information about your workplace rights?",
+                            "Describe a right that surprised you to learn about.",
+                            "Which right do you think workers know the least about?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Growing in Your Career",
+                "topics": [
+                    {
+                        "name": "Continuing Education",
+                        "questions": [
+                            "What classes or training could help your career?",
+                            "Describe a certification or class you want to complete.",
+                            "How would this education change your job opportunities?",
+                            "What class would you take if your employer paid for it?"
+                        ]
+                    },
+                    {
+                        "name": "Finding a Mentor",
+                        "questions": [
+                            "What is a mentor, and how can one help your career?",
+                            "Do you have someone who guides you at work? Describe them.",
+                            "What questions would you ask a mentor?",
+                            "Who has taught you the most about work?"
+                        ]
+                    },
+                    {
+                        "name": "Building a Professional Network",
+                        "questions": [
+                            "Who is part of your professional network right now?",
+                            "How do you meet new people in your field?",
+                            "Describe an event where you could meet professional contacts.",
+                            "Is networking uncomfortable for you? Be honest."
+                        ]
+                    },
+                    {
+                        "name": "Preparing for a Promotion",
+                        "questions": [
+                            "What skills would help you get a promotion?",
+                            "Describe a promotion you would like to receive.",
+                            "How would you show your supervisor you are ready?",
+                            "What would you do differently if you were the boss?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Company Benefits",
+                        "questions": [
+                            "What benefits does your job offer, such as health insurance?",
+                            "How do you find information about your workplace benefits?",
+                            "Which benefit would make you accept a lower salary?",
+                            "Which benefit matters most to you: time, money, or health?"
+                        ]
+                    },
+                    {
+                        "name": "Long-Term Career Planning",
+                        "questions": [
+                            "Where do you see your career in five years?",
+                            "What steps will help you reach this goal?",
+                            "Who can support you in your career journey?",
+                            "What do you want your work life to look like in ten years?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

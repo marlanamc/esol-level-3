@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Workplace Communication",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Greeting Coworkers",
-                                                                        "questions": [
-                                                                                        "How do you greet your coworkers each morning?",
-                                                                                        "What small talk topics are common at your workplace?",
-                                                                                        "Describe a friendly conversation you had with a coworker.",
-                                                                                        "Why is greeting people politely important at work?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Asking Your Supervisor a Question",
-                                                                        "questions": [
-                                                                                        "Describe a time you needed to ask your supervisor something.",
-                                                                                        "How did you start the conversation politely?",
-                                                                                        "What would you say if you did not understand an instruction?",
-                                                                                        "Why is it important to ask questions instead of guessing?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Explaining You Will Be Late",
-                                                                        "questions": [
-                                                                                        "Imagine you will be late to work today.",
-                                                                                        "What would you say when you call or text your supervisor?",
-                                                                                        "What information should you include in the message?",
-                                                                                        "How can you sound professional even when you are stressed?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Requesting Time Off",
-                                                                        "questions": [
-                                                                                        "Describe how you would ask for a day off work.",
-                                                                                        "What information do you need to provide?",
-                                                                                        "How far in advance should you ask?",
-                                                                                        "What would you say if your request was denied?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Workplace Emails",
-                                                                        "questions": [
-                                                                                        "Describe an email you received from your workplace.",
-                                                                                        "What was the main information in the message?",
-                                                                                        "What do you do if an email is confusing?",
-                                                                                        "How do you reply politely to a work email?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Small Talk During Breaks",
-                                                                        "questions": [
-                                                                                        "What do you talk about with coworkers during a break?",
-                                                                                        "How do you start a conversation with someone new at work?",
-                                                                                        "Describe a topic that helped you connect with a coworker.",
-                                                                                        "Why is small talk useful in a workplace?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Job Search Skills",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Writing a Resume",
-                                                                        "questions": [
-                                                                                        "What information belongs on a resume?",
-                                                                                        "Describe your work experience in a few sentences.",
-                                                                                        "What skills would you highlight on your resume?",
-                                                                                        "Why is it important to update a resume regularly?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Filling Out a Job Application",
-                                                                        "questions": [
-                                                                                        "Describe a job application you have completed.",
-                                                                                        "What information is usually required?",
-                                                                                        "What questions were difficult to answer?",
-                                                                                        "How do you prepare before filling out an application?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Searching for Job Openings",
-                                                                        "questions": [
-                                                                                        "Where do you look for job openings?",
-                                                                                        "How do you decide if a job is a good match for you?",
-                                                                                        "Describe a job posting that interested you recently.",
-                                                                                        "What questions do you have before applying to a job?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Preparing for a Job Interview",
-                                                                        "questions": [
-                                                                                        "How do you prepare for a job interview?",
-                                                                                        "What question do you find difficult to answer in interviews?",
-                                                                                        "Describe how you would answer, tell me about yourself.",
-                                                                                        "What would you wear to a job interview and why?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Following Up After an Interview",
-                                                                        "questions": [
-                                                                                        "What would you say in a thank-you message after an interview?",
-                                                                                        "How soon should you follow up after an interview?",
-                                                                                        "Why is following up a good idea?",
-                                                                                        "Describe how you would ask about the next steps politely."
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Networking and Referrals",
-                                                                        "questions": [
-                                                                                        "Who in your life could help you find a job?",
-                                                                                        "How would you ask a friend about job openings at their company?",
-                                                                                        "Describe a time someone helped you find work.",
-                                                                                        "Why are personal connections helpful in a job search?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Building Career Skills",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Improving Speaking Skills for Work",
-                                                                        "questions": [
-                                                                                        "What English skills do you need most for your job?",
-                                                                                        "Describe a work situation where speaking clearly was important.",
-                                                                                        "How do you practice speaking English outside of class?",
-                                                                                        "What speaking skill would you like to improve first?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Learning New Job Skills",
-                                                                        "questions": [
-                                                                                        "What new skill would help you at work?",
-                                                                                        "How could you learn this skill?",
-                                                                                        "Describe a skill you learned recently on the job.",
-                                                                                        "Who could teach you this skill?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Giving and Receiving Instructions",
-                                                                        "questions": [
-                                                                                        "Describe a time you gave instructions to a coworker.",
-                                                                                        "What makes instructions easy or hard to understand?",
-                                                                                        "How do you check that you understood an instruction correctly?",
-                                                                                        "Why is clear communication important for safety at work?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Teamwork on the Job",
-                                                                        "questions": [
-                                                                                        "Describe a time you worked as part of a team at work.",
-                                                                                        "What made the teamwork successful or difficult?",
-                                                                                        "How do you communicate with teammates who speak a different language?",
-                                                                                        "What makes someone a good coworker?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Handling Feedback from a Supervisor",
-                                                                        "questions": [
-                                                                                        "Describe a time your supervisor gave you feedback.",
-                                                                                        "How did you respond to the feedback?",
-                                                                                        "What is a professional way to accept criticism?",
-                                                                                        "How can feedback help you improve at your job?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Setting Career Goals",
-                                                                        "questions": [
-                                                                                        "What is one career goal you have for this year?",
-                                                                                        "What steps are you taking toward this goal?",
-                                                                                        "How could better English help you reach this goal?",
-                                                                                        "Who supports you in reaching your career goals?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Workplace Professionalism",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Understanding a Work Schedule",
-                                                                        "questions": [
-                                                                                        "Describe your typical work schedule.",
-                                                                                        "What would you do if you needed to change your schedule?",
-                                                                                        "How do you check your schedule each week?",
-                                                                                        "What questions would you ask about a schedule change?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Dressing for the Workplace",
-                                                                        "questions": [
-                                                                                        "Describe the dress code at your job or a job you want.",
-                                                                                        "Why do workplaces have dress codes?",
-                                                                                        "What would you wear on your first day at a new job?",
-                                                                                        "How is dress code different between jobs you know?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Handling a Workplace Disagreement",
-                                                                        "questions": [
-                                                                                        "Describe a disagreement you had or could have with a coworker.",
-                                                                                        "How would you talk about the problem calmly?",
-                                                                                        "What would you say to find a solution together?",
-                                                                                        "Why is it important to stay professional during conflict?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Taking a Message at Work",
-                                                                        "questions": [
-                                                                                        "Imagine you answer the phone for a coworker who is not there.",
-                                                                                        "What information would you write down?",
-                                                                                        "How would you tell your coworker about the message?",
-                                                                                        "Why is accurate information important in a workplace message?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Workplace Safety Rules",
-                                                                        "questions": [
-                                                                                        "What safety rules exist at your job?",
-                                                                                        "Describe a safety procedure you follow at work.",
-                                                                                        "What would you do if you saw an unsafe situation?",
-                                                                                        "Why do workplaces train employees on safety?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Balancing Multiple Responsibilities",
-                                                                        "questions": [
-                                                                                        "How do you manage work, family, and school together?",
-                                                                                        "What is the hardest part of balancing these responsibilities?",
-                                                                                        "Describe a strategy that helps you stay organized.",
-                                                                                        "Who supports you when your schedule gets busy?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                        const categories = [
+            {
+                "title": "Workplace Communication",
+                "topics": [
+                    {
+                        "name": "Greeting Coworkers",
+                        "questions": [
+                            "How do you greet your coworkers each morning?",
+                            "What small talk topics are common at your workplace?",
+                            "Describe a friendly conversation you had with a coworker.",
+                            "What is the friendliest workplace you have ever been in?"
+                        ]
+                    },
+                    {
+                        "name": "Asking Your Supervisor a Question",
+                        "questions": [
+                            "Describe a time you needed to ask your supervisor something.",
+                            "How did you start the conversation politely?",
+                            "What would you say if you did not understand an instruction?",
+                            "Is it harder to ask a question or admit a mistake?"
+                        ]
+                    },
+                    {
+                        "name": "Explaining You Will Be Late",
+                        "questions": [
+                            "Imagine you will be late to work today.",
+                            "What would you say when you call or text your supervisor?",
+                            "What information should you include in the message?",
+                            "What is the most believable true reason for being late?"
+                        ]
+                    },
+                    {
+                        "name": "Requesting Time Off",
+                        "questions": [
+                            "Describe how you would ask for a day off work.",
+                            "What information do you need to provide?",
+                            "How far in advance should you ask?",
+                            "If you got one extra day off next week, what would you do?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Workplace Emails",
+                        "questions": [
+                            "Describe an email you received from your workplace.",
+                            "What was the main information in the message?",
+                            "What do you do if an email is confusing?",
+                            "What makes an email annoying to read?"
+                        ]
+                    },
+                    {
+                        "name": "Small Talk During Breaks",
+                        "questions": [
+                            "What do you talk about with coworkers during a break?",
+                            "How do you start a conversation with someone new at work?",
+                            "Describe a topic that helped you connect with a coworker.",
+                            "What is the best break-room conversation topic?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Job Search Skills",
+                "topics": [
+                    {
+                        "name": "Writing a Resume",
+                        "questions": [
+                            "What information belongs on a resume?",
+                            "Describe your work experience in a few sentences.",
+                            "What skills would you highlight on your resume?",
+                            "What is one thing about you a resume can never show?"
+                        ]
+                    },
+                    {
+                        "name": "Filling Out a Job Application",
+                        "questions": [
+                            "Describe a job application you have completed.",
+                            "What information do applications always ask for?",
+                            "What questions were difficult to answer?",
+                            "Which question on an application annoys you most?"
+                        ]
+                    },
+                    {
+                        "name": "Searching for Job Openings",
+                        "questions": [
+                            "Where do you look for job openings?",
+                            "How do you decide if a job is a good match for you?",
+                            "Describe a job posting that interested you recently.",
+                            "What job would you apply for if you knew you would get it?"
+                        ]
+                    },
+                    {
+                        "name": "Preparing for a Job Interview",
+                        "questions": [
+                            "How do you prepare for a job interview?",
+                            "What question do you find difficult to answer in interviews?",
+                            "Describe how you would answer, tell me about yourself.",
+                            "What is the hardest interview question? Answer it now."
+                        ]
+                    },
+                    {
+                        "name": "Following Up After an Interview",
+                        "questions": [
+                            "What would you say in a thank-you message after an interview?",
+                            "How soon should you follow up after an interview?",
+                            "Does following up actually help? What do you think?",
+                            "How long would you wait before following up?"
+                        ]
+                    },
+                    {
+                        "name": "Networking and Referrals",
+                        "questions": [
+                            "Who in your life could help you find a job?",
+                            "How would you ask a friend about job openings at their company?",
+                            "Describe a time someone helped you find work.",
+                            "Who in your life is the best at knowing people?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Building Career Skills",
+                "topics": [
+                    {
+                        "name": "Improving Speaking Skills for Work",
+                        "questions": [
+                            "What English skills do you need most for your job?",
+                            "Describe a work situation where speaking clearly was important.",
+                            "How do you practice speaking English outside of class?",
+                            "Which is harder at work: phone calls or meetings?"
+                        ]
+                    },
+                    {
+                        "name": "Learning New Job Skills",
+                        "questions": [
+                            "What new skill would help you at work?",
+                            "How could you learn this skill?",
+                            "Describe a skill you learned recently on the job.",
+                            "What skill did you learn faster than you expected?"
+                        ]
+                    },
+                    {
+                        "name": "Giving and Receiving Instructions",
+                        "questions": [
+                            "Describe a time you gave instructions to a coworker.",
+                            "What makes instructions easy or hard to understand?",
+                            "How do you check that you understood an instruction correctly?",
+                            "What makes instructions impossible to follow?"
+                        ]
+                    },
+                    {
+                        "name": "Teamwork on the Job",
+                        "questions": [
+                            "Describe a time you worked as part of a team at work.",
+                            "What made the teamwork successful or difficult?",
+                            "How do you communicate with teammates who speak a different language?",
+                            "What makes someone a coworker everybody likes?"
+                        ]
+                    },
+                    {
+                        "name": "Handling Feedback from a Supervisor",
+                        "questions": [
+                            "Describe a time your supervisor gave you feedback.",
+                            "How did you respond to the feedback?",
+                            "What is a professional way to accept criticism?",
+                            "What is the most useful feedback you ever received?"
+                        ]
+                    },
+                    {
+                        "name": "Setting Career Goals",
+                        "questions": [
+                            "What is one career goal you have for this year?",
+                            "What steps are you taking toward this goal?",
+                            "How could better English help you reach this goal?",
+                            "What job title do you want on your card in five years?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Workplace Professionalism",
+                "topics": [
+                    {
+                        "name": "Understanding a Work Schedule",
+                        "questions": [
+                            "Describe your typical work schedule.",
+                            "What would you do if you needed to change your schedule?",
+                            "How do you check your schedule each week?",
+                            "Would you rather work early mornings or late nights?"
+                        ]
+                    },
+                    {
+                        "name": "Dressing for the Workplace",
+                        "questions": [
+                            "Describe the dress code at your job or a job you want.",
+                            "Is your workplace dress code fair? Discuss.",
+                            "What would you wear on your first day at a new job?",
+                            "What is the most uncomfortable thing you have worn to work?"
+                        ]
+                    },
+                    {
+                        "name": "Handling a Workplace Disagreement",
+                        "questions": [
+                            "Describe a disagreement you had or could have with a coworker.",
+                            "How would you talk about the problem calmly?",
+                            "What would you say to find a solution together?",
+                            "Is it better to speak up right away or wait? Discuss."
+                        ]
+                    },
+                    {
+                        "name": "Taking a Message at Work",
+                        "questions": [
+                            "Imagine you answer the phone for a coworker who is not there.",
+                            "What information would you write down?",
+                            "How would you tell your coworker about the message?",
+                            "What is the worst phone message you have received?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Workplace Safety Rules",
+                        "questions": [
+                            "What safety rules exist at your job?",
+                            "Describe a safety procedure you follow at work.",
+                            "What would you do if you saw an unsafe situation?",
+                            "Which safety rule do people break most often?"
+                        ]
+                    },
+                    {
+                        "name": "Balancing Multiple Responsibilities",
+                        "questions": [
+                            "How do you manage work, family, and school together?",
+                            "What is the hardest part of balancing these responsibilities?",
+                            "Describe a strategy that helps you stay organized.",
+                            "What keeps you going during your busiest week?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;

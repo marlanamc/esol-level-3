@@ -614,245 +614,244 @@
     </div>
 
     <script>
-        const categories = [
-                        {
-                                        "title": "Everyday Shopping Decisions",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Comparing Prices",
-                                                                        "questions": [
-                                                                                        "Describe a time you compared prices before buying something.",
-                                                                                        "How do you decide between two similar products?",
-                                                                                        "What store do you trust for good prices?",
-                                                                                        "Why is comparing prices important?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Making a Shopping List",
-                                                                        "questions": [
-                                                                                        "Do you make a list before grocery shopping? Why or why not?",
-                                                                                        "How does a list help you spend less money?",
-                                                                                        "Describe what happens when you shop without a list.",
-                                                                                        "What items do you always need to buy each week?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Needs versus Wants",
-                                                                        "questions": [
-                                                                                        "What is the difference between a need and a want?",
-                                                                                        "Describe a recent purchase that was a need.",
-                                                                                        "Describe a recent purchase that was a want.",
-                                                                                        "How do you decide what to buy first when money is limited?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Sales and Discounts",
-                                                                        "questions": [
-                                                                                        "How do you find out about sales at stores?",
-                                                                                        "Describe a time you saved money using a coupon or sale.",
-                                                                                        "Why do stores offer discounts?",
-                                                                                        "What should you check before buying something on sale?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Buying in Bulk",
-                                                                        "questions": [
-                                                                                        "Have you ever bought food or supplies in a large quantity?",
-                                                                                        "What are the benefits of buying in bulk?",
-                                                                                        "What are the risks of buying too much of something?",
-                                                                                        "When is it better to buy a small amount instead?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Online versus In-Store Shopping",
-                                                                        "questions": [
-                                                                                        "Do you prefer shopping online or in a store? Why?",
-                                                                                        "Describe a time you shopped online.",
-                                                                                        "What are the risks of shopping online?",
-                                                                                        "How do you decide which method to use for a purchase?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Managing a Budget",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Creating a Monthly Budget",
-                                                                        "questions": [
-                                                                                        "Do you plan your spending each month? How?",
-                                                                                        "What expenses do you include in your budget?",
-                                                                                        "How do you decide how much to spend on food?",
-                                                                                        "What happens if you spend more than you planned?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Tracking Expenses",
-                                                                        "questions": [
-                                                                                        "How do you keep track of your spending?",
-                                                                                        "What app or method do you use to track money?",
-                                                                                        "Describe a time tracking expenses helped you.",
-                                                                                        "Why is it useful to know where your money goes?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Saving Money",
-                                                                        "questions": [
-                                                                                        "What is one goal you are saving money for?",
-                                                                                        "How much do you try to save each month?",
-                                                                                        "Describe a strategy you use to save money.",
-                                                                                        "What makes it difficult to save money sometimes?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Unexpected Expenses",
-                                                                        "questions": [
-                                                                                        "Describe a time you had an unexpected expense.",
-                                                                                        "How did you pay for it?",
-                                                                                        "What can you do to prepare for surprise costs?",
-                                                                                        "Why is an emergency fund helpful?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Paying Bills on Time",
-                                                                        "questions": [
-                                                                                        "What bills do you pay every month?",
-                                                                                        "How do you remember to pay bills on time?",
-                                                                                        "What happens if a bill is paid late?",
-                                                                                        "Describe a system you use to organize your bills."
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Setting Financial Goals",
-                                                                        "questions": [
-                                                                                        "What is one financial goal you have this year?",
-                                                                                        "How will you reach this goal?",
-                                                                                        "Who can help you plan your finances?",
-                                                                                        "What steps have you already taken toward this goal?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Banking and Credit",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Opening a Bank Account",
-                                                                        "questions": [
-                                                                                        "Describe your experience opening a bank account.",
-                                                                                        "What documents did you need?",
-                                                                                        "What questions did you ask the bank employee?",
-                                                                                        "What do you look for in a good bank account?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Using a Debit Card",
-                                                                        "questions": [
-                                                                                        "How often do you use a debit card instead of cash?",
-                                                                                        "What are the benefits of using a debit card?",
-                                                                                        "Describe a problem you had with a debit card.",
-                                                                                        "How do you keep your card information safe?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Credit Cards",
-                                                                        "questions": [
-                                                                                        "Do you have a credit card? Why or why not?",
-                                                                                        "What is the difference between a debit card and a credit card?",
-                                                                                        "What happens if you do not pay a credit card bill on time?",
-                                                                                        "How can a credit card be helpful or risky?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Building Credit History",
-                                                                        "questions": [
-                                                                                        "Why is credit history important in the United States?",
-                                                                                        "What can someone do to build good credit?",
-                                                                                        "Describe what you know about a credit score.",
-                                                                                        "Who could you ask for advice about building credit?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Avoiding Scams",
-                                                                        "questions": [
-                                                                                        "Describe a scam you have heard about or experienced.",
-                                                                                        "How can you tell if a phone call or email is a scam?",
-                                                                                        "What should you do if someone asks for your bank information?",
-                                                                                        "Why is it important to protect your personal information?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Talking to a Bank Representative",
-                                                                        "questions": [
-                                                                                        "What question would you ask about a fee on your account?",
-                                                                                        "How would you politely disagree with a charge on your statement?",
-                                                                                        "What information should you have ready before calling your bank?",
-                                                                                        "Why is it helpful to stay calm and polite during this call?"
-                                                                        ]
-                                                        }
-                                        ]
-                        },
-                        {
-                                        "title": "Consumer Rights and Decisions",
-                                        "topics": [
-                                                        {
-                                                                        "name": "Returning a Product",
-                                                                        "questions": [
-                                                                                        "Describe a time you returned something to a store.",
-                                                                                        "What information do you need to make a return?",
-                                                                                        "What would you say to a cashier when returning an item?",
-                                                                                        "Why do stores have return policies?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Reading Contracts and Agreements",
-                                                                        "questions": [
-                                                                                        "Describe a contract you have signed, such as for a phone or gym.",
-                                                                                        "What should you check before signing an agreement?",
-                                                                                        "What questions would you ask about hidden fees?",
-                                                                                        "Why is it important to read the fine print?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Comparing Phone or Internet Plans",
-                                                                        "questions": [
-                                                                                        "How do you choose a phone or internet plan?",
-                                                                                        "What features are most important to you?",
-                                                                                        "Describe a time you switched providers.",
-                                                                                        "What questions would you ask a salesperson about a plan?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Making a Complaint",
-                                                                        "questions": [
-                                                                                        "Describe a time you were unhappy with a product or service.",
-                                                                                        "How did you explain the problem to the company?",
-                                                                                        "What outcome were you hoping for?",
-                                                                                        "Why is it useful to stay polite when making a complaint?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Understanding Warranties",
-                                                                        "questions": [
-                                                                                        "What is a warranty, and why is it useful?",
-                                                                                        "Describe a product you bought that had a warranty.",
-                                                                                        "What steps would you take if a product broke during its warranty?",
-                                                                                        "How long should you keep a receipt for a big purchase?"
-                                                                        ]
-                                                        },
-                                                        {
-                                                                        "name": "Making a Big Purchase Decision",
-                                                                        "questions": [
-                                                                                        "Describe a large purchase you are planning or made recently.",
-                                                                                        "What research did you do before deciding?",
-                                                                                        "Who did you ask for advice?",
-                                                                                        "How did you decide it was the right choice?"
-                                                                        ]
-                                                        }
-                                        ]
-                        }
+                        const categories = [
+            {
+                "title": "Everyday Shopping Decisions",
+                "topics": [
+                    {
+                        "name": "Comparing Prices",
+                        "questions": [
+                            "Describe a time you compared prices before buying something.",
+                            "How do you decide between two similar products?",
+                            "What store do you trust for good prices?",
+                            "Who in your family is best at finding a deal?"
+                        ]
+                    },
+                    {
+                        "name": "Making a Shopping List",
+                        "questions": [
+                            "Do you make a list before grocery shopping? Why or why not?",
+                            "How does a list help you spend less money?",
+                            "Describe what happens when you shop without a list.",
+                            "What always ends up in your cart that was not on the list?"
+                        ]
+                    },
+                    {
+                        "name": "Needs versus Wants",
+                        "questions": [
+                            "What is the difference between a need and a want?",
+                            "Describe a recent purchase that was a need.",
+                            "Describe a recent purchase that was a want.",
+                            "Name one thing others call a want that you call a need."
+                        ]
+                    },
+                    {
+                        "name": "Sales and Discounts",
+                        "questions": [
+                            "How do you find out about sales at stores?",
+                            "Describe a time you saved money using a coupon or sale.",
+                            "What sale trick has worked on you?",
+                            "What is the best deal you have ever found?"
+                        ]
+                    },
+                    {
+                        "name": "Buying in Bulk",
+                        "questions": [
+                            "Have you ever bought food or supplies in a large quantity?",
+                            "What are the benefits of buying in bulk?",
+                            "What are the risks of buying too much of something?",
+                            "What do you always buy too much of?"
+                        ]
+                    },
+                    {
+                        "name": "Online versus In-Store Shopping",
+                        "questions": [
+                            "Do you prefer shopping online or in a store? Why?",
+                            "Describe a time you shopped online.",
+                            "What are the risks of shopping online?",
+                            "Would you rather shop online or in a store? Defend it."
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Managing a Budget",
+                "topics": [
+                    {
+                        "name": "Creating a Monthly Budget",
+                        "questions": [
+                            "Do you plan your spending each month? How?",
+                            "What expenses do you include in your budget?",
+                            "How do you decide how much to spend on food?",
+                            "Which expense is always bigger than you planned?"
+                        ]
+                    },
+                    {
+                        "name": "Tracking Expenses",
+                        "questions": [
+                            "How do you keep track of your spending?",
+                            "What app or method do you use to track money?",
+                            "Describe a time tracking expenses helped you.",
+                            "Do you know what you spent yesterday? Be honest."
+                        ]
+                    },
+                    {
+                        "name": "Saving Money",
+                        "questions": [
+                            "What is one goal you are saving money for?",
+                            "How much do you try to save each month?",
+                            "Describe a strategy you use to save money.",
+                            "What are you saving for right now?"
+                        ]
+                    },
+                    {
+                        "name": "Unexpected Expenses",
+                        "questions": [
+                            "Describe a time you had an unexpected expense.",
+                            "How did you pay for it?",
+                            "What can you do to prepare for surprise costs?",
+                            "What is the worst surprise expense you have had?"
+                        ]
+                    },
+                    {
+                        "name": "Paying Bills on Time",
+                        "questions": [
+                            "What bills do you pay every month?",
+                            "How do you remember to pay bills on time?",
+                            "What happens if a bill is paid late?",
+                            "Which bill is the easiest to forget?"
+                        ]
+                    },
+                    {
+                        "name": "Setting Financial Goals",
+                        "questions": [
+                            "What is one financial goal you have this year?",
+                            "How will you reach this goal?",
+                            "Who can help you plan your finances?",
+                            "What would you do first with an extra 500 dollars?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Banking and Credit",
+                "topics": [
+                    {
+                        "name": "Opening a Bank Account",
+                        "questions": [
+                            "Describe your experience opening a bank account.",
+                            "What documents did you need?",
+                            "What questions did you ask the bank employee?",
+                            "What makes you trust a bank?"
+                        ]
+                    },
+                    {
+                        "name": "Using a Debit Card",
+                        "questions": [
+                            "How often do you use a debit card instead of cash?",
+                            "What are the benefits of using a debit card?",
+                            "Describe a problem you had with a debit card.",
+                            "Cash or card? Which do you prefer, and why?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Credit Cards",
+                        "questions": [
+                            "Do you have a credit card? Why or why not?",
+                            "What is the difference between a debit card and a credit card?",
+                            "What happens if you do not pay a credit card bill on time?",
+                            "Are credit cards helpful or dangerous? Take a side."
+                        ]
+                    },
+                    {
+                        "name": "Building Credit History",
+                        "questions": [
+                            "What does credit history affect in daily life here?",
+                            "What can someone do to build good credit?",
+                            "Describe what you know about a credit score.",
+                            "What surprised you most about credit in this country?"
+                        ]
+                    },
+                    {
+                        "name": "Avoiding Scams",
+                        "questions": [
+                            "Describe a scam you have heard about or experienced.",
+                            "How can you tell if a phone call or email is a scam?",
+                            "What should you do if someone asks for your bank information?",
+                            "What is the strangest scam call or message you have received?"
+                        ]
+                    },
+                    {
+                        "name": "Talking to a Bank Representative",
+                        "questions": [
+                            "What question would you ask about a fee on your account?",
+                            "How would you politely disagree with a charge on your statement?",
+                            "What information should you have ready before calling your bank?",
+                            "How do you stay polite when you are frustrated?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Consumer Rights and Decisions",
+                "topics": [
+                    {
+                        "name": "Returning a Product",
+                        "questions": [
+                            "Describe a time you returned something to a store.",
+                            "What information do you need to make a return?",
+                            "What would you say to a cashier when returning an item?",
+                            "What is the most annoying return you have ever made?"
+                        ]
+                    },
+                    {
+                        "name": "Reading Contracts and Agreements",
+                        "questions": [
+                            "Describe a contract you have signed, such as for a phone or gym.",
+                            "What should you check before signing an agreement?",
+                            "What questions would you ask about hidden fees?",
+                            "Do you read the fine print? Really?"
+                        ]
+                    },
+                    {
+                        "name": "Comparing Phone or Internet Plans",
+                        "questions": [
+                            "How do you choose a phone or internet plan?",
+                            "What features are most important to you?",
+                            "Describe a time you switched providers.",
+                            "Is your phone plan worth the money? Convince us."
+                        ]
+                    },
+                    {
+                        "name": "Making a Complaint",
+                        "questions": [
+                            "Describe a time you were unhappy with a product or service.",
+                            "How did you explain the problem to the company?",
+                            "What outcome were you hoping for?",
+                            "Have you ever complained and actually won?"
+                        ]
+                    },
+                    {
+                        "name": "Understanding Warranties",
+                        "questions": [
+                            "What is a warranty, and why is it useful?",
+                            "Describe a product you bought that had a warranty.",
+                            "What steps would you take if a product broke during its warranty?",
+                            "Do you keep receipts, or throw them away?"
+                        ]
+                    },
+                    {
+                        "name": "Making a Big Purchase Decision",
+                        "questions": [
+                            "Describe a large purchase you are planning or made recently.",
+                            "What research did you do before deciding?",
+                            "Who did you ask for advice?",
+                            "What big purchase are you glad you waited on?"
+                        ]
+                    }
+                ]
+            }
         ];
-
         let currentCategoryIndex = 0;
         let timeLeft = 90;
         let timerId = null;
