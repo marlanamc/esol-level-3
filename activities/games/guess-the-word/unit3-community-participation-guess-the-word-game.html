@@ -202,12 +202,38 @@
 
         .taboo-body { padding: 22px 24px 28px; }
 
+        .mask-word {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 0 .3em;
+        }
+
+        /* a clear gap between words so a 3-word answer reads as three groups */
+        .mask-word + .mask-word {
+            margin-left: 1.1em;
+            border-left: 2px solid rgba(255,255,255,.35);
+        }
+
         .taboo-hidden-mark {
             display: none;
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: .12em;
             opacity: .9;
         }
+
+        .taboo-pos {
+            display: inline-block;
+            font-size: 12px; font-weight: 700; letter-spacing: 1.4px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,.22);
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 999px;
+            padding: 4px 12px;
+            margin-top: 12px;
+        }
+
+        .hint { background: #5a5a5a; }
+        .hint:hover { background: #444444; }
 
         .taboo-label {
             font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
@@ -385,7 +411,8 @@
                     <div class="taboo-head">
                         <div class="taboo-topic" id="tabooTopic">TOPIC</div>
                         <div class="taboo-word" id="tabooWord">WORD</div>
-                        <div class="taboo-hidden-mark" aria-hidden="true">???</div>
+                        <div class="taboo-hidden-mark" id="tabooMask" role="status" aria-label="answer hidden">???</div>
+                        <div class="taboo-pos" id="tabooPos"></div>
                     </div>
                     <div class="taboo-body">
                         <div class="taboo-label">Clues</div>
@@ -394,12 +421,13 @@
                 </div>
 
                 <div class="action-row">
+                    <button class="action-btn hint" id="hintBtn" onclick="toggleHint()">Need a hint?</button>
                     <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">Everyone looks at the clues &bull; Got it scores a point for the guessing team and switches turns</div>
+                <div class="instruction-text">Everyone looks at the clues &bull; Stuck? Use Need a hint? for the first letter &bull; Got it scores a point and switches turns</div>
             </div>
 
             <div class="nav-container">
@@ -413,29 +441,30 @@
 
     <script>
         const cards = [
-            { word: "volunteer", clues: ["free", "help", "time"], topic: "Helping Out" },
-            { word: "assist", clues: ["help", "hand", "support"], topic: "Helping Out" },
-            { word: "contribute", clues: ["give", "part", "add"], topic: "Helping Out" },
-            { word: "donate", clues: ["give", "money", "charity"], topic: "Helping Out" },
-            { word: "participate", clues: ["join", "take part", "activity"], topic: "Working Together" },
-            { word: "suggest", clues: ["idea", "say", "maybe"], topic: "Working Together" },
-            { word: "propose", clues: ["plan", "idea", "offer"], topic: "Working Together" },
-            { word: "recommend", clues: ["suggest", "good", "advice"], topic: "Working Together" },
-            { word: "agree", clues: ["yes", "same", "think"], topic: "Working Together" },
-            { word: "vote", clues: ["election", "choose", "ballot"], topic: "Civic Voice" },
-            { word: "elect", clues: ["vote", "choose", "president"], topic: "Civic Voice" },
-            { word: "advocate", clues: ["speak", "support", "fight"], topic: "Civic Voice" },
-            { word: "petition", clues: ["sign", "names", "paper"], topic: "Civic Voice" },
-            { word: "represent", clues: ["speak for", "group", "instead"], topic: "Civic Voice" },
-            { word: "campaign", clues: ["election", "run", "votes"], topic: "Civic Voice" },
-            { word: "analyze", clues: ["look", "study", "understand"], topic: "Solving Problems" },
-            { word: "resolve", clues: ["solve", "fix", "problem"], topic: "Solving Problems" },
-            { word: "improve", clues: ["better", "fix", "good"], topic: "Solving Problems" },
-            { word: "collaborate", clues: ["together", "work", "team"], topic: "Solving Problems" },
-            { word: "report", clues: ["tell", "police", "problem"], topic: "Solving Problems" },
-            { word: "prevent", clues: ["stop", "before", "happen"], topic: "Solving Problems" }
+            { word: "volunteer", clues: ["free", "help", "time"], topic: "Helping Out", pos: "verb" },
+            { word: "assist", clues: ["help", "hand", "support"], topic: "Helping Out", pos: "verb" },
+            { word: "contribute", clues: ["give", "part", "add"], topic: "Helping Out", pos: "verb" },
+            { word: "donate", clues: ["give", "money", "charity"], topic: "Helping Out", pos: "verb" },
+            { word: "participate", clues: ["join", "take part", "activity"], topic: "Working Together", pos: "verb" },
+            { word: "suggest", clues: ["idea", "say", "maybe"], topic: "Working Together", pos: "verb" },
+            { word: "propose", clues: ["plan", "idea", "offer"], topic: "Working Together", pos: "verb" },
+            { word: "recommend", clues: ["suggest", "good", "advice"], topic: "Working Together", pos: "verb" },
+            { word: "agree", clues: ["yes", "same", "think"], topic: "Working Together", pos: "verb" },
+            { word: "vote", clues: ["election", "choose", "ballot"], topic: "Civic Voice", pos: "verb" },
+            { word: "elect", clues: ["vote", "choose", "president"], topic: "Civic Voice", pos: "verb" },
+            { word: "advocate", clues: ["speak up", "support", "cause"], topic: "Civic Voice", pos: "verb" },
+            { word: "petition", clues: ["sign", "names", "paper"], topic: "Civic Voice", pos: "verb" },
+            { word: "represent", clues: ["speak for", "group", "instead"], topic: "Civic Voice", pos: "verb" },
+            { word: "campaign", clues: ["election", "run", "votes"], topic: "Civic Voice", pos: "verb" },
+            { word: "analyze", clues: ["look", "study", "understand"], topic: "Solving Problems", pos: "verb" },
+            { word: "resolve", clues: ["solve", "fix", "problem"], topic: "Solving Problems", pos: "verb" },
+            { word: "improve", clues: ["better", "fix", "good"], topic: "Solving Problems", pos: "verb" },
+            { word: "collaborate", clues: ["together", "work", "team"], topic: "Solving Problems", pos: "verb" },
+            { word: "report", clues: ["tell", "police", "problem"], topic: "Solving Problems", pos: "verb" },
+            { word: "prevent", clues: ["stop", "before", "happen"], topic: "Solving Problems", pos: "verb" }
         ];
 
+        let hintShown = false;
         let order = cards.map(function (_, i) { return i; });
         let pos = 0;
         let score = { a: 0, b: 0 };
@@ -462,6 +491,7 @@
             const c = cards[order[i]];
             document.getElementById('tabooTopic').textContent = c.topic;
             document.getElementById('tabooWord').textContent = c.word;
+            document.getElementById('tabooPos').textContent = c.pos || '';
             document.getElementById('tabooList').innerHTML =
                 c.clues.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
             document.getElementById('questionCounter').textContent =
@@ -469,7 +499,49 @@
             // Each new card starts with the answer hidden so the class can guess from the clues.
             document.getElementById('tabooCard').classList.add('concealed');
             document.getElementById('revealBtn').textContent = 'Reveal answer';
+            hintShown = false;
+            paintMask();
             resetTimer();
+        }
+
+        // Letter shape: first letter, then one blank per remaining letter.
+        // Word breaks are preserved so multi-word answers are visibly multi-word.
+        function letterShape(word) {
+            return word.split(' ').filter(Boolean).map(function (part) {
+                const shape = part.charAt(0) + part.slice(1).replace(/./g, ' _');
+                return '<span class="mask-word">' + escapeHtml(shape) + '</span>';
+            }).join('');
+        }
+
+        function maskLabel(word) {
+            const words = word.split(' ').filter(Boolean);
+            const letters = word.replace(/ /g, '').length;
+            return 'hint: ' + (words.length > 1 ? words.length + ' words, ' : '') +
+                letters + ' letters, starts with ' + word.charAt(0).toUpperCase();
+        }
+
+        function paintMask() {
+            const c = cards[order[pos]];
+            const el = document.getElementById('tabooMask');
+            // long answers need a smaller shape or the blanks overflow the card
+            const letters = c.word.replace(/ /g, '').length;
+            el.style.fontSize = hintShown
+                ? (letters > 12 ? '28px' : letters > 9 ? '36px' : letters > 7 ? '44px' : '')
+                : '';
+            if (hintShown) {
+                el.innerHTML = letterShape(c.word);
+                el.setAttribute('aria-label', maskLabel(c.word));
+                document.getElementById('hintBtn').textContent = 'Hide hint';
+            } else {
+                el.textContent = '???';
+                el.setAttribute('aria-label', 'answer hidden');
+                document.getElementById('hintBtn').textContent = 'Need a hint?';
+            }
+        }
+
+        function toggleHint() {
+            hintShown = !hintShown;
+            paintMask();
         }
 
         function revealCard() {

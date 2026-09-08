@@ -202,12 +202,38 @@
 
         .taboo-body { padding: 22px 24px 28px; }
 
+        .mask-word {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 0 .3em;
+        }
+
+        /* a clear gap between words so a 3-word answer reads as three groups */
+        .mask-word + .mask-word {
+            margin-left: 1.1em;
+            border-left: 2px solid rgba(255,255,255,.35);
+        }
+
         .taboo-hidden-mark {
             display: none;
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: .12em;
             opacity: .9;
         }
+
+        .taboo-pos {
+            display: inline-block;
+            font-size: 12px; font-weight: 700; letter-spacing: 1.4px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,.22);
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 999px;
+            padding: 4px 12px;
+            margin-top: 12px;
+        }
+
+        .hint { background: #5a5a5a; }
+        .hint:hover { background: #444444; }
 
         .taboo-label {
             font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
@@ -381,7 +407,8 @@
                     <div class="taboo-head">
                         <div class="taboo-topic" id="tabooTopic">TOPIC</div>
                         <div class="taboo-word" id="tabooWord">WORD</div>
-                        <div class="taboo-hidden-mark" aria-hidden="true">???</div>
+                        <div class="taboo-hidden-mark" id="tabooMask" role="status" aria-label="answer hidden">???</div>
+                        <div class="taboo-pos" id="tabooPos"></div>
                     </div>
                     <div class="taboo-body">
                         <div class="taboo-label">Clues</div>
@@ -390,12 +417,13 @@
                 </div>
 
                 <div class="action-row">
+                    <button class="action-btn hint" id="hintBtn" onclick="toggleHint()">Need a hint?</button>
                     <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">Everyone looks at the clues &bull; Got it scores a point for the guessing team and switches turns</div>
+                <div class="instruction-text">Everyone looks at the clues &bull; Stuck? Use Need a hint? for the first letter &bull; Got it scores a point and switches turns</div>
             </div>
 
             <div class="nav-container">
@@ -409,28 +437,29 @@
 
     <script>
         const cards = [
-            { word: "symptom", clues: ["sick", "feel", "sign"], topic: "Symptoms & Medicine" },
-            { word: "temperature", clues: ["hot", "cold", "degrees"], topic: "Symptoms & Medicine" },
-            { word: "prescribe", clues: ["doctor", "medicine", "give"], topic: "Symptoms & Medicine" },
-            { word: "dose", clues: ["amount", "medicine", "take"], topic: "Symptoms & Medicine" },
-            { word: "chronic", clues: ["long", "always", "forever"], topic: "Symptoms & Medicine" },
-            { word: "nutrient", clues: ["food", "healthy", "vitamin"], topic: "Symptoms & Medicine" },
-            { word: "wellness", clues: ["health", "good", "feeling"], topic: "Self-Care" },
-            { word: "self-care", clues: ["yourself", "take care", "health"], topic: "Self-Care" },
-            { word: "relax", clues: ["calm", "rest", "stress"], topic: "Self-Care" },
-            { word: "coping skills", clues: ["stress", "handle", "deal"], topic: "Self-Care" },
-            { word: "mindful", clues: ["aware", "present", "think"], topic: "Self-Care" },
-            { word: "processed", clues: ["food", "factory", "package"], topic: "Remedies" },
-            { word: "remedy", clues: ["cure", "fix", "medicine"], topic: "Remedies" },
-            { word: "relieve", clues: ["less", "pain", "better"], topic: "Remedies" },
-            { word: "soothe", clues: ["calm", "gentle", "comfort"], topic: "Remedies" },
-            { word: "fluids", clues: ["water", "drink", "liquid"], topic: "Remedies" },
-            { word: "ailment", clues: ["sick", "illness", "problem"], topic: "Remedies" },
-            { word: "progress", clues: ["better", "forward", "improve"], topic: "Growth" },
-            { word: "accomplish", clues: ["finish", "do", "achieve"], topic: "Growth" },
-            { word: "reflection", clues: ["think", "back", "look"], topic: "Growth" }
+            { word: "symptom", clues: ["sick", "feel", "sign"], topic: "Symptoms & Medicine", pos: "noun" },
+            { word: "temperature", clues: ["hot", "cold", "degrees"], topic: "Symptoms & Medicine", pos: "noun" },
+            { word: "prescribe", clues: ["doctor", "medicine", "give"], topic: "Symptoms & Medicine", pos: "verb" },
+            { word: "dose", clues: ["amount", "medicine", "take"], topic: "Symptoms & Medicine", pos: "noun" },
+            { word: "chronic", clues: ["long", "always", "forever"], topic: "Symptoms & Medicine", pos: "adjective" },
+            { word: "nutrient", clues: ["food", "healthy", "vitamin"], topic: "Symptoms & Medicine", pos: "noun" },
+            { word: "wellness", clues: ["health", "good", "feeling"], topic: "Self-Care", pos: "noun" },
+            { word: "self-care", clues: ["yourself", "take care", "health"], topic: "Self-Care", pos: "noun" },
+            { word: "relax", clues: ["calm", "rest", "stress"], topic: "Self-Care", pos: "verb" },
+            { word: "coping skills", clues: ["stress", "handle", "deal"], topic: "Self-Care", pos: "noun phrase" },
+            { word: "mindful", clues: ["aware", "present", "think"], topic: "Self-Care", pos: "adjective" },
+            { word: "processed", clues: ["food", "factory", "package"], topic: "Remedies", pos: "adjective" },
+            { word: "remedy", clues: ["cure", "fix", "medicine"], topic: "Remedies", pos: "noun" },
+            { word: "relieve", clues: ["less", "pain", "better"], topic: "Remedies", pos: "verb" },
+            { word: "soothe", clues: ["calm", "gentle", "comfort"], topic: "Remedies", pos: "verb" },
+            { word: "fluids", clues: ["water", "drink", "liquid"], topic: "Remedies", pos: "noun" },
+            { word: "ailment", clues: ["sick", "illness", "problem"], topic: "Remedies", pos: "noun" },
+            { word: "progress", clues: ["better", "forward", "improve"], topic: "Growth", pos: "verb" },
+            { word: "accomplish", clues: ["finish", "do", "achieve"], topic: "Growth", pos: "verb" },
+            { word: "reflection", clues: ["thought", "mirror", "looking back"], topic: "Growth", pos: "noun" }
         ];
 
+        let hintShown = false;
         let order = cards.map(function (_, i) { return i; });
         let pos = 0;
         let score = { a: 0, b: 0 };
@@ -457,6 +486,7 @@
             const c = cards[order[i]];
             document.getElementById('tabooTopic').textContent = c.topic;
             document.getElementById('tabooWord').textContent = c.word;
+            document.getElementById('tabooPos').textContent = c.pos || '';
             document.getElementById('tabooList').innerHTML =
                 c.clues.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
             document.getElementById('questionCounter').textContent =
@@ -464,7 +494,49 @@
             // Each new card starts with the answer hidden so the class can guess from the clues.
             document.getElementById('tabooCard').classList.add('concealed');
             document.getElementById('revealBtn').textContent = 'Reveal answer';
+            hintShown = false;
+            paintMask();
             resetTimer();
+        }
+
+        // Letter shape: first letter, then one blank per remaining letter.
+        // Word breaks are preserved so multi-word answers are visibly multi-word.
+        function letterShape(word) {
+            return word.split(' ').filter(Boolean).map(function (part) {
+                const shape = part.charAt(0) + part.slice(1).replace(/./g, ' _');
+                return '<span class="mask-word">' + escapeHtml(shape) + '</span>';
+            }).join('');
+        }
+
+        function maskLabel(word) {
+            const words = word.split(' ').filter(Boolean);
+            const letters = word.replace(/ /g, '').length;
+            return 'hint: ' + (words.length > 1 ? words.length + ' words, ' : '') +
+                letters + ' letters, starts with ' + word.charAt(0).toUpperCase();
+        }
+
+        function paintMask() {
+            const c = cards[order[pos]];
+            const el = document.getElementById('tabooMask');
+            // long answers need a smaller shape or the blanks overflow the card
+            const letters = c.word.replace(/ /g, '').length;
+            el.style.fontSize = hintShown
+                ? (letters > 12 ? '28px' : letters > 9 ? '36px' : letters > 7 ? '44px' : '')
+                : '';
+            if (hintShown) {
+                el.innerHTML = letterShape(c.word);
+                el.setAttribute('aria-label', maskLabel(c.word));
+                document.getElementById('hintBtn').textContent = 'Hide hint';
+            } else {
+                el.textContent = '???';
+                el.setAttribute('aria-label', 'answer hidden');
+                document.getElementById('hintBtn').textContent = 'Need a hint?';
+            }
+        }
+
+        function toggleHint() {
+            hintShown = !hintShown;
+            paintMask();
         }
 
         function revealCard() {

@@ -202,12 +202,38 @@
 
         .taboo-body { padding: 22px 24px 28px; }
 
+        .mask-word {
+            display: inline-block;
+            white-space: nowrap;
+            padding: 0 .3em;
+        }
+
+        /* a clear gap between words so a 3-word answer reads as three groups */
+        .mask-word + .mask-word {
+            margin-left: 1.1em;
+            border-left: 2px solid rgba(255,255,255,.35);
+        }
+
         .taboo-hidden-mark {
             display: none;
             font-family: 'Atkinson Hyperlegible', sans-serif;
             font-size: 56px; font-weight: 700; line-height: 1.1; letter-spacing: .12em;
             opacity: .9;
         }
+
+        .taboo-pos {
+            display: inline-block;
+            font-size: 12px; font-weight: 700; letter-spacing: 1.4px;
+            text-transform: uppercase;
+            background: rgba(255,255,255,.22);
+            border: 1px solid rgba(255,255,255,.45);
+            border-radius: 999px;
+            padding: 4px 12px;
+            margin-top: 12px;
+        }
+
+        .hint { background: #5a5a5a; }
+        .hint:hover { background: #444444; }
 
         .taboo-label {
             font-size: 12px; font-weight: 700; letter-spacing: 1.6px;
@@ -381,7 +407,8 @@
                     <div class="taboo-head">
                         <div class="taboo-topic" id="tabooTopic">TOPIC</div>
                         <div class="taboo-word" id="tabooWord">WORD</div>
-                        <div class="taboo-hidden-mark" aria-hidden="true">???</div>
+                        <div class="taboo-hidden-mark" id="tabooMask" role="status" aria-label="answer hidden">???</div>
+                        <div class="taboo-pos" id="tabooPos"></div>
                     </div>
                     <div class="taboo-body">
                         <div class="taboo-label">Clues</div>
@@ -390,12 +417,13 @@
                 </div>
 
                 <div class="action-row">
+                    <button class="action-btn hint" id="hintBtn" onclick="toggleHint()">Need a hint?</button>
                     <button class="action-btn reveal" id="revealBtn" onclick="revealCard()">Reveal answer</button>
                     <button class="action-btn got-it" onclick="gotIt()">&#10003; Got it</button>
                     <button class="action-btn skip" onclick="skipCard()">Skip &#8594;</button>
                 </div>
 
-                <div class="instruction-text">Everyone looks at the clues &bull; Got it scores a point for the guessing team and switches turns</div>
+                <div class="instruction-text">Everyone looks at the clues &bull; Stuck? Use Need a hint? for the first letter &bull; Got it scores a point and switches turns</div>
             </div>
 
             <div class="nav-container">
@@ -409,25 +437,26 @@
 
     <script>
         const cards = [
-            { word: "shift", clues: ["work", "hours", "time"], topic: "Work Schedule" },
-            { word: "break", clues: ["rest", "lunch", "stop"], topic: "Work Schedule" },
-            { word: "time off", clues: ["vacation", "not work", "day"], topic: "Work Schedule" },
-            { word: "reliable", clues: ["trust", "always", "depend"], topic: "Work Schedule" },
-            { word: "flexible", clues: ["change", "easy", "bend"], topic: "Work Schedule" },
-            { word: "clock in", clues: ["start", "time", "work"], topic: "On the Job" },
-            { word: "clock out", clues: ["finish", "leave", "time"], topic: "On the Job" },
-            { word: "call out", clues: ["sick", "not come", "phone"], topic: "On the Job" },
-            { word: "supervisor", clues: ["boss", "manager", "above"], topic: "On the Job" },
-            { word: "follow up", clues: ["check", "again", "after"], topic: "On the Job" },
-            { word: "experience", clues: ["before", "years", "done"], topic: "Job Search" },
-            { word: "resume", clues: ["paper", "job", "experience"], topic: "Job Search" },
-            { word: "cover letter", clues: ["write", "job", "apply"], topic: "Job Search" },
-            { word: "reference", clues: ["person", "recommend", "boss"], topic: "Job Search" },
-            { word: "deadline", clues: ["time", "last", "due"], topic: "Job Search" },
-            { word: "interview", clues: ["job", "questions", "meet"], topic: "Job Search" },
-            { word: "teamwork", clues: ["together", "group", "work"], topic: "Work Schedule" }
+            { word: "shift", clues: ["hours", "morning", "night"], topic: "Work Schedule", pos: "noun" },
+            { word: "break", clues: ["rest", "lunch", "stop"], topic: "Work Schedule", pos: "verb" },
+            { word: "time off", clues: ["vacation", "not work", "day"], topic: "Work Schedule", pos: "noun phrase" },
+            { word: "reliable", clues: ["trust", "always", "depend"], topic: "Work Schedule", pos: "adjective" },
+            { word: "flexible", clues: ["change", "easy", "bend"], topic: "Work Schedule", pos: "adjective" },
+            { word: "clock in", clues: ["start", "punch", "badge"], topic: "On the Job", pos: "phrasal verb" },
+            { word: "clock out", clues: ["finish", "leave", "time"], topic: "On the Job", pos: "phrasal verb" },
+            { word: "call out", clues: ["sick", "not come", "phone"], topic: "On the Job", pos: "phrasal verb" },
+            { word: "supervisor", clues: ["boss", "manager", "above"], topic: "On the Job", pos: "noun" },
+            { word: "follow up", clues: ["check", "email", "after"], topic: "On the Job", pos: "phrasal verb" },
+            { word: "experience", clues: ["before", "years", "done"], topic: "Job Search", pos: "noun" },
+            { word: "resume", clues: ["paper", "job", "experience"], topic: "Job Search", pos: "noun" },
+            { word: "cover letter", clues: ["write", "job", "apply"], topic: "Job Search", pos: "noun phrase" },
+            { word: "reference", clues: ["person", "recommend", "boss"], topic: "Job Search", pos: "noun" },
+            { word: "deadline", clues: ["due", "friday", "submit"], topic: "Job Search", pos: "noun" },
+            { word: "interview", clues: ["job", "questions", "meet"], topic: "Job Search", pos: "noun" },
+            { word: "teamwork", clues: ["together", "group", "work"], topic: "Work Schedule", pos: "noun" }
         ];
 
+        let hintShown = false;
         let order = cards.map(function (_, i) { return i; });
         let pos = 0;
         let score = { a: 0, b: 0 };
@@ -454,6 +483,7 @@
             const c = cards[order[i]];
             document.getElementById('tabooTopic').textContent = c.topic;
             document.getElementById('tabooWord').textContent = c.word;
+            document.getElementById('tabooPos').textContent = c.pos || '';
             document.getElementById('tabooList').innerHTML =
                 c.clues.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
             document.getElementById('questionCounter').textContent =
@@ -461,7 +491,49 @@
             // Each new card starts with the answer hidden so the class can guess from the clues.
             document.getElementById('tabooCard').classList.add('concealed');
             document.getElementById('revealBtn').textContent = 'Reveal answer';
+            hintShown = false;
+            paintMask();
             resetTimer();
+        }
+
+        // Letter shape: first letter, then one blank per remaining letter.
+        // Word breaks are preserved so multi-word answers are visibly multi-word.
+        function letterShape(word) {
+            return word.split(' ').filter(Boolean).map(function (part) {
+                const shape = part.charAt(0) + part.slice(1).replace(/./g, ' _');
+                return '<span class="mask-word">' + escapeHtml(shape) + '</span>';
+            }).join('');
+        }
+
+        function maskLabel(word) {
+            const words = word.split(' ').filter(Boolean);
+            const letters = word.replace(/ /g, '').length;
+            return 'hint: ' + (words.length > 1 ? words.length + ' words, ' : '') +
+                letters + ' letters, starts with ' + word.charAt(0).toUpperCase();
+        }
+
+        function paintMask() {
+            const c = cards[order[pos]];
+            const el = document.getElementById('tabooMask');
+            // long answers need a smaller shape or the blanks overflow the card
+            const letters = c.word.replace(/ /g, '').length;
+            el.style.fontSize = hintShown
+                ? (letters > 12 ? '28px' : letters > 9 ? '36px' : letters > 7 ? '44px' : '')
+                : '';
+            if (hintShown) {
+                el.innerHTML = letterShape(c.word);
+                el.setAttribute('aria-label', maskLabel(c.word));
+                document.getElementById('hintBtn').textContent = 'Hide hint';
+            } else {
+                el.textContent = '???';
+                el.setAttribute('aria-label', 'answer hidden');
+                document.getElementById('hintBtn').textContent = 'Need a hint?';
+            }
+        }
+
+        function toggleHint() {
+            hintShown = !hintShown;
+            paintMask();
         }
 
         function revealCard() {
