@@ -229,9 +229,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 26px;
+            gap: 18px;
             z-index: 10;
-            padding: 120px 24px 24px;
+            padding: 96px 24px 20px;
             width: 100%;
             max-width: 1100px;
         }
@@ -240,7 +240,7 @@
         .round-card {
             width: 100%;
             max-width: 860px;
-            padding: 22px 28px;
+            padding: 16px 28px;
             border-radius: 8px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, #1E6E5C 0%, #175749 100%);
@@ -268,7 +268,7 @@
         .rank-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
             max-width: 860px;
             list-style: none;
@@ -277,11 +277,11 @@
         .rank-item {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
             background: #FFFFFF;
             border-left: 6px solid #1E6E5C;
             border-radius: 8px;
-            padding: 18px 22px;
+            padding: 11px 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             cursor: grab;
             transition: box-shadow 0.2s ease, transform 0.2s ease;
@@ -415,37 +415,111 @@
             width: 100%;
             max-width: 860px;
             background: #FFFFFF;
-            border-left: 6px solid #E04E39;
+            border-left: 6px solid #1E6E5C;
             border-radius: 8px;
-            padding: 18px 24px;
+            padding: 14px 24px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.07);
         }
 
         .frames-title {
             font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #1E6E5C;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .frames-box ul {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px 22px;
+            gap: 4px 16px;
             list-style: none;
         }
 
         .frames-box li {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 600;
+            line-height: 1.35;
             color: #1a1a1a;
         }
 
         .frames-box li::before { content: "“"; color: #1E6E5C; }
         .frames-box li::after { content: "…”"; color: #1E6E5C; }
+
+        .support-row {
+            width: 100%;
+            max-width: 860px;
+            display: flex;
+            align-items: stretch;
+            gap: 14px;
+        }
+
+        .support-row .frames-box,
+        .support-row .reveal-box {
+            max-width: none;
+            flex: 1 1 50%;
+            margin: 0;
+        }
+
+        /* SHORT VIEWPORTS: keep the Compare step above the nav bar */
+        @media (max-height: 950px) {
+            .content-area { padding-top: 76px; gap: 10px; padding-bottom: 12px; }
+            .question-counter { top: 20px; left: 20px; padding: 8px 16px; font-size: 16px; }
+            .timer-container { top: 16px; right: 20px; gap: 6px; }
+            .timer-display { font-size: 30px; padding: 6px 14px; min-width: 104px; }
+            .timer-btn { font-size: 12px; padding: 6px 12px; }
+            .round-card { padding: 12px 24px; }
+            .round-card h2 { font-size: 24px; }
+            .round-kicker { font-size: 12px; }
+            .rank-item { padding: 8px 18px; }
+            .rank-number { width: 34px; height: 34px; min-width: 34px; font-size: 18px; }
+            .rank-text { font-size: 19px; }
+            .rank-list { gap: 8px; }
+            .frames-box, .reveal-box { padding: 10px 16px; }
+            .frames-box li { font-size: 14px; }
+            .reveal-text { font-size: 15px; }
+            .nav-container { padding: 12px; }
+            .nav-btn { padding: 10px 24px; font-size: 15px; }
+        }
+
+        @media (max-width: 900px) {
+            .support-row { flex-direction: column; }
+        }
+
+        /* COMPARE / REVEAL STEP */
+        .reveal-box {
+            width: 100%;
+            max-width: 860px;
+            flex-direction: column;
+            gap: 6px;
+            background: #1E6E5C0F;
+            border: 2px dashed #1E6E5C;
+            border-radius: 8px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .reveal-label {
+            font-family: 'Atkinson Hyperlegible', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #1E6E5C;
+            white-space: nowrap;
+            padding-top: 2px;
+        }
+
+        .reveal-text {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.45;
+            color: #1a1a1a;
+        }
 
         .instruction-text {
             font-size: 15px;
@@ -558,9 +632,16 @@
 
                 <div id="roundBody"></div>
 
-                <div class="frames-box">
-                    <div class="frames-title" id="framesTitle">Use these sentence starters</div>
-                    <ul id="framesList"></ul>
+                <div class="support-row">
+                    <div class="frames-box">
+                        <div class="frames-title" id="framesTitle">Use these sentence starters</div>
+                        <ul id="framesList"></ul>
+                    </div>
+
+                    <div class="reveal-box" id="revealBox">
+                        <span class="reveal-label">Compare</span>
+                        <span class="reveal-text" id="revealText"></span>
+                    </div>
                 </div>
 
                 <div class="instruction-text" id="instructionText"></div>
@@ -602,7 +683,8 @@
                     "Buy groceries for the month",
                     "Send it to family",
                     "Buy something you want"
-                ]
+                ],
+                reveal: "Did anyone put “Send it to family” first? Ask them why it comes before savings."
             },
             {
                 type: "wyr",
@@ -619,7 +701,8 @@
                     "An email asking for your password",
                     "A stranger offering a job with high pay and no interview",
                     "A store coupon in the mail"
-                ]
+                ],
+                reveal: "Has anyone received one of these? Tell the class what you did."
             },
             {
                 type: "rank",
@@ -630,7 +713,8 @@
                     "The price at other stores",
                     "The warranty",
                     "The brand name"
-                ]
+                ],
+                reveal: "Did anyone rank “The brand name” first? Ask them which brands they trust."
             },
             {
                 type: "wyr",
@@ -647,7 +731,8 @@
                     "Phone",
                     "Car insurance",
                     "Internet and streaming"
-                ]
+                ],
+                reveal: "Almost everyone puts rent first. Compare the rest of your order with a partner."
             },
             {
                 type: "rank",
@@ -658,7 +743,8 @@
                     "Buy store brands",
                     "Walk instead of driving",
                     "Stop buying coffee out"
-                ]
+                ],
+                reveal: "Find someone who called “Stop buying coffee out” the hardest. Ask about their morning."
             },
             {
                 type: "wyr",
@@ -675,7 +761,8 @@
                     "Ask to speak to the manager",
                     "Call the company",
                     "File a complaint with consumer protection"
-                ]
+                ],
+                reveal: "Has anyone done this before? Tell the class how it ended."
             },
             {
                 type: "wyr",
@@ -723,10 +810,18 @@
                 frames.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
 
             document.getElementById('instructionText').textContent = r.type === 'rank'
-                ? 'Drag the cards or use the arrows to reorder • Every student must give a reason for one position'
+                ? 'Drag the cards or use the arrows to reorder • Then compare orders with a partner and explain one choice'
                 : 'Click a side to choose • Click again to count more votes • Ask three students to explain why';
 
             document.getElementById('shuffleBtn').style.display = r.type === 'rank' ? '' : 'none';
+
+            const revealBox = document.getElementById('revealBox');
+            if (r.type === 'rank' && r.reveal) {
+                document.getElementById('revealText').textContent = r.reveal;
+                revealBox.style.display = '';
+            } else {
+                revealBox.style.display = 'none';
+            }
 
             if (r.type === 'rank') renderRank(); else renderWyr();
             resetTimer();
