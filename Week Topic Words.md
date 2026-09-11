@@ -5,10 +5,10 @@
 
 | Week | Topic | Words |
 |------|-------|-------|
-| sep-w1 | Start the Class: Digital Habits | log in, navigate, submit, access, complete, review |
-| sep-w2 | Parts of Speech: Key Verbs | identify, categorize, pronounce, spell, translate, practice |
-| sep-w3 | Verb Forms: Action Words | explain, describe, discuss, listen, record, repeat |
-| sep-w4 | Life Experience: Personal Journey Verbs | relocate, introduce, motivate, achieve, overcome, immigrate |
+| sep-w1 | Meet the Class: Introductions | introduce, greet, share, describe, prefer, listen |
+| sep-w2 | Word Practice: Say It & Spell It *(sub-friendly)* | pronounce, spell, identify, categorize, practice, repeat |
+| sep-w3 | Start the Class: Digital Habits | log in, navigate, submit, access, complete, review |
+| sep-w4 | Life Experience: Personal Journey Verbs | relocate, motivate, achieve, overcome, immigrate, belong |
 
 ## Unit 2 — October
 **Daily Life in the Community**
