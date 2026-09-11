@@ -639,7 +639,7 @@
                     </svg>
                 </span> Unit 1: Getting to Know You</span>
                 <span class="home-title-game">Ranking Game</span></h1>
-            <p class="home-subtitle">Rank classroom habits, introductions, and study routines — then defend your order. Practice comparatives, superlatives, and giving reasons.</p>
+            <p class="home-subtitle">Rank first-day fears, late excuses, and class habits — then defend your order. Practice comparatives, superlatives, and giving reasons.</p>
             <button class="start-game-btn" onclick="startGame()">Start Game</button>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
@@ -722,26 +722,33 @@
             {
                 type: "wyr",
                 prompt: "Would you rather…",
-                a: "Speak English perfectly, but only for 10 minutes a day",
-                b: "Speak English with many mistakes, but all day long"
+                a: "Sit next to someone new every class",
+                b: "Sit with the same classmates every class"
             },
             {
                 type: "rank",
-                prompt: "Rank these from MOST to LEAST important for learning English.",
+                prompt: "Rank these from MOST to LEAST scary on the first day of class.",
                 items: [
-                    "Practicing every day",
-                    "Having a good teacher",
-                    "Making friends who speak English",
-                    "Studying grammar",
-                    "Not being afraid of mistakes"
+                    "Saying your name",
+                    "Asking a question",
+                    "Working with a partner",
+                    "Speaking in front of the class",
+                    "Asking the teacher to repeat"
                 ],
-                reveal: "Did anyone put “Studying grammar” last? Ask them what they do instead."
+                reveal: "Who put “Speaking in front of the class” first? Ask them what helps.",
+                frames: [
+                    "The scariest thing is",
+                    "I put ___ first because",
+                    "___ is scarier than ___ because",
+                    "I disagree. For me,",
+                    "The least scary is ___ because"
+                ]
             },
             {
                 type: "rank",
-                prompt: "You are late to class. Rank these excuses from MOST to LEAST believable.",
+                prompt: "You are late to class. Rank these excuses from EASIEST to HARDEST to believe.",
                 items: [
-                    "The train was delayed",
+                    "The train was late",
                     "My alarm did not ring",
                     "My child was sick",
                     "I could not find parking",
@@ -752,8 +759,8 @@
             {
                 type: "wyr",
                 prompt: "Would you rather…",
-                a: "Have a classmate who talks the whole class",
-                b: "Have a classmate who never says one word"
+                a: "Work with a partner who talks a lot",
+                b: "Work with a partner who is very quiet"
             },
             {
                 type: "rank",
@@ -773,7 +780,7 @@
                 items: [
                     "Where are you from?",
                     "What do you do for work?",
-                    "Why did you come to this country?",
+                    "Why do you want to learn English?",
                     "What are your plans for the future?",
                     "Tell me about yourself"
                 ],
@@ -782,20 +789,27 @@
             {
                 type: "wyr",
                 prompt: "Would you rather…",
-                a: "Understand everything you hear, but speak slowly",
-                b: "Speak fast and fluently, but understand only half"
+                a: "Homework every night",
+                b: "No homework, but more talking in class"
             },
             {
                 type: "rank",
-                prompt: "Rank these from MOST to LEAST useful for remembering new words.",
+                prompt: "Rank these from MOST to LEAST annoying in English class.",
                 items: [
-                    "Writing the word 5 times",
-                    "Using it in a sentence",
-                    "Making a picture in your mind",
-                    "Saying it out loud",
-                    "Translating it to your language"
+                    "People speak too fast",
+                    "You know the word but cannot say it",
+                    "The teacher calls on you",
+                    "Two people talk at the same time",
+                    "You forget a word you just learned"
                 ],
-                reveal: "Did anyone rank “Translating it to your language” first? Ask how they use it."
+                reveal: "Which one did the class hate the most? Ask two people for a story.",
+                frames: [
+                    "The most annoying thing is",
+                    "I put ___ first because",
+                    "___ is more annoying than ___ because",
+                    "I disagree. For me,",
+                    "The least annoying is ___ because"
+                ]
             },
             {
                 type: "wyr",
@@ -838,7 +852,7 @@
                 r.type === 'rank' ? 'RANK THESE' : 'WOULD YOU RATHER';
             document.getElementById('roundPrompt').textContent = r.prompt;
 
-            const frames = r.type === 'rank' ? RANK_FRAMES : WYR_FRAMES;
+            const frames = r.frames || (r.type === 'rank' ? RANK_FRAMES : WYR_FRAMES);
             document.getElementById('framesList').innerHTML =
                 frames.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
 
