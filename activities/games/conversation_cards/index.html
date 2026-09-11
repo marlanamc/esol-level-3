@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversation Cards — All Units</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pastel-pink: #e8b4bc;
+      --pastel-lavender: #c9b8e0;
+      --pastel-blue: #a8cce8;
+      --pastel-green: #b8d9b8;
+      --accent: #B0432B;
+    }
+
+    body{
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f5f5;
+      color: #22201d;
+    }
+
+    .wrap{ max-width: 1100px; margin: 0 auto; }
+
+    header{ text-align:center; margin-bottom: 8px; }
+    .eyebrow{
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1{ margin: 6px 0 8px; font-size: 2rem; }
+    .tagline{ text-align:center; color:#555; margin: 0 auto 22px; max-width: 60ch; line-height:1.45; }
+
+    .how{
+      background:#fff;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:14px 16px;
+      margin: 0 0 24px;
+      line-height:1.5;
+      color:#444;
+      font-size: 0.95rem;
+    }
+    .how strong{ color:#22201d; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .deck{
+      display:block;
+      background:#fff;
+      border:1px solid #ddd;
+      border-radius:12px;
+      padding: 0 0 14px;
+      text-decoration:none;
+      color:inherit;
+      overflow:hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .deck:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.09);
+    }
+    .deck:focus-visible{
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .stripe{ display:flex; height: 8px; }
+    .stripe span{ flex:1; }
+    .s-pink{ background: var(--pastel-pink); }
+    .s-lavender{ background: var(--pastel-lavender); }
+    .s-blue{ background: var(--pastel-blue); }
+    .s-green{ background: var(--pastel-green); }
+
+    .deck-body{ padding: 14px 16px 0; }
+    .unit{
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    .deck h2{ margin: 4px 0 10px; font-size: 1.18rem; line-height:1.3; }
+
+    .cats{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:5px;
+      font-size: 0.92rem;
+      color:#444;
+    }
+    .cats li{ display:flex; gap:8px; align-items:baseline; }
+    .cats .dot{ font-size: 0.95rem; }
+
+    .home-link{ margin: 26px 0 0; text-align:center; }
+    .home-link a{ color: var(--accent); font-weight:600; text-decoration:none; }
+    .home-link a:hover{ text-decoration: underline; }
+
+    @media print{
+      body{ background:#fff; }
+      .deck{ break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">ESOL Level 3</div>
+    <h1>Conversation Cards</h1>
+  </header>
+  <p class="tagline">
+    Ten printable decks, one per unit. Every deck has 24 cards in four categories &mdash; discussion,
+    role-play phone calls, and scenarios. Draw a card, flip it, then talk.
+  </p>
+
+  <div class="how">
+    <strong>Open a deck and press Draw.</strong> One card at a time, big enough to project, with no repeats
+    until the deck runs out. Tap a category to draw only phone calls, only scenarios, and so on.
+    <strong>Space</strong> flips the card, <strong>&rarr;</strong> draws the next one.
+    <br><br>
+    <strong>Teachers:</strong> the link at the top right of any deck switches to the printable sheets &mdash;
+    landscape, two-sided, flipped on the <strong>long edge</strong>. 8 sheets, 6 cards each. Cut on the lines
+    and each question lands on the back of its own category.
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="home-link"><a href="../../../index.html">&larr; All activities</a></p>
+
+</div>
+
+<script>
+  const DECKS = [
+    { unit: 1, topic: "Getting to Know You", file: "Unit1_cards.html", cats: [
+      ["pink", "👋", "First Introductions"],
+      ["lavender", "☕", "Life Outside Class"],
+      ["blue", "📚", "In This Class"],
+      ["green", "🗣️", "Living in Two Languages"]
+    ]},
+    { unit: 2, topic: "Daily Life in the Community", file: "Unit2_cards.html", cats: [
+      ["pink", "🕗", "Before the Alarm"],
+      ["lavender", "🚇", "Missed It By Two Minutes"],
+      ["blue", "📝", "Fine Print & Signatures"],
+      ["green", "📞", "Somebody Has to Call"]
+    ]},
+    { unit: 3, topic: "Community Participation", file: "Unit3_cards.html", cats: [
+      ["pink", "🤝", "Hands, Not Money"],
+      ["lavender", "💡", "Your Idea, Out Loud"],
+      ["blue", "🗳️", "Who Decides Around Here"],
+      ["green", "🧩", "Somebody Should Fix This"]
+    ]},
+    { unit: 4, topic: "Consumer Smarts", file: "Unit4_cards.html", cats: [
+      ["pink", "🛒", "Worth It or Not"],
+      ["lavender", "🏦", "The Money Moves"],
+      ["blue", "🚩", "Too Good To Be True"],
+      ["green", "🎯", "Make the Money Talk"]
+    ]},
+    { unit: 5, topic: "Housing", file: "Unit5_cards.html", cats: [
+      ["pink", "🔎", "The Apartment Hunt"],
+      ["lavender", "📞", "Dialing the Landlord"],
+      ["blue", "📄", "Paper Beats Memory"],
+      ["green", "🤔", "You'd Have to Decide"]
+    ]},
+    { unit: 6, topic: "Workforce Preparation", file: "Unit6_cards.html", cats: [
+      ["pink", "⏰", "Clock In, Clock Out"],
+      ["lavender", "☎️", "The Call You Don't Want to Make"],
+      ["blue", "📄", "Paper That Gets You Hired"],
+      ["green", "🧍", "What Would You Do at Work"]
+    ]},
+    { unit: 7, topic: "Career Awareness", file: "Unit7_cards.html", cats: [
+      ["pink", "💵", "Where Did It Go"],
+      ["lavender", "⚖️", "Must, Should, or Can"],
+      ["blue", "🛡️", "Know It Before You Need It"],
+      ["green", "🔁", "Show Up, Follow Up"]
+    ]},
+    { unit: 8, topic: "Health", file: "Unit8_cards.html", cats: [
+      ["pink", "🩺", "Say Where It Hurts"],
+      ["lavender", "📞", "Press One for English"],
+      ["blue", "🔄", "Change One Thing"],
+      ["green", "🧠", "The Part Nobody Mentions"]
+    ]},
+    { unit: 9, topic: "Holistic Wellness", file: "Unit9_cards.html", cats: [
+      ["pink", "💊", "Read the Label"],
+      ["lavender", "🌿", "What Actually Helps"],
+      ["blue", "🧘", "Nobody Has Time For This"],
+      ["green", "🏆", "Give Yourself Credit"]
+    ]},
+    { unit: 10, topic: "Future Academic Goals", file: "Unit10_cards.html", cats: [
+      ["pink", "🎓", "What Comes After This"],
+      ["lavender", "🏫", "Calling the School"],
+      ["blue", "🧭", "The Thing in the Way"],
+      ["green", "💌", "Before We Close the Book"]
+    ]}
+  ];
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
+    });
+  }
+
+  document.getElementById("grid").innerHTML = DECKS.map(function(d){
+    return '<a class="deck" href="' + d.file + '">' +
+      '<div class="stripe">' +
+        '<span class="s-pink"></span><span class="s-lavender"></span>' +
+        '<span class="s-blue"></span><span class="s-green"></span>' +
+      '</div>' +
+      '<div class="deck-body">' +
+        '<div class="unit">Unit ' + d.unit + '</div>' +
+        '<h2>' + esc(d.topic) + '</h2>' +
+        '<ul class="cats">' +
+          d.cats.map(function(c){
+            return '<li><span class="dot">' + c[1] + '</span>' + esc(c[2]) + '</li>';
+          }).join("") +
+        '</ul>' +
+      '</div>' +
+    '</a>';
+  }).join("");
+</script>
+
+</body>
+</html>

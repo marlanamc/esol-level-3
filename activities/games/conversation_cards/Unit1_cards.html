@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 1: Getting to Know You Cards (Front/Back Print)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --page-pad: 0.5in;
+      --border: 1px solid #000;
+      --pastel-pink: #e8b4bc;
+      --pastel-lavender: #c9b8e0;
+      --pastel-blue: #a8cce8;
+      --pastel-green: #b8d9b8;
+    }
+
+    body{
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: #f5f5f5;
+    }
+
+    h1{ text-align:center; margin: 0 0 8px; }
+    .tagline{ text-align:center; color:#555; margin: 0 0 16px; }
+
+    .teacher-bar{
+      max-width: 1100px;
+      margin: 0 auto 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 18px;
+      align-items:baseline;
+      justify-content:space-between;
+      font-size: 0.92rem;
+    }
+    .teacher-bar a{ color:#B0432B; font-weight:600; text-decoration:none; }
+    .teacher-bar a:hover{ text-decoration:underline; }
+    .home-link{ margin:0; }
+    .teacher-tools{ margin:0; display:flex; gap:16px; flex-wrap:wrap; }
+
+    .linkish{
+      font: inherit;
+      font-size: 0.88rem;
+      background:none;
+      border:none;
+      padding:2px;
+      color:#8d867c;
+      cursor:pointer;
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .linkish:hover{ color:#B0432B; }
+    .linkish:focus-visible{ outline:2px solid #B0432B; outline-offset:2px; border-radius:3px; }
+
+    .print-note{
+      display:none;
+      max-width:1100px;
+      margin:0 auto 16px;
+      background:#fff;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:12px 14px;
+      color:#444;
+      line-height:1.45;
+      font-size:0.95rem;
+    }
+    body:has(#showPrint:checked) .print-note{ display:block; }
+    body:has(#showPrint:checked) .teacher-bar{ display:none; }
+
+    .preview{
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .preview-card{
+      border: none;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      perspective: 900px;
+      min-height: 220px;
+      text-align: inherit;
+      font: inherit;
+      color: inherit;
+    }
+    .preview-card:focus-visible{
+      outline: 3px solid #B0432B;
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+    .preview-inner{
+      position: relative;
+      min-height: 220px;
+      transform-style: preserve-3d;
+      transition: transform 0.45s ease;
+    }
+    .preview-card.is-flipped .preview-inner{ transform: rotateY(180deg); }
+    .preview-face{
+      position: absolute;
+      inset: 0;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #fff;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      box-sizing: border-box;
+    }
+    .preview-front{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 22px 16px;
+      border-top: 8px solid #ccc;
+    }
+    .preview-front.cat-pink{ border-top-color: var(--pastel-pink); }
+    .preview-front.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .preview-front.cat-blue{ border-top-color: var(--pastel-blue); }
+    .preview-front.cat-green{ border-top-color: var(--pastel-green); }
+    .preview-front .emoji{ font-size: 2.4rem; line-height: 1; }
+    .preview-front .cat{
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .preview-front .flip-hint{
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #666;
+    }
+    .preview-back{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 18px;
+      transform: rotateY(180deg);
+      text-align: left;
+      border-top: 8px solid #ccc;
+    }
+    .preview-back.cat-pink{ border-top-color: var(--pastel-pink); }
+    .preview-back.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .preview-back.cat-blue{ border-top-color: var(--pastel-blue); }
+    .preview-back.cat-green{ border-top-color: var(--pastel-green); }
+    .preview-back h3{
+      margin: 0;
+      font-size: 1.28rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .preview-back .steps{
+      margin: 0;
+      padding-left: 1.25rem;
+      color: #222;
+      font-size: 1.05rem;
+      line-height: 1.4;
+    }
+    .preview-back .steps li{ margin: 0.35rem 0; }
+    .preview-back .say{
+      margin: 2px 0 0;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: #f7f3f1;
+      color: #333;
+      font-size: 1rem;
+      font-style: italic;
+      line-height: 1.35;
+    }
+    .preview-back .say strong{
+      display: block;
+      margin-bottom: 2px;
+      font-style: normal;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #8a3a28;
+    }
+
+    /* ---- Play mode (the default view) ---- */
+    .play{ display:none; }
+
+    body:has(#showPlay:checked) .play{ display:block; }
+    body:has(#showPlay:checked) .screen-stuff{ display:none; }
+
+    .play-wrap{
+      max-width: 760px;
+      margin: 0 auto;
+      text-align:center;
+    }
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:center;
+      margin: 0 0 16px;
+    }
+    .filters button{
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 22px;
+      border: 2px solid #ddd;
+      background:#fff;
+      color:#444;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    .filters button[aria-pressed="true"]{ border-color:#555; background:#f0ece9; color:#111; }
+    .filters button:focus-visible{ outline:3px solid #B0432B; outline-offset:2px; }
+    .filters .sw{
+      width:14px; height:14px; border-radius:50%;
+      display:inline-block; flex:0 0 auto;
+    }
+    .sw-pink{ background: var(--pastel-pink); }
+    .sw-lavender{ background: var(--pastel-lavender); }
+    .sw-blue{ background: var(--pastel-blue); }
+    .sw-green{ background: var(--pastel-green); }
+    .sw-all{ background: linear-gradient(135deg, var(--pastel-pink) 0 25%, var(--pastel-lavender) 25% 50%, var(--pastel-blue) 50% 75%, var(--pastel-green) 75% 100%); }
+
+    .play-title{
+      text-align:center;
+      font-size: 1.55rem;
+      margin: 0 0 14px;
+    }
+
+    .stage{
+      perspective: 1400px;
+      margin: 0 auto 18px;
+      max-width: 640px;
+    }
+    .stage-empty{
+      min-height: 340px;
+      border: 2px dashed #d8d2cc;
+      border-radius:16px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      color:#8d867c;
+      background:#fbfaf8;
+      box-sizing:border-box;
+      padding: 20px;
+    }
+    .stage-empty p{ margin:0; font-size:1.1rem; }
+    .stage-empty-emoji{ font-size:3rem; opacity:0.5; line-height:1; }
+    .stage-empty[hidden]{ display:none; }
+    .stage-card[hidden]{ display:none; }
+    .stage-card{
+      display:block;
+      width:100%;
+      border:none;
+      padding:0;
+      background:transparent;
+      font:inherit;
+      color:inherit;
+      cursor:pointer;
+      text-align:inherit;
+    }
+    .stage-card:focus-visible{ outline:3px solid #B0432B; outline-offset:4px; border-radius:16px; }
+    .stage-inner{
+      position:relative;
+      min-height: 340px;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+    .stage-card.is-flipped .stage-inner{ transform: rotateY(180deg); }
+    .stage-face{
+      position:absolute;
+      inset:0;
+      border:1px solid #ddd;
+      border-radius:16px;
+      background:#fff;
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+      box-sizing:border-box;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    }
+    .stage-front{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      padding: 30px 24px;
+      border-top: 12px solid #ccc;
+    }
+    .stage-front.cat-pink{ border-top-color: var(--pastel-pink); }
+    .stage-front.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .stage-front.cat-blue{ border-top-color: var(--pastel-blue); }
+    .stage-front.cat-green{ border-top-color: var(--pastel-green); }
+    .stage-front .emoji{ font-size: 4.4rem; line-height:1; }
+    .stage-front .cat{
+      font-size: 2rem;
+      font-weight:800;
+      letter-spacing:0.03em;
+      text-transform:uppercase;
+      line-height:1.2;
+    }
+    .stage-front .flip-hint{ font-size:1.1rem; font-weight:600; color:#666; }
+
+    .stage-back{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:14px;
+      padding: 30px 34px;
+      transform: rotateY(180deg);
+      text-align:left;
+      border-top: 12px solid #ccc;
+    }
+    .stage-back.cat-pink{ border-top-color: var(--pastel-pink); }
+    .stage-back.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .stage-back.cat-blue{ border-top-color: var(--pastel-blue); }
+    .stage-back.cat-green{ border-top-color: var(--pastel-green); }
+    .stage-back h3{ margin:0; font-size:1.9rem; font-weight:700; line-height:1.2; }
+    .stage-back .steps{ margin:0; padding-left:1.3rem; font-size:1.32rem; line-height:1.45; color:#222; }
+    .stage-back .steps li{ margin:0.5rem 0; }
+    .stage-back .say{
+      margin:4px 0 0;
+      padding:12px 15px;
+      border-radius:8px;
+      background:#f7f3f1;
+      font-size:1.22rem;
+      font-style:italic;
+      line-height:1.4;
+    }
+    .stage-back .say strong{
+      display:block;
+      margin-bottom:3px;
+      font-style:normal;
+      font-size:0.9rem;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      color:#8a3a28;
+    }
+
+    .draw-row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .draw-btn{
+      font: inherit;
+      font-size:1.25rem;
+      font-weight:800;
+      letter-spacing:0.02em;
+      padding: 15px 38px;
+      border-radius:12px;
+      border:none;
+      background:#B0432B;
+      color:#fff;
+      cursor:pointer;
+    }
+    .draw-btn:hover{ background:#963a25; }
+    .draw-btn:focus-visible{ outline:3px solid #22201d; outline-offset:3px; }
+    .draw-btn[disabled]{ background:#bbb; cursor:default; }
+    .draw-btn.is-shuffling{ animation: nudge 0.32s ease; }
+    @keyframes nudge{
+      0%{ transform: translateY(0) }
+      35%{ transform: translateY(-5px) rotate(-1.2deg) }
+      70%{ transform: translateY(2px) rotate(0.8deg) }
+      100%{ transform: translateY(0) }
+    }
+    .counter{ font-size:1rem; font-weight:700; color:#666; }
+    .reset-btn{
+      font:inherit;
+      font-size:0.95rem;
+      font-weight:600;
+      background:none;
+      border:none;
+      color:#B0432B;
+      cursor:pointer;
+      text-decoration:underline;
+      text-underline-offset:3px;
+      padding:6px;
+    }
+    .reset-btn:focus-visible{ outline:3px solid #B0432B; outline-offset:2px; }
+    .play-hint{ margin:14px 0 0; color:#777; font-size:0.92rem; }
+
+    @media (max-width: 560px){
+      .stage-inner{ min-height: 380px; }
+      .stage-front .emoji{ font-size:3.4rem; }
+      .stage-front .cat{ font-size:1.5rem; }
+      .stage-back h3{ font-size:1.45rem; }
+      .stage-back .steps{ font-size:1.08rem; }
+      .stage-back .say{ font-size:1.02rem; }
+      .stage-back{ padding:24px 22px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .stage-inner, .preview-inner{ transition: none; }
+      .draw-btn.is-shuffling{ animation: none; }
+    }
+
+    .print-pack{ display:none; }
+
+    body:has(#showPrint:checked) .print-pack{ display:block; }
+    body:has(#showPrint:checked) .screen-stuff{ display:none; }
+    body:has(#showPrint:checked) .play{ display:none !important; }
+
+    .sheet{
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      margin: 18px auto;
+      max-width: 1200px;
+      overflow: hidden;
+    }
+    .sheet-header{
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 10px;
+      padding: 14px;
+      aspect-ratio: 11 / 8.5;
+    }
+
+    .slot{
+      border: var(--border);
+      min-height: 0;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align:center;
+      font-size: 1rem;
+    }
+
+    .front{
+      background: #fff;
+      color: #111;
+      border-top: 10px solid #ccc;
+    }
+    .front.cat-pink{ border-top-color: var(--pastel-pink); }
+    .front.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .front.cat-blue{ border-top-color: var(--pastel-blue); }
+    .front.cat-green{ border-top-color: var(--pastel-green); }
+    .front .emoji{ font-size: 2.5rem; display:block; margin-bottom: 10px; line-height: 1; }
+    .front .cat{
+      font-size: 1.4rem;
+      letter-spacing: 0.4px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .front .flip-hint{
+      margin-top: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #444;
+    }
+
+    .back{
+      align-items: stretch;
+      text-align: left;
+      justify-content: center;
+      gap: 8px;
+      background: #fff;
+      color: #111;
+      border-top: 10px solid #ccc;
+    }
+    .back.cat-pink{ border-top-color: var(--pastel-pink); }
+    .back.cat-lavender{ border-top-color: var(--pastel-lavender); }
+    .back.cat-blue{ border-top-color: var(--pastel-blue); }
+    .back.cat-green{ border-top-color: var(--pastel-green); }
+    .back h3{
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .back .steps{
+      margin: 0;
+      padding-left: 1.2rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .back .steps li{
+      line-height: 1.35;
+      margin: 0.35rem 0;
+      font-size: 1.05rem;
+    }
+    .back .say{
+      margin: 2px 0 0;
+      padding: 7px 9px;
+      border-radius: 4px;
+      background: #f7f3f1;
+      color: #333;
+      font-size: 0.98rem;
+      font-style: italic;
+      line-height: 1.35;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .back .say strong{
+      display: block;
+      margin-bottom: 2px;
+      font-style: normal;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #8a3a28;
+    }
+
+    @media print{
+      @page{
+        size: Letter landscape;
+        margin: 0;
+      }
+
+      body{ background:#fff; padding:0; }
+      .teacher-bar, .screen-stuff, .play, .print-note{ display:none !important; }
+
+      .print-pack{ display:block !important; }
+
+      .sheet{
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        max-width: none;
+      }
+      .sheet-header{ display:none; }
+
+      .grid{
+        padding: var(--page-pad);
+        width: 11in;
+        height: 8.5in;
+        aspect-ratio: auto;
+        box-sizing: border-box;
+      }
+      .sheet{ page-break-after: always; }
+      .sheet:last-child{ page-break-after: auto; }
+
+      .back h3{ font-size: 1.28rem; }
+      .back .steps li{ font-size: 1.05rem; line-height: 1.34; }
+      .back .say{ font-size: 0.98rem; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .front .cat{ font-size: 1.45rem; }
+      .front .emoji{ font-size: 2.4rem; }
+      .front .flip-hint{ font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <input id="showPlay" type="checkbox" checked hidden />
+  <input id="showPrint" type="checkbox" hidden />
+
+  <div class="teacher-bar">
+    <p class="home-link"><a href="index.html">&larr; All card decks</a> &nbsp;·&nbsp; <a href="../../../index.html">All activities</a></p>
+    <p class="teacher-tools">
+      <button type="button" class="linkish" id="toPrint">Teacher: print these cards</button>
+      <button type="button" class="linkish" id="toBrowse">See all 24 at once</button>
+    </p>
+  </div>
+
+  <div class="print-note">
+    <strong>Printing:</strong> choose <strong>landscape</strong>, two-sided, flip on the
+    <strong>long edge</strong>. 8 sheets, 6 cards each. Cut on the lines.
+    <button type="button" class="linkish" id="backToPlay">&larr; Back to play mode</button>
+  </div>
+
+  <div class="play" id="play">
+    <div class="play-wrap">
+      <h1 class="play-title" id="playTitle"></h1>
+      <div class="filters" id="filters" role="group" aria-label="Choose a category to draw from"></div>
+
+      <div class="stage">
+        <div class="stage-empty" id="stageEmpty">
+          <span class="stage-empty-emoji" aria-hidden="true">🎴</span>
+          <p>Press <strong>Draw a card</strong> to start.</p>
+        </div>
+        <button class="stage-card" id="stageCard" type="button" aria-pressed="false" hidden>
+          <div class="stage-inner" id="stageInner"></div>
+        </button>
+      </div>
+
+      <div class="draw-row">
+        <button class="draw-btn" id="drawBtn" type="button">Draw a card</button>
+        <span class="counter" id="counter" aria-live="polite"></span>
+        <button class="reset-btn" id="resetBtn" type="button" hidden>Shuffle and start over</button>
+      </div>
+
+      <p class="play-hint">Click the card to flip it. <strong>Space</strong> flips, <strong>&rarr;</strong> draws the next one.</p>
+    </div>
+  </div>
+
+  <div class="screen-stuff">
+    <h1>Getting to Know You Cards</h1>
+    <p class="tagline">24 first-week speaking cards for a mostly Spanish-speaking class. Draw a card, flip it, then talk.</p>
+    <p class="tagline">Unit 1 &middot; Getting to Know You</p>
+    <div class="preview" id="preview"></div>
+  </div>
+
+  <div class="print-pack" id="printPack"></div>
+
+  <script>
+    const CATS = {
+      pink: { name: "First Introductions", emoji: "👋", cls: "cat-pink" },
+      lavender: { name: "Life Outside Class", emoji: "☕", cls: "cat-lavender" },
+      blue: { name: "In This Class", emoji: "📚", cls: "cat-blue" },
+      green: { name: "Living in Two Languages", emoji: "🗣️", cls: "cat-green" }
+    };
+
+    const CARDS = [
+      { cat: "pink", title: "Your Name", steps: [
+        "Say your full name slowly. Teach the group how to say it.",
+        "Then ask everyone what people call them."
+      ], say: "What do people call you?" },
+      { cat: "pink", title: "Two True, One False", steps: [
+        "Tell two true things and one false thing about you.",
+        "The group guesses which one is false. Then the next person goes."
+      ]},
+      { cat: "pink", title: "Introduce a Partner", steps: [
+        "Ask a partner three questions: name, work, and a favorite food.",
+        "Then introduce them to the group with those three facts."
+      ]},
+      { cat: "pink", title: "Name Story", steps: [
+        "Is there a story about your name? Who chose it? Does it mean something?",
+        "Share your story. Then ask two people about their names."
+      ]},
+      { cat: "pink", title: "Same and Different", steps: [
+        "Talk with a partner. Find two things the same and two things different.",
+        "You can use country, city, family, work, or food."
+      ]},
+      { cat: "pink", title: "Before Class Tonight", steps: [
+        "How did you feel on your way here tonight? Tired, nervous, late, or ready?",
+        "Ask everyone. Then name one thing that would make the first week easier."
+      ]},
+      { cat: "lavender", title: "Your Saturday", steps: [
+        "What do you usually do on Saturday? Tell the group three things.",
+        "Then ask each person one weekend question."
+      ]},
+      { cat: "lavender", title: "Food You Love", steps: [
+        "What is a food you love? Describe it. How does it taste? When do you eat it?",
+        "Ask everyone their favorite food from home or from here."
+      ]},
+      { cat: "lavender", title: "Morning or Night", steps: [
+        "Are you a morning person or a night person? Convince the group.",
+        "Then ask who wakes up first in their house."
+      ], say: "Who wakes up first in your house?" },
+      { cat: "lavender", title: "The Longest Trip Here", steps: [
+        "How do you get to class — walk, bus, Blue Line, car? How long does it really take?",
+        "Find out who in the group travels farthest. They win nothing."
+      ]},
+      { cat: "lavender", title: "Something You Are Good At", steps: [
+        "Tell the group one thing you are good at: cooking, fixing things, sports, or singing.",
+        "Ask two people what they are good at."
+      ]},
+      { cat: "lavender", title: "Perfect Sunday", steps: [
+        "Describe a perfect Sunday with no work and no homework.",
+        "Then ask what they would add to your Sunday."
+      ], say: "What would you add to my Sunday?" },
+      { cat: "blue", title: "New Seat or Same Seat", steps: [
+        "Would you rather sit next to someone new every class, or sit with the same people?",
+        "Everyone votes and says why."
+      ]},
+      { cat: "blue", title: "Ask to Be Partners", steps: [
+        "Pick someone in your group. Practice asking them to work with you.",
+        "They can say yes or no. Then switch."
+      ], say: "Do you want to work together?" },
+      { cat: "blue", title: "I Forgot Your Name", steps: [
+        "Pick someone in your group. You forgot their name.",
+        "Role-play asking again in a kind way. Then switch."
+      ], say: "I'm sorry. Can you tell me your name again?" },
+      { cat: "blue", title: "Please Repeat That", steps: [
+        "Pick someone to be the teacher. They say a sentence a little too fast.",
+        "Practice asking them to repeat, speak slower, or write the word."
+      ], say: "Can you say that again, please?" },
+      { cat: "blue", title: "I Need Help", steps: [
+        "You do not understand the homework. Practice asking a classmate for help.",
+        "The classmate explains one step. Then switch."
+      ], say: "Can you help me with this?" },
+      { cat: "blue", title: "Phone Rules", steps: [
+        "When is a phone fine in class, and when is it not? Translating? Photos of the board? A call from school?",
+        "Agree on two phone rules your whole group can live with."
+      ]},
+      { cat: "green", title: "Same Word, Different Spanish", steps: [
+        "Pick a word like bus, juice, cake, or straw. How do you say it in your Spanish?",
+        "Compare with your classmates. Whose version wins?"
+      ]},
+      { cat: "green", title: "The Word That Fights You", steps: [
+        "Name one English word your mouth refuses to say correctly.",
+        "Teach it to the group. Everyone says it wrong together, then tries again."
+      ], say: "How do you say this word?" },
+      { cat: "green", title: "False Friends", steps: [
+        "Embarazada is not embarrassed. Constipado is not constipated. Name another word that tricked you.",
+        "Ask the group if anyone has used the wrong one out loud."
+      ]},
+      { cat: "green", title: "The Family Translator", steps: [
+        "Who translates for your family: you, a child, a phone, or nobody?",
+        "Ask the group what is hardest to translate — the doctor, the school, or the landlord."
+      ]},
+      { cat: "green", title: "When You Don't Understand", steps: [
+        "Someone speaks English too fast. Do you nod, ask again, or walk away? Be honest.",
+        "Practice one sentence that buys you time. The group picks the most useful one."
+      ], say: "I'm sorry, I didn't catch that." },
+      { cat: "green", title: "Kind Words", steps: [
+        "Tell the person on your right one kind, specific thing: their question, smile, or English.",
+        "Then they tell the next person. Go around the group."
+      ]}
+    ];
+
+    function el(tag, attrs, children) {
+      const node = document.createElement(tag);
+      if (attrs) {
+        Object.keys(attrs).forEach(function (key) {
+          if (key === "className") node.className = attrs[key];
+          else if (key === "htmlFor") node.htmlFor = attrs[key];
+          else if (key.slice(0, 2) === "on") node.addEventListener(key.slice(2).toLowerCase(), attrs[key]);
+          else if (attrs[key] !== null && attrs[key] !== undefined) node.setAttribute(key, attrs[key]);
+        });
+      }
+      (children || []).forEach(function (child) {
+        node.appendChild(typeof child === "string" ? document.createTextNode(child) : child);
+      });
+      return node;
+    }
+
+    function frontFace(card, classNames) {
+      const cat = CATS[card.cat];
+      return el("div", { className: classNames + " " + cat.cls }, [
+        el("span", { className: "emoji" }, [cat.emoji]),
+        el("div", { className: "cat" }, [cat.name]),
+        el("div", { className: "flip-hint" }, ["Flip to talk"])
+      ]);
+    }
+
+    function backFace(card, classNames) {
+      const cat = CATS[card.cat];
+      const list = el("ol", { className: "steps" });
+      card.steps.forEach(function (step) {
+        list.appendChild(el("li", null, [step]));
+      });
+      const children = [
+        el("h3", null, [card.title]),
+        list
+      ];
+      if (card.say) {
+        children.push(el("p", { className: "say" }, [
+          el("strong", null, ["Say"]),
+          "\u201c" + card.say + "\u201d"
+        ]));
+      }
+      return el("div", { className: classNames + " " + cat.cls }, children);
+    }
+
+    function renderPreview() {
+      const root = document.getElementById("preview");
+      CARDS.forEach(function (card) {
+        const btn = el("button", {
+          className: "preview-card",
+          type: "button",
+          "aria-pressed": "false",
+          "aria-label": CATS[card.cat].name + ". Flip to talk."
+        }, [
+          el("div", { className: "preview-inner" }, [
+            frontFace(card, "preview-face preview-front"),
+            backFace(card, "preview-face preview-back")
+          ])
+        ]);
+        btn.addEventListener("click", function () {
+          const open = btn.classList.toggle("is-flipped");
+          btn.setAttribute("aria-pressed", open ? "true" : "false");
+          btn.setAttribute("aria-label", open ? card.title : CATS[card.cat].name + ". Flip to talk.");
+        });
+        root.appendChild(btn);
+      });
+    }
+
+    function duplexBacks(group) {
+      // Landscape + long-edge flip mirrors top and bottom rows.
+      return [group[3], group[4], group[5], group[0], group[1], group[2]];
+    }
+
+    function makeSheet(title, slots) {
+      const grid = el("div", { className: "grid" });
+      slots.forEach(function (slot) { grid.appendChild(slot); });
+      return el("div", { className: "sheet" }, [
+        el("div", { className: "sheet-header" }, [title]),
+        grid
+      ]);
+    }
+
+    function renderPrint() {
+      const root = document.getElementById("printPack");
+      let sheet = 1;
+      for (let i = 0; i < CARDS.length; i += 6) {
+        const group = CARDS.slice(i, i + 6);
+        const start = i + 1;
+        const end = i + group.length;
+        const fronts = group.map(function (card) {
+          return frontFace(card, "slot front");
+        });
+        const backs = duplexBacks(group).map(function (card) {
+          return backFace(card, "slot back");
+        });
+        root.appendChild(makeSheet("Sheet " + sheet++ + " (Fronts " + start + "–" + end + ")", fronts));
+        root.appendChild(makeSheet("Sheet " + sheet++ + " (Backs " + start + "–" + end + ", mirrored for duplex)", backs));
+      }
+    }
+
+    /* ---- Play mode ---- */
+    var play = {
+      filter: "all",   // "all" or a category key
+      drawn: [],       // indexes already drawn under the current filter
+      current: null
+    };
+
+    function poolFor(filter) {
+      return CARDS.map(function (card, i) { return i; })
+        .filter(function (i) { return filter === "all" || CARDS[i].cat === filter; });
+    }
+
+    function renderFilters() {
+      var root = document.getElementById("filters");
+      var options = [{ key: "all", name: "Everything", sw: "sw-all", emoji: "" }];
+      Object.keys(CATS).forEach(function (k) {
+        options.push({ key: k, name: CATS[k].name, sw: "sw-" + k, emoji: CATS[k].emoji });
+      });
+
+      options.forEach(function (opt) {
+        var btn = el("button", {
+          type: "button",
+          className: "",
+          "aria-pressed": opt.key === play.filter ? "true" : "false"
+        }, [
+          el("span", { className: "sw " + opt.sw, "aria-hidden": "true" }),
+          (opt.emoji ? opt.emoji + " " : "") + opt.name
+        ]);
+        btn.addEventListener("click", function () {
+          play.filter = opt.key;
+          play.drawn = [];
+          play.current = null;
+          Array.prototype.forEach.call(root.children, function (b) {
+            b.setAttribute("aria-pressed", "false");
+          });
+          btn.setAttribute("aria-pressed", "true");
+          var card = document.getElementById("stageCard");
+          card.hidden = true;
+          card.classList.remove("is-flipped");
+          card.setAttribute("aria-pressed", "false");
+          document.getElementById("stageEmpty").hidden = false;
+          updateDrawUI();
+        });
+        root.appendChild(btn);
+      });
+    }
+
+    function updateDrawUI() {
+      var pool = poolFor(play.filter);
+      var left = pool.length - play.drawn.length;
+      var drawBtn = document.getElementById("drawBtn");
+      var counter = document.getElementById("counter");
+      var resetBtn = document.getElementById("resetBtn");
+
+      counter.textContent = play.drawn.length + " of " + pool.length;
+      if (left === 0) {
+        drawBtn.disabled = true;
+        drawBtn.textContent = "That's the whole deck";
+        resetBtn.hidden = false;
+      } else {
+        drawBtn.disabled = false;
+        drawBtn.textContent = play.current === null ? "Draw a card" : "Next card";
+        resetBtn.hidden = play.drawn.length === 0;
+      }
+    }
+
+    function showCard(card) {
+      var inner = document.getElementById("stageInner");
+      var btn = document.getElementById("stageCard");
+      inner.textContent = "";
+      inner.appendChild(frontFace(card, "stage-face stage-front"));
+      inner.appendChild(backFace(card, "stage-face stage-back"));
+      document.getElementById("stageEmpty").hidden = true;
+      btn.hidden = false;
+      btn.classList.remove("is-flipped");
+      btn.setAttribute("aria-pressed", "false");
+      btn.setAttribute("aria-label", CATS[card.cat].name + ". Flip to read the card.");
+    }
+
+    function drawCard() {
+      var pool = poolFor(play.filter).filter(function (i) {
+        return play.drawn.indexOf(i) === -1;
+      });
+      if (!pool.length) return;
+
+      var pick = pool[Math.floor(Math.random() * pool.length)];
+      play.drawn.push(pick);
+      play.current = pick;
+      showCard(CARDS[pick]);
+
+      var drawBtn = document.getElementById("drawBtn");
+      drawBtn.classList.remove("is-shuffling");
+      void drawBtn.offsetWidth;            // restart the animation
+      drawBtn.classList.add("is-shuffling");
+
+      updateDrawUI();
+    }
+
+    function flipStage() {
+      var btn = document.getElementById("stageCard");
+      if (btn.hidden) return;
+      var open = btn.classList.toggle("is-flipped");
+      btn.setAttribute("aria-pressed", open ? "true" : "false");
+      btn.setAttribute("aria-label", open
+        ? CARDS[play.current].title
+        : CATS[CARDS[play.current].cat].name + ". Flip to read the card.");
+    }
+
+    function initModes() {
+      var playBox = document.getElementById("showPlay");
+      var printBox = document.getElementById("showPrint");
+
+      // Reuse the deck's own heading so play mode names the deck.
+      var h1 = document.querySelector(".screen-stuff h1");
+      if (h1) document.getElementById("playTitle").textContent = h1.textContent;
+
+      document.getElementById("toPrint").addEventListener("click", function () {
+        printBox.checked = true;
+        window.scrollTo(0, 0);
+      });
+      document.getElementById("backToPlay").addEventListener("click", function () {
+        printBox.checked = false;
+        playBox.checked = true;
+        window.scrollTo(0, 0);
+      });
+      document.getElementById("toBrowse").addEventListener("click", function () {
+        var browsing = !playBox.checked;
+        playBox.checked = browsing;   // toggle back and forth
+        this.textContent = playBox.checked ? "See all 24 at once" : "Back to play mode";
+      });
+
+      // Teachers can also land straight on the print sheets with ?print
+      if (/[?&]print\b/.test(window.location.search)) printBox.checked = true;
+    }
+
+    function initPlay() {
+      renderFilters();
+      updateDrawUI();
+
+      document.getElementById("drawBtn").addEventListener("click", drawCard);
+      document.getElementById("stageCard").addEventListener("click", flipStage);
+      document.getElementById("resetBtn").addEventListener("click", function () {
+        play.drawn = [];
+        play.current = null;
+        var card = document.getElementById("stageCard");
+        card.hidden = true;
+        card.classList.remove("is-flipped");
+        document.getElementById("stageEmpty").hidden = false;
+        updateDrawUI();
+        document.getElementById("drawBtn").focus();
+      });
+
+      document.addEventListener("keydown", function (e) {
+        // Only while play mode is visible, and never while typing in a control.
+        if (!document.getElementById("showPlay").checked) return;
+        var tag = (e.target.tagName || "").toLowerCase();
+        if (tag === "input" || tag === "textarea") return;
+
+        if (e.key === " " || e.key === "Spacebar") {
+          if (document.getElementById("stageCard").hidden) return;
+          e.preventDefault();
+          flipStage();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          if (!document.getElementById("drawBtn").disabled) drawCard();
+        }
+      });
+    }
+
+    renderPreview();
+    renderPrint();
+    initPlay();
+    initModes();
+  </script>
+
+</body>
+</html>
