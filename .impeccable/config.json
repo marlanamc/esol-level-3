@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "activities/superlatives/unit1-getting-to-know-you-discussion-game.html"
+        ],
+        "createdAt": "2026-09-07T17:42:01.048Z"
+      },
+      {
+        "rule": "single-font",
+        "value": "*",
+        "files": [
+          "activities/games/conversation_cards/Unit1_cards.html"
+        ],
+        "createdAt": "2026-09-11T21:58:01.584Z"
+      },
+      {
+        "rule": "single-font",
+        "value": "*",
+        "files": [
+          "activities/games/conversation_cards/index.html"
+        ],
+        "createdAt": "2026-09-11T21:58:05.731Z"
+      }
+    ]
+  }
+}
