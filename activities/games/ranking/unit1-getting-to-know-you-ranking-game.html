@@ -457,10 +457,9 @@
             gap: 14px;
         }
 
-        .support-row .frames-box,
-        .support-row .reveal-box {
+        .support-row .frames-box {
             max-width: none;
-            flex: 1 1 50%;
+            flex: 1 1 100%;
             margin: 0;
         }
 
@@ -478,9 +477,8 @@
             .rank-number { width: 34px; height: 34px; min-width: 34px; font-size: 18px; }
             .rank-text { font-size: 19px; }
             .rank-list { gap: 8px; }
-            .frames-box, .reveal-box { padding: 10px 16px; }
+            .frames-box { padding: 10px 16px; }
             .frames-box li { font-size: 14px; }
-            .reveal-text { font-size: 15px; }
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { padding: 10px 24px; font-size: 15px; }
         }
@@ -489,35 +487,40 @@
             .support-row { flex-direction: column; }
         }
 
-        /* COMPARE / REVEAL STEP */
-        .reveal-box {
-            width: 100%;
-            max-width: 860px;
-            flex-direction: column;
-            gap: 6px;
-            background: #B0432B0F;
-            border: 2px dashed #B0432B;
-            border-radius: 8px;
-            padding: 12px 18px;
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
         /* Collapsed: a quiet button-shaped prompt. Expanded: the full box. */
-        .reveal-box.is-collapsed {
+        .frames-box.is-collapsed {
+            display: flex;
             align-items: center;
             justify-content: center;
             padding: 0;
             background: transparent;
             border-style: solid;
+            border-left-width: 2px;
             border-color: #B0432B55;
         }
 
-        .reveal-box.is-collapsed .reveal-label,
-        .reveal-box.is-collapsed .reveal-text { display: none; }
+        .frames-box.is-collapsed .frames-title,
+        .frames-box.is-collapsed ul,
+        .frames-box.is-collapsed .frames-hide { display: none; }
 
-        .reveal-toggle {
+        .frames-hide {
+            display: block;
+            width: 100%;
+            text-align: right;
+            font-family: 'Atkinson Hyperlegible', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .4px;
+            color: inherit;
+            opacity: 0.55;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 2px 4px;
+        }
+        .frames-hide:hover { opacity: 0.9; }
+
+        .frames-toggle {
             display: none;
             width: 100%;
             font-family: 'Atkinson Hyperlegible', sans-serif;
@@ -533,26 +536,8 @@
             transition: background .2s ease;
         }
 
-        .reveal-box.is-collapsed .reveal-toggle { display: block; }
-        .reveal-toggle:hover { background: #B0432B14; }
-
-        .reveal-label {
-            font-family: 'Atkinson Hyperlegible', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #B0432B;
-            white-space: nowrap;
-            padding-top: 2px;
-        }
-
-        .reveal-text {
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 1.45;
-            color: #1a1a1a;
-        }
+        .frames-box.is-collapsed .frames-toggle { display: block; }
+        .frames-toggle:hover { background: #B0432B14; }
 
         .instruction-text {
             font-size: 15px;
@@ -663,27 +648,25 @@
 
                 <div id="roundBody"></div>
 
+                <div class="instruction-text" id="instructionText"></div>
+
                 <div class="support-row">
-                    <div class="frames-box">
+                    <div class="frames-box is-collapsed" id="framesBox">
+                        <button type="button" class="frames-toggle" id="framesToggle"
+                                onclick="showFrames()">Need extra help? &#9662;</button>
+                        <button type="button" class="frames-hide" id="framesHide"
+                                onclick="hideFrames()">Hide &#9652;</button>
                         <div class="frames-title" id="framesTitle">Use these sentence starters</div>
                         <ul id="framesList"></ul>
                     </div>
-
-                    <div class="reveal-box is-collapsed" id="revealBox">
-                        <button type="button" class="reveal-toggle" id="revealToggle"
-                                onclick="showCompare()">Compare answers &#9662;</button>
-                        <span class="reveal-label">Compare</span>
-                        <span class="reveal-text" id="revealText"></span>
-                    </div>
                 </div>
-
-                <div class="instruction-text" id="instructionText"></div>
             </div>
 
             <div class="nav-container">
                 <button class="nav-btn back" onclick="previousRound()" id="backBtn">← Back</button>
                 <button class="nav-btn home" onclick="goHome()">🏠 Home</button>
                 <button class="nav-btn" onclick="shuffleCurrent()" id="shuffleBtn">🔀 Shuffle</button>
+                <button class="nav-btn" onclick="resetVotes()" id="resetVotesBtn">↺ Reset votes</button>
                 <button class="nav-btn" onclick="nextRound()" id="nextBtn">Next →</button>
             </div>
         </div>
@@ -751,10 +734,10 @@
                     "The train was late",
                     "My alarm did not ring",
                     "My child was sick",
-                    "I was on a long WhatsApp call with my family",
+                    "I was on a long FaceTime call with my family",
                     "I could not find parking"
                 ],
-                reveal: "Which excuse did the class trust the least? Who has really been stuck on a family WhatsApp call?"
+                reveal: "Which excuse did the class trust the least? Who has really been stuck on a family FaceTime call?"
             },
             {
                 type: "wyr",
@@ -782,15 +765,15 @@
                     "Where are you from?",
                     "What do you do for work?",
                     "Why do you want to learn English?",
-                    "Tell me about yourself"
+                    "Tell me a fun fact about yourself"
                 ],
                 reveal: "Compare orders. Who put the 30-second life story last? Ask two people why."
             },
             {
                 type: "wyr",
                 prompt: "Would you rather…",
-                a: "Homework every night",
-                b: "No homework, but more talking in class"
+                a: "A class that's all speaking and listening",
+                b: "A class that's all reading and writing"
             },
             {
                 type: "rank",
@@ -814,8 +797,8 @@
             {
                 type: "wyr",
                 prompt: "Would you rather…",
-                a: "A class where the teacher corrects every mistake you make",
-                b: "A class where the teacher never corrects you"
+                a: "A teacher who stops you to fix every mistake right away",
+                b: "A teacher who lets you finish talking, then fixes mistakes after"
             }
         ];
 
@@ -857,28 +840,23 @@
                 frames.map(function (f) { return '<li>' + escapeHtml(f) + '</li>'; }).join('');
 
             document.getElementById('instructionText').textContent = r.type === 'rank'
-                ? 'Drag the cards or use the arrows to reorder • When everyone has an order, tap Compare answers'
+                ? 'Drag the cards or use the arrows to reorder'
                 : 'Click a side to choose • Click again to count more votes • Ask three students to explain why';
 
             document.getElementById('shuffleBtn').style.display = r.type === 'rank' ? '' : 'none';
-
-            const revealBox = document.getElementById('revealBox');
-            if (r.type === 'rank' && r.reveal) {
-                document.getElementById('revealText').textContent = r.reveal;
-                revealBox.style.display = '';
-                // Start collapsed each round so the prompt cannot give away
-                // the interesting answer before students commit to an order.
-                revealBox.classList.add('is-collapsed');
-            } else {
-                revealBox.style.display = 'none';
-            }
+            document.getElementById('resetVotesBtn').style.display = r.type === 'wyr' ? '' : 'none';
 
             if (r.type === 'rank') renderRank(); else renderWyr();
             resetTimer();
         }
 
-        function showCompare() {
-            document.getElementById('revealBox').classList.remove('is-collapsed');
+
+        function showFrames() {
+            document.getElementById('framesBox').classList.remove('is-collapsed');
+        }
+
+        function hideFrames() {
+            document.getElementById('framesBox').classList.add('is-collapsed');
         }
 
         /* ---------- RANKING ROUND ---------- */
@@ -1000,6 +978,13 @@
             const st = roundState[currentRound];
             st.votes[side]++;
             st.chosen = side;
+            paintWyr(st);
+        }
+
+        function resetVotes() {
+            const st = roundState[currentRound];
+            st.votes = { a: 0, b: 0 };
+            st.chosen = null;
             paintWyr(st);
         }
 
