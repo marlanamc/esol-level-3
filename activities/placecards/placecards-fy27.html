@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="../../assets/icons/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Place Cards - FY27</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    body {
+      font-family: 'Atkinson Hyperlegible', Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: #111;
+    }
+
+    .sheet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3in;
+      padding: 0.3in;
+      box-sizing: border-box;
+    }
+
+    .card {
+      border: 2px solid #222;
+      height: 2.75in;
+      display: flex;
+      flex-direction: column;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .half {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.15in;
+      box-sizing: border-box;
+    }
+
+    .top {
+      border-bottom: 1.5px dashed #777;
+    }
+
+    .top .name-block {
+      transform: rotate(180deg);
+    }
+
+    .name-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.15;
+    }
+
+    .name {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .country {
+      font-size: 15px;
+      color: #555;
+    }
+
+    .flag {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      .sheet {
+        gap: 0.25in;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Marinela</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Marinela</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Daniel</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Daniel</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Carolina</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Carolina</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Elena</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Elena</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇲🇽</div>
+          <div class="name">Evelina</div>
+          <div class="country">Mexico</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇲🇽</div>
+          <div class="name">Evelina</div>
+          <div class="country">Mexico</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Leidy</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Leidy</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Juan</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Juan</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Sandra</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Sandra</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Bryan</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Bryan</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Diego</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Diego</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇧🇷</div>
+          <div class="name">Helena</div>
+          <div class="country">Brazil</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇧🇷</div>
+          <div class="name">Helena</div>
+          <div class="country">Brazil</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Sara</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Sara</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Mirna</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Mirna</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Angie</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Angie</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Fredy</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Fredy</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Nuvia</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Nuvia</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Roman</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Roman</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Susan</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Susan</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Josue</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Josue</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇩🇴</div>
+          <div class="name">Angel</div>
+          <div class="country">Dominican Republic</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇩🇴</div>
+          <div class="name">Angel</div>
+          <div class="country">Dominican Republic</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇧🇷</div>
+          <div class="name">Alexandre</div>
+          <div class="country">Brazil</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇧🇷</div>
+          <div class="name">Alexandre</div>
+          <div class="country">Brazil</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Noe</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Noe</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Zuleima</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇸🇻</div>
+          <div class="name">Zuleima</div>
+          <div class="country">El Salvador</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Erlinda</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇭🇳</div>
+          <div class="name">Erlinda</div>
+          <div class="country">Honduras</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇲🇽</div>
+          <div class="name">Elena R</div>
+          <div class="country">Mexico</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇲🇽</div>
+          <div class="name">Elena R</div>
+          <div class="country">Mexico</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Mariana</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇨🇴</div>
+          <div class="name">Mariana</div>
+          <div class="country">Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇺🇸</div>
+          <div class="name">Marlie</div>
+          <div class="country">USA</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇺🇸</div>
+          <div class="name">Marlie</div>
+          <div class="country">USA</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="half top">
+        <div class="name-block">
+          <div class="flag">🇺🇸</div>
+          <div class="name">Matt</div>
+          <div class="country">USA</div>
+        </div>
+      </div>
+      <div class="half bottom">
+        <div class="name-block">
+          <div class="flag">🇺🇸</div>
+          <div class="name">Matt</div>
+          <div class="country">USA</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

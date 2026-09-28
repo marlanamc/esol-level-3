@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 1: Getting to Know You Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #B0432B; --discussion-accent-dark: #8a3220; --discussion-background: #FFF7ED; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 1: Getting to Know You</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about school, classmates, and daily routines</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -622,17 +627,17 @@
                     {
                         "name": "Introducing Yourself",
                         "questions": [
-                            "Tell us your name and where you are from.",
+                            "What’s your name, and where are you from?",
                             "How long have you lived in this city?",
                             "What is something you enjoy doing outside of class?",
-                            "What is something people always get wrong about you at first?"
+                            "What is something you enjoy that new classmates might not know about?"
                         ]
                     },
                     {
                         "name": "Family Members",
                         "questions": [
                             "Who lives with you at home?",
-                            "Describe one person in your family.",
+                            "What is someone in your family like?",
                             "How many brothers or sisters do you have?",
                             "Who in your family is the funniest?"
                         ]
@@ -641,17 +646,17 @@
                         "name": "Free Time and Hobbies",
                         "questions": [
                             "What do you like to do on weekends?",
-                            "Name one hobby you enjoy.",
-                            "How often do you do this activity?",
+                            "What’s a hobby you enjoy?",
+                            "How often do you spend time on a hobby you enjoy?",
                             "What hobby would you start tomorrow if it were free?"
                         ]
                     },
                     {
                         "name": "Your Country and Culture",
                         "questions": [
-                            "Describe a custom or tradition from your country.",
+                            "What is a tradition from your country that you enjoy?",
                             "What food from your country do you miss?",
-                            "How is a holiday celebrated in your country?",
+                            "What do people do on your favorite holiday?",
                             "What food from home would you make for this class?"
                         ]
                     },
@@ -661,7 +666,7 @@
                             "Why did you decide to study English?",
                             "What do you want to be able to do in English?",
                             "How will English help you in your daily life?",
-                            "What is the first thing you will do when your English is strong?"
+                            "What would you like to try when you feel more confident speaking English?"
                         ]
                     },
                     {
@@ -681,27 +686,27 @@
                     {
                         "name": "Finding Your Classroom",
                         "questions": [
-                            "Describe how you find your classroom on the first day.",
+                            "It’s your first day at a new school. How would you find your classroom?",
                             "What do you do if you get lost in the building?",
                             "Who can you ask for directions inside the school?",
-                            "What is the worst place you have ever gotten lost?"
+                            "Have you ever had trouble finding a place in this city?"
                         ]
                     },
                     {
                         "name": "Attendance and Being on Time",
                         "questions": [
-                            "What makes it hardest to arrive on time?",
-                            "What should you do if you will be late?",
+                            "What sometimes makes you late for class?",
+                            "Your bus is late, and class starts in ten minutes. What could you say in a message to your teacher?",
                             "How do you let your teacher know you are absent?",
-                            "Are you an early person or a last-minute person? Be honest."
+                            "Do you usually arrive early or just in time?"
                         ]
                     },
                     {
                         "name": "Classroom Materials",
                         "questions": [
-                            "What materials do you need for this class?",
+                            "What do you usually bring to class?",
                             "Where do you keep your notebook and pens?",
-                            "What do you do if you forget your materials?",
+                            "What do you do if you forget your notebook?",
                             "What is always in your bag that nobody would guess?"
                         ]
                     },
@@ -710,25 +715,25 @@
                         "questions": [
                             "What do you say when you do not understand a lesson?",
                             "How do you ask your teacher to repeat something?",
-                            "Describe a polite way to ask a classmate for help.",
+                            "You can’t find the page everyone is reading. What could you ask the person next to you?",
                             "Is it easier to ask the teacher or a classmate? Why?"
                         ]
                     },
                     {
                         "name": "Classroom Rules",
                         "questions": [
-                            "Name one important rule in this classroom.",
-                            "Why do classrooms have rules?",
-                            "What should you do with your phone during class?",
-                            "What is one rule you would add, and one you would delete?"
+                            "You’re choosing a rule for your study group. What rule would you suggest?",
+                            "Two people in your group are talking at the same time. How would you feel?",
+                            "You’re waiting for an important call during class. How would you handle it?",
+                            "What is one classroom rule you would like to change?"
                         ]
                     },
                     {
                         "name": "Help at This School",
                         "questions": [
-                            "What resources does the school offer to students?",
-                            "Where can you find help with computers or the library?",
-                            "Who can answer your questions about school programs?",
+                            "You’re visiting a new school. What would you like to ask about the help students can get there?",
+                            "You’re using a library computer, but you can’t print your work. What could you say to ask for help?",
+                            "You want to take a computer class at your school. What would you ask someone in the school office?",
                             "What do you wish this school had that it does not?"
                         ]
                     }
@@ -740,17 +745,17 @@
                     {
                         "name": "Morning Routine",
                         "questions": [
-                            "Describe your morning routine before class.",
+                            "What do you usually do before you leave for class?",
                             "What time do you wake up on a school day?",
                             "What do you eat for breakfast?",
-                            "Are you a morning person? Convince us."
+                            "Do you like getting up early?"
                         ]
                     },
                     {
                         "name": "Getting to Class",
                         "questions": [
                             "How do you travel to class each day?",
-                            "How long does it take you to arrive?",
+                            "How long does it take you to get to class?",
                             "What do you do if traffic or the bus is delayed?",
                             "What is the longest your trip to class has ever taken?"
                         ]
@@ -758,28 +763,28 @@
                     {
                         "name": "Daily Schedule",
                         "questions": [
-                            "Walk us through a typical weekday for you.",
+                            "What is usually the busiest part of your weekday?",
                             "What time do you usually eat lunch?",
                             "When do you have time to study or do homework?",
-                            "Which hour of your day would you happily delete?"
+                            "What is one thing you wish you spent less time doing each day?"
                         ]
                     },
                     {
                         "name": "Balancing Work, Family, and School",
                         "questions": [
                             "How do you make time for class along with work or family?",
-                            "What is difficult about balancing these responsibilities?",
+                            "You have homework to finish, and a friend invites you to dinner. What would you do?",
                             "Who helps you manage your schedule?",
-                            "What is the first thing you drop when the week gets busy?"
+                            "What do you stop doing when your week gets busy?"
                         ]
                     },
                     {
                         "name": "Evening Routine",
                         "questions": [
-                            "Describe what you do after class ends.",
+                            "What do you usually do after class?",
                             "What time do you usually go to bed?",
                             "How do you relax at the end of the day?",
-                            "What do you do to relax that you would never admit?"
+                            "Do you prefer relaxing alone or with other people?"
                         ]
                     },
                     {
@@ -787,8 +792,8 @@
                         "questions": [
                             "What do you usually do on Saturday and Sunday?",
                             "Do you study on the weekend? Why or why not?",
-                            "Describe a typical weekend activity with your family.",
-                            "Describe your perfect weekend with no budget limit."
+                            "What do you like to do with family or friends on weekends?",
+                            "If you could do anything this weekend, what would you choose?"
                         ]
                     }
                 ]
@@ -800,7 +805,7 @@
                         "name": "Working in Pairs or Groups",
                         "questions": [
                             "How do you feel about working with a partner in class?",
-                            "Describe a good way to share ideas in a group.",
+                            "You’re in a meeting at work. You have an idea you want to share. What could you say?",
                             "What do you do if you disagree with your partner?",
                             "Would you rather work alone or with a partner? Why?"
                         ]
@@ -808,9 +813,9 @@
                     {
                         "name": "Introducing a Classmate",
                         "questions": [
-                            "Interview a classmate and learn three facts about them.",
-                            "How would you introduce this classmate to the class?",
-                            "What question was most interesting to ask?",
+                            "You meet a new classmate before class. What would you like to ask them?",
+                            "A classmate joins you while you’re talking to a friend. How would you introduce them?",
+                            "When you meet a new classmate, would you rather talk about food, hobbies, or something else?",
                             "What is the most surprising thing you learned about a classmate?"
                         ]
                     },
@@ -818,18 +823,18 @@
                         "name": "Giving and Receiving Feedback",
                         "questions": [
                             "How do you feel when someone corrects your English?",
-                            "Describe a polite way to give feedback to a classmate.",
-                            "Would you rather be corrected right away or later?",
-                            "Do you like being corrected? Be honest."
+                            "A classmate asks you to read their email in English. One sentence is hard to understand. What could you say?",
+                            "When you make a mistake in English, would you rather hear about it right away or later?",
+                            "Do you like it when someone corrects your English?"
                         ]
                     },
                     {
                         "name": "Sharing Contact Information",
                         "questions": [
-                            "Why might you want to exchange contact information with a classmate?",
-                            "What would you share with a classmate, and what would you keep private?",
+                            "What would you like to talk about with classmates outside class?",
+                            "What contact information, if any, would you feel comfortable sharing with a classmate?",
                             "How would you ask a classmate for their phone number politely?",
-                            "How many WhatsApp group chats are too many?"
+                            "How many group chats are too many for you?"
                         ]
                     },
                     {
@@ -837,17 +842,17 @@
                         "questions": [
                             "How do you feel about speaking in front of the whole class?",
                             "What helps you feel more confident speaking English?",
-                            "Describe a strategy for joining a group discussion.",
+                            "Your classmates are talking about a movie you’ve seen. What could you say to join the conversation?",
                             "What topic could you talk about for an hour?"
                         ]
                     },
                     {
                         "name": "Setting Class Goals Together",
                         "questions": [
-                            "What is one goal the whole class could work toward?",
-                            "How can classmates support each other's goals?",
-                            "What rules would help everyone learn better together?",
-                            "What should the class celebrate at the end of the term?"
+                            "What would you like our class to practice more?",
+                            "A classmate wants more practice speaking English outside class. What could you suggest doing together?",
+                            "Your class is working in small groups, but it’s hard to hear. What could make it easier to talk?",
+                            "What would you like our class to celebrate at the end of the term?"
                         ]
                     }
                 ]
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

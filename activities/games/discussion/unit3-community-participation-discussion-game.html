@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 3: Community Participation Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #4B6B1F; --discussion-accent-dark: #3c5519; --discussion-background: #F3F8EC; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 3: Community Participation</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about neighbors, groups, and getting involved</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -622,9 +627,9 @@
                     {
                         "name": "Neighborhood Community",
                         "questions": [
-                            "Describe the neighborhood where you live.",
+                            "What is your neighborhood like?",
                             "Who are the people you see most often nearby?",
-                            "What makes your neighborhood feel like a community?",
+                            "Where do people in your neighborhood stop to talk?",
                             "What do you like best about where you live now?"
                         ]
                     },
@@ -632,44 +637,44 @@
                         "name": "Cultural or Language Community",
                         "questions": [
                             "Do you belong to a community that shares your language or culture?",
-                            "How did you find this community?",
-                            "What activities does this community organize?",
-                            "What do you miss most when you are away from this community?"
+                            "Where do you meet people who share your language or culture?",
+                            "What activity would you enjoy with people who share your language or culture?",
+                            "What do you enjoy talking about with people who speak your first language?"
                         ]
                     },
                     {
                         "name": "Online Communities",
                         "questions": [
                             "Are you in any WhatsApp, Facebook, or other online groups?",
-                            "How do you communicate with people in this group?",
-                            "What topics do you discuss in this online community?",
-                            "Are online friends real friends? Discuss."
+                            "Do you prefer sending texts, photos, or voice messages in a group chat?",
+                            "What do you like to talk about in online groups?",
+                            "Can an online friendship be as close as a friendship in person?"
                         ]
                     },
                     {
                         "name": "Workplace Community",
                         "questions": [
-                            "Describe the community of people at your job.",
-                            "How do coworkers support each other?",
-                            "What activities bring your coworkers together?",
-                            "What makes a workplace feel like a team?"
+                            "What kind of people do you like to work with?",
+                            "You're new at work and can't find the supplies. What could you ask a coworker?",
+                            "What activity would you enjoy doing with coworkers after work?",
+                            "Your team has a busy day ahead. What could you say to offer help?"
                         ]
                     },
                     {
                         "name": "School Community",
                         "questions": [
-                            "Describe the community here at your school.",
+                            "Where do you like to spend time with people at school?",
                             "Who do you feel closest to in this school?",
-                            "What activities help build community in your class?",
-                            "What would make this school feel more like a community?"
+                            "What activity would you like to do together as a class?",
+                            "What would help you get to know more people at school?"
                         ]
                     },
                     {
                         "name": "Faith or Interest Groups",
                         "questions": [
                             "Are you part of a group based on a shared interest or belief?",
-                            "How often does this group meet?",
-                            "What do you enjoy about being part of this group?",
+                            "How often would you like to meet with a group that shares your interests?",
+                            "What do you enjoy about spending time with people who share your interests?",
                             "What group would you start if you had the time?"
                         ]
                     }
@@ -681,54 +686,54 @@
                     {
                         "name": "Parks and Public Spaces",
                         "questions": [
-                            "Describe a park or public space you visit often.",
-                            "Who do you usually see there?",
-                            "What activities happen in this space?",
+                            "What is a park or outdoor place you like to visit?",
+                            "Who do you usually go to a park with?",
+                            "What do people like to do in parks near you?",
                             "What is your favorite place to sit outside in your city?"
                         ]
                     },
                     {
                         "name": "Community Centers",
                         "questions": [
-                            "Describe a community center near your home.",
-                            "What programs or classes are offered there?",
+                            "Is there a community center near you that you would like to visit?",
+                            "You're visiting a community center for the first time. What would you ask about its classes?",
                             "Have you attended an event at a community center?",
-                            "What should every community center have?"
+                            "What would you most like to find at a community center?"
                         ]
                     },
                     {
                         "name": "Local Businesses",
                         "questions": [
-                            "Describe a local business you visit regularly.",
-                            "How do you know the people who work there?",
-                            "What keeps you going back to the same place?",
+                            "What is a local shop or business you visit often?",
+                            "Do you like chatting with people who work in local shops?",
+                            "What makes you go back to the same shop?",
                             "Which local business would you miss most if it closed?"
                         ]
                     },
                     {
                         "name": "Schools and Libraries",
                         "questions": [
-                            "How do schools bring a community together?",
-                            "Describe an event at a school or library you attended.",
-                            "Who uses the library in your area?",
+                            "Your school wants to hold an event for neighbors. What kind of event would you suggest?",
+                            "What is a school or library event you have enjoyed?",
+                            "A friend has never visited a library here. What would you like to show them?",
                             "When did you last use a library? What for?"
                         ]
                     },
                     {
                         "name": "Places of Worship",
                         "questions": [
-                            "How do places of worship function as communities?",
-                            "Describe activities that happen there beyond services.",
-                            "Who attends these gatherings in your area?",
-                            "What brings people back to the same place week after week?"
+                            "A place of worship is hosting a meal for the neighborhood. What could you ask someone you meet there?",
+                            "A place of worship asks for ideas for an activity open to everyone. What would you suggest?",
+                            "You see a flyer for a concert at a place of worship. What would you ask to find out who can attend?",
+                            "What makes you want to return to a community event?"
                         ]
                     },
                     {
                         "name": "Online Groups",
                         "questions": [
-                            "Where online is your community — WhatsApp, Facebook, TikTok, or somewhere else?",
-                            "How is a digital community similar to a physical one?",
-                            "What are the benefits of a digital community?",
+                            "What app or website do you like for keeping in touch with a group?",
+                            "Is it easier for you to talk in a group chat or in person?",
+                            "Your neighborhood starts a group chat. What useful information would you like people to share?",
                             "Would you rather meet online or in person? Why?"
                         ]
                     }
@@ -740,26 +745,26 @@
                     {
                         "name": "Attending Local Events",
                         "questions": [
-                            "Describe a local event you attended recently.",
-                            "How did you find out about this event?",
-                            "Who did you go with?",
+                            "What local event have you enjoyed recently?",
+                            "Where do you usually hear about local events?",
+                            "Do you prefer going to local events alone or with someone?",
                             "What was the best local event you have ever been to?"
                         ]
                     },
                     {
                         "name": "Volunteering and Giving Back",
                         "questions": [
-                            "Have you volunteered for a community organization? Describe it.",
-                            "What motivates you to help others in your community?",
-                            "How much time do you spend volunteering?",
+                            "Have you ever volunteered with a community group?",
+                            "What makes you want to help with a community project?",
+                            "How much time would you like to spend on a volunteer activity?",
                             "What kind of help do people need most in your area?"
                         ]
                     },
                     {
                         "name": "Speaking Up About Local Problems",
                         "questions": [
-                            "Have you ever attended a community meeting? Describe it.",
-                            "How can residents share opinions about local issues?",
+                            "Have you ever been to a neighborhood meeting?",
+                            "You're at a neighborhood meeting and want to suggest more benches in the park. What could you say?",
                             "What issue in your community would you like to discuss?",
                             "What local issue would get you to speak at a meeting?"
                         ]
@@ -767,9 +772,9 @@
                     {
                         "name": "Supporting Neighbors",
                         "questions": [
-                            "Describe a time you helped a neighbor.",
+                            "Have you ever helped a neighbor with something?",
                             "How do neighbors support each other in your area?",
-                            "What would you do if a neighbor needed help?",
+                            "A neighbor is carrying several shopping bags. How could you offer to help?",
                             "What is the kindest thing a neighbor has done for you?"
                         ]
                     },
@@ -778,17 +783,17 @@
                         "questions": [
                             "What skill could you teach someone in your community?",
                             "Have you ever helped someone learn something new?",
-                            "How can sharing skills bring people together?",
-                            "What skill could you trade with someone in this room?"
+                            "You and a neighbor want to teach each other something. What could you learn together?",
+                            "What could you teach a classmate, and what would you like to learn from them?"
                         ]
                     },
                     {
                         "name": "Respecting Community Rules",
                         "questions": [
-                            "What rules help your community function smoothly?",
-                            "Describe a rule you think is important to follow.",
-                            "What happens when community rules are not followed?",
-                            "Which rule in your building or street does everyone ignore?"
+                            "People leave bicycles in a shared hallway. What could you suggest at a building meeting?",
+                            "What is one rule you appreciate in a shared space?",
+                            "Someone leaves trash beside a park bin. What could you say to them?",
+                            "What rule would you like people to follow more often in your neighborhood?"
                         ]
                     }
                 ]
@@ -799,27 +804,27 @@
                     {
                         "name": "Identifying Community Needs",
                         "questions": [
-                            "What is one need you notice in your community?",
-                            "How did you learn about this need?",
-                            "Who could help address this need?",
+                            "What is something your neighborhood needs more of?",
+                            "What have you noticed on your street that you would like to improve?",
+                            "You want more benches at a bus stop. Who could you ask to help you share the idea?",
                             "What is missing from your neighborhood?"
                         ]
                     },
                     {
                         "name": "Organizing a Community Event",
                         "questions": [
-                            "Imagine you are planning a small community event.",
-                            "What type of event would you organize?",
-                            "Who would you invite?",
-                            "Plan a street party. Who does what?"
+                            "You're planning a small neighborhood event. Where would you like to hold it?",
+                            "What kind of neighborhood event would you like to organize?",
+                            "Who would you invite to a neighborhood picnic?",
+                            "You're helping plan a street party. What job would you like to do?"
                         ]
                     },
                     {
                         "name": "Communicating with Community Leaders",
                         "questions": [
-                            "How would you contact a local leader about a concern?",
-                            "What information would you include in your message?",
-                            "Do leaders in your area listen? Give an example.",
+                            "The lights in a park are broken. How would you contact the town office about it?",
+                            "You write to the town office about a broken bus shelter. What details would help explain the problem?",
+                            "You send a suggestion to the town office. What kind of reply would you hope to get?",
                             "What would you say to your mayor in one minute?"
                         ]
                     },
@@ -827,26 +832,26 @@
                         "name": "Working with Diverse Groups",
                         "questions": [
                             "How many languages are spoken at your job or in your building?",
-                            "What did you learn from this experience?",
-                            "How can diverse groups work together successfully?",
+                            "What is something interesting you have learned from a person who speaks another language?",
+                            "You're planning an event with people who speak different languages. What could help everyone share ideas?",
                             "What did you learn from someone very different from you?"
                         ]
                     },
                     {
                         "name": "Encouraging Others to Participate",
                         "questions": [
-                            "How would you invite a friend to join a community activity?",
-                            "What reasons would you give them to participate?",
+                            "You're going to a neighborhood picnic. What could you say to invite a friend?",
+                            "A friend isn't sure about joining a community class. What would you like to tell them about it?",
                             "Who invited you to your first event or group here?",
-                            "How would you convince a shy friend to join you?"
+                            "A friend feels nervous about meeting a new group. What could you offer to do together?"
                         ]
                     },
                     {
                         "name": "How Community Changed Your Life",
                         "questions": [
-                            "How has your community changed your life since you arrived?",
-                            "What impact would you like to have on your community?",
-                            "Describe one way you have already contributed.",
+                            "What is something you enjoy more now that you know people in your neighborhood?",
+                            "What would you like to help improve in your neighborhood?",
+                            "What is something you have done to help at school or in your neighborhood?",
                             "What do you want your neighbors to remember about you?"
                         ]
                     }
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

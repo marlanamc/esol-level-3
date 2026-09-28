@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 9: Holistic Wellness Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #7c285b; --discussion-accent-dark: #5d1e44; --discussion-background: #F0FDF4; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 9: Holistic Wellness</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about feeling okay at home, work, and with family</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -624,53 +629,53 @@
                         "questions": [
                             "What physical activities do you enjoy?",
                             "How often do you exercise during the week?",
-                            "Describe how your body feels after you exercise.",
-                            "What activity do you actually enjoy, not just tolerate?"
+                            "How do you usually feel after an activity you enjoy?",
+                            "What activity do you enjoy so much that you forget the time?"
                         ]
                     },
                     {
                         "name": "Healthy Eating Habits",
                         "questions": [
-                            "Describe a meal you consider healthy.",
-                            "What food habits would you like to improve?",
-                            "How does eating well affect your energy during the day?",
-                            "What healthy food do you genuinely like?"
+                            "What is a meal you enjoy that includes vegetables?",
+                            "What new food would you like to try?",
+                            "What do you like to eat before a busy day?",
+                            "What is a fruit or vegetable you really enjoy?"
                         ]
                     },
                     {
                         "name": "Rest and Recovery",
                         "questions": [
                             "How do you rest after a long day?",
-                            "What signs tell you that your body needs rest?",
-                            "Describe a time you felt tired because of poor sleep.",
+                            "When do you like to take a break during a busy day?",
+                            "What do you like to do on a quiet evening when you're tired?",
                             "What is your ideal way to spend a completely free day?"
                         ]
                     },
                     {
                         "name": "Managing Physical Stress",
                         "questions": [
-                            "Where do you feel stress in your body?",
-                            "What activity helps release physical tension?",
-                            "Describe a time stress affected your physical health.",
-                            "Where does stress show up in your body first?"
+                            "You've been sitting at a desk for a long time and want a break. What would you like to do?",
+                            "What helps you feel relaxed after a busy day?",
+                            "A friend invites you out, but you want a quiet evening. What could you say?",
+                            "Do you prefer a quiet break or a chat with someone after a busy task?"
                         ]
                     },
                     {
                         "name": "Balancing Screen Time",
                         "questions": [
                             "How much time do you spend on your phone — TikTok, WhatsApp, or work?",
-                            "How does screen time affect your body or eyes?",
-                            "What would you do instead of scrolling — honestly?",
+                            "When do you like to take a break from a screen?",
+                            "What would you like to do instead of spending time on your phone?",
                             "How long could you last without your phone?"
                         ]
                     },
                     {
                         "name": "Habits That Keep You Healthy",
                         "questions": [
-                            "What habits help you stay healthy long term?",
-                            "Describe a checkup or health habit you keep regularly.",
-                            "What health goal would you like to set for this year?",
-                            "Which healthy habit is hardest to keep? Compare answers."
+                            "What is a small daily habit that helps you feel good?",
+                            "What is a relaxing routine you enjoy?",
+                            "What enjoyable activity would you like to make more time for this year?",
+                            "What daily habit do you find difficult to keep?"
                         ]
                     }
                 ]
@@ -681,17 +686,17 @@
                     {
                         "name": "Managing Stress",
                         "questions": [
-                            "What causes you the most stress right now?",
-                            "How do you usually cope with stress?",
-                            "Describe a healthy way to relax after a stressful day.",
-                            "What is your fastest way to calm down?"
+                            "You have several errands and little time before class. What could make the day feel less rushed?",
+                            "What helps you relax when you feel stressed?",
+                            "How do you like to relax after a busy day?",
+                            "What helps you feel calmer when you're in a hurry?"
                         ]
                     },
                     {
                         "name": "Talking About Feelings",
                         "questions": [
                             "How comfortable are you talking about your feelings?",
-                            "Describe a time you shared how you felt with someone.",
+                            "A friend asks how your day went. How could you say you feel tired but don't want to talk about the details?",
                             "Is it easier to talk to family or to a friend? Why?",
                             "Is it easier to talk about feelings in your first language? Why?"
                         ]
@@ -699,37 +704,37 @@
                     {
                         "name": "Coping with Change",
                         "questions": [
-                            "Describe a big change you have experienced in your life.",
-                            "How did you feel during this change?",
-                            "What helped you adjust to this new situation?",
-                            "What change turned out better than you expected?"
+                            "Your class moves to a different time next month. What would you want to plan?",
+                            "You're about to start a new class. How do you think you would feel?",
+                            "You start using a different bus route to school. What could help you get used to it?",
+                            "What is a small change in your routine that you ended up liking?"
                         ]
                     },
                     {
                         "name": "Building Confidence",
                         "questions": [
                             "What did you do this year that you did not think you could do?",
-                            "What activity helps build your confidence?",
+                            "What do you enjoy doing that makes you feel confident?",
                             "How has learning English affected your confidence?",
-                            "What are you better at than you give yourself credit for?"
+                            "What is something you're good at that you don't often talk about?"
                         ]
                     },
                     {
                         "name": "Noticing Good Things",
                         "questions": [
                             "What is something you are grateful for today?",
-                            "How does noticing good things affect your mood?",
-                            "Describe a small moment that made you happy recently.",
-                            "Name one small good thing from today."
+                            "What small thing can make an ordinary day better for you?",
+                            "What is a small moment you enjoyed recently?",
+                            "What is one small thing that went well today?"
                         ]
                     },
                     {
                         "name": "Seeking Support When Needed",
                         "questions": [
-                            "Who do you turn to when you need emotional support?",
-                            "Describe a resource in your community for mental health.",
-                            "What would you say to a friend who seems overwhelmed?",
-                            "What makes it hard for people to ask for help?"
+                            "What helps you feel comfortable asking someone for support?",
+                            "A friend wants to find someone to talk to about stress. How could you offer to help them look for support?",
+                            "A friend says they have too much to do this week. What could you say to show support?",
+                            "You need help with a task but feel nervous asking. What could make it easier to ask?"
                         ]
                     }
                 ]
@@ -740,55 +745,55 @@
                     {
                         "name": "Feeling Okay at Home",
                         "questions": [
-                            "How does your home affect how you feel — noisy, crowded, or calm?",
+                            "Do you prefer a quiet home or a home with music and conversation?",
                             "What makes your home feel calm and comfortable?",
-                            "Describe a habit at home that supports your health.",
+                            "What is something you like to do at home to relax?",
                             "What one change would make your home more relaxing?"
                         ]
                     },
                     {
                         "name": "Feeling Okay at Work",
                         "questions": [
-                            "How does your job affect your physical or mental health?",
-                            "What helps you feel balanced during a work day?",
-                            "Describe a work habit that helps you feel okay after a long shift.",
-                            "What would make your workday feel lighter?"
+                            "After a long shift, you want some time to rest. How could you explain that to a friend who wants to meet?",
+                            "What would make a busy workday feel more manageable?",
+                            "What would you enjoy doing after a long day at work or school?",
+                            "What small thing could make a workday more enjoyable?"
                         ]
                     },
                     {
                         "name": "Help in Your Community",
                         "questions": [
-                            "How does your community help you feel supported?",
-                            "Describe a community resource that helps you stay healthy.",
-                            "What activities in your community bring you joy?",
+                            "What place in your neighborhood helps you feel welcome?",
+                            "What free activity near you would you like to try?",
+                            "What local activity do you enjoy?",
                             "What free thing in your area makes life better?"
                         ]
                     },
                     {
                         "name": "People Who Help You",
                         "questions": [
-                            "How do your relationships affect how you feel day to day?",
-                            "Describe a relationship that helps you feel stronger.",
-                            "What makes a relationship healthy?",
-                            "What does a good friend do that a nice person does not?"
+                            "Who do you enjoy spending time with after a busy day?",
+                            "What is something a friend does that makes you feel supported?",
+                            "You and a friend want to make plans, but you want different things. How could you decide together?",
+                            "What is something you value in a close friend?"
                         ]
                     },
                     {
                         "name": "Money Stress",
                         "questions": [
-                            "How does money stress affect your overall health?",
-                            "Describe a habit that helps you feel secure about money.",
-                            "What money goal would help you sleep better — rent, debt, or sending money home?",
-                            "What money habit helps you sleep better?"
+                            "A friend wants to spend less on going out. What free activity could you suggest doing together?",
+                            "Would you rather plan your shopping ahead or decide when you reach the store?",
+                            "You're planning a low-cost weekend with friends. What could you suggest?",
+                            "What helps you avoid buying things you don't need?"
                         ]
                     },
                     {
                         "name": "Balancing All Areas of Life",
                         "questions": [
-                            "Which area of your life needs the most attention right now?",
-                            "How do home, work, and community connect for you?",
-                            "When work gets hard, what is the first thing at home that suffers?",
-                            "Which part of your life needs the most attention right now?"
+                            "What would you like to make more time for in your week?",
+                            "You want time for class, errands, and seeing a friend this weekend. How would you plan it?",
+                            "You're invited to an activity after a very busy day. How could you politely say you need to rest?",
+                            "What would you like to spend less time doing during a busy week?"
                         ]
                     }
                 ]
@@ -800,54 +805,54 @@
                         "name": "Goals for Taking Care of Yourself",
                         "questions": [
                             "What is one goal for taking care of yourself this year?",
-                            "How will you know when you reach this goal?",
-                            "What steps will help you get started?",
+                            "You decide to spend more time on a hobby this month. How would you notice your progress?",
+                            "You want to add a short walk to your routine. What could help you get started?",
                             "What is one small goal you could start this week?"
                         ]
                     },
                     {
                         "name": "Creating Healthy Routines",
                         "questions": [
-                            "Describe a daily routine that supports your health.",
+                            "What daily routine helps your day go well?",
                             "What time of day do you feel most energetic?",
-                            "How do you stay consistent with healthy habits?",
+                            "What helps you remember a habit you want to keep?",
                             "Are you better in the morning or the evening?"
                         ]
                     },
                     {
                         "name": "Overcoming Setbacks",
                         "questions": [
-                            "Describe a time you struggled to keep a healthy habit.",
-                            "What caused you to get off track?",
-                            "How did you get back to your routine?",
-                            "What helps you start again after you fall off a routine?"
+                            "What everyday habit have you found difficult to keep?",
+                            "You planned to read each evening, but your week got busy. What could you change about the plan?",
+                            "You haven't practiced a hobby for a few weeks. What could help you start again?",
+                            "What helps you return to a routine after a break?"
                         ]
                     },
                     {
                         "name": "Help Near You",
                         "questions": [
-                            "What help exists near you — classes, clinics, parks, or free groups?",
-                            "Have you used any of these resources? Describe your experience.",
-                            "How did you find out about this resource?",
-                            "What resource should more people know about?"
+                            "What free classes, parks, or groups would you like to find near you?",
+                            "Have you ever tried a free class or community activity?",
+                            "Where do you hear about free activities near you?",
+                            "What local place or activity would you recommend to a classmate?"
                         ]
                     },
                     {
                         "name": "Teaching Habits to Family",
                         "questions": [
-                            "What healthy habit would you like to teach your family?",
-                            "How do you encourage family members to be healthy?",
-                            "Describe something healthy you do together as a family.",
-                            "What habit did you learn from your family, good or bad?"
+                            "What activity would you like to try with family or friends?",
+                            "You want to invite a family member to take a walk with you. What could you say?",
+                            "What active thing do you enjoy doing with family or friends?",
+                            "What useful everyday habit did you learn from someone in your family?"
                         ]
                     },
                     {
                         "name": "Reflecting on Personal Growth",
                         "questions": [
-                            "How have your habits for taking care of yourself changed this year?",
-                            "What are you most proud of about taking care of yourself?",
-                            "What do you want to focus on next — sleep, stress, money, or family?",
-                            "What are you proud of that nobody noticed?"
+                            "What small change has made your daily routine easier this year?",
+                            "What is a small thing you have done for yourself that you're proud of?",
+                            "What would you like more time for next month: rest, a hobby, or seeing people?",
+                            "What is something you have done recently that you're proud of?"
                         ]
                     }
                 ]
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

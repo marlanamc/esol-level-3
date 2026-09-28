@@ -5,8 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 5: Housing Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Keep session controls clear of the floating Phrase Help button. */
+        #groupSetup, #groupGame { padding-bottom: 96px; }
+        :root { --discussion-accent: #17667F; --discussion-accent-dark: #125166; --discussion-background: #F4F4F0; }
         * {
             margin: 0;
             padding: 0;
@@ -719,7 +723,10 @@
                 </span> Unit 5: Housing</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about home, landlords, and safety</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <div class="stage-picker" id="stagePicker">
                 <span class="stage-picker-label">Support level &mdash; starters and word banks fade as you go</span>
                 <a class="stage-btn" href="?stage=1" data-stage="1">Task 1 &middot; Most support</a>
@@ -783,26 +790,26 @@
                         "name": "Favorite Room",
                         "questions": [
                             "What is your favorite room in your home?",
-                            "Why do you like this room?",
-                            "Describe at least three things in that room.",
-                            "Which room does your family argue about most?"
+                            "What do you like about your favorite room at home?",
+                            "What is something in your favorite room that makes it comfortable?",
+                            "Which room at home do you enjoy spending time in with other people?"
                         ]
                     },
                     {
                         "name": "Weeknight at Home",
                         "questions": [
-                            "Describe a typical weeknight at home.",
+                            "What do you usually do at home on a weeknight?",
                             "What time do you usually get home?",
                             "What do you do first when you walk in the door?",
-                            "What is the laziest thing you do on a weeknight?"
+                            "What do you like to do on a quiet evening at home?"
                         ]
                     },
                     {
                         "name": "Describing a Room",
                         "questions": [
-                            "Describe one room in your home.",
-                            "Name at least five objects in that room.",
-                            "Which object in the room is the most useful?",
+                            "What is one room in your home like?",
+                            "What is something you would like to add to a room in your home?",
+                            "What is one of the most useful things you have at home?",
                             "What is one thing in your home you would never throw away?"
                         ]
                     },
@@ -810,7 +817,7 @@
                         "name": "Household Chores",
                         "questions": [
                             "What chores do you do at home?",
-                            "How often do you do each chore?",
+                            "How often do you do your least favorite chore?",
                             "How are chores divided in your home?",
                             "Which chore do you avoid until the last possible minute?"
                         ]
@@ -818,18 +825,18 @@
                     {
                         "name": "Your First Home Here",
                         "questions": [
-                            "Describe the first place you lived after you arrived.",
-                            "Was it small or big? Quiet or noisy?",
-                            "What is one thing you liked and one thing you did not like?",
+                            "What is something you remember liking about a place you used to live?",
+                            "Do you prefer a small, quiet home or a bigger, busier home?",
+                            "What is one thing you like about the place you live now?",
                             "What surprised you most about homes here?"
                         ]
                     },
                     {
                         "name": "Dream Home",
                         "questions": [
-                            "Describe your dream apartment or house.",
-                            "Where is it, and how many rooms does it have?",
-                            "What is around it in the neighborhood?",
+                            "What would your dream home look like?",
+                            "How many rooms would you like in your dream home?",
+                            "What would you like to have near your dream home?",
                             "What is one thing in your dream home nobody else would want?"
                         ]
                     }
@@ -842,17 +849,17 @@
                         "name": "A Problem with Heat",
                         "questions": [
                             "How would you tell a landlord your apartment is too cold?",
-                            "What information should you give them?",
-                            "What questions should you ask?",
-                            "Who is the most patient person you know? Would they stay calm here?"
+                            "Your apartment has been cold for two days. What details would you include in a message to the landlord?",
+                            "Your landlord says someone will check the heating. What would you like to ask about the visit?",
+                            "You're waiting for news about a heating repair. What would help you stay calm while you wait?"
                         ]
                     },
                     {
                         "name": "Noisy Neighbors",
                         "questions": [
                             "How would you describe a noise problem to a building manager?",
-                            "What solution would you ask for?",
-                            "What would you say to the neighbor directly?",
+                            "Loud music from another apartment keeps you awake. What would you ask the building manager to help with?",
+                            "Your neighbor plays loud music late at night. What could you say if you decide to talk to them?",
                             "What is the strangest noise you have heard from a neighbor?"
                         ]
                     },
@@ -860,8 +867,8 @@
                         "name": "Texting or WhatsApping a Landlord",
                         "questions": [
                             "What would you text or WhatsApp a landlord about a broken light?",
-                            "What should the message include besides the problem?",
-                            "Is text/WhatsApp better than a phone call for this? Why?",
+                            "You text your landlord about a broken hallway light. How could you explain exactly which light it is?",
+                            "Would you rather send a photo or explain a broken light in a message?",
                             "Would you rather call or text a landlord? Why?"
                         ]
                     },
@@ -869,26 +876,26 @@
                         "name": "A Rent Increase",
                         "questions": [
                             "What would you ask a landlord about a rent increase?",
-                            "How would you ask for more information?",
+                            "Your landlord sends a notice saying the rent will increase. What would you ask about when the change starts?",
                             "What would you do if the new rent was too high?",
-                            "Do you think renters should be told further in advance? Why?"
+                            "How much notice would you like before a rent increase?"
                         ]
                     },
                     {
                         "name": "Renewing a Lease",
                         "questions": [
-                            "What questions would you ask before renewing a lease?",
-                            "What is most important to you in a new lease?",
-                            "How would you ask about a discount or repairs?",
+                            "What would you ask before agreeing to stay in an apartment for another year?",
+                            "What would matter most to you in a new rental agreement?",
+                            "You're thinking about staying in your apartment for another year. How could you ask about a repair you want done?",
                             "What would make you leave an apartment you liked?"
                         ]
                     },
                     {
                         "name": "Leaving a Voicemail",
                         "questions": [
-                            "What information belongs in a voicemail to a landlord?",
-                            "How would you explain a problem clearly and briefly?",
-                            "What would you do if nobody returned your call?",
+                            "You call your landlord about a broken tap and get voicemail. How would you start your message?",
+                            "Your kitchen tap won't stop dripping. How would you explain the problem in a short message?",
+                            "You left a message about a repair but haven't heard back. What could you say in a follow-up message?",
                             "Do you like leaving voicemails? Why or why not?"
                         ]
                     }
@@ -901,35 +908,35 @@
                         "name": "A Leak in the Ceiling",
                         "questions": [
                             "How would you describe a ceiling leak to a landlord?",
-                            "What should you do first, second, and third?",
-                            "Who else in the building should know?",
-                            "What is the worst home repair problem you have had?"
+                            "You took a photo of a ceiling leak to send to the landlord. What would you write with the photo?",
+                            "Water from a leak might also reach the apartment below yours. What could you say to that neighbor?",
+                            "What is a repair you would like to learn how to do at home?"
                         ]
                     },
                     {
                         "name": "Pests in the Kitchen",
                         "questions": [
                             "What would you do if you saw mice or bugs in your kitchen?",
-                            "What can you do yourself, and what should a landlord do?",
-                            "How would you report this problem?",
+                            "You see signs of mice in a shared hallway. What would you ask the building manager about getting help?",
+                            "You notice bugs in a kitchen cupboard. How could you describe the problem to the landlord?",
                             "Which household pest bothers you the most?"
                         ]
                     },
                     {
                         "name": "A Broken Elevator",
                         "questions": [
-                            "How does a broken elevator affect daily life in a building?",
-                            "Who is most affected when it breaks?",
-                            "What solutions would you ask for?",
-                            "How many flights of stairs would you climb before complaining?"
+                            "The elevator in your building is broken, and you're carrying groceries. What help could you ask for?",
+                            "A visitor is coming to your building, but the elevator is broken. What would you tell them before they arrive?",
+                            "Your building's elevator has been out of service for several days. What update would you ask the manager for?",
+                            "When would you prefer taking the stairs instead of an elevator?"
                         ]
                     },
                     {
                         "name": "Disagreeing About Cleaning",
                         "questions": [
-                            "Two people disagree about how often to clean. What are both opinions?",
-                            "What would be a fair compromise?",
-                            "How can people talk about this calmly?",
+                            "You like to wash dishes right away, but your housemate leaves them until morning. What could you say?",
+                            "You and a housemate want to clean the kitchen at different times. What plan could you suggest?",
+                            "You're unhappy about a shared room being messy. How could you start a calm conversation about it?",
                             "Are you the tidy one or the messy one in your home?"
                         ]
                     },
@@ -937,16 +944,16 @@
                         "name": "Paying Rent Late",
                         "questions": [
                             "How would you explain politely that rent will be a few days late?",
-                            "What information should you include?",
-                            "How far in advance should you tell a landlord?",
+                            "You need to tell a landlord that rent will be three days late. How could you explain the timing in a message?",
+                            "You expect a delay with a rent payment. What would you like to discuss with the landlord before the due date?",
                             "Do you think landlords should charge a late fee? Why?"
                         ]
                     },
                     {
                         "name": "Shared Laundry",
                         "questions": [
-                            "What problems happen in shared laundry rooms?",
-                            "What rules would help everyone?",
+                            "What is something you find difficult about using a shared laundry room?",
+                            "Several neighbors want to use the washing machine at the same time. What plan could you suggest?",
                             "How would you handle someone leaving clothes in a machine?",
                             "What is the most annoying thing people do in a shared laundry room?"
                         ]
@@ -959,35 +966,35 @@
                     {
                         "name": "Smelling Gas",
                         "questions": [
-                            "What should you do if you smell gas in your kitchen?",
-                            "What should you NOT do?",
-                            "Who would you call first?",
-                            "Who in your home stays calmest in an emergency?"
+                            "Imagine you're safely outside after noticing a gas smell at home and have called for help. How would you describe what you noticed?",
+                            "You're safely outside after a gas smell was reported in your building. What would you ask the emergency worker helping you?",
+                            "You're safely outside while emergency workers check a gas smell. What message could you send a housemate who is away?",
+                            "What helps you speak clearly when you feel nervous?"
                         ]
                     },
                     {
                         "name": "A Fire Alarm",
                         "questions": [
-                            "What should you do step by step if a fire alarm goes off?",
-                            "Where are the exits in your building?",
-                            "What would you take with you if you had ten seconds?",
-                            "Have you ever been woken up by an alarm that was a false alarm?"
+                            "You're safely outside after a fire alarm. What would you like to ask the building manager?",
+                            "You're visiting a building for the first time. How could you ask where the exits are?",
+                            "Your household is making a plan for where to meet outside after an alarm. How could you choose a place together?",
+                            "Have you ever taken part in a fire drill?"
                         ]
                     },
                     {
                         "name": "Water from Upstairs",
                         "questions": [
                             "What would you do if water came through your ceiling?",
-                            "Who should you contact, and in what order?",
-                            "How would you protect your things?",
-                            "How would you feel about knocking on a stranger's door to ask?"
+                            "Water is coming through your ceiling, and you need to report it. What could you say to the building manager?",
+                            "A ceiling leak damaged a box of books. How could you explain the damage in a message?",
+                            "You want to ask an upstairs neighbor about a leak. How would you feel about starting that conversation?"
                         ]
                     },
                     {
                         "name": "Someone at the Door",
                         "questions": [
                             "What would you do if someone you did not know knocked late at night?",
-                            "What safety habit did you learn only after moving here?",
+                            "What makes you feel comfortable about answering the door?",
                             "How do you check who is at the door?",
                             "Do you answer the door if you are not expecting anyone?"
                         ]
@@ -996,18 +1003,18 @@
                         "name": "No Heat in Winter",
                         "questions": [
                             "What would you do if your apartment had no heat in winter?",
-                            "What can you do inside your home while you wait?",
-                            "What help would you request from a landlord?",
-                            "What is your best trick for staying warm cheaply?"
+                            "You're waiting for a heating repair and want to know when someone will arrive. What message could you send?",
+                            "Your apartment has no heat, and the landlord hasn't replied. What would you ask in a follow-up message?",
+                            "What do you like to wear on a cold day?"
                         ]
                     },
                     {
                         "name": "Calling for Help",
                         "questions": [
-                            "What information do you give when you call 911?",
-                            "Which emergencies need a call right away?",
-                            "How would you describe your address clearly?",
-                            "Why do you think some people hesitate to call for help?"
+                            "In a practice emergency call, the operator asks where help is needed. How could you describe a made-up address clearly?",
+                            "You're practicing an emergency call in English. What would you say if the operator spoke too quickly?",
+                            "Someone on a practice call didn't hear a street name. How could you repeat or spell it?",
+                            "What would help you feel more confident making a call for help in English?"
                         ]
                     }
                 ]
@@ -1211,5 +1218,7 @@
             if (btn) btn.classList.add('is-current');
         })();
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

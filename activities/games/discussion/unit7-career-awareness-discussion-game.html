@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 7: Career Awareness Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #4A46A0; --discussion-accent-dark: #3b3780; --discussion-background: #FFFBEB; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 7: Career Awareness</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about workplace rights and self-advocacy</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -622,54 +627,54 @@
                     {
                         "name": "Your Current Job",
                         "questions": [
-                            "Describe your current job and daily tasks.",
-                            "What do you like most about your job?",
-                            "What is challenging about your job?",
-                            "What is the best part of your workday?"
+                            "What is a task you have done in a job or volunteer role?",
+                            "What do you enjoy about a job you have done or would like to do?",
+                            "What might be difficult about a job you would like to try?",
+                            "What would make a workday enjoyable for you?"
                         ]
                     },
                     {
                         "name": "A Career You Are Interested In",
                         "questions": [
-                            "What career would you like to pursue in the future?",
-                            "What steps are needed to work in this field?",
-                            "What training or education does this career require?",
+                            "What kind of work would you like to do in the future?",
+                            "You meet someone who has a job that interests you. What would you ask about how they got started?",
+                            "A training program prepares people for a job you like. What would you ask about the course?",
                             "What job did you dream about as a child?"
                         ]
                     },
                     {
                         "name": "Comparing Two Careers",
                         "questions": [
-                            "Name two careers you are considering.",
-                            "How are these two careers different?",
-                            "Which career pays better or offers more hours?",
-                            "Better pay or better hours? Choose and defend it."
+                            "What are two jobs you would like to learn more about?",
+                            "Would you prefer a job mostly indoors or mostly outdoors?",
+                            "You're comparing two job advertisements. What would you like to know about their hours and pay?",
+                            "Which would matter more to you in a job: higher pay or hours that fit your life?"
                         ]
                     },
                     {
                         "name": "Skills Needed for a Career",
                         "questions": [
-                            "What skills are needed for a career you want?",
-                            "Which of these skills do you already have?",
-                            "Which skill do you need to develop?",
-                            "Which skill of yours is most underrated?"
+                            "What is one skill you would like to use in a future job?",
+                            "What is a skill you already have that could be useful at work?",
+                            "What skill would you like to learn for a future job?",
+                            "What is something you're good at that people might not notice?"
                         ]
                     },
                     {
                         "name": "Career Changes",
                         "questions": [
-                            "Have you ever changed careers or considered it? Describe it.",
-                            "What made you think about changing careers?",
-                            "What is difficult about starting a new career?",
-                            "Is it ever too late to change careers? Discuss."
+                            "Have you ever thought about trying a different kind of work?",
+                            "What could make you interested in a different kind of work?",
+                            "What would you find hardest about starting a new kind of job?",
+                            "How would you feel about learning a new career later in life?"
                         ]
                     },
                     {
                         "name": "Learning About Job Requirements",
                         "questions": [
                             "How do you find out what a job requires?",
-                            "Describe a job posting and its requirements.",
-                            "What requirements are hardest for you to meet?",
+                            "A job advertisement asks for experience using a computer. What would you ask about the skills needed?",
+                            "What part of a job advertisement would you like someone to explain?",
                             "Which job requirement seems unnecessary to you?"
                         ]
                     }
@@ -681,55 +686,55 @@
                     {
                         "name": "Minimum Wage",
                         "questions": [
-                            "What do you know about minimum wage laws?",
-                            "How is minimum wage decided?",
-                            "Who decides what a fair wage is?",
-                            "Is the minimum wage enough to live on here? Discuss."
+                            "You see 'minimum wage' in a job advertisement. What would you ask to understand the pay?",
+                            "You hear that the minimum wage has changed. Where would you look to check the information?",
+                            "What would you want to know before deciding whether a job's pay seems fair?",
+                            "A friend wants to compare a job's pay with travel costs. What questions could you discuss together?"
                         ]
                     },
                     {
                         "name": "Safe Working Conditions",
                         "questions": [
-                            "What makes a workplace safe?",
-                            "Describe an unsafe condition you have seen or heard about.",
-                            "What right do workers have regarding safety?",
-                            "What unsafe thing have you seen people accept as normal?"
+                            "You're visiting a workplace before starting a job. What would you like to ask about safety?",
+                            "You notice boxes blocking a doorway at work. What could you say to a supervisor?",
+                            "You haven't been shown how to use a machine at work. How could you ask for training?",
+                            "A coworker says a tool isn't working properly. What could you ask before using it?"
                         ]
                     },
                     {
                         "name": "Breaks and Overtime",
                         "questions": [
-                            "What do you know about break times at work?",
-                            "What is overtime pay?",
-                            "Describe a situation where overtime pay would apply.",
+                            "You're starting a new job. What would you ask about breaks during your shift?",
+                            "A job offer mentions overtime pay. What would you ask the employer to explain?",
+                            "Your supervisor asks you to work extra hours. What would you ask about the schedule and pay?",
                             "Would you rather have a longer break or leave earlier?"
                         ]
                     },
                     {
                         "name": "Protection from Discrimination",
                         "questions": [
-                            "What does workplace discrimination mean to you?",
-                            "What does fair treatment at work look like day to day?",
-                            "Describe a situation where someone might face unfair treatment.",
-                            "What makes it hard for people to speak up about unfair treatment?"
+                            "A coworker makes an unkind comment about someone's accent. What could you say to show support?",
+                            "What is one thing a supervisor can do that would make you feel respected?",
+                            "A coworker is often left out of team conversations. How could you help include them?",
+                            "A coworker wants to report unfair treatment but feels nervous. What could you say to support them?"
                         ]
                     },
                     {
                         "name": "Understanding a Paycheck",
                         "questions": [
-                            "What information appears on a paycheck?",
-                            "What deductions do you usually see on a paycheck?",
+                            "You're looking at a sample pay statement. What would you want someone to explain?",
+                            "A pay statement lists a deduction you don't understand. What could you ask the payroll office?",
                             "What would you do if your paycheck seemed incorrect?",
-                            "Which deduction on a paycheck surprises people most?"
+                            "Would you prefer someone to explain a pay statement in person or give you a written guide?"
                         ]
                     },
                     {
                         "name": "Workers' Compensation",
                         "questions": [
-                            "What happens if someone gets injured at work?",
-                            "What do you know about workers' compensation?",
-                            "What should a worker do in the first hour after an injury?",
-                            "Why do you think some workers do not report injuries?"
+                            "During job training, you want to learn how workplace injuries are reported. What would you ask?",
+                            "A workplace guide mentions workers' compensation. What would you ask someone to explain about it?",
+                            "A coworker has already received help after an injury and needs to describe what happened for a report. How could you offer language help?",
+                            "A coworker is unsure how to report an injury. How could you help them ask about the reporting process?"
                         ]
                     }
                 ]
@@ -741,54 +746,54 @@
                         "name": "Asking for a Raise",
                         "questions": [
                             "How would you ask your supervisor for a raise?",
-                            "What information would you prepare before asking?",
-                            "What would you say if your supervisor said no?",
-                            "Practice it now: ask for a raise in two sentences."
+                            "What work achievements would you want to mention when asking for a raise?",
+                            "You ask for a raise, and your supervisor says no. What could you ask next?",
+                            "You have taken on new tasks at work. How could you begin a conversation about a raise?"
                         ]
                     },
                     {
                         "name": "Reporting a Problem at Work",
                         "questions": [
-                            "Describe a problem you might need to report at work.",
-                            "Who would you talk to about this problem?",
-                            "What would you say to explain the situation clearly?",
-                            "What would make it easier to report a problem?"
+                            "A work computer keeps shutting down. How would you explain the problem to someone who can help?",
+                            "Two versions of your work schedule show different hours. Who would you ask to check it?",
+                            "Supplies keep arriving late, making your tasks harder. What could you tell your supervisor?",
+                            "What would help you feel comfortable reporting a problem at work?"
                         ]
                     },
                     {
                         "name": "Requesting Reasonable Accommodations",
                         "questions": [
-                            "What is a workplace accommodation — a change that helps you do the job?",
-                            "Describe a situation where someone might need one.",
-                            "How would you request an accommodation from your employer?",
+                            "You need instructions in writing so you can check them as you work. How could you ask for that change?",
+                            "The print on a work document is too small to read comfortably. What could you ask for?",
+                            "You want to discuss a change that would help you do your job. How could you ask for a private meeting?",
                             "What small change at work would help you most?"
                         ]
                     },
                     {
                         "name": "Disagreeing with a Decision Respectfully",
                         "questions": [
-                            "Describe a time you disagreed with a decision at work.",
-                            "How would you express disagreement respectfully?",
-                            "What questions would you ask to understand the decision better?",
-                            "How do you disagree without starting an argument?"
+                            "Your supervisor changes the order of your tasks, and you have a concern. What could you say?",
+                            "A coworker suggests a plan that you think will take too long. How could you offer another idea?",
+                            "Your supervisor changes your schedule without explaining why. What would you like to ask?",
+                            "What phrase helps you disagree politely with someone at work?"
                         ]
                     },
                     {
                         "name": "Knowing Who to Contact for Help",
                         "questions": [
-                            "Who can employees contact if they have a workplace problem?",
-                            "What does HR (human resources) do at a company — in plain English?",
-                            "Describe a situation where you would contact HR.",
-                            "Who do you go to first when something goes wrong at work?"
+                            "You have a question about your pay but don't know who handles it. What could you ask a coworker?",
+                            "You're new at a company and hear about the HR office. How could you ask what it can help with?",
+                            "You need help understanding a workplace form. What could you write to the HR office?",
+                            "Would you rather ask a coworker or a supervisor when you have a work question?"
                         ]
                     },
                     {
                         "name": "Understanding Your Employee Rights",
                         "questions": [
-                            "What employee rights are most important to you?",
+                            "What would you like to learn about workers' rights?",
                             "Where can you find information about your workplace rights?",
-                            "Describe a right that surprised you to learn about.",
-                            "Which right do you think workers know the least about?"
+                            "A class is inviting someone to explain workers' rights. What question would you like to send them?",
+                            "Would you rather learn about work breaks, pay, or safety rules first?"
                         ]
                     }
                 ]
@@ -800,17 +805,17 @@
                         "name": "Continuing Education",
                         "questions": [
                             "What classes or training could help your career?",
-                            "Describe a certification or class you want to complete.",
-                            "How would this education change your job opportunities?",
+                            "What is a class or training course you would like to take?",
+                            "You're considering a training course. What would you ask about the jobs it could help you prepare for?",
                             "What class would you take if your employer paid for it?"
                         ]
                     },
                     {
                         "name": "Someone Who Guides You at Work",
                         "questions": [
-                            "Who is someone who guides you at work, and how do they help?",
-                            "Do you have someone who guides you at work? Describe them.",
-                            "What questions would you ask a mentor?",
+                            "Who has helped you learn a task at work, school, or home?",
+                            "What makes you comfortable asking someone at work for guidance?",
+                            "What would you ask someone with many years of experience in a job you like?",
                             "Who has taught you the most about work?"
                         ]
                     },
@@ -818,36 +823,36 @@
                         "name": "People Who Open Doors",
                         "questions": [
                             "Who helps you hear about jobs — family, coworkers, or classmates?",
-                            "How do you meet people who know about jobs in your field?",
+                            "You're at a job event and meet someone in a field you like. What could you ask them?",
                             "Where could you meet people who hire — a job fair, class, or WhatsApp group?",
-                            "Is asking people for job help uncomfortable? Be honest."
+                            "How do you feel about asking someone for help finding work?"
                         ]
                     },
                     {
                         "name": "Preparing for a Promotion",
                         "questions": [
                             "What skills would help you get a promotion?",
-                            "Describe a promotion you would like to receive.",
-                            "How would you show your supervisor you are ready?",
+                            "What new responsibility would you like to try at work?",
+                            "You want to take on a new task at work. How could you show your supervisor you're ready?",
                             "What would you do differently if you were the boss?"
                         ]
                     },
                     {
                         "name": "Understanding Company Benefits",
                         "questions": [
-                            "What benefits does your job offer, such as health insurance?",
-                            "How do you find information about your workplace benefits?",
-                            "Which benefit would make you accept a lower salary?",
-                            "Which benefit matters most to you: time, money, or health?"
+                            "What would you ask about benefits before accepting a job?",
+                            "A job offer mentions benefits but gives few details. How could you ask for more information?",
+                            "What benefit would matter most to you when comparing two jobs?",
+                            "Which would you value more in a job: paid time off or help paying for a class?"
                         ]
                     },
                     {
                         "name": "Long-Term Career Planning",
                         "questions": [
                             "Where do you see your work life in five years?",
-                            "What steps will help you reach this goal?",
+                            "What is one step you could take this year toward work you would enjoy?",
                             "Who can support your work plans — family, teacher, or coworker?",
-                            "Would you rather get a raise next year or a job that does not wreck your back?"
+                            "Would you prefer a job with more variety or a job with a familiar daily routine?"
                         ]
                     }
                 ]
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

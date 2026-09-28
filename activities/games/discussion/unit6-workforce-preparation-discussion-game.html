@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 6: Workforce Preparation Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #2A5599; --discussion-accent-dark: #21447A; --discussion-background: #EAF0F9; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 6: Workforce Preparation</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about job searching and workplace communication</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -623,16 +628,16 @@
                         "name": "Greeting Coworkers",
                         "questions": [
                             "How do you greet your coworkers each morning?",
-                            "What small talk topics are common at your workplace?",
-                            "Describe a friendly conversation you had with a coworker.",
+                            "What do you like to chat about with coworkers or classmates?",
+                            "Have you ever had a friendly conversation with someone new at work?",
                             "What is the friendliest workplace you have ever been in?"
                         ]
                     },
                     {
                         "name": "Asking Your Supervisor a Question",
                         "questions": [
-                            "Describe a time you needed to ask your supervisor something.",
-                            "How did you start the conversation politely?",
+                            "You need to ask your supervisor about tomorrow's tasks. How could you start the conversation?",
+                            "Your supervisor looks busy, but you have a question. What could you say?",
                             "What would you say if you did not understand an instruction?",
                             "Is it harder to ask a question or admit a mistake?"
                         ]
@@ -640,26 +645,26 @@
                     {
                         "name": "Explaining You Will Be Late",
                         "questions": [
-                            "Imagine you will be late to work today.",
-                            "What would you say when you call, text, or WhatsApp your supervisor?",
-                            "What information should you include in the message?",
-                            "What is the most believable true reason for being late?"
+                            "Your bus is delayed on the way to work. How would you let your supervisor know?",
+                            "You expect to arrive at work ten minutes late. What could you write in a message to your supervisor?",
+                            "Your supervisor asks when you expect to arrive. What could you say if you're not sure yet?",
+                            "What sometimes makes getting to work or class take longer than expected?"
                         ]
                     },
                     {
                         "name": "Requesting Time Off",
                         "questions": [
-                            "Describe how you would ask for a day off work.",
-                            "What information do you need to provide?",
-                            "How far in advance should you ask?",
+                            "How would you ask for a day off work?",
+                            "You want next Friday off. What would you ask your supervisor about making the request?",
+                            "You're planning a day off next month. How could you ask about when to submit the request?",
                             "If you got one extra day off next week, what would you do?"
                         ]
                     },
                     {
                         "name": "Understanding Workplace Emails",
                         "questions": [
-                            "Describe a work message you got — email, text, or WhatsApp.",
-                            "What was the main information in the message?",
+                            "Do you prefer getting work messages by email or text?",
+                            "A work message gives a meeting time but no place. What could you ask in your reply?",
                             "What do you do if an email is confusing?",
                             "What makes an email annoying to read?"
                         ]
@@ -667,9 +672,9 @@
                     {
                         "name": "Small Talk During Breaks",
                         "questions": [
-                            "What do you talk about on break — kids, food, soccer, or TikTok?",
+                            "What do you like to talk about during a break at work or school?",
                             "How do you start a conversation with someone new at work?",
-                            "Describe a topic that helped you connect with a coworker.",
+                            "What is something you discovered you had in common with a coworker or classmate?",
                             "What is the best break-room conversation topic?"
                         ]
                     }
@@ -681,8 +686,8 @@
                     {
                         "name": "Writing a Resume",
                         "questions": [
-                            "What information belongs on a resume?",
-                            "Describe your work experience in a few sentences.",
+                            "You're helping a friend start a resume. What would you ask about their experience?",
+                            "What is a task you have done at work, at home, or as a volunteer?",
                             "What skills would you highlight on your resume?",
                             "What is one thing about you a resume can never show?"
                         ]
@@ -690,9 +695,9 @@
                     {
                         "name": "Filling Out a Job Application",
                         "questions": [
-                            "Describe a job application you have completed.",
-                            "What information do applications always ask for?",
-                            "What questions were difficult to answer?",
+                            "Have you ever filled out a job application?",
+                            "A job application asks when you can work. How could you describe a schedule that would suit you?",
+                            "What part of a job application would you like help with?",
                             "Which question on an application annoys you most?"
                         ]
                     },
@@ -701,7 +706,7 @@
                         "questions": [
                             "Where do you look for job openings?",
                             "How do you decide if a job is a good match for you?",
-                            "Describe a job posting that interested you recently.",
+                            "Have you seen a job advertisement that interested you recently?",
                             "What job would you apply for if you knew you would get it?"
                         ]
                     },
@@ -710,17 +715,17 @@
                         "questions": [
                             "How do you prepare for a job interview?",
                             "What question do you find difficult to answer in interviews?",
-                            "Describe how you would answer, tell me about yourself.",
-                            "What is the hardest interview question? Answer it now."
+                            "An interviewer says, 'Tell me about yourself.' What would you like to tell them about your skills?",
+                            "What interview question would you like to practice with a partner?"
                         ]
                     },
                     {
                         "name": "Following Up After an Interview",
                         "questions": [
                             "What would you say in a thank-you message after an interview?",
-                            "How soon should you follow up after an interview?",
+                            "An interviewer says they will contact you soon. What could you ask about when to expect a reply?",
                             "Does following up actually help? What do you think?",
-                            "How long would you wait before following up?"
+                            "How long would you feel comfortable waiting to hear back after an interview?"
                         ]
                     },
                     {
@@ -728,8 +733,8 @@
                         "questions": [
                             "Who in your life could help you find a job — a cousin, coworker, or friend?",
                             "How would you ask a friend or cousin about openings — by WhatsApp or in person?",
-                            "Describe a time someone helped you find work.",
-                            "Who in your life is the best at knowing people?"
+                            "Has anyone ever told you about a job opening?",
+                            "Who do you know who enjoys meeting new people?"
                         ]
                     }
                 ]
@@ -740,55 +745,55 @@
                     {
                         "name": "Improving Speaking Skills for Work",
                         "questions": [
-                            "What English skills do you need most for your job?",
-                            "Describe a work situation where speaking clearly was important.",
+                            "What would you like to be able to say in English at work?",
+                            "A customer can't hear what you're saying. What could you do to make the conversation easier?",
                             "How do you practice speaking English outside of class?",
-                            "Which is harder at work: phone calls or meetings?"
+                            "Would you find a work phone call or a work meeting more difficult in English?"
                         ]
                     },
                     {
                         "name": "Learning New Job Skills",
                         "questions": [
                             "What new skill would help you at work?",
-                            "How could you learn this skill?",
-                            "Describe a skill you learned recently on the job.",
+                            "You want to learn a new computer skill for work. Who could you ask about training?",
+                            "What is a skill you learned at work, at home, or in a class?",
                             "What skill did you learn faster than you expected?"
                         ]
                     },
                     {
                         "name": "Giving and Receiving Instructions",
                         "questions": [
-                            "Describe a time you gave instructions to a coworker.",
+                            "A new coworker asks how to find the supplies. How would you explain where to go?",
                             "What makes instructions easy or hard to understand?",
-                            "How do you check that you understood an instruction correctly?",
-                            "What makes instructions impossible to follow?"
+                            "Your supervisor gives you several tasks at once. What could you say to check that you understood?",
+                            "Do you prefer instructions with pictures, a demonstration, or written steps?"
                         ]
                     },
                     {
                         "name": "Teamwork on the Job",
                         "questions": [
-                            "Describe a time you worked as part of a team at work.",
-                            "What made the teamwork successful or difficult?",
+                            "Have you ever worked on a task with a team?",
+                            "What do you enjoy or find difficult about working in a team?",
                             "How do you communicate with teammates who speak a different language?",
-                            "What makes someone a coworker everybody likes?"
+                            "What is one thing you appreciate in a coworker?"
                         ]
                     },
                     {
                         "name": "Handling Feedback from a Supervisor",
                         "questions": [
-                            "Describe a time your supervisor gave you feedback.",
-                            "How did you respond to the feedback?",
-                            "What is a calm, respectful way to accept criticism at work?",
-                            "What is the most useful feedback you ever received?"
+                            "A supervisor says your work has improved. How could you respond?",
+                            "A supervisor suggests a different way to do a task. What would you like to ask them?",
+                            "A supervisor points out a mistake you don't understand. What could you say to learn more?",
+                            "What is a useful suggestion someone has given you about a task?"
                         ]
                     },
                     {
                         "name": "Setting Career Goals",
                         "questions": [
                             "What is one career goal you have for this year?",
-                            "What steps are you taking toward this goal?",
-                            "How could better English help you reach this goal?",
-                            "What job do you want in five years — say the real title out loud."
+                            "What is one step you could take toward a job you want?",
+                            "How could stronger English help you in a job you would like?",
+                            "What kind of work would you like to do in five years?"
                         ]
                     }
                 ]
@@ -799,17 +804,17 @@
                     {
                         "name": "Understanding a Work Schedule",
                         "questions": [
-                            "Describe your typical work schedule.",
+                            "What kind of work schedule would suit your daily life?",
                             "What would you do if you needed to change your schedule?",
-                            "How do you check your schedule each week?",
+                            "Would you rather check a work schedule on paper or on your phone?",
                             "Would you rather work early mornings or late nights?"
                         ]
                     },
                     {
                         "name": "Dressing for the Workplace",
                         "questions": [
-                            "Describe the dress code at your job or a job you want.",
-                            "Is your workplace dress code fair? Discuss.",
+                            "What clothes would you expect to wear in a job you would like?",
+                            "Would you prefer to wear a uniform or choose your own work clothes?",
                             "What would you wear on your first day at a new job?",
                             "What is the most uncomfortable thing you have worn to work?"
                         ]
@@ -817,36 +822,36 @@
                     {
                         "name": "Handling a Workplace Disagreement",
                         "questions": [
-                            "Describe a disagreement you had or could have with a coworker.",
-                            "How would you talk about the problem calmly?",
-                            "What would you say to find a solution together?",
-                            "Is it better to speak up right away or wait? Discuss."
+                            "You and a coworker disagree about which task to do first. What could you say?",
+                            "A coworker keeps moving supplies you need. How could you explain the problem calmly?",
+                            "You and a coworker both want the same day off. How could you start discussing a solution?",
+                            "When you disagree with a coworker, do you prefer to talk right away or take a little time first?"
                         ]
                     },
                     {
                         "name": "Taking a Message at Work",
                         "questions": [
-                            "Imagine you answer the phone for a coworker who is not there.",
-                            "What information would you write down?",
-                            "How would you tell your coworker about the message?",
-                            "What is the worst phone message you have received?"
+                            "You answer a call for a coworker who is away. How could you offer to take a message?",
+                            "A caller wants your coworker to call back. What information would you ask for?",
+                            "You took a phone message for a coworker. How would you let them know about it?",
+                            "A voicemail is too quiet to understand. What could you say when you call the person back?"
                         ]
                     },
                     {
                         "name": "Understanding Workplace Safety Rules",
                         "questions": [
-                            "What safety rules exist at your job?",
-                            "Describe a safety procedure you follow at work.",
+                            "You're starting a new job. What would you like to ask about safety training?",
+                            "Someone asks you to use equipment you haven't used before. How could you ask for a demonstration?",
                             "What would you do if you saw an unsafe situation?",
-                            "Which safety rule do people break most often?"
+                            "You notice a wet floor near a doorway at work. How could you tell a supervisor about it?"
                         ]
                     },
                     {
                         "name": "Balancing Multiple Responsibilities",
                         "questions": [
                             "How do you manage work, family, and school together?",
-                            "What is the hardest part of balancing these responsibilities?",
-                            "Describe a strategy that helps you stay organized.",
+                            "What part of a busy day is hardest for you to plan?",
+                            "What helps you keep track of tasks during a busy week?",
                             "What keeps you going during your busiest week?"
                         ]
                     }
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>

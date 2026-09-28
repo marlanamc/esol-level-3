@@ -5,8 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="../../../assets/icons/favicon.svg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Unit 8: Health Discussion Game</title>
+    <link rel="stylesheet" href="group-mode.css">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root { --discussion-accent: #7A3E9D; --discussion-accent-dark: #61327e; --discussion-background: #EFF6FF; }
         * {
             margin: 0;
             padding: 0;
@@ -575,7 +577,10 @@
                 </span> Unit 8: Health</span>
                 <span class="home-title-game">Discussion Game</span></h1>
             <p class="home-subtitle">Open-ended questions to practice talking about health, doctors, and self-advocacy</p>
-            <button class="start-game-btn" onclick="startGame()">Start Game</button>
+            <div class="mode-buttons" aria-label="Choose how to play">
+                <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
+                <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
+            </div>
             <a href="../../../index.html" class="all-activities-link">&larr; All activities</a>
         </div>
 
@@ -622,19 +627,19 @@
                     {
                         "name": "Describing Symptoms",
                         "questions": [
-                            "Describe symptoms you might explain to a doctor.",
-                            "How would you explain how long you have felt sick?",
-                            "What words describe different kinds of pain?",
-                            "What is the hardest symptom to put into words?"
+                            "In a practice doctor visit, imagine you have a sore throat. How could you explain it?",
+                            "In a role-play, you have had a cough for three days. How could you tell the doctor when it started?",
+                            "In a practice appointment, you can't find the English word for a symptom. How could you ask for help explaining it?",
+                            "What would help you explain a symptom in English: a picture, a note, or an example?"
                         ]
                     },
                     {
                         "name": "Scheduling a Doctor's Appointment",
                         "questions": [
-                            "Describe how you would schedule a doctor's appointment.",
-                            "What information do they always ask for on the phone?",
-                            "What would you say if you need to reschedule?",
-                            "Would you rather book by phone or online? Why?"
+                            "How would you ask to make a doctor's appointment?",
+                            "You're practicing an appointment call. How could you ask what information the clinic needs without giving real personal details?",
+                            "You have a clinic appointment at a time you can no longer attend. What could you say when you call to change it?",
+                            "Would you rather book an appointment by phone or online?"
                         ]
                     },
                     {
@@ -642,35 +647,35 @@
                         "questions": [
                             "What question would you ask about a new medicine?",
                             "How would you ask the doctor to explain something again?",
-                            "Describe a time you did not understand medical advice.",
-                            "What question do you wish doctors would answer better?"
+                            "A doctor uses a word you don't understand. What could you say?",
+                            "What would you like a doctor to take more time explaining during a visit?"
                         ]
                     },
                     {
                         "name": "Understanding Medical Instructions",
                         "questions": [
-                            "Describe instructions a doctor might give after a visit.",
-                            "How do you make sure you understand instructions correctly?",
-                            "What would you do if you forgot part of the instructions?",
-                            "Have you ever left an appointment and forgotten everything?"
+                            "At the end of a practice appointment, you want written instructions. How could you ask for them?",
+                            "A doctor explains the next steps after a visit. How could you check that you understood?",
+                            "You get home from an appointment and don't remember part of the instructions. What could you ask when you contact the clinic?",
+                            "Would you prefer taking notes during an appointment or asking for a written summary?"
                         ]
                     },
                     {
                         "name": "Requesting an Interpreter",
                         "questions": [
-                            "Why might someone need an interpreter at a medical visit?",
+                            "A clinic asks whether you want language help for a practice appointment. How could you explain your preference?",
                             "How would you ask for an interpreter at a clinic?",
-                            "Describe a situation where an interpreter would help.",
-                            "What makes it easier to ask for language help?"
+                            "An interpreter joins a practice appointment. What would you like to ask about how the conversation will work?",
+                            "What would make you feel comfortable asking for language help at a clinic?"
                         ]
                     },
                     {
                         "name": "Talking About Family Medical History",
                         "questions": [
-                            "What questions might a doctor ask about your family's health?",
-                            "How would you explain a health condition in your family?",
-                            "How much do you know about your family's health history?",
-                            "Who in your family knows all the family health stories?"
+                            "A health form asks about family history, but you don't understand the question. What could you ask the clinic staff?",
+                            "In a practice appointment, you don't know the English name of a condition on a family-history form. How could you ask for help with the word?",
+                            "A doctor asks about family health history, but you don't know the answer. What could you say?",
+                            "You want to ask a relative for help understanding a family-history form. How could you ask to talk privately?"
                         ]
                     }
                 ]
@@ -681,55 +686,55 @@
                     {
                         "name": "Choosing Health Insurance",
                         "questions": [
-                            "What do you know about your health insurance plan?",
-                            "What questions would you ask when choosing a plan?",
-                            "What is a copay? What is a deductible? Say it in your own words.",
-                            "What is the most confusing word on an insurance form?"
+                            "What would you like someone to explain about health insurance?",
+                            "What would you ask when comparing health insurance plans?",
+                            "An insurance form uses the words 'copay' and 'deductible.' How could you ask someone to explain them with an example?",
+                            "What insurance word would you like explained in everyday English?"
                         ]
                     },
                     {
                         "name": "Finding an In-Network Doctor",
                         "questions": [
-                            "What does in-network mean — and why does it change the bill?",
+                            "A clinic says a doctor is 'in-network.' What would you ask to understand what that means for the cost?",
                             "How would you find a doctor your insurance covers — phone, website, or ask a friend?",
-                            "Describe a time you needed to check if a provider was covered.",
+                            "You want to check whether an appointment is covered by insurance. What could you ask the insurance company?",
                             "How do you decide to trust a new doctor?"
                         ]
                     },
                     {
                         "name": "Reading a Medical Bill",
                         "questions": [
-                            "Describe a medical bill you have received.",
-                            "What information is confusing on medical bills?",
-                            "What would you do if you thought a bill was wrong?",
-                            "What is the most surprising bill you have ever received?"
+                            "A sample medical bill has a charge you don't understand. What could you ask the billing office?",
+                            "What would make a medical bill easier to understand?",
+                            "You think a sample medical bill lists the same visit twice. What could you say to the billing office?",
+                            "A clinic bill is higher than the price you were told. What would you like the billing office to explain?"
                         ]
                     },
                     {
                         "name": "Applying for Health Coverage",
                         "questions": [
-                            "Describe the process of applying for health insurance.",
-                            "What documents are usually needed?",
-                            "Where can someone get help applying for coverage?",
-                            "Which part of the paperwork would you gladly skip?"
+                            "You want help starting a health insurance application. What could you say to someone at a help desk?",
+                            "You're preparing for a meeting about health coverage. How could you ask which documents to bring?",
+                            "You don't know where to get help with a coverage application. What could you ask at a community center?",
+                            "Would you rather fill out a long form online or on paper?"
                         ]
                     },
                     {
                         "name": "Understanding Prescription Costs",
                         "questions": [
-                            "How do you find out the cost of a prescription?",
-                            "Describe a time a medicine cost more than you expected.",
-                            "What options exist if you cannot afford a medicine?",
-                            "Do you ask the pharmacist questions, or just take the bag?"
+                            "What could you ask a pharmacy about the price of a prescription?",
+                            "In a pharmacy role-play, the price is higher than expected. What could you ask the pharmacist to explain?",
+                            "In a practice conversation, a medicine costs more than you can pay. How could you ask the pharmacist about lower-cost options?",
+                            "What would help you feel comfortable asking a pharmacist a question?"
                         ]
                     },
                     {
                         "name": "Emergency Room versus Urgent Care",
                         "questions": [
-                            "What is the difference between the emergency room and urgent care?",
-                            "Describe a situation for each type of visit.",
-                            "How does cost differ between these two options?",
-                            "Someone has a bad cut at 9pm. Where should they go? Discuss."
+                            "A clinic gives you a leaflet about urgent care and emergency rooms. What would you ask a health professional to explain?",
+                            "You're planning ahead for times when your clinic is closed. What would you ask the clinic about getting medical advice?",
+                            "You're asking your insurer about different places to get care. What would you like to know about coverage and costs?",
+                            "You're already at a clinic after getting a cut. How could you tell the staff you need help explaining what happened?"
                         ]
                     }
                 ]
@@ -740,55 +745,55 @@
                     {
                         "name": "Taking Medication Correctly",
                         "questions": [
-                            "Describe how you remember to take your medication.",
-                            "What would you do if you missed a dose?",
-                            "How do you read instructions on a medicine label?",
+                            "A pharmacist explains a medicine schedule in a role-play. What could you ask to make the timing clear?",
+                            "In a practice call, you missed a dose of medicine. What would you ask the pharmacist?",
+                            "The instructions on a sample medicine label are hard to understand. How could you ask the pharmacist to explain them?",
                             "What is your trick for remembering something every day?"
                         ]
                     },
                     {
                         "name": "Checkups You Keep Putting Off",
                         "questions": [
-                            "What checkups do you get regularly, such as dental or vision?",
-                            "How often should someone see a doctor for a checkup?",
-                            "Describe a checkup you have scheduled or attended recently.",
-                            "Which checkup do people put off the longest?"
+                            "You're practicing a call to book a routine checkup. What appointment times would you ask about?",
+                            "At the end of a practice checkup, you want to know when to come back. What would you ask the doctor?",
+                            "You have a practice appointment at a new clinic. What would you ask about getting ready for the visit?",
+                            "What could make it easier to book an appointment during a busy week?"
                         ]
                     },
                     {
                         "name": "Managing a Chronic Condition",
                         "questions": [
-                            "Describe a chronic health condition you know about, such as diabetes.",
-                            "What daily habits help manage this condition?",
-                            "Do you write symptoms down, use an app, or just tell your aunt on WhatsApp?",
-                            "What makes a daily health routine easier to keep?"
+                            "In a practice appointment, a doctor says a condition will need ongoing care. What would you like them to explain?",
+                            "A doctor suggests a new daily routine in a role-play. What would you ask about fitting it into a workday?",
+                            "Would you rather bring written questions to an appointment or keep them on your phone?",
+                            "What helps you remember a new daily routine?"
                         ]
                     },
                     {
                         "name": "Stress and Feeling Okay",
                         "questions": [
-                            "What does mental health mean to you?",
-                            "How can stress affect a person's daily life?",
-                            "What helps when you are stressed — walk, prayer, WhatsApp jokes, or sleep?",
-                            "What helps most when someone is having a hard week?"
+                            "What is a small activity that helps you feel good after a busy day?",
+                            "A friend has a very busy week and seems tired. What could you offer to do together?",
+                            "What helps you relax after a busy day?",
+                            "A friend says they have had a hard week. What could you say to show you're listening?"
                         ]
                     },
                     {
                         "name": "Nutrition and Healthy Eating",
                         "questions": [
-                            "Describe your typical daily meals.",
-                            "What healthy foods do you try to eat regularly?",
-                            "What makes it difficult to eat healthy sometimes?",
-                            "What food could you never give up?"
+                            "What is a meal you like making on a busy day?",
+                            "What fruit or vegetable do you enjoy eating?",
+                            "What makes it hard to find time to cook sometimes?",
+                            "What is a food you would really miss if you couldn't have it?"
                         ]
                     },
                     {
                         "name": "Sleep and Rest",
                         "questions": [
-                            "How many hours do you usually sleep each night?",
-                            "What affects the quality of your sleep?",
-                            "Describe a habit that helps you sleep better.",
-                            "What is the latest you have stayed up for something worth it?"
+                            "Do you prefer going to bed early or staying up later?",
+                            "Would you rather sleep in a very quiet room or with a little background sound?",
+                            "What do you like to do to relax before bed?",
+                            "Have you ever stayed up late for an event you enjoyed?"
                         ]
                     }
                 ]
@@ -799,9 +804,9 @@
                     {
                         "name": "Disagreeing with a Diagnosis",
                         "questions": [
-                            "What would you do if you disagreed with a doctor's diagnosis?",
+                            "In a practice visit, a doctor's explanation doesn't match what you expected. What could you ask them to explain further?",
                             "How would you ask for a second opinion?",
-                            "Describe how you would explain your concerns to a doctor.",
+                            "In a practice appointment, you're still worried after the doctor explains something. How could you say you have another question?",
                             "Is it hard for you to disagree with a doctor? Why?"
                         ]
                     },
@@ -809,45 +814,45 @@
                         "name": "Refusing a Treatment",
                         "questions": [
                             "What would you say if you did not want a certain treatment?",
-                            "How would you explain your reasons to a doctor?",
-                            "What questions would you ask about other options?",
-                            "Why do patients have the right to refuse treatment?"
+                            "In a role-play, you want more time to think about a treatment. How could you explain that to the doctor?",
+                            "In a practice visit, you want to hear about other treatment options. What could you ask?",
+                            "What would help you feel comfortable sharing your preferences with a doctor?"
                         ]
                     },
                     {
                         "name": "Getting a Second Opinion",
                         "questions": [
-                            "Describe a situation where a second opinion would help.",
-                            "How would you ask your doctor about getting one?",
-                            "What would you say to a new doctor about your situation?",
-                            "Would you tell your first doctor you are getting another opinion?"
+                            "In a role-play, you want another doctor's opinion before deciding about a treatment. How could you explain your request?",
+                            "How could you ask a doctor about getting a second opinion?",
+                            "You're practicing a visit with a second doctor. How could you ask them to review notes from an earlier visit?",
+                            "Would you find it easy or difficult to tell a doctor you want another opinion?"
                         ]
                     },
                     {
                         "name": "Bringing Someone to an Appointment",
                         "questions": [
-                            "Why might someone bring a friend or family member to an appointment?",
-                            "How can this person help during the visit?",
-                            "Describe a time you helped someone at a medical appointment.",
-                            "Who would you bring to an important appointment, and why them?"
+                            "What might you like a friend to help with during an appointment?",
+                            "You're accompanying a friend to an appointment. How could you ask what help they want from you?",
+                            "A friend asks you to help practice a clinic call. What could you practice together?",
+                            "Would you prefer going to an appointment alone or with someone you trust?"
                         ]
                     },
                     {
                         "name": "Reporting a Problem at a Clinic",
                         "questions": [
-                            "Describe a problem you might report about a clinic visit.",
-                            "Who would you talk to about this problem?",
-                            "What information would you include in your complaint?",
-                            "Have you ever spoken up when something felt wrong?"
+                            "You arrive at a clinic and are told your appointment isn't on the schedule. What could you say?",
+                            "You can't find the room for an appointment. How could you ask the reception staff for help?",
+                            "A clinic keeps sending appointment reminders for the wrong date. What would you say when you contact them?",
+                            "What would help you speak up if something at a clinic confused you?"
                         ]
                     },
                     {
                         "name": "Your Rights as a Patient",
                         "questions": [
-                            "What rights do patients have during a medical visit?",
-                            "Where can you learn more about your patient rights?",
-                            "Which patient right do you think people use least?",
-                            "Which patient right surprised you the most?"
+                            "A clinic gives you a leaflet about patient rights. What would you like someone to explain?",
+                            "How could you ask a clinic for information about patient rights in a language you understand?",
+                            "A clinic form asks for information you would rather discuss privately. What could you say to the staff?",
+                            "You want to know who can see information you give a clinic. How could you ask about privacy?"
                         ]
                     }
                 ]
@@ -970,5 +975,7 @@
             updateDisplay();
         }
     </script>
+    <script src="group-mode.js"></script>
+    <script>DiscussionGroup.mount(categories);</script>
 </body>
 </html>
