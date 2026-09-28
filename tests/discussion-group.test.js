@@ -15,7 +15,7 @@ for (let size = 2; size <= 8; size++) {
             session.startRoundTwo();
             let previous, lastSpecial = 0, normalPrompts = new Set(), promptDraws = 0;
             const types = new Set();
-            for (let i = 0; i < 500; i++) {
+            for (let i = 0; i < size; i++) {
                 const round = session.next();
                 assert.equal(round.round, i + 1);
                 assert.equal(session.next(), round, 'cannot skip the follow-up');
@@ -46,7 +46,7 @@ for (let size = 2; size <= 8; size++) {
                 }
                 previous = [round.asker, round.answerer];
             }
-            assert.deepEqual([...types].sort(), ['normal', 'your-question']);
+            assert.ok([...types].every(type => ['normal', 'your-question'].includes(type)));
         }
     });
 }
@@ -81,8 +81,8 @@ for (const filename of fs.readdirSync(discussionDir).filter(name => name.endsWit
         }
         assert.equal(new Set(questions).size, 96);
         assert.equal((source.match(/DiscussionGroup\.mount\(categories\)/g) || []).length, 1);
-        assert.ok(source.includes('href="group-mode.css"'));
-        assert.ok(source.includes('src="group-mode.js"'));
+        assert.match(source, /href="group-mode\.css(?:\?[^"\s]+)?"/);
+        assert.match(source, /src="group-mode\.js(?:\?[^"\s]+)?"/);
         assert.ok(source.includes('id="chooseGroup"'));
         for (const [, script] of source.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(script);
         const session = createSession(6, categories, seeded(123));
@@ -106,42 +106,30 @@ for (const filename of fs.readdirSync(discussionDir).filter(name => name.endsWit
     });
 }
 
-test('warm-up skips follow-ups and special rounds; Round 2 keeps the current pair, bank, and participation', () => {
+test('manual Round 2 keeps the unanswered question and participation', () => {
     const session = createSession(5, bank, seeded(75));
-    const questions = new Set();
-    for (let i = 0; i < 20; i++) {
-        const conversation = session.next();
-        assert.equal(conversation.phase, 1);
-        assert.equal(conversation.type, 'normal');
-        questions.add(conversation.prompt.question);
-        assert.equal(session.answered().step, 'complete');
-        const counts = JSON.stringify(session.students);
-        session.answered();
-        assert.equal(JSON.stringify(session.students), counts);
-    }
+    session.next(); session.answered();
     const current = session.next();
     const counts = JSON.stringify(session.students);
     session.startRoundTwo();
     session.startRoundTwo();
     assert.equal(session.next(), current);
     assert.equal(current.phase, 2);
+    assert.equal(current.phaseTurn, 1);
+    assert.equal(current.limit, 5);
     assert.equal(JSON.stringify(session.students), counts);
     assert.equal(session.answered().step, 'followup');
     const next = session.next();
-    assert.equal(next.round, 22);
+    assert.equal(next.phaseTurn, 2);
     assert.equal(next.phase, 2);
-    assert.equal(next.type, 'normal');
-    assert.ok(!questions.has(next.prompt.question));
-    const fresh = createSession(5, bank);
-    assert.equal(fresh.next().phase, 1);
-    assert.equal(fresh.answered().step, 'complete');
+    assert.notEqual(next.prompt.question, current.prompt.question);
 });
 
 for (let size = 2; size <= 8; size++) {
     test(`${size} students: Round 3 rotates leaders equally without inventing answers`, () => {
         for (let seed = 1; seed <= 30; seed++) {
             const session = createSession(size, bank, seeded(seed));
-            for (let i = 0; i < 13; i++) { session.next(); session.answered(); }
+            for (let i = 0; i < 1; i++) { session.next(); session.answered(); }
             session.startRoundTwo();
             const pair = session.next();
             const prompt = pair.prompt;
@@ -190,3 +178,78 @@ test('Round 3 can start after a completed pair follow-up without double counting
     assert.ok(fresh.students.every(s => s.led === 0 && s.asked === 0 && s.answered === 0));
     assert.equal(fresh.next().phase, 1);
 });
+
+for (let size = 2; size <= 8; size++) {
+    test(`${size} students: one turn per student in each paired round, then open discussion`, () => {
+        const session = createSession(size, bank, seeded(size));
+        for (let i = 1; i <= size; i++) {
+            const conversation = session.next();
+            assert.equal(conversation.phase, 1);
+            assert.equal(conversation.phaseTurn, i);
+            assert.equal(conversation.limit, size);
+            assert.equal(conversation.type, 'normal');
+            assert.equal(session.next(), conversation);
+            assert.equal(session.answered().step, 'complete');
+        }
+        for (let i = 1; i <= size; i++) {
+            const conversation = session.next();
+            assert.equal(conversation.phase, 2);
+            assert.equal(conversation.phaseTurn, i);
+            assert.equal(conversation.limit, size);
+            assert.equal(session.answered().step, 'followup');
+            assert.equal(conversation.phase, 2, 'last answer still requires follow-up');
+        }
+        assert.ok(session.students.every(s => s.asked === 2 && s.answered === 2));
+        const answers = session.students.map(s => s.answered);
+        assert.equal(answers.reduce((a, b) => a + b), 2 * size);
+        for (let i = 1; i <= 20; i++) {
+            const discussion = session.next();
+            assert.equal(discussion.phase, 3);
+            assert.equal(discussion.phaseTurn, i);
+            assert.equal(discussion.limit, null);
+            session.answered();
+        }
+        assert.deepEqual(session.students.map(s => s.answered), answers);
+        const fresh = createSession(size, bank);
+        assert.equal(fresh.next().phaseTurn, 1);
+        assert.equal(fresh.next().phase, 1);
+    });
+}
+
+for (let size = 2; size <= 8; size++) {
+    test(`${size} students: exact asking and answering coverage across random cycles and early switches`, () => {
+        for (let seed = 1; seed <= 100; seed++) {
+            const session = createSession(size, bank, seeded(seed));
+            let previous;
+            for (let phase = 1; phase <= 2; phase++) {
+                const askers = new Set(), answerers = new Set();
+                for (let i = 0; i < size; i++) {
+                    const c = session.next();
+                    assert.equal(c.phase, phase);
+                    assert.notEqual(c.asker, c.answerer);
+                    assert.notDeepEqual([c.asker, c.answerer], previous);
+                    askers.add(c.asker); answerers.add(c.answerer);
+                    session.answered();
+                    previous = [c.asker, c.answerer];
+                }
+                assert.equal(askers.size, size);
+                assert.equal(answerers.size, size);
+            }
+            assert.equal(session.next().phase, 3);
+            const early = createSession(size, bank, seeded(seed));
+            early.next(); early.answered();
+            early.next(); early.startRoundTwo();
+            const askers = new Set(), answerers = new Set();
+            for (let i = 0; i < size; i++) {
+                const c = early.next();
+                assert.equal(c.phase, 2);
+                assert.notEqual(c.asker, c.answerer);
+                askers.add(c.asker); answerers.add(c.answerer);
+                early.answered();
+            }
+            assert.equal(askers.size, size);
+            assert.equal(answerers.size, size);
+            assert.equal(early.next().phase, 3);
+        }
+    });
+}

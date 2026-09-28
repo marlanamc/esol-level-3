@@ -6,7 +6,8 @@ const DiscussionGroup = (() => {
         const questions = categories.flatMap(category => category.topics.flatMap(topic =>
             topic.questions.map(question => ({ category: category.title, topic: topic.name, question }))));
         if (!questions.length) throw new Error('Questions are required.');
-        let deck = [], previousQuestion, previous, round = 0, lastSpecial = 0, current, phase = 1;
+        let deck = [], previousQuestion, previous, round = 0, lastSpecial = 0, current, phase = 1, phaseTurn = 0;
+        let pairCycle = [];
         const pick = items => items[Math.floor(random() * items.length)];
         function drawQuestion() {
             if (!deck.length) {
@@ -20,6 +21,22 @@ const DiscussionGroup = (() => {
             previousQuestion = deck.pop();
             return previousQuestion;
         }
+        function makePairCycle(firstPair = null) {
+            // A shuffled circle gives everyone exactly one turn in each role.
+            // A nonzero offset prevents self-pairs without a greedy dead end.
+            const order = students.map(s => s.number).filter(n => n !== firstPair?.asker);
+            for (let i = order.length - 1; i > 0; i--) {
+                const j = Math.floor(random() * (i + 1));
+                [order[i], order[j]] = [order[j], order[i]];
+            }
+            if (firstPair) order.unshift(firstPair.asker);
+            const offset = firstPair ? order.indexOf(firstPair.answerer) : 1 + Math.floor(random() * (size - 1));
+            const pairs = order.map((asker, i) => ({ asker, answerer: order[(i + offset) % size] }));
+            if (!firstPair && pairs[0].asker === previous?.asker && pairs[0].answerer === previous?.answerer) {
+                pairs.push(pairs.shift());
+            }
+            return pairs;
+        }
         function chooseLeader() {
             const leastLed = Math.min(...students.map(s => s.led));
             let eligible = students.filter(s => s.led === leastLed);
@@ -30,9 +47,12 @@ const DiscussionGroup = (() => {
         }
         function next() {
             if (current && current.step === 'answer') return current;
+            if (phase === 1 && phaseTurn >= size) startRoundTwo();
+            if (phase === 2 && phaseTurn >= size) startRoundThree();
             round++;
+            phaseTurn++;
             if (phase === 3) {
-                current = { round, phase, type: 'group', asker: chooseLeader(), answerer: null,
+                current = { round, phase, phaseTurn, limit: null, type: 'group', asker: chooseLeader(), answerer: null,
                     step: 'answer', prompt: drawQuestion() };
                 return current;
             }
@@ -40,24 +60,9 @@ const DiscussionGroup = (() => {
             const type = phase === 2 && round >= 4 && round - lastSpecial >= 4 && random() < 0.22
                 ? 'your-question' : 'normal';
             if (type !== 'normal') lastSpecial = round;
-            const candidates = [];
-            for (const answerer of students) {
-                for (const asker of students) {
-                    if (asker === answerer) continue;
-                    if (asker && previous?.asker === asker.number && previous?.answerer === answerer.number) continue;
-                    // Favor the pair that minimizes projected asking/answering imbalance.
-                    const asks = students.map(s => s.asked + Number(s === asker));
-                    const answers = students.map(s => s.answered + Number(s === answerer));
-                    const balance = [...asks, ...answers].reduce((sum, count) => sum + count * count, 0);
-                    const recent = previous ? Number(previous.answerer === answerer.number) + Number(asker && previous.asker === asker.number) : 0;
-                    candidates.push({ asker: asker?.number ?? null, answerer: answerer.number, balance, recent });
-                }
-            }
-            const bestBalance = Math.min(...candidates.map(c => c.balance));
-            const balanced = candidates.filter(c => c.balance === bestBalance);
-            const bestRecency = Math.min(...balanced.map(c => c.recent));
-            const pair = pick(balanced.filter(c => c.recent === bestRecency));
-            current = { round, phase, type, asker: pair.asker, answerer: pair.answerer, step: 'answer',
+            if (!pairCycle.length) pairCycle = makePairCycle();
+            const pair = pairCycle[phaseTurn - 1];
+            current = { round, phase, phaseTurn, limit: size, type, asker: pair.asker, answerer: pair.answerer, step: 'answer',
                 prompt: type === 'your-question' ? null : drawQuestion() };
             return current;
         }
@@ -77,17 +82,26 @@ const DiscussionGroup = (() => {
         function startRoundTwo() {
             if (phase >= 2) return;
             phase = 2;
+            phaseTurn = current?.step === 'answer' ? 1 : 0;
             lastSpecial = round;
+            pairCycle = makePairCycle(current?.step === 'answer' ? current : null);
             // Keep the displayed question and pair when the facilitator switches.
             // Participation counts and the question deck continue across stages.
-            if (current) current.phase = 2;
+            if (current?.step === 'answer') {
+                current.phase = 2;
+                current.phaseTurn = phaseTurn;
+                current.limit = size;
+            }
         }
         function startRoundThree() {
             if (phase !== 2) return;
             phase = 3;
+            phaseTurn = current?.step === 'answer' ? 1 : 0;
             if (current?.step === 'answer') {
                 // Reuse the unanswered prompt without crediting an uncompleted pair.
                 current.phase = 3;
+                current.phaseTurn = phaseTurn;
+                current.limit = null;
                 current.type = 'group';
                 current.asker = chooseLeader();
                 current.answerer = null;
@@ -115,12 +129,20 @@ const DiscussionGroup = (() => {
         </section>
 
         <section id="groupGame" class="group-page hidden" aria-labelledby="groupRound">
-            <p id="groupCategory" class="group-category"></p>
-            <p id="groupRound" class="group-eyebrow"></p>
+            <header class="group-header">
+                <div class="group-heading">
+                    <p id="groupCategory" class="group-category"></p>
+                    <h2 id="groupProgress"></h2>
+                </div>
+                <div class="group-round-status">
+                    <p id="groupRound"></p>
+                    <p id="groupPhase"></p>
+                </div>
+            </header>
             <div id="groupConversation" class="group-conversation" tabindex="-1" aria-label="Current conversation">
                 <p id="groupSpecial" class="group-special hidden"></p>
-                <div id="groupRoles" class="group-roles"></div>
                 <h2 id="groupQuestion" class="group-question"></h2>
+                <div id="groupRoles" class="group-roles"></div>
             </div>
             <div id="groupDiscussion" class="group-followup hidden">
                 <p class="group-instruction">Share your ideas. Respond to someone else.</p>
@@ -181,7 +203,9 @@ const DiscussionGroup = (() => {
         });
         function renderRound() {
             current = session.next();
-            el('groupRound').textContent = `Round ${current.phase}: ${['', 'Warm-up', 'Follow-up', 'Group discussion'][current.phase]} · Conversation ${current.round}`;
+            el('groupRound').textContent = `Round ${current.phase} of 3`;
+            el('groupPhase').textContent = ['', 'Warm-up', 'Follow-up', 'Group discussion'][current.phase];
+            el('groupProgress').textContent = `Conversation ${current.phaseTurn}${current.limit ? ` of ${current.limit}` : ''}`;
             hide('groupRoundTwo', current.phase !== 1);
             hide('groupRoundThree', current.phase !== 2);
             hide('groupDiscussion', current.phase !== 3);

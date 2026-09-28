@@ -49,3 +49,52 @@
 @media (prefers-reduced-motion: reduce) {
     .group-page button, .mode-buttons button { transition: none; }
 }
+
+/* A question-first hierarchy for every unit's shared group screen. */
+#groupGame { max-width: 1320px; gap: 24px; justify-content: flex-start; padding-top: 32px; }
+.group-header { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 32px; padding-bottom: 24px; border-bottom: 1px solid #33333320; text-align: left; }
+.group-heading { max-width: 75%; }
+#groupCategory { color: #626262; font-size: 16px; }
+#groupProgress { font-size: clamp(24px, 2.6vw, 34px); margin-top: 6px; }
+.group-round-status { flex-shrink: 0; font-size: 20px; line-height: 1.5; }
+#groupRound { font-weight: 700; }
+#groupPhase { color: #626262; font-size: 17px; }
+#groupGame .group-conversation { gap: 24px; }
+#groupGame .group-question { display: flex; align-items: center; justify-content: center; min-height: 240px; padding: 36px 48px; border: 1px solid #33333325; box-shadow: none; font-size: clamp(30px, 4vw, 54px); line-height: 1.2; }
+#groupGame .group-roles { gap: 20px; }
+#groupGame .group-student { flex: 1; max-width: 600px; padding: 16px 24px; gap: 4px; }
+#groupGame .group-student strong { font-size: clamp(28px, 3vw, 40px); }
+#groupGame .group-student span { font-size: 16px; }
+#groupGame .group-student.answerer { border: 1px solid #33333360; background: transparent; }
+#groupGame .start-game-btn { margin: 0; padding: 16px 48px; font-size: 24px; box-shadow: none; }
+#groupGame .group-session-controls { width: 100%; margin-top: 0; padding-top: 12px; border-top: 1px solid #33333320; gap: 8px 20px; }
+#groupGame .group-session-controls .nav-btn, #groupIdea { background: transparent; color: #555; box-shadow: none; font-size: 16px; padding: 12px 16px; margin: 0; }
+#groupGame .group-session-controls .nav-btn:hover, #groupIdea:hover { background: #3333330a; color: #222; transform: none; }
+#groupGame .group-followup { gap: 12px; }
+#groupGame .group-followup h2 { font-size: 28px; }
+#groupGame .group-instruction { font-size: 24px; }
+#groupGame .group-special { font-size: 18px; }
+#groupConversation:focus, #groupFollowup:focus { outline: none; }
+@media (min-width: 900px) and (max-height: 800px) {
+    #groupGame { gap: 18px; padding-top: 20px; }
+    .group-header { padding-bottom: 16px; }
+    #groupGame .group-conversation { gap: 18px; }
+    #groupGame .group-question { min-height: 200px; padding: 28px 36px; font-size: 44px; }
+    #groupGame .group-student { padding: 12px 24px; }
+}
+@media (max-width: 600px) {
+    #groupGame { gap: 20px; padding-top: 24px; }
+    .group-header { gap: 16px; align-items: flex-start; padding-bottom: 20px; }
+    .group-heading { max-width: none; }
+    #groupCategory { font-size: 13px; }
+    #groupProgress { font-size: 24px; }
+    .group-round-status { font-size: 16px; }
+    #groupPhase { font-size: 14px; }
+    #groupGame .group-question { min-height: 220px; padding: 24px 18px; font-size: 30px; }
+    #groupGame .group-roles { gap: 12px; }
+    #groupGame .group-student { padding: 14px 10px; }
+    #groupGame .group-student strong { font-size: 28px; }
+    #groupGame .group-student span { font-size: 13px; }
+    #groupGame .group-session-controls { gap: 4px; }
+    #groupGame .group-session-controls .nav-btn { flex: 1 1 44%; font-size: 14px; padding: 10px 8px; }
+}
