@@ -2,11 +2,11 @@
 const DiscussionGroup = (() => {
     function createSession(size, categories, random = Math.random) {
         if (!Number.isInteger(size) || size < 2 || size > 8) throw new RangeError('Choose 2–8 students.');
-        const students = Array.from({ length: size }, (_, i) => ({ number: i + 1, asked: 0, answered: 0 }));
+        const students = Array.from({ length: size }, (_, i) => ({ number: i + 1, asked: 0, answered: 0, led: 0 }));
         const questions = categories.flatMap(category => category.topics.flatMap(topic =>
             topic.questions.map(question => ({ category: category.title, topic: topic.name, question }))));
         if (!questions.length) throw new Error('Questions are required.');
-        let deck = [], previousQuestion, previous, round = 0, lastSpecial = 0, current;
+        let deck = [], previousQuestion, previous, round = 0, lastSpecial = 0, current, phase = 1;
         const pick = items => items[Math.floor(random() * items.length)];
         function drawQuestion() {
             if (!deck.length) {
@@ -20,21 +20,33 @@ const DiscussionGroup = (() => {
             previousQuestion = deck.pop();
             return previousQuestion;
         }
+        function chooseLeader() {
+            const leastLed = Math.min(...students.map(s => s.led));
+            let eligible = students.filter(s => s.led === leastLed);
+            const leastAsked = Math.min(...eligible.map(s => s.asked));
+            eligible = eligible.filter(s => s.asked === leastAsked);
+            const different = eligible.filter(s => s.number !== previous?.asker);
+            return pick(different.length ? different : eligible).number;
+        }
         function next() {
-            if (current && current.step !== 'followup') return current;
+            if (current && current.step === 'answer') return current;
             round++;
+            if (phase === 3) {
+                current = { round, phase, type: 'group', asker: chooseLeader(), answerer: null,
+                    step: 'answer', prompt: drawQuestion() };
+                return current;
+            }
             // At least three regular conversations between special rounds.
-            const type = round >= 4 && round - lastSpecial >= 4 && random() < 0.22
-                ? (random() < 0.5 ? 'everyone' : 'your-question') : 'normal';
+            const type = phase === 2 && round >= 4 && round - lastSpecial >= 4 && random() < 0.22
+                ? 'your-question' : 'normal';
             if (type !== 'normal') lastSpecial = round;
             const candidates = [];
             for (const answerer of students) {
-                for (const asker of (type === 'everyone' ? [null] : students)) {
+                for (const asker of students) {
                     if (asker === answerer) continue;
                     if (asker && previous?.asker === asker.number && previous?.answerer === answerer.number) continue;
-                    // Minimize projected role imbalance. All everyone-round follow-up
-                    // askers count once; the answering student counts one conversation.
-                    const asks = students.map(s => s.asked + Number(type === 'everyone' ? s !== answerer : s === asker));
+                    // Favor the pair that minimizes projected asking/answering imbalance.
+                    const asks = students.map(s => s.asked + Number(s === asker));
                     const answers = students.map(s => s.answered + Number(s === answerer));
                     const balance = [...asks, ...answers].reduce((sum, count) => sum + count * count, 0);
                     const recent = previous ? Number(previous.answerer === answerer.number) + Number(asker && previous.asker === asker.number) : 0;
@@ -45,21 +57,46 @@ const DiscussionGroup = (() => {
             const balanced = candidates.filter(c => c.balance === bestBalance);
             const bestRecency = Math.min(...balanced.map(c => c.recent));
             const pair = pick(balanced.filter(c => c.recent === bestRecency));
-            current = { round, type, asker: pair.asker, answerer: pair.answerer, step: 'answer',
+            current = { round, phase, type, asker: pair.asker, answerer: pair.answerer, step: 'answer',
                 prompt: type === 'your-question' ? null : drawQuestion() };
             return current;
         }
         function answered() {
             if (!current || current.step !== 'answer') return current;
-            current.step = 'followup';
-            students[current.answerer - 1].answered++;
-            for (const student of students) {
-                if (current.type === 'everyone' ? student.number !== current.answerer : student.number === current.asker) student.asked++;
+            current.step = phase === 2 ? 'followup' : 'complete';
+            students[current.asker - 1].asked++;
+            if (phase === 3) {
+                // Leading is assigned; spontaneous answers cannot be inferred.
+                students[current.asker - 1].led++;
+            } else {
+                students[current.answerer - 1].answered++;
             }
             previous = { asker: current.asker, answerer: current.answerer };
             return current;
         }
-        return { next, answered, students };
+        function startRoundTwo() {
+            if (phase >= 2) return;
+            phase = 2;
+            lastSpecial = round;
+            // Keep the displayed question and pair when the facilitator switches.
+            // Participation counts and the question deck continue across stages.
+            if (current) current.phase = 2;
+        }
+        function startRoundThree() {
+            if (phase !== 2) return;
+            phase = 3;
+            if (current?.step === 'answer') {
+                // Reuse the unanswered prompt without crediting an uncompleted pair.
+                current.phase = 3;
+                current.type = 'group';
+                current.asker = chooseLeader();
+                current.answerer = null;
+                current.prompt ??= drawQuestion();
+            } else {
+                current = undefined;
+            }
+        }
+        return { next, answered, students, startRoundTwo, startRoundThree };
     }
 
     function mount(categories) {
@@ -85,6 +122,11 @@ const DiscussionGroup = (() => {
                 <div id="groupRoles" class="group-roles"></div>
                 <h2 id="groupQuestion" class="group-question"></h2>
             </div>
+            <div id="groupDiscussion" class="group-followup hidden">
+                <p class="group-instruction">Share your ideas. Respond to someone else.</p>
+                <p class="group-category">Invite someone who hasn't spoken yet.</p>
+                <button id="groupDiscussionNext" class="start-game-btn">Next Discussion →</button>
+            </div>
             <button id="groupAnswered" class="start-game-btn">Answered ✓</button>
             <div id="groupFollowup" class="group-followup hidden" tabindex="-1">
                 <h2 id="followupTitle"></h2>
@@ -97,6 +139,8 @@ const DiscussionGroup = (() => {
                 <button id="groupNext" class="start-game-btn">Next Conversation →</button>
             </div>
             <nav class="group-session-controls" aria-label="Group session">
+                <button id="groupRoundTwo" class="nav-btn">Start Round 2 →</button>
+                <button id="groupRoundThree" class="nav-btn hidden">Start Round 3 →</button>
                 <button id="groupRestart" class="nav-btn back">New session</button>
                 <button id="groupChange" class="nav-btn back">Change students</button>
                 <button id="groupHome" class="nav-btn back">Mode selection</button>
@@ -137,12 +181,15 @@ const DiscussionGroup = (() => {
         });
         function renderRound() {
             current = session.next();
-            el('groupRound').textContent = `Round ${current.round} · ${size} students`;
+            el('groupRound').textContent = `Round ${current.phase}: ${['', 'Warm-up', 'Follow-up', 'Group discussion'][current.phase]} · Conversation ${current.round}`;
+            hide('groupRoundTwo', current.phase !== 1);
+            hide('groupRoundThree', current.phase !== 2);
+            hide('groupDiscussion', current.phase !== 3);
             hide('groupFollowup', true);
-            hide('groupAnswered', false);
+            hide('groupAnswered', current.phase === 3);
             hide('groupRoles', false);
-            hide('groupSpecial', current.type === 'normal');
-            el('groupSpecial').textContent = current.type === 'everyone' ? 'EVERYONE!' : 'YOUR QUESTION!';
+            hide('groupSpecial', current.type !== 'your-question');
+            el('groupSpecial').textContent = 'YOUR QUESTION!';
             const role = (number, label, className) => {
                 const node = document.createElement('div');
                 node.className = `group-student ${className}`;
@@ -153,8 +200,8 @@ const DiscussionGroup = (() => {
                 node.append(name, caption);
                 return node;
             };
-            const roles = [role(current.answerer, 'ANSWERS', 'answerer')];
-            if (current.asker) roles.unshift(role(current.asker, 'ASKS →', 'asker'));
+            const roles = [role(current.asker, current.phase === 3 ? 'ASK THE GROUP' : 'ASKS →', 'asker')];
+            if (current.answerer !== null) roles.push(role(current.answerer, 'ANSWERS', 'answerer'));
             el('groupRoles').replaceChildren(...roles);
             el('groupCategory').textContent = current.prompt ? `${current.prompt.category} · ${current.prompt.topic}` : 'No question from the game this time.';
             el('groupQuestion').textContent = current.prompt?.question ?? 'Ask any question you want.';
@@ -169,20 +216,35 @@ const DiscussionGroup = (() => {
         el('startGroup').onclick = start;
         el('groupRestart').onclick = start;
         el('groupChange').onclick = setup;
+        el('groupRoundTwo').onclick = () => {
+            session.startRoundTwo();
+            renderRound();
+        };
+        el('groupRoundThree').onclick = () => {
+            session.startRoundThree();
+            renderRound();
+        };
+        el('groupDiscussionNext').onclick = () => {
+            session.answered();
+            renderRound();
+        };
         ['setupHome', 'groupHome'].forEach(id => el(id).onclick = () => {
             session = null;
             screen('homePage', 'chooseGroup');
         });
         el('groupAnswered').onclick = () => {
             session.answered();
+            if (current.phase === 1) {
+                renderRound();
+                return;
+            }
             hide('groupAnswered', true);
             hide('groupRoles', true);
             hide('groupFollowup', false);
             hide('followupIdeas', true);
             el('groupIdea').setAttribute('aria-expanded', 'false');
-            el('followupTitle').textContent = current.type === 'everyone' ? 'Everyone else, keep it going!' : `Student ${current.asker}, keep it going!`;
-            el('followupInstruction').textContent = current.type === 'everyone'
-                ? `Take turns. Each person asks Student ${current.answerer} one more question.` : 'Ask ONE more question.';
+            el('followupTitle').textContent = `Student ${current.asker}, keep it going!`;
+            el('followupInstruction').textContent = 'Ask ONE more question.';
             el('groupFollowup').focus();
         };
         el('groupIdea').onclick = () => {

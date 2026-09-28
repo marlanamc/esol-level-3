@@ -12,6 +12,7 @@ for (let size = 2; size <= 8; size++) {
     test(`${size} students: balanced roles, valid pairs, special spacing, and question reuse`, () => {
         for (let seed = 1; seed <= 30; seed++) {
             const session = createSession(size, bank, seeded(seed));
+            session.startRoundTwo();
             let previous, lastSpecial = 0, normalPrompts = new Set(), promptDraws = 0;
             const types = new Set();
             for (let i = 0; i < 500; i++) {
@@ -45,7 +46,7 @@ for (let size = 2; size <= 8; size++) {
                 }
                 previous = [round.asker, round.answerer];
             }
-            assert.equal(types.size, 3);
+            assert.deepEqual([...types].sort(), ['normal', 'your-question']);
         }
     });
 }
@@ -85,6 +86,7 @@ for (const filename of fs.readdirSync(discussionDir).filter(name => name.endsWit
         assert.ok(source.includes('id="chooseGroup"'));
         for (const [, script] of source.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(script);
         const session = createSession(6, categories, seeded(123));
+        session.startRoundTwo();
         const seen = new Set();
         let previousQuestion;
         for (let i = 0; seen.size < 96 && i < 200; i++) {
@@ -103,3 +105,88 @@ for (const filename of fs.readdirSync(discussionDir).filter(name => name.endsWit
         assert.notEqual(next.prompt.question, previousQuestion);
     });
 }
+
+test('warm-up skips follow-ups and special rounds; Round 2 keeps the current pair, bank, and participation', () => {
+    const session = createSession(5, bank, seeded(75));
+    const questions = new Set();
+    for (let i = 0; i < 20; i++) {
+        const conversation = session.next();
+        assert.equal(conversation.phase, 1);
+        assert.equal(conversation.type, 'normal');
+        questions.add(conversation.prompt.question);
+        assert.equal(session.answered().step, 'complete');
+        const counts = JSON.stringify(session.students);
+        session.answered();
+        assert.equal(JSON.stringify(session.students), counts);
+    }
+    const current = session.next();
+    const counts = JSON.stringify(session.students);
+    session.startRoundTwo();
+    session.startRoundTwo();
+    assert.equal(session.next(), current);
+    assert.equal(current.phase, 2);
+    assert.equal(JSON.stringify(session.students), counts);
+    assert.equal(session.answered().step, 'followup');
+    const next = session.next();
+    assert.equal(next.round, 22);
+    assert.equal(next.phase, 2);
+    assert.equal(next.type, 'normal');
+    assert.ok(!questions.has(next.prompt.question));
+    const fresh = createSession(5, bank);
+    assert.equal(fresh.next().phase, 1);
+    assert.equal(fresh.answered().step, 'complete');
+});
+
+for (let size = 2; size <= 8; size++) {
+    test(`${size} students: Round 3 rotates leaders equally without inventing answers`, () => {
+        for (let seed = 1; seed <= 30; seed++) {
+            const session = createSession(size, bank, seeded(seed));
+            for (let i = 0; i < 13; i++) { session.next(); session.answered(); }
+            session.startRoundTwo();
+            const pair = session.next();
+            const prompt = pair.prompt;
+            const counts = JSON.stringify(session.students);
+            session.startRoundThree();
+            const group = session.next();
+            assert.equal(group.prompt, prompt);
+            assert.equal(JSON.stringify(session.students), counts);
+            const answers = session.students.map(s => s.answered);
+            for (let i = 0; i < size * 20; i++) {
+                const discussion = session.next();
+                assert.equal(discussion.phase, 3);
+                assert.equal(discussion.type, 'group');
+                assert.equal(discussion.answerer, null);
+                assert.ok(discussion.prompt);
+                const minimum = Math.min(...session.students.map(s => s.led));
+                assert.equal(session.students[discussion.asker - 1].led, minimum);
+                session.answered();
+                const credited = JSON.stringify(session.students);
+                session.answered();
+                assert.equal(JSON.stringify(session.students), credited);
+                assert.deepEqual(session.students.map(s => s.answered), answers);
+                const led = session.students.map(s => s.led);
+                assert.ok(Math.max(...led) - Math.min(...led) <= 1);
+            }
+            assert.ok(session.students.every(s => s.led === 20));
+            session.startRoundTwo();
+            assert.equal(session.next().phase, 3);
+        }
+    });
+}
+test('Round 3 can start after a completed pair follow-up without double counting it', () => {
+    const session = createSession(4, bank, seeded(5));
+    session.startRoundThree();
+    assert.equal(session.next().phase, 1);
+    session.startRoundTwo();
+    session.answered();
+    const counts = JSON.stringify(session.students);
+    session.startRoundThree();
+    session.startRoundThree();
+    const discussion = session.next();
+    assert.equal(discussion.phase, 3);
+    assert.equal(discussion.round, 2);
+    assert.equal(JSON.stringify(session.students), counts);
+    const fresh = createSession(4, bank);
+    assert.ok(fresh.students.every(s => s.led === 0 && s.asked === 0 && s.answered === 0));
+    assert.equal(fresh.next().phase, 1);
+});
