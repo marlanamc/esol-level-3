@@ -418,7 +418,7 @@
                     </svg>
                 </span> Unit 5: Housing</span>
                 <span class="home-title-game">Guess the Word</span></h1>
-            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 20 words from this unit.</p>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 24 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
@@ -440,7 +440,7 @@
                 <button class="setup-btn" onclick="goHome()" title="Back to the start screen">Home</button>
             </div>
 
-            <div class="question-counter" id="questionCounter">Card 1 of 20</div>
+            <div class="question-counter" id="questionCounter">Card 1 of 24</div>
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:00</div>
                 <div class="timer-controls">
@@ -505,23 +505,27 @@
             { word: "rent", clues: ["money", "month", "apartment"], topic: "Finding a Place", pos: "verb" },
             { word: "lease", clues: ["contract", "sign", "year"], topic: "Finding a Place", pos: "verb" },
             { word: "occupy", clues: ["live", "inside", "space"], topic: "Finding a Place", pos: "verb" },
+            { word: "move", clues: ["boxes", "new home", "truck"], topic: "Finding a Place", pos: "verb" },
             { word: "qualify", clues: ["enough", "allowed", "requirements"], topic: "Finding a Place", pos: "verb" },
             { word: "apply", clues: ["application", "form", "submit"], topic: "Finding a Place", pos: "verb" },
+            { word: "compare", clues: ["two apartments", "differences", "prices"], topic: "Choosing Housing", pos: "verb" },
             { word: "afford", clues: ["money", "enough", "pay"], topic: "Choosing Housing", pos: "verb" },
             { word: "evaluate", clues: ["judge", "look", "decide"], topic: "Choosing Housing", pos: "verb" },
             { word: "select", clues: ["choose", "pick", "one"], topic: "Choosing Housing", pos: "verb" },
             { word: "negotiate", clues: ["talk", "price", "agree"], topic: "Choosing Housing", pos: "verb" },
+            { word: "own", clues: ["yours", "property", "belongs to you"], topic: "Choosing Housing", pos: "verb" },
             { word: "request", clues: ["ask", "please", "want"], topic: "Repairs & Issues", pos: "verb" },
+            { word: "report", clues: ["tell", "landlord", "problem"], topic: "Repairs & Issues", pos: "verb" },
             { word: "inspect", clues: ["look", "check", "careful"], topic: "Repairs & Issues", pos: "verb" },
             { word: "repair", clues: ["fix", "broken", "tool"], topic: "Repairs & Issues", pos: "verb" },
             { word: "leak", clues: ["water", "drip", "pipe"], topic: "Repairs & Issues", pos: "verb" },
             { word: "clog", clues: ["block", "drain", "stuck"], topic: "Repairs & Issues", pos: "verb" },
+            { word: "resolve", clues: ["solve", "problem", "agreement"], topic: "Tenant Follow-Through", pos: "verb" },
             { word: "maintain", clues: ["keep", "same", "take care"], topic: "Tenant Follow-Through", pos: "verb" },
             { word: "notify", clues: ["tell", "let know", "inform"], topic: "Tenant Follow-Through", pos: "verb" },
             { word: "document", clues: ["write", "paper", "record"], topic: "Tenant Follow-Through", pos: "verb" },
-            { word: "reimburse", clues: ["money back", "pay", "repay"], topic: "Tenant Follow-Through", pos: "verb" },
-            { word: "landlord", clues: ["owner", "rent", "building"], topic: "Finding a Place", pos: "noun" },
-            { word: "deposit", clues: ["security", "first month", "get back"], topic: "Finding a Place", pos: "noun" }
+            { word: "prevent", clues: ["stop", "before", "damage"], topic: "Tenant Follow-Through", pos: "verb" },
+            { word: "reimburse", clues: ["money back", "pay", "repay"], topic: "Tenant Follow-Through", pos: "verb" }
         ];
 
         let hintShown = false;

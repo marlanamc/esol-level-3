@@ -418,7 +418,7 @@
                     </svg>
                 </span> Unit 1: Getting to Know You</span>
                 <span class="home-title-game">Guess the Word</span></h1>
-            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 21 words from this unit.</p>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 24 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
@@ -440,7 +440,7 @@
                 <button class="setup-btn" onclick="goHome()" title="Back to the start screen">Home</button>
             </div>
 
-            <div class="question-counter" id="questionCounter">Card 1 of 21</div>
+            <div class="question-counter" id="questionCounter">Card 1 of 24</div>
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:00</div>
                 <div class="timer-controls">
@@ -502,27 +502,30 @@
 
     <script>
         const cards = [
+            { word: "introduce", clues: ["meet", "name", "hello"], topic: "Introductions", pos: "verb" },
+            { word: "greet", clues: ["hello", "welcome", "wave"], topic: "Introductions", pos: "verb" },
+            { word: "share", clues: ["give", "others", "together"], topic: "Introductions", pos: "verb" },
+            { word: "describe", clues: ["tell", "what", "looks"], topic: "Introductions", pos: "verb" },
+            { word: "prefer", clues: ["like better", "choice", "favorite"], topic: "Introductions", pos: "verb" },
+            { word: "listen", clues: ["ears", "hear", "attention"], topic: "Introductions", pos: "verb" },
+            { word: "pronounce", clues: ["say", "sound", "mouth"], topic: "Say It & Spell It", pos: "verb" },
+            { word: "spell", clues: ["letters", "write", "name"], topic: "Say It & Spell It", pos: "verb" },
+            { word: "identify", clues: ["find", "name", "which"], topic: "Say It & Spell It", pos: "verb" },
+            { word: "categorize", clues: ["group", "sort", "put"], topic: "Say It & Spell It", pos: "verb" },
+            { word: "practice", clues: ["try", "again", "skill"], topic: "Say It & Spell It", pos: "verb" },
+            { word: "repeat", clues: ["again", "echo", "copy"], topic: "Say It & Spell It", pos: "verb" },
             { word: "log in", clues: ["password", "account", "computer"], topic: "Digital Habits", pos: "phrasal verb" },
             { word: "navigate", clues: ["find", "website", "around"], topic: "Digital Habits", pos: "verb" },
             { word: "submit", clues: ["send", "turn in", "homework"], topic: "Digital Habits", pos: "verb" },
             { word: "access", clues: ["open", "enter", "get"], topic: "Digital Habits", pos: "verb" },
+            { word: "complete", clues: ["finish", "all done", "task"], topic: "Digital Habits", pos: "verb" },
             { word: "review", clues: ["look", "again", "study"], topic: "Digital Habits", pos: "verb" },
-            { word: "identify", clues: ["find", "name", "which"], topic: "Key Verbs", pos: "verb" },
-            { word: "categorize", clues: ["group", "sort", "put"], topic: "Key Verbs", pos: "verb" },
-            { word: "pronounce", clues: ["say", "sound", "mouth"], topic: "Key Verbs", pos: "verb" },
-            { word: "spell", clues: ["letters", "write", "name"], topic: "Key Verbs", pos: "verb" },
-            { word: "translate", clues: ["language", "meaning", "Spanish"], topic: "Key Verbs", pos: "verb" },
-            { word: "explain", clues: ["tell", "why", "understand"], topic: "Action Words", pos: "verb" },
-            { word: "describe", clues: ["tell", "what", "looks"], topic: "Action Words", pos: "verb" },
-            { word: "discuss", clues: ["talk", "together", "about"], topic: "Action Words", pos: "verb" },
-            { word: "record", clues: ["voice", "phone", "listen"], topic: "Action Words", pos: "verb" },
-            { word: "repeat", clues: ["again", "echo", "copy"], topic: "Action Words", pos: "verb" },
             { word: "relocate", clues: ["move", "boxes", "truck"], topic: "Personal Journey", pos: "verb" },
-            { word: "introduce", clues: ["meet", "name", "hello"], topic: "Personal Journey", pos: "verb" },
             { word: "motivate", clues: ["want", "energy", "push"], topic: "Personal Journey", pos: "verb" },
             { word: "achieve", clues: ["reach", "goal", "success"], topic: "Personal Journey", pos: "verb" },
             { word: "overcome", clues: ["problem", "beat", "difficult"], topic: "Personal Journey", pos: "verb" },
-            { word: "immigrate", clues: ["country", "visa", "arrive"], topic: "Personal Journey", pos: "verb" }
+            { word: "immigrate", clues: ["country", "visa", "arrive"], topic: "Personal Journey", pos: "verb" },
+            { word: "belong", clues: ["fit in", "accepted", "group"], topic: "Personal Journey", pos: "verb" }
         ];
 
         let hintShown = false;

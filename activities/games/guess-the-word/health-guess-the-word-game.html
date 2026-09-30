@@ -418,7 +418,7 @@
                     </svg>
                 </span> Unit 8: Health</span>
                 <span class="home-title-game">Guess the Word</span></h1>
-            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 16 words from this unit.</p>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 18 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
@@ -440,7 +440,7 @@
                 <button class="setup-btn" onclick="goHome()" title="Back to the start screen">Home</button>
             </div>
 
-            <div class="question-counter" id="questionCounter">Card 1 of 16</div>
+            <div class="question-counter" id="questionCounter">Card 1 of 18</div>
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:00</div>
                 <div class="timer-controls">
@@ -506,18 +506,20 @@
             { word: "infected", clues: ["germs", "sick", "bacteria"], topic: "Getting Sick", pos: "adjective" },
             { word: "depressed", clues: ["sad", "feeling", "down"], topic: "Getting Sick", pos: "adjective" },
             { word: "habit", clues: ["every day", "usually", "routine"], topic: "Getting Sick", pos: "noun" },
+            { word: "avoid", clues: ["stay away", "germs", "keep clear"], topic: "Getting Sick", pos: "verb" },
             { word: "quit", clues: ["stop", "smoking", "finish"], topic: "Getting Sick", pos: "verb" },
             { word: "recover", clues: ["better", "after", "well"], topic: "Getting Better", pos: "verb" },
+            { word: "improve", clues: ["get better", "health", "progress"], topic: "Getting Better", pos: "verb" },
+            { word: "exercise", clues: ["workout", "body", "run"], topic: "Getting Better", pos: "verb" },
             { word: "lifestyle", clues: ["way", "live", "habits"], topic: "Getting Better", pos: "noun" },
+            { word: "prevent", clues: ["stop", "before", "illness"], topic: "Getting Better", pos: "verb" },
             { word: "adjust", clues: ["change", "little", "fix"], topic: "Getting Better", pos: "verb" },
             { word: "appointment", clues: ["doctor", "time", "schedule"], topic: "At the Doctor", pos: "noun" },
             { word: "checkup", clues: ["doctor", "regular", "exam"], topic: "At the Doctor", pos: "noun" },
             { word: "diagnosis", clues: ["doctor", "what", "sick"], topic: "At the Doctor", pos: "noun" },
             { word: "prescription", clues: ["doctor", "medicine", "pharmacy"], topic: "At the Doctor", pos: "noun" },
             { word: "fever", clues: ["hot", "temperature", "sick"], topic: "At the Doctor", pos: "noun" },
-            { word: "contagious", clues: ["catch", "spread", "others"], topic: "At the Doctor", pos: "adjective" },
-            { word: "pharmacy", clues: ["medicine", "store", "pick up"], topic: "At the Doctor", pos: "noun" },
-            { word: "insurance", clues: ["pay", "card", "doctor"], topic: "At the Doctor", pos: "noun" }
+            { word: "contagious", clues: ["catch", "spread", "others"], topic: "At the Doctor", pos: "adjective" }
         ];
 
         let hintShown = false;

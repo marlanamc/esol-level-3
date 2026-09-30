@@ -418,7 +418,7 @@
                     </svg>
                 </span> Unit 6: Workforce Preparation</span>
                 <span class="home-title-game">Guess the Word</span></h1>
-            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 17 words from this unit.</p>
+            <p class="home-subtitle">Look at the three clue words. Say the vocabulary word they go with. 18 words from this unit.</p>
             <div class="rules-box">
                 <h3>How to play</h3>
                 <ol>
@@ -440,7 +440,7 @@
                 <button class="setup-btn" onclick="goHome()" title="Back to the start screen">Home</button>
             </div>
 
-            <div class="question-counter" id="questionCounter">Card 1 of 17</div>
+            <div class="question-counter" id="questionCounter">Card 1 of 18</div>
             <div class="timer-container">
                 <div class="timer-display" id="timer">01:00</div>
                 <div class="timer-controls">
@@ -502,23 +502,24 @@
 
     <script>
         const cards = [
-            { word: "shift", clues: ["hours", "morning", "night"], topic: "Work Schedule", pos: "noun" },
-            { word: "break", clues: ["rest", "lunch", "stop"], topic: "Work Schedule", pos: "verb" },
+            { word: "schedule", clues: ["work hours", "calendar", "timetable"], topic: "Work Schedule", pos: "noun" },
+            { word: "break", clues: ["rest", "lunch", "stop"], topic: "Work Schedule", pos: "noun" },
             { word: "time off", clues: ["vacation", "not work", "day"], topic: "Work Schedule", pos: "noun phrase" },
+            { word: "team", clues: ["coworkers", "group", "together"], topic: "Work Schedule", pos: "noun" },
             { word: "reliable", clues: ["trust", "always", "depend"], topic: "Work Schedule", pos: "adjective" },
             { word: "flexible", clues: ["change", "easy", "bend"], topic: "Work Schedule", pos: "adjective" },
             { word: "clock in", clues: ["start", "punch", "badge"], topic: "On the Job", pos: "phrasal verb" },
             { word: "clock out", clues: ["finish", "leave", "time"], topic: "On the Job", pos: "phrasal verb" },
             { word: "call out", clues: ["sick", "not come", "phone"], topic: "On the Job", pos: "phrasal verb" },
+            { word: "shift", clues: ["hours", "morning", "night"], topic: "On the Job", pos: "noun" },
             { word: "supervisor", clues: ["boss", "manager", "above"], topic: "On the Job", pos: "noun" },
             { word: "follow up", clues: ["check", "email", "after"], topic: "On the Job", pos: "phrasal verb" },
             { word: "experience", clues: ["before", "years", "done"], topic: "Job Search", pos: "noun" },
             { word: "resume", clues: ["paper", "job", "experience"], topic: "Job Search", pos: "noun" },
             { word: "cover letter", clues: ["write", "job", "apply"], topic: "Job Search", pos: "noun phrase" },
             { word: "reference", clues: ["person", "recommend", "boss"], topic: "Job Search", pos: "noun" },
-            { word: "deadline", clues: ["due", "friday", "submit"], topic: "Job Search", pos: "noun" },
-            { word: "interview", clues: ["job", "questions", "meet"], topic: "Job Search", pos: "noun" },
-            { word: "teamwork", clues: ["together", "group", "work"], topic: "Work Schedule", pos: "noun" }
+            { word: "submit", clues: ["send", "application", "turn in"], topic: "Job Search", pos: "verb" },
+            { word: "deadline", clues: ["due", "friday", "submit"], topic: "Job Search", pos: "noun" }
         ];
 
         let hintShown = false;
