@@ -620,7 +620,7 @@
                     </svg>
                 </span> Unit 2: Daily Life in the Community</span>
                 <span class="home-title-game">Discussion Game</span></h1>
-            <p class="home-subtitle">Open-ended questions to practice talking about community and family life</p>
+            <p class="home-subtitle">Open-ended questions about routines, transportation, neighborhoods, and elections</p>
             <div class="mode-buttons" aria-label="Choose how to play">
                 <button class="start-game-btn" onclick="startGame()">Discussion Mode</button>
                 <button class="start-game-btn group-secondary" id="chooseGroup">Group Mode</button>
@@ -666,237 +666,237 @@
     <script>
                         const categories = [
             {
-                "title": "Staying Connected with Family",
+                "title": "Your Routine",
                 "topics": [
                     {
-                        "name": "Calling Family Back Home",
+                        "name": "A Full Week",
                         "questions": [
-                            "How often do you talk to family in your home country?",
-                            "What app do you use to call home, and why that one?",
-                            "What do you usually talk about when you call home?",
-                            "Who in your family talks the longest on the phone?"
+                            "What time does your day usually start?",
+                            "How many places do you go in one day for work, class, or home?",
+                            "What do you get ready the night before?",
+                            "When the week is too full, what do you drop first?"
                         ]
                     },
                     {
-                        "name": "Family Traditions",
+                        "name": "Work and Class",
                         "questions": [
-                            "What is a family tradition you enjoy?",
-                            "Who usually organizes family gatherings?",
-                            "What is it like to celebrate a holiday far away from your family?",
-                            "What family tradition do you still keep here?"
+                            "Which days are work, and which days are class?",
+                            "Do you work days, nights, or both?",
+                            "What's hard about getting to class after work?",
+                            "Who needs to know if you're running late?"
                         ]
                     },
                     {
-                        "name": "Sharing News and Photos",
+                        "name": "Errands",
                         "questions": [
-                            "How do you share good news with your family?",
-                            "What app do you like to use to share photos?",
-                            "What was the last photo you sent to your family?",
-                            "Who sends the most photos in your family?"
-                        ]
-                    },
-                    {
-                        "name": "Supporting Family Members",
-                        "questions": [
-                            "What is the most helpful thing a family member has done for you?",
-                            "Who do you go to for advice?",
-                            "What is something you taught a family member to do?",
-                            "What is the best advice a family member ever gave you?"
-                        ]
-                    },
-                    {
-                        "name": "Family Celebrations",
-                        "questions": [
-                            "How do you like to celebrate birthdays?",
-                            "Who do you usually invite to a family celebration?",
-                            "Who does most of the cooking for family parties?",
-                            "What food has to be on the table, or it's not a real party?"
-                        ]
-                    },
-                    {
-                        "name": "Raising Children Far from Family",
-                        "questions": [
-                            "How do kids in your family stay in touch with their grandparents?",
-                            "What game did you play as a kid that kids here don't know?",
-                            "How is growing up here different from growing up in your home country?",
-                            "What tradition do you hope the next generation keeps?"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Building Community Connections",
-                "topics": [
-                    {
-                        "name": "Meeting Neighbors",
-                        "questions": [
-                            "How did you first meet one of your neighbors?",
-                            "How do you greet people in your neighborhood?",
-                            "What do you talk about with your neighbors?",
-                            "What makes someone a good neighbor?"
-                        ]
-                    },
-                    {
-                        "name": "Community Centers and Groups",
-                        "questions": [
-                            "What places in your neighborhood bring people together?",
-                            "What kinds of groups or classes are popular in your community?",
-                            "How do you find out about classes or groups in your area?",
-                            "What class would you sign up for tomorrow if it were free?"
-                        ]
-                    },
-                    {
-                        "name": "Places of Worship",
-                        "questions": [
-                            "What places of worship are in your neighborhood?",
-                            "What events do places of worship near you hold for the community?",
-                            "How are places of worship here different from the ones back home?",
-                            "What makes you feel welcome when you walk into a place where you don't know anyone?"
-                        ]
-                    },
-                    {
-                        "name": "Cultural Events in the Community",
-                        "questions": [
-                            "What is a local festival or cultural event you have enjoyed?",
-                            "What festival from your home country should people here know about?",
-                            "What cultural events would you like to see more of?",
-                            "What event should your city hold every year?"
-                        ]
-                    },
-                    {
-                        "name": "Making New Friends",
-                        "questions": [
-                            "How did you meet your closest friend here?",
-                            "What activities help you meet new people?",
-                            "What do you find difficult about meeting new people?",
-                            "Why is making friends as an adult different from making friends as a child?"
-                        ]
-                    },
-                    {
-                        "name": "Helping a New Neighbor",
-                        "questions": [
-                            "What do you say when you meet a new neighbor for the first time?",
-                            "If a new neighbor asked where to buy groceries, where would you send them?",
-                            "What could neighbors do to make a new family feel welcome?",
-                            "What is one thing you would tell someone who just moved to your neighborhood?"
-                        ]
-                    }
-                ]
-            },
-            {
-                "title": "Daily Life Outside the Home",
-                "topics": [
-                    {
-                        "name": "Grocery Shopping Routine",
-                        "questions": [
-                            "When do you usually go grocery shopping?",
-                            "Where do you usually buy groceries?",
-                            "How do you decide what to buy at the store?",
-                            "Who in your home is the best at grocery shopping?"
-                        ]
-                    },
-                    {
-                        "name": "Using Public Transportation",
-                        "questions": [
-                            "How do you usually get around your neighborhood?",
-                            "Which bus or train do you take the most?",
-                            "What's the most annoying thing about taking the bus or train here?",
-                            "What's the strangest thing you've seen on a bus or train?"
-                        ]
-                    },
-                    {
-                        "name": "Visiting the Library or Post Office",
-                        "questions": [
-                            "How often do you visit the library or post office?",
-                            "What do people use the library for in your neighborhood?",
-                            "What was the last thing you mailed, and who was it for?",
-                            "What's the longest you've ever waited in line at the post office?"
-                        ]
-                    },
-                    {
-                        "name": "Weekly Errands",
-                        "questions": [
-                            "What errands do you run during a typical week?",
-                            "How do you plan your errands to save time?",
-                            "Who helps you with errands if you are busy?",
+                            "What errands do you fit around work?",
+                            "When do you usually get food, if you have a regular time?",
+                            "Where do you get food — a store, a market, a pantry, or somewhere else?",
                             "Which errand do you put off the longest?"
                         ]
                     },
                     {
-                        "name": "Eating Out in the Community",
+                        "name": "Meals",
                         "questions": [
-                            "What's your favorite restaurant around here?",
-                            "Who do you usually eat out with?",
-                            "How often do you eat out?",
-                            "What is the best cheap meal in your neighborhood?"
+                            "Do you usually cook at home, or do you eat out?",
+                            "Who do you share meals with?",
+                            "How do you decide what to buy when money is tight?",
+                            "What's a good low-cost meal near you?"
                         ]
                     },
                     {
-                        "name": "Community Health and Fitness",
+                        "name": "Rest",
                         "questions": [
-                            "Where do you go to exercise or stay active?",
-                            "What park or outdoor place near you do you like the most?",
-                            "How often do you exercise each week?",
-                            "What helps you stay active when you are busy?"
+                            "Do you get a real day off, or is every day a workday?",
+                            "After a long day, do you want to walk, rest, or just get home?",
+                            "When is the quietest hour of your day?",
+                            "What would make your week easier?"
+                        ]
+                    },
+                    {
+                        "name": "Family in the Week",
+                        "questions": [
+                            "Does your family live with you, nearby in this city, or farther away?",
+                            "How do you stay in touch on a workday — a visit, a call, or a message?",
+                            "On a holiday, do you get together here, work, or go somewhere else?",
+                            "Who in your family do you see the most?"
                         ]
                     }
                 ]
             },
             {
-                "title": "Community Resources and Support",
+                "title": "Transportation",
                 "topics": [
                     {
-                        "name": "Finding Local Services",
+                        "name": "How You Get There",
                         "questions": [
-                            "If a friend wanted free computer classes, where would you tell them to look?",
-                            "Where do you find out about free help in your area?",
-                            "What free services in your community do you think people should know about?",
-                            "What local service would you like to learn more about?"
+                            "How do you usually get around — bus, train, walk, car, or a ride?",
+                            "How long is the trip from your door to work or class?",
+                            "Do you transfer, or is it one ride?",
+                            "What does that trip cost you in a week?"
                         ]
                     },
                     {
-                        "name": "Asking for Directions",
+                        "name": "Running Late",
                         "questions": [
-                            "How do you find your way when you go somewhere new?",
-                            "What is the most confusing place to find your way around here?",
-                            "What landmarks would you use to give directions to your home?",
-                            "What map app or website do you use, and what do you like about it?"
+                            "What do you do first when the bus or train is late?",
+                            "Who do you text when you're going to be late?",
+                            "What do you say to a boss or a teacher?",
+                            "What's harder — leaving earlier, or arriving late?"
                         ]
                     },
                     {
-                        "name": "Community Bulletin Boards and Flyers",
+                        "name": "Around the Neighborhood",
                         "questions": [
-                            "Where do you see flyers or announcements about local events?",
-                            "What was the last event you heard about from a flyer or post?",
-                            "How do you usually find out what is happening in your neighborhood?",
-                            "What makes you actually stop and read a flyer?"
+                            "What can you walk to from home, and what can't you?",
+                            "Which stop or station do you use the most?",
+                            "Have you asked someone for directions here? What did you ask?",
+                            "Do street names or landmarks help you more?"
                         ]
                     },
                     {
-                        "name": "Getting Help in an Emergency",
+                        "name": "The Ride",
                         "questions": [
-                            "How are emergency services here different from your home country?",
-                            "If you had a problem at home late at night, who would you call first?",
-                            "Who helped you the most in your first month here?",
-                            "What makes someone a good emergency contact?"
+                            "What's the most annoying thing about getting around here?",
+                            "What's something you often see on your trip?",
+                            "Where do you stand or sit so you feel safer?",
+                            "What would you change about the trip you take most?"
                         ]
                     },
                     {
-                        "name": "Volunteering Locally",
+                        "name": "Time or Money",
                         "questions": [
-                            "What community events happen in your neighborhood each year?",
-                            "What kind of local group would you like to volunteer with?",
-                            "What do you think people get from volunteering?",
-                            "If you had a free Saturday to help your community, what would you like to do?"
+                            "When do you pay more to save time, and when do you take the slower cheap way?",
+                            "What do you do if you miss the last bus or train?",
+                            "Who in your home depends on the same ride as you?",
+                            "What's one tip you wish someone had told you sooner?"
                         ]
                     },
                     {
-                        "name": "City Help and Local Offices",
+                        "name": "Showing Someone the Way",
                         "questions": [
-                            "What problem in your neighborhood should the city fix first?",
-                            "What are some reasons people go to city hall?",
-                            "What makes it hard to get help from city offices here?",
-                            "If you were mayor for a day, what's the first thing you'd change?"
+                            "A new neighbor asks how to get to a grocery store that isn't too expensive. What do you tell them?",
+                            "A classmate asks which bus goes near the school. What do you say?",
+                            "Your phone is dead. How do you give directions with landmarks only?",
+                            "What's the most confusing place to find your way around here?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Neighborhoods",
+                "topics": [
+                    {
+                        "name": "Your Street",
+                        "questions": [
+                            "What's your neighborhood like on a weekday morning?",
+                            "Who do you see most often near home?",
+                            "What do you like about where you live, and what's hard?",
+                            "Is it quiet, busy, or both?"
+                        ]
+                    },
+                    {
+                        "name": "Neighbors",
+                        "questions": [
+                            "How do you greet people in your building or on your street?",
+                            "What do you talk about with neighbors, if you talk?",
+                            "A new family moves in. You have a few minutes before work. What do you say?",
+                            "What's one useful thing you'd tell someone who just moved in?"
+                        ]
+                    },
+                    {
+                        "name": "Places You Use",
+                        "questions": [
+                            "Where do you actually go in a normal week — store, work, school, bus stop, or somewhere else?",
+                            "Which place do you wish were closer to home?",
+                            "Is there a park, library, or clinic you use? If not, what gets in the way?",
+                            "What local place would you miss if it closed?"
+                        ]
+                    },
+                    {
+                        "name": "Problems on the Block",
+                        "questions": [
+                            "What's one problem you notice — lights, trash, noise, a sidewalk, or something else?",
+                            "If you wanted the city to fix it, who would you call?",
+                            "You work while city offices are open. What could you ask so you don't miss work?",
+                            "If you were mayor for a day, what's the first thing you'd change on your street?"
+                        ]
+                    },
+                    {
+                        "name": "Family Nearby",
+                        "questions": [
+                            "Does any of your family live in your neighborhood?",
+                            "Where do families around you spend time together?",
+                            "On a holiday, is your family together here, or are people in different places?",
+                            "What food has to be on the table when your family gets together?"
+                        ]
+                    },
+                    {
+                        "name": "Feeling at Home",
+                        "questions": [
+                            "What makes someone a good neighbor when everyone is busy?",
+                            "Where do people stop to talk, if they stop at all?",
+                            "What did you need most in your first month in this neighborhood?",
+                            "What do you know now that you wish you'd known on day one?"
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Community and Elections",
+                "topics": [
+                    {
+                        "name": "What You Notice",
+                        "questions": [
+                            "What do you see in your neighborhood before an election — signs, flyers, or not much?",
+                            "Where do people you know get news about an election?",
+                            "Do you talk about elections at home, at work, or not at all?",
+                            "What local issue do you hear people talking about?"
+                        ]
+                    },
+                    {
+                        "name": "Voting or Not",
+                        "questions": [
+                            "Some people can vote here, and some cannot. What's true for you, if you want to say?",
+                            "If you vote, when do you go — before work, after work, or on a day off?",
+                            "If you don't vote, what makes it hard, or not possible?",
+                            "What would you want to know before voting for the first time?"
+                        ]
+                    },
+                    {
+                        "name": "Finding the Facts",
+                        "questions": [
+                            "Where could someone look up the date, the place, and what's on the ballot?",
+                            "You see a flyer about an election, but the date is missing. What would you ask?",
+                            "A neighbor asks where to vote. You're not sure. What do you say?",
+                            "Which is more useful to you — the date, the place, or what the vote is about?"
+                        ]
+                    },
+                    {
+                        "name": "Election Day and Work",
+                        "questions": [
+                            "Election Day is a workday for a lot of people. How would you fit one stop into your schedule?",
+                            "What could you say if you need to get to work late or leave early?",
+                            "If someone at home needs to vote during a shift, what has to change in the day?",
+                            "What does your neighborhood feel like on Election Day — busy, quiet, or the same?"
+                        ]
+                    },
+                    {
+                        "name": "Community News",
+                        "questions": [
+                            "Where do you see flyers — a store, a bus stop, a lobby, or your phone?",
+                            "Which flyers do you read, and which do you walk past?",
+                            "A flyer offers a free class. What do you check first — the time, the place, or whether you can get there after work?",
+                            "What community news actually matters for your week?"
+                        ]
+                    },
+                    {
+                        "name": "No Extra Hours",
+                        "questions": [
+                            "A neighbor asks you to help on Saturday, but you have work. What do you say?",
+                            "You don't have time for a meeting. What's another way to report a problem — a call, a text, or a website?",
+                            "What kind of help do people in your building already give each other, if any?",
+                            "What should the city know about people who work more than one job?"
                         ]
                     }
                 ]
