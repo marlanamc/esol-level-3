@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -657,7 +701,7 @@
                             "You've been sitting at a desk for a long time and want a break. What would you like to do?",
                             "What helps you feel relaxed after a busy day?",
                             "A friend invites you out, but you want a quiet evening. What could you say?",
-                            "Do you prefer a quiet break or a chat with someone after a busy task?"
+                            "What is the best kind of break after a busy task?"
                         ]
                     },
                     {
@@ -697,8 +741,8 @@
                         "questions": [
                             "How comfortable are you talking about your feelings?",
                             "A friend asks how your day went. How could you say you feel tired but don't want to talk about the details?",
-                            "Is it easier to talk to family or to a friend? Why?",
-                            "Is it easier to talk about feelings in your first language? Why?"
+                            "What makes someone easy to talk to?",
+                            "Why are feelings sometimes easier to explain in your first language?"
                         ]
                     },
                     {
@@ -745,7 +789,7 @@
                     {
                         "name": "Feeling Okay at Home",
                         "questions": [
-                            "Do you prefer a quiet home or a home with music and conversation?",
+                            "What sounds make your home feel cozy?",
                             "What makes your home feel calm and comfortable?",
                             "What is something you like to do at home to relax?",
                             "What one change would make your home more relaxing?"
@@ -782,7 +826,7 @@
                         "name": "Money Stress",
                         "questions": [
                             "A friend wants to spend less on going out. What free activity could you suggest doing together?",
-                            "Would you rather plan your shopping ahead or decide when you reach the store?",
+                            "What is your best trick for saving money on groceries?",
                             "You're planning a low-cost weekend with friends. What could you suggest?",
                             "What helps you avoid buying things you don't need?"
                         ]
@@ -816,7 +860,7 @@
                             "What daily routine helps your day go well?",
                             "What time of day do you feel most energetic?",
                             "What helps you remember a habit you want to keep?",
-                            "Are you better in the morning or the evening?"
+                            "What does a perfect morning look like for you?"
                         ]
                     },
                     {
@@ -832,7 +876,7 @@
                         "name": "Help Near You",
                         "questions": [
                             "What free classes, parks, or groups would you like to find near you?",
-                            "Have you ever tried a free class or community activity?",
+                            "What stops people from trying free community activities?",
                             "Where do you hear about free activities near you?",
                             "What local place or activity would you recommend to a classmate?"
                         ]
@@ -851,7 +895,7 @@
                         "questions": [
                             "What small change has made your daily routine easier this year?",
                             "What is a small thing you have done for yourself that you're proud of?",
-                            "What would you like more time for next month: rest, a hobby, or seeing people?",
+                            "What would you like more time for next month, and why?",
                             "What is something you have done recently that you're proud of?"
                         ]
                     }

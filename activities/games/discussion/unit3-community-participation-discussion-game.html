@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -636,7 +680,7 @@
                     {
                         "name": "Cultural or Language Community",
                         "questions": [
-                            "Do you belong to a community that shares your language or culture?",
+                            "What is the community like here for people who speak your language?",
                             "Where do you meet people who share your language or culture?",
                             "What activity would you enjoy with people who share your language or culture?",
                             "What do you enjoy talking about with people who speak your first language?"
@@ -645,10 +689,10 @@
                     {
                         "name": "Online Communities",
                         "questions": [
-                            "Are you in any WhatsApp, Facebook, or other online groups?",
-                            "Do you prefer sending texts, photos, or voice messages in a group chat?",
+                            "What group chats do you use the most?",
+                            "Why do some people love voice messages and others hate them?",
                             "What do you like to talk about in online groups?",
-                            "Can an online friendship be as close as a friendship in person?"
+                            "How is an online friendship different from a friendship in person?"
                         ]
                     },
                     {
@@ -672,7 +716,7 @@
                     {
                         "name": "Faith or Interest Groups",
                         "questions": [
-                            "Are you part of a group based on a shared interest or belief?",
+                            "What kinds of groups do people join to meet others with the same interests?",
                             "How often would you like to meet with a group that shares your interests?",
                             "What do you enjoy about spending time with people who share your interests?",
                             "What group would you start if you had the time?"
@@ -695,9 +739,9 @@
                     {
                         "name": "Community Centers",
                         "questions": [
-                            "Is there a community center near you that you would like to visit?",
+                            "What do people do at community centers in your area?",
                             "You're visiting a community center for the first time. What would you ask about its classes?",
-                            "Have you attended an event at a community center?",
+                            "Who do you think community centers help the most?",
                             "What would you most like to find at a community center?"
                         ]
                     },
@@ -705,7 +749,7 @@
                         "name": "Local Businesses",
                         "questions": [
                             "What is a local shop or business you visit often?",
-                            "Do you like chatting with people who work in local shops?",
+                            "What do you talk about with people who work in local shops?",
                             "What makes you go back to the same shop?",
                             "Which local business would you miss most if it closed?"
                         ]
@@ -722,9 +766,9 @@
                     {
                         "name": "Places of Worship",
                         "questions": [
-                            "A place of worship is hosting a meal for the neighborhood. What could you ask someone you meet there?",
-                            "A place of worship asks for ideas for an activity open to everyone. What would you suggest?",
-                            "You see a flyer for a concert at a place of worship. What would you ask to find out who can attend?",
+                            "What community events do places of worship in your area hold?",
+                            "What activity could a place of worship hold that the whole neighborhood would enjoy?",
+                            "How do places of worship help people who are new to the area?",
                             "What makes you want to return to a community event?"
                         ]
                     },
@@ -732,9 +776,9 @@
                         "name": "Online Groups",
                         "questions": [
                             "What app or website do you like for keeping in touch with a group?",
-                            "Is it easier for you to talk in a group chat or in person?",
+                            "What is easier to say in a group chat than in person?",
                             "Your neighborhood starts a group chat. What useful information would you like people to share?",
-                            "Would you rather meet online or in person? Why?"
+                            "What is lost when a group meets online instead of in person?"
                         ]
                     }
                 ]
@@ -747,14 +791,14 @@
                         "questions": [
                             "What local event have you enjoyed recently?",
                             "Where do you usually hear about local events?",
-                            "Do you prefer going to local events alone or with someone?",
+                            "Who would you bring to a local event, and why?",
                             "What was the best local event you have ever been to?"
                         ]
                     },
                     {
                         "name": "Volunteering and Giving Back",
                         "questions": [
-                            "Have you ever volunteered with a community group?",
+                            "What community group would you like to volunteer with?",
                             "What makes you want to help with a community project?",
                             "How much time would you like to spend on a volunteer activity?",
                             "What kind of help do people need most in your area?"
@@ -763,7 +807,7 @@
                     {
                         "name": "Speaking Up About Local Problems",
                         "questions": [
-                            "Have you ever been to a neighborhood meeting?",
+                            "What do people usually talk about at neighborhood meetings?",
                             "You're at a neighborhood meeting and want to suggest more benches in the park. What could you say?",
                             "What issue in your community would you like to discuss?",
                             "What local issue would get you to speak at a meeting?"
@@ -772,7 +816,7 @@
                     {
                         "name": "Supporting Neighbors",
                         "questions": [
-                            "Have you ever helped a neighbor with something?",
+                            "What is an easy way to help a neighbor?",
                             "How do neighbors support each other in your area?",
                             "A neighbor is carrying several shopping bags. How could you offer to help?",
                             "What is the kindest thing a neighbor has done for you?"
@@ -782,7 +826,7 @@
                         "name": "Sharing Skills and Knowledge",
                         "questions": [
                             "What skill could you teach someone in your community?",
-                            "Have you ever helped someone learn something new?",
+                            "What is something you learned from a neighbor or friend?",
                             "You and a neighbor want to teach each other something. What could you learn together?",
                             "What could you teach a classmate, and what would you like to learn from them?"
                         ]

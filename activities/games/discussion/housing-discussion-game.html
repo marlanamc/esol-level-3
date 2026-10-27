@@ -695,6 +695,50 @@
         @media (max-width: 480px) {
             .phrase-bank-toggle { bottom: 90px; right: 12px; padding: 10px 16px; font-size: 13px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -826,7 +870,7 @@
                         "name": "Your First Home Here",
                         "questions": [
                             "What is something you remember liking about a place you used to live?",
-                            "Do you prefer a small, quiet home or a bigger, busier home?",
+                            "What kind of home feels most comfortable to you, and why?",
                             "What is one thing you like about the place you live now?",
                             "What surprised you most about homes here?"
                         ]
@@ -868,8 +912,8 @@
                         "questions": [
                             "What would you text or WhatsApp a landlord about a broken light?",
                             "You text your landlord about a broken hallway light. How could you explain exactly which light it is?",
-                            "Would you rather send a photo or explain a broken light in a message?",
-                            "Would you rather call or text a landlord? Why?"
+                            "What makes a repair message clear and easy to understand?",
+                            "When is calling a landlord better than texting?"
                         ]
                     },
                     {
@@ -896,7 +940,7 @@
                             "You call your landlord about a broken tap and get voicemail. How would you start your message?",
                             "Your kitchen tap won't stop dripping. How would you explain the problem in a short message?",
                             "You left a message about a repair but haven't heard back. What could you say in a follow-up message?",
-                            "Do you like leaving voicemails? Why or why not?"
+                            "What makes leaving a voicemail in English hard?"
                         ]
                     }
                 ]
@@ -937,7 +981,7 @@
                             "You like to wash dishes right away, but your housemate leaves them until morning. What could you say?",
                             "You and a housemate want to clean the kitchen at different times. What plan could you suggest?",
                             "You're unhappy about a shared room being messy. How could you start a calm conversation about it?",
-                            "Are you the tidy one or the messy one in your home?"
+                            "Who is the tidiest person in your home, and who is the messiest?"
                         ]
                     },
                     {
@@ -946,7 +990,7 @@
                             "How would you explain politely that rent will be a few days late?",
                             "You need to tell a landlord that rent will be three days late. How could you explain the timing in a message?",
                             "You expect a delay with a rent payment. What would you like to discuss with the landlord before the due date?",
-                            "Do you think landlords should charge a late fee? Why?"
+                            "What do you think is a fair late fee for rent, and why?"
                         ]
                     },
                     {
@@ -978,7 +1022,7 @@
                             "You're safely outside after a fire alarm. What would you like to ask the building manager?",
                             "You're visiting a building for the first time. How could you ask where the exits are?",
                             "Your household is making a plan for where to meet outside after an alarm. How could you choose a place together?",
-                            "Have you ever taken part in a fire drill?"
+                            "What should everyone in a building know about fire safety?"
                         ]
                     },
                     {
@@ -996,7 +1040,7 @@
                             "What would you do if someone you did not know knocked late at night?",
                             "What makes you feel comfortable about answering the door?",
                             "How do you check who is at the door?",
-                            "Do you answer the door if you are not expecting anyone?"
+                            "What would you say to a delivery person who comes to the wrong apartment?"
                         ]
                     },
                     {

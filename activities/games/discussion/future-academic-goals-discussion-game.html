@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -630,7 +674,7 @@
                             "Why did you decide to start learning English?",
                             "How did you feel on your first day of English class?",
                             "What has surprised you most about learning English?",
-                            "Was starting English class easier or harder than you expected?"
+                            "What was different about English class from what you expected?"
                         ]
                     },
                     {
@@ -648,7 +692,7 @@
                             "What part of English was hardest for you at the beginning?",
                             "What has helped you with a part of English you find difficult?",
                             "Who has helped you when an English task felt difficult?",
-                            "Which is harder for you in English: listening or speaking?"
+                            "What still feels hard in English, and what are you doing about it?"
                         ]
                     },
                     {
@@ -657,7 +701,7 @@
                             "What is an English mistake you used to make and no longer make?",
                             "How do you feel when you make a mistake in English?",
                             "A classmate feels embarrassed after making an English mistake. What could you say to encourage them?",
-                            "Have you ever had a funny misunderstanding while using English?"
+                            "What is a funny English mistake you or someone you know has made?"
                         ]
                     },
                     {
@@ -689,7 +733,7 @@
                             "What is one English skill you want to improve this month?",
                             "How would you like to practice speaking English this month?",
                             "What would show you that your listening in English is improving?",
-                            "Would you rather study 20 minutes daily or two hours once a week?"
+                            "What is a study habit you could keep even on busy days?"
                         ]
                     },
                     {
@@ -707,7 +751,7 @@
                             "What types of classes or programs interest you?",
                             "Where would you look for a class on something you want to learn?",
                             "What would you like to ask about taking classes after this course?",
-                            "Would you rather learn in a classroom or online? Why?"
+                            "What do you like about learning in a classroom compared to online?"
                         ]
                     },
                     {
@@ -734,7 +778,7 @@
                             "Who or what could help you plan your next class — teacher, website, or a friend?",
                             "How would you ask a teacher for advice about your next step?",
                             "What kind of help has made learning English easier for you?",
-                            "Do you find it easy or difficult to ask for help with schoolwork?"
+                            "What makes it hard to ask for help with schoolwork sometimes?"
                         ]
                     }
                 ]
@@ -814,7 +858,7 @@
                         "name": "Learning and Family Life",
                         "questions": [
                             "What do you enjoy sharing with family or friends about your English class?",
-                            "Have you ever used something from class to help a family member or friend?",
+                            "How could something you learn in class help someone in your family?",
                             "What would you like a younger person to learn from seeing you study?",
                             "Who in your family is the most curious learner?"
                         ]

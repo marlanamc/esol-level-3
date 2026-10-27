@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -629,7 +673,7 @@
                         "questions": [
                             "How do you greet your coworkers each morning?",
                             "What do you like to chat about with coworkers or classmates?",
-                            "Have you ever had a friendly conversation with someone new at work?",
+                            "What makes a coworker easy to talk to?",
                             "What is the friendliest workplace you have ever been in?"
                         ]
                     },
@@ -639,7 +683,7 @@
                             "You need to ask your supervisor about tomorrow's tasks. How could you start the conversation?",
                             "Your supervisor looks busy, but you have a question. What could you say?",
                             "What would you say if you did not understand an instruction?",
-                            "Is it harder to ask a question or admit a mistake?"
+                            "Why do people sometimes feel nervous asking their supervisor a question?"
                         ]
                     },
                     {
@@ -663,7 +707,7 @@
                     {
                         "name": "Understanding Workplace Emails",
                         "questions": [
-                            "Do you prefer getting work messages by email or text?",
+                            "What makes a work message easy to understand?",
                             "A work message gives a meeting time but no place. What could you ask in your reply?",
                             "What do you do if an email is confusing?",
                             "What makes an email annoying to read?"
@@ -695,7 +739,7 @@
                     {
                         "name": "Filling Out a Job Application",
                         "questions": [
-                            "Have you ever filled out a job application?",
+                            "What information does a job application usually ask for?",
                             "A job application asks when you can work. How could you describe a schedule that would suit you?",
                             "What part of a job application would you like help with?",
                             "Which question on an application annoys you most?"
@@ -706,7 +750,7 @@
                         "questions": [
                             "Where do you look for job openings?",
                             "How do you decide if a job is a good match for you?",
-                            "Have you seen a job advertisement that interested you recently?",
+                            "What makes a job advertisement catch your eye?",
                             "What job would you apply for if you knew you would get it?"
                         ]
                     },
@@ -724,7 +768,7 @@
                         "questions": [
                             "What would you say in a thank-you message after an interview?",
                             "An interviewer says they will contact you soon. What could you ask about when to expect a reply?",
-                            "Does following up actually help? What do you think?",
+                            "How can a follow-up message help you get a job?",
                             "How long would you feel comfortable waiting to hear back after an interview?"
                         ]
                     },
@@ -732,8 +776,8 @@
                         "name": "Who Helps You Find Work",
                         "questions": [
                             "Who in your life could help you find a job — a cousin, coworker, or friend?",
-                            "How would you ask a friend or cousin about openings — by WhatsApp or in person?",
-                            "Has anyone ever told you about a job opening?",
+                            "What could you say to ask a friend about job openings where they work?",
+                            "How do people in your community usually hear about jobs?",
                             "Who do you know who enjoys meeting new people?"
                         ]
                     }
@@ -748,7 +792,7 @@
                             "What would you like to be able to say in English at work?",
                             "A customer can't hear what you're saying. What could you do to make the conversation easier?",
                             "How do you practice speaking English outside of class?",
-                            "Would you find a work phone call or a work meeting more difficult in English?"
+                            "What makes phone calls in English harder than talking face to face?"
                         ]
                     },
                     {
@@ -766,13 +810,13 @@
                             "A new coworker asks how to find the supplies. How would you explain where to go?",
                             "What makes instructions easy or hard to understand?",
                             "Your supervisor gives you several tasks at once. What could you say to check that you understood?",
-                            "Do you prefer instructions with pictures, a demonstration, or written steps?"
+                            "What is the best way for someone to show you a new task?"
                         ]
                     },
                     {
                         "name": "Teamwork on the Job",
                         "questions": [
-                            "Have you ever worked on a task with a team?",
+                            "What makes a team work well together?",
                             "What do you enjoy or find difficult about working in a team?",
                             "How do you communicate with teammates who speak a different language?",
                             "What is one thing you appreciate in a coworker?"
@@ -806,15 +850,15 @@
                         "questions": [
                             "What kind of work schedule would suit your daily life?",
                             "What would you do if you needed to change your schedule?",
-                            "Would you rather check a work schedule on paper or on your phone?",
-                            "Would you rather work early mornings or late nights?"
+                            "What could make a work schedule easier to follow?",
+                            "What are the good and bad things about working early mornings?"
                         ]
                     },
                     {
                         "name": "Dressing for the Workplace",
                         "questions": [
                             "What clothes would you expect to wear in a job you would like?",
-                            "Would you prefer to wear a uniform or choose your own work clothes?",
+                            "What are the good things about wearing a uniform at work?",
                             "What would you wear on your first day at a new job?",
                             "What is the most uncomfortable thing you have worn to work?"
                         ]
@@ -825,7 +869,7 @@
                             "You and a coworker disagree about which task to do first. What could you say?",
                             "A coworker keeps moving supplies you need. How could you explain the problem calmly?",
                             "You and a coworker both want the same day off. How could you start discussing a solution?",
-                            "When you disagree with a coworker, do you prefer to talk right away or take a little time first?"
+                            "What helps you stay calm when you disagree with a coworker?"
                         ]
                     },
                     {
