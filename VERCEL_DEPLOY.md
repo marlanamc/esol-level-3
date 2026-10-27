@@ -84,7 +84,7 @@ Vercel will automatically deploy your changes! Usually takes 1-2 minutes.
 Your `vercel.json` file is already configured with:
 - ✅ Redirects for clean URLs
 - ✅ Security headers
-- ✅ Cache headers for performance
+- ✅ Cache headers so browsers always check for the newest version of each page
 
 No additional setup needed!
 
