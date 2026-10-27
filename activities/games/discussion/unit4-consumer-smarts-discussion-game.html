@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -636,8 +680,8 @@
                     {
                         "name": "Making a Shopping List",
                         "questions": [
-                            "Do you make a list before grocery shopping? Why or why not?",
-                            "Do you find it easier to stay within your spending plan when you use a shopping list?",
+                            "How do you plan before you go grocery shopping?",
+                            "How can a shopping list help you spend less?",
                             "What do you usually forget when you shop without a list?",
                             "What always ends up in your cart that was not on the list?"
                         ]
@@ -655,15 +699,15 @@
                         "name": "Sales and Discounts",
                         "questions": [
                             "How do you find sales — flyers, apps, TikTok, or a cousin's tip?",
-                            "Have you ever found a good deal with a coupon?",
-                            "Have you ever bought something because the sale was ending soon?",
+                            "Where do you find coupons or discount codes?",
+                            "Why do stores put up signs that say \"Sale ends today!\"?",
                             "What is the best deal you have ever found?"
                         ]
                     },
                     {
                         "name": "Buying in Bulk",
                         "questions": [
-                            "Have you ever bought food or supplies in a large quantity?",
+                            "What things are worth buying in a large size?",
                             "A large bag of rice costs less per kilo than a small bag. What would you think about before choosing one?",
                             "A shop has a big box of fresh fruit on sale. How would you decide whether you could use it all?",
                             "What do you always buy too much of?"
@@ -672,8 +716,8 @@
                     {
                         "name": "Online versus In-Store Shopping",
                         "questions": [
-                            "Do you prefer shopping online or in a store? Why?",
-                            "Have you ever bought something after seeing it online?",
+                            "What is good and bad about shopping online?",
+                            "What kinds of ads or videos make people want to buy things?",
                             "You see a very cheap jacket on a website you haven't used before. What would you want to check?",
                             "What do you prefer to try in a store before buying?"
                         ]
@@ -686,7 +730,7 @@
                     {
                         "name": "Creating a Monthly Budget",
                         "questions": [
-                            "Do you plan your spending each month? How?",
+                            "What is a simple way to plan your spending for the month?",
                             "You're helping plan the cost of a picnic. What would you put on the shopping list?",
                             "You have a set amount to spend on groceries this week. How would you choose what to buy first?",
                             "Your shopping total is higher than you expected. What would you look at first?"
@@ -696,9 +740,9 @@
                         "name": "Tracking Expenses",
                         "questions": [
                             "How do you keep track of your spending?",
-                            "Would you rather track spending on paper or on your phone?",
+                            "What app or tool could help someone track their spending?",
                             "You want to see where small purchases add up. What would help you remember what you bought?",
-                            "Do you find it easy to remember small purchases?"
+                            "What small purchases add up the fastest?"
                         ]
                     },
                     {
@@ -707,7 +751,7 @@
                             "If you saved a little money each week for something enjoyable, what would you choose?",
                             "You want to compare two ways to send money to someone. What would you ask about the fees?",
                             "What is a simple way you like to spend less when shopping?",
-                            "Would you rather save for a trip or something for your home?"
+                            "What is something worth saving up for?"
                         ]
                     },
                     {
@@ -725,7 +769,7 @@
                             "You're helping someone plan a monthly budget. What regular costs could they list without writing down amounts?",
                             "How do you remember to pay bills on time?",
                             "You realize you forgot a bill yesterday. What would you ask the company when you call?",
-                            "Would a phone reminder or a paper calendar help you remember a bill?"
+                            "What can happen when you pay a bill late?"
                         ]
                     },
                     {
@@ -733,7 +777,7 @@
                         "questions": [
                             "You want to save for a short trip next year. What is one small step you could take?",
                             "You're saving for a new bicycle. How could you remind yourself of that goal?",
-                            "Would you rather ask someone a general money question or read about it yourself?",
+                            "Where do you go when you have a question about money?",
                             "What would you do first with an extra 500 dollars?"
                         ]
                     }
@@ -757,7 +801,7 @@
                             "How often do you use a debit card instead of cash?",
                             "When would you prefer to pay with a card instead of cash?",
                             "Your debit card doesn't work at a shop. What could you say to the cashier?",
-                            "Cash or card? Which do you prefer, and why?"
+                            "What are the good and bad things about paying with cash?"
                         ]
                     },
                     {
@@ -804,19 +848,19 @@
                     {
                         "name": "Returning a Product",
                         "questions": [
-                            "Have you ever returned something to a store?",
+                            "What makes returning something to a store stressful?",
                             "You want to return a jacket, but you lost the receipt. What could you ask the shop?",
                             "You bought a shirt that doesn't fit. What could you say when you return it?",
-                            "Do you find returning something easier in a shop or online?"
+                            "What is the most annoying part of returning something you bought online?"
                         ]
                     },
                     {
                         "name": "Reading Contracts and Agreements",
                         "questions": [
-                            "Have you ever read an agreement for a phone plan or gym membership?",
+                            "Why do so many people sign agreements without reading them?",
                             "You're considering a gym membership. What would you like to ask before signing up?",
                             "A phone plan advertises a low monthly price. What would you ask about extra charges?",
-                            "Do you read an agreement yourself or ask someone to explain it with you?"
+                            "Who could help you understand an agreement before you sign it?"
                         ]
                     },
                     {
@@ -824,17 +868,17 @@
                         "questions": [
                             "How do you choose a phone or internet plan?",
                             "What matters most to you in a phone plan?",
-                            "Have you ever changed phone or internet companies?",
+                            "What would make you switch to a new phone company?",
                             "What would make a phone plan worth the price for you?"
                         ]
                     },
                     {
                         "name": "Making a Complaint",
                         "questions": [
-                            "Have you ever bought something that didn't work as you expected?",
+                            "What is something you bought that was a big disappointment?",
                             "A new pair of shoes comes apart after one day. What could you say to the shop?",
-                            "An online order arrives damaged. Would you prefer a replacement or a refund?",
-                            "Have you ever asked a company to fix a problem and been happy with the result?"
+                            "An online order arrives damaged. What would you write to the seller?",
+                            "What makes a company's customer service good?"
                         ]
                     },
                     {
@@ -843,7 +887,7 @@
                             "A shop offers a warranty for a new appliance. What would you ask about what it covers?",
                             "What kind of product would you want a warranty for?",
                             "Your new kettle stops working and is still under warranty. What could you say when you contact the company?",
-                            "Do you keep receipts, or throw them away?"
+                            "Where do you keep important receipts?"
                         ]
                     },
                     {
@@ -852,7 +896,7 @@
                             "What would you want to find out before buying a new refrigerator?",
                             "Where would you look for information before buying a laptop?",
                             "Who would you ask for advice before buying something expensive?",
-                            "Have you ever been glad you waited before buying something?"
+                            "Why is it sometimes smart to wait before buying something?"
                         ]
                     }
                 ]

@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -639,7 +683,7 @@
                             "How would you ask to make a doctor's appointment?",
                             "You're practicing an appointment call. How could you ask what information the clinic needs without giving real personal details?",
                             "You have a clinic appointment at a time you can no longer attend. What could you say when you call to change it?",
-                            "Would you rather book an appointment by phone or online?"
+                            "What makes calling a clinic stressful, and what helps?"
                         ]
                     },
                     {
@@ -657,7 +701,7 @@
                             "At the end of a practice appointment, you want written instructions. How could you ask for them?",
                             "A doctor explains the next steps after a visit. How could you check that you understood?",
                             "You get home from an appointment and don't remember part of the instructions. What could you ask when you contact the clinic?",
-                            "Would you prefer taking notes during an appointment or asking for a written summary?"
+                            "What helps you remember what a doctor told you?"
                         ]
                     },
                     {
@@ -716,7 +760,7 @@
                             "You want help starting a health insurance application. What could you say to someone at a help desk?",
                             "You're preparing for a meeting about health coverage. How could you ask which documents to bring?",
                             "You don't know where to get help with a coverage application. What could you ask at a community center?",
-                            "Would you rather fill out a long form online or on paper?"
+                            "What makes a long form hard to fill out?"
                         ]
                     },
                     {
@@ -765,7 +809,7 @@
                         "questions": [
                             "In a practice appointment, a doctor says a condition will need ongoing care. What would you like them to explain?",
                             "A doctor suggests a new daily routine in a role-play. What would you ask about fitting it into a workday?",
-                            "Would you rather bring written questions to an appointment or keep them on your phone?",
+                            "How do you remember the questions you want to ask a doctor?",
                             "What helps you remember a new daily routine?"
                         ]
                     },
@@ -790,10 +834,10 @@
                     {
                         "name": "Sleep and Rest",
                         "questions": [
-                            "Do you prefer going to bed early or staying up later?",
-                            "Would you rather sleep in a very quiet room or with a little background sound?",
+                            "What does a good night's sleep look like for you?",
+                            "What helps you fall asleep when your mind is busy?",
                             "What do you like to do to relax before bed?",
-                            "Have you ever stayed up late for an event you enjoyed?"
+                            "What is worth staying up late for?"
                         ]
                     }
                 ]
@@ -807,7 +851,7 @@
                             "In a practice visit, a doctor's explanation doesn't match what you expected. What could you ask them to explain further?",
                             "How would you ask for a second opinion?",
                             "In a practice appointment, you're still worried after the doctor explains something. How could you say you have another question?",
-                            "Is it hard for you to disagree with a doctor? Why?"
+                            "What makes it hard to disagree with a doctor?"
                         ]
                     },
                     {
@@ -825,7 +869,7 @@
                             "In a role-play, you want another doctor's opinion before deciding about a treatment. How could you explain your request?",
                             "How could you ask a doctor about getting a second opinion?",
                             "You're practicing a visit with a second doctor. How could you ask them to review notes from an earlier visit?",
-                            "Would you find it easy or difficult to tell a doctor you want another opinion?"
+                            "Why might someone feel nervous asking for a second opinion?"
                         ]
                     },
                     {
@@ -834,7 +878,7 @@
                             "What might you like a friend to help with during an appointment?",
                             "You're accompanying a friend to an appointment. How could you ask what help they want from you?",
                             "A friend asks you to help practice a clinic call. What could you practice together?",
-                            "Would you prefer going to an appointment alone or with someone you trust?"
+                            "Who would you bring to an important appointment, and why?"
                         ]
                     },
                     {

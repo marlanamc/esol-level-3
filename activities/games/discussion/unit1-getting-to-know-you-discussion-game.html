@@ -549,6 +549,50 @@
             .nav-container { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
             .nav-btn { font-size: 13px; padding: 10px 16px; }
         }
+
+        /* Expanded card: skip the 3D flip so the question list can scroll on phones */
+        .content-area:has(.topic-flip-card.flipped) {
+            z-index: 101;
+        }
+
+        .topic-flip-card.flipped {
+            height: 80vh;
+            height: 80dvh;
+            max-height: 640px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-inner {
+            transform: none;
+            height: 100%;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-front {
+            display: none;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back {
+            transform: none;
+            height: 100%;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        .topic-flip-card.flipped .topic-flip-card-back ul {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .topic-flip-card.flipped .topic-card-close-btn {
+            position: static;
+            transform: none;
+            flex-shrink: 0;
+            align-self: center;
+            margin-top: 16px;
+        }
     </style>
 </head>
 <body>
@@ -689,7 +733,7 @@
                             "It’s your first day at a new school. How would you find your classroom?",
                             "What do you do if you get lost in the building?",
                             "Who can you ask for directions inside the school?",
-                            "Have you ever had trouble finding a place in this city?"
+                            "What place in this city was hard to find the first time?"
                         ]
                     },
                     {
@@ -698,7 +742,7 @@
                             "What sometimes makes you late for class?",
                             "Your bus is late, and class starts in ten minutes. What could you say in a message to your teacher?",
                             "How do you let your teacher know you are absent?",
-                            "Do you usually arrive early or just in time?"
+                            "What time do you usually arrive for class, and why?"
                         ]
                     },
                     {
@@ -716,7 +760,7 @@
                             "What do you say when you do not understand a lesson?",
                             "How do you ask your teacher to repeat something?",
                             "You can’t find the page everyone is reading. What could you ask the person next to you?",
-                            "Is it easier to ask the teacher or a classmate? Why?"
+                            "When do you ask a classmate for help instead of the teacher?"
                         ]
                     },
                     {
@@ -748,7 +792,7 @@
                             "What do you usually do before you leave for class?",
                             "What time do you wake up on a school day?",
                             "What do you eat for breakfast?",
-                            "Do you like getting up early?"
+                            "What helps you get out of bed in the morning?"
                         ]
                     },
                     {
@@ -784,14 +828,14 @@
                             "What do you usually do after class?",
                             "What time do you usually go to bed?",
                             "How do you relax at the end of the day?",
-                            "Do you prefer relaxing alone or with other people?"
+                            "What do you do in the evening to get ready for the next day?"
                         ]
                     },
                     {
                         "name": "Weekend Plans",
                         "questions": [
                             "What do you usually do on Saturday and Sunday?",
-                            "Do you study on the weekend? Why or why not?",
+                            "What could you do on the weekend to practice English?",
                             "What do you like to do with family or friends on weekends?",
                             "If you could do anything this weekend, what would you choose?"
                         ]
@@ -807,7 +851,7 @@
                             "How do you feel about working with a partner in class?",
                             "You’re in a meeting at work. You have an idea you want to share. What could you say?",
                             "What do you do if you disagree with your partner?",
-                            "Would you rather work alone or with a partner? Why?"
+                            "What makes someone a good partner in class?"
                         ]
                     },
                     {
@@ -815,7 +859,7 @@
                         "questions": [
                             "You meet a new classmate before class. What would you like to ask them?",
                             "A classmate joins you while you’re talking to a friend. How would you introduce them?",
-                            "When you meet a new classmate, would you rather talk about food, hobbies, or something else?",
+                            "What is a good topic to talk about with a new classmate?",
                             "What is the most surprising thing you learned about a classmate?"
                         ]
                     },
@@ -824,8 +868,8 @@
                         "questions": [
                             "How do you feel when someone corrects your English?",
                             "A classmate asks you to read their email in English. One sentence is hard to understand. What could you say?",
-                            "When you make a mistake in English, would you rather hear about it right away or later?",
-                            "Do you like it when someone corrects your English?"
+                            "What is the best way for someone to correct your English?",
+                            "What English mistake do you make most often?"
                         ]
                     },
                     {
